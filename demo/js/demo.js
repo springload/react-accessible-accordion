@@ -163,7 +163,7 @@ const Example = () => (
                                 </p>
                             </AccordionItemBody>
                         </AccordionItem>
-                    </Accordion>         
+                    </Accordion>
                 </AccordionItemBody>
             </AccordionItem>
             <AccordionItem>
