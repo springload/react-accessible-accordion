@@ -1,0 +1,18 @@
+language: node_js
+cache:
+  directories:
+  - node_modules
+node_js:
+- 6
+script:
+- npm run test:coverage
+after_success:
+- npm run coveralls
+branches:
+  except:
+  - gh-pages
+notifications:
+  email: false
+  slack:
+    rooms:
+      secure: Dp3ZtUx5O3v69zZk6M1TAA8HsDGA5VVpJSK7iXxK+q7/rBRmIOvfyUDRw+V4naXowgt4jKmIKKr5VUC9ItpIVkFr2t4Z8FL573WLuLpZUh2aGD3PW94GEax6WKpWNbsR4x31BMz7no3WX+WW4IuWO9m3pYIU+WD3mmNYXvEkgrs=

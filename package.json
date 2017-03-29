@@ -1,0 +1,82 @@
+{
+  "name": "react-accessible-accordion",
+  "version": "0.0.1",
+  "description": "Accessible Accordion component for React",
+  "main": "./dist/react-accessible-accordion.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "lint": "eslint",
+    "build": "webpack --config ./webpack/webpack.config.prod.js",
+    "start": "webpack --config ./webpack/webpack.config.dev.js",
+    "build-demo": "webpack --config ./webpack/webpack.config.demo.js",
+    "start-demo": "webpack-dev-server --config ./webpack/webpack.config.demo.js",
+    "pages": "rm -rf pages && cp -R demo pages && webpack --config=webpack.config.prod.js --progress -p",
+    "deploy": "npm run pages && ./bin/deploy.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/springload/react-accessible-accordion.git"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ]
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/"
+    ]
+  },
+  "keywords": [
+    "react",
+    "component",
+    "accordion",
+    "collapse",
+    "accessible",
+    "accessibility"
+  ],
+  "authors": [
+      "Vincent Audebert <vincent@springload.co.nz>"
+  ],
+  "contributors": [
+      {
+        "name": "Samantha Sanders"
+      }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/springload/react-accessible-accordion/issues"
+  },
+  "homepage": "https://github.com/springload/react-accessible-accordion#readme",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-eslint": "^7.2.1",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "coveralls": "^2.12.0",
+    "css-loader": "^0.27.3",
+    "eslint": "^3.18.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "jest": "^19.0.2",
+    "style-loader": "^0.16.1",
+    "webpack": "^2.3.2",
+    "webpack-dev-server": "^2.4.2"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "uuid": "^3.0.1"
+  },
+  "peerDependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  }
+}
