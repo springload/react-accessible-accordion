@@ -1,13 +1,10 @@
-const path = require('path');
 const webpack = require('webpack');
-
-const demoPath = path.join(__dirname, '..', 'demo');
 
 module.exports = {
     devtool: 'source-map',
 
     entry: {
-        demo: ['webpack/hot/dev-server', `${demoPath}/js/demo.js`],
+        demo: ['webpack/hot/dev-server', './demo/js/demo.js'],
     },
 
     output: {
