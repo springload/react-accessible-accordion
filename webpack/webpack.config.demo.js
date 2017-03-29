@@ -8,7 +8,7 @@ module.exports = {
     },
 
     output: {
-        filename: 'demo/js/bundle.js',
+        filename: 'js/bundle.js',
     },
 
     module: {
