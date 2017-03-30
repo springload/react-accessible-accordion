@@ -1,6 +1,6 @@
 {
   "name": "react-accessible-accordion",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Accessible Accordion component for React",
   "main": "dist/react-accessible-accordion.js",
   "scripts": {
@@ -41,12 +41,12 @@
     "accessibility"
   ],
   "authors": [
-      "Vincent Audebert <vincent@springload.co.nz>"
+    "Vincent Audebert <vincent@springload.co.nz>"
   ],
   "contributors": [
-      {
-        "name": "Samantha Sanders"
-      }
+    {
+      "name": "Samantha Sanders"
+    }
   ],
   "license": "MIT",
   "bugs": {
