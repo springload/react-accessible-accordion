@@ -1,5 +1,6 @@
 const config = require('./webpack.config.demo.js');
 
+config.watch = false;
 config.entry = {
     demo: './demo/js/demo.js',
 };
