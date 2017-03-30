@@ -9,7 +9,7 @@ import {
 } from '../../src';
 
 import '../css/demo.css';
-import '../../dist/react-accessible-accordion.css';
+import '../../src/react-accessible-accordion.css';
 
 const Example = () => (
     <div className="demo-container">
