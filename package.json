@@ -2,7 +2,7 @@
   "name": "react-accessible-accordion",
   "version": "0.0.1",
   "description": "Accessible Accordion component for React",
-  "main": "./dist/react-accessible-accordion.js",
+  "main": "dist/react-accessible-accordion.js",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",

@@ -27,6 +27,10 @@ module.exports = {
                     loader: 'babel-loader',
                 }],
             },
+            {
+                test: /\.css$/,
+                loaders: ['style-loader', 'css-loader'],
+            },
         ],
     },
     // Some libraries import Node modules but don't use them in the browser.

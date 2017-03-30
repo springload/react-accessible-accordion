@@ -1,6 +1,5 @@
 const config = require('./webpack.config.demo.js');
 
-config.devtool = false;
 config.entry = {
     demo: './demo/js/demo.js',
 };
