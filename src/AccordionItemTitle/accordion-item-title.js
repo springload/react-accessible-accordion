@@ -56,5 +56,8 @@ class AccordionItemTitle extends Component {
 
 AccordionItemTitle.propTypes = propTypes;
 AccordionItemTitle.defaultProps = defaultProps;
+// We need this to be able to assign correct params to element.
+// Minifiers modify component name
+AccordionItemTitle.accordionElementName = 'AccordionItemTitle';
 
 export default AccordionItemTitle;

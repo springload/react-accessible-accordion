@@ -37,13 +37,13 @@ class AccordionItem extends Component {
                 expanded: expanded,
             };
 
-            if (item.type.name === 'AccordionItemTitle') {
+            if (item.type.accordionElementName === 'AccordionItemTitle') {
                 itemProps.key = 'title';
                 itemProps.id = `accordion__title-${itemUuid}`;
                 itemProps.ariaControls = `accordion__body-${itemUuid}`;
                 itemProps.onClick = onClick;
                 itemProps.role = accordion ? 'tab' : 'button';
-            } else if (item.type.name === 'AccordionItemBody') {
+            } else if (item.type.accordionElementName === 'AccordionItemBody') {
                 itemProps.key = 'body';
                 itemProps.id = `accordion__body-${itemUuid}`;
                 itemProps.role = accordion ? 'tabpanel' : '';

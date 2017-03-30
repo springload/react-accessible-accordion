@@ -43,5 +43,8 @@ const AccordionItemBody = ({ id, expanded, children, className, prefixCss, role 
 
 AccordionItemBody.propTypes = propTypes;
 AccordionItemBody.defaultProps = defaultProps;
+// We need this to be able to assign correct params to element.
+// Minifiers modify component name
+AccordionItemBody.accordionElementName = 'AccordionItemBody';
 
 export default AccordionItemBody;

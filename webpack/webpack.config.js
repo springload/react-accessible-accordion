@@ -12,8 +12,6 @@ module.exports = {
     output: {
         path: distPath,
         filename: '[name].js',
-        libraryTarget: 'umd',
-        library: 'react-accessible-accordion',
     },
     plugins: [],
     module: {

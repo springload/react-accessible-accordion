@@ -7,8 +7,6 @@ module.exports = {
     },
     output: {
         filename: 'js/bundle.js',
-        libraryTarget: 'umd',
-        library: 'react-accessible-accordion',
     },
     module: {
         rules: [
