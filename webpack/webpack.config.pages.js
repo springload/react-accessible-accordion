@@ -1,6 +1,6 @@
 const config = require('./webpack.config.demo.js');
 
-config.devtool = 'source-map';
+config.devtool = false;
 config.entry = {
     demo: './demo/js/demo.js',
 };
@@ -10,5 +10,6 @@ config.output = {
 };
 
 config.plugins = [];
+config.devServer = false;
 
 module.exports = config;

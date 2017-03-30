@@ -6,10 +6,10 @@ import {
     AccordionItem,
     AccordionItemTitle,
     AccordionItemBody,
-} from '../../src';
+} from '../../dist/react-accessible-accordion';
 
 import '../css/demo.css';
-import '../../css/react-accessible-accordion.css';
+import '../../dist/react-accessible-accordion.css';
 
 const Example = () => (
     <div className="demo-container">
