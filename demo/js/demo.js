@@ -6,7 +6,7 @@ import {
     AccordionItem,
     AccordionItemTitle,
     AccordionItemBody,
-} from '../../dist/react-accessible-accordion';
+} from '../../src';
 
 import '../css/demo.css';
 import '../../dist/react-accessible-accordion.css';

@@ -10,6 +10,6 @@ config.output = {
 };
 
 config.plugins = [];
-config.devServer = false;
+config.devServer = {};
 
 module.exports = config;
