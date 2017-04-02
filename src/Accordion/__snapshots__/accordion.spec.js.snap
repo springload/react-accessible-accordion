@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Accordion disabled children 1`] = `
+<div
+  className="accordion"
+>
+  <div
+    accordion={false}
+    disabled={true}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={false}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+</div>
+`;
+
+exports[`Accordion renders correctly with accordion false 1`] = `
+<div
+  className="accordion"
+>
+  <div
+    accordion={false}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake child
+  </div>
+  <div
+    accordion={false}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake child
+  </div>
+</div>
+`;
+
+exports[`Accordion renders correctly with min params 1`] = `
+<div
+  className="accordion"
+>
+  <div
+    accordion={true}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake child
+  </div>
+  <div
+    accordion={true}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake child
+  </div>
+</div>
+`;
