@@ -55,7 +55,7 @@ class Accordion extends Component {
             return null;
         }
 
-        return children.map((item, index) => {
+        return React.Children.map(children, (item, index) => {
             const key = index;
             const expanded = (this.state.activeItems.indexOf(key) !== -1) && (!item.props.disabled);
 

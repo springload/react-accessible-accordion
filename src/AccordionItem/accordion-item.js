@@ -32,7 +32,7 @@ class AccordionItem extends Component {
             return null;
         }
 
-        return children.map((item) => {
+        return React.Children.map(children, (item) => {
             const itemProps = {
                 expanded: expanded,
             };
