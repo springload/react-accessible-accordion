@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
 const defaultProps = {
-    activeItems: [],
     accordion: true,
     onChange: () => {},
     className: 'accordion',
@@ -9,7 +8,6 @@ const defaultProps = {
 
 const propTypes = {
     accordion: PropTypes.bool,
-    activeItems: PropTypes.arrayOf(PropTypes.number),
     children: PropTypes.arrayOf(PropTypes.element).isRequired,
     className: PropTypes.string,
     onChange: PropTypes.func,
@@ -18,11 +16,26 @@ const propTypes = {
 class Accordion extends Component {
     constructor(props) {
         super(props);
+        const activeItems = this.preExpandedItems();
         this.state = {
-            activeItems: props.activeItems,
+            activeItems: activeItems,
             accordion: true,
         };
         this.renderItems = this.renderItems.bind(this);
+    }
+
+    preExpandedItems() {
+        const activeItems = [];
+        React.Children.map(this.props.children, (item, index) => {
+            if (item.props.expanded) {
+                if (this.props.accordion) {
+                    if (activeItems.length === 0) activeItems.push(index);
+                } else {
+                    activeItems.push(index);
+                }
+            }
+        });
+        return activeItems;
     }
 
     handleClick(key) {

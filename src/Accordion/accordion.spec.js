@@ -84,4 +84,34 @@ describe('Accordion', () => {
         wrapper.getInstance().handleClick(0);
         expect(wrapper).toMatchSnapshot();
     });
+
+    it('pre expanded accordion', () => {
+        const tree = renderer.create(
+            <Accordion>
+                <AccordionItem expanded={true}>Fake Child</AccordionItem>
+                <AccordionItem>Fake Child</AccordionItem>
+            </Accordion>,
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('works with multiple pre expanded accordion. Extra expands are just ignored.', () => {
+        const tree = renderer.create(
+            <Accordion>
+                <AccordionItem expanded={true}>Fake Child</AccordionItem>
+                <AccordionItem expanded={true}>Fake Child</AccordionItem>
+            </Accordion>,
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('pre expanded accordion when accordion is false', () => {
+        const tree = renderer.create(
+            <Accordion accordion={false}>
+                <AccordionItem expanded={true}>Fake Child</AccordionItem>
+                <AccordionItem expanded={true}>Fake Child</AccordionItem>
+            </Accordion>,
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
 });

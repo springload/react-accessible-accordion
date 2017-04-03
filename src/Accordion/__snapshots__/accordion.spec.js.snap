@@ -161,6 +161,52 @@ exports[`Accordion handles disabled children 1`] = `
 </div>
 `;
 
+exports[`Accordion pre expanded accordion 1`] = `
+<div
+  className="accordion"
+>
+  <div
+    accordion={true}
+    disabled={undefined}
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={true}
+    disabled={undefined}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+</div>
+`;
+
+exports[`Accordion pre expanded accordion when accordion is false 1`] = `
+<div
+  className="accordion"
+>
+  <div
+    accordion={false}
+    disabled={undefined}
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={false}
+    disabled={undefined}
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+</div>
+`;
+
 exports[`Accordion renders correctly with accordion false 1`] = `
 <div
   className="accordion"
@@ -203,6 +249,29 @@ exports[`Accordion renders correctly with min params 1`] = `
     onClick={[Function]}
   >
     Fake child
+  </div>
+</div>
+`;
+
+exports[`Accordion works with multiple pre expanded accordion. Extra expands are just ignored. 1`] = `
+<div
+  className="accordion"
+>
+  <div
+    accordion={true}
+    disabled={undefined}
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={true}
+    disabled={undefined}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
   </div>
 </div>
 `;

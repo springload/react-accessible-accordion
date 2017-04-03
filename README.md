@@ -111,6 +111,12 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
     </thead>
     <tbody>
       <tr>
+          <td>expanded</td>
+          <td>Boolean</td>
+          <th>false</th>
+          <td>Expands this item on first render</td>
+      </tr>
+      <tr>
           <td>className</td>
           <td>String</td>
           <th>accordion__item</th>
