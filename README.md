@@ -59,6 +59,118 @@ const Example = () => (
 ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
 ```
 
+## API
+
+### Accordion
+
+#### props:
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="width: 100px;">name</th>
+        <th style="width: 50px;">type</th>
+        <th>default</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td>accordion</td>
+          <td>Boolean</td>
+          <th>true</th>
+          <td>Open only one item at a time or not</td>
+      </tr>
+      <tr>
+          <td>onChange</td>
+          <td>Function(activeItems)</td>
+          <th>noop</th>
+          <td>Triggered on change (open/close items)</td>
+      </tr>
+      <tr>
+          <td>className</td>
+          <td>String</td>
+          <th>accordion</th>
+          <td>CSS class(es) applied to the component</td>
+      </tr>
+    </tbody>
+</table>
+
+### AccordionItem
+
+#### props:
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="width: 100px;">name</th>
+        <th style="width: 50px;">type</th>
+        <th>default</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td>className</td>
+          <td>String</td>
+          <th>accordion__item</th>
+          <td>CSS class(es) applied to the component</td>
+      </tr>
+    </tbody>
+</table>
+
+### AccordionItemTitle
+
+#### props:
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="width: 100px;">name</th>
+        <th style="width: 50px;">type</th>
+        <th>default</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td>className</td>
+          <td>String</td>
+          <th>accordion__title</th>
+          <td>CSS class(es) applied to the component</td>
+      </tr>
+    </tbody>
+</table>
+
+### AccordionItemBody
+
+#### props:
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="width: 100px;">name</th>
+        <th style="width: 50px;">type</th>
+        <th>default</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td>className</td>
+          <td>String</td>
+          <th>accordion__body</th>
+          <td>CSS class(es) applied to the component</td>
+      </tr>
+      <tr>
+          <td>prefixCss</td>
+          <td>String</td>
+          <th>accordion__body</th>
+          <td>Prefix added to '--hidden' if you want to specify your own CSS animation</td>
+      </tr>
+    </tbody>
+</table>
+
 ## Development
 
 ### Install
