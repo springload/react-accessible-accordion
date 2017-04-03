@@ -212,7 +212,7 @@ const Example = () => (
             </AccordionItem>
         </Accordion>
 
-        <h2 className="u-margin-top">Pre expanded items</h2>
+        <h2 className="u-margin-top">Pre expanded children</h2>
 
         <Accordion>
             <AccordionItem expanded={true}>
