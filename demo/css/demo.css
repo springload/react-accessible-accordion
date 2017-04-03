@@ -4,24 +4,95 @@
 * ----------------------------------------------
 **/
 .u-margin-top {
-    margin-top: 30px;
+    margin-top: 1.875rem;
 }
 
-.accordion__title {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    text-align: left;
-    border: none;
+.u-margin-bottom-s {
+    margin-bottom: .5rem;
 }
 
-.accordion__title:hover {
-    background-color: #ddd;
+
+.u-position-absolute {
+    position: absolute;
 }
 
-.accordion__body {
-    padding: 0 18px;
-    background-color: white;
+.u-position-relative {
+    position: relative;
 }
+
+.accordion {
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 2px;
+}
+
+.accordion__item + .accordion__item {
+    border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
+.accordion__item--has-icon {
+    position: relative;
+}
+
+    .accordion__title {
+        background-color: #f4f4f4;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        text-align: left;
+        border: none;
+    }
+
+    .accordion__title:hover {
+        background-color: #ddd;
+    }
+
+    .accordion__body {
+        padding: 20px;
+    }
+
+    .accordion__title > *:last-child,
+    .accordion__body > *:last-child {
+        margin-bottom: 0;
+    }
+
+        .accordion__arrow {
+            display: inline-block;
+            position: relative;
+            width: 24px;
+            height: 12px;
+            position: absolute;
+            top: 50%;
+            right: 0;
+            margin-top: -6px;
+        }
+
+
+        .accordion__arrow::after,
+        .accordion__arrow::before {
+            display: block;
+            position: absolute;
+            top: 50%;
+            width: 10px;
+            height: 2px;
+            background-color: currentColor;
+            content: '';
+        }
+
+        .accordion__arrow::before {
+            left: 4px;
+            transform: rotate(45deg);
+        }
+
+        [aria-expanded="true"] .accordion__arrow::before {
+            transform: rotate(-45deg);
+        }
+
+        .accordion__arrow::after {
+            right: 4px;
+            transform: rotate(-45deg);
+        }
+
+        [aria-expanded="true"] .accordion__arrow::after {
+            transform: rotate(45deg);
+        }

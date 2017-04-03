@@ -5,7 +5,7 @@ const defaultProps = {
     id: '',
     expanded: false,
     className: 'accordion__body',
-    prefixCss: 'accordion__body',
+    hideBodyClassName: 'accordion__body--hidden',
     role: '',
 };
 
@@ -17,15 +17,15 @@ const propTypes = {
         PropTypes.arrayOf(PropTypes.element),
     ]).isRequired,
     className: PropTypes.string,
-    prefixCss: PropTypes.string,
+    hideBodyClassName: PropTypes.string,
     role: PropTypes.string,
 };
 
-const AccordionItemBody = ({ id, expanded, children, className, prefixCss, role }) => {
+const AccordionItemBody = ({ id, expanded, children, className, hideBodyClassName, role }) => {
     const bodyClass = classNames(
         className,
         {
-            [`${prefixCss}--hidden`]: !expanded,
+            [hideBodyClassName]: !expanded,
         },
     );
     const ariaHidden = !expanded;
