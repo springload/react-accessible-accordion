@@ -24,7 +24,7 @@ describe('AccordionItemBody', () => {
 
     it('renders correctly with prefixClass', () => {
         const tree = renderer.create(
-            <AccordionItemBody prefixCss="testCSSClass">
+            <AccordionItemBody hideBodyClassName="testCSSClass--hidden">
                 <div>Fake body</div>
             </AccordionItemBody>,
         ).toJSON();

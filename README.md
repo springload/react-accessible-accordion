@@ -163,10 +163,10 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
           <td>CSS class(es) applied to the component</td>
       </tr>
       <tr>
-          <td>prefixCss</td>
+          <td>hideBodyClassName</td>
           <td>String</td>
-          <th>accordion__body</th>
-          <td>Prefix added to '--hidden' if you want to specify your own CSS animation</td>
+          <th>accordion__body--hidden</th>
+          <td>Class name for hidden body state</td>
       </tr>
     </tbody>
 </table>
