@@ -13,14 +13,15 @@ import '../../src/react-accessible-accordion.css';
 
 const Example = () => (
     <div className="demo-container">
-        <h1>React Accessible Accordion</h1>
-
         <h2>Default settings</h2>
 
         <Accordion>
             <AccordionItem>
                 <AccordionItemTitle>
-                    <h3>Simple title</h3>
+                    <h3 className="u-position-relative">
+                        Simple title
+                        <div className="accordion__arrow" role="presentation" />
+                    </h3>
                 </AccordionItemTitle>
                 <AccordionItemBody>
                     <p>
@@ -31,7 +32,7 @@ const Example = () => (
                         mollis, scelerisque ex quis, pharetra elit. Nam leo nulla, porttitor
                         at felis non, mollis blandit nisl. Curabitur finibus ex ut ipsum
                         scelerisque, eget imperdiet lacus dignissim. Donec a blandit
-                        sem. Aliquam interdum posuere mi eu posuere. Nam venenatis
+                        sem. <a href="/">Aliquam interdum posuere mi eu posuere.</a> Nam venenatis
                         auctor fermentum. Donec facilisis eleifend viverra. Integer malesuada
                         dapibus sodales. Integer mollis maximus bibendum. Maecenas varius
                         nisl aliquam velit commodo, quis consectetur massa fringilla. Pellentesque
@@ -39,9 +40,12 @@ const Example = () => (
                     </p>
                 </AccordionItemBody>
             </AccordionItem>
-            <AccordionItem>
+            <AccordionItem className="accordion__item">
                 <AccordionItemTitle>
-                    <h3>Complex title</h3>
+                    <h3 className=" u-position-relative u-margin-bottom-s">
+                        Complex title
+                        <div className="accordion__arrow" role="presentation" />
+                    </h3>
                     <div>With a bit of description</div>
                 </AccordionItemTitle>
                 <AccordionItemBody>
@@ -68,7 +72,10 @@ const Example = () => (
         <Accordion accordion={false}>
             <AccordionItem>
                 <AccordionItemTitle>
-                    <h3>Simple title</h3>
+                    <h3 className="u-position-relative">
+                        Simple title
+                        <div className="accordion__arrow" role="presentation" />
+                    </h3>
                 </AccordionItemTitle>
                 <AccordionItemBody>
                     <p>
@@ -89,7 +96,10 @@ const Example = () => (
             </AccordionItem>
             <AccordionItem>
                 <AccordionItemTitle>
-                    <h3>Complex title</h3>
+                    <h3 className=" u-position-relative u-margin-bottom-s">
+                        Complex title
+                        <div className="accordion__arrow" role="presentation" />
+                    </h3>
                     <div>With a bit of description</div>
                 </AccordionItemTitle>
                 <AccordionItemBody>
@@ -113,16 +123,22 @@ const Example = () => (
 
         <h2 className="u-margin-top">Accordion children</h2>
 
-        <Accordion accordion={false}>
+        <Accordion>
             <AccordionItem>
                 <AccordionItemTitle>
-                    <h3>Simple title</h3>
+                    <h3 className="u-position-relative">
+                        Simple title
+                        <div className="accordion__arrow" role="presentation" />
+                    </h3>
                 </AccordionItemTitle>
                 <AccordionItemBody>
                     <Accordion accordion={false}>
                         <AccordionItem>
                             <AccordionItemTitle>
-                                <h3>Simple title</h3>
+                                <h3 className="u-position-relative">
+                                    Simple title
+                                    <div className="accordion__arrow" role="presentation" />
+                                </h3>
                             </AccordionItemTitle>
                             <AccordionItemBody>
                                 <p>
@@ -143,7 +159,10 @@ const Example = () => (
                         </AccordionItem>
                         <AccordionItem>
                             <AccordionItemTitle>
-                                <h3>Complex title</h3>
+                                <h3 className=" u-position-relative u-margin-bottom-s">
+                                    Complex title
+                                    <div className="accordion__arrow" role="presentation" />
+                                </h3>
                                 <div>With a bit of description</div>
                             </AccordionItemTitle>
                             <AccordionItemBody>
@@ -168,7 +187,10 @@ const Example = () => (
             </AccordionItem>
             <AccordionItem>
                 <AccordionItemTitle>
-                    <h3>Complex title</h3>
+                    <h3 className=" u-position-relative u-margin-bottom-s">
+                        Complex title
+                        <div className="accordion__arrow" role="presentation" />
+                    </h3>
                     <div>With a bit of description</div>
                 </AccordionItemTitle>
                 <AccordionItemBody>
