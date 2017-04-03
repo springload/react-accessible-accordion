@@ -1,3 +1,4 @@
+// Used to populate the bundle for npm publish
 const webpack = require('webpack');
 const config = require('./webpack.config.js');
 
@@ -15,6 +16,11 @@ config.plugins.push(new webpack.optimize.UglifyJsPlugin({
         screw_ie8: true,
     },
     sourceMap: true,
+}),
+new webpack.DefinePlugin({
+    'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+    },
 }));
 
 module.exports = config;

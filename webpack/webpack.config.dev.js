@@ -1,3 +1,4 @@
+// Used to update the bundle in dev mode
 const config = require('./webpack.config.js');
 
 config.devtool = 'cheap-module-source-map';

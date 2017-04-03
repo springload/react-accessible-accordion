@@ -11,9 +11,8 @@
     "lint": "eslint",
     "build": "webpack --config ./webpack/webpack.config.prod.js",
     "start": "webpack --config ./webpack/webpack.config.dev.js",
-    "build-demo": "webpack --config ./webpack/webpack.config.demo.js",
     "start-demo": "webpack-dev-server --config ./webpack/webpack.config.demo.js",
-    "pages": "rm -rf pages && cp -R demo pages && webpack --config=./webpack/webpack.config.pages.js --progress -p",
+    "pages": "rm -rf pages && cp -R demo pages && webpack --config=./webpack/webpack.config.pages.js",
     "deploy": "npm run pages && ./bin/deploy.sh"
   },
   "repository": {

@@ -1,3 +1,4 @@
+// Used to run webpack dev server to test the demo in local
 const webpack = require('webpack');
 
 module.exports = {

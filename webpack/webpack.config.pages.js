@@ -1,3 +1,4 @@
+// Used to populate the github pages
 const webpack = require('webpack');
 const config = require('./webpack.config.demo.js');
 
@@ -23,6 +24,11 @@ config.plugins = [
             screw_ie8: true,
         },
         sourceMap: true,
+    }),
+    new webpack.DefinePlugin({
+        'process.env': {
+            NODE_ENV: JSON.stringify('production'),
+        },
     }),
 ];
 config.watch = false;
