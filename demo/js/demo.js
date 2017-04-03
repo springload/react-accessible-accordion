@@ -121,7 +121,7 @@ const Example = () => (
             </AccordionItem>
         </Accordion>
 
-        <h2 className="u-margin-top">Accordion children</h2>
+        <h2 className="u-margin-top">Multi Accordion children</h2>
 
         <Accordion>
             <AccordionItem>
