@@ -12,7 +12,7 @@ jest.mock('uuid', () => {
 });
 
 jest.mock('../AccordionItemTitle/accordion-item-title', () => {
-    const RealReact = require.requireActual('React');
+    const RealReact = require.requireActual('react');
     class MockElement extends RealReact.Component {
         render() {
             return RealReact.createElement('div', this.props, this.props.children);
@@ -24,7 +24,7 @@ jest.mock('../AccordionItemTitle/accordion-item-title', () => {
 });
 
 jest.mock('../AccordionItemBody/accordion-item-body', () => {
-    const RealReact = require.requireActual('React');
+    const RealReact = require.requireActual('react');
     class MockElement extends RealReact.Component {
         render() {
             return RealReact.createElement('div', this.props, this.props.children);
