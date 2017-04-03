@@ -4,7 +4,13 @@ Changelog
 > All notable changes to this project are documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [[v0.0.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v0.0.1)
+## [[v0.1.2]](https://github.com/springload/react-accessible-accordion/releases/tag/v0.1.2)
+
+- Accordion mode / Collapse mode
+- Possibility to pre expand items
+- 100% coverage with unit tests
+- Possibility to customise CSS.
+- Clean CSS for the demo/github page.
 
 
 ## [[vx.y.z]](https://github.com/springload/Quicktube.js/releases/tag/x.y.z) Template from http://keepachangelog.com/
