@@ -43,7 +43,7 @@ class AccordionItemTitle extends Component {
                 aria-expanded={expanded}
                 aria-controls={ariaControls}
                 className={className}
-                onClick={() => onClick()}
+                onClick={onClick}
                 role={role}
                 tabIndex="0"
                 onKeyPress={this.handleKeyPress}

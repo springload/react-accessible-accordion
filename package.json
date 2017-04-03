@@ -7,6 +7,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
+    "test:coverage:watch": "jest --coverage --watch",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "lint": "eslint",
     "build": "webpack --config ./webpack/webpack.config.prod.js",
@@ -45,6 +46,9 @@
   "contributors": [
     {
       "name": "Samantha Sanders"
+    },
+    {
+      "name": "Thibaud Colas"
     }
   ],
   "license": "MIT",
@@ -67,7 +71,9 @@
     "eslint-plugin-react": "^6.10.3",
     "jest": "^19.0.2",
     "react": "^15.4.2",
+    "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-test-renderer": "^15.4.2",
     "style-loader": "^0.16.1",
     "webpack": "^2.3.2",
     "webpack-dev-server": "^2.4.2"

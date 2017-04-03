@@ -44,22 +44,18 @@ class Accordion extends Component {
             activeItems: activeItems,
         });
 
-        if (this.props.onChange) {
-            this.props.onChange(this.props.accordion ? activeItems[0] : activeItems);
-        }
+        this.props.onChange(this.props.accordion ? activeItems[0] : activeItems);
     }
 
     renderItems() {
         const { accordion, children } = this.props;
-        if (!children) {
-            return null;
-        }
 
         return React.Children.map(children, (item, index) => {
             const key = index;
             const expanded = (this.state.activeItems.indexOf(key) !== -1) && (!item.props.disabled);
 
             return React.cloneElement(item, {
+                disabled: item.props.disabled,
                 accordion: accordion,
                 expanded: expanded,
                 key: `accordion__item-${key}`,

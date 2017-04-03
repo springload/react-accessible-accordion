@@ -28,9 +28,6 @@ class AccordionItem extends Component {
     renderChildren() {
         const { accordion, expanded, onClick, children } = this.props;
         const { itemUuid } = this.state;
-        if (!children) {
-            return null;
-        }
 
         return React.Children.map(children, (item) => {
             const itemProps = {

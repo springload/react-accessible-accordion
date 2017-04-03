@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccordionItemTitle renders correctly when pressing another key 1`] = `
+<div
+  aria-controls=""
+  aria-expanded={false}
+  className="accordion__title"
+  id=""
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  role=""
+  tabIndex="0"
+>
+  <div>
+    Fake Title
+  </div>
+</div>
+`;
+
+exports[`AccordionItemTitle renders correctly when pressing enter 1`] = `
+<div
+  aria-controls=""
+  aria-expanded={false}
+  className="accordion__title"
+  id=""
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  role=""
+  tabIndex="0"
+>
+  <div>
+    Fake Title
+  </div>
+</div>
+`;
+
+exports[`AccordionItemTitle renders correctly when pressing space 1`] = `
+<div
+  aria-controls=""
+  aria-expanded={false}
+  className="accordion__title"
+  id=""
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  role=""
+  tabIndex="0"
+>
+  <div>
+    Fake Title
+  </div>
+</div>
+`;
+
+exports[`AccordionItemTitle renders correctly with different className 1`] = `
+<div
+  aria-controls=""
+  aria-expanded={false}
+  className="testCSSClass"
+  id=""
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  role=""
+  tabIndex="0"
+>
+  <div>
+    Fake Title
+  </div>
+</div>
+`;
+
+exports[`AccordionItemTitle renders correctly with min params 1`] = `
+<div
+  aria-controls=""
+  aria-expanded={false}
+  className="accordion__title"
+  id=""
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  role=""
+  tabIndex="0"
+>
+  <div>
+    Fake Title
+  </div>
+</div>
+`;
