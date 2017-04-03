@@ -55,6 +55,7 @@ class Accordion extends Component {
             const expanded = (this.state.activeItems.indexOf(key) !== -1) && (!item.props.disabled);
 
             return React.cloneElement(item, {
+                disabled: item.props.disabled,
                 accordion: accordion,
                 expanded: expanded,
                 key: `accordion__item-${key}`,

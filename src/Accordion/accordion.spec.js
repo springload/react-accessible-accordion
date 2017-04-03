@@ -27,10 +27,10 @@ describe('Accordion', () => {
         expect(tree).toMatchSnapshot();
     });
 
-    it('disabled children', () => {
+    it('different className', () => {
         const tree = renderer.create(
-            <Accordion accordion={false}>
-                <AccordionItem disabled={true}>Fake Child</AccordionItem>
+            <Accordion accordion={false} className="testCSSClass">
+                <AccordionItem>Fake Child</AccordionItem>
                 <AccordionItem>Fake Child</AccordionItem>
             </Accordion>,
         ).toJSON();
@@ -71,6 +71,17 @@ describe('Accordion', () => {
         wrapper.getInstance().handleClick(0);
         wrapper.getInstance().handleClick(1);
         expect(wrapper.getInstance().state.activeItems).toEqual([0, 1]);
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    it('handles disabled children', () => {
+        const wrapper = renderer.create(
+            <Accordion accordion={false}>
+                <AccordionItem disabled={true}>Fake Child</AccordionItem>
+                <AccordionItem>Fake Child</AccordionItem>
+            </Accordion>,
+        );
+        wrapper.getInstance().handleClick(0);
         expect(wrapper).toMatchSnapshot();
     });
 });

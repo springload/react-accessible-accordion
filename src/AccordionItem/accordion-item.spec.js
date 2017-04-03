@@ -73,4 +73,18 @@ describe('AccordionItem', () => {
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
+
+    it('renders with different className', () => {
+        const tree = renderer.create(
+            <AccordionItem className="testCSSClass">
+                <AccordionItemTitle>
+                    <div>Fake title</div>
+                </AccordionItemTitle>
+                <AccordionItemBody>
+                    <div>Fake body</div>
+                </AccordionItemBody>
+            </AccordionItem>,
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
 });

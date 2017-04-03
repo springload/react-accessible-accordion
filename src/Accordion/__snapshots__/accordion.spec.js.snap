@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Accordion disabled children 1`] = `
+exports[`Accordion different className 1`] = `
 <div
-  className="accordion"
+  className="testCSSClass"
 >
   <div
     accordion={false}
-    disabled={true}
+    disabled={undefined}
     expanded={false}
     onClick={[Function]}
   >
@@ -14,6 +14,7 @@ exports[`Accordion disabled children 1`] = `
   </div>
   <div
     accordion={false}
+    disabled={undefined}
     expanded={false}
     onClick={[Function]}
   >
@@ -28,6 +29,7 @@ exports[`Accordion handleClick function accordion false 1`] = `
 >
   <div
     accordion={false}
+    disabled={undefined}
     expanded={false}
     onClick={[Function]}
   >
@@ -35,6 +37,7 @@ exports[`Accordion handleClick function accordion false 1`] = `
   </div>
   <div
     accordion={false}
+    disabled={undefined}
     expanded={true}
     onClick={[Function]}
   >
@@ -49,6 +52,7 @@ exports[`Accordion handleClick function accordion false 2`] = `
 >
   <div
     accordion={false}
+    disabled={undefined}
     expanded={false}
     onClick={[Function]}
   >
@@ -56,6 +60,7 @@ exports[`Accordion handleClick function accordion false 2`] = `
   </div>
   <div
     accordion={false}
+    disabled={undefined}
     expanded={false}
     onClick={[Function]}
   >
@@ -70,6 +75,7 @@ exports[`Accordion handleClick function accordion false 3`] = `
 >
   <div
     accordion={false}
+    disabled={undefined}
     expanded={true}
     onClick={[Function]}
   >
@@ -77,6 +83,7 @@ exports[`Accordion handleClick function accordion false 3`] = `
   </div>
   <div
     accordion={false}
+    disabled={undefined}
     expanded={true}
     onClick={[Function]}
   >
@@ -91,6 +98,7 @@ exports[`Accordion handleClick function accordion true 1`] = `
 >
   <div
     accordion={true}
+    disabled={undefined}
     expanded={false}
     onClick={[Function]}
   >
@@ -98,6 +106,7 @@ exports[`Accordion handleClick function accordion true 1`] = `
   </div>
   <div
     accordion={true}
+    disabled={undefined}
     expanded={true}
     onClick={[Function]}
   >
@@ -112,6 +121,7 @@ exports[`Accordion handleClick function accordion true 2`] = `
 >
   <div
     accordion={true}
+    disabled={undefined}
     expanded={false}
     onClick={[Function]}
   >
@@ -119,6 +129,30 @@ exports[`Accordion handleClick function accordion true 2`] = `
   </div>
   <div
     accordion={true}
+    disabled={undefined}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+</div>
+`;
+
+exports[`Accordion handles disabled children 1`] = `
+<div
+  className="accordion"
+>
+  <div
+    accordion={false}
+    disabled={true}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={false}
+    disabled={undefined}
     expanded={false}
     onClick={[Function]}
   >
@@ -133,6 +167,7 @@ exports[`Accordion renders correctly with accordion false 1`] = `
 >
   <div
     accordion={false}
+    disabled={undefined}
     expanded={false}
     onClick={[Function]}
   >
@@ -140,6 +175,7 @@ exports[`Accordion renders correctly with accordion false 1`] = `
   </div>
   <div
     accordion={false}
+    disabled={undefined}
     expanded={false}
     onClick={[Function]}
   >
@@ -154,6 +190,7 @@ exports[`Accordion renders correctly with min params 1`] = `
 >
   <div
     accordion={true}
+    disabled={undefined}
     expanded={false}
     onClick={[Function]}
   >
@@ -161,6 +198,7 @@ exports[`Accordion renders correctly with min params 1`] = `
   </div>
   <div
     accordion={true}
+    disabled={undefined}
     expanded={false}
     onClick={[Function]}
   >
