@@ -11,9 +11,10 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "lint": "eslint",
     "js": "babel -d dist src",
+    "js:watch": "npm run js -- --watch",
     "css": "cp src/react-accessible-accordion.css dist",
     "build": "npm run js -s && npm run css -s",
-    "start": "webpack --config ./webpack/webpack.config.dev.js",
+    "start": "npm run js:watch",
     "start-demo": "webpack-dev-server --config ./webpack/webpack.config.demo.js",
     "pages": "rm -rf pages && cp -R demo pages && webpack --config=./webpack/webpack.config.pages.js",
     "deploy": "npm run pages && ./bin/deploy.sh"
