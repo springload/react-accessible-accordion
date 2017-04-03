@@ -74,8 +74,7 @@ bower_components
 # -------------------------------------------------
 # Generated files
 # -------------------------------------------------
-/dist/
-/pages/
+pages
 /demo/js/bundle.js
 /demo/js/bundle.map.js
 
