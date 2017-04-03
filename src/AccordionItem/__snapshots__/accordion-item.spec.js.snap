@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccordionItem renders correctly with accordion false 1`] = `
+<div
+  className="accordion__item"
+>
+  <div
+    ariaControls="accordion__body-mock-uuid-hash"
+    expanded={false}
+    id="accordion__title-mock-uuid-hash"
+    onClick={[Function]}
+    role="button"
+  >
+    <div>
+      Fake title
+    </div>
+  </div>
+  <div
+    expanded={false}
+    id="accordion__body-mock-uuid-hash"
+    role=""
+  >
+    <div>
+      Fake body
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AccordionItem renders correctly with accordion true 1`] = `
+<div
+  className="accordion__item"
+>
+  <div
+    ariaControls="accordion__body-mock-uuid-hash"
+    expanded={false}
+    id="accordion__title-mock-uuid-hash"
+    onClick={[Function]}
+    role="tab"
+  >
+    <div>
+      Fake title
+    </div>
+  </div>
+  <div
+    expanded={false}
+    id="accordion__body-mock-uuid-hash"
+    role="tabpanel"
+  >
+    <div>
+      Fake body
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AccordionItem still renders with incorrect type children 1`] = `
+<div
+  className="accordion__item"
+>
+  <div
+    expanded={false}
+  >
+    Fake title
+  </div>
+  <div
+    expanded={false}
+  >
+    Fake body
+  </div>
+</div>
+`;

@@ -1,7 +1,5 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { shallow } from 'enzyme';
-// import ReactTestUtils from 'react-addons-test-utils';
 
 import Accordion from './accordion';
 import AccordionItem from '../AccordionItem/accordion-item';
@@ -40,39 +38,39 @@ describe('Accordion', () => {
     });
 
     it('handleClick function accordion true', () => {
-        const wrapper = shallow(
+        const wrapper = renderer.create(
             <Accordion>
                 <AccordionItem>Fake Child</AccordionItem>
                 <AccordionItem>Fake Child</AccordionItem>
             </Accordion>,
         );
-        wrapper.instance().handleClick(1);
+        wrapper.getInstance().handleClick(1);
+        expect(wrapper.getInstance().state.activeItems).toEqual([1]);
+        expect(wrapper).toMatchSnapshot();
 
-        expect(wrapper.instance().state.activeItems).toEqual([1]);
-
-        wrapper.instance().handleClick(1);
-
-        expect(wrapper.instance().state.activeItems).toEqual([]);
+        wrapper.getInstance().handleClick(1);
+        expect(wrapper.getInstance().state.activeItems).toEqual([]);
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('handleClick function accordion false', () => {
-        const wrapper = shallow(
+        const wrapper = renderer.create(
             <Accordion accordion={false}>
                 <AccordionItem>Fake Child</AccordionItem>
                 <AccordionItem>Fake Child</AccordionItem>
             </Accordion>,
         );
-        wrapper.instance().handleClick(1);
+        wrapper.getInstance().handleClick(1);
+        expect(wrapper.getInstance().state.activeItems).toEqual([1]);
+        expect(wrapper).toMatchSnapshot();
 
-        expect(wrapper.instance().state.activeItems).toEqual([1]);
+        wrapper.getInstance().handleClick(1);
+        expect(wrapper.getInstance().state.activeItems).toEqual([]);
+        expect(wrapper).toMatchSnapshot();
 
-        wrapper.instance().handleClick(1);
-
-        expect(wrapper.instance().state.activeItems).toEqual([]);
-
-        wrapper.instance().handleClick(0);
-        wrapper.instance().handleClick(1);
-
-        expect(wrapper.instance().state.activeItems).toEqual([0, 1]);
+        wrapper.getInstance().handleClick(0);
+        wrapper.getInstance().handleClick(1);
+        expect(wrapper.getInstance().state.activeItems).toEqual([0, 1]);
+        expect(wrapper).toMatchSnapshot();
     });
 });

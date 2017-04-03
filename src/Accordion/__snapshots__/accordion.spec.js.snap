@@ -22,6 +22,111 @@ exports[`Accordion disabled children 1`] = `
 </div>
 `;
 
+exports[`Accordion handleClick function accordion false 1`] = `
+<div
+  className="accordion"
+>
+  <div
+    accordion={false}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={false}
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+</div>
+`;
+
+exports[`Accordion handleClick function accordion false 2`] = `
+<div
+  className="accordion"
+>
+  <div
+    accordion={false}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={false}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+</div>
+`;
+
+exports[`Accordion handleClick function accordion false 3`] = `
+<div
+  className="accordion"
+>
+  <div
+    accordion={false}
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={false}
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+</div>
+`;
+
+exports[`Accordion handleClick function accordion true 1`] = `
+<div
+  className="accordion"
+>
+  <div
+    accordion={true}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={true}
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+</div>
+`;
+
+exports[`Accordion handleClick function accordion true 2`] = `
+<div
+  className="accordion"
+>
+  <div
+    accordion={true}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={true}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+</div>
+`;
+
 exports[`Accordion renders correctly with accordion false 1`] = `
 <div
   className="accordion"
