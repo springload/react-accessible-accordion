@@ -83,7 +83,7 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
       </tr>
       <tr>
           <td>onChange</td>
-          <td>Function(activeItems)</td>
+          <td>Function(keys)</td>
           <th>noop</th>
           <td>Triggered on change (open/close items)</td>
       </tr>
