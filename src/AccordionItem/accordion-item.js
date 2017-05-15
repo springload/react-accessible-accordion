@@ -34,15 +34,14 @@ class AccordionItem extends Component {
 
             if (item.type.accordionElementName === 'AccordionItemTitle' ||
                 item.type.accordionElementName === 'AccordionItemBody') {
-                if (item.type.accordionElementName === 'AccordionItemTitle') {
-                    itemProps.expanded = expanded;
+                itemProps.expanded = expanded;
+                if (item.type.accordionElementName === 'AccordionItemTitle') {    
                     itemProps.key = 'title';
                     itemProps.id = `accordion__title-${itemUuid}`;
                     itemProps.ariaControls = `accordion__body-${itemUuid}`;
                     itemProps.onClick = onClick;
                     itemProps.role = accordion ? 'tab' : 'button';
                 } else { // AccordionItemBody
-                    itemProps.expanded = expanded;
                     itemProps.key = 'body';
                     itemProps.id = `accordion__body-${itemUuid}`;
                     itemProps.role = accordion ? 'tabpanel' : '';
