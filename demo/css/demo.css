@@ -7,6 +7,10 @@
     margin-top: 1.875rem;
 }
 
+.block {
+    padding: 20px;
+}
+
 .u-margin-bottom-s {
     margin-bottom: .5rem;
 }

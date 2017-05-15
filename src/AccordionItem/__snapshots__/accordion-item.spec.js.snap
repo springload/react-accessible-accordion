@@ -54,6 +54,66 @@ exports[`AccordionItem renders correctly with accordion true 1`] = `
 </div>
 `;
 
+exports[`AccordionItem renders correctly with other blocks inside 1`] = `
+<div
+  className="accordion__item"
+>
+  <div
+    ariaControls="accordion__body-mock-uuid-hash"
+    expanded={false}
+    id="accordion__title-mock-uuid-hash"
+    onClick={[Function]}
+    role="button"
+  >
+    <div>
+      Fake title
+    </div>
+  </div>
+  <div>
+    Just another block
+  </div>
+  <div
+    expanded={false}
+    id="accordion__body-mock-uuid-hash"
+    role=""
+  >
+    <div>
+      Fake body
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
+<div
+  className="accordion__item"
+>
+  <div
+    ariaControls="accordion__body-mock-uuid-hash"
+    expanded={false}
+    id="accordion__title-mock-uuid-hash"
+    onClick={[Function]}
+    role="button"
+  >
+    <div>
+      Fake title
+    </div>
+  </div>
+  <div
+    expanded={false}
+    id="accordion__body-mock-uuid-hash"
+    role=""
+  >
+    <div>
+      Fake body
+    </div>
+  </div>
+  <div>
+    Just another block
+  </div>
+</div>
+`;
+
 exports[`AccordionItem renders with different className 1`] = `
 <div
   className="testCSSClass"
@@ -81,18 +141,14 @@ exports[`AccordionItem renders with different className 1`] = `
 </div>
 `;
 
-exports[`AccordionItem still renders with incorrect type children 1`] = `
+exports[`AccordionItem still renders with no AccordionItemTitle or AccordionItemBody 1`] = `
 <div
   className="accordion__item"
 >
-  <div
-    expanded={false}
-  >
+  <div>
     Fake title
   </div>
-  <div
-    expanded={false}
-  >
+  <div>
     Fake body
   </div>
 </div>

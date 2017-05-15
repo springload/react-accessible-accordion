@@ -64,7 +64,7 @@ describe('AccordionItem', () => {
         expect(tree).toMatchSnapshot();
     });
 
-    it('still renders with incorrect type children', () => {
+    it('still renders with no AccordionItemTitle or AccordionItemBody', () => {
         const tree = renderer.create(
             <AccordionItem accordion={false}>
                 <div>Fake title</div>
@@ -83,6 +83,36 @@ describe('AccordionItem', () => {
                 <AccordionItemBody>
                     <div>Fake body</div>
                 </AccordionItemBody>
+            </AccordionItem>,
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('renders correctly with other blocks inside', () => {
+        const tree = renderer.create(
+            <AccordionItem accordion={false}>
+                <AccordionItemTitle>
+                    <div>Fake title</div>
+                </AccordionItemTitle>
+                <div>Just another block</div>
+                <AccordionItemBody>
+                    <div>Fake body</div>
+                </AccordionItemBody>
+            </AccordionItem>,
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('renders correctly with other blocks inside 2', () => {
+        const tree = renderer.create(
+            <AccordionItem accordion={false}>
+                <AccordionItemTitle>
+                    <div>Fake title</div>
+                </AccordionItemTitle>
+                <AccordionItemBody>
+                    <div>Fake body</div>
+                </AccordionItemBody>
+                <div>Just another block</div>
             </AccordionItem>,
         ).toJSON();
         expect(tree).toMatchSnapshot();
