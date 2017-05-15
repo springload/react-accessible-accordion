@@ -78,19 +78,19 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
       <tr>
           <td>accordion</td>
           <td>Boolean</td>
-          <th>true</th>
+          <td>true</td>
           <td>Open only one item at a time or not</td>
       </tr>
       <tr>
           <td>onChange</td>
           <td>Function(keys)</td>
-          <th>noop</th>
+          <td>noop</td>
           <td>Triggered on change (open/close items)</td>
       </tr>
       <tr>
           <td>className</td>
           <td>String</td>
-          <th>accordion</th>
+          <td>accordion</td>
           <td>CSS class(es) applied to the component</td>
       </tr>
     </tbody>
@@ -113,13 +113,13 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
       <tr>
           <td>expanded</td>
           <td>Boolean</td>
-          <th>false</th>
+          <td>false</td>
           <td>Expands this item on first render</td>
       </tr>
       <tr>
           <td>className</td>
           <td>String</td>
-          <th>accordion__item</th>
+          <td>accordion__item</td>
           <td>CSS class(es) applied to the component</td>
       </tr>
     </tbody>
@@ -142,7 +142,7 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
       <tr>
           <td>className</td>
           <td>String</td>
-          <th>accordion__title</th>
+          <td>accordion__title</td>
           <td>CSS class(es) applied to the component</td>
       </tr>
     </tbody>
@@ -165,13 +165,13 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
       <tr>
           <td>className</td>
           <td>String</td>
-          <th>accordion__body</th>
+          <td>accordion__body</td>
           <td>CSS class(es) applied to the component</td>
       </tr>
       <tr>
           <td>hideBodyClassName</td>
           <td>String</td>
-          <th>accordion__body--hidden</th>
+          <td>accordion__body--hidden</td>
           <td>Class name for hidden body state</td>
       </tr>
     </tbody>
