@@ -19,50 +19,41 @@ const Example = () => (
             <AccordionItem>
                 <AccordionItemTitle>
                     <h3 className="u-position-relative">
-                        Simple title
+                        Accessible Accordion
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
                 </AccordionItemTitle>
                 <AccordionItemBody>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                        sollicitudin, quam at pulvinar rhoncus, turpis sem condimentum
-                        purus, id ullamcorper sem lectus nec nulla. Vestibulum fringilla
-                        nisi eget erat iaculis mollis a sit amet metus. Donec nec tortor
-                        mollis, scelerisque ex quis, pharetra elit. Nam leo nulla, porttitor
-                        at felis non, mollis blandit nisl. Curabitur finibus ex ut ipsum
-                        scelerisque, eget imperdiet lacus dignissim. Donec a blandit
-                        sem. <a href="/">Aliquam interdum posuere mi eu posuere.</a> Nam venenatis
-                        auctor fermentum. Donec facilisis eleifend viverra. Integer malesuada
-                        dapibus sodales. Integer mollis maximus bibendum. Maecenas varius
-                        nisl aliquam velit commodo, quis consectetur massa fringilla. Pellentesque
-                        blandit ex mauris, vel vulputate mauris egestas vitae.
+                        Accessible Accordion component for React. Inspired by <a
+                            href="https://github.com/react-component/collapse"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="rc-collapse"
+                        >rc-collapse</a> and <a
+                            href="https://github.com/daviferreira/react-sanfona"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="react-sanfona"
+                        >react-sanfona</a>.
                     </p>
                 </AccordionItemBody>
             </AccordionItem>
             <AccordionItem className="accordion__item">
                 <AccordionItemTitle>
                     <h3 className=" u-position-relative u-margin-bottom-s">
-                        Complex title
+                        Components
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
-                    <div>With a bit of description</div>
+                    <div>See all the components from this package</div>
                 </AccordionItemTitle>
                 <AccordionItemBody>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                        sollicitudin, quam at pulvinar rhoncus, turpis sem condimentum
-                        purus, id ullamcorper sem lectus nec nulla. Vestibulum fringilla
-                        nisi eget erat iaculis mollis a sit amet metus. Donec nec tortor
-                        mollis, scelerisque ex quis, pharetra elit. Nam leo nulla, porttitor
-                        at felis non, mollis blandit nisl. Curabitur finibus ex ut ipsum
-                        scelerisque, eget imperdiet lacus dignissim. Donec a blandit
-                        sem. Aliquam interdum posuere mi eu posuere. Nam venenatis
-                        auctor fermentum. Donec facilisis eleifend viverra. Integer malesuada
-                        dapibus sodales. Integer mollis maximus bibendum. Maecenas varius
-                        nisl aliquam velit commodo, quis consectetur massa fringilla. Pellentesque
-                        blandit ex mauris, vel vulputate mauris egestas vitae.
-                    </p>
+                    <ul>
+                        <li>Accordion</li>
+                        <li>AccordionItem</li>
+                        <li>AccordionItemTitle</li>
+                        <li>AccordionItemBody</li>
+                    </ul>
                 </AccordionItemBody>
             </AccordionItem>
         </Accordion>
@@ -73,50 +64,140 @@ const Example = () => (
             <AccordionItem>
                 <AccordionItemTitle>
                     <h3 className="u-position-relative">
-                        Simple title
+                        Accordion
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
                 </AccordionItemTitle>
                 <AccordionItemBody>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                        sollicitudin, quam at pulvinar rhoncus, turpis sem condimentum
-                        purus, id ullamcorper sem lectus nec nulla. Vestibulum fringilla
-                        nisi eget erat iaculis mollis a sit amet metus. Donec nec tortor
-                        mollis, scelerisque ex quis, pharetra elit. Nam leo nulla, porttitor
-                        at felis non, mollis blandit nisl. Curabitur finibus ex ut ipsum
-                        scelerisque, eget imperdiet lacus dignissim. Donec a blandit
-                        sem. Aliquam interdum posuere mi eu posuere. Nam venenatis
-                        auctor fermentum. Donec facilisis eleifend viverra. Integer malesuada
-                        dapibus sodales. Integer mollis maximus bibendum. Maecenas varius
-                        nisl aliquam velit commodo, quis consectetur massa fringilla. Pellentesque
-                        blandit ex mauris, vel vulputate mauris egestas vitae.
-                    </p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>default</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>accordion</td>
+                                <td>Boolean</td>
+                                <td>true</td>
+                                <td>Open only one item at a time or not</td>
+                            </tr>
+                            <tr>
+                                <td>onChange</td>
+                                <td>Function(keys)</td>
+                                <td>noop</td>
+                                <td>Triggered on change (open/close items)</td>
+                            </tr>
+                            <tr>
+                                <td>className</td>
+                                <td>String</td>
+                                <td>accordion</td>
+                                <td>CSS class(es) applied to the component</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </AccordionItemBody>
             </AccordionItem>
             <AccordionItem>
                 <AccordionItemTitle>
-                    <h3 className=" u-position-relative u-margin-bottom-s">
-                        Complex title
+                    <h3 className="u-position-relative">
+                        AccordionItem
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
-                    <div>With a bit of description</div>
                 </AccordionItemTitle>
                 <AccordionItemBody>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                        sollicitudin, quam at pulvinar rhoncus, turpis sem condimentum
-                        purus, id ullamcorper sem lectus nec nulla. Vestibulum fringilla
-                        nisi eget erat iaculis mollis a sit amet metus. Donec nec tortor
-                        mollis, scelerisque ex quis, pharetra elit. Nam leo nulla, porttitor
-                        at felis non, mollis blandit nisl. Curabitur finibus ex ut ipsum
-                        scelerisque, eget imperdiet lacus dignissim. Donec a blandit
-                        sem. Aliquam interdum posuere mi eu posuere. Nam venenatis
-                        auctor fermentum. Donec facilisis eleifend viverra. Integer malesuada
-                        dapibus sodales. Integer mollis maximus bibendum. Maecenas varius
-                        nisl aliquam velit commodo, quis consectetur massa fringilla. Pellentesque
-                        blandit ex mauris, vel vulputate mauris egestas vitae.
-                    </p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>default</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>expanded</td>
+                                <td>Boolean</td>
+                                <td>false</td>
+                                <td>Expands this item on first render</td>
+                            </tr>
+                            <tr>
+                                <td>className</td>
+                                <td>String</td>
+                                <td>accordion__item</td>
+                                <td>CSS class(es) applied to the component</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </AccordionItemBody>
+            </AccordionItem>
+            <AccordionItem>
+                <AccordionItemTitle>
+                    <h3 className="u-position-relative">
+                        AccordionItemTitle
+                        <div className="accordion__arrow" role="presentation" />
+                    </h3>
+                </AccordionItemTitle>
+                <AccordionItemBody>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>default</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>className</td>
+                                <td>String</td>
+                                <td>accordion__title</td>
+                                <td>CSS class(es) applied to the component</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </AccordionItemBody>
+            </AccordionItem>
+            <AccordionItem>
+                <AccordionItemTitle>
+                    <h3 className="u-position-relative">
+                        AccordionItemBody
+                        <div className="accordion__arrow" role="presentation" />
+                    </h3>
+                </AccordionItemTitle>
+                <AccordionItemBody>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>default</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>className</td>
+                                <td>String</td>
+                                <td>accordion__body</td>
+                                <td>CSS class(es) applied to the component</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    hideBody
+                                    ClassName
+                                </td>
+                                <td>String</td>
+                                <td>accordion__body--hidden</td>
+                                <td>Class name for hidden body state</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </AccordionItemBody>
             </AccordionItem>
         </Accordion>
@@ -127,7 +208,7 @@ const Example = () => (
             <AccordionItem>
                 <AccordionItemTitle>
                     <h3 className="u-position-relative">
-                        Simple title
+                        Components API
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
                 </AccordionItemTitle>
@@ -136,50 +217,140 @@ const Example = () => (
                         <AccordionItem>
                             <AccordionItemTitle>
                                 <h3 className="u-position-relative">
-                                    Simple title
+                                    Accordion
                                     <div className="accordion__arrow" role="presentation" />
                                 </h3>
                             </AccordionItemTitle>
                             <AccordionItemBody>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                        sollicitudin, quam at pulvinar rhoncus, turpis sem condimentum
-                        purus, id ullamcorper sem lectus nec nulla. Vestibulum fringilla
-                        nisi eget erat iaculis mollis a sit amet metus. Donec nec tortor
-                        mollis, scelerisque ex quis, pharetra elit. Nam leo nulla, porttitor
-                        at felis non, mollis blandit nisl. Curabitur finibus ex ut ipsum
-                        scelerisque, eget imperdiet lacus dignissim. Donec a blandit
-                        sem. Aliquam interdum posuere mi eu posuere. Nam venenatis
-                        auctor fermentum. Donec facilisis eleifend viverra. Integer malesuada
-                        dapibus sodales. Integer mollis maximus bibendum. Maecenas varius
-                        nisl aliquam velit commodo, quis consectetur massa fringilla. Pellentesque
-                        blandit ex mauris, vel vulputate mauris egestas vitae.
-                                </p>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>name</th>
+                                            <th>type</th>
+                                            <th>default</th>
+                                            <th>description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>accordion</td>
+                                            <td>Boolean</td>
+                                            <td>true</td>
+                                            <td>Open only one item at a time or not</td>
+                                        </tr>
+                                        <tr>
+                                            <td>onChange</td>
+                                            <td>Function(keys)</td>
+                                            <td>noop</td>
+                                            <td>Triggered on change (open/close items)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>className</td>
+                                            <td>String</td>
+                                            <td>accordion</td>
+                                            <td>CSS class(es) applied to the component</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </AccordionItemBody>
                         </AccordionItem>
                         <AccordionItem>
                             <AccordionItemTitle>
-                                <h3 className=" u-position-relative u-margin-bottom-s">
-                                    Complex title
+                                <h3 className="u-position-relative">
+                                    AccordionItem
                                     <div className="accordion__arrow" role="presentation" />
                                 </h3>
-                                <div>With a bit of description</div>
                             </AccordionItemTitle>
                             <AccordionItemBody>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                        sollicitudin, quam at pulvinar rhoncus, turpis sem condimentum
-                        purus, id ullamcorper sem lectus nec nulla. Vestibulum fringilla
-                        nisi eget erat iaculis mollis a sit amet metus. Donec nec tortor
-                        mollis, scelerisque ex quis, pharetra elit. Nam leo nulla, porttitor
-                        at felis non, mollis blandit nisl. Curabitur finibus ex ut ipsum
-                        scelerisque, eget imperdiet lacus dignissim. Donec a blandit
-                        sem. Aliquam interdum posuere mi eu posuere. Nam venenatis
-                        auctor fermentum. Donec facilisis eleifend viverra. Integer malesuada
-                        dapibus sodales. Integer mollis maximus bibendum. Maecenas varius
-                        nisl aliquam velit commodo, quis consectetur massa fringilla. Pellentesque
-                        blandit ex mauris, vel vulputate mauris egestas vitae.
-                                </p>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>name</th>
+                                            <th>type</th>
+                                            <th>default</th>
+                                            <th>description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>expanded</td>
+                                            <td>Boolean</td>
+                                            <td>false</td>
+                                            <td>Expands this item on first render</td>
+                                        </tr>
+                                        <tr>
+                                            <td>className</td>
+                                            <td>String</td>
+                                            <td>accordion__item</td>
+                                            <td>CSS class(es) applied to the component</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </AccordionItemBody>
+                        </AccordionItem>
+                        <AccordionItem>
+                            <AccordionItemTitle>
+                                <h3 className="u-position-relative">
+                                    AccordionItemTitle
+                                    <div className="accordion__arrow" role="presentation" />
+                                </h3>
+                            </AccordionItemTitle>
+                            <AccordionItemBody>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>name</th>
+                                            <th>type</th>
+                                            <th>default</th>
+                                            <th>description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>className</td>
+                                            <td>String</td>
+                                            <td>accordion__title</td>
+                                            <td>CSS class(es) applied to the component</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </AccordionItemBody>
+                        </AccordionItem>
+                        <AccordionItem>
+                            <AccordionItemTitle>
+                                <h3 className="u-position-relative">
+                                    AccordionItemBody
+                                    <div className="accordion__arrow" role="presentation" />
+                                </h3>
+                            </AccordionItemTitle>
+                            <AccordionItemBody>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>name</th>
+                                            <th>type</th>
+                                            <th>default</th>
+                                            <th>description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>className</td>
+                                            <td>String</td>
+                                            <td>accordion__body</td>
+                                            <td>CSS class(es) applied to the component</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                hideBody
+                                                ClassName
+                                            </td>
+                                            <td>String</td>
+                                            <td>accordion__body--hidden</td>
+                                            <td>Class name for hidden body state</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </AccordionItemBody>
                         </AccordionItem>
                     </Accordion>
@@ -188,25 +359,23 @@ const Example = () => (
             <AccordionItem>
                 <AccordionItemTitle>
                     <h3 className=" u-position-relative u-margin-bottom-s">
-                        Complex title
+                        Development
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
-                    <div>With a bit of description</div>
+                    <div>How to install the project</div>
                 </AccordionItemTitle>
                 <AccordionItemBody>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                        sollicitudin, quam at pulvinar rhoncus, turpis sem condimentum
-                        purus, id ullamcorper sem lectus nec nulla. Vestibulum fringilla
-                        nisi eget erat iaculis mollis a sit amet metus. Donec nec tortor
-                        mollis, scelerisque ex quis, pharetra elit. Nam leo nulla, porttitor
-                        at felis non, mollis blandit nisl. Curabitur finibus ex ut ipsum
-                        scelerisque, eget imperdiet lacus dignissim. Donec a blandit
-                        sem. Aliquam interdum posuere mi eu posuere. Nam venenatis
-                        auctor fermentum. Donec facilisis eleifend viverra. Integer malesuada
-                        dapibus sodales. Integer mollis maximus bibendum. Maecenas varius
-                        nisl aliquam velit commodo, quis consectetur massa fringilla. Pellentesque
-                        blandit ex mauris, vel vulputate mauris egestas vitae.
+                        Clone the project on your computer, and install Node. This project also uses nvm.
+                    </p>
+                    <p>
+                        nvm install<br />
+                        # Then, install all project dependencies.<br />
+                        npm install<br />
+                        # Install the git hooks.<br />
+                        ./.githooks/deploy<br />
+                        # Set up a `.env` file with the appropriate secrets.<br />
+                        touch .env
                     </p>
                 </AccordionItemBody>
             </AccordionItem>
@@ -218,49 +387,101 @@ const Example = () => (
             <AccordionItem expanded={true}>
                 <AccordionItemTitle>
                     <h3 className="u-position-relative">
-                        Simple title
+                        Working on the project
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
                 </AccordionItemTitle>
                 <AccordionItemBody>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                        sollicitudin, quam at pulvinar rhoncus, turpis sem condimentum
-                        purus, id ullamcorper sem lectus nec nulla. Vestibulum fringilla
-                        nisi eget erat iaculis mollis a sit amet metus. Donec nec tortor
-                        mollis, scelerisque ex quis, pharetra elit. Nam leo nulla, porttitor
-                        at felis non, mollis blandit nisl. Curabitur finibus ex ut ipsum
-                        scelerisque, eget imperdiet lacus dignissim. Donec a blandit
-                        sem. Aliquam interdum posuere mi eu posuere. Nam venenatis
-                        auctor fermentum. Donec facilisis eleifend viverra. Integer malesuada
-                        dapibus sodales. Integer mollis maximus bibendum. Maecenas varius
-                        nisl aliquam velit commodo, quis consectetur massa fringilla. Pellentesque
-                        blandit ex mauris, vel vulputate mauris egestas vitae.
+                        Everything mentioned in the installation process should already be done.
+                    </p>
+                    <p>
+                        # Make sure you use the right node version.<br />
+                        nvm use<br />
+                        # Start the the development tools in watch mode.<br />
+                        npm run start<br />
+                        # Runs linting.<br />
+                        npm run lint<br />
+                        # Runs tests.<br />
+                        npm run test<br />
+                        # View other available commands with:<br />
+                        npm run
                     </p>
                 </AccordionItemBody>
             </AccordionItem>
             <AccordionItem>
                 <AccordionItemTitle>
                     <h3 className=" u-position-relative u-margin-bottom-s">
-                        Complex title
+                        Run the demo
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
-                    <div>With a bit of description</div>
+                    <div>To have an easy play around</div>
                 </AccordionItemTitle>
                 <AccordionItemBody>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                        sollicitudin, quam at pulvinar rhoncus, turpis sem condimentum
-                        purus, id ullamcorper sem lectus nec nulla. Vestibulum fringilla
-                        nisi eget erat iaculis mollis a sit amet metus. Donec nec tortor
-                        mollis, scelerisque ex quis, pharetra elit. Nam leo nulla, porttitor
-                        at felis non, mollis blandit nisl. Curabitur finibus ex ut ipsum
-                        scelerisque, eget imperdiet lacus dignissim. Donec a blandit
-                        sem. Aliquam interdum posuere mi eu posuere. Nam venenatis
-                        auctor fermentum. Donec facilisis eleifend viverra. Integer malesuada
-                        dapibus sodales. Integer mollis maximus bibendum. Maecenas varius
-                        nisl aliquam velit commodo, quis consectetur massa fringilla. Pellentesque
-                        blandit ex mauris, vel vulputate mauris egestas vitae.
+                        Everything mentioned in the installation process should already be done.
+                    </p>
+                    <p>
+                        # Make sure you use the right node version.<br />
+                        nvm use<br />
+                        # Start the server and the development tools.<br />
+                        npm run start-demo
+                    </p>
+                </AccordionItemBody>
+            </AccordionItem>
+        </Accordion>
+
+        <h2 className="u-margin-top">With permanent blocks</h2>
+
+        <Accordion>
+            <AccordionItem expanded={true}>
+                <AccordionItemTitle>
+                    <h3 className="u-position-relative">
+                        Working on the project
+                        <div className="accordion__arrow" role="presentation" />
+                    </h3>
+                </AccordionItemTitle>
+                <AccordionItemBody>
+                    <p>
+                        Everything mentioned in the installation process should already be done.
+                    </p>
+                    <p>
+                        # Make sure you use the right node version.<br />
+                        nvm use<br />
+                        # Start the the development tools in watch mode.<br />
+                        npm run start<br />
+                        # Runs linting.<br />
+                        npm run lint<br />
+                        # Runs tests.<br />
+                        npm run test<br />
+                        # View other available commands with:<br />
+                        npm run
+                    </p>
+                </AccordionItemBody>
+                <div className="block">
+                    Please feel free to contribute to this repository
+                </div>
+            </AccordionItem>
+            <AccordionItem>
+                <AccordionItemTitle>
+                    <h3 className=" u-position-relative u-margin-bottom-s">
+                        Run the demo
+                        <div className="accordion__arrow" role="presentation" />
+                    </h3>
+                    <div>To have an easy play around</div>
+                </AccordionItemTitle>
+                <div className="block">
+                    This block fits in between the title and the body.
+                </div>
+                <AccordionItemBody>
+                    <p>
+                        Everything mentioned in the installation process should already be done.
+                    </p>
+                    <p>
+                        # Make sure you use the right node version.<br />
+                        nvm use<br />
+                        # Start the server and the development tools.<br />
+                        npm run start-demo
                     </p>
                 </AccordionItemBody>
             </AccordionItem>
