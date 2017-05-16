@@ -434,7 +434,7 @@ const Example = () => (
         <h2 className="u-margin-top">With permanent blocks</h2>
 
         <Accordion>
-            <AccordionItem expanded={true}>
+            <AccordionItem expanded={false}>
                 <AccordionItemTitle>
                     <h3 className="u-position-relative">
                         Working on the project
