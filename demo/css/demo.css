@@ -100,3 +100,37 @@
         [aria-expanded="true"] .accordion__arrow::after {
             transform: rotate(45deg);
         }
+
+        .accordion__arrow::before, .accordion__arrow::after {
+            transition: transform .25s ease, -webkit-transform .25s ease;
+        }
+
+/* -------------------------------------------------- */
+/* ---------------- Animation part ------------------ */
+/* -------------------------------------------------- */
+
+@keyframes move-down {
+	0% { transform: translateY(0); }
+    10% { transform: translateY(0); }
+    20% { transform: translateY(5px); }
+    30% { transform: translateY(0); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes move-up {
+	0% { transform: translateY(0); }
+    10% { transform: translateY(0); }
+    20% { transform: translateY(-5px); }
+    30% { transform: translateY(0); }
+    100% { transform: translateY(0); }
+}
+
+.accordion__title--animated:hover .accordion__arrow {
+    animation-name: move-down;
+    animation-duration: 1.5s;
+}
+
+.accordion__title--animated[aria-expanded="true"]:hover .accordion__arrow {
+    animation-name: move-up;
+    animation-duration: 1.5s;
+}
