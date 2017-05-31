@@ -486,6 +486,37 @@ const Example = () => (
                 </AccordionItemBody>
             </AccordionItem>
         </Accordion>
+
+        <h2 className="u-margin-top">A bit of animation on the arrow?</h2>
+
+        <Accordion>
+            <AccordionItem>
+                <AccordionItemTitle className="accordion__title accordion__title--animated">
+                    <h3 className="u-position-relative">
+                        Animated Accessible Accordion
+                        <div className="accordion__arrow" role="presentation" />
+                    </h3>
+                </AccordionItemTitle>
+                <AccordionItemBody>
+                    <p>
+                        Did you notice the animation on the arrow?
+                    </p>
+                </AccordionItemBody>
+            </AccordionItem>
+            <AccordionItem className="accordion__item">
+                <AccordionItemTitle className="accordion__title accordion__title--animated">
+                    <h3 className="u-position-relative">
+                        How to?
+                        <div className="accordion__arrow" role="presentation" />
+                    </h3>
+                </AccordionItemTitle>
+                <AccordionItemBody>
+                    <p>
+                        Check css/demo.css in the demo/ folder :)
+                    </p>
+                </AccordionItemBody>
+            </AccordionItem>
+        </Accordion>
     </div>
 );
 
