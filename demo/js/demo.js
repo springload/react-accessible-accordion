@@ -517,6 +517,24 @@ const Example = () => (
                 </AccordionItemBody>
             </AccordionItem>
         </Accordion>
+
+        <h2 className="u-margin-top">Only one item</h2>
+
+        <Accordion>
+            <AccordionItem>
+                <AccordionItemTitle>
+                    <h3 className="u-position-relative">
+                        Single item
+                        <div className="accordion__arrow" role="presentation" />
+                    </h3>
+                </AccordionItemTitle>
+                <AccordionItemBody>
+                    <p>
+                        Why would you need more than one?
+                    </p>
+                </AccordionItemBody>
+            </AccordionItem>
+        </Accordion>
     </div>
 );
 

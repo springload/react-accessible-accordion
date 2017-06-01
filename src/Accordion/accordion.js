@@ -8,7 +8,10 @@ const defaultProps = {
 
 const propTypes = {
     accordion: PropTypes.bool,
-    children: PropTypes.arrayOf(PropTypes.element).isRequired,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.element),
+        PropTypes.object,
+    ]).isRequired,
     className: PropTypes.string,
     onChange: PropTypes.func,
 };
