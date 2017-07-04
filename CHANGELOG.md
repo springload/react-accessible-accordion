@@ -4,6 +4,10 @@ Changelog
 > All notable changes to this project are documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [[v0.4.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v0.4.0)
+
+- Supports React 15.5+
+
 ## [[v0.3.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v0.3.0)
 
 - No warnings when you have only one item in the accordion
