@@ -1,10 +1,30 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
+const isArraysEqual = (array, other) => {
+    if (array === other) {
+        return true;
+    }
+    if (!Array.isArray(array) || !Array.isArray(other) || array.length !== other.length) {
+        return false;
+    }
+
+    let result = true;
+    const arrLength = array.length;
+    for (let index = 0; index < arrLength; index += 1) {
+        if (array[index] !== other[index]) {
+            result = false;
+            break;
+        }
+    }
+    return result;
+};
+
 const defaultProps = {
     accordion: true,
     onChange: () => {},
     className: 'accordion',
+    activeItems: [],
 };
 
 const propTypes = {
@@ -13,6 +33,10 @@ const propTypes = {
         PropTypes.arrayOf(PropTypes.element),
         PropTypes.object,
     ]).isRequired,
+    activeItems: PropTypes.arrayOf(PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+    ])),
     className: PropTypes.string,
     onChange: PropTypes.func,
 };
@@ -28,17 +52,38 @@ class Accordion extends Component {
         this.renderItems = this.renderItems.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (!isArraysEqual(nextProps.activeItems, this.state.activeItems)) {
+            let newActiveItems;
+            if (nextProps.accordion) {
+                newActiveItems = nextProps.activeItems.length
+                    ? [nextProps.activeItems[0]]
+                    : [];
+            } else {
+                newActiveItems = nextProps.activeItems.slice();
+            }
+            this.setState({
+                activeItems: newActiveItems,
+            });
+
+            nextProps.onChange(nextProps.accordion ? newActiveItems[0] : newActiveItems);
+        }
+    }
+
     preExpandedItems() {
-        const activeItems = [];
+        let activeItems = [];
         React.Children.map(this.props.children, (item, index) => {
             if (item.props.expanded) {
                 if (this.props.accordion) {
-                    if (activeItems.length === 0) activeItems.push(index);
+                    if (activeItems.length === 0) activeItems.push(item.props.customKey || index);
                 } else {
-                    activeItems.push(index);
+                    activeItems.push(item.props.customKey || index);
                 }
             }
         });
+        if (activeItems.length === 0 && this.props.activeItems.length !== 0) {
+            activeItems = this.props.accordion ? [this.props.activeItems[0]] : this.props.activeItems.slice();
+        }
         return activeItems;
     }
 
@@ -68,7 +113,7 @@ class Accordion extends Component {
         const { accordion, children } = this.props;
 
         return React.Children.map(children, (item, index) => {
-            const key = index;
+            const key = item.props.customKey || index;
             const expanded = (this.state.activeItems.indexOf(key) !== -1) && (!item.props.disabled);
 
             return React.cloneElement(item, {
