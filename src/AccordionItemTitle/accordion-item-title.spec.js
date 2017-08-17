@@ -22,6 +22,24 @@ describe('AccordionItemTitle', () => {
         expect(tree).toMatchSnapshot();
     });
 
+    it('renders with different hideBodyClassName', () => {
+        const tree = renderer.create(
+            <AccordionItemTitle expanded={false} hideBodyClassName="testCSSClass--hidden">
+                <div>Fake title</div>
+            </AccordionItemTitle>,
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('doesn\'t respect hideBodyClassName when collapsed', () => {
+        const tree = renderer.create(
+            <AccordionItemTitle expanded={true} hideBodyClassName="testCSSClass--hidden">
+                <div>Fake title</div>
+            </AccordionItemTitle>,
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
     it('renders correctly when pressing enter', () => {
         const mockOnClick = jest.fn();
         const tree = renderer.create(
