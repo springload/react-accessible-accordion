@@ -224,9 +224,7 @@ npm run start-demo
 ### Publish
 
 ```sh
-git release vx.y.z
-npm run dist
-# Use irish-pub to check the package content. Install w/ npm install -g first.
-irish-pub
+npm version [TYPE]
+git push origin master --tags
 npm publish
 ```
