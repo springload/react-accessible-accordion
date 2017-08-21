@@ -88,6 +88,20 @@ describe('AccordionItem', () => {
         expect(tree).toMatchSnapshot();
     });
 
+    it('renders with different hideBodyClassName', () => {
+        const tree = renderer.create(
+            <AccordionItem expanded={false} hideBodyClassName="testCSSClass--hidden">
+                <AccordionItemTitle>
+                    <div>Fake title</div>
+                </AccordionItemTitle>
+                <AccordionItemBody>
+                    <div>Fake body</div>
+                </AccordionItemBody>
+            </AccordionItem>,
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+
     it('renders correctly with other blocks inside', () => {
         const tree = renderer.create(
             <AccordionItem accordion={false}>

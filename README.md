@@ -122,6 +122,12 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
           <td>accordion__item</td>
           <td>CSS class(es) applied to the component</td>
       </tr>
+      <tr>
+          <td>hideBodyClassName</td>
+          <td>String</td>
+          <td>null</td>
+          <td>Class name for hidden body state</td>
+      </tr>
     </tbody>
 </table>
 
@@ -144,6 +150,12 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
           <td>String</td>
           <td>accordion__title</td>
           <td>CSS class(es) applied to the component</td>
+      </tr>
+      <tr>
+          <td>hideBodyClassName</td>
+          <td>String</td>
+          <td>null</td>
+          <td>Class name for hidden body state</td>
       </tr>
     </tbody>
 </table>
