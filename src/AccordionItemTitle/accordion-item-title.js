@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import classNames from 'classnames';
 
 const defaultProps = {
     id: '',
@@ -7,6 +8,7 @@ const defaultProps = {
     onClick: () => {},
     ariaControls: '',
     className: 'accordion__title',
+    hideBodyClassName: null,
     role: '',
 };
 
@@ -20,6 +22,7 @@ const propTypes = {
         PropTypes.arrayOf(PropTypes.element),
     ]).isRequired,
     className: PropTypes.string,
+    hideBodyClassName: PropTypes.string,
     role: PropTypes.string,
 };
 
@@ -37,13 +40,20 @@ class AccordionItemTitle extends Component {
     }
 
     render() {
-        const { id, expanded, ariaControls, onClick, children, className, role } = this.props;
+        const { id, expanded, ariaControls, onClick, children, className, role, hideBodyClassName } = this.props;
+        const titleClassName = classNames(
+            className,
+            {
+                [hideBodyClassName]: (hideBodyClassName && !expanded),
+            },
+        );
+
         return (
             <div // eslint-disable-line jsx-a11y/no-static-element-interactions
                 id={id}
                 aria-expanded={expanded}
                 aria-controls={ariaControls}
-                className={className}
+                className={titleClassName}
                 onClick={onClick}
                 role={role}
                 tabIndex="0"

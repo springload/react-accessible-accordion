@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import uuid from 'uuid';
+import classNames from 'classnames';
 
 const defaultProps = {
     accordion: true,
     expanded: false,
     onClick: () => {},
     className: 'accordion__item',
+    hideBodyClassName: null,
 };
 
 const propTypes = {
@@ -15,6 +17,7 @@ const propTypes = {
     expanded: PropTypes.bool,
     children: PropTypes.arrayOf(PropTypes.element).isRequired,
     className: PropTypes.string,
+    hideBodyClassName: PropTypes.string,
 };
 
 class AccordionItem extends Component {
@@ -56,9 +59,17 @@ class AccordionItem extends Component {
     }
 
     render() {
-        const { className } = this.props;
+        const { className, expanded, hideBodyClassName } = this.props;
+
+        const itemClassName = classNames(
+            className,
+            {
+                [hideBodyClassName]: (!expanded && hideBodyClassName),
+            },
+        );
+
         return (
-            <div className={className}>
+            <div className={itemClassName}>
                 {this.renderChildren()}
             </div>
         );
