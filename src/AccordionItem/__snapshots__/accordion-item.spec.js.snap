@@ -18,7 +18,7 @@ exports[`AccordionItem renders correctly with accordion false 1`] = `
   <div
     expanded={false}
     id="accordion__body-mock-uuid-hash"
-    role=""
+    role={null}
   >
     <div>
       Fake body
@@ -75,7 +75,7 @@ exports[`AccordionItem renders correctly with other blocks inside 1`] = `
   <div
     expanded={false}
     id="accordion__body-mock-uuid-hash"
-    role=""
+    role={null}
   >
     <div>
       Fake body
@@ -102,7 +102,7 @@ exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
   <div
     expanded={false}
     id="accordion__body-mock-uuid-hash"
-    role=""
+    role={null}
   >
     <div>
       Fake body

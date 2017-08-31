@@ -49,7 +49,7 @@ class AccordionItem extends Component {
                 itemProps.expanded = expanded;
                 itemProps.key = 'body';
                 itemProps.id = `accordion__body-${itemUuid}`;
-                itemProps.role = accordion ? 'tabpanel' : '';
+                itemProps.role = accordion ? 'tabpanel' : null;
 
                 return React.cloneElement(item, itemProps);
             }
