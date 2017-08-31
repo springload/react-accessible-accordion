@@ -82,9 +82,9 @@ class Accordion extends Component {
     }
 
     render() {
-        const { className } = this.props;
+        const { className, accordion } = this.props;
         return (
-            <div className={className}>
+            <div role={accordion ? 'tablist' : null} className={className}>
                 {this.renderItems()}
             </div>
         );

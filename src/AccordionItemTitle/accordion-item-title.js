@@ -48,6 +48,22 @@ class AccordionItemTitle extends Component {
             },
         );
 
+        if (role === 'tab') {
+            return (
+                <div // eslint-disable-line jsx-a11y/no-static-element-interactions
+                    id={id}
+                    aria-selected={expanded}
+                    aria-controls={ariaControls}
+                    className={titleClassName}
+                    onClick={onClick}
+                    role={role}
+                    tabIndex="0"
+                    onKeyPress={this.handleKeyPress}
+                >
+                    {children}
+                </div>
+            );
+        }
         return (
             <div // eslint-disable-line jsx-a11y/no-static-element-interactions
                 id={id}
