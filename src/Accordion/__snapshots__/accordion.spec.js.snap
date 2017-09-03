@@ -1,5 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Accordion close accordions via accordion props props dynamicly 1`] = `
+<div
+  className="accordion"
+>
+  <div
+    accordion={true}
+    disabled={undefined}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={true}
+    disabled={undefined}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+</div>
+`;
+
 exports[`Accordion different className 1`] = `
 <div
   className="testCSSClass"
@@ -16,6 +39,115 @@ exports[`Accordion different className 1`] = `
     accordion={false}
     disabled={undefined}
     expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+</div>
+`;
+
+exports[`Accordion different className with the same activeItems prop 1`] = `
+<div
+  className="test-2"
+>
+  <div
+    accordion={true}
+    disabled={undefined}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={true}
+    disabled={undefined}
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+</div>
+`;
+
+exports[`Accordion expand accordion via accordion props dynamicly 1`] = `
+<div
+  className="accordion"
+>
+  <div
+    accordion={true}
+    disabled={undefined}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={true}
+    disabled={undefined}
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+</div>
+`;
+
+exports[`Accordion expand multiple accordions via accordion props props dynamicly 1`] = `
+<div
+  className="accordion"
+>
+  <div
+    accordion={false}
+    disabled={undefined}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={false}
+    disabled={undefined}
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={false}
+    disabled={undefined}
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+</div>
+`;
+
+exports[`Accordion expand multiple accordions via accordion props props dynamicly with default
+        expanded on accordion items 1`] = `
+<div
+  className="accordion"
+>
+  <div
+    accordion={false}
+    disabled={undefined}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={false}
+    disabled={undefined}
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={false}
+    disabled={undefined}
+    expanded={true}
     onClick={[Function]}
   >
     Fake Child
@@ -184,29 +316,6 @@ exports[`Accordion pre expand accordion via accordion props 1`] = `
 </div>
 `;
 
-exports[`Accordion pre expand accordion via accordion props dynamicly 1`] = `
-<div
-  className="accordion"
->
-  <div
-    accordion={true}
-    disabled={undefined}
-    expanded={false}
-    onClick={[Function]}
-  >
-    Fake Child
-  </div>
-  <div
-    accordion={true}
-    disabled={undefined}
-    expanded={true}
-    onClick={[Function]}
-  >
-    Fake Child
-  </div>
-</div>
-`;
-
 exports[`Accordion pre expand accordion via accordion props vs accordion item props. Expanded only second item. 1`] = `
 <div
   className="accordion"
@@ -270,69 +379,6 @@ exports[`Accordion pre expand multiple accordions via accordion props 1`] = `
     accordion={false}
     disabled={undefined}
     expanded={false}
-    onClick={[Function]}
-  >
-    Fake Child
-  </div>
-  <div
-    accordion={false}
-    disabled={undefined}
-    expanded={true}
-    onClick={[Function]}
-  >
-    Fake Child
-  </div>
-</div>
-`;
-
-exports[`Accordion pre expand multiple accordions via accordion props props dynamicly 1`] = `
-<div
-  className="accordion"
->
-  <div
-    accordion={false}
-    disabled={undefined}
-    expanded={false}
-    onClick={[Function]}
-  >
-    Fake Child
-  </div>
-  <div
-    accordion={false}
-    disabled={undefined}
-    expanded={true}
-    onClick={[Function]}
-  >
-    Fake Child
-  </div>
-  <div
-    accordion={false}
-    disabled={undefined}
-    expanded={true}
-    onClick={[Function]}
-  >
-    Fake Child
-  </div>
-</div>
-`;
-
-exports[`Accordion pre expand multiple accordions via accordion props props dynamicly with default
-        expanded on accordion items 1`] = `
-<div
-  className="accordion"
->
-  <div
-    accordion={false}
-    disabled={undefined}
-    expanded={false}
-    onClick={[Function]}
-  >
-    Fake Child
-  </div>
-  <div
-    accordion={false}
-    disabled={undefined}
-    expanded={true}
     onClick={[Function]}
   >
     Fake Child

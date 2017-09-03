@@ -156,7 +156,7 @@ describe('Accordion', () => {
         expect(tree).toMatchSnapshot();
     });
 
-    it('pre expand accordion via accordion props dynamicly', () => {
+    it('expand accordion via accordion props dynamicly', () => {
         const wrapper = renderer.create(
             <Accordion activeItems={[0]}>
                 <AccordionItem>Fake Child</AccordionItem>
@@ -173,7 +173,7 @@ describe('Accordion', () => {
         expect(wrapper).toMatchSnapshot();
     });
 
-    it('pre expand multiple accordions via accordion props props dynamicly', () => {
+    it('expand multiple accordions via accordion props props dynamicly', () => {
         const wrapper = renderer.create(
             <Accordion accordion={false} activeItems={[0, 2]}>
                 <AccordionItem>Fake Child</AccordionItem>
@@ -192,7 +192,7 @@ describe('Accordion', () => {
         expect(wrapper).toMatchSnapshot();
     });
 
-    it(`pre expand multiple accordions via accordion props props dynamicly with default
+    it(`expand multiple accordions via accordion props props dynamicly with default
         expanded on accordion items`, () => {
         const wrapper = renderer.create(
             <Accordion accordion={false}>
@@ -209,6 +209,39 @@ describe('Accordion', () => {
             </Accordion>,
         );
         expect(wrapper.getInstance().state.activeItems).toEqual([1, 2]);
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    it('close accordions via accordion props props dynamicly', () => {
+        const wrapper = renderer.create(
+            <Accordion activeItems={[1]}>
+                <AccordionItem>Fake Child</AccordionItem>
+                <AccordionItem>Fake Child</AccordionItem>
+            </Accordion>,
+        );
+        wrapper.update(
+            <Accordion activeItems={[]}>
+                <AccordionItem>Fake Child</AccordionItem>
+                <AccordionItem>Fake Child</AccordionItem>
+            </Accordion>,
+        );
+        expect(wrapper.getInstance().state.activeItems).toEqual([]);
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    it('different className with the same activeItems prop', () => {
+        const wrapper = renderer.create(
+            <Accordion activeItems={[1]} className="test-1">
+                <AccordionItem>Fake Child</AccordionItem>
+                <AccordionItem>Fake Child</AccordionItem>
+            </Accordion>,
+        );
+        wrapper.update(
+            <Accordion activeItems={[1]} className="test-2">
+                <AccordionItem>Fake Child</AccordionItem>
+                <AccordionItem>Fake Child</AccordionItem>
+            </Accordion>,
+        );
         expect(wrapper).toMatchSnapshot();
     });
 });
