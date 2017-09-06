@@ -78,4 +78,13 @@ describe('AccordionItemTitle', () => {
         expect(mockOnClick).toHaveBeenCalledTimes(0);
         expect(tree).toMatchSnapshot();
     });
+
+    it('renders correctly with role of tab', () => {
+        const tree = renderer.create(
+            <AccordionItemTitle role="tab" className="testCSSClass">
+                <div>Fake Title</div>
+            </AccordionItemTitle>,
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
 });
