@@ -17,7 +17,8 @@
         "react/jsx-no-bind": [1],
         "react/jsx-indent": [2, 4],
         "react/jsx-indent-props": [2, 4],
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "jsx-a11y/no-static-element-interactions": [0]
     },
     "env": {
         "jest": true,
