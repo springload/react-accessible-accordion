@@ -93,6 +93,12 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
           <td>accordion</td>
           <td>CSS class(es) applied to the component</td>
       </tr>
+      <tr>
+          <td>activeItems</td>
+          <td>Array</td>
+          <td>[]</td>
+          <td>Indexes (or custom keys) to pre expand items. Can be changed dynamically. Doesn't have the priority against `AccordionItem - expanded` on first render.</td>
+      </tr>
     </tbody>
 </table>
 
