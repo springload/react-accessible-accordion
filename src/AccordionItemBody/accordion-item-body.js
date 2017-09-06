@@ -30,24 +30,12 @@ const AccordionItemBody = ({ id, expanded, children, className, hideBodyClassNam
         },
     );
     const ariaHidden = !expanded;
-    if (role === 'tabpanel') {
-        return (
-            <div
-                id={id}
-                className={bodyClass}
-                aria-hidden={ariaHidden}
-                aria-labelledby={id.replace('accordion__body-', 'accordion__title-')}
-                role={role}
-            >
-                {children}
-            </div>
-        );
-    }
     return (
         <div
             id={id}
             className={bodyClass}
             aria-hidden={ariaHidden}
+            aria-labelledby={id.replace('accordion__body-', 'accordion__title-')}
             role={role}
         >
             {children}
