@@ -102,6 +102,23 @@ exports[`AccordionItemTitle renders correctly with min params 1`] = `
 </div>
 `;
 
+exports[`AccordionItemTitle renders correctly with role of tab 1`] = `
+<div
+  aria-controls=""
+  aria-selected={false}
+  className="testCSSClass"
+  id=""
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  role="tab"
+  tabIndex="0"
+>
+  <div>
+    Fake Title
+  </div>
+</div>
+`;
+
 exports[`AccordionItemTitle renders with different hideBodyClassName 1`] = `
 <div
   aria-controls=""
