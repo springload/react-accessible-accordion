@@ -128,6 +128,12 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
           <td>accordion__item</td>
           <td>CSS class(es) applied to the component</td>
       </tr>
+      <tr>
+          <td>customKey</td>
+          <td>String</td>
+          <td></td>
+          <td>Custom key to be used as a reference in `Accordion - activeItems`</td>
+      </tr>
     </tbody>
 </table>
 
