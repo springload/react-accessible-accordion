@@ -45,12 +45,10 @@ class Example extends Component {
                                     href="https://github.com/react-component/collapse"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    title="rc-collapse"
                                 >rc-collapse</a> and <a
                                     href="https://github.com/daviferreira/react-sanfona"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    title="react-sanfona"
                                 >react-sanfona</a>.
                             </p>
                         </AccordionItemBody>
