@@ -193,12 +193,11 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
 
 ### What this project is doing accessibility-wise?
 
-This project manages two types of Accordions:
+This project manages two types of Accordions, with single or multiple items open.
 
-- #1 Only one item open - `Accordion` with props `accordion` set to `true`
-- #2 Multiple items can be open - `Accordion` with props `accordion` set to `false`
+#### Single item
 
-#### Type #1
+> Use this with with props `accordion` set to `true` on `Accordion`.
 
 For this type of Accordion, you will get the following `role` set up on your elements:
 
@@ -207,9 +206,11 @@ For this type of Accordion, you will get the following `role` set up on your ele
 - AccordionItemTitle: `tab`
 - AccordionItemBody: `tabpanel`
 
-#### Type #2
+#### Multiple items
 
 For this type of Accordion, you will get the following `role` set up on your elements:
+
+> Use this with with props `accordion` set to `false` on `Accordion`.
 
 - Accordion: no specific role
 - AccordionItem: no specific role
