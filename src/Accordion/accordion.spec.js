@@ -150,7 +150,7 @@ describe('Accordion', () => {
         const tree = renderer.create(
             <Accordion activeItems={['custom']}>
                 <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem customKey={'custom'}>Fake Child</AccordionItem>
+                <AccordionItem customKey="custom">Fake Child</AccordionItem>
             </Accordion>,
         ).toJSON();
         expect(tree).toMatchSnapshot();
