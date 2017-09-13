@@ -3,6 +3,7 @@
 exports[`Accordion close accordions via accordion props props dynamicly 1`] = `
 <div
   className="accordion"
+  role="tablist"
 >
   <div
     accordion={true}
@@ -50,6 +51,7 @@ exports[`Accordion different className 1`] = `
 exports[`Accordion different className with the same activeItems prop 1`] = `
 <div
   className="test-2"
+  role="tablist"
 >
   <div
     accordion={true}
@@ -73,6 +75,7 @@ exports[`Accordion different className with the same activeItems prop 1`] = `
 exports[`Accordion expand accordion via accordion props dynamicly 1`] = `
 <div
   className="accordion"
+  role="tablist"
 >
   <div
     accordion={true}
@@ -96,6 +99,7 @@ exports[`Accordion expand accordion via accordion props dynamicly 1`] = `
 exports[`Accordion expand multiple accordions via accordion props props dynamicly 1`] = `
 <div
   className="accordion"
+  role={null}
 >
   <div
     accordion={false}
@@ -128,6 +132,7 @@ exports[`Accordion expand multiple accordions via accordion props props dynamicl
         expanded on accordion items 1`] = `
 <div
   className="accordion"
+  role={null}
 >
   <div
     accordion={false}
@@ -303,6 +308,7 @@ exports[`Accordion handles disabled children 1`] = `
 exports[`Accordion pre expand accordion via accordion props 1`] = `
 <div
   className="accordion"
+  role="tablist"
 >
   <div
     accordion={true}
@@ -326,6 +332,7 @@ exports[`Accordion pre expand accordion via accordion props 1`] = `
 exports[`Accordion pre expand accordion via accordion props vs accordion item props. Expanded only second item. 1`] = `
 <div
   className="accordion"
+  role="tablist"
 >
   <div
     accordion={true}
@@ -349,6 +356,7 @@ exports[`Accordion pre expand accordion via accordion props vs accordion item pr
 exports[`Accordion pre expand accordion via accordion props with custom key 1`] = `
 <div
   className="accordion"
+  role="tablist"
 >
   <div
     accordion={true}
@@ -373,6 +381,7 @@ exports[`Accordion pre expand accordion via accordion props with custom key 1`] 
 exports[`Accordion pre expand multiple accordions via accordion props 1`] = `
 <div
   className="accordion"
+  role={null}
 >
   <div
     accordion={false}
