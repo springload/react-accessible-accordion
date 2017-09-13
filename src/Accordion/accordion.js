@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { isArraysEqual } from '../utils';
+import { isArraysEqualShallow } from '../utils';
 
 const defaultProps = {
     accordion: true,
@@ -35,7 +35,7 @@ class Accordion extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (!isArraysEqual(nextProps.activeItems, this.state.activeItems)) {
+        if (!isArraysEqualShallow(nextProps.activeItems, this.state.activeItems)) {
             let newActiveItems;
             if (nextProps.accordion) {
                 newActiveItems = nextProps.activeItems.length

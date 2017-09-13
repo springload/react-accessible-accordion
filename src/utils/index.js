@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-export const isArraysEqual = (array, other) => {
+export const isArraysEqualShallow = (array, other) => {
     if (array === other) {
         return true;
     }
