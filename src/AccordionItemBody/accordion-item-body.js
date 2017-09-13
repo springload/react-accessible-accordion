@@ -35,6 +35,7 @@ const AccordionItemBody = ({ id, expanded, children, className, hideBodyClassNam
             id={id}
             className={bodyClass}
             aria-hidden={ariaHidden}
+            aria-labelledby={id.replace('accordion__body-', 'accordion__title-')}
             role={role}
         >
             {children}

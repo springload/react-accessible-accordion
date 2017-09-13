@@ -18,7 +18,7 @@ exports[`AccordionItem renders correctly with accordion false 1`] = `
   <div
     expanded={false}
     id="accordion__body-mock-uuid-hash"
-    role=""
+    role={null}
   >
     <div>
       Fake body
@@ -75,7 +75,7 @@ exports[`AccordionItem renders correctly with other blocks inside 1`] = `
   <div
     expanded={false}
     id="accordion__body-mock-uuid-hash"
-    role=""
+    role={null}
   >
     <div>
       Fake body
@@ -102,7 +102,7 @@ exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
   <div
     expanded={false}
     id="accordion__body-mock-uuid-hash"
-    role=""
+    role={null}
   >
     <div>
       Fake body
@@ -117,6 +117,33 @@ exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
 exports[`AccordionItem renders with different className 1`] = `
 <div
   className="testCSSClass"
+>
+  <div
+    ariaControls="accordion__body-mock-uuid-hash"
+    expanded={false}
+    id="accordion__title-mock-uuid-hash"
+    onClick={[Function]}
+    role="tab"
+  >
+    <div>
+      Fake title
+    </div>
+  </div>
+  <div
+    expanded={false}
+    id="accordion__body-mock-uuid-hash"
+    role="tabpanel"
+  >
+    <div>
+      Fake body
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AccordionItem renders with different hideBodyClassName 1`] = `
+<div
+  className="accordion__item testCSSClass--hidden"
 >
   <div
     ariaControls="accordion__body-mock-uuid-hash"

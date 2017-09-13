@@ -129,11 +129,17 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
           <td>CSS class(es) applied to the component</td>
       </tr>
       <tr>
+          <td>hideBodyClassName</td>
+          <td>String</td>
+          <td>null</td>
+          <td>Class name for hidden body state</td>
+      </tr>
+      <tr>
           <td>customKey</td>
           <td>String</td>
           <td></td>
           <td>Custom key to be used as a reference in `Accordion - activeItems`</td>
-      </tr>
+        </tr>
     </tbody>
 </table>
 
@@ -156,6 +162,12 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
           <td>String</td>
           <td>accordion__title</td>
           <td>CSS class(es) applied to the component</td>
+      </tr>
+      <tr>
+          <td>hideBodyClassName</td>
+          <td>String</td>
+          <td>null</td>
+          <td>Class name for hidden body state</td>
       </tr>
     </tbody>
 </table>
@@ -188,6 +200,34 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
       </tr>
     </tbody>
 </table>
+
+## Accessibility
+
+### What this project is doing accessibility-wise?
+
+This project manages two types of Accordions, with single or multiple items open.
+
+#### Single item
+
+> Use this with with props `accordion` set to `true` on `Accordion`.
+
+For this type of Accordion, you will get the following `role` set up on your elements:
+
+- Accordion: `tablist`
+- AccordionItem: no specific role
+- AccordionItemTitle: `tab`
+- AccordionItemBody: `tabpanel`
+
+#### Multiple items
+
+For this type of Accordion, you will get the following `role` set up on your elements:
+
+> Use this with with props `accordion` set to `false` on `Accordion`.
+
+- Accordion: no specific role
+- AccordionItem: no specific role
+- AccordionItemTitle: `button`
+- AccordionItemBody: no specific role
 
 ## Development
 
@@ -236,9 +276,7 @@ npm run start-demo
 ### Publish
 
 ```sh
-git release vx.y.z
-npm run dist
-# Use irish-pub to check the package content. Install w/ npm install -g first.
-irish-pub
+npm version [TYPE]
+git push origin master --tags
 npm publish
 ```

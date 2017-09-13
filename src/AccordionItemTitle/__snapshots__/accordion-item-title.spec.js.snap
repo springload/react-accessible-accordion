@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AccordionItemTitle doesn't respect hideBodyClassName when collapsed 1`] = `
+<div
+  aria-controls=""
+  aria-expanded={true}
+  className="accordion__title"
+  id=""
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  role=""
+  tabIndex="0"
+>
+  <div>
+    Fake title
+  </div>
+</div>
+`;
+
 exports[`AccordionItemTitle renders correctly when pressing another key 1`] = `
 <div
   aria-controls=""
@@ -81,6 +98,40 @@ exports[`AccordionItemTitle renders correctly with min params 1`] = `
 >
   <div>
     Fake Title
+  </div>
+</div>
+`;
+
+exports[`AccordionItemTitle renders correctly with role of tab 1`] = `
+<div
+  aria-controls=""
+  aria-selected={false}
+  className="testCSSClass"
+  id=""
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  role="tab"
+  tabIndex="0"
+>
+  <div>
+    Fake Title
+  </div>
+</div>
+`;
+
+exports[`AccordionItemTitle renders with different hideBodyClassName 1`] = `
+<div
+  aria-controls=""
+  aria-expanded={false}
+  className="accordion__title testCSSClass--hidden"
+  id=""
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  role=""
+  tabIndex="0"
+>
+  <div>
+    Fake title
   </div>
 </div>
 `;
