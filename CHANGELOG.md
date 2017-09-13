@@ -4,6 +4,14 @@ Changelog
 > All notable changes to this project are documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [[v0.6.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v0.6.0)
+
+- Improved accessibility support (Following https://github.com/springload/react-accessible-accordion/pull/19)
+- Adds possibility to programmatically open items(https://github.com/springload/react-accessible-accordion/pull/13)
+Thanks @epotockiy for the contribution
+- Improved accessibility status on demo page
+- Documentation about accessibility for this component
+
 ## [[v0.5.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v0.5.0)
 
 - Possibility to add a CSS class to hidden blocks (Following https://github.com/springload/react-accessible-accordion/pull/16)

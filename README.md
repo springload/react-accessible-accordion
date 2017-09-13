@@ -1,4 +1,5 @@
 [react-accessible-accordion](https://springload.github.io/react-accessible-accordion/) [![npm](https://img.shields.io/npm/v/react-accessible-accordion.svg?style=flat-square)](https://www.npmjs.com/package/react-accessible-accordion) [![Build Status](https://travis-ci.org/springload/react-accessible-accordion.svg?branch=master)](https://travis-ci.org/springload/react-accessible-accordion) [![Coverage Status](https://coveralls.io/repos/github/springload/react-accessible-accordion/badge.svg)](https://coveralls.io/github/springload/react-accessible-accordion) [![Dependency Status](https://david-dm.org/springload/react-accessible-accordion.svg?style=flat-square)](https://david-dm.org/springload/react-accessible-accordion) [![devDependency Status](https://david-dm.org/springload/react-accessible-accordion/dev-status.svg?style=flat-square)](https://david-dm.org/springload/react-accessible-accordion#info=devDependencies)
+[![Accessibility status](https://img.shields.io/badge/a11y-0%20error-brightgreen.svg)](http://wave.webaim.org/report#/https://springload.github.io/react-accessible-accordion/)
 =========
 
 > Accessible Accordion component for React. Inspired by [rc-collapse](https://github.com/react-component/collapse) and [react-sanfona](https://github.com/daviferreira/react-sanfona). :mag::ok_hand:
@@ -280,3 +281,18 @@ npm version [TYPE]
 git push origin master --tags
 npm publish
 ```
+
+
+# Browser support
+
+**Supported browser / device versions:**
+
+| Browser | Device/OS | Version | Notes |
+|---------|-----------|---------|-------|
+| Mobile Safari | iOS | latest ||
+| Chrome | Android | latest ||
+| IE | Windows | 11 ||
+| MS Edge | Windows | latest ||
+| Chrome | Desktop | latest ||
+| Firefox | Desktop | latest ||
+| Safari | OSX | latest ||
