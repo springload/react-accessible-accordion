@@ -93,6 +93,12 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
           <td>accordion</td>
           <td>CSS class(es) applied to the component</td>
       </tr>
+      <tr>
+          <td>activeItems</td>
+          <td>Array</td>
+          <td>[]</td>
+          <td>Indexes (or custom keys) to pre expand items. Can be changed dynamically. Doesn't have the priority against `AccordionItem - expanded` on first render.</td>
+      </tr>
     </tbody>
 </table>
 
@@ -128,6 +134,12 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
           <td>null</td>
           <td>Class name for hidden body state</td>
       </tr>
+      <tr>
+          <td>customKey</td>
+          <td>String</td>
+          <td></td>
+          <td>Custom key to be used as a reference in `Accordion - activeItems`</td>
+        </tr>
     </tbody>
 </table>
 
