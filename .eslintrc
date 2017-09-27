@@ -1,7 +1,17 @@
 {
     "parser": "babel-eslint",
-    "extends": "airbnb",
+    "extends": [
+        "airbnb",
+        "plugin:react/recommended",
+        "plugin:flowtype/recommended"
+    ],
+    "plugins": [
+        "react",
+        "flowtype",
+        "flowtype-errors",
+    ],
     "rules": {
+        "flowtype-errors/show-errors": 2,
         "indent": [2, 4],
         "max-len": [1, 120, 4, {"ignoreUrls": true}],
         "id-length": [0],

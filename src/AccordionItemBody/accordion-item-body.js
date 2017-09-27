@@ -1,5 +1,7 @@
-import PropTypes from 'prop-types';
+// @flow
+
 import React from 'react';
+import type { Node } from 'react';
 import classNames from 'classnames';
 
 const defaultProps = {
@@ -10,19 +12,17 @@ const defaultProps = {
     role: '',
 };
 
-const propTypes = {
-    id: PropTypes.string,
-    expanded: PropTypes.bool,
-    children: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.arrayOf(PropTypes.element),
-    ]).isRequired,
-    className: PropTypes.string,
-    hideBodyClassName: PropTypes.string,
-    role: PropTypes.string,
+type AccordionItemBodyProps = {
+    id: string,
+    expanded: boolean,
+    children: Node,
+    className: string,
+    hideBodyClassName: string,
+    role: string,
 };
 
-const AccordionItemBody = ({ id, expanded, children, className, hideBodyClassName, role }) => {
+const AccordionItemBody = (props: AccordionItemBodyProps) => {
+    const { id, expanded, children, className, hideBodyClassName, role } = props;
     const bodyClass = classNames(
         className,
         {
@@ -43,7 +43,6 @@ const AccordionItemBody = ({ id, expanded, children, className, hideBodyClassNam
     );
 };
 
-AccordionItemBody.propTypes = propTypes;
 AccordionItemBody.defaultProps = defaultProps;
 // We need this to be able to assign correct params to element.
 // Minifiers modify component name

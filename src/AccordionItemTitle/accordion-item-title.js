@@ -1,43 +1,43 @@
-import PropTypes from 'prop-types';
+// @flow
+
 import React, { Component } from 'react';
+import type { Node } from 'react';
 import classNames from 'classnames';
 
-const defaultProps = {
-    id: '',
-    expanded: false,
-    onClick: () => {},
-    ariaControls: '',
-    className: 'accordion__title',
-    hideBodyClassName: null,
-    role: '',
+type AccordionItemTitleProps = {
+    id: string,
+    expanded: boolean,
+    onClick: Function,
+    ariaControls: string,
+    children: Node,
+    className: string,
+    hideBodyClassName: string,
+    role: string,
 };
 
-const propTypes = {
-    id: PropTypes.string,
-    expanded: PropTypes.bool,
-    onClick: PropTypes.func,
-    ariaControls: PropTypes.string,
-    children: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.arrayOf(PropTypes.element),
-    ]).isRequired,
-    className: PropTypes.string,
-    hideBodyClassName: PropTypes.string,
-    role: PropTypes.string,
-};
+type AccordionItemTitleState = {};
 
-class AccordionItemTitle extends Component {
-    constructor(props) {
-        super(props);
-        this.handleKeyPress = this.handleKeyPress.bind(this);
-    }
+class AccordionItemTitle extends Component<AccordionItemTitleProps, AccordionItemTitleState> {
+    static accordionElementName = 'AccordionItemTitle';
 
-    handleKeyPress(evt) {
+    static defaultProps = {
+        id: '',
+        expanded: false,
+        onClick: () => {},
+        ariaControls: '',
+        className: 'accordion__title',
+        hideBodyClassName: '',
+        role: '',
+    };
+
+    handleKeyPress(evt: SyntheticInputEvent<HTMLButtonElement>) {
         const { onClick } = this.props;
         if (evt.charCode === 13 || evt.charCode === 32) {
             onClick();
         }
     }
+
+    handleKeyPress = this.handleKeyPress.bind(this);
 
     render() {
         const { id, expanded, ariaControls, onClick, children, className, role, hideBodyClassName } = this.props;
@@ -80,11 +80,5 @@ class AccordionItemTitle extends Component {
         );
     }
 }
-
-AccordionItemTitle.propTypes = propTypes;
-AccordionItemTitle.defaultProps = defaultProps;
-// We need this to be able to assign correct params to element.
-// Minifiers modify component name
-AccordionItemTitle.accordionElementName = 'AccordionItemTitle';
 
 export default AccordionItemTitle;

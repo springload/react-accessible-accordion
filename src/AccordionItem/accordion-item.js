@@ -1,33 +1,35 @@
-import PropTypes from 'prop-types';
+// @flow
+
 import React, { Component } from 'react';
+import type { Node } from 'react';
 import uuid from 'uuid';
 import classNames from 'classnames';
 
-const defaultProps = {
-    accordion: true,
-    expanded: false,
-    onClick: () => {},
-    className: 'accordion__item',
-    hideBodyClassName: null,
+type AccordionItemProps = {
+    accordion: boolean,
+    expanded: boolean,
+    onClick: Function,
+    children: Node,
+    className: string,
+    hideBodyClassName: string,
 };
 
-const propTypes = {
-    accordion: PropTypes.bool,
-    onClick: PropTypes.func,
-    expanded: PropTypes.bool,
-    children: PropTypes.arrayOf(PropTypes.element).isRequired,
-    className: PropTypes.string,
-    hideBodyClassName: PropTypes.string,
+type AccordionItemState = {
+    itemUuid: string,
 };
 
-class AccordionItem extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            itemUuid: uuid.v4(),
-        };
-        this.renderChildren = this.renderChildren.bind(this);
-    }
+class AccordionItem extends Component<AccordionItemProps, AccordionItemState> {
+    static defaultProps = {
+        accordion: true,
+        expanded: false,
+        onClick: () => {},
+        className: 'accordion__item',
+        hideBodyClassName: '',
+    };
+
+    state = {
+        itemUuid: uuid.v4(),
+    };
 
     renderChildren() {
         const { accordion, expanded, onClick, children } = this.props;
@@ -58,6 +60,8 @@ class AccordionItem extends Component {
         });
     }
 
+    renderChildren = this.renderChildren.bind(this);
+
     render() {
         const { className, expanded, hideBodyClassName } = this.props;
 
@@ -76,8 +80,5 @@ class AccordionItem extends Component {
     }
 
 }
-
-AccordionItem.propTypes = propTypes;
-AccordionItem.defaultProps = defaultProps;
 
 export default AccordionItem;
