@@ -3,7 +3,10 @@
     "extends": [
         "airbnb",
         "plugin:react/recommended",
-        "plugin:flowtype/recommended"
+        "plugin:flowtype/recommended",
+        "prettier",
+        "prettier/react",
+        "prettier/flowtype"
     ],
     "plugins": [
         "react",
@@ -12,21 +15,9 @@
     ],
     "rules": {
         "flowtype-errors/show-errors": 2,
-        "indent": [2, 4],
-        "max-len": [1, 120, 4, {"ignoreUrls": true}],
-        "id-length": [0],
-        "object-shorthand": [2, "methods"],
-        "arrow-body-style": [0],
-        "no-new": [1],
-        "new-cap": [0],
-        "no-multi-spaces": [0],
-        "no-underscore-dangle": [0],
         "no-warning-comments": [1, { "terms": ["todo", "fixme", "xxx"], "location": "start" }],
         "react/sort-comp": [0],
         "react/jsx-boolean-value": [0],
-        "react/jsx-no-bind": [1],
-        "react/jsx-indent": [2, 4],
-        "react/jsx-indent-props": [2, 4],
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "jsx-a11y/no-static-element-interactions": [0]
     },
@@ -35,6 +26,4 @@
         "es6": true,
         "browser": true
     },
-    "globals": {
-    }
 }

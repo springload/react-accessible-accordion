@@ -80,7 +80,7 @@ class Accordion extends Component<AccordionProps, AccordionState> {
             }
         }
         this.setState({
-            activeItems: activeItems,
+            activeItems,
         });
 
         this.props.onChange(this.props.accordion ? activeItems[0] : activeItems);
@@ -95,8 +95,8 @@ class Accordion extends Component<AccordionProps, AccordionState> {
 
             return React.cloneElement(item, {
                 disabled: item.props.disabled,
-                accordion: accordion,
-                expanded: expanded,
+                accordion,
+                expanded,
                 key: `accordion__item-${key}`,
                 onClick: this.handleClick.bind(this, key),
             });
