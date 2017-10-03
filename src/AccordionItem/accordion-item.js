@@ -78,7 +78,6 @@ class AccordionItem extends Component<AccordionItemProps, AccordionItemState> {
             </div>
         );
     }
-
 }
 
 export default AccordionItem;
