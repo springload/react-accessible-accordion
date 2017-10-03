@@ -17,12 +17,12 @@ class Example extends Component {
         this.state = {
             activeItems: [0, 1],
         };
-        this.changeActiveItems = this._changeActiveItems.bind(this);
+        this.changeActiveItems = this.changeActiveItems.bind(this);
     }
 
-    _changeActiveItems(activeItems) {
+    changeActiveItems(activeItems) {
         this.setState({
-            activeItems: activeItems,
+            activeItems,
         });
     }
 
