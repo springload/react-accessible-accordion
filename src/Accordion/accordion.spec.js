@@ -196,23 +196,23 @@ describe('Accordion', () => {
 
     it(`expand multiple accordions via accordion props props dynamicly with default
         expanded on accordion items`, () => {
-        const wrapper = renderer.create(
-            <Accordion accordion={false}>
-                <AccordionItem expanded={true}>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-            </Accordion>,
-        );
-        wrapper.update(
-            <Accordion accordion={false} activeItems={[1, 2]}>
-                <AccordionItem expanded={true}>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-            </Accordion>,
-        );
-        expect(wrapper.getInstance().state.activeItems).toEqual([1, 2]);
-        expect(wrapper).toMatchSnapshot();
-    });
+            const wrapper = renderer.create(
+                <Accordion accordion={false}>
+                    <AccordionItem expanded={true}>Fake Child</AccordionItem>
+                    <AccordionItem>Fake Child</AccordionItem>
+                    <AccordionItem>Fake Child</AccordionItem>
+                </Accordion>,
+            );
+            wrapper.update(
+                <Accordion accordion={false} activeItems={[1, 2]}>
+                    <AccordionItem expanded={true}>Fake Child</AccordionItem>
+                    <AccordionItem>Fake Child</AccordionItem>
+                    <AccordionItem>Fake Child</AccordionItem>
+                </Accordion>,
+            );
+            expect(wrapper.getInstance().state.activeItems).toEqual([1, 2]);
+            expect(wrapper).toMatchSnapshot();
+        });
 
     it('close accordions via accordion props props dynamicly', () => {
         const wrapper = renderer.create(

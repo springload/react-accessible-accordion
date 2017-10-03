@@ -77,7 +77,7 @@ type JestCallsType = {
 type JestClockType = {
   install(): void,
   mockDate(date: Date): void,
-  tick(milliseconds?:number): void,
+  tick(milliseconds?: number): void,
   uninstall(): void,
 }
 
@@ -422,7 +422,7 @@ declare var expect: {
   /** The object that you want to make assertions against */
   (value: any): JestExpectType,
   /** Add additional Jasmine matchers to Jest's roster */
-  extend(matchers: {[name:string]: JestMatcher}): void,
+  extend(matchers: {[name: string]: JestMatcher}): void,
   /** Add a module that formats application-specific data structures. */
   addSnapshotSerializer(serializer: (input: Object) => string): void,
   assertions(expectedAssertions: number): void,

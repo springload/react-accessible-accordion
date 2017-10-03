@@ -113,7 +113,6 @@ class Accordion extends Component<AccordionProps, AccordionState> {
             </div>
         );
     }
-
 }
 
 export default Accordion;
