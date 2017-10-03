@@ -57,7 +57,7 @@ class AccordionItemTitle extends Component<AccordionItemTitleProps, AccordionIte
                     className={titleClassName}
                     onClick={onClick}
                     role={role}
-                    tabIndex="0"
+                    tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
                     onKeyPress={this.handleKeyPress}
                 >
                     {children}
@@ -72,7 +72,7 @@ class AccordionItemTitle extends Component<AccordionItemTitleProps, AccordionIte
                 className={titleClassName}
                 onClick={onClick}
                 role={role}
-                tabIndex="0"
+                tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
                 onKeyPress={this.handleKeyPress}
             >
                 {children}

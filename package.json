@@ -17,7 +17,8 @@
     "start": "npm run js:watch",
     "start-demo": "webpack-dev-server --config ./webpack/webpack.config.demo.js",
     "pages": "rm -rf pages && cp -R demo pages && webpack --config=./webpack/webpack.config.pages.js",
-    "deploy": "npm run pages && ./bin/deploy.sh"
+    "deploy": "npm run pages && ./bin/deploy.sh",
+    "prettier": "prettier **/*.js --write"
   },
   "repository": {
     "type": "git",
@@ -71,13 +72,15 @@
     "css-loader": "^0.28.7",
     "eslint": "^4.8.0",
     "eslint-config-airbnb": "^15.1.0",
+    "eslint-config-prettier": "^2.6.0",
     "eslint-plugin-flowtype": "^2.36.0",
     "eslint-plugin-flowtype-errors": "^3.3.2",
-    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.4.0",
     "flow-bin": "^0.56.0",
     "jest": "^21.2.1",
+    "prettier": "^1.7.3",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0",
