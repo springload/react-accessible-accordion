@@ -4,6 +4,13 @@ Changelog
 > All notable changes to this project are documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [[v1.0.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v1.0.0)
+
+- Replace prop-types implementation with flow-types (https://github.com/springload/react-accessible-accordion/pull/22)
+Thanks @ryami333 for the great contribution
+
+NB: This version is backward compatible. It's just bumping to 1.0 to represent maturity rather than API changes.
+
 ## [[v0.6.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v0.6.0)
 
 - Improved accessibility support (Following https://github.com/springload/react-accessible-accordion/pull/19)
