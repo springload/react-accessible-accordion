@@ -9,14 +9,16 @@
     "test:coverage": "jest --coverage",
     "test:coverage:watch": "jest --coverage --watch",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "lint": "eslint",
+    "lint": "eslint .",
     "js": "babel -d dist src",
     "js:watch": "npm run js -- --watch",
     "css": "cp src/react-accessible-accordion.css dist",
     "build": "npm run js -s && npm run css -s",
     "start": "npm run js:watch",
-    "start-demo": "webpack-dev-server --config ./webpack/webpack.config.demo.js",
-    "pages": "rm -rf pages && cp -R demo pages && webpack --config=./webpack/webpack.config.pages.js",
+    "start-demo":
+      "webpack-dev-server --config ./webpack/webpack.config.demo.js",
+    "pages":
+      "rm -rf pages && cp -R demo pages && webpack --config=./webpack/webpack.config.pages.js",
     "deploy": "npm run pages && ./bin/deploy.sh"
   },
   "repository": {
@@ -24,17 +26,10 @@
     "url": "git+https://github.com/springload/react-accessible-accordion.git"
   },
   "babel": {
-    "presets": [
-      "es2015",
-      "react",
-      "stage-2"
-    ]
+    "presets": ["es2015", "react", "stage-2"]
   },
   "jest": {
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/dist/"
-    ]
+    "testPathIgnorePatterns": ["/node_modules/", "/dist/"]
   },
   "keywords": [
     "react",
@@ -44,9 +39,7 @@
     "accessible",
     "accessibility"
   ],
-  "authors": [
-    "Vincent Audebert <vincent@springload.co.nz>"
-  ],
+  "authors": ["Vincent Audebert <vincent@springload.co.nz>"],
   "contributors": [
     {
       "name": "Mitch Ryan",
