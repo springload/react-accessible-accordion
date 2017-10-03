@@ -1,40 +1,35 @@
-import PropTypes from 'prop-types';
+// @flow
+
 import React, { Component } from 'react';
+import type { Node } from 'react';
 import { isArraysEqualShallow } from '../utils';
 
-const defaultProps = {
-    accordion: true,
-    onChange: () => {},
-    className: 'accordion',
-    activeItems: [],
+type AccordionProps = {
+    accordion: boolean,
+    children: Node,
+    activeItems: Array<string | number>,
+    className: string,
+    onChange: Function,
 };
 
-const propTypes = {
-    accordion: PropTypes.bool,
-    children: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.element),
-        PropTypes.object,
-    ]).isRequired,
-    activeItems: PropTypes.arrayOf(PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-    ])),
-    className: PropTypes.string,
-    onChange: PropTypes.func,
+type AccordionState = {
+    activeItems: Array<string | number>,
 };
 
-class Accordion extends Component {
-    constructor(props) {
-        super(props);
-        const activeItems = this.preExpandedItems();
-        this.state = {
-            activeItems: activeItems,
-            accordion: true,
-        };
-        this.renderItems = this.renderItems.bind(this);
-    }
+class Accordion extends Component<AccordionProps, AccordionState> {
+    static defaultProps = {
+        accordion: true,
+        onChange: () => {},
+        className: 'accordion',
+        activeItems: [],
+    };
 
-    componentWillReceiveProps(nextProps) {
+    state = {
+        activeItems: this.preExpandedItems(),
+        accordion: true,
+    };
+
+    componentWillReceiveProps(nextProps: AccordionProps) {
         if (!isArraysEqualShallow(nextProps.activeItems, this.state.activeItems)) {
             let newActiveItems;
             if (nextProps.accordion) {
@@ -69,7 +64,7 @@ class Accordion extends Component {
         return activeItems;
     }
 
-    handleClick(key) {
+    handleClick(key: number | string) {
         let activeItems = this.state.activeItems;
         if (this.props.accordion) {
             activeItems = activeItems[0] === key ? [] : [key];
@@ -108,6 +103,8 @@ class Accordion extends Component {
         });
     }
 
+    renderItems = this.renderItems.bind(this);
+
     render() {
         const { className, accordion } = this.props;
         return (
@@ -118,8 +115,5 @@ class Accordion extends Component {
     }
 
 }
-
-Accordion.propTypes = propTypes;
-Accordion.defaultProps = defaultProps;
 
 export default Accordion;

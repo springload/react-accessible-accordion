@@ -1,3 +1,5 @@
+// @flow
+
 import { isArraysEqualShallow } from './index';
 
 describe('isArrayEqual', () => {
