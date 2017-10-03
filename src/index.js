@@ -5,9 +5,4 @@ import AccordionItem from './AccordionItem/accordion-item';
 import AccordionItemTitle from './AccordionItemTitle/accordion-item-title';
 import AccordionItemBody from './AccordionItemBody/accordion-item-body';
 
-export {
-    Accordion,
-    AccordionItem,
-    AccordionItemTitle,
-    AccordionItemBody,
-};
+export { Accordion, AccordionItem, AccordionItemTitle, AccordionItemBody };

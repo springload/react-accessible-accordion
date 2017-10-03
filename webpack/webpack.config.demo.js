@@ -16,9 +16,11 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: [/node_modules/],
-                use: [{
-                    loader: 'babel-loader',
-                }],
+                use: [
+                    {
+                        loader: 'babel-loader',
+                    },
+                ],
             },
             {
                 test: /\.css$/,
@@ -34,14 +36,11 @@ module.exports = {
         tls: 'empty',
     },
 
-
     resolve: {
         extensions: ['.js'],
     },
 
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-    ],
+    plugins: [new webpack.HotModuleReplacementPlugin()],
 
     devServer: {
         contentBase: './demo',
