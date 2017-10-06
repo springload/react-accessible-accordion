@@ -7,9 +7,7 @@ import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title';
 import AccordionItemBody from '../AccordionItemBody/accordion-item-body';
 import AccordionItem from './accordion-item';
 
-jest.mock('uuid', () => ({
-    v4: () => 'mock-uuid-hash',
-}));
+jest.mock('consecutive', () => () => () => 'mock-uuid-hash');
 
 jest.mock('../AccordionItemTitle/accordion-item-title', () => {
     const RealReact = require.requireActual('react');

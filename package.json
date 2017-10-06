@@ -94,7 +94,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "uuid": "^3.0.1"
+    "consecutive": "^5.0.4"
   },
   "peerDependencies": {
     "react": "^15.4.0 || ^16.0.0",
