@@ -2,8 +2,10 @@
 
 import React, { Component } from 'react';
 import type { Node } from 'react';
-import uuid from 'uuid';
+import consecutive from 'consecutive';
 import classNames from 'classnames';
+
+const nextUuid = consecutive();
 
 type AccordionItemProps = {
     accordion: boolean,
@@ -28,7 +30,7 @@ class AccordionItem extends Component<AccordionItemProps, AccordionItemState> {
     };
 
     state = {
-        itemUuid: uuid.v4(),
+        itemUuid: nextUuid(),
     };
 
     renderChildren() {
