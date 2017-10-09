@@ -1,6 +1,6 @@
 {
   "name": "react-accessible-accordion",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Accessible Accordion component for React",
   "main": "dist/index.js",
   "scripts": {
