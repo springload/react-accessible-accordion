@@ -13,11 +13,15 @@ type AccordionItemTitleProps = {
     className: string,
     hideBodyClassName: string,
     role: string,
+    level: number,
 };
 
 type AccordionItemTitleState = {};
 
-class AccordionItemTitle extends Component<AccordionItemTitleProps, AccordionItemTitleState> {
+class AccordionItemTitle extends Component<
+    AccordionItemTitleProps,
+    AccordionItemTitleState,
+> {
     static accordionElementName = 'AccordionItemTitle';
 
     static defaultProps = {
@@ -28,6 +32,7 @@ class AccordionItemTitle extends Component<AccordionItemTitleProps, AccordionIte
         className: 'accordion__title',
         hideBodyClassName: '',
         role: '',
+        level: 0,
     };
 
     handleKeyPress(evt: SyntheticInputEvent<HTMLButtonElement>) {
@@ -40,27 +45,36 @@ class AccordionItemTitle extends Component<AccordionItemTitleProps, AccordionIte
     handleKeyPress = this.handleKeyPress.bind(this);
 
     render() {
-        const { id, expanded, ariaControls, onClick, children, className, role, hideBodyClassName } = this.props;
-        const titleClassName = classNames(
+        const {
+            id,
+            expanded,
+            ariaControls,
+            onClick,
+            children,
             className,
-            {
-                [hideBodyClassName]: (hideBodyClassName && !expanded),
-            },
-        );
+            role,
+            hideBodyClassName,
+            level,
+        } = this.props;
+        const titleClassName = classNames(className, {
+            [hideBodyClassName]: hideBodyClassName && !expanded,
+        });
 
-        if (role === 'tab') {
+        if (role === 'heading') {
             return (
-                <div
-                    id={id}
-                    aria-selected={expanded}
-                    aria-controls={ariaControls}
-                    className={titleClassName}
-                    onClick={onClick}
-                    role={role}
-                    tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-                    onKeyPress={this.handleKeyPress}
-                >
-                    {children}
+                <div aria-level={level} role={role}>
+                    <div
+                        id={id}
+                        aria-expanded={expanded}
+                        aria-controls={ariaControls}
+                        className={titleClassName}
+                        onClick={onClick}
+                        role="button"
+                        tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+                        onKeyPress={this.handleKeyPress}
+                    >
+                        {children}
+                    </div>
                 </div>
             );
         }

@@ -14,6 +14,7 @@ type AccordionItemProps = {
     children: Node,
     className: string,
     hideBodyClassName: string,
+    level: number,
 };
 
 type AccordionItemState = {
@@ -27,6 +28,7 @@ class AccordionItem extends Component<AccordionItemProps, AccordionItemState> {
         onClick: () => {},
         className: 'accordion__item',
         hideBodyClassName: '',
+        level: 0,
     };
 
     state = {
@@ -34,10 +36,10 @@ class AccordionItem extends Component<AccordionItemProps, AccordionItemState> {
     };
 
     renderChildren() {
-        const { accordion, expanded, onClick, children } = this.props;
+        const { accordion, expanded, onClick, children, level } = this.props;
         const { itemUuid } = this.state;
 
-        return React.Children.map(children, (item) => {
+        return React.Children.map(children, item => {
             const itemProps = {};
 
             if (item.type.accordionElementName === 'AccordionItemTitle') {
@@ -46,14 +48,15 @@ class AccordionItem extends Component<AccordionItemProps, AccordionItemState> {
                 itemProps.id = `accordion__title-${itemUuid}`;
                 itemProps.ariaControls = `accordion__body-${itemUuid}`;
                 itemProps.onClick = onClick;
-                itemProps.role = accordion ? 'tab' : 'button';
+                itemProps.role = accordion ? 'heading' : 'button';
+                itemProps.level = level;
 
                 return React.cloneElement(item, itemProps);
             } else if (item.type.accordionElementName === 'AccordionItemBody') {
                 itemProps.expanded = expanded;
                 itemProps.key = 'body';
                 itemProps.id = `accordion__body-${itemUuid}`;
-                itemProps.role = accordion ? 'tabpanel' : null;
+                itemProps.role = accordion ? 'region' : null;
 
                 return React.cloneElement(item, itemProps);
             }
@@ -67,18 +70,11 @@ class AccordionItem extends Component<AccordionItemProps, AccordionItemState> {
     render() {
         const { className, expanded, hideBodyClassName } = this.props;
 
-        const itemClassName = classNames(
-            className,
-            {
-                [hideBodyClassName]: (!expanded && hideBodyClassName),
-            },
-        );
+        const itemClassName = classNames(className, {
+            [hideBodyClassName]: !expanded && hideBodyClassName,
+        });
 
-        return (
-            <div className={itemClassName}>
-                {this.renderChildren()}
-            </div>
-        );
+        return <div className={itemClassName}>{this.renderChildren()}</div>;
     }
 }
 
