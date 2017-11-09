@@ -16,9 +16,16 @@ class Example extends Component {
         super(props);
         this.state = {
             activeItems: [0, 1],
+            value: '',
         };
         this.changeActiveItems = this.changeActiveItems.bind(this);
     }
+
+    handleChange = evt => {
+        this.setState({
+            value: evt.target.value,
+        });
+    };
 
     changeActiveItems(activeItems) {
         this.setState({
