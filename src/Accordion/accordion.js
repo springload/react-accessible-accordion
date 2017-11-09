@@ -32,7 +32,7 @@ class Accordion extends Component<AccordionProps, AccordionState> {
         nextProps: AccordionProps,
         nextState: AccordionState,
     ) {
-        if (!nextState.activeItems && !nextProps.activeItems) {
+        if (!nextState.activeItems && nextProps.activeItems.length === 0) {
             this.setState({
                 activeItems: this.state.activeItems,
             });
