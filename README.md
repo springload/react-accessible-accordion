@@ -6,6 +6,8 @@
 
 This is a work in progress. Feel free to contribute. [Try a demo now](https://springload.github.io/react-accessible-accordion/).
 
+If you like accessible components, feel free to check this other repo [react-accessible-modal](https://github.com/springload/react-accessible-modal).
+
 ## Usage
 
 First, grab the package from npm:
