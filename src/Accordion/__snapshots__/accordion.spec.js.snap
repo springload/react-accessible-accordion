@@ -72,6 +72,30 @@ exports[`Accordion different className with the same activeItems prop 1`] = `
 </div>
 `;
 
+exports[`Accordion different className with the same activeItems prop 2`] = `
+<div
+  className="test-2"
+  role="tablist"
+>
+  <div
+    accordion={true}
+    disabled={undefined}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+  <div
+    accordion={true}
+    disabled={undefined}
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </div>
+</div>
+`;
+
 exports[`Accordion expand accordion via accordion props dynamicly 1`] = `
 <div
   className="accordion"
