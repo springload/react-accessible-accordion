@@ -18,7 +18,8 @@
     "start-demo": "webpack-dev-server --config ./webpack/webpack.config.demo.js",
     "pages": "rm -rf pages && cp -R demo pages && webpack --config=./webpack/webpack.config.pages.js",
     "deploy": "npm run pages && ./bin/deploy.sh",
-    "prettier": "prettier **/*.js --write"
+    "prettier": "prettier **/*.js --write",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
