@@ -8,6 +8,12 @@ import AccordionItem from '../AccordionItem/accordion-item';
 import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title';
 import AccordionItemBody from '../AccordionItemBody/accordion-item-body';
 
+import 'raf/polyfill';
+import { mount, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
+
 jest.mock('../AccordionItem/accordion-item', () => 'div');
 jest.mock('../AccordionItemTitle/accordion-item-title', () => 'div');
 jest.mock('../AccordionItemBody/accordion-item-body', () => 'div');
@@ -288,7 +294,7 @@ describe('Accordion', () => {
     });
 
     it('supports controlled component inside accordion', () => {
-        class App extends Component {
+        class App extends Component<*, { value: string }> {
             constructor(props) {
                 super(props);
 
@@ -306,34 +312,39 @@ describe('Accordion', () => {
             render() {
                 return (
                     <Accordion activeItems={[1]} id="accordion">
-                        <AccordionItem>
+                        <AccordionItem id="accordion-item--1">
                             <AccordionItemTitle>
-                                Open and try to write something in the input
+                                {`Title One`}
                             </AccordionItemTitle>
                             <AccordionItemBody>
                                 <input
-                                    id="controlled-input"
+                                    id="controlled-input--1"
                                     onChange={this.handleChange}
                                     value={this.state.value}
                                 />
+                            </AccordionItemBody>
+                        </AccordionItem>
+                        <AccordionItem>
+                            <AccordionItemTitle>
+                                {`Title Two`}
+                            </AccordionItemTitle>
+                            <AccordionItemBody>
+                                {`Body Two`}
                             </AccordionItemBody>
                         </AccordionItem>
                     </Accordion>
                 );
             }
         }
-        const wrapper = renderer.create(<App />);
-        const accordion = wrapper.root.findByType(Accordion);
-        accordion._fiber.stateNode.handleClick(0);
-        console.log(accordion._fiber.stateNode.state);
-        expect(accordion._fiber.stateNode.state.activeItems).toEqual([0]);
-        wrapper.getInstance().handleChange({ target: { value: 'newValue' } });
-        console.log(accordion._fiber.stateNode.state);
-        expect(accordion._fiber.stateNode.state.activeItems).toEqual([0]);
+        const wrapper = mount(<App />);
+        const accordion = wrapper.find(Accordion);
+        const input = wrapper.find('#controlled-input--1');
+        const itemOne = wrapper.find('#accordion-item--1');
 
-        // accordion.getInstance().handleClick(0);
-        // expect(accordion.getInstance().state.activeItems).toEqual([0]);
-
-        // expect(accordion.getInstance().state.activeItems).toEqual([0]);
+        expect(accordion.instance().state.activeItems).toEqual([1]);
+        itemOne.simulate('click');
+        expect(accordion.instance().state.activeItems).toEqual([0]);
+        input.simulate('change', { value: 'foo' });
+        expect(accordion.instance().state.activeItems).toEqual([0]);
     });
 });
