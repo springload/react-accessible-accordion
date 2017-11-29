@@ -2,17 +2,12 @@
 
 import React, { Component } from 'react';
 import renderer from 'react-test-renderer';
+import { mount } from 'enzyme';
 
 import Accordion from './accordion';
 import AccordionItem from '../AccordionItem/accordion-item';
 import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title';
 import AccordionItemBody from '../AccordionItemBody/accordion-item-body';
-
-import 'raf/polyfill';
-import { mount, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-configure({ adapter: new Adapter() });
 
 jest.mock('../AccordionItem/accordion-item', () => 'div');
 jest.mock('../AccordionItemTitle/accordion-item-title', () => 'div');
