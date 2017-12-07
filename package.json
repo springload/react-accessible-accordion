@@ -33,6 +33,9 @@
     ]
   },
   "jest": {
+    "setupFiles": [
+        "./src/setupTests.js"
+    ],
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/dist/"
@@ -75,6 +78,8 @@
     "babel-preset-stage-2": "^6.24.1",
     "coveralls": "^3.0.0",
     "css-loader": "^0.28.7",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.0",
     "eslint": "^4.8.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-prettier": "^2.6.0",
@@ -86,6 +91,7 @@
     "flow-bin": "^0.56.0",
     "jest": "^21.2.1",
     "prettier": "^1.7.3",
+    "raf": "^3.4.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0",
