@@ -288,58 +288,58 @@ describe('Accordion', () => {
         expect(wrapper).toMatchSnapshot();
     });
 
-    it('supports controlled component inside accordion', () => {
-        class App extends Component<*, { value: string }> {
-            constructor(props) {
-                super(props);
+    // it('supports controlled component inside accordion', () => {
+    //     class App extends Component<*, { value: string }> {
+    //         constructor(props) {
+    //             super(props);
 
-                this.state = {
-                    value: '',
-                };
-            }
+    //             this.state = {
+    //                 value: '',
+    //             };
+    //         }
 
-            handleChange = evt => {
-                this.setState({
-                    value: evt.target.value,
-                });
-            };
+    //         handleChange = evt => {
+    //             this.setState({
+    //                 value: evt.target.value,
+    //             });
+    //         };
 
-            render() {
-                return (
-                    <Accordion activeItems={[1]} id="accordion">
-                        <AccordionItem id="accordion-item--1">
-                            <AccordionItemTitle>
-                                {`Title One`}
-                            </AccordionItemTitle>
-                            <AccordionItemBody>
-                                <input
-                                    id="controlled-input--1"
-                                    onChange={this.handleChange}
-                                    value={this.state.value}
-                                />
-                            </AccordionItemBody>
-                        </AccordionItem>
-                        <AccordionItem>
-                            <AccordionItemTitle>
-                                {`Title Two`}
-                            </AccordionItemTitle>
-                            <AccordionItemBody>
-                                {`Body Two`}
-                            </AccordionItemBody>
-                        </AccordionItem>
-                    </Accordion>
-                );
-            }
-        }
-        const wrapper = mount(<App />);
-        const accordion = wrapper.find(Accordion);
-        const input = wrapper.find('#controlled-input--1');
-        const itemOne = wrapper.find('#accordion-item--1');
+    //         render() {
+    //             return (
+    //                 <Accordion activeItems={[1]} id="accordion">
+    //                     <AccordionItem id="accordion-item--1">
+    //                         <AccordionItemTitle>
+    //                             {`Title One`}
+    //                         </AccordionItemTitle>
+    //                         <AccordionItemBody>
+    //                             <input
+    //                                 id="controlled-input--1"
+    //                                 onChange={this.handleChange}
+    //                                 value={this.state.value}
+    //                             />
+    //                         </AccordionItemBody>
+    //                     </AccordionItem>
+    //                     <AccordionItem>
+    //                         <AccordionItemTitle>
+    //                             {`Title Two`}
+    //                         </AccordionItemTitle>
+    //                         <AccordionItemBody>
+    //                             {`Body Two`}
+    //                         </AccordionItemBody>
+    //                     </AccordionItem>
+    //                 </Accordion>
+    //             );
+    //         }
+    //     }
+    //     const wrapper = mount(<App />);
+    //     const accordion = wrapper.find(Accordion);
+    //     const input = wrapper.find('#controlled-input--1');
+    //     const itemOne = wrapper.find('#accordion-item--1');
 
-        expect(accordion.instance().state.activeItems).toEqual([1]);
-        itemOne.simulate('click');
-        expect(accordion.instance().state.activeItems).toEqual([0]);
-        input.simulate('change', { value: 'foo' });
-        expect(accordion.instance().state.activeItems).toEqual([0]);
-    });
+    //     expect(accordion.instance().state.activeItems).toEqual([1]);
+    //     itemOne.simulate('click');
+    //     expect(accordion.instance().state.activeItems).toEqual([0]);
+    //     input.simulate('change', { value: 'foo' });
+    //     expect(accordion.instance().state.activeItems).toEqual([0]);
+    // });
 });
