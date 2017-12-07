@@ -30,13 +30,8 @@ class Accordion extends Component<AccordionProps, AccordionState> {
 
     componentWillReceiveProps(
         nextProps: AccordionProps,
-        nextState: AccordionState,
     ) {
-        if (!nextState.activeItems && nextProps.activeItems.length === 0) {
-            this.setState({
-                activeItems: this.state.activeItems,
-            });
-        } else if (
+        if (
             !isArraysEqualShallow(nextProps.activeItems, this.state.activeItems)
         ) {
             let newActiveItems;
