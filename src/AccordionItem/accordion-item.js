@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import type { Node } from 'react';
+import { observer } from 'mobx-react';
 import consecutive from 'consecutive';
 import classNames from 'classnames';
 
@@ -14,6 +15,10 @@ type AccordionItemProps = {
     children: Node,
     className: string,
     hideBodyClassName: string,
+    accordionStore: {
+        activeItems: Array,
+        setActiveItems: Array => void,
+    },
 };
 
 type AccordionItemState = {
@@ -27,11 +32,15 @@ class AccordionItem extends Component<AccordionItemProps, AccordionItemState> {
         onClick: () => {},
         className: 'accordion__item',
         hideBodyClassName: '',
+        activeItems: [],
     };
 
     state = {
         itemUuid: nextUuid(),
     };
+
+    onClick = ()_ => {
+    }
 
     renderChildren() {
         const { accordion, expanded, onClick, children } = this.props;
@@ -82,4 +91,4 @@ class AccordionItem extends Component<AccordionItemProps, AccordionItemState> {
     }
 }
 
-export default AccordionItem;
+export default observer('accordionStore')(AccordionItem);

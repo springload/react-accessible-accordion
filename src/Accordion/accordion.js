@@ -1,6 +1,8 @@
 // @flow
 
 import React, { Component } from 'react';
+import { observable } from 'mobx';
+import { Provider } from 'mobx-react';
 import type { Node } from 'react';
 import { isArraysEqualShallow } from '../utils';
 
@@ -28,6 +30,11 @@ class Accordion extends Component<AccordionProps, AccordionState> {
         activeItems: this.preExpandedItems(),
         accordion: true,
     };
+
+    accordionStore = observable({
+        activeItems: [],
+        setActiveItems((foo) => this.activeItems = foo),
+    })
 
     componentWillReceiveProps(nextProps: AccordionProps) {
         if (!isArraysEqualShallow(nextProps.activeItems, this.state.activeItems)) {
@@ -86,30 +93,13 @@ class Accordion extends Component<AccordionProps, AccordionState> {
         this.props.onChange(this.props.accordion ? activeItems[0] : activeItems);
     }
 
-    renderItems() {
-        const { accordion, children } = this.props;
-
-        return React.Children.map(children, (item, index) => {
-            const key = item.props.customKey || index;
-            const expanded = (this.state.activeItems.indexOf(key) !== -1) && (!item.props.disabled);
-
-            return React.cloneElement(item, {
-                disabled: item.props.disabled,
-                accordion,
-                expanded,
-                key: `accordion__item-${key}`,
-                onClick: this.handleClick.bind(this, key),
-            });
-        });
-    }
-
-    renderItems = this.renderItems.bind(this);
-
     render() {
         const { className, accordion } = this.props;
         return (
             <div role={accordion ? 'tablist' : null} className={className}>
-                {this.renderItems()}
+                <Provider accordionStore={this.accordionStore}>
+                    {this.props.children}
+                </Provider>
             </div>
         );
     }
