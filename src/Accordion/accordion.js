@@ -32,12 +32,14 @@ class Accordion extends Component<AccordionProps, AccordionState> {
     };
 
     accordionStore = observable({
+        accordion: true,
         activeItems: [],
-        setActiveItems((foo) => this.activeItems = foo),
-    })
+    });
 
     componentWillReceiveProps(nextProps: AccordionProps) {
-        if (!isArraysEqualShallow(nextProps.activeItems, this.state.activeItems)) {
+        if (
+            !isArraysEqualShallow(nextProps.activeItems, this.state.activeItems)
+        ) {
             let newActiveItems;
             if (nextProps.accordion) {
                 newActiveItems = nextProps.activeItems.length
@@ -50,7 +52,9 @@ class Accordion extends Component<AccordionProps, AccordionState> {
                 activeItems: newActiveItems,
             });
 
-            nextProps.onChange(nextProps.accordion ? newActiveItems[0] : newActiveItems);
+            nextProps.onChange(
+                nextProps.accordion ? newActiveItems[0] : newActiveItems,
+            );
         }
     }
 
@@ -59,14 +63,17 @@ class Accordion extends Component<AccordionProps, AccordionState> {
         React.Children.map(this.props.children, (item, index) => {
             if (item.props.expanded) {
                 if (this.props.accordion) {
-                    if (activeItems.length === 0) activeItems.push(item.props.customKey || index);
+                    if (activeItems.length === 0)
+                        activeItems.push(item.props.customKey || index);
                 } else {
                     activeItems.push(item.props.customKey || index);
                 }
             }
         });
         if (activeItems.length === 0 && this.props.activeItems.length !== 0) {
-            activeItems = this.props.accordion ? [this.props.activeItems[0]] : this.props.activeItems.slice();
+            activeItems = this.props.accordion
+                ? [this.props.activeItems[0]]
+                : this.props.activeItems.slice();
         }
         return activeItems;
     }
@@ -90,7 +97,9 @@ class Accordion extends Component<AccordionProps, AccordionState> {
             activeItems,
         });
 
-        this.props.onChange(this.props.accordion ? activeItems[0] : activeItems);
+        this.props.onChange(
+            this.props.accordion ? activeItems[0] : activeItems,
+        );
     }
 
     render() {
@@ -98,7 +107,7 @@ class Accordion extends Component<AccordionProps, AccordionState> {
         return (
             <div role={accordion ? 'tablist' : null} className={className}>
                 <Provider accordionStore={this.accordionStore}>
-                    {this.props.children}
+                    <div>{this.props.children}</div>
                 </Provider>
             </div>
         );

@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import type { Node } from 'react';
-import { observer } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 import consecutive from 'consecutive';
 import classNames from 'classnames';
 
@@ -39,14 +39,14 @@ class AccordionItem extends Component<AccordionItemProps, AccordionItemState> {
         itemUuid: nextUuid(),
     };
 
-    onClick = ()_ => {
-    }
+    // onClick = ()_ => {
+    // }
 
     renderChildren() {
         const { accordion, expanded, onClick, children } = this.props;
         const { itemUuid } = this.state;
 
-        return React.Children.map(children, (item) => {
+        return React.Children.map(children, item => {
             const itemProps = {};
 
             if (item.type.accordionElementName === 'AccordionItemTitle') {
@@ -74,21 +74,15 @@ class AccordionItem extends Component<AccordionItemProps, AccordionItemState> {
     renderChildren = this.renderChildren.bind(this);
 
     render() {
+        console.log(this.props);
         const { className, expanded, hideBodyClassName } = this.props;
 
-        const itemClassName = classNames(
-            className,
-            {
-                [hideBodyClassName]: (!expanded && hideBodyClassName),
-            },
-        );
+        const itemClassName = classNames(className, {
+            [hideBodyClassName]: !expanded && hideBodyClassName,
+        });
 
-        return (
-            <div className={itemClassName}>
-                {this.renderChildren()}
-            </div>
-        );
+        return <div className={itemClassName}>{this.renderChildren()}</div>;
     }
 }
 
-export default observer('accordionStore')(AccordionItem);
+export default inject('accordionStore')(observer(AccordionItem));
