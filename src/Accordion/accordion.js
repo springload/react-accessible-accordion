@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { observable } from 'mobx';
 import { Provider } from 'mobx-react';
 import type { Node } from 'react';
-import { isArraysEqualShallow } from '../utils';
+// import { isArraysEqualShallow } from '../utils';
 
 type AccordionProps = {
     accordion: boolean,
@@ -26,37 +26,11 @@ class Accordion extends Component<AccordionProps, AccordionState> {
         activeItems: [],
     };
 
-    state = {
-        activeItems: this.preExpandedItems(),
-        accordion: true,
-    };
-
     accordionStore = observable({
-        accordion: true,
-        activeItems: [],
+        activeItems: this.preExpandedItems(),
+        accordion: this.props.accordion,
+        onChange: this.props.onChange,
     });
-
-    componentWillReceiveProps(nextProps: AccordionProps) {
-        if (
-            !isArraysEqualShallow(nextProps.activeItems, this.state.activeItems)
-        ) {
-            let newActiveItems;
-            if (nextProps.accordion) {
-                newActiveItems = nextProps.activeItems.length
-                    ? [nextProps.activeItems[0]]
-                    : [];
-            } else {
-                newActiveItems = nextProps.activeItems.slice();
-            }
-            this.setState({
-                activeItems: newActiveItems,
-            });
-
-            nextProps.onChange(
-                nextProps.accordion ? newActiveItems[0] : newActiveItems,
-            );
-        }
-    }
 
     preExpandedItems() {
         let activeItems = [];
@@ -78,28 +52,21 @@ class Accordion extends Component<AccordionProps, AccordionState> {
         return activeItems;
     }
 
-    handleClick(key: number | string) {
-        let activeItems = this.state.activeItems;
-        if (this.props.accordion) {
-            activeItems = activeItems[0] === key ? [] : [key];
-        } else {
-            activeItems = [...activeItems];
-            const index = activeItems.indexOf(key);
-            const isActive = index > -1;
-            if (isActive) {
-                // remove active state
-                activeItems.splice(index, 1);
-            } else {
-                activeItems.push(key);
-            }
-        }
-        this.setState({
-            activeItems,
-        });
+    renderItems() {
+        const { children } = this.props;
+        const { accordion, activeItems } = this.accordionStore;
 
-        this.props.onChange(
-            this.props.accordion ? activeItems[0] : activeItems,
-        );
+        return React.Children.map(children, (item, index) => {
+            const itemKey = item.props.customKey || index;
+            const expanded =
+                activeItems.indexOf(itemKey) !== -1 && !item.props.disabled;
+
+            return React.cloneElement(item, {
+                accordion,
+                expanded,
+                itemKey,
+            });
+        });
     }
 
     render() {
@@ -107,7 +74,7 @@ class Accordion extends Component<AccordionProps, AccordionState> {
         return (
             <div role={accordion ? 'tablist' : null} className={className}>
                 <Provider accordionStore={this.accordionStore}>
-                    <div>{this.props.children}</div>
+                    <div>{this.renderItems()}</div>
                 </Provider>
             </div>
         );
