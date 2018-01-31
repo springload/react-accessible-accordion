@@ -10,15 +10,11 @@ type AccordionItemTitleProps = {
     className: string,
     hideBodyClassName: string,
     accordionStore: {
-        activeItems: Array<string | number>,
+        items: Array<Object>,
         accordion: boolean,
         onChange: Function,
     },
-    accordionItemStore: {
-        itemKey: string | number,
-        itemUuid: string,
-        expanded: boolean,
-    },
+    itemkey: string | number,
 };
 
 type AccordionItemTitleState = {};
@@ -35,25 +31,31 @@ class AccordionItemTitle extends Component<
     };
 
     handleClick() {
-        const { itemKey } = this.props.accordionItemStore;
-        const { activeItems, accordion, onChange } = this.props.accordionStore;
-        let newActiveItems = activeItems;
-        if (accordion) {
-            newActiveItems = newActiveItems[0] === itemKey ? [] : [itemKey];
-        } else {
-            newActiveItems = [...newActiveItems];
-            const index = newActiveItems.indexOf(itemKey);
-            const isActive = index > -1;
-            if (isActive) {
-                // remove active state
-                newActiveItems.splice(index, 1);
-            } else {
-                newActiveItems.push(itemKey);
-            }
-        }
-        this.props.accordionStore.activeItems = newActiveItems;
+        const { itemkey } = this.props;
+        const { accordion, onChange } = this.props.accordionStore;
+        let { items } = this.props.accordionStore;
+        const foundItem = items.find(item => item.itemkey === itemkey);
+        if (!foundItem) return;
 
-        onChange(accordion ? newActiveItems[0] : newActiveItems);
+        if (accordion) {
+            const newValue = !foundItem.expanded;
+            items = items.map(item => {
+                const resetItem = item;
+                resetItem.expanded = false;
+                return resetItem;
+            });
+            foundItem.expanded = newValue;
+        } else {
+            foundItem.expanded = !foundItem.expanded;
+        }
+
+        if (accordion) {
+            onChange(foundItem.itemkey);
+        } else {
+            const filteredItems = items.filter(item => item.expanded === true);
+            const itemkeys = filteredItems.map(item => item.itemkey);
+            onChange(itemkeys);
+        }
     }
 
     handleClick = this.handleClick.bind(this);
@@ -67,9 +69,12 @@ class AccordionItemTitle extends Component<
     handleKeyPress = this.handleKeyPress.bind(this);
 
     render() {
-        const { accordion } = this.props.accordionStore;
-        const { itemUuid, expanded } = this.props.accordionItemStore;
-        const { children, className, hideBodyClassName } = this.props;
+        const { items, accordion } = this.props.accordionStore;
+        const { itemkey, children, className, hideBodyClassName } = this.props;
+        const foundItem = items.find(item => item.itemkey === itemkey);
+        if (!foundItem) return null;
+
+        const { itemUuid, expanded } = foundItem;
 
         const id = `accordion__title-${itemUuid}`;
         const ariaControls = `accordion__body-${itemUuid}`;
@@ -111,6 +116,4 @@ class AccordionItemTitle extends Component<
     }
 }
 
-export default inject('accordionStore', 'accordionItemStore')(
-    observer(AccordionItemTitle),
-);
+export default inject('accordionStore')(observer(AccordionItemTitle));

@@ -15,22 +15,20 @@ type AccordionItemBodyProps = {
     className: string,
     hideBodyClassName: string,
     accordionStore: {
-        activeItems: Array<string | number>,
+        items: Array<Object>,
         accordion: boolean,
         onChange: Function,
     },
-    accordionItemStore: {
-        itemKey: string | number,
-        itemUuid: string,
-        expanded: boolean,
-    },
+    itemkey: string | number,
 };
 
 const AccordionItemBody = (props: AccordionItemBodyProps) => {
-    const { accordion } = props.accordionStore;
-    const { itemUuid, expanded } = props.accordionItemStore;
-    const { children, className, hideBodyClassName } = props;
+    const { itemkey, children, className, hideBodyClassName } = props;
+    const { items, accordion } = props.accordionStore;
+    const foundItem = items.find(item => item.itemkey === itemkey);
+    if (!foundItem) return null;
 
+    const { itemUuid, expanded } = foundItem;
     const id = `accordion__body-${itemUuid}`;
     const role = accordion ? 'tabpanel' : null;
 
@@ -59,6 +57,4 @@ AccordionItemBody.defaultProps = defaultProps;
 // Minifiers modify component name
 AccordionItemBody.accordionElementName = 'AccordionItemBody';
 
-export default inject('accordionStore', 'accordionItemStore')(
-    observer(AccordionItemBody),
-);
+export default inject('accordionStore')(observer(AccordionItemBody));
