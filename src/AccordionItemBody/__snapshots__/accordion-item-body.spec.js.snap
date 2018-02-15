@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AccordionItemBody renders correctly with different className 1`] = `
+<div
+  aria-hidden={true}
+  aria-labelledby="accordion__title-ghij-5678"
+  className="testCSSClass accordion__body--hidden"
+  id="accordion__body-ghij-5678"
+  role="tabpanel"
+>
+  <div>
+    Fake body
+  </div>
+</div>
+`;
+
 exports[`AccordionItemBody renders correctly with min params 1`] = `
 <div
   aria-hidden={true}

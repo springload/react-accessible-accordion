@@ -25,14 +25,14 @@ describe('AccordionItemBody', () => {
         expect(tree).toMatchSnapshot();
     });
 
-    // it('renders correctly with different className', () => {
-    //     const tree = renderer.create(
-    //         <AccordionItemBody className="testCSSClass">
-    //             <div>Fake body</div>
-    //         </AccordionItemBody>,
-    //     ).toJSON();
-    //     expect(tree).toMatchSnapshot();
-    // });
+    it('renders correctly with different className', () => {
+        const tree = renderer.create(
+            <AccordionItemBody className="testCSSClass" accordionStore={mockAccordionStore} itemkey="asdf-1234">
+                <div>Fake body</div>
+            </AccordionItemBody>,
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
 
     // it('renders correctly with prefixClass', () => {
     //     const tree = renderer.create(
