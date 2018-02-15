@@ -2,13 +2,13 @@
 
 exports[`AccordionItemTitle doesn't respect hideBodyClassName when collapsed 1`] = `
 <div
-  aria-controls=""
+  aria-controls="accordion__body-item-two-itemUUid"
   aria-expanded={true}
   className="accordion__title"
-  id=""
+  id="accordion__title-item-two-itemUUid"
   onClick={[Function]}
   onKeyPress={[Function]}
-  role=""
+  role="button"
   tabIndex="0"
 >
   <div>
@@ -19,13 +19,13 @@ exports[`AccordionItemTitle doesn't respect hideBodyClassName when collapsed 1`]
 
 exports[`AccordionItemTitle renders correctly when pressing another key 1`] = `
 <div
-  aria-controls=""
+  aria-controls="accordion__body-item-one-itemUUid"
   aria-expanded={false}
   className="accordion__title"
-  id=""
+  id="accordion__title-item-one-itemUUid"
   onClick={[Function]}
   onKeyPress={[Function]}
-  role=""
+  role="button"
   tabIndex="0"
 >
   <div>
@@ -36,13 +36,13 @@ exports[`AccordionItemTitle renders correctly when pressing another key 1`] = `
 
 exports[`AccordionItemTitle renders correctly when pressing enter 1`] = `
 <div
-  aria-controls=""
+  aria-controls="accordion__body-item-one-itemUUid"
   aria-expanded={false}
   className="accordion__title"
-  id=""
+  id="accordion__title-item-one-itemUUid"
   onClick={[Function]}
   onKeyPress={[Function]}
-  role=""
+  role="button"
   tabIndex="0"
 >
   <div>
@@ -53,13 +53,13 @@ exports[`AccordionItemTitle renders correctly when pressing enter 1`] = `
 
 exports[`AccordionItemTitle renders correctly when pressing space 1`] = `
 <div
-  aria-controls=""
+  aria-controls="accordion__body-item-one-itemUUid"
   aria-expanded={false}
   className="accordion__title"
-  id=""
+  id="accordion__title-item-one-itemUUid"
   onClick={[Function]}
   onKeyPress={[Function]}
-  role=""
+  role="button"
   tabIndex="0"
 >
   <div>
@@ -70,13 +70,13 @@ exports[`AccordionItemTitle renders correctly when pressing space 1`] = `
 
 exports[`AccordionItemTitle renders correctly with different className 1`] = `
 <div
-  aria-controls="accordion__body-ghij-5678"
-  aria-selected={false}
+  aria-controls="accordion__body-item-one-itemUUid"
+  aria-expanded={false}
   className="testCSSClass"
-  id="accordion__title-ghij-5678"
+  id="accordion__title-item-one-itemUUid"
   onClick={[Function]}
   onKeyPress={[Function]}
-  role="tab"
+  role="button"
   tabIndex="0"
 >
   <div>
@@ -87,30 +87,13 @@ exports[`AccordionItemTitle renders correctly with different className 1`] = `
 
 exports[`AccordionItemTitle renders correctly with min params 1`] = `
 <div
-  aria-controls="accordion__body-ghij-5678"
-  aria-selected={false}
+  aria-controls="accordion__body-item-one-itemUUid"
+  aria-expanded={false}
   className="accordion__title"
-  id="accordion__title-ghij-5678"
+  id="accordion__title-item-one-itemUUid"
   onClick={[Function]}
   onKeyPress={[Function]}
-  role="tab"
-  tabIndex="0"
->
-  <div>
-    Fake Title
-  </div>
-</div>
-`;
-
-exports[`AccordionItemTitle renders correctly with role of tab 1`] = `
-<div
-  aria-controls=""
-  aria-selected={false}
-  className="testCSSClass"
-  id=""
-  onClick={[Function]}
-  onKeyPress={[Function]}
-  role="tab"
+  role="button"
   tabIndex="0"
 >
   <div>
@@ -121,13 +104,13 @@ exports[`AccordionItemTitle renders correctly with role of tab 1`] = `
 
 exports[`AccordionItemTitle renders with different hideBodyClassName 1`] = `
 <div
-  aria-controls=""
+  aria-controls="accordion__body-item-one-itemUUid"
   aria-expanded={false}
   className="accordion__title testCSSClass--hidden"
-  id=""
+  id="accordion__title-item-one-itemUUid"
   onClick={[Function]}
   onKeyPress={[Function]}
-  role=""
+  role="button"
   tabIndex="0"
 >
   <div>

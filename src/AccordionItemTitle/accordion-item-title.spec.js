@@ -2,23 +2,31 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-
 import { AccordionItemTitle } from './accordion-item-title';
 
-const mockAccordionStore = {
-    items: [{
-        itemkey: 'asdf-1234',
-        expanded: false,
-        itemUuid: 'ghij-5678',
-    }],
-    accordion: true,
-    onChange: jest.fn(),
-};
-
 describe('AccordionItemTitle', () => {
+    let mockAccordionStore;
+
+    beforeEach(() => {
+        mockAccordionStore = {
+            items: [{
+                itemkey: 'item-one-itemkey',
+                expanded: false,
+                itemUuid: 'item-one-itemUUid',
+            },
+            {
+                itemkey: 'item-two-itemkey',
+                expanded: true,
+                itemUuid: 'item-two-itemUUid',
+            }],
+            accordion: false,
+            onChange: jest.fn(),
+        };
+    });
+
     it('renders correctly with min params', () => {
         const tree = renderer.create(
-            <AccordionItemTitle accordionStore={mockAccordionStore} itemkey="asdf-1234">
+            <AccordionItemTitle accordionStore={mockAccordionStore} itemkey="item-one-itemkey">
                 <div>Fake Title</div>
             </AccordionItemTitle>,
         ).toJSON();
@@ -27,7 +35,7 @@ describe('AccordionItemTitle', () => {
 
     it('renders correctly with different className', () => {
         const tree = renderer.create(
-            <AccordionItemTitle className="testCSSClass" accordionStore={mockAccordionStore} itemkey="asdf-1234">
+            <AccordionItemTitle className="testCSSClass" accordionStore={mockAccordionStore} itemkey="item-one-itemkey">
                 <div>Fake Title</div>
             </AccordionItemTitle>,
         ).toJSON();
@@ -36,7 +44,7 @@ describe('AccordionItemTitle', () => {
 
     it('renders with different hideBodyClassName', () => {
         const tree = renderer.create(
-            <AccordionItemTitle expanded={false} hideBodyClassName="testCSSClass--hidden">
+            <AccordionItemTitle hideBodyClassName="testCSSClass--hidden" accordionStore={mockAccordionStore} itemkey="item-one-itemkey">
                 <div>Fake title</div>
             </AccordionItemTitle>,
         ).toJSON();
@@ -45,58 +53,55 @@ describe('AccordionItemTitle', () => {
 
     it('doesn\'t respect hideBodyClassName when collapsed', () => {
         const tree = renderer.create(
-            <AccordionItemTitle expanded={true} hideBodyClassName="testCSSClass--hidden">
+            <AccordionItemTitle hideBodyClassName="testCSSClass--hidden" accordionStore={mockAccordionStore} itemkey="item-two-itemkey">
                 <div>Fake title</div>
             </AccordionItemTitle>,
         ).toJSON();
         expect(tree).toMatchSnapshot();
     });
 
-    it('renders correctly when pressing enter', () => {
-        const mockOnClick = jest.fn();
+    it('renders correctly when pressing enter', async () => {
         const tree = renderer.create(
-            <AccordionItemTitle onClick={mockOnClick}>
+            <AccordionItemTitle accordionStore={mockAccordionStore} itemkey="item-one-itemkey">
                 <div>Fake Title</div>
             </AccordionItemTitle>,
         );
 
         tree.getInstance().handleKeyPress({ charCode: 13 });
-        expect(mockOnClick).toHaveBeenCalledTimes(1);
+
+        await new Promise(resolve => setTimeout(resolve, 200));
+
+        expect(mockAccordionStore.onChange).toHaveBeenCalledTimes(1);
         expect(tree).toMatchSnapshot();
     });
 
-    it('renders correctly when pressing space', () => {
-        const mockOnClick = jest.fn();
+    it('renders correctly when pressing space', async () => {
         const tree = renderer.create(
-            <AccordionItemTitle onClick={mockOnClick}>
+            <AccordionItemTitle accordionStore={mockAccordionStore} itemkey="item-one-itemkey">
                 <div>Fake Title</div>
             </AccordionItemTitle>,
         );
 
         tree.getInstance().handleKeyPress({ charCode: 32 });
-        expect(mockOnClick).toHaveBeenCalledTimes(1);
+
+        await new Promise(resolve => setTimeout(resolve, 200));
+
+        expect(mockAccordionStore.onChange).toHaveBeenCalledTimes(1);
         expect(tree).toMatchSnapshot();
     });
 
-    it('renders correctly when pressing another key', () => {
-        const mockOnClick = jest.fn();
+    it('renders correctly when pressing another key', async () => {
         const tree = renderer.create(
-            <AccordionItemTitle onClick={mockOnClick}>
+            <AccordionItemTitle accordionStore={mockAccordionStore} itemkey="item-one-itemkey">
                 <div>Fake Title</div>
             </AccordionItemTitle>,
         );
 
         tree.getInstance().handleKeyPress({ charCode: 35 });
-        expect(mockOnClick).toHaveBeenCalledTimes(0);
-        expect(tree).toMatchSnapshot();
-    });
 
-    it('renders correctly with role of tab', () => {
-        const tree = renderer.create(
-            <AccordionItemTitle role="tab" className="testCSSClass">
-                <div>Fake Title</div>
-            </AccordionItemTitle>,
-        ).toJSON();
+        await new Promise(resolve => setTimeout(resolve, 200));
+
+        expect(mockAccordionStore.onChange).toHaveBeenCalledTimes(0);
         expect(tree).toMatchSnapshot();
     });
 });
