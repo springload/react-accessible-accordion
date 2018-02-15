@@ -34,14 +34,14 @@ describe('AccordionItemBody', () => {
         expect(tree).toMatchSnapshot();
     });
 
-    // it('renders correctly with prefixClass', () => {
-    //     const tree = renderer.create(
-    //         <AccordionItemBody hideBodyClassName="testCSSClass--hidden">
-    //             <div>Fake body</div>
-    //         </AccordionItemBody>,
-    //     ).toJSON();
-    //     expect(tree).toMatchSnapshot();
-    // });
+    it('renders correctly with prefixClass', () => {
+        const tree = renderer.create(
+            <AccordionItemBody hideBodyClassName="testCSSClass--hidden" accordionStore={mockAccordionStore} itemkey="asdf-1234">
+                <div>Fake body</div>
+            </AccordionItemBody>,
+        ).toJSON();
+        expect(tree).toMatchSnapshot();
+    });
 
     // it('renders correctly with expanded', () => {
     //     const tree = renderer.create(
