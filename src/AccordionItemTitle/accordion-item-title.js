@@ -19,7 +19,7 @@ type AccordionItemTitleProps = {
 
 type AccordionItemTitleState = {};
 
-class AccordionItemTitle extends Component<
+export class AccordionItemTitle extends Component<
     AccordionItemTitleProps,
     AccordionItemTitleState,
 > {
