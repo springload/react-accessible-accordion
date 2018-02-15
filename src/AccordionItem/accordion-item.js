@@ -2,10 +2,9 @@
 
 import React, { Component } from 'react';
 import type { Node } from 'react';
-import { inject, observer, Provider } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 
 import classNames from 'classnames';
-import { observable } from 'mobx';
 
 type AccordionItemProps = {
     items: Array<Object>,
