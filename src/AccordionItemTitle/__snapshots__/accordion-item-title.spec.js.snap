@@ -70,13 +70,13 @@ exports[`AccordionItemTitle renders correctly when pressing space 1`] = `
 
 exports[`AccordionItemTitle renders correctly with different className 1`] = `
 <div
-  aria-controls=""
-  aria-expanded={false}
+  aria-controls="accordion__body-ghij-5678"
+  aria-selected={false}
   className="testCSSClass"
-  id=""
+  id="accordion__title-ghij-5678"
   onClick={[Function]}
   onKeyPress={[Function]}
-  role=""
+  role="tab"
   tabIndex="0"
 >
   <div>

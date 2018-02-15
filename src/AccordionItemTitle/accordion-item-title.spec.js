@@ -27,7 +27,7 @@ describe('AccordionItemTitle', () => {
 
     it('renders correctly with different className', () => {
         const tree = renderer.create(
-            <AccordionItemTitle className="testCSSClass">
+            <AccordionItemTitle className="testCSSClass" accordionStore={mockAccordionStore} itemkey="asdf-1234">
                 <div>Fake Title</div>
             </AccordionItemTitle>,
         ).toJSON();
