@@ -3,39 +3,48 @@
 import React from 'react';
 import type { Node } from 'react';
 import classNames from 'classnames';
+import { inject, observer } from 'mobx-react';
 
 const defaultProps = {
-    id: '',
-    expanded: false,
     className: 'accordion__body',
     hideBodyClassName: 'accordion__body--hidden',
-    role: '',
 };
 
 type AccordionItemBodyProps = {
-    id: string,
-    expanded: boolean,
     children: Node,
     className: string,
     hideBodyClassName: string,
-    role: string,
+    accordionStore: {
+        items: Array<Object>,
+        accordion: boolean,
+        onChange: Function,
+    },
+    itemkey: string | number,
 };
 
-const AccordionItemBody = (props: AccordionItemBodyProps) => {
-    const { id, expanded, children, className, hideBodyClassName, role } = props;
-    const bodyClass = classNames(
-        className,
-        {
-            [hideBodyClassName]: !expanded,
-        },
-    );
+export const AccordionItemBody = (props: AccordionItemBodyProps) => {
+    const { itemkey, children, className, hideBodyClassName } = props;
+    const { items, accordion } = props.accordionStore;
+    const foundItem = items.find(item => item.itemkey === itemkey);
+    if (!foundItem) return null;
+
+    const { itemUuid, expanded } = foundItem;
+    const id = `accordion__body-${itemUuid}`;
+    const role = accordion ? 'tabpanel' : null;
+
+    const bodyClass = classNames(className, {
+        [hideBodyClassName]: !expanded,
+    });
     const ariaHidden = !expanded;
     return (
         <div
             id={id}
             className={bodyClass}
             aria-hidden={ariaHidden}
-            aria-labelledby={id.replace('accordion__body-', 'accordion__title-')}
+            aria-labelledby={id.replace(
+                'accordion__body-',
+                'accordion__title-',
+            )}
             role={role}
         >
             {children}
@@ -48,4 +57,4 @@ AccordionItemBody.defaultProps = defaultProps;
 // Minifiers modify component name
 AccordionItemBody.accordionElementName = 'AccordionItemBody';
 
-export default AccordionItemBody;
+export default inject('accordionStore')(observer(AccordionItemBody));

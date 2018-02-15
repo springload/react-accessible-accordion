@@ -1,8 +1,12 @@
 // @flow
 
 import React, { Component } from 'react';
+import { observable } from 'mobx';
+import { Provider } from 'mobx-react';
 import type { Node } from 'react';
-import { isArraysEqualShallow } from '../utils';
+import consecutive from 'consecutive';
+
+const nextUuid = consecutive();
 
 type AccordionProps = {
     accordion: boolean,
@@ -12,11 +16,7 @@ type AccordionProps = {
     onChange: Function,
 };
 
-type AccordionState = {
-    activeItems: Array<string | number>,
-};
-
-class Accordion extends Component<AccordionProps, AccordionState> {
+class Accordion extends Component<AccordionProps, *> {
     static defaultProps = {
         accordion: true,
         onChange: () => {},
@@ -24,92 +24,94 @@ class Accordion extends Component<AccordionProps, AccordionState> {
         activeItems: [],
     };
 
-    state = {
-        activeItems: this.preExpandedItems(),
-        accordion: true,
-    };
+    accordionStore = observable({
+        items: this.parseItems(),
+        accordion: this.props.accordion,
+        onChange: this.props.onChange,
+    });
 
-    componentWillReceiveProps(nextProps: AccordionProps) {
-        if (!isArraysEqualShallow(nextProps.activeItems, this.state.activeItems)) {
-            let newActiveItems;
-            if (nextProps.accordion) {
-                newActiveItems = nextProps.activeItems.length
-                    ? [nextProps.activeItems[0]]
-                    : [];
+    componentDidUpdate() {
+        this.accordionStore.items = this.parseItems();
+    }
+
+    parseItems() {
+        let items = [];
+        let hasOneExpanded = false;
+        let expandsWithChildrenProperties = false;
+
+        // we leave priority to children properties
+        React.Children.map(this.props.children, (child, index) => {
+            const item = {
+                itemkey: child.props.customKey || index,
+                itemUuid: nextUuid(),
+                expanded: false,
+            };
+
+            if (this.props.accordion) {
+                item.expanded = !hasOneExpanded && child.props.expanded;
+                if (child.props.expanded) {
+                    hasOneExpanded = true;
+                }
             } else {
-                newActiveItems = nextProps.activeItems.slice();
+                item.expanded = child.props.expanded;
             }
-            this.setState({
-                activeItems: newActiveItems,
+
+            if (child.props.expanded) {
+                expandsWithChildrenProperties = true;
+            }
+            items.push(item);
+        });
+
+        // if not using children properties to expand items we check with activeItems property
+        if (
+            !expandsWithChildrenProperties &&
+            this.props.activeItems.length !== 0
+        ) {
+            items = items.map((item: Object) => {
+                const resetItem = item;
+                resetItem.expanded = false;
+                return resetItem;
             });
 
-            nextProps.onChange(nextProps.accordion ? newActiveItems[0] : newActiveItems);
-        }
-    }
-
-    preExpandedItems() {
-        let activeItems = [];
-        React.Children.map(this.props.children, (item, index) => {
-            if (item.props.expanded) {
-                if (this.props.accordion) {
-                    if (activeItems.length === 0) activeItems.push(item.props.customKey || index);
-                } else {
-                    activeItems.push(item.props.customKey || index);
+            this.props.activeItems.forEach(activeItem => {
+                const foundItem = items.find(
+                    item => item.itemkey === activeItem,
+                );
+                hasOneExpanded = false;
+                if (foundItem) {
+                    let expanded = true;
+                    if (this.props.accordion) {
+                        expanded = !hasOneExpanded;
+                        hasOneExpanded = true;
+                    }
+                    foundItem.expanded = expanded;
                 }
-            }
-        });
-        if (activeItems.length === 0 && this.props.activeItems.length !== 0) {
-            activeItems = this.props.accordion ? [this.props.activeItems[0]] : this.props.activeItems.slice();
+            });
         }
-        return activeItems;
-    }
-
-    handleClick(key: number | string) {
-        let activeItems = this.state.activeItems;
-        if (this.props.accordion) {
-            activeItems = activeItems[0] === key ? [] : [key];
-        } else {
-            activeItems = [...activeItems];
-            const index = activeItems.indexOf(key);
-            const isActive = index > -1;
-            if (isActive) {
-                // remove active state
-                activeItems.splice(index, 1);
-            } else {
-                activeItems.push(key);
-            }
-        }
-        this.setState({
-            activeItems,
-        });
-
-        this.props.onChange(this.props.accordion ? activeItems[0] : activeItems);
+        return items;
     }
 
     renderItems() {
-        const { accordion, children } = this.props;
+        const { children } = this.props;
 
         return React.Children.map(children, (item, index) => {
-            const key = item.props.customKey || index;
-            const expanded = (this.state.activeItems.indexOf(key) !== -1) && (!item.props.disabled);
+            const itemkey = item.props.customKey || index;
 
             return React.cloneElement(item, {
-                disabled: item.props.disabled,
-                accordion,
-                expanded,
-                key: `accordion__item-${key}`,
-                onClick: this.handleClick.bind(this, key),
+                itemkey,
             });
         });
     }
 
-    renderItems = this.renderItems.bind(this);
-
     render() {
-        const { className, accordion } = this.props;
+        const { className } = this.props;
+        const { accordion } = this.accordionStore;
+
         return (
             <div role={accordion ? 'tablist' : null} className={className}>
-                {this.renderItems()}
+                <Provider accordionStore={this.accordionStore}>
+                    <div>{this.renderItems()}</div>
+                </Provider>
             </div>
         );
     }

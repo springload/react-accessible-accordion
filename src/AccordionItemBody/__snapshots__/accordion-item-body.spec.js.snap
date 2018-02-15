@@ -1,40 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AccordionItemBody renders correctly with an id (aria-labelledBy filled) 1`] = `
-<div
-  aria-hidden={false}
-  aria-labelledby="accordion__title-HASHID"
-  className="accordion__body"
-  id="accordion__body-HASHID"
-  role=""
->
-  <div>
-    Fake body
-  </div>
-</div>
-`;
-
 exports[`AccordionItemBody renders correctly with different className 1`] = `
 <div
   aria-hidden={true}
-  aria-labelledby=""
+  aria-labelledby="accordion__title-ghij-5678"
   className="testCSSClass accordion__body--hidden"
-  id=""
-  role=""
->
-  <div>
-    Fake body
-  </div>
-</div>
-`;
-
-exports[`AccordionItemBody renders correctly with expanded 1`] = `
-<div
-  aria-hidden={false}
-  aria-labelledby=""
-  className="accordion__body"
-  id=""
-  role=""
+  id="accordion__body-ghij-5678"
+  role="tabpanel"
 >
   <div>
     Fake body
@@ -45,10 +17,10 @@ exports[`AccordionItemBody renders correctly with expanded 1`] = `
 exports[`AccordionItemBody renders correctly with min params 1`] = `
 <div
   aria-hidden={true}
-  aria-labelledby=""
+  aria-labelledby="accordion__title-ghij-5678"
   className="accordion__body accordion__body--hidden"
-  id=""
-  role=""
+  id="accordion__body-ghij-5678"
+  role="tabpanel"
 >
   <div>
     Fake body
@@ -59,10 +31,10 @@ exports[`AccordionItemBody renders correctly with min params 1`] = `
 exports[`AccordionItemBody renders correctly with prefixClass 1`] = `
 <div
   aria-hidden={true}
-  aria-labelledby=""
+  aria-labelledby="accordion__title-ghij-5678"
   className="accordion__body testCSSClass--hidden"
-  id=""
-  role=""
+  id="accordion__body-ghij-5678"
+  role="tabpanel"
 >
   <div>
     Fake body

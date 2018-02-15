@@ -2,84 +2,50 @@
 
 import React, { Component } from 'react';
 import type { Node } from 'react';
-import consecutive from 'consecutive';
+import { inject, observer } from 'mobx-react';
+
 import classNames from 'classnames';
 
-const nextUuid = consecutive();
-
 type AccordionItemProps = {
-    accordion: boolean,
-    expanded: boolean,
-    onClick: Function,
+    items: Array<Object>,
     children: Node,
     className: string,
     hideBodyClassName: string,
+    itemkey: string | number,
+    accordionStore: Object,
 };
 
-type AccordionItemState = {
-    itemUuid: string,
-};
-
-class AccordionItem extends Component<AccordionItemProps, AccordionItemState> {
+class AccordionItem extends Component<AccordionItemProps, *> {
     static defaultProps = {
-        accordion: true,
-        expanded: false,
-        onClick: () => {},
         className: 'accordion__item',
         hideBodyClassName: '',
     };
 
-    state = {
-        itemUuid: nextUuid(),
-    };
-
     renderChildren() {
-        const { accordion, expanded, onClick, children } = this.props;
-        const { itemUuid } = this.state;
+        const { children, itemkey } = this.props;
 
-        return React.Children.map(children, (item) => {
-            const itemProps = {};
-
-            if (item.type.accordionElementName === 'AccordionItemTitle') {
-                itemProps.expanded = expanded;
-                itemProps.key = 'title';
-                itemProps.id = `accordion__title-${itemUuid}`;
-                itemProps.ariaControls = `accordion__body-${itemUuid}`;
-                itemProps.onClick = onClick;
-                itemProps.role = accordion ? 'tab' : 'button';
-
-                return React.cloneElement(item, itemProps);
-            } else if (item.type.accordionElementName === 'AccordionItemBody') {
-                itemProps.expanded = expanded;
-                itemProps.key = 'body';
-                itemProps.id = `accordion__body-${itemUuid}`;
-                itemProps.role = accordion ? 'tabpanel' : null;
-
-                return React.cloneElement(item, itemProps);
-            }
-
-            return item;
-        });
+        return React.Children.map(children, item =>
+            React.cloneElement(item, {
+                itemkey,
+            }),
+        );
     }
 
-    renderChildren = this.renderChildren.bind(this);
-
     render() {
-        const { className, expanded, hideBodyClassName } = this.props;
-
-        const itemClassName = classNames(
-            className,
-            {
-                [hideBodyClassName]: (!expanded && hideBodyClassName),
-            },
+        const { className, hideBodyClassName } = this.props;
+        const itemProperties = this.props.accordionStore.items.find(
+            item => item.itemkey === this.props.itemkey,
         );
 
-        return (
-            <div className={itemClassName}>
-                {this.renderChildren()}
-            </div>
-        );
+        if (!itemProperties) return null;
+        const { expanded } = itemProperties;
+
+        const itemClassName = classNames(className, {
+            [hideBodyClassName]: !expanded && hideBodyClassName,
+        });
+
+        return <div className={itemClassName}>{this.renderChildren()}</div>;
     }
 }
 
-export default AccordionItem;
+export default inject('accordionStore')(observer(AccordionItem));
