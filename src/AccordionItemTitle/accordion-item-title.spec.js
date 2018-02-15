@@ -3,12 +3,22 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import AccordionItemTitle from './accordion-item-title';
+import { AccordionItemTitle } from './accordion-item-title';
+
+const mockAccordionStore = {
+    items: [{
+        itemkey: 'asdf-1234',
+        expanded: false,
+        itemUuid: 'ghij-5678',
+    }],
+    accordion: true,
+    onChange: jest.fn(),
+};
 
 describe('AccordionItemTitle', () => {
     it('renders correctly with min params', () => {
         const tree = renderer.create(
-            <AccordionItemTitle>
+            <AccordionItemTitle accordionStore={mockAccordionStore} itemkey="asdf-1234">
                 <div>Fake Title</div>
             </AccordionItemTitle>,
         ).toJSON();
