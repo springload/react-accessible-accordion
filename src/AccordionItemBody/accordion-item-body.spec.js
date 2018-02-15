@@ -43,15 +43,6 @@ describe('AccordionItemBody', () => {
         expect(tree).toMatchSnapshot();
     });
 
-    // it('renders correctly with expanded', () => {
-    //     const tree = renderer.create(
-    //         <AccordionItemBody expanded={true}>
-    //             <div>Fake body</div>
-    //         </AccordionItemBody>,
-    //     ).toJSON();
-    //     expect(tree).toMatchSnapshot();
-    // });
-
     // it('renders correctly with an id (aria-labelledBy filled)', () => {
     //     const tree = renderer.create(
     //         <AccordionItemBody id="accordion__body-HASHID" expanded={true}>
