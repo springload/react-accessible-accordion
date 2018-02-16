@@ -16,7 +16,7 @@ type AccordionItemProps = {
     itemkey: string | number,
     accordionStore: Store,
     disabled: boolean,
-    expanded: boolean,
+    expanded: ?boolean,
 };
 
 class AccordionItem extends Component<AccordionItemProps, *> {
@@ -24,17 +24,23 @@ class AccordionItem extends Component<AccordionItemProps, *> {
         className: 'accordion__item',
         hideBodyClassName: '',
         disabled: false,
-        expanded: false,
+        expanded: null,
     };
 
     customKey = this.props.itemkey || nextUuid();
 
     componentWillMount() {
-        this.props.accordionStore.addItem({
+        const { accordionStore, disabled } = this.props;
+
+        accordionStore.addItem({
             itemkey: this.customKey,
             itemUuid: nextUuid(),
-            expanded: this.props.expanded,
-            disabled: this.props.disabled,
+            expanded:
+                this.props.expanded !== null &&
+                this.props.expanded !== undefined
+                    ? this.props.expanded
+                    : accordionStore.activeItems.indexOf(this.customKey) !== -1,
+            disabled,
         });
     }
 
@@ -47,7 +53,11 @@ class AccordionItem extends Component<AccordionItemProps, *> {
         expanded,
         accordionStore,
     }: AccordionItemProps) {
-        if (expanded !== this.props.expanded) {
+        if (
+            expanded !== null &&
+            expanded !== undefined &&
+            expanded !== this.props.expanded
+        ) {
             accordionStore.setExpanded(this.customKey, expanded);
         }
     }

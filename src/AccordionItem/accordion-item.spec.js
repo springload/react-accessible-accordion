@@ -165,4 +165,21 @@ describe('AccordionItem', () => {
             accordionStore.items.filter(item => item.expanded === true).length,
         ).toEqual(1);
     });
+
+    it('can dynamically set activeItems', () => {
+        accordionStore.activeItems = ['foo'];
+        mount(
+            <Provider accordionStore={accordionStore}>
+                <AccordionItem itemkey="foo">
+                    <AccordionItemTitle>
+                        <div>Fake title</div>
+                    </AccordionItemTitle>
+                </AccordionItem>
+            </Provider>,
+        );
+
+        expect(
+            accordionStore.items.filter(item => item.expanded === true).length,
+        ).toEqual(1);
+    });
 });

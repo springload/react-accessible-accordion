@@ -15,6 +15,7 @@ export type Store = {
     addItem: Item => void,
     removeItem: ($PropertyType<Item, 'itemkey'>) => void,
     setExpanded: ($PropertyType<Item, 'itemkey'>, boolean) => void,
+    activeItems: Array<$PropertyType<Item, 'itemkey'>>,
 };
 
 // eslint-disable-next-line import/prefer-default-export
@@ -55,6 +56,7 @@ export const createAccordionStore = ({
                 return item;
             });
         }),
+        activeItems: [],
     });
     return store;
 };
