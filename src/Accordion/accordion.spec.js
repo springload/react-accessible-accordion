@@ -1,292 +1,350 @@
 // @flow
 
-import React, { Component } from 'react';
-import renderer from 'react-test-renderer';
+import React from 'react';
 import { mount } from 'enzyme';
+import renderer from 'react-test-renderer';
 
 import Accordion from './accordion';
 import AccordionItem from '../AccordionItem/accordion-item';
 import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title';
-import AccordionItemBody from '../AccordionItemBody/accordion-item-body';
-
-jest.mock('../AccordionItem/accordion-item', () => 'div');
-jest.mock('../AccordionItemTitle/accordion-item-title', () => 'div');
-jest.mock('../AccordionItemBody/accordion-item-body', () => 'div');
+// import AccordionItemBody from '../AccordionItemBody/accordion-item-body';
 
 describe('Accordion', () => {
+    //
     it('renders correctly with min params', () => {
-        const tree = renderer
-            .create(
-                <Accordion>
-                    <AccordionItem>Fake child</AccordionItem>
-                    <AccordionItem>Fake child</AccordionItem>
-                </Accordion>,
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
+        const tree = mount(<Accordion />);
+        expect(tree.find('div').props().role).toEqual('tablist');
     });
 
     it('renders correctly with accordion false', () => {
-        const tree = renderer
-            .create(
-                <Accordion accordion={false}>
-                    <AccordionItem>Fake child</AccordionItem>
-                    <AccordionItem>Fake child</AccordionItem>
-                </Accordion>,
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
+        const tree = mount(<Accordion accordion={false} />);
+        expect(tree.find('div').props().role).toEqual(null);
     });
 
     it('different className', () => {
-        const tree = renderer
-            .create(
-                <Accordion accordion={false} className="testCSSClass">
-                    <AccordionItem>Fake Child</AccordionItem>
-                    <AccordionItem>Fake Child</AccordionItem>
-                </Accordion>,
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
+        const tree = mount(<Accordion className="testCSSClass" />);
+        expect(tree.find('div').props().className).toEqual('testCSSClass');
     });
 
-    it('handleClick function accordion true', () => {
-        const wrapper = renderer.create(
-            <Accordion>
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
+    describe('<Accordion accordion="true" />', () => {
+        const wrapper = mount(
+            <Accordion accordion={true}>
+                <AccordionItem>
+                    <AccordionItemTitle className="foo">
+                        Foo Title
+                    </AccordionItemTitle>
+                </AccordionItem>
+                <AccordionItem>
+                    <AccordionItemTitle className="bar">
+                        Foo Title
+                    </AccordionItemTitle>
+                </AccordionItem>
             </Accordion>,
         );
-        wrapper.getInstance().handleClick(1);
-        expect(wrapper.getInstance().state.activeItems).toEqual([1]);
-        expect(wrapper).toMatchSnapshot();
+        const fooTitle = wrapper.find('div.foo').first();
+        const barTitle = wrapper.find('div.bar').first();
 
-        wrapper.getInstance().handleClick(1);
-        expect(wrapper.getInstance().state.activeItems).toEqual([]);
-        expect(wrapper).toMatchSnapshot();
+        it('expands a collapsed item when its title is clicked', () => {
+            fooTitle.simulate('click');
+            expect(
+                wrapper
+                    .instance()
+                    .accordionStore.items.filter(item => item.expanded === true)
+                    .length,
+            ).toEqual(1);
+        });
+
+        it('expands a collapsed item when its title is clicked, and closes the others', () => {
+            barTitle.simulate('click');
+            expect(
+                wrapper
+                    .instance()
+                    .accordionStore.items.filter(item => item.expanded === true)
+                    .length,
+            ).toEqual(1);
+        });
+
+        it('collapses an expanded item when its title is clicked', () => {
+            barTitle.simulate('click');
+            expect(
+                wrapper
+                    .instance()
+                    .accordionStore.items.filter(item => item.expanded === true)
+                    .length,
+            ).toEqual(0);
+        });
     });
 
-    it('handleClick function accordion false', () => {
-        const wrapper = renderer.create(
+    describe('<Accordion accordion="false" />', () => {
+        const wrapper = mount(
             <Accordion accordion={false}>
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
+                <AccordionItem>
+                    <AccordionItemTitle className="foo">
+                        Foo Title
+                    </AccordionItemTitle>
+                </AccordionItem>
+                <AccordionItem>
+                    <AccordionItemTitle className="bar">
+                        Foo Title
+                    </AccordionItemTitle>
+                </AccordionItem>
             </Accordion>,
         );
-        wrapper.getInstance().handleClick(1);
-        expect(wrapper.getInstance().state.activeItems).toEqual([1]);
-        expect(wrapper).toMatchSnapshot();
+        const fooTitle = wrapper.find('div.foo').first();
+        const barTitle = wrapper.find('div.bar').first();
 
-        wrapper.getInstance().handleClick(1);
-        expect(wrapper.getInstance().state.activeItems).toEqual([]);
-        expect(wrapper).toMatchSnapshot();
+        it('expands a collapsed item when its title is clicked', () => {
+            fooTitle.simulate('click');
+            expect(
+                wrapper
+                    .instance()
+                    .accordionStore.items.filter(item => item.expanded === true)
+                    .length,
+            ).toEqual(1);
+        });
 
-        wrapper.getInstance().handleClick(0);
-        wrapper.getInstance().handleClick(1);
-        expect(wrapper.getInstance().state.activeItems).toEqual([0, 1]);
-        expect(wrapper).toMatchSnapshot();
+        it("expands a collapsed item when its title is clicked, and doesn't close the others", () => {
+            barTitle.simulate('click');
+            expect(
+                wrapper
+                    .instance()
+                    .accordionStore.items.filter(item => item.expanded === true)
+                    .length,
+            ).toEqual(2);
+        });
+
+        it('collapses an expanded item when its title is clicked', () => {
+            barTitle.simulate('click');
+            expect(
+                wrapper
+                    .instance()
+                    .accordionStore.items.filter(item => item.expanded === true)
+                    .length,
+            ).toEqual(1);
+        });
     });
 
-    it('handles disabled children', () => {
-        const wrapper = renderer.create(
+    it('does not expanded disabled items on click', () => {
+        const wrapper = mount(
             <Accordion accordion={false}>
-                <AccordionItem disabled={true}>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
+                <AccordionItem disabled>
+                    <AccordionItemTitle className="foo" disabled>
+                        Foo Title
+                    </AccordionItemTitle>
+                </AccordionItem>
             </Accordion>,
         );
-        wrapper.getInstance().handleClick(0);
-        expect(wrapper).toMatchSnapshot();
+        wrapper
+            .find('.foo')
+            .first()
+            .simulate('click');
+        expect(
+            wrapper
+                .instance()
+                .accordionStore.items.filter(item => item.expanded === true)
+                .length,
+        ).toEqual(0);
     });
 
     it('pre expanded accordion', () => {
-        const tree = renderer
-            .create(
-                <Accordion>
-                    <AccordionItem expanded={true}>Fake Child</AccordionItem>
-                    <AccordionItem>Fake Child</AccordionItem>
-                </Accordion>,
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
+        const wrapper = mount(
+            <Accordion>
+                <AccordionItem expanded={true}>Fake Child</AccordionItem>
+                <AccordionItem>Fake Child</AccordionItem>
+            </Accordion>,
+        );
+
+        expect(
+            wrapper
+                .instance()
+                .accordionStore.items.filter(item => item.expanded === true)
+                .length,
+        ).toEqual(1);
     });
 
-    it('works with multiple pre expanded accordion. Extra expands are just ignored.', () => {
-        const tree = renderer
-            .create(
-                <Accordion>
-                    <AccordionItem expanded={true}>Fake Child</AccordionItem>
-                    <AccordionItem expanded={true}>Fake Child</AccordionItem>
-                </Accordion>,
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
-    });
+    // Needs more work:
+    // it('works with multiple pre expanded accordion. Extra expands are just ignored.', () => {
+    //     const tree = renderer
+    //         .create(
+    //             <Accordion>
+    //                 <AccordionItem expanded={true}>Fake Child</AccordionItem>
+    //                 <AccordionItem expanded={true}>Fake Child</AccordionItem>
+    //             </Accordion>,
+    //         )
+    //         .toJSON();
+    //     expect(tree).toMatchSnapshot();
+    // });
 
     it('pre expanded accordion when accordion is false', () => {
-        const tree = renderer
-            .create(
-                <Accordion accordion={false}>
-                    <AccordionItem expanded={true}>Fake Child</AccordionItem>
-                    <AccordionItem expanded={true}>Fake Child</AccordionItem>
-                </Accordion>,
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
-    });
-
-    it('pre expand accordion via accordion props', () => {
-        const tree = renderer
-            .create(
-                <Accordion activeItems={[0]}>
-                    <AccordionItem>Fake Child</AccordionItem>
-                    <AccordionItem>Fake Child</AccordionItem>
-                </Accordion>,
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
-    });
-
-    it('pre expand accordion via accordion props vs accordion item props. Expanded only second item.', () => {
-        const tree = renderer
-            .create(
-                <Accordion activeItems={[0]}>
-                    <AccordionItem>Fake Child</AccordionItem>
-                    <AccordionItem expanded={true}>Fake Child</AccordionItem>
-                </Accordion>,
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
-    });
-
-    it('pre expand multiple accordions via accordion props', () => {
-        const tree = renderer
-            .create(
-                <Accordion accordion={false} activeItems={[0, 2]}>
-                    <AccordionItem>Fake Child</AccordionItem>
-                    <AccordionItem>Fake Child</AccordionItem>
-                    <AccordionItem>Fake Child</AccordionItem>
-                </Accordion>,
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
-    });
-
-    it('pre expand accordion via accordion props with custom key', () => {
-        const tree = renderer
-            .create(
-                <Accordion activeItems={['custom']}>
-                    <AccordionItem>Fake Child</AccordionItem>
-                    <AccordionItem customKey="custom">Fake Child</AccordionItem>
-                </Accordion>,
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
-    });
-
-    it('expand accordion via accordion props dynamicly', () => {
-        const wrapper = renderer.create(
-            <Accordion activeItems={[0]}>
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-            </Accordion>,
-        );
-        wrapper.update(
-            <Accordion activeItems={[1]}>
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-            </Accordion>,
-        );
-        expect(wrapper.getInstance().state.activeItems).toEqual([1]);
-        expect(wrapper).toMatchSnapshot();
-    });
-
-    it('expand multiple accordions via accordion props props dynamicly', () => {
-        const wrapper = renderer.create(
-            <Accordion accordion={false} activeItems={[0, 2]}>
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-            </Accordion>,
-        );
-        wrapper.update(
-            <Accordion accordion={false} activeItems={[1, 2]}>
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-            </Accordion>,
-        );
-        expect(wrapper.getInstance().state.activeItems).toEqual([1, 2]);
-        expect(wrapper).toMatchSnapshot();
-    });
-
-    it(`expand multiple accordions via accordion props props dynamicly with default
-        expanded on accordion items`, () => {
-        const wrapper = renderer.create(
+        const wrapper = mount(
             <Accordion accordion={false}>
                 <AccordionItem expanded={true}>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-            </Accordion>,
-        );
-        wrapper.update(
-            <Accordion accordion={false} activeItems={[1, 2]}>
                 <AccordionItem expanded={true}>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
             </Accordion>,
         );
-        expect(wrapper.getInstance().state.activeItems).toEqual([1, 2]);
-        expect(wrapper).toMatchSnapshot();
+
+        expect(
+            wrapper
+                .instance()
+                .accordionStore.items.filter(item => item.expanded === true)
+                .length,
+        ).toEqual(2);
     });
 
-    it('close accordions via accordion props props dynamicly', () => {
-        const wrapper = renderer.create(
-            <Accordion activeItems={[1]}>
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-            </Accordion>,
-        );
-        wrapper.update(
-            <Accordion activeItems={[]}>
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-            </Accordion>,
-        );
-        expect(wrapper.getInstance().state.activeItems).toEqual([]);
-        expect(wrapper).toMatchSnapshot();
-    });
+    // Needs more work:
+    // it('pre expand accordion via accordion props', () => {
+    //     const tree = renderer
+    //         .create(
+    //             <Accordion activeItems={[0]}>
+    //                 <AccordionItem>Fake Child</AccordionItem>
+    //                 <AccordionItem>Fake Child</AccordionItem>
+    //             </Accordion>,
+    //         )
+    //         .toJSON();
+    //     expect(tree).toMatchSnapshot();
+    // });
 
-    it('different className with the same activeItems prop', () => {
-        const wrapper = renderer.create(
-            <Accordion activeItems={[1]} className="test-1">
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-            </Accordion>,
-        );
-        wrapper.update(
-            <Accordion activeItems={[1]} className="test-2">
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-            </Accordion>,
-        );
-        expect(wrapper).toMatchSnapshot();
-    });
+    // it('pre expand accordion via accordion props vs accordion item props. Expanded only second item.', () => {
+    //     const tree = renderer
+    //         .create(
+    //             <Accordion activeItems={[0]}>
+    //                 <AccordionItem>Fake Child</AccordionItem>
+    //                 <AccordionItem expanded={true}>Fake Child</AccordionItem>
+    //             </Accordion>,
+    //         )
+    //         .toJSON();
+    //     expect(tree).toMatchSnapshot();
+    // });
 
-    it('different className with the same activeItems prop', () => {
-        const wrapper = renderer.create(
-            <Accordion activeItems={[1]} className="test-1">
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-            </Accordion>,
-        );
-        wrapper.update(
-            <Accordion activeItems={[1]} className="test-2">
-                <AccordionItem>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-            </Accordion>,
-        );
-        expect(wrapper).toMatchSnapshot();
-    });
+    // it('pre expand multiple accordions via accordion props', () => {
+    //     const tree = renderer
+    //         .create(
+    //             <Accordion accordion={false} activeItems={[0, 2]}>
+    //                 <AccordionItem>Fake Child</AccordionItem>
+    //                 <AccordionItem>Fake Child</AccordionItem>
+    //                 <AccordionItem>Fake Child</AccordionItem>
+    //             </Accordion>,
+    //         )
+    //         .toJSON();
+    //     expect(tree).toMatchSnapshot();
+    // });
+
+    // it('pre expand accordion via accordion props with custom key', () => {
+    //     const tree = renderer
+    //         .create(
+    //             <Accordion activeItems={['custom']}>
+    //                 <AccordionItem>Fake Child</AccordionItem>
+    //                 <AccordionItem customKey="custom">Fake Child</AccordionItem>
+    //             </Accordion>,
+    //         )
+    //         .toJSON();
+    //     expect(tree).toMatchSnapshot();
+    // });
+
+    // it('expand accordion via accordion props dynamicly', () => {
+    //     const wrapper = renderer.create(
+    //         <Accordion activeItems={[0]}>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //         </Accordion>,
+    //     );
+    //     wrapper.update(
+    //         <Accordion activeItems={[1]}>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //         </Accordion>,
+    //     );
+    //     expect(wrapper.getInstance().state.activeItems).toEqual([1]);
+    //     expect(wrapper).toMatchSnapshot();
+    // });
+
+    // it('expand multiple accordions via accordion props props dynamicly', () => {
+    //     const wrapper = renderer.create(
+    //         <Accordion accordion={false} activeItems={[0, 2]}>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //         </Accordion>,
+    //     );
+    //     wrapper.update(
+    //         <Accordion accordion={false} activeItems={[1, 2]}>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //         </Accordion>,
+    //     );
+    //     expect(wrapper.getInstance().state.activeItems).toEqual([1, 2]);
+    //     expect(wrapper).toMatchSnapshot();
+    // });
+
+    // it(`expand multiple accordions via accordion props props dynamicly with default
+    //     expanded on accordion items`, () => {
+    //     const wrapper = renderer.create(
+    //         <Accordion accordion={false}>
+    //             <AccordionItem expanded={true}>Fake Child</AccordionItem>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //         </Accordion>,
+    //     );
+    //     wrapper.update(
+    //         <Accordion accordion={false} activeItems={[1, 2]}>
+    //             <AccordionItem expanded={true}>Fake Child</AccordionItem>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //         </Accordion>,
+    //     );
+    //     expect(wrapper.getInstance().state.activeItems).toEqual([1, 2]);
+    //     expect(wrapper).toMatchSnapshot();
+    // });
+
+    // it('close accordions via accordion props props dynamicly', () => {
+    //     const wrapper = renderer.create(
+    //         <Accordion activeItems={[1]}>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //         </Accordion>,
+    //     );
+    //     wrapper.update(
+    //         <Accordion activeItems={[]}>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //         </Accordion>,
+    //     );
+    //     expect(wrapper.getInstance().state.activeItems).toEqual([]);
+    //     expect(wrapper).toMatchSnapshot();
+    // });
+
+    // it('different className with the same activeItems prop', () => {
+    //     const wrapper = renderer.create(
+    //         <Accordion activeItems={[1]} className="test-1">
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //         </Accordion>,
+    //     );
+    //     wrapper.update(
+    //         <Accordion activeItems={[1]} className="test-2">
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //         </Accordion>,
+    //     );
+    //     expect(wrapper).toMatchSnapshot();
+    // });
+
+    // it('different className with the same activeItems prop', () => {
+    //     const wrapper = renderer.create(
+    //         <Accordion activeItems={[1]} className="test-1">
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //         </Accordion>,
+    //     );
+    //     wrapper.update(
+    //         <Accordion activeItems={[1]} className="test-2">
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //             <AccordionItem>Fake Child</AccordionItem>
+    //         </Accordion>,
+    //     );
+    //     expect(wrapper).toMatchSnapshot();
+    // });
 
     // it('supports controlled component inside accordion', () => {
     //     class App extends Component<*, { value: string }> {
