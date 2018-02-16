@@ -18,6 +18,7 @@ class Accordion extends Component<AccordionProps, *> {
         onChange: () => {},
         className: 'accordion',
         activeItems: [],
+        children: null,
     };
 
     accordionStore = createAccordionStore({
