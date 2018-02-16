@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import { mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { Provider } from 'mobx-react';
 import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title';
@@ -145,5 +146,23 @@ describe('AccordionItem', () => {
             )
             .toJSON();
         expect(tree).toMatchSnapshot();
+    });
+
+    it('can dynamically set expanded prop', () => {
+        const Wrapper = ({ expanded }: { expanded: boolean }) => (
+            <Provider accordionStore={accordionStore}>
+                <AccordionItem expanded={expanded}>
+                    <AccordionItemTitle>
+                        <div>Fake title</div>
+                    </AccordionItemTitle>
+                </AccordionItem>
+            </Provider>
+        );
+        const wrapper = mount(<Wrapper expanded={false} />);
+        wrapper.setProps({ expanded: true });
+
+        expect(
+            accordionStore.items.filter(item => item.expanded === true).length,
+        ).toEqual(1);
     });
 });
