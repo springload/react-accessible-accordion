@@ -38,9 +38,15 @@ class AccordionItem extends Component<AccordionItemProps, *> {
     }
 
     render() {
-        const { className, hideBodyClassName, children } = this.props;
-        const currentItem = this.props.accordionStore.items.find(
-            item => item.itemkey === this.props.itemkey,
+        const {
+            className,
+            hideBodyClassName,
+            children,
+            accordionStore,
+        } = this.props;
+
+        const currentItem = accordionStore.items.find(
+            item => item.itemkey === this.customKey,
         );
 
         if (!currentItem) {
