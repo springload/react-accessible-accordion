@@ -124,11 +124,11 @@ class Accordion extends Component<AccordionProps, *> {
         const { accordion } = this.accordionStore;
 
         return (
-            <div role={accordion ? 'tablist' : null} className={className}>
-                <Provider accordionStore={this.accordionStore}>
-                    <div>{children}</div>
-                </Provider>
-            </div>
+            <Provider accordionStore={this.accordionStore}>
+                <div role={accordion ? 'tablist' : null} className={className}>
+                    {children}
+                </div>
+            </Provider>
         );
     }
 }
