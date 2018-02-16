@@ -3,8 +3,11 @@
 import React, { Component } from 'react';
 import type { Node } from 'react';
 import { inject, observer } from 'mobx-react';
+import consecutive from 'consecutive';
 
 import classNames from 'classnames';
+
+const nextUuid = consecutive();
 
 type AccordionItemProps = {
     items: Array<Object>,
@@ -20,6 +23,20 @@ class AccordionItem extends Component<AccordionItemProps, *> {
         className: 'accordion__item',
         hideBodyClassName: '',
     };
+
+    customKey = this.props.itemkey || nextUuid();
+
+    componentDidMount() {
+        this.props.accordionStore.addItem({
+            itemkey: this.customKey,
+            itemUuid: nextUuid(),
+            expanded: false,
+        });
+    }
+
+    componentWillUnmount() {
+        this.props.accordionStore.removeItem(this.customKey);
+    }
 
     renderChildren() {
         const { children, itemkey } = this.props;
