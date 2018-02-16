@@ -45,6 +45,12 @@ export const createAccordionStore = ({
                         ...item,
                         expanded,
                     };
+                } else if (this.accordion && expanded) {
+                    // If this is an accordion, we might need to collapse the other expanded item.
+                    return {
+                        ...item,
+                        expanded: false,
+                    };
                 }
                 return item;
             });

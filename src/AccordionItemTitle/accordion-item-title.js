@@ -33,24 +33,14 @@ class AccordionItemTitle extends Component<
         const foundItem = items.find(item => item.itemkey === itemkey);
         if (!foundItem) return;
 
-        if (accordion) {
-            const newValue = Boolean(!foundItem.expanded);
-            items.forEach(item => {
-                this.props.accordionStore.setExpanded(item.itemkey, false);
-                if (item.itemkey === foundItem.itemkey) {
-                    this.props.accordionStore.setExpanded(
-                        foundItem.itemkey,
-                        newValue,
-                    );
-                }
-            });
+        this.props.accordionStore.setExpanded(
+            foundItem.itemkey,
+            !foundItem.expanded,
+        );
 
+        if (accordion) {
             onChange(foundItem.itemkey);
         } else {
-            this.props.accordionStore.setExpanded(
-                foundItem.itemkey,
-                !foundItem.expanded,
-            );
             onChange(
                 this.props.accordionStore.items
                     .filter(item => item.expanded)
