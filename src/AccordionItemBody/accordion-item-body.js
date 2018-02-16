@@ -19,7 +19,7 @@ type AccordionItemBodyProps = {
     itemkey: string | number,
 };
 
-export const AccordionItemBody = (props: AccordionItemBodyProps) => {
+const AccordionItemBody = (props: AccordionItemBodyProps) => {
     const { itemkey, children, className, hideBodyClassName } = props;
     const { items, accordion } = props.accordionStore;
     const foundItem = items.find(item => item.itemkey === itemkey);
