@@ -42,6 +42,16 @@ class AccordionItem extends Component<AccordionItemProps, *> {
         this.props.accordionStore.removeItem(this.customKey);
     }
 
+    // This is here so that the user can dynamically set the 'expanded' state using the 'expanded' prop.
+    componentWillReceiveProps({
+        expanded,
+        accordionStore,
+    }: AccordionItemProps) {
+        if (expanded !== this.props.expanded) {
+            accordionStore.setExpanded(this.customKey, expanded);
+        }
+    }
+
     render() {
         const {
             className,
