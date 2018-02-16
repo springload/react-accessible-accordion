@@ -13,6 +13,7 @@ type AccordionItemTitleProps = {
         items: Array<Object>,
         accordion: boolean,
         onChange: Function,
+        setExpanded: (string | number, boolean) => void,
     },
     itemkey: string | number,
 };
@@ -30,7 +31,7 @@ export class AccordionItemTitle extends Component<
         hideBodyClassName: '',
     };
 
-    handleClick() {
+    handleClick = () => {
         const { itemkey } = this.props;
         const { accordion, onChange } = this.props.accordionStore;
         let { items } = this.props.accordionStore;
@@ -38,35 +39,36 @@ export class AccordionItemTitle extends Component<
         if (!foundItem) return;
 
         if (accordion) {
-            const newValue = !foundItem.expanded;
-            items = items.map(item => {
-                const resetItem = item;
-                resetItem.expanded = false;
-                return resetItem;
+            const newValue = Boolean(!foundItem.expanded);
+            items = items.forEach(item => {
+                if (item.itemkey === foundItem.itemkey) {
+                    this.props.accordionStore.setExpanded(
+                        foundItem.itemkey,
+                        newValue,
+                    );
+                }
+                this.props.accordionStore.setExpanded(item.itemkey, false);
             });
-            foundItem.expanded = newValue;
-        } else {
-            foundItem.expanded = !foundItem.expanded;
-        }
 
-        if (accordion) {
             onChange(foundItem.itemkey);
         } else {
-            const filteredItems = items.filter(item => item.expanded === true);
-            const itemkeys = filteredItems.map(item => item.itemkey);
-            onChange(itemkeys);
+            this.props.accordionStore.setExpanded(
+                foundItem.itemkey,
+                !foundItem.expanded,
+            );
+            onChange(
+                this.props.accordionStore.items
+                    .filter(item => item.expanded)
+                    .map(item => item.itemkey),
+            );
         }
-    }
+    };
 
-    handleClick = this.handleClick.bind(this);
-
-    handleKeyPress(evt: SyntheticInputEvent<HTMLButtonElement>) {
+    handleKeyPress = (evt: SyntheticInputEvent<HTMLButtonElement>) => {
         if (evt.charCode === 13 || evt.charCode === 32) {
             this.handleClick();
         }
-    }
-
-    handleKeyPress = this.handleKeyPress.bind(this);
+    };
 
     render() {
         const { items, accordion } = this.props.accordionStore;

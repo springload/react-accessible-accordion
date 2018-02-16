@@ -30,6 +30,20 @@ class Accordion extends Component<AccordionProps, *> {
         removeItem: action.bound(function removeItem(key) {
             this.items = this.items.filter(item => item.itemkey !== key);
         }),
+        setExpanded: action.bound(function setExpanded(
+            key: string | number,
+            expanded: boolean,
+        ) {
+            this.items = this.items.map(item => {
+                if (item.itemkey === key) {
+                    return {
+                        ...item,
+                        expanded,
+                    };
+                }
+                return item;
+            });
+        }),
     });
 
     // componentDidUpdate() {
