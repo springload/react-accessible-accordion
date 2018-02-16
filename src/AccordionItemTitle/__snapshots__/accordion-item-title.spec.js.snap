@@ -18,57 +18,6 @@ exports[`AccordionItemTitle doesn't respect hideBodyClassName when collapsed 1`]
 </div>
 `;
 
-exports[`AccordionItemTitle renders correctly when pressing another key 1`] = `
-<div
-  aria-controls="accordion__body-item-one-itemUUid"
-  aria-expanded={false}
-  className="accordion__title"
-  id="accordion__title-item-one-itemUUid"
-  onClick={[Function]}
-  onKeyPress={[Function]}
-  role="button"
-  tabIndex="0"
->
-  <div>
-    Fake Title
-  </div>
-</div>
-`;
-
-exports[`AccordionItemTitle renders correctly when pressing enter 1`] = `
-<div
-  aria-controls="accordion__body-item-one-itemUUid"
-  aria-expanded={false}
-  className="accordion__title"
-  id="accordion__title-item-one-itemUUid"
-  onClick={[Function]}
-  onKeyPress={[Function]}
-  role="button"
-  tabIndex="0"
->
-  <div>
-    Fake Title
-  </div>
-</div>
-`;
-
-exports[`AccordionItemTitle renders correctly when pressing space 1`] = `
-<div
-  aria-controls="accordion__body-item-one-itemUUid"
-  aria-expanded={false}
-  className="accordion__title"
-  id="accordion__title-item-one-itemUUid"
-  onClick={[Function]}
-  onKeyPress={[Function]}
-  role="button"
-  tabIndex="0"
->
-  <div>
-    Fake Title
-  </div>
-</div>
-`;
-
 exports[`AccordionItemTitle renders correctly with different className 1`] = `
 <div
   aria-controls="accordion__body-item-one-itemUUid"

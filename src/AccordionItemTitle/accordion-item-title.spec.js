@@ -2,16 +2,20 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { mount } from 'enzyme';
 import AccordionItemTitle from './accordion-item-title';
 import { createAccordionStore } from '../accordionStore/accordionStore';
 
 describe('AccordionItemTitle', () => {
     let accordionStore;
+    let onChange;
 
     beforeEach(() => {
+        onChange = jest.fn();
+
         accordionStore = createAccordionStore({
             accordion: false,
-            onChange: jest.fn(),
+            onChange,
         });
 
         accordionStore.addItem({
@@ -88,56 +92,56 @@ describe('AccordionItemTitle', () => {
     });
 
     it('renders correctly when pressing enter', async () => {
-        const tree = renderer.create(
+        const wrapper = mount(
             <AccordionItemTitle
                 accordionStore={accordionStore}
                 itemkey="item-one-itemkey"
             >
-                <div>Fake Title</div>
+                Fake Title
             </AccordionItemTitle>,
         );
 
-        tree.getInstance().handleKeyPress({ charCode: 13 });
+        wrapper.find('div').simulate('keypress', { charCode: 13 });
 
-        await new Promise(resolve => setTimeout(resolve, 200));
-
-        expect(accordionStore.onChange).toHaveBeenCalledTimes(1);
-        expect(tree).toMatchSnapshot();
+        expect(onChange.mock.calls.length).toEqual(1);
+        expect(
+            accordionStore.items.filter(item => item.expanded === true).length,
+        ).toEqual(2);
     });
 
     it('renders correctly when pressing space', async () => {
-        const tree = renderer.create(
+        const wrapper = mount(
             <AccordionItemTitle
                 accordionStore={accordionStore}
                 itemkey="item-one-itemkey"
             >
-                <div>Fake Title</div>
+                Fake Title
             </AccordionItemTitle>,
         );
 
-        tree.getInstance().handleKeyPress({ charCode: 32 });
+        wrapper.find('div').simulate('keypress', { charCode: 32 });
 
-        await new Promise(resolve => setTimeout(resolve, 200));
-
-        expect(accordionStore.onChange).toHaveBeenCalledTimes(1);
-        expect(tree).toMatchSnapshot();
+        expect(onChange.mock.calls.length).toEqual(1);
+        expect(
+            accordionStore.items.filter(item => item.expanded === true).length,
+        ).toEqual(2);
     });
 
     it('renders correctly when pressing another key', async () => {
-        const tree = renderer.create(
+        const wrapper = mount(
             <AccordionItemTitle
                 accordionStore={accordionStore}
                 itemkey="item-one-itemkey"
             >
-                <div>Fake Title</div>
+                Fake Title
             </AccordionItemTitle>,
         );
 
-        tree.getInstance().handleKeyPress({ charCode: 35 });
+        wrapper.find('div').simulate('keypress', { charCode: 35 });
 
-        await new Promise(resolve => setTimeout(resolve, 200));
-
-        expect(accordionStore.onChange).toHaveBeenCalledTimes(0);
-        expect(tree).toMatchSnapshot();
+        expect(onChange.mock.calls.length).toEqual(0);
+        expect(
+            accordionStore.items.filter(item => item.expanded === true).length,
+        ).toEqual(1);
     });
 });
