@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import type { Node } from 'react';
+import { intercept } from 'mobx';
 import { inject, observer, Provider } from 'mobx-react';
 import consecutive from 'consecutive';
 import classNames from 'classnames';
@@ -41,6 +42,13 @@ class AccordionItem extends Component<AccordionItemProps, *> {
                     ? this.props.expanded
                     : accordionStore.activeItems.indexOf(this.customKey) !== -1,
             disabled,
+        });
+
+        intercept(accordionStore, 'activeItems', ({ newValue }) => {
+            accordionStore.setExpanded(
+                this.customKey,
+                newValue && newValue.indexOf(this.customKey) !== -1,
+            );
         });
     }
 
