@@ -15,12 +15,14 @@ type AccordionItemProps = {
     hideBodyClassName: string,
     itemkey: string | number,
     accordionStore: Store,
+    disabled: boolean,
 };
 
 class AccordionItem extends Component<AccordionItemProps, *> {
     static defaultProps = {
         className: 'accordion__item',
         hideBodyClassName: '',
+        disabled: false,
     };
 
     customKey = this.props.itemkey || nextUuid();
@@ -30,6 +32,7 @@ class AccordionItem extends Component<AccordionItemProps, *> {
             itemkey: this.customKey,
             itemUuid: nextUuid(),
             expanded: false,
+            disabled: this.props.disabled,
         });
     }
 

@@ -6,6 +6,7 @@ export type Item = {
     itemkey: string | number,
     itemUuid: number,
     expanded: boolean,
+    disabled: boolean,
 };
 export type Store = {
     items: Array<Item>,

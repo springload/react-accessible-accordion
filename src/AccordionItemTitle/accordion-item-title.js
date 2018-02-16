@@ -75,7 +75,7 @@ export class AccordionItemTitle extends Component<
         const foundItem = items.find(item => item.itemkey === itemkey);
         if (!foundItem) return null;
 
-        const { itemUuid, expanded } = foundItem;
+        const { itemUuid, expanded, disabled } = foundItem;
 
         const id = `accordion__title-${itemUuid}`;
         const ariaControls = `accordion__body-${itemUuid}`;
@@ -91,10 +91,11 @@ export class AccordionItemTitle extends Component<
                     aria-selected={expanded}
                     aria-controls={ariaControls}
                     className={titleClassName}
-                    onClick={this.handleClick}
+                    onClick={disabled ? undefined : this.handleClick}
                     role={role}
                     tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
                     onKeyPress={this.handleKeyPress}
+                    disabled={disabled}
                 >
                     {children}
                 </div>
@@ -106,10 +107,11 @@ export class AccordionItemTitle extends Component<
                 aria-expanded={expanded}
                 aria-controls={ariaControls}
                 className={titleClassName}
-                onClick={this.handleClick}
+                onClick={disabled ? undefined : this.handleClick}
                 role={role}
                 tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
                 onKeyPress={this.handleKeyPress}
+                disabled={disabled}
             >
                 {children}
             </div>
