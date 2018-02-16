@@ -50,8 +50,5 @@ export const AccordionItemBody = (props: AccordionItemBodyProps) => {
 };
 
 AccordionItemBody.defaultProps = defaultProps;
-// We need this to be able to assign correct params to element.
-// Minifiers modify component name
-AccordionItemBody.accordionElementName = 'AccordionItemBody';
 
 export default inject('accordionStore', 'itemkey')(observer(AccordionItemBody));
