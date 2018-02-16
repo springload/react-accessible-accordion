@@ -4,17 +4,13 @@ import React, { Component } from 'react';
 import type { Node } from 'react';
 import classNames from 'classnames';
 import { inject, observer } from 'mobx-react';
+import { type Store } from '../accordionStore/accordionStore';
 
 type AccordionItemTitleProps = {
     children: Node,
     className: string,
     hideBodyClassName: string,
-    accordionStore: {
-        items: Array<Object>,
-        accordion: boolean,
-        onChange: Function,
-        setExpanded: (string | number, boolean) => void,
-    },
+    accordionStore: Store,
     itemkey: string | number,
 };
 
