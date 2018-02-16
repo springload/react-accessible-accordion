@@ -1,8 +1,8 @@
 // @flow
 
 import React, { Component, type Node } from 'react';
-import { observable, action } from 'mobx';
 import { Provider } from 'mobx-react';
+import { createAccordionStore } from '../accordionStore/accordionStore';
 
 type AccordionProps = {
     accordion: boolean,
@@ -20,30 +20,9 @@ class Accordion extends Component<AccordionProps, *> {
         activeItems: [],
     };
 
-    accordionStore = observable({
-        items: [],
+    accordionStore = createAccordionStore({
         accordion: this.props.accordion,
         onChange: this.props.onChange,
-        addItem: action.bound(function addItem(item) {
-            this.items = [...this.items, item];
-        }),
-        removeItem: action.bound(function removeItem(key) {
-            this.items = this.items.filter(item => item.itemkey !== key);
-        }),
-        setExpanded: action.bound(function setExpanded(
-            key: string | number,
-            expanded: boolean,
-        ) {
-            this.items = this.items.map(item => {
-                if (item.itemkey === key) {
-                    return {
-                        ...item,
-                        expanded,
-                    };
-                }
-                return item;
-            });
-        }),
     });
 
     // componentDidUpdate() {
