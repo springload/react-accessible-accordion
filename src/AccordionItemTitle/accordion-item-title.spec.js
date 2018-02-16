@@ -2,36 +2,37 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { AccordionItemTitle } from './accordion-item-title';
+import AccordionItemTitle from './accordion-item-title';
+import { createAccordionStore } from '../accordionStore/accordionStore';
 
 describe('AccordionItemTitle', () => {
-    let mockAccordionStore;
+    let accordionStore;
 
     beforeEach(() => {
-        mockAccordionStore = {
-            items: [
-                {
-                    itemkey: 'item-one-itemkey',
-                    expanded: false,
-                    itemUuid: 'item-one-itemUUid',
-                },
-                {
-                    itemkey: 'item-two-itemkey',
-                    expanded: true,
-                    itemUuid: 'item-two-itemUUid',
-                },
-            ],
+        accordionStore = createAccordionStore({
             accordion: false,
             onChange: jest.fn(),
-            setExpanded: jest.fn(),
-        };
+        });
+
+        accordionStore.addItem({
+            itemkey: 'item-one-itemkey',
+            expanded: false,
+            disabled: false,
+            itemUuid: 'item-one-itemUUid',
+        });
+        accordionStore.addItem({
+            itemkey: 'item-two-itemkey',
+            expanded: true,
+            disabled: false,
+            itemUuid: 'item-two-itemUUid',
+        });
     });
 
     it('renders correctly with min params', () => {
         const tree = renderer
             .create(
                 <AccordionItemTitle
-                    accordionStore={mockAccordionStore}
+                    accordionStore={accordionStore}
                     itemkey="item-one-itemkey"
                 >
                     <div>Fake Title</div>
@@ -46,7 +47,7 @@ describe('AccordionItemTitle', () => {
             .create(
                 <AccordionItemTitle
                     className="testCSSClass"
-                    accordionStore={mockAccordionStore}
+                    accordionStore={accordionStore}
                     itemkey="item-one-itemkey"
                 >
                     <div>Fake Title</div>
@@ -61,7 +62,7 @@ describe('AccordionItemTitle', () => {
             .create(
                 <AccordionItemTitle
                     hideBodyClassName="testCSSClass--hidden"
-                    accordionStore={mockAccordionStore}
+                    accordionStore={accordionStore}
                     itemkey="item-one-itemkey"
                 >
                     <div>Fake title</div>
@@ -76,7 +77,7 @@ describe('AccordionItemTitle', () => {
             .create(
                 <AccordionItemTitle
                     hideBodyClassName="testCSSClass--hidden"
-                    accordionStore={mockAccordionStore}
+                    accordionStore={accordionStore}
                     itemkey="item-two-itemkey"
                 >
                     <div>Fake title</div>
@@ -89,7 +90,7 @@ describe('AccordionItemTitle', () => {
     it('renders correctly when pressing enter', async () => {
         const tree = renderer.create(
             <AccordionItemTitle
-                accordionStore={mockAccordionStore}
+                accordionStore={accordionStore}
                 itemkey="item-one-itemkey"
             >
                 <div>Fake Title</div>
@@ -100,14 +101,14 @@ describe('AccordionItemTitle', () => {
 
         await new Promise(resolve => setTimeout(resolve, 200));
 
-        expect(mockAccordionStore.onChange).toHaveBeenCalledTimes(1);
+        expect(accordionStore.onChange).toHaveBeenCalledTimes(1);
         expect(tree).toMatchSnapshot();
     });
 
     it('renders correctly when pressing space', async () => {
         const tree = renderer.create(
             <AccordionItemTitle
-                accordionStore={mockAccordionStore}
+                accordionStore={accordionStore}
                 itemkey="item-one-itemkey"
             >
                 <div>Fake Title</div>
@@ -118,14 +119,14 @@ describe('AccordionItemTitle', () => {
 
         await new Promise(resolve => setTimeout(resolve, 200));
 
-        expect(mockAccordionStore.onChange).toHaveBeenCalledTimes(1);
+        expect(accordionStore.onChange).toHaveBeenCalledTimes(1);
         expect(tree).toMatchSnapshot();
     });
 
     it('renders correctly when pressing another key', async () => {
         const tree = renderer.create(
             <AccordionItemTitle
-                accordionStore={mockAccordionStore}
+                accordionStore={accordionStore}
                 itemkey="item-one-itemkey"
             >
                 <div>Fake Title</div>
@@ -136,7 +137,7 @@ describe('AccordionItemTitle', () => {
 
         await new Promise(resolve => setTimeout(resolve, 200));
 
-        expect(mockAccordionStore.onChange).toHaveBeenCalledTimes(0);
+        expect(accordionStore.onChange).toHaveBeenCalledTimes(0);
         expect(tree).toMatchSnapshot();
     });
 });

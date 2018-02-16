@@ -16,7 +16,7 @@ type AccordionItemTitleProps = {
 
 type AccordionItemTitleState = {};
 
-export class AccordionItemTitle extends Component<
+class AccordionItemTitle extends Component<
     AccordionItemTitleProps,
     AccordionItemTitleState,
 > {
