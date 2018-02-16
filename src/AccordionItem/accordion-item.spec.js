@@ -59,6 +59,24 @@ describe('AccordionItem', () => {
         expect(tree).toMatchSnapshot();
     });
 
+    it('renders with multiple AccordionItems', () => {
+        const wrapper = mount(
+            <Provider accordionStore={accordionStore}>
+                <div>
+                    <AccordionItem>
+                        <div>Fake title</div>
+                        <div>Fake body</div>
+                    </AccordionItem>
+                    <AccordionItem>
+                        <div>Fake title</div>
+                        <div>Fake body</div>
+                    </AccordionItem>
+                </div>
+            </Provider>,
+        );
+        expect(wrapper.find(AccordionItem).length).toEqual(2);
+    });
+
     it('still renders with no AccordionItemTitle or AccordionItemBody', () => {
         const tree = renderer
             .create(
