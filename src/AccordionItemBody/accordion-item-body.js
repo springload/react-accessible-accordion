@@ -4,6 +4,7 @@ import React from 'react';
 import type { Node } from 'react';
 import classNames from 'classnames';
 import { inject, observer } from 'mobx-react';
+import { type Store } from '../accordionStore/accordionStore';
 
 const defaultProps = {
     className: 'accordion__body',
@@ -14,11 +15,7 @@ type AccordionItemBodyProps = {
     children: Node,
     className: string,
     hideBodyClassName: string,
-    accordionStore: {
-        items: Array<Object>,
-        accordion: boolean,
-        onChange: Function,
-    },
+    accordionStore: Store,
     itemkey: string | number,
 };
 
