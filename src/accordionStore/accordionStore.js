@@ -4,7 +4,7 @@ import { observable, action } from 'mobx';
 
 export type Item = {
     itemkey: string | number,
-    itemUuid: number,
+    itemUuid: string | number,
     expanded: boolean,
     disabled: boolean,
 };
