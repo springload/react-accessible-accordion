@@ -10,7 +10,6 @@ import type { Store } from '../accordionStore/accordionStore';
 const nextUuid = consecutive();
 
 type AccordionItemProps = {
-    items: Array<Object>,
     children: Node,
     className: string,
     hideBodyClassName: string,
