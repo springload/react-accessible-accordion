@@ -23,6 +23,7 @@ describe('accordionStore', () => {
                 itemkey: 'foo',
                 itemUuid: 1,
                 expanded: true,
+                disabled: false,
             });
             expect(store.items.length).toEqual(1);
         });
@@ -38,6 +39,7 @@ describe('accordionStore', () => {
                 itemkey: 'foo',
                 itemUuid: 1,
                 expanded: true,
+                disabled: false,
             });
 
             expect(store.items.length).toEqual(1);
@@ -45,6 +47,7 @@ describe('accordionStore', () => {
                 itemkey: 'bar',
                 itemUuid: 2,
                 expanded: true,
+                disabled: false,
             });
 
             expect(store.items.length).toEqual(2);
@@ -62,12 +65,14 @@ describe('accordionStore', () => {
                 itemkey: 'foo',
                 itemUuid: 1,
                 expanded: true,
+                disabled: false,
             });
 
             store.addItem({
                 itemkey: 'bar',
                 itemUuid: 2,
                 expanded: true,
+                disabled: false,
             });
 
             store.setExpanded('foo', false);
