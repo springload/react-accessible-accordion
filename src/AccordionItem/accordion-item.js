@@ -2,10 +2,10 @@
 
 import React, { Component } from 'react';
 import type { Node } from 'react';
-import { inject, observer } from 'mobx-react';
+import { inject, observer, Provider } from 'mobx-react';
 import consecutive from 'consecutive';
-
 import classNames from 'classnames';
+import type { Store } from '../accordionStore/accordionStore';
 
 const nextUuid = consecutive();
 
@@ -15,7 +15,7 @@ type AccordionItemProps = {
     className: string,
     hideBodyClassName: string,
     itemkey: string | number,
-    accordionStore: Object,
+    accordionStore: Store,
 };
 
 class AccordionItem extends Component<AccordionItemProps, *> {
@@ -26,7 +26,7 @@ class AccordionItem extends Component<AccordionItemProps, *> {
 
     customKey = this.props.itemkey || nextUuid();
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.accordionStore.addItem({
             itemkey: this.customKey,
             itemUuid: nextUuid(),
@@ -38,30 +38,28 @@ class AccordionItem extends Component<AccordionItemProps, *> {
         this.props.accordionStore.removeItem(this.customKey);
     }
 
-    renderChildren() {
-        const { children, itemkey } = this.props;
-
-        return React.Children.map(children, item =>
-            React.cloneElement(item, {
-                itemkey,
-            }),
-        );
-    }
-
     render() {
-        const { className, hideBodyClassName } = this.props;
-        const itemProperties = this.props.accordionStore.items.find(
+        const { className, hideBodyClassName, children } = this.props;
+        const currentItem = this.props.accordionStore.items.find(
             item => item.itemkey === this.props.itemkey,
         );
 
-        if (!itemProperties) return null;
-        const { expanded } = itemProperties;
+        if (!currentItem) {
+            return null;
+        }
+        const { expanded } = currentItem;
 
-        const itemClassName = classNames(className, {
-            [hideBodyClassName]: !expanded && hideBodyClassName,
-        });
-
-        return <div className={itemClassName}>{this.renderChildren()}</div>;
+        return (
+            <Provider itemkey={this.customKey}>
+                <div
+                    className={classNames(className, {
+                        [hideBodyClassName]: !expanded && hideBodyClassName,
+                    })}
+                >
+                    {children}
+                </div>
+            </Provider>
+        );
     }
 }
 

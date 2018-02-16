@@ -118,4 +118,6 @@ export class AccordionItemTitle extends Component<
     }
 }
 
-export default inject('accordionStore')(observer(AccordionItemTitle));
+export default inject('accordionStore', 'itemkey')(
+    observer(AccordionItemTitle),
+);

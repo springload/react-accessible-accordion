@@ -57,4 +57,4 @@ AccordionItemBody.defaultProps = defaultProps;
 // Minifiers modify component name
 AccordionItemBody.accordionElementName = 'AccordionItemBody';
 
-export default inject('accordionStore')(observer(AccordionItemBody));
+export default inject('accordionStore', 'itemkey')(observer(AccordionItemBody));
