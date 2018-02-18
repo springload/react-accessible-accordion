@@ -126,5 +126,29 @@ describe('accordionStore', () => {
             store.setExpanded('bar', true);
             expect(store.items.filter(item => item.expanded).length).toEqual(2);
         });
+
+        it('closes expanded items when expanded item is added and accordion=true', () => {
+            const store = createAccordionStore({
+                accordion: true,
+                onChange: jest.fn(),
+            });
+
+            store.addItem({
+                itemkey: 'foo',
+                itemUuid: 1,
+                expanded: true,
+                disabled: false,
+            });
+
+            store.addItem({
+                itemkey: 'bar',
+                itemUuid: 2,
+                expanded: true,
+                disabled: false,
+            });
+
+            store.setExpanded('bar', true);
+            expect(store.items.filter(item => item.expanded).length).toEqual(1);
+        });
     });
 });

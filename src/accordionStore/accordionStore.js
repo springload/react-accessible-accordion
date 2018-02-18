@@ -30,8 +30,16 @@ export const createAccordionStore = ({
         items: [],
         accordion,
         onChange,
-        addItem: action.bound(function addItem(item) {
-            this.items = [...this.items, item];
+        addItem: action.bound(function addItem(newItem) {
+            if (this.accordion && newItem.expanded) {
+                // If this is a true accordion and the new item is expanded, then the others must be closed.
+                this.items = [
+                    ...this.items.map(item => ({ ...item, expanded: false })),
+                    newItem,
+                ];
+            } else {
+                this.items = [...this.items, newItem];
+            }
         }),
         removeItem: action.bound(function removeItem(key) {
             this.items = this.items.filter(item => item.itemkey !== key);
