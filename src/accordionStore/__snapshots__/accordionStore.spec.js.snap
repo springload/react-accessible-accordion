@@ -3,6 +3,7 @@
 exports[`accordionStore createAccordionStore initializes a new store 1`] = `
 Object {
   "accordion": true,
+  "activeItems": Array [],
   "items": Array [],
   "onChange": [Function],
 }
