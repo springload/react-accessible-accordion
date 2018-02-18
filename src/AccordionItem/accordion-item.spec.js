@@ -6,15 +6,14 @@ import renderer from 'react-test-renderer';
 import { Provider } from 'mobx-react';
 import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title';
 import AccordionItemBody from '../AccordionItemBody/accordion-item-body';
-import AccordionItem from './accordion-item';
+import AccordionItem, { resetNextUuid } from './accordion-item';
 import { createAccordionStore } from '../accordionStore/accordionStore';
-
-jest.mock('consecutive', () => () => () => 'mock-uuid-hash');
 
 describe('AccordionItem', () => {
     let accordionStore;
 
     beforeEach(() => {
+        resetNextUuid();
         accordionStore = createAccordionStore({
             accordion: false,
             onChange: jest.fn(),
@@ -219,5 +218,30 @@ describe('AccordionItem', () => {
         );
 
         expect(fooItem && fooItem.expanded).toEqual(true);
+    });
+
+    it('can manually reset the uuid', () => {
+        const wrapperOne = mount(
+            <Provider accordionStore={accordionStore}>
+                <AccordionItem />
+            </Provider>,
+        );
+        resetNextUuid();
+        const wrapperTwo = mount(
+            <Provider accordionStore={accordionStore}>
+                <AccordionItem />
+            </Provider>,
+        );
+        expect(
+            wrapperOne
+                .find(Provider)
+                .last()
+                .props().itemkey,
+        ).toEqual(
+            wrapperTwo
+                .find(Provider)
+                .last()
+                .props().itemkey,
+        );
     });
 });

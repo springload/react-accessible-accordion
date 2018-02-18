@@ -8,7 +8,10 @@ import consecutive from 'consecutive';
 import classNames from 'classnames';
 import type { Store } from '../accordionStore/accordionStore';
 
-const nextUuid = consecutive();
+let nextUuid = consecutive();
+export function resetNextUuid() {
+    nextUuid = consecutive();
+}
 
 type AccordionItemProps = {
     children: Node,
