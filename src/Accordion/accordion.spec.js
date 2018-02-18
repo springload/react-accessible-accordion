@@ -246,17 +246,27 @@ describe('Accordion', () => {
     //     expect(tree).toMatchSnapshot();
     // });
 
-    // it('pre expand accordion via accordion props with custom key', () => {
-    //     const tree = renderer
-    //         .create(
-    //             <Accordion activeItems={['custom']}>
-    //                 <AccordionItem>Fake Child</AccordionItem>
-    //                 <AccordionItem customKey="custom">Fake Child</AccordionItem>
-    //             </Accordion>,
-    //         )
-    //         .toJSON();
-    //     expect(tree).toMatchSnapshot();
-    // });
+    it('pre expand accordion via accordion props with custom key', () => {
+        const className = 'className';
+        const hideBodyClassName = 'hideBodyClassName';
+        const wrapper = mount(
+            <Accordion activeItems={['custom-one']}>
+                <AccordionItem
+                    className={className}
+                    itemkey="custom-one"
+                    hideBodyClassName={hideBodyClassName}
+                />
+                <AccordionItem
+                    className={className}
+                    itemkey="custom-two"
+                    hideBodyClassName={hideBodyClassName}
+                />
+            </Accordion>,
+        );
+        const items = wrapper.findWhere(item => item.hasClass(className));
+        expect(items.first().hasClass(hideBodyClassName)).toEqual(false);
+        expect(items.last().hasClass(hideBodyClassName)).toEqual(true);
+    });
 
     // it('expand accordion via accordion props dynamicly', () => {
     //     const wrapper = renderer.create(
