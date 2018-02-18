@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import renderer from 'react-test-renderer';
+// import renderer from 'react-test-renderer';
 
 import Accordion from './accordion';
 import AccordionItem from '../AccordionItem/accordion-item';
@@ -163,17 +163,34 @@ describe('Accordion', () => {
     });
 
     // Needs more work:
-    // it('works with multiple pre expanded accordion. Extra expands are just ignored.', () => {
-    //     const tree = renderer
-    //         .create(
-    //             <Accordion>
-    //                 <AccordionItem expanded={true}>Fake Child</AccordionItem>
-    //                 <AccordionItem expanded={true}>Fake Child</AccordionItem>
-    //             </Accordion>,
-    //         )
-    //         .toJSON();
-    //     expect(tree).toMatchSnapshot();
-    // });
+    it('works with multiple pre expanded accordion. Extra expands are just ignored.', () => {
+        const hideBodyClassName = 'HIDE';
+        const wrapper = mount(
+            <Accordion accordion={true}>
+                <AccordionItem
+                    expanded={true}
+                    hideBodyClassName={hideBodyClassName}
+                >
+                    Fake Child
+                </AccordionItem>
+                <AccordionItem
+                    expanded={true}
+                    hideBodyClassName={hideBodyClassName}
+                >
+                    Fake Child
+                </AccordionItem>
+            </Accordion>,
+        );
+
+        expect(
+            wrapper
+                .instance()
+                .accordionStore.items.filter(item => item.expanded).length,
+        ).toEqual(1);
+        expect(
+            wrapper.findWhere(item => item.hasClass(hideBodyClassName)).length,
+        ).toEqual(1);
+    });
 
     it('pre expanded accordion when accordion is false', () => {
         const wrapper = mount(
