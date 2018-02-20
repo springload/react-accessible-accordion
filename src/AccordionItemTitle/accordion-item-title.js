@@ -11,7 +11,7 @@ type AccordionItemTitleProps = {
     className: string,
     hideBodyClassName: string,
     accordionStore: Store,
-    itemkey: string | number,
+    uuid: string | number,
 };
 
 type AccordionItemTitleState = {};
@@ -28,23 +28,23 @@ class AccordionItemTitle extends Component<
     };
 
     handleClick = () => {
-        const { itemkey, accordionStore } = this.props;
+        const { uuid, accordionStore } = this.props;
         const { accordion, onChange, items } = accordionStore;
-        const foundItem = items.find(item => item.itemkey === itemkey);
+        const foundItem = items.find(item => item.uuid === uuid);
         if (!foundItem) return;
 
         this.props.accordionStore.setExpanded(
-            foundItem.itemkey,
+            foundItem.uuid,
             !foundItem.expanded,
         );
 
         if (accordion) {
-            onChange(foundItem.itemkey);
+            onChange(foundItem.uuid);
         } else {
             onChange(
                 this.props.accordionStore.items
                     .filter(item => item.expanded)
-                    .map(item => item.itemkey),
+                    .map(item => item.uuid),
             );
         }
     };
@@ -57,14 +57,14 @@ class AccordionItemTitle extends Component<
 
     render() {
         const { items, accordion } = this.props.accordionStore;
-        const { itemkey, children, className, hideBodyClassName } = this.props;
-        const foundItem = items.find(item => item.itemkey === itemkey);
+        const { uuid, children, className, hideBodyClassName } = this.props;
+        const foundItem = items.find(item => item.uuid === uuid);
         if (!foundItem) return null;
 
-        const { itemUuid, expanded, disabled } = foundItem;
+        const { expanded, disabled } = foundItem;
 
-        const id = `accordion__title-${itemUuid}`;
-        const ariaControls = `accordion__body-${itemUuid}`;
+        const id = `accordion__title-${uuid}`;
+        const ariaControls = `accordion__body-${uuid}`;
         const role = accordion ? 'tab' : 'button';
         const titleClassName = classNames(className, {
             [hideBodyClassName]: hideBodyClassName && !expanded,
@@ -105,6 +105,4 @@ class AccordionItemTitle extends Component<
     }
 }
 
-export default inject('accordionStore', 'itemkey')(
-    observer(AccordionItemTitle),
-);
+export default inject('accordionStore', 'uuid')(observer(AccordionItemTitle));

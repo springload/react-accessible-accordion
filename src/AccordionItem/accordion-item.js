@@ -16,7 +16,6 @@ type AccordionItemProps = {
     children: Node,
     className: string,
     hideBodyClassName: string,
-    itemkey: string | number,
     accordionStore: Store,
     disabled: boolean,
     expanded: ?boolean,
@@ -30,28 +29,20 @@ class AccordionItem extends Component<AccordionItemProps, *> {
         expanded: null,
     };
 
-    customKey = this.props.itemkey || nextUuid();
+    uuid = nextUuid();
 
     componentWillMount() {
         const { accordionStore, disabled } = this.props;
 
         accordionStore.addItem({
-            itemkey: this.customKey,
-            itemUuid: nextUuid(),
+            uuid: this.uuid,
             expanded: this.props.expanded || false,
             disabled,
-        });
-
-        intercept(accordionStore, 'activeItems', ({ newValue }) => {
-            accordionStore.setExpanded(
-                this.customKey,
-                newValue && newValue.indexOf(this.customKey) !== -1,
-            );
         });
     }
 
     componentWillUnmount() {
-        this.props.accordionStore.removeItem(this.customKey);
+        this.props.accordionStore.removeItem(this.uuid);
     }
 
     // This is here so that the user can dynamically set the 'expanded' state using the 'expanded' prop.
@@ -64,7 +55,7 @@ class AccordionItem extends Component<AccordionItemProps, *> {
             expanded !== undefined &&
             expanded !== this.props.expanded
         ) {
-            accordionStore.setExpanded(this.customKey, expanded);
+            accordionStore.setExpanded(this.uuid, expanded);
         }
     }
 
@@ -77,7 +68,7 @@ class AccordionItem extends Component<AccordionItemProps, *> {
         } = this.props;
 
         const currentItem = accordionStore.items.find(
-            item => item.itemkey === this.customKey,
+            item => item.uuid === this.uuid,
         );
 
         if (!currentItem) {
@@ -86,7 +77,7 @@ class AccordionItem extends Component<AccordionItemProps, *> {
         const { expanded } = currentItem;
 
         return (
-            <Provider itemkey={this.customKey}>
+            <Provider uuid={this.uuid}>
                 <div
                     className={classNames(className, {
                         [hideBodyClassName]: !expanded && hideBodyClassName,

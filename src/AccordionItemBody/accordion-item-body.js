@@ -16,17 +16,17 @@ type AccordionItemBodyProps = {
     className: string,
     hideBodyClassName: string,
     accordionStore: Store,
-    itemkey: string | number,
+    uuid: string | number,
 };
 
 const AccordionItemBody = (props: AccordionItemBodyProps) => {
-    const { itemkey, children, className, hideBodyClassName } = props;
+    const { uuid, children, className, hideBodyClassName } = props;
     const { items, accordion } = props.accordionStore;
-    const foundItem = items.find(item => item.itemkey === itemkey);
+    const foundItem = items.find(item => item.uuid === uuid);
     if (!foundItem) return null;
 
-    const { itemUuid, expanded } = foundItem;
-    const id = `accordion__body-${itemUuid}`;
+    const { expanded } = foundItem;
+    const id = `accordion__body-${uuid}`;
     const role = accordion ? 'tabpanel' : null;
 
     const bodyClass = classNames(className, {
@@ -51,4 +51,4 @@ const AccordionItemBody = (props: AccordionItemBodyProps) => {
 
 AccordionItemBody.defaultProps = defaultProps;
 
-export default inject('accordionStore', 'itemkey')(observer(AccordionItemBody));
+export default inject('accordionStore', 'uuid')(observer(AccordionItemBody));

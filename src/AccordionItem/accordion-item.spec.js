@@ -199,12 +199,12 @@ describe('AccordionItem', () => {
             wrapperOne
                 .find(Provider)
                 .last()
-                .props().itemkey,
+                .props().uuid,
         ).toEqual(
             wrapperTwo
                 .find(Provider)
                 .last()
-                .props().itemkey,
+                .props().uuid,
         );
     });
 });

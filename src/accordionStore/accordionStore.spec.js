@@ -20,8 +20,7 @@ describe('accordionStore', () => {
 
             expect(store.items.length).toEqual(0);
             store.addItem({
-                itemkey: 'foo',
-                itemUuid: 1,
+                uuid: 'foo',
                 expanded: true,
                 disabled: false,
             });
@@ -36,16 +35,14 @@ describe('accordionStore', () => {
 
             expect(store.items.length).toEqual(0);
             store.addItem({
-                itemkey: 'foo',
-                itemUuid: 1,
+                uuid: 'foo',
                 expanded: true,
                 disabled: false,
             });
 
             expect(store.items.length).toEqual(1);
             store.addItem({
-                itemkey: 'bar',
-                itemUuid: 2,
+                uuid: 'bar',
                 expanded: true,
                 disabled: false,
             });
@@ -62,15 +59,13 @@ describe('accordionStore', () => {
             });
 
             store.addItem({
-                itemkey: 'foo',
-                itemUuid: 1,
+                uuid: 'foo',
                 expanded: true,
                 disabled: false,
             });
 
             store.addItem({
-                itemkey: 'bar',
-                itemUuid: 2,
+                uuid: 'bar',
                 expanded: true,
                 disabled: false,
             });
@@ -86,15 +81,13 @@ describe('accordionStore', () => {
             });
 
             store.addItem({
-                itemkey: 'foo',
-                itemUuid: 1,
+                uuid: 'foo',
                 expanded: true,
                 disabled: false,
             });
 
             store.addItem({
-                itemkey: 'bar',
-                itemUuid: 2,
+                uuid: 'bar',
                 expanded: false,
                 disabled: false,
             });
@@ -110,15 +103,13 @@ describe('accordionStore', () => {
             });
 
             store.addItem({
-                itemkey: 'foo',
-                itemUuid: 1,
+                uuid: 'foo',
                 expanded: true,
                 disabled: false,
             });
 
             store.addItem({
-                itemkey: 'bar',
-                itemUuid: 2,
+                uuid: 'bar',
                 expanded: false,
                 disabled: false,
             });
@@ -134,15 +125,13 @@ describe('accordionStore', () => {
             });
 
             store.addItem({
-                itemkey: 'foo',
-                itemUuid: 1,
+                uuid: 'foo',
                 expanded: true,
                 disabled: false,
             });
 
             store.addItem({
-                itemkey: 'bar',
-                itemUuid: 2,
+                uuid: 'bar',
                 expanded: true,
                 disabled: false,
             });

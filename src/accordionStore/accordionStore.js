@@ -3,8 +3,7 @@
 import { observable, action } from 'mobx';
 
 export type Item = {
-    itemkey: string | number,
-    itemUuid: string | number,
+    uuid: string | number,
     expanded: boolean,
     disabled: boolean,
 };
@@ -13,8 +12,8 @@ export type Store = {
     accordion: boolean,
     onChange: Function,
     addItem: Item => void,
-    removeItem: ($PropertyType<Item, 'itemkey'>) => void,
-    setExpanded: ($PropertyType<Item, 'itemkey'>, boolean) => void,
+    removeItem: ($PropertyType<Item, 'uuid'>) => void,
+    setExpanded: ($PropertyType<Item, 'uuid'>, boolean) => void,
 };
 
 // eslint-disable-next-line import/prefer-default-export
@@ -41,14 +40,14 @@ export const createAccordionStore = ({
             }
         }),
         removeItem: action.bound(function removeItem(key) {
-            this.items = this.items.filter(item => item.itemkey !== key);
+            this.items = this.items.filter(item => item.uuid !== key);
         }),
         setExpanded: action.bound(function setExpanded(
             key: string | number,
             expanded: boolean,
         ) {
             this.items = this.items.map(item => {
-                if (item.itemkey === key) {
+                if (item.uuid === key) {
                     return {
                         ...item,
                         expanded,

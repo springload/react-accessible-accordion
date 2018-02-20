@@ -19,16 +19,14 @@ describe('AccordionItemTitle', () => {
         });
 
         accordionStore.addItem({
-            itemkey: 'item-one-itemkey',
+            uuid: 'item-one-uuid',
             expanded: false,
             disabled: false,
-            itemUuid: 'item-one-itemUUid',
         });
         accordionStore.addItem({
-            itemkey: 'item-two-itemkey',
+            uuid: 'item-two-uuid',
             expanded: true,
             disabled: false,
-            itemUuid: 'item-two-itemUUid',
         });
     });
 
@@ -37,7 +35,7 @@ describe('AccordionItemTitle', () => {
             .create(
                 <AccordionItemTitle
                     accordionStore={accordionStore}
-                    itemkey="item-one-itemkey"
+                    uuid="item-one-uuid"
                 >
                     <div>Fake Title</div>
                 </AccordionItemTitle>,
@@ -52,7 +50,7 @@ describe('AccordionItemTitle', () => {
                 <AccordionItemTitle
                     className="testCSSClass"
                     accordionStore={accordionStore}
-                    itemkey="item-one-itemkey"
+                    uuid="item-one-uuid"
                 >
                     <div>Fake Title</div>
                 </AccordionItemTitle>,
@@ -67,7 +65,7 @@ describe('AccordionItemTitle', () => {
                 <AccordionItemTitle
                     hideBodyClassName="testCSSClass--hidden"
                     accordionStore={accordionStore}
-                    itemkey="item-one-itemkey"
+                    uuid="item-one-uuid"
                 >
                     <div>Fake title</div>
                 </AccordionItemTitle>,
@@ -82,7 +80,7 @@ describe('AccordionItemTitle', () => {
                 <AccordionItemTitle
                     hideBodyClassName="testCSSClass--hidden"
                     accordionStore={accordionStore}
-                    itemkey="item-two-itemkey"
+                    uuid="item-two-uuid"
                 >
                     <div>Fake title</div>
                 </AccordionItemTitle>,
@@ -95,7 +93,7 @@ describe('AccordionItemTitle', () => {
         const wrapper = mount(
             <AccordionItemTitle
                 accordionStore={accordionStore}
-                itemkey="item-one-itemkey"
+                uuid="item-one-uuid"
             >
                 Fake Title
             </AccordionItemTitle>,
@@ -113,7 +111,7 @@ describe('AccordionItemTitle', () => {
         const wrapper = mount(
             <AccordionItemTitle
                 accordionStore={accordionStore}
-                itemkey="item-one-itemkey"
+                uuid="item-one-uuid"
             >
                 Fake Title
             </AccordionItemTitle>,
@@ -131,7 +129,7 @@ describe('AccordionItemTitle', () => {
         const wrapper = mount(
             <AccordionItemTitle
                 accordionStore={accordionStore}
-                itemkey="item-one-itemkey"
+                uuid="item-one-uuid"
             >
                 Fake Title
             </AccordionItemTitle>,
