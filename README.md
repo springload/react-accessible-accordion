@@ -192,6 +192,19 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
     </tbody>
 </table>
 
+### resetNextUuid
+
+<table class="table table-bordered table-striped">
+    <tbody>
+      <tr>
+          <td>Function(void)</td>
+      </tr>
+      <tr>
+          <td>Resets the internal counter for Accordion items' identifiers (including `id` attributes). For use in test suites and isomorphic frameworks.</td>
+      </tr>
+    </tbody>
+</table>
+
 ## Accessibility
 
 ### What this project is doing accessibility-wise?
