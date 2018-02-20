@@ -7,7 +7,6 @@ import { createAccordionStore } from '../accordionStore/accordionStore';
 type AccordionProps = {
     accordion: boolean,
     children: Node,
-    // activeItems: Array<string | number>,
     className: string,
     onChange: Function,
 };
@@ -17,7 +16,6 @@ class Accordion extends Component<AccordionProps, *> {
         accordion: true,
         onChange: () => {},
         className: 'accordion',
-        activeItems: [],
         children: null,
     };
 

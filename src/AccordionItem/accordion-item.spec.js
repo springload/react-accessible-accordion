@@ -183,43 +183,6 @@ describe('AccordionItem', () => {
         ).toEqual(1);
     });
 
-    it('can dynamically set activeItems', () => {
-        accordionStore.activeItems = ['foo'];
-        mount(
-            <Provider accordionStore={accordionStore}>
-                <AccordionItem itemkey="foo">
-                    <AccordionItemTitle>
-                        <div>Fake title</div>
-                    </AccordionItemTitle>
-                </AccordionItem>
-            </Provider>,
-        );
-
-        expect(
-            accordionStore.items.filter(item => item.expanded === true).length,
-        ).toEqual(1);
-    });
-
-    it('can dynamically toggle activeItems', () => {
-        accordionStore.activeItems = [];
-        mount(
-            <Provider accordionStore={accordionStore}>
-                <AccordionItem itemkey="foo">
-                    <AccordionItemTitle>
-                        <div>Fake title</div>
-                    </AccordionItemTitle>
-                </AccordionItem>
-            </Provider>,
-        );
-        accordionStore.activeItems = ['foo'];
-
-        const fooItem = accordionStore.items.find(
-            item => item.itemkey === 'foo',
-        );
-
-        expect(fooItem && fooItem.expanded).toEqual(true);
-    });
-
     it('can manually reset the uuid', () => {
         const wrapperOne = mount(
             <Provider accordionStore={accordionStore}>
