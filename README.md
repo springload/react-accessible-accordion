@@ -20,7 +20,7 @@ npm install --save react@^15.0.0 react-dom@^15.0.0
 
 Then, import the editor and use it in your code. Here is a [basic example](https://springload.github.io/react-accessible-accordion/):
 
-```js
+```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
 
