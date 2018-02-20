@@ -2,11 +2,11 @@
 
 exports[`AccordionItemTitle doesn't respect hideBodyClassName when collapsed 1`] = `
 <div
-  aria-controls="accordion__body-item-two-itemUUid"
+  aria-controls="accordion__body-item-two-uuid"
   aria-expanded={true}
   className="accordion__title"
   disabled={false}
-  id="accordion__title-item-two-itemUUid"
+  id="accordion__title-item-two-uuid"
   onClick={[Function]}
   onKeyPress={[Function]}
   role="button"
@@ -20,11 +20,11 @@ exports[`AccordionItemTitle doesn't respect hideBodyClassName when collapsed 1`]
 
 exports[`AccordionItemTitle renders correctly with different className 1`] = `
 <div
-  aria-controls="accordion__body-item-one-itemUUid"
+  aria-controls="accordion__body-item-one-uuid"
   aria-expanded={false}
   className="testCSSClass"
   disabled={false}
-  id="accordion__title-item-one-itemUUid"
+  id="accordion__title-item-one-uuid"
   onClick={[Function]}
   onKeyPress={[Function]}
   role="button"
@@ -38,11 +38,11 @@ exports[`AccordionItemTitle renders correctly with different className 1`] = `
 
 exports[`AccordionItemTitle renders correctly with min params 1`] = `
 <div
-  aria-controls="accordion__body-item-one-itemUUid"
+  aria-controls="accordion__body-item-one-uuid"
   aria-expanded={false}
   className="accordion__title"
   disabled={false}
-  id="accordion__title-item-one-itemUUid"
+  id="accordion__title-item-one-uuid"
   onClick={[Function]}
   onKeyPress={[Function]}
   role="button"
@@ -56,11 +56,11 @@ exports[`AccordionItemTitle renders correctly with min params 1`] = `
 
 exports[`AccordionItemTitle renders with different hideBodyClassName 1`] = `
 <div
-  aria-controls="accordion__body-item-one-itemUUid"
+  aria-controls="accordion__body-item-one-uuid"
   aria-expanded={false}
   className="accordion__title testCSSClass--hidden"
   disabled={false}
-  id="accordion__title-item-one-itemUUid"
+  id="accordion__title-item-one-uuid"
   onClick={[Function]}
   onKeyPress={[Function]}
   role="button"

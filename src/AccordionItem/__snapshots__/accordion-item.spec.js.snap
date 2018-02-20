@@ -5,11 +5,11 @@ exports[`AccordionItem renders correctly with accordion false 1`] = `
   className="accordion__item"
 >
   <div
-    aria-controls="accordion__body-1"
+    aria-controls="accordion__body-0"
     aria-expanded={false}
     className="accordion__title"
     disabled={false}
-    id="accordion__title-1"
+    id="accordion__title-0"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
@@ -21,9 +21,9 @@ exports[`AccordionItem renders correctly with accordion false 1`] = `
   </div>
   <div
     aria-hidden={true}
-    aria-labelledby="accordion__title-1"
+    aria-labelledby="accordion__title-0"
     className="accordion__body accordion__body--hidden"
-    id="accordion__body-1"
+    id="accordion__body-0"
     role={null}
   >
     <div>
@@ -38,11 +38,11 @@ exports[`AccordionItem renders correctly with accordion true 1`] = `
   className="accordion__item"
 >
   <div
-    aria-controls="accordion__body-1"
+    aria-controls="accordion__body-0"
     aria-selected={false}
     className="accordion__title"
     disabled={false}
-    id="accordion__title-1"
+    id="accordion__title-0"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="tab"
@@ -54,9 +54,9 @@ exports[`AccordionItem renders correctly with accordion true 1`] = `
   </div>
   <div
     aria-hidden={true}
-    aria-labelledby="accordion__title-1"
+    aria-labelledby="accordion__title-0"
     className="accordion__body accordion__body--hidden"
-    id="accordion__body-1"
+    id="accordion__body-0"
     role="tabpanel"
   >
     <div>
@@ -71,11 +71,11 @@ exports[`AccordionItem renders correctly with other blocks inside 1`] = `
   className="accordion__item"
 >
   <div
-    aria-controls="accordion__body-1"
+    aria-controls="accordion__body-0"
     aria-expanded={false}
     className="accordion__title"
     disabled={false}
-    id="accordion__title-1"
+    id="accordion__title-0"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
@@ -90,9 +90,9 @@ exports[`AccordionItem renders correctly with other blocks inside 1`] = `
   </div>
   <div
     aria-hidden={true}
-    aria-labelledby="accordion__title-1"
+    aria-labelledby="accordion__title-0"
     className="accordion__body accordion__body--hidden"
-    id="accordion__body-1"
+    id="accordion__body-0"
     role={null}
   >
     <div>
@@ -107,11 +107,11 @@ exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
   className="accordion__item"
 >
   <div
-    aria-controls="accordion__body-1"
+    aria-controls="accordion__body-0"
     aria-expanded={false}
     className="accordion__title"
     disabled={false}
-    id="accordion__title-1"
+    id="accordion__title-0"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
@@ -123,9 +123,9 @@ exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
   </div>
   <div
     aria-hidden={true}
-    aria-labelledby="accordion__title-1"
+    aria-labelledby="accordion__title-0"
     className="accordion__body accordion__body--hidden"
-    id="accordion__body-1"
+    id="accordion__body-0"
     role={null}
   >
     <div>
