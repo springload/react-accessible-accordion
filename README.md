@@ -13,9 +13,7 @@ If you like accessible components, feel free to check this other repo [react-acc
 First, grab the package from npm:
 
 ```sh
-npm install --save react-accessible-accordion
-# react-accessible-accordion's peerDependencies:
-npm install --save react@^15.0.0 react-dom@^15.0.0
+npm install --save react-accessible-accordion react react-dom
 ```
 
 Then, import the editor and use it in your code. Here is a [basic example](https://springload.github.io/react-accessible-accordion/):
