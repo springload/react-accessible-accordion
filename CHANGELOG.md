@@ -33,9 +33,10 @@ If you're currently using activeItems, you're upgrade path might look like this:
 
 ```diff
 const items = ['Foo', 'Bar'];
+const activeItems = [0];
 
 return (
--    <Accordion activeItems={[0]} />
+-    <Accordion activeItems={activeItems} />
 +    <Accordion />
         {activeItems.forEach((item, i) => (
 -            <AccordionItem key={item}>{item}</AccordionItem>
