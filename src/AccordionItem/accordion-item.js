@@ -18,7 +18,7 @@ type AccordionItemProps = {
     hideBodyClassName: string,
     accordionStore: Store,
     disabled: boolean,
-    expanded: ?boolean,
+    expanded: boolean,
 };
 
 class AccordionItem extends Component<AccordionItemProps, *> {
@@ -26,7 +26,7 @@ class AccordionItem extends Component<AccordionItemProps, *> {
         className: 'accordion__item',
         hideBodyClassName: '',
         disabled: false,
-        expanded: null,
+        expanded: false,
     };
 
     uuid = nextUuid();
@@ -50,11 +50,7 @@ class AccordionItem extends Component<AccordionItemProps, *> {
         expanded,
         accordionStore,
     }: AccordionItemProps) {
-        if (
-            expanded !== null &&
-            expanded !== undefined &&
-            expanded !== this.props.expanded
-        ) {
+        if (expanded !== this.props.expanded) {
             accordionStore.setExpanded(this.uuid, expanded);
         }
     }

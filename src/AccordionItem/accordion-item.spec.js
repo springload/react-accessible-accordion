@@ -183,6 +183,24 @@ describe('AccordionItem', () => {
         ).toEqual(1);
     });
 
+    it('can dynamically unset expanded prop', () => {
+        const Wrapper = ({ expanded }: { expanded: boolean }) => (
+            <Provider accordionStore={accordionStore}>
+                <AccordionItem expanded={expanded}>
+                    <AccordionItemTitle>
+                        <div>Fake title</div>
+                    </AccordionItemTitle>
+                </AccordionItem>
+            </Provider>
+        );
+        const wrapper = mount(<Wrapper expanded={true} />);
+        wrapper.setProps({ expanded: undefined });
+
+        expect(
+            accordionStore.items.filter(item => item.expanded === true).length,
+        ).toEqual(0);
+    });
+
     it('can manually reset the uuid', () => {
         const wrapperOne = mount(
             <Provider accordionStore={accordionStore}>
