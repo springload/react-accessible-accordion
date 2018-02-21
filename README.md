@@ -4,7 +4,7 @@
 
 > Accessible Accordion component for React. Inspired by [rc-collapse](https://github.com/react-component/collapse) and [react-sanfona](https://github.com/daviferreira/react-sanfona). :mag::ok_hand:
 
-Try a demo now](https://springload.github.io/react-accessible-accordion/).
+[Try a demo now](https://springload.github.io/react-accessible-accordion/).
 
 If you like accessible components, feel free to check this other repo [react-accessible-modal](https://github.com/springload/react-accessible-modal).
 
