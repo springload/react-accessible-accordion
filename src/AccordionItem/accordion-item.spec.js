@@ -219,6 +219,21 @@ describe('AccordionItem', () => {
         ).toEqual(0);
     });
 
+    it('does not render if its uuid is not registered in accordionStore', () => {
+        // prevent AccordionItem from being able to register itself, for the sake of testing.
+        accordionStore.addItem = jest.fn();
+
+        const wrapper = mount(
+            <Provider accordionStore={accordionStore}>
+                <AccordionItem>Fake Title</AccordionItem>
+            </Provider>,
+        );
+
+        expect(
+            wrapper.find(AccordionItem).find('div.accordion__item').length,
+        ).toEqual(0);
+    });
+
     it('can manually reset the uuid', () => {
         const wrapperOne = mount(
             <Provider accordionStore={accordionStore}>
