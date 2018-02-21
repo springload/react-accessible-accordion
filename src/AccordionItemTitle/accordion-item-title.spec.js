@@ -3,6 +3,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
+import { Provider } from 'mobx-react';
 import AccordionItemTitle from './accordion-item-title';
 import { createAccordionStore } from '../accordionStore/accordionStore';
 
@@ -141,5 +142,20 @@ describe('AccordionItemTitle', () => {
         expect(
             accordionStore.items.filter(item => item.expanded === true).length,
         ).toEqual(1);
+    });
+
+    it('renders null if an associated AccordionItem is not registered in accordionStore', () => {
+        const className = 'className';
+        const wrapper = mount(
+            <Provider accordionStore={accordionStore} uuid="foo">
+                <AccordionItemTitle className={className}>
+                    <div>Fake body</div>
+                </AccordionItemTitle>
+            </Provider>,
+        );
+
+        expect(
+            wrapper.findWhere(item => item.className === className).length,
+        ).toEqual(0);
     });
 });
