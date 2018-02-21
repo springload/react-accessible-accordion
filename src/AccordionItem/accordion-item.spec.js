@@ -201,6 +201,49 @@ describe('AccordionItem', () => {
         ).toEqual(0);
     });
 
+    it('dynamically changing arbitrary props does not affect expanded state', () => {
+        const Wrapper = ({ className }: { className: string }) => (
+            <Provider accordionStore={accordionStore}>
+                <AccordionItem className={className}>
+                    <AccordionItemTitle>
+                        <div>Fake title</div>
+                    </AccordionItemTitle>
+                </AccordionItem>
+            </Provider>
+        );
+        const wrapper = mount(<Wrapper className="foo" />);
+        wrapper.setProps({ className: 'bar' });
+
+        expect(
+            accordionStore.items.filter(item => item.expanded === true).length,
+        ).toEqual(0);
+    });
+
+    it('can manually reset the uuid', () => {
+        const wrapperOne = mount(
+            <Provider accordionStore={accordionStore}>
+                <AccordionItem />
+            </Provider>,
+        );
+        resetNextUuid();
+        const wrapperTwo = mount(
+            <Provider accordionStore={accordionStore}>
+                <AccordionItem />
+            </Provider>,
+        );
+        expect(
+            wrapperOne
+                .find(Provider)
+                .last()
+                .props().uuid,
+        ).toEqual(
+            wrapperTwo
+                .find(Provider)
+                .last()
+                .props().uuid,
+        );
+    });
+
     it('can manually reset the uuid', () => {
         const wrapperOne = mount(
             <Provider accordionStore={accordionStore}>
