@@ -207,4 +207,22 @@ describe('AccordionItem', () => {
                 .props().uuid,
         );
     });
+
+    it('correctly unregisters itself on unmount', () => {
+        const wrapper = mount(
+            <Provider accordionStore={accordionStore}>
+                <AccordionItem>
+                    <AccordionItemTitle>
+                        <div>Fake title</div>
+                    </AccordionItemTitle>
+                </AccordionItem>
+            </Provider>,
+        );
+
+        expect(accordionStore.items.length).toEqual(1);
+
+        wrapper.unmount();
+
+        expect(accordionStore.items.length).toEqual(0);
+    });
 });
