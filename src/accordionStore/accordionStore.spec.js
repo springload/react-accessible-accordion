@@ -136,7 +136,6 @@ describe('accordionStore', () => {
                 disabled: false,
             });
 
-            store.setExpanded('bar', true);
             expect(store.items.filter(item => item.expanded).length).toEqual(1);
         });
     });
