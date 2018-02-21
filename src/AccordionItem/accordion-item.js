@@ -2,84 +2,88 @@
 
 import React, { Component } from 'react';
 import type { Node } from 'react';
+import { inject, observer, Provider } from 'mobx-react';
 import consecutive from 'consecutive';
 import classNames from 'classnames';
+import type { Store } from '../accordionStore/accordionStore';
 
-const nextUuid = consecutive();
+let nextUuid = consecutive();
+export function resetNextUuid() {
+    nextUuid = consecutive();
+}
 
 type AccordionItemProps = {
-    accordion: boolean,
-    expanded: boolean,
-    onClick: Function,
     children: Node,
     className: string,
     hideBodyClassName: string,
+    accordionStore: Store,
+    disabled: boolean,
+    expanded: boolean,
 };
 
-type AccordionItemState = {
-    itemUuid: string,
-};
-
-class AccordionItem extends Component<AccordionItemProps, AccordionItemState> {
+class AccordionItem extends Component<AccordionItemProps, *> {
     static defaultProps = {
-        accordion: true,
-        expanded: false,
-        onClick: () => {},
         className: 'accordion__item',
         hideBodyClassName: '',
+        disabled: false,
+        expanded: false,
     };
 
-    state = {
-        itemUuid: nextUuid(),
-    };
+    uuid = nextUuid();
 
-    renderChildren() {
-        const { accordion, expanded, onClick, children } = this.props;
-        const { itemUuid } = this.state;
+    componentWillMount() {
+        const { accordionStore, disabled } = this.props;
 
-        return React.Children.map(children, (item) => {
-            const itemProps = {};
-
-            if (item.type.accordionElementName === 'AccordionItemTitle') {
-                itemProps.expanded = expanded;
-                itemProps.key = 'title';
-                itemProps.id = `accordion__title-${itemUuid}`;
-                itemProps.ariaControls = `accordion__body-${itemUuid}`;
-                itemProps.onClick = onClick;
-                itemProps.role = accordion ? 'tab' : 'button';
-
-                return React.cloneElement(item, itemProps);
-            } else if (item.type.accordionElementName === 'AccordionItemBody') {
-                itemProps.expanded = expanded;
-                itemProps.key = 'body';
-                itemProps.id = `accordion__body-${itemUuid}`;
-                itemProps.role = accordion ? 'tabpanel' : null;
-
-                return React.cloneElement(item, itemProps);
-            }
-
-            return item;
+        accordionStore.addItem({
+            uuid: this.uuid,
+            expanded: this.props.expanded || false,
+            disabled,
         });
     }
 
-    renderChildren = this.renderChildren.bind(this);
+    componentWillUnmount() {
+        this.props.accordionStore.removeItem(this.uuid);
+    }
+
+    // This is here so that the user can dynamically set the 'expanded' state using the 'expanded' prop.
+    componentWillReceiveProps({
+        expanded,
+        accordionStore,
+    }: AccordionItemProps) {
+        if (expanded !== this.props.expanded) {
+            accordionStore.setExpanded(this.uuid, expanded);
+        }
+    }
 
     render() {
-        const { className, expanded, hideBodyClassName } = this.props;
-
-        const itemClassName = classNames(
+        const {
             className,
-            {
-                [hideBodyClassName]: (!expanded && hideBodyClassName),
-            },
+            hideBodyClassName,
+            children,
+            accordionStore,
+        } = this.props;
+
+        const currentItem = accordionStore.items.find(
+            item => item.uuid === this.uuid,
         );
 
+        if (!currentItem) {
+            return null;
+        }
+        const { expanded } = currentItem;
+
         return (
-            <div className={itemClassName}>
-                {this.renderChildren()}
-            </div>
+            <Provider uuid={this.uuid}>
+                <div
+                    className={classNames(className, {
+                        [hideBodyClassName]: !expanded && hideBodyClassName,
+                    })}
+                >
+                    {children}
+                </div>
+            </Provider>
         );
     }
 }
 
-export default AccordionItem;
+export default inject('accordionStore')(observer(AccordionItem));

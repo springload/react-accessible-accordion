@@ -3,50 +3,72 @@
 import React, { Component } from 'react';
 import type { Node } from 'react';
 import classNames from 'classnames';
+import { inject, observer } from 'mobx-react';
+import { type Store } from '../accordionStore/accordionStore';
 
 type AccordionItemTitleProps = {
-    id: string,
-    expanded: boolean,
-    onClick: Function,
-    ariaControls: string,
     children: Node,
     className: string,
     hideBodyClassName: string,
-    role: string,
+    accordionStore: Store,
+    uuid: string | number,
 };
 
 type AccordionItemTitleState = {};
 
-class AccordionItemTitle extends Component<AccordionItemTitleProps, AccordionItemTitleState> {
+class AccordionItemTitle extends Component<
+    AccordionItemTitleProps,
+    AccordionItemTitleState,
+> {
     static accordionElementName = 'AccordionItemTitle';
 
     static defaultProps = {
-        id: '',
-        expanded: false,
-        onClick: () => {},
-        ariaControls: '',
         className: 'accordion__title',
         hideBodyClassName: '',
-        role: '',
     };
 
-    handleKeyPress(evt: SyntheticInputEvent<HTMLButtonElement>) {
-        const { onClick } = this.props;
-        if (evt.charCode === 13 || evt.charCode === 32) {
-            onClick();
-        }
-    }
+    handleClick = () => {
+        const { uuid, accordionStore } = this.props;
+        const { accordion, onChange, items } = accordionStore;
+        const foundItem = items.find(item => item.uuid === uuid);
+        if (!foundItem) return;
 
-    handleKeyPress = this.handleKeyPress.bind(this);
+        this.props.accordionStore.setExpanded(
+            foundItem.uuid,
+            !foundItem.expanded,
+        );
+
+        if (accordion) {
+            onChange(foundItem.uuid);
+        } else {
+            onChange(
+                this.props.accordionStore.items
+                    .filter(item => item.expanded)
+                    .map(item => item.uuid),
+            );
+        }
+    };
+
+    handleKeyPress = (evt: SyntheticInputEvent<HTMLButtonElement>) => {
+        if (evt.charCode === 13 || evt.charCode === 32) {
+            this.handleClick();
+        }
+    };
 
     render() {
-        const { id, expanded, ariaControls, onClick, children, className, role, hideBodyClassName } = this.props;
-        const titleClassName = classNames(
-            className,
-            {
-                [hideBodyClassName]: (hideBodyClassName && !expanded),
-            },
-        );
+        const { items, accordion } = this.props.accordionStore;
+        const { uuid, children, className, hideBodyClassName } = this.props;
+        const foundItem = items.find(item => item.uuid === uuid);
+        if (!foundItem) return null;
+
+        const { expanded, disabled } = foundItem;
+
+        const id = `accordion__title-${uuid}`;
+        const ariaControls = `accordion__body-${uuid}`;
+        const role = accordion ? 'tab' : 'button';
+        const titleClassName = classNames(className, {
+            [hideBodyClassName]: hideBodyClassName && !expanded,
+        });
 
         if (role === 'tab') {
             return (
@@ -55,10 +77,11 @@ class AccordionItemTitle extends Component<AccordionItemTitleProps, AccordionIte
                     aria-selected={expanded}
                     aria-controls={ariaControls}
                     className={titleClassName}
-                    onClick={onClick}
+                    onClick={disabled ? undefined : this.handleClick}
                     role={role}
                     tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
                     onKeyPress={this.handleKeyPress}
+                    disabled={disabled}
                 >
                     {children}
                 </div>
@@ -70,10 +93,11 @@ class AccordionItemTitle extends Component<AccordionItemTitleProps, AccordionIte
                 aria-expanded={expanded}
                 aria-controls={ariaControls}
                 className={titleClassName}
-                onClick={onClick}
+                onClick={disabled ? undefined : this.handleClick}
                 role={role}
                 tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
                 onKeyPress={this.handleKeyPress}
+                disabled={disabled}
             >
                 {children}
             </div>
@@ -81,4 +105,4 @@ class AccordionItemTitle extends Component<AccordionItemTitleProps, AccordionIte
     }
 }
 
-export default AccordionItemTitle;
+export default inject('accordionStore', 'uuid')(observer(AccordionItemTitle));

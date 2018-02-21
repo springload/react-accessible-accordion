@@ -5,19 +5,25 @@ exports[`AccordionItem renders correctly with accordion false 1`] = `
   className="accordion__item"
 >
   <div
-    ariaControls="accordion__body-mock-uuid-hash"
-    expanded={false}
-    id="accordion__title-mock-uuid-hash"
+    aria-controls="accordion__body-0"
+    aria-expanded={false}
+    className="accordion__title"
+    disabled={false}
+    id="accordion__title-0"
     onClick={[Function]}
+    onKeyPress={[Function]}
     role="button"
+    tabIndex="0"
   >
     <div>
       Fake title
     </div>
   </div>
   <div
-    expanded={false}
-    id="accordion__body-mock-uuid-hash"
+    aria-hidden={true}
+    aria-labelledby="accordion__title-0"
+    className="accordion__body accordion__body--hidden"
+    id="accordion__body-0"
     role={null}
   >
     <div>
@@ -32,19 +38,25 @@ exports[`AccordionItem renders correctly with accordion true 1`] = `
   className="accordion__item"
 >
   <div
-    ariaControls="accordion__body-mock-uuid-hash"
-    expanded={false}
-    id="accordion__title-mock-uuid-hash"
+    aria-controls="accordion__body-0"
+    aria-selected={false}
+    className="accordion__title"
+    disabled={false}
+    id="accordion__title-0"
     onClick={[Function]}
+    onKeyPress={[Function]}
     role="tab"
+    tabIndex="0"
   >
     <div>
       Fake title
     </div>
   </div>
   <div
-    expanded={false}
-    id="accordion__body-mock-uuid-hash"
+    aria-hidden={true}
+    aria-labelledby="accordion__title-0"
+    className="accordion__body accordion__body--hidden"
+    id="accordion__body-0"
     role="tabpanel"
   >
     <div>
@@ -59,11 +71,15 @@ exports[`AccordionItem renders correctly with other blocks inside 1`] = `
   className="accordion__item"
 >
   <div
-    ariaControls="accordion__body-mock-uuid-hash"
-    expanded={false}
-    id="accordion__title-mock-uuid-hash"
+    aria-controls="accordion__body-0"
+    aria-expanded={false}
+    className="accordion__title"
+    disabled={false}
+    id="accordion__title-0"
     onClick={[Function]}
+    onKeyPress={[Function]}
     role="button"
+    tabIndex="0"
   >
     <div>
       Fake title
@@ -73,8 +89,10 @@ exports[`AccordionItem renders correctly with other blocks inside 1`] = `
     Just another block
   </div>
   <div
-    expanded={false}
-    id="accordion__body-mock-uuid-hash"
+    aria-hidden={true}
+    aria-labelledby="accordion__title-0"
+    className="accordion__body accordion__body--hidden"
+    id="accordion__body-0"
     role={null}
   >
     <div>
@@ -89,19 +107,25 @@ exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
   className="accordion__item"
 >
   <div
-    ariaControls="accordion__body-mock-uuid-hash"
-    expanded={false}
-    id="accordion__title-mock-uuid-hash"
+    aria-controls="accordion__body-0"
+    aria-expanded={false}
+    className="accordion__title"
+    disabled={false}
+    id="accordion__title-0"
     onClick={[Function]}
+    onKeyPress={[Function]}
     role="button"
+    tabIndex="0"
   >
     <div>
       Fake title
     </div>
   </div>
   <div
-    expanded={false}
-    id="accordion__body-mock-uuid-hash"
+    aria-hidden={true}
+    aria-labelledby="accordion__title-0"
+    className="accordion__body accordion__body--hidden"
+    id="accordion__body-0"
     role={null}
   >
     <div>
@@ -110,60 +134,6 @@ exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
   </div>
   <div>
     Just another block
-  </div>
-</div>
-`;
-
-exports[`AccordionItem renders with different className 1`] = `
-<div
-  className="testCSSClass"
->
-  <div
-    ariaControls="accordion__body-mock-uuid-hash"
-    expanded={false}
-    id="accordion__title-mock-uuid-hash"
-    onClick={[Function]}
-    role="tab"
-  >
-    <div>
-      Fake title
-    </div>
-  </div>
-  <div
-    expanded={false}
-    id="accordion__body-mock-uuid-hash"
-    role="tabpanel"
-  >
-    <div>
-      Fake body
-    </div>
-  </div>
-</div>
-`;
-
-exports[`AccordionItem renders with different hideBodyClassName 1`] = `
-<div
-  className="accordion__item testCSSClass--hidden"
->
-  <div
-    ariaControls="accordion__body-mock-uuid-hash"
-    expanded={false}
-    id="accordion__title-mock-uuid-hash"
-    onClick={[Function]}
-    role="tab"
-  >
-    <div>
-      Fake title
-    </div>
-  </div>
-  <div
-    expanded={false}
-    id="accordion__body-mock-uuid-hash"
-    role="tabpanel"
-  >
-    <div>
-      Fake body
-    </div>
   </div>
 </div>
 `;
@@ -179,4 +149,10 @@ exports[`AccordionItem still renders with no AccordionItemTitle or AccordionItem
     Fake body
   </div>
 </div>
+`;
+
+exports[`AccordionItem still renders with no children at all 1`] = `
+<div
+  className="accordion__item"
+/>
 `;

@@ -4,7 +4,7 @@
 
 > Accessible Accordion component for React. Inspired by [rc-collapse](https://github.com/react-component/collapse) and [react-sanfona](https://github.com/daviferreira/react-sanfona). :mag::ok_hand:
 
-This is a work in progress. Feel free to contribute. [Try a demo now](https://springload.github.io/react-accessible-accordion/).
+Try a demo now](https://springload.github.io/react-accessible-accordion/).
 
 If you like accessible components, feel free to check this other repo [react-accessible-modal](https://github.com/springload/react-accessible-modal).
 
@@ -13,14 +13,12 @@ If you like accessible components, feel free to check this other repo [react-acc
 First, grab the package from npm:
 
 ```sh
-npm install --save react-accessible-accordion
-# react-accessible-accordion's peerDependencies:
-npm install --save react@^15.0.0 react-dom@^15.0.0
+npm install --save react-accessible-accordion react react-dom
 ```
 
 Then, import the editor and use it in your code. Here is a [basic example](https://springload.github.io/react-accessible-accordion/):
 
-```js
+```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -40,9 +38,7 @@ const Example = () => (
                 <h3>Simple title</h3>
             </AccordionItemTitle>
             <AccordionItemBody>
-                <p>
-                    Body content
-                </p>
+                <p>Body content</p>
             </AccordionItemBody>
         </AccordionItem>
         <AccordionItem>
@@ -51,9 +47,7 @@ const Example = () => (
                 <div>With a bit of description</div>
             </AccordionItemTitle>
             <AccordionItemBody>
-                <p>
-                    Body content
-                </p>
+                <p>Body content</p>
             </AccordionItemBody>
         </AccordionItem>
     </Accordion>
@@ -96,12 +90,6 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
           <td>accordion</td>
           <td>CSS class(es) applied to the component</td>
       </tr>
-      <tr>
-          <td>activeItems</td>
-          <td>Array</td>
-          <td>[]</td>
-          <td>Indexes (or custom keys) to pre expand items. Can be changed dynamically. Doesn't have the priority against `AccordionItem - expanded` on first render.</td>
-      </tr>
     </tbody>
 </table>
 
@@ -137,12 +125,6 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
           <td>null</td>
           <td>Class name for hidden body state</td>
       </tr>
-      <tr>
-          <td>customKey</td>
-          <td>String</td>
-          <td></td>
-          <td>Custom key to be used as a reference in `Accordion - activeItems`</td>
-        </tr>
     </tbody>
 </table>
 
@@ -204,6 +186,19 @@ ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
     </tbody>
 </table>
 
+### resetNextUuid
+
+<table class="table table-bordered table-striped">
+    <tbody>
+      <tr>
+          <td>Function(void)</td>
+      </tr>
+      <tr>
+          <td>Resets the internal counter for Accordion items' identifiers (including `id` attributes). For use in test suites and isomorphic frameworks.</td>
+      </tr>
+    </tbody>
+</table>
+
 ## Accessibility
 
 ### What this project is doing accessibility-wise?
@@ -216,10 +211,10 @@ This project manages two types of Accordions, with single or multiple items open
 
 For this type of Accordion, you will get the following `role` set up on your elements:
 
-- Accordion: `tablist`
-- AccordionItem: no specific role
-- AccordionItemTitle: `tab`
-- AccordionItemBody: `tabpanel`
+* Accordion: `tablist`
+* AccordionItem: no specific role
+* AccordionItemTitle: `tab`
+* AccordionItemBody: `tabpanel`
 
 #### Multiple items
 
@@ -227,10 +222,10 @@ For this type of Accordion, you will get the following `role` set up on your ele
 
 > Use this with with props `accordion` set to `false` on `Accordion`.
 
-- Accordion: no specific role
-- AccordionItem: no specific role
-- AccordionItemTitle: `button`
-- AccordionItemBody: no specific role
+* Accordion: no specific role
+* AccordionItem: no specific role
+* AccordionItemTitle: `button`
+* AccordionItemBody: no specific role
 
 ## Development
 
@@ -284,17 +279,16 @@ git push origin master --tags
 npm publish
 ```
 
-
 # Browser support
 
 **Supported browser / device versions:**
 
-| Browser | Device/OS | Version | Notes |
-|---------|-----------|---------|-------|
-| Mobile Safari | iOS | latest ||
-| Chrome | Android | latest ||
-| IE | Windows | 11 ||
-| MS Edge | Windows | latest ||
-| Chrome | Desktop | latest ||
-| Firefox | Desktop | latest ||
-| Safari | OSX | latest ||
+| Browser       | Device/OS | Version | Notes |
+| ------------- | --------- | ------- | ----- |
+| Mobile Safari | iOS       | latest  |       |
+| Chrome        | Android   | latest  |       |
+| IE            | Windows   | 11      |       |
+| MS Edge       | Windows   | latest  |       |
+| Chrome        | Desktop   | latest  |       |
+| Firefox       | Desktop   | latest  |       |
+| Safari        | OSX       | latest  |       |

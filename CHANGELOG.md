@@ -4,6 +4,50 @@ Changelog
 > All notable changes to this project are documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [[v2.0.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.0.0)
+
+Version 2.0 represents a total refactor, with a new context-based approach which should make this library more flexible, more maintainable and more comprehensively testable.
+
+As this is a major release, users should expect some breaking changes - though they should be limited to the removal of the `activeItems` prop (read more below).
+
+### Added
+
+- Exports `resetNextId` (https://github.com/springload/react-accessible-accordion/issues/41).
+
+### Fixed
+
+- Defect where controlled components' props were overridden by React.Children.map (https://github.com/springload/react-accessible-accordion/issues/33).
+- Defect where accordion crashed with unexpected `children` types (https://github.com/springload/react-accessible-accordion/issues/45).
+- Defect where React Accessible Accordion's components could not be extended.
+- Defect where the `children` of `Accordion` or `AccordionItem` could not be arbitrary.
+- Defect where `AccordionItem` had to be a child of `Accordion` (as opposed to to an arbitrary-level descendant).
+- Defect where `AccordionItemBody` and `AccordionItemTitle` had to be children of `AccordionItem` (as opposed to arbitrary-level descendants).
+
+### Removed:
+
+- 🚨 Breaking change 🚨 `activeItems` property is no longer supported.
+
+Control at the `Accordion` level (via the `activeItems` prop) and `AccordionItem` level (via the `expanded` prop) fought against one another, and choosing which control mechanism to give preference to would have been an arbitrary decision - and whichever way we went, we would have had test cases which demonstrated unusual/unpredictable behaviour. The `activeItems` mechanism was the obvious one to remove - it was arguably the "less React-y way", and we considered it more of a convenience than a feature. Crucially though, it fought too hard against the new architecture of the library, and keeping it would have prevented us enabling lots of other new features or resolving some of the issues that our users had raised.
+
+If you're currently using activeItems, you're upgrade path might look like this:
+
+```diff
+const items = ['Foo', 'Bar'];
+const activeItems = [0];
+
+return (
+-    <Accordion activeItems={activeItems} />
++    <Accordion />
+        {activeItems.forEach((item, i) => (
+-            <AccordionItem key={item}>{item}</AccordionItem>
++            <AccordionItem key={item} expanded={activeItems.includes(i)}>{item}</AccordionItem>
+        )}
+    </Accordion>
+);
+```
+
+Please don't hesitate to reach out to one of the maintainers (or raise an issue) if you're having trouble upgrading - we're happy to help!
+
 ## [[v1.0.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v1.0.1)
 
 - Renders predictable `id` attributes.(https://github.com/springload/react-accessible-accordion/pull/29)
