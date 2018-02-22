@@ -409,8 +409,7 @@ const Example = () => (
                         npm install<br />
                         # Install the git hooks.<br />
                         ./.githooks/deploy<br />
-                        # Set up a `.env` file with the appropriate secrets.<br
-                        />
+                        # Set up a `.env` file with the appropriate secrets.<br />
                         touch .env
                     </p>
                 </AccordionItemBody>
