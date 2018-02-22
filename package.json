@@ -1,6 +1,6 @@
 {
   "name": "react-accessible-accordion",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Accessible Accordion component for React",
   "main": "dist/umd/index.js",
   "jsnext:main": "dist/es/index.js",
@@ -16,8 +16,10 @@
     "css": "cp src/react-accessible-accordion.css dist",
     "build": "NODE_ENV=production rollup -c",
     "start": "npm run js:watch",
-    "start-demo": "webpack-dev-server --config ./webpack/webpack.config.demo.js",
-    "pages": "rm -rf pages && cp -R demo pages && webpack --config=./webpack/webpack.config.pages.js",
+    "start-demo":
+      "webpack-dev-server --config ./webpack/webpack.config.demo.js",
+    "pages":
+      "rm -rf pages && cp -R demo pages && webpack --config=./webpack/webpack.config.pages.js",
     "deploy": "npm run pages && ./bin/deploy.sh",
     "prettier": "prettier **/*.js --write",
     "prepublish": "npm run build"
@@ -39,22 +41,13 @@
     ],
     "env": {
       "test": {
-        "presets": [
-          "es2015",
-          "react",
-          "stage-2"
-        ]
+        "presets": ["es2015", "react", "stage-2"]
       }
     }
   },
   "jest": {
-    "setupFiles": [
-      "./src/setupTests.js"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/dist/"
-    ]
+    "setupFiles": ["./src/setupTests.js"],
+    "testPathIgnorePatterns": ["/node_modules/", "/dist/"]
   },
   "keywords": [
     "react",
@@ -64,9 +57,7 @@
     "accessible",
     "accessibility"
   ],
-  "authors": [
-    "Vincent Audebert <vincent@springload.co.nz>"
-  ],
+  "authors": ["Vincent Audebert <vincent@springload.co.nz>"],
   "contributors": [
     {
       "name": "Mitch Ryan",
