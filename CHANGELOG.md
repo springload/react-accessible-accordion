@@ -3,13 +3,13 @@
 > All notable changes to this project are documented in this file.
 > This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [[v2.0.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.0.0)
-
-Version 2.1 represents changes to devDependencies only, and should have no backward-incompatible effect on this library.
+## [[v2.0.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.0.1)
 
 ### Changed
 
 * Upgrade all dev-dependencies except the eslint configs.
+* Replace snapshot tests with explicit assertions in AccordionItemBody and AccordionItemTitle.
+* Add specific assertions to tests in accordionStore.
 
 ## [[v2.0.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.0.0)
 
