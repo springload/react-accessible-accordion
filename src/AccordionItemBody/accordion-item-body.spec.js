@@ -37,16 +37,13 @@ describe('AccordionItemBody', () => {
     });
 
     it('renders correctly with different className', () => {
-        const tree = renderer
-            .create(
-                <Provider accordionStore={accordionStore} uuid={uuid}>
-                    <AccordionItemBody className="testCSSClass">
-                        <div>Fake body</div>
-                    </AccordionItemBody>
-                </Provider>,
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
+        const className = 'className';
+        const wrapper = mount(
+            <Provider accordionStore={accordionStore} uuid={uuid}>
+                <AccordionItemBody className={className} />
+            </Provider>,
+        );
+        expect(wrapper.find('div').hasClass(className)).toEqual(true);
     });
 
     it('renders correctly with prefixClass', () => {
