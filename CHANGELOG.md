@@ -1,8 +1,15 @@
-Changelog
-=========
+# Changelog
 
 > All notable changes to this project are documented in this file.
-This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+> This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
+## [[v2.0.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.0.0)
+
+Version 2.1 represents changes to devDependencies only, and should have no backward-incompatible effect on this library.
+
+### Changed
+
+* Upgrade all dev-dependencies except the eslint configs.
 
 ## [[v2.0.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.0.0)
 
@@ -12,20 +19,20 @@ As this is a major release, users should expect some breaking changes - though t
 
 ### Added
 
-- Exports `resetNextId` (https://github.com/springload/react-accessible-accordion/issues/41).
+* Exports `resetNextId` (https://github.com/springload/react-accessible-accordion/issues/41).
 
 ### Fixed
 
-- Defect where controlled components' props were overridden by React.Children.map (https://github.com/springload/react-accessible-accordion/issues/33).
-- Defect where accordion crashed with unexpected `children` types (https://github.com/springload/react-accessible-accordion/issues/45).
-- Defect where React Accessible Accordion's components could not be extended.
-- Defect where the `children` of `Accordion` or `AccordionItem` could not be arbitrary.
-- Defect where `AccordionItem` had to be a child of `Accordion` (as opposed to to an arbitrary-level descendant).
-- Defect where `AccordionItemBody` and `AccordionItemTitle` had to be children of `AccordionItem` (as opposed to arbitrary-level descendants).
+* Defect where controlled components' props were overridden by React.Children.map (https://github.com/springload/react-accessible-accordion/issues/33).
+* Defect where accordion crashed with unexpected `children` types (https://github.com/springload/react-accessible-accordion/issues/45).
+* Defect where React Accessible Accordion's components could not be extended.
+* Defect where the `children` of `Accordion` or `AccordionItem` could not be arbitrary.
+* Defect where `AccordionItem` had to be a child of `Accordion` (as opposed to to an arbitrary-level descendant).
+* Defect where `AccordionItemBody` and `AccordionItemTitle` had to be children of `AccordionItem` (as opposed to arbitrary-level descendants).
 
 ### Removed:
 
-- 🚨 Breaking change 🚨 `activeItems` property is no longer supported.
+* 🚨 Breaking change 🚨 `activeItems` property is no longer supported.
 
 Control at the `Accordion` level (via the `activeItems` prop) and `AccordionItem` level (via the `expanded` prop) fought against one another, and choosing which control mechanism to give preference to would have been an arbitrary decision - and whichever way we went, we would have had test cases which demonstrated unusual/unpredictable behaviour. The `activeItems` mechanism was the obvious one to remove - it was arguably the "less React-y way", and we considered it more of a convenience than a feature. Crucially though, it fought too hard against the new architecture of the library, and keeping it would have prevented us enabling lots of other new features or resolving some of the issues that our users had raised.
 
@@ -50,55 +57,54 @@ Please don't hesitate to reach out to one of the maintainers (or raise an issue)
 
 ## [[v1.0.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v1.0.1)
 
-- Renders predictable `id` attributes.(https://github.com/springload/react-accessible-accordion/pull/29)
+* Renders predictable `id` attributes.(https://github.com/springload/react-accessible-accordion/pull/29)
 
 ## [[v1.0.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v1.0.0)
 
-- Replace prop-types implementation with flow-types (https://github.com/springload/react-accessible-accordion/pull/22)
-Thanks @ryami333 for the great contribution
+* Replace prop-types implementation with flow-types (https://github.com/springload/react-accessible-accordion/pull/22)
+  Thanks @ryami333 for the great contribution
 
 NB: This version is backward compatible. It's just bumping to 1.0 to represent maturity rather than API changes.
 
 ## [[v0.6.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v0.6.0)
 
-- Improved accessibility support (Following https://github.com/springload/react-accessible-accordion/pull/19)
-- Adds possibility to programmatically open items(https://github.com/springload/react-accessible-accordion/pull/13)
-Thanks @epotockiy for the contribution
-- Improved accessibility status on demo page
-- Documentation about accessibility for this component
+* Improved accessibility support (Following https://github.com/springload/react-accessible-accordion/pull/19)
+* Adds possibility to programmatically open items(https://github.com/springload/react-accessible-accordion/pull/13)
+  Thanks @epotockiy for the contribution
+* Improved accessibility status on demo page
+* Documentation about accessibility for this component
 
 ## [[v0.5.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v0.5.0)
 
-- Possibility to add a CSS class to hidden blocks (Following https://github.com/springload/react-accessible-accordion/pull/16)
-- Githooks are executable (https://github.com/springload/react-accessible-accordion/pull/15)
-- Bump to Node 8 / NPM 5
+* Possibility to add a CSS class to hidden blocks (Following https://github.com/springload/react-accessible-accordion/pull/16)
+* Githooks are executable (https://github.com/springload/react-accessible-accordion/pull/15)
+* Bump to Node 8 / NPM 5
 
 ## [[v0.4.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v0.4.0)
 
-- Supports React 15.5+
+* Supports React 15.5+
 
 ## [[v0.3.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v0.3.0)
 
-- No warnings when you have only one item in the accordion
+* No warnings when you have only one item in the accordion
 
 ## [[v0.2.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v0.2.0)
 
-- Possibility to have extra blocks in AccordionItem
+* Possibility to have extra blocks in AccordionItem
 
 ## [[v0.1.2]](https://github.com/springload/react-accessible-accordion/releases/tag/v0.1.2)
 
-- Accordion mode / Collapse mode
-- Possibility to pre expand items
-- 100% coverage with unit tests
-- Possibility to customise CSS.
-- Clean CSS for the demo/github page.
-
+* Accordion mode / Collapse mode
+* Possibility to pre expand items
+* 100% coverage with unit tests
+* Possibility to customise CSS.
+* Clean CSS for the demo/github page.
 
 ## [[vx.y.z]](https://github.com/springload/Quicktube.js/releases/tag/x.y.z) Template from http://keepachangelog.com/
 
 ### Added
 
-- Something was added to the API / a new feature was introduced.
+* Something was added to the API / a new feature was introduced.
 
 ### Changed
 
