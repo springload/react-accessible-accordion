@@ -46,17 +46,14 @@ describe('AccordionItemBody', () => {
         expect(wrapper.find('div').hasClass(className)).toEqual(true);
     });
 
-    it('renders correctly with prefixClass', () => {
-        const tree = renderer
-            .create(
-                <Provider accordionStore={accordionStore} uuid={uuid}>
-                    <AccordionItemBody hideBodyClassName="testCSSClass--hidden">
-                        <div>Fake body</div>
-                    </AccordionItemBody>
-                </Provider>,
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
+    it('renders correctly with different hideBodyClassName', () => {
+        const hideBodyClassName = 'hideBodyClassName';
+        const wrapper = mount(
+            <Provider accordionStore={accordionStore} uuid={uuid}>
+                <AccordionItemBody hideBodyClassName={hideBodyClassName} />
+            </Provider>,
+        );
+        expect(wrapper.find('div').hasClass(hideBodyClassName)).toEqual(true);
     });
 
     it('renders null if an associated AccordionItem is not registered in accordionStore', () => {
