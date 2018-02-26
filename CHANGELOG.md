@@ -11,6 +11,12 @@ Version 2.1 represents changes to devDependencies only, and should have no backw
 
 * Upgrade all dev-dependencies except the eslint configs.
 
+## [[v2.0.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.0.1)
+
+### Changed
+
+* Minor syntax change in AccordionItemBody
+
 ## [[v2.0.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.0.0)
 
 Version 2.0 represents a total refactor, with a new context-based approach which should make this library more flexible, more maintainable and more comprehensively testable.

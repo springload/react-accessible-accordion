@@ -27,6 +27,7 @@ const AccordionItemBody = (props: AccordionItemBodyProps) => {
 
     const { expanded } = foundItem;
     const id = `accordion__body-${uuid}`;
+    const ariaLabelledby = `accordion__title-${uuid}`;
     const role = accordion ? 'tabpanel' : null;
 
     const bodyClass = classNames(className, {
@@ -38,10 +39,7 @@ const AccordionItemBody = (props: AccordionItemBodyProps) => {
             id={id}
             className={bodyClass}
             aria-hidden={ariaHidden}
-            aria-labelledby={id.replace(
-                'accordion__body-',
-                'accordion__title-',
-            )}
+            aria-labelledby={ariaLabelledby}
             role={role}
         >
             {children}
