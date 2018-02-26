@@ -4,6 +4,6 @@ exports[`accordionStore createAccordionStore initializes a new store 1`] = `
 Object {
   "accordion": true,
   "items": Array [],
-  "onChange": [Function],
+  "onChange": [MockFunction],
 }
 `;
