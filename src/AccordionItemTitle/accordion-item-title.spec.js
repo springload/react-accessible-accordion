@@ -46,48 +46,39 @@ describe('AccordionItemTitle', () => {
     });
 
     it('renders correctly with different className', () => {
-        const tree = renderer
-            .create(
-                <AccordionItemTitle
-                    className="testCSSClass"
-                    accordionStore={accordionStore}
-                    uuid="item-one-uuid"
-                >
-                    <div>Fake Title</div>
-                </AccordionItemTitle>,
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
+        const className = 'className';
+        const wrapper = mount(
+            <AccordionItemTitle
+                className={className}
+                accordionStore={accordionStore}
+                uuid="item-one-uuid"
+            />,
+        );
+        expect(wrapper.find('div').hasClass(className)).toEqual(true);
     });
 
     it('renders with different hideBodyClassName', () => {
-        const tree = renderer
-            .create(
-                <AccordionItemTitle
-                    hideBodyClassName="testCSSClass--hidden"
-                    accordionStore={accordionStore}
-                    uuid="item-one-uuid"
-                >
-                    <div>Fake title</div>
-                </AccordionItemTitle>,
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
+        const hideBodyClassName = 'hideBodyClassName';
+        const wrapper = mount(
+            <AccordionItemTitle
+                hideBodyClassName={hideBodyClassName}
+                accordionStore={accordionStore}
+                uuid="item-one-uuid"
+            />,
+        );
+        expect(wrapper.find('div').hasClass(hideBodyClassName)).toEqual(true);
     });
 
-    it("doesn't respect hideBodyClassName when collapsed", () => {
-        const tree = renderer
-            .create(
-                <AccordionItemTitle
-                    hideBodyClassName="testCSSClass--hidden"
-                    accordionStore={accordionStore}
-                    uuid="item-two-uuid"
-                >
-                    <div>Fake title</div>
-                </AccordionItemTitle>,
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
+    it("doesn't present hideBodyClassName when collapsed", () => {
+        const hideBodyClassName = 'hideBodyClassName';
+        const wrapper = mount(
+            <AccordionItemTitle
+                hideBodyClassName={hideBodyClassName}
+                accordionStore={accordionStore}
+                uuid="item-two-uuid"
+            />,
+        );
+        expect(wrapper.find('div').hasClass(hideBodyClassName)).toEqual(false);
     });
 
     it('renders correctly when pressing enter', async () => {

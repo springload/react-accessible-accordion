@@ -1,38 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AccordionItemBody renders correctly with different className 1`] = `
-<div
-  aria-hidden={true}
-  aria-labelledby="accordion__title-asdf-1234"
-  className="testCSSClass accordion__body--hidden"
-  id="accordion__body-asdf-1234"
-  role="tabpanel"
->
-  <div>
-    Fake body
-  </div>
-</div>
-`;
-
 exports[`AccordionItemBody renders correctly with min params 1`] = `
 <div
   aria-hidden={true}
   aria-labelledby="accordion__title-asdf-1234"
   className="accordion__body accordion__body--hidden"
-  id="accordion__body-asdf-1234"
-  role="tabpanel"
->
-  <div>
-    Fake body
-  </div>
-</div>
-`;
-
-exports[`AccordionItemBody renders correctly with prefixClass 1`] = `
-<div
-  aria-hidden={true}
-  aria-labelledby="accordion__title-asdf-1234"
-  className="accordion__body testCSSClass--hidden"
   id="accordion__body-asdf-1234"
   role="tabpanel"
 >

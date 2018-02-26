@@ -1,41 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AccordionItemTitle doesn't respect hideBodyClassName when collapsed 1`] = `
-<div
-  aria-controls="accordion__body-item-two-uuid"
-  aria-expanded={true}
-  className="accordion__title"
-  disabled={false}
-  id="accordion__title-item-two-uuid"
-  onClick={[Function]}
-  onKeyPress={[Function]}
-  role="button"
-  tabIndex="0"
->
-  <div>
-    Fake title
-  </div>
-</div>
-`;
-
-exports[`AccordionItemTitle renders correctly with different className 1`] = `
-<div
-  aria-controls="accordion__body-item-one-uuid"
-  aria-expanded={false}
-  className="testCSSClass"
-  disabled={false}
-  id="accordion__title-item-one-uuid"
-  onClick={[Function]}
-  onKeyPress={[Function]}
-  role="button"
-  tabIndex="0"
->
-  <div>
-    Fake Title
-  </div>
-</div>
-`;
-
 exports[`AccordionItemTitle renders correctly with min params 1`] = `
 <div
   aria-controls="accordion__body-item-one-uuid"
@@ -50,24 +14,6 @@ exports[`AccordionItemTitle renders correctly with min params 1`] = `
 >
   <div>
     Fake Title
-  </div>
-</div>
-`;
-
-exports[`AccordionItemTitle renders with different hideBodyClassName 1`] = `
-<div
-  aria-controls="accordion__body-item-one-uuid"
-  aria-expanded={false}
-  className="accordion__title testCSSClass--hidden"
-  disabled={false}
-  id="accordion__title-item-one-uuid"
-  onClick={[Function]}
-  onKeyPress={[Function]}
-  role="button"
-  tabIndex="0"
->
-  <div>
-    Fake title
   </div>
 </div>
 `;

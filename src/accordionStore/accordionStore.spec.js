@@ -50,6 +50,9 @@ describe('accordionStore', () => {
             expect(store.items.length).toEqual(2);
             store.removeItem('foo');
             expect(store.items.length).toEqual(1);
+            expect(store.items.find(item => item.uuid === 'foo')).toEqual(
+                undefined,
+            );
         });
 
         it('can modify the expanded property of an item', () => {
@@ -71,7 +74,12 @@ describe('accordionStore', () => {
             });
 
             store.setExpanded('foo', false);
-            expect(store.items.filter(item => item.expanded).length).toEqual(1);
+
+            const expandedItems = store.items.filter(item => item.expanded);
+            expect(expandedItems.length).toEqual(1);
+            expect(expandedItems.find(item => item.uuid === 'foo')).toEqual(
+                undefined,
+            );
         });
 
         it('will collapse any open item if accordion=true', () => {
