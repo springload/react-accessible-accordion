@@ -3,7 +3,11 @@
 > All notable changes to this project are documented in this file.
 > This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [[v2.0.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.0.1)
+## Next
+
+### Added
+
+* Publish flow types.
 
 ### Changed
 
