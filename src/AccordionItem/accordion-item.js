@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import type { Node } from 'react';
+import type { ElementProps } from 'react';
 import { inject, observer, Provider } from 'mobx-react';
 import consecutive from 'consecutive';
 import classNames from 'classnames';
@@ -12,9 +12,7 @@ export function resetNextUuid() {
     nextUuid = consecutive();
 }
 
-type AccordionItemProps = {
-    children: Node,
-    className: string,
+type AccordionItemProps = ElementProps<'div'> & {
     hideBodyClassName: string,
     accordionStore: Store,
     disabled: boolean,
@@ -59,8 +57,10 @@ class AccordionItem extends Component<AccordionItemProps, *> {
         const {
             className,
             hideBodyClassName,
-            children,
             accordionStore,
+            disabled,
+            expanded: expandedProp,
+            ...rest
         } = this.props;
 
         const currentItem = accordionStore.items.find(
@@ -78,9 +78,8 @@ class AccordionItem extends Component<AccordionItemProps, *> {
                     className={classNames(className, {
                         [hideBodyClassName]: !expanded && hideBodyClassName,
                     })}
-                >
-                    {children}
-                </div>
+                    {...rest}
+                />
             </Provider>
         );
     }
