@@ -70,4 +70,13 @@ describe('AccordionItemBody', () => {
             wrapper.findWhere(item => item.className === className).length,
         ).toEqual(0);
     });
+
+    it('respects arbitrary user-defined props', () => {
+        const wrapper = mount(
+            <Provider accordionStore={accordionStore} uuid={uuid}>
+                <AccordionItemBody lang="en" />
+            </Provider>,
+        );
+        expect(wrapper.find('div').instance().lang).toEqual('en');
+    });
 });

@@ -131,7 +131,7 @@ describe('AccordionItem', () => {
         const tree = renderer
             .create(
                 <Provider accordionStore={accordionStore}>
-                    <AccordionItem accordion={false}>
+                    <AccordionItem>
                         <AccordionItemTitle>
                             <div>Fake title</div>
                         </AccordionItemTitle>
@@ -150,7 +150,7 @@ describe('AccordionItem', () => {
         const tree = renderer
             .create(
                 <Provider accordionStore={accordionStore}>
-                    <AccordionItem accordion={false}>
+                    <AccordionItem>
                         <AccordionItemTitle>
                             <div>Fake title</div>
                         </AccordionItemTitle>
@@ -300,5 +300,15 @@ describe('AccordionItem', () => {
         wrapper.unmount();
 
         expect(accordionStore.items.length).toEqual(0);
+    });
+
+    it('respects arbitrary user-defined props', () => {
+        const wrapper = mount(
+            <Provider accordionStore={accordionStore}>
+                <AccordionItem lang="en" />
+            </Provider>,
+        );
+
+        expect(wrapper.find('div').instance().lang).toEqual('en');
     });
 });

@@ -1,13 +1,11 @@
 // @flow
 
-import React, { Component, type Node } from 'react';
+import React, { Component, type ElementProps } from 'react';
 import { Provider } from 'mobx-react';
 import { createAccordionStore } from '../accordionStore/accordionStore';
 
-type AccordionProps = {
+type AccordionProps = ElementProps<'div'> & {
     accordion: boolean,
-    children: Node,
-    className: string,
     onChange: Function,
 };
 
@@ -25,14 +23,12 @@ class Accordion extends Component<AccordionProps, *> {
     });
 
     render() {
-        const { className, children } = this.props;
+        const { accordion: accordionProp, onChange, ...rest } = this.props;
         const { accordion } = this.accordionStore;
 
         return (
             <Provider accordionStore={this.accordionStore}>
-                <div role={accordion ? 'tablist' : null} className={className}>
-                    {children}
-                </div>
+                <div role={accordion ? 'tablist' : null} {...rest} />
             </Provider>
         );
     }

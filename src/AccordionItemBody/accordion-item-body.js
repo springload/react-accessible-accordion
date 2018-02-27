@@ -1,7 +1,6 @@
 // @flow
 
-import React from 'react';
-import type { Node } from 'react';
+import React, { type ElementProps } from 'react';
 import classNames from 'classnames';
 import { inject, observer } from 'mobx-react';
 import { type Store } from '../accordionStore/accordionStore';
@@ -11,16 +10,20 @@ const defaultProps = {
     hideBodyClassName: 'accordion__body--hidden',
 };
 
-type AccordionItemBodyProps = {
-    children: Node,
-    className: string,
+type AccordionItemBodyProps = ElementProps<'div'> & {
     hideBodyClassName: string,
     accordionStore: Store,
     uuid: string | number,
 };
 
 const AccordionItemBody = (props: AccordionItemBodyProps) => {
-    const { uuid, children, className, hideBodyClassName } = props;
+    const {
+        accordionStore,
+        uuid,
+        className,
+        hideBodyClassName,
+        ...rest
+    } = props;
     const { items, accordion } = props.accordionStore;
     const foundItem = items.find(item => item.uuid === uuid);
     if (!foundItem) return null;
@@ -41,9 +44,8 @@ const AccordionItemBody = (props: AccordionItemBodyProps) => {
             aria-hidden={ariaHidden}
             aria-labelledby={ariaLabelledby}
             role={role}
-        >
-            {children}
-        </div>
+            {...rest}
+        />
     );
 };
 

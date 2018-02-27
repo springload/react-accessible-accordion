@@ -1,14 +1,11 @@
 // @flow
 
-import React, { Component } from 'react';
-import type { Node } from 'react';
+import React, { Component, type ElementProps } from 'react';
 import classNames from 'classnames';
 import { inject, observer } from 'mobx-react';
 import { type Store } from '../accordionStore/accordionStore';
 
-type AccordionItemTitleProps = {
-    children: Node,
-    className: string,
+type AccordionItemTitleProps = ElementProps<'div'> & {
     hideBodyClassName: string,
     accordionStore: Store,
     uuid: string | number,
@@ -57,7 +54,13 @@ class AccordionItemTitle extends Component<
 
     render() {
         const { items, accordion } = this.props.accordionStore;
-        const { uuid, children, className, hideBodyClassName } = this.props;
+        const {
+            uuid,
+            className,
+            hideBodyClassName,
+            accordionStore,
+            ...rest
+        } = this.props;
         const foundItem = items.find(item => item.uuid === uuid);
         if (!foundItem) return null;
 
@@ -82,9 +85,8 @@ class AccordionItemTitle extends Component<
                     tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
                     onKeyPress={this.handleKeyPress}
                     disabled={disabled}
-                >
-                    {children}
-                </div>
+                    {...rest}
+                />
             );
         }
         return (
@@ -98,9 +100,8 @@ class AccordionItemTitle extends Component<
                 tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
                 onKeyPress={this.handleKeyPress}
                 disabled={disabled}
-            >
-                {children}
-            </div>
+                {...rest}
+            />
         );
     }
 }

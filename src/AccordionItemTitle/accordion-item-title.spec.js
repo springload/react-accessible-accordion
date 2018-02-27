@@ -149,4 +149,18 @@ describe('AccordionItemTitle', () => {
             wrapper.findWhere(item => item.className === className).length,
         ).toEqual(0);
     });
+
+    it('respects arbitrary user-defined props', () => {
+        const wrapper = mount(
+            <AccordionItemTitle
+                accordionStore={accordionStore}
+                uuid="item-one-uuid"
+                lang="en"
+            >
+                Fake Title
+            </AccordionItemTitle>,
+        );
+
+        expect(wrapper.find('div').instance().lang).toEqual('en');
+    });
 });
