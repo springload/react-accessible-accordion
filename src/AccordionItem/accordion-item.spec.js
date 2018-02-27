@@ -301,4 +301,14 @@ describe('AccordionItem', () => {
 
         expect(accordionStore.items.length).toEqual(0);
     });
+
+    it('respects arbitrary user-defined props', () => {
+        const wrapper = mount(
+            <Provider accordionStore={accordionStore}>
+                <AccordionItem lang="en" />
+            </Provider>,
+        );
+
+        expect(wrapper.find('div').instance().lang).toEqual('en');
+    });
 });

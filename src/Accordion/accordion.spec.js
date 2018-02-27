@@ -206,4 +206,10 @@ describe('Accordion', () => {
                 .length,
         ).toEqual(2);
     });
+
+    it('respects arbitrary user-defined props', () => {
+        const wrapper = mount(<Accordion lang="en" />);
+
+        expect(wrapper.find('div').instance().lang).toEqual('en');
+    });
 });
