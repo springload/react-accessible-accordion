@@ -14,9 +14,11 @@
     "js": "babel -d dist src",
     "js:watch": "npm run js -- --watch",
     "css": "cp src/react-accessible-accordion.css dist",
+    "build:clean": "rm -rf dist/",
     "build:rollup": "NODE_ENV=production rollup -c",
     "build:flow": "flow-copy-source src dist/es -i \"**/*.spec.js\"",
-    "build": "npm run build:flow && npm run build:rollup",
+    "build":
+      "npm run build:clean && npm run build:flow && npm run build:rollup",
     "start": "npm run js:watch",
     "start-demo":
       "webpack-dev-server --config ./webpack/webpack.config.demo.js",
