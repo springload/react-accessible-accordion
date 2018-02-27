@@ -131,7 +131,7 @@ describe('AccordionItem', () => {
         const tree = renderer
             .create(
                 <Provider accordionStore={accordionStore}>
-                    <AccordionItem accordion={false}>
+                    <AccordionItem>
                         <AccordionItemTitle>
                             <div>Fake title</div>
                         </AccordionItemTitle>
@@ -150,7 +150,7 @@ describe('AccordionItem', () => {
         const tree = renderer
             .create(
                 <Provider accordionStore={accordionStore}>
-                    <AccordionItem accordion={false}>
+                    <AccordionItem>
                         <AccordionItemTitle>
                             <div>Fake title</div>
                         </AccordionItemTitle>
