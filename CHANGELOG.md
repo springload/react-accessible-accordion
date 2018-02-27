@@ -5,6 +5,8 @@
 
 ## Next
 
+## [[v2.1.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.1.0)
+
 ### Added
 
 * Publish flow types.
