@@ -11,14 +11,10 @@
 
 ### Changed
 
+* Update all React components to accept arbitrary HTMLDivElement props (eg. 'lang', 'role' etc).
 * Upgrade all dev-dependencies except the eslint configs.
 * Replace snapshot tests with explicit assertions in AccordionItemBody and AccordionItemTitle.
 * Add specific assertions to tests in accordionStore.
-
-## [[v2.0.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.0.1)
-
-### Changed
-
 * Minor syntax change in AccordionItemBody
 
 ## [[v2.0.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.0.0)
