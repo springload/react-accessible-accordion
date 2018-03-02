@@ -57,7 +57,7 @@ const Example = () => (
 ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
 ```
 
-## Styles
+### Styles
 
 We strongly encourage you to write your own styles for your accordions, but we've published these two starter stylesheets to help you get up and running:
 ```js
