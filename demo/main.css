@@ -499,3 +499,19 @@ footer {
 h4:hover .anchor {
     display: inline;
 }
+
+.u-margin-top {
+    margin-top: 1.875rem;
+}
+
+.u-margin-right {
+    margin-right: 1.875rem;
+}
+
+.block {
+    padding: 1.25rem;
+}
+
+.u-margin-bottom-s {
+    margin-bottom: 0.5rem;
+}

@@ -29,7 +29,8 @@ import {
     AccordionItemBody,
 } from 'react-accessible-accordion';
 
-import './node_modules/react-accessible-accordion/dist/react-accessible-accordion.css';
+// Demo styles, see 'Styles' section below for some notes on use.
+import 'react-accessible-accordion/dist/fancy-example.css';
 
 const Example = () => (
     <Accordion>
@@ -55,6 +56,19 @@ const Example = () => (
 
 ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
 ```
+
+### Styles
+
+We strongly encourage you to write your own styles for your accordions, but we've published these two starter stylesheets to help you get up and running:
+```js
+// 'Minimal' theme - hide/show the AccordionBody component:
+import 'react-accessible-accordion/dist/fancy-example.css';
+
+// 'Fancy' theme - boilerplate styles for all components, as seen on our demo:
+import 'react-accessible-accordion/dist/minimal-example.css';
+```
+
+We recommend that you copy them into your own app and modify them to suit your needs, particularly if you're using your own `className`s.
 
 ## API
 
