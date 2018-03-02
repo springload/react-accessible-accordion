@@ -5,6 +5,15 @@
 
 ## Next
 
+## [[v2.2.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.2.0)
+
+### Added
+
+* Demo styles added to the bundle as two optional files:
+  - `minimal-example.css`: 'Minimal' theme - hide/show the AccordionBody component
+  - `fancy-example.css`: 'Fancy' theme - boilerplate styles for all components, as seen on our demo
+
+
 ## [[v2.1.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.1.0)
 
 ### Added
