@@ -29,14 +29,18 @@ import {
     AccordionItemBody,
 } from 'react-accessible-accordion';
 
-// The following line is optional
-// import './node_modules/react-accessible-accordion/dist/minimal-example.css'; 
-// This is the minimal styling you can import to have the default accordion show/hide panels.
-
-// The following line is optional
-import './node_modules/react-accessible-accordion/dist/fancy-example.css'; 
-// This imports all the accordion styles used in the demo page.
-// Use one or the other
+/*
+ * We've published these two demo stylesheets to get you up and running right
+ * away, but we recommend that you copy them into your own app and modify them
+ * to suit your needs, particularly if you're using your own `className`s.
+ *
+ * 'Minimal' theme - hide/show the AccordionBody component:
+ * import 'react-accessible-accordion/dist/minimal-example.css';
+ * OR
+ * 'Fancy' theme - boilerplate styles for all components, as seen on our demo
+ * page:
+ */
+import 'react-accessible-accordion/dist/fancy-example.css';
 
 const Example = () => (
     <Accordion>
@@ -62,9 +66,6 @@ const Example = () => (
 
 ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
 ```
-
-Note that any `className` modification will more likely break the example CSS styles provided in this package. You will need to write your own CSS to takeover the default one.
-
 
 ## API
 
