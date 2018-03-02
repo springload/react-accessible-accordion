@@ -8,7 +8,6 @@ import {
     AccordionItemBody,
 } from '../../src';
 
-import '../../src/css/minimal-example.css';
 import '../../src/css/fancy-example.css';
 
 const Example = () => (
