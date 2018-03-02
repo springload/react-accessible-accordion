@@ -3,22 +3,6 @@
 * Demo styles
 * ----------------------------------------------
 **/
-.u-margin-top {
-    margin-top: 1.875rem;
-}
-
-.u-margin-right {
-    margin-right: 1.875rem;
-}
-
-.block {
-    padding: 1.25rem;
-}
-
-.u-margin-bottom-s {
-    margin-bottom: 0.5rem;
-}
-
 .u-position-absolute {
     position: absolute;
 }
@@ -56,6 +40,14 @@
 
 .accordion__body {
     padding: 20px;
+    display: block;
+    animation: fadein 0.35s ease-in;
+}
+
+.accordion__body--hidden {
+    display: none;
+    opacity: 0;
+    animation: fadein 0.35s ease-in;
 }
 
 .accordion__title > *:last-child,
@@ -111,6 +103,16 @@
 /* -------------------------------------------------- */
 /* ---------------- Animation part ------------------ */
 /* -------------------------------------------------- */
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
 
 @keyframes move-down {
     0% {

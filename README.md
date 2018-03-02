@@ -29,7 +29,14 @@ import {
     AccordionItemBody,
 } from 'react-accessible-accordion';
 
-import './node_modules/react-accessible-accordion/dist/react-accessible-accordion.css';
+// The following line is optional
+// import './node_modules/react-accessible-accordion/dist/minimal-example.css'; 
+// This is the minimal styling you can import to have the default accordion show/hide panels.
+
+// The following line is optional
+import './node_modules/react-accessible-accordion/dist/fancy-example.css'; 
+// This imports all the accordion styles used in the demo page.
+// Use one or the other
 
 const Example = () => (
     <Accordion>
@@ -55,6 +62,9 @@ const Example = () => (
 
 ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
 ```
+
+Note that any `className` modification will more likely break the example CSS styles provided in this package. You will need to write your own CSS to takeover the default one.
+
 
 ## API
 

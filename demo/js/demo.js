@@ -8,8 +8,8 @@ import {
     AccordionItemBody,
 } from '../../src';
 
-import '../css/demo.css';
-import '../../src/react-accessible-accordion.css';
+import '../../src/css/minimal-example.css';
+import '../../src/css/fancy-example.css';
 
 const Example = () => (
     <div className="demo-container">

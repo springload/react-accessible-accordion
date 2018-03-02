@@ -1,0 +1,8 @@
+.accordion__body {
+    display: block;
+}
+
+.accordion__body--hidden {
+    display: none;
+    opacity: 0;
+}
