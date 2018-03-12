@@ -2,27 +2,26 @@
 
 import React, { Component, type ElementProps } from 'react';
 import classNames from 'classnames';
-import { inject, observer } from 'mobx-react';
-import { type Store } from '../accordionStore/accordionStore';
+import { Subscribe } from 'unstated';
+import AccordionContainer from '../Accordion/accordion.container';
 
 type AccordionItemTitleProps = ElementProps<'div'> & {
     hideBodyClassName: string,
-    accordionStore: Store,
     uuid: string | number,
 };
 
 type AccordionItemTitleState = {};
+
+const defaultProps = {
+    className: 'accordion__title',
+    hideBodyClassName: '',
+};
 
 class AccordionItemTitle extends Component<
     AccordionItemTitleProps,
     AccordionItemTitleState,
 > {
     static accordionElementName = 'AccordionItemTitle';
-
-    static defaultProps = {
-        className: 'accordion__title',
-        hideBodyClassName: '',
-    };
 
     handleClick = () => {
         const { uuid, accordionStore } = this.props;
@@ -53,7 +52,7 @@ class AccordionItemTitle extends Component<
     };
 
     render() {
-        const { items, accordion } = this.props.accordionStore;
+        const { state: { items, accordion } } = this.props.accordionStore;
         const {
             uuid,
             className,
@@ -106,4 +105,13 @@ class AccordionItemTitle extends Component<
     }
 }
 
-export default inject('accordionStore', 'uuid')(observer(AccordionItemTitle));
+const AccordionItemTitleSubscriber = (props: AccordionItemTitleProps) => (
+    <Subscribe to={[AccordionContainer]}>
+        {accordionStore => (
+            <AccordionItemTitle {...props} accordionStore={accordionStore} />
+        )}
+    </Subscribe>
+);
+AccordionItemTitleSubscriber.defaultProps = defaultProps;
+
+export default AccordionItemTitleSubscriber;

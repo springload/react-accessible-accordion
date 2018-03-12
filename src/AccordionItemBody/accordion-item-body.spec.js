@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import { Provider } from 'mobx-react';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import { createAccordionStore } from '../accordionStore/accordionStore';

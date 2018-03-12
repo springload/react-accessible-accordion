@@ -3,25 +3,23 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import renderer from 'react-test-renderer';
-import { Provider } from 'mobx-react';
 import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title';
 import AccordionItemBody from '../AccordionItemBody/accordion-item-body';
 import AccordionItem, { resetNextUuid } from './accordion-item';
-import { createAccordionStore } from '../accordionStore/accordionStore';
+import AccordionContainer from '../Accordion/accordion.container';
 
 describe('AccordionItem', () => {
     let accordionStore;
 
     beforeEach(() => {
         resetNextUuid();
-        accordionStore = createAccordionStore({
-            accordion: false,
-            onChange: jest.fn(),
-        });
+        const accordionContainer = new AccordionContainer();
+        accordionContainer.init(false, jest.fn());
+        accordionStore = accordionContainer;
     });
 
     it('renders correctly with accordion true', () => {
-        accordionStore.accordion = true;
+        accordionStore.setAccordion(true);
         const tree = renderer
             .create(
                 <Provider accordionStore={accordionStore}>
@@ -40,7 +38,7 @@ describe('AccordionItem', () => {
     });
 
     it('renders correctly with accordion false', () => {
-        accordionStore.accordion = false;
+        accordionStore.setAccordion(false);
         const tree = renderer
             .create(
                 <Provider accordionStore={accordionStore}>

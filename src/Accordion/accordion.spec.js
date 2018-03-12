@@ -49,8 +49,9 @@ describe('Accordion', () => {
             expect(
                 wrapper
                     .instance()
-                    .accordionStore.items.filter(item => item.expanded === true)
-                    .length,
+                    .accordionStore.state.items.filter(
+                        item => item.expanded === true,
+                    ).length,
             ).toEqual(1);
         });
 
@@ -59,8 +60,9 @@ describe('Accordion', () => {
             expect(
                 wrapper
                     .instance()
-                    .accordionStore.items.filter(item => item.expanded === true)
-                    .length,
+                    .accordionStore.state.items.filter(
+                        item => item.expanded === true,
+                    ).length,
             ).toEqual(1);
         });
 
@@ -69,8 +71,9 @@ describe('Accordion', () => {
             expect(
                 wrapper
                     .instance()
-                    .accordionStore.items.filter(item => item.expanded === true)
-                    .length,
+                    .accordionStore.state.items.filter(
+                        item => item.expanded === true,
+                    ).length,
             ).toEqual(0);
         });
     });
@@ -98,8 +101,9 @@ describe('Accordion', () => {
             expect(
                 wrapper
                     .instance()
-                    .accordionStore.items.filter(item => item.expanded === true)
-                    .length,
+                    .accordionStore.state.items.filter(
+                        item => item.expanded === true,
+                    ).length,
             ).toEqual(1);
         });
 
@@ -108,8 +112,9 @@ describe('Accordion', () => {
             expect(
                 wrapper
                     .instance()
-                    .accordionStore.items.filter(item => item.expanded === true)
-                    .length,
+                    .accordionStore.state.items.filter(
+                        item => item.expanded === true,
+                    ).length,
             ).toEqual(2);
         });
 
@@ -118,8 +123,9 @@ describe('Accordion', () => {
             expect(
                 wrapper
                     .instance()
-                    .accordionStore.items.filter(item => item.expanded === true)
-                    .length,
+                    .accordionStore.state.items.filter(
+                        item => item.expanded === true,
+                    ).length,
             ).toEqual(1);
         });
     });
@@ -141,8 +147,9 @@ describe('Accordion', () => {
         expect(
             wrapper
                 .instance()
-                .accordionStore.items.filter(item => item.expanded === true)
-                .length,
+                .accordionStore.state.items.filter(
+                    item => item.expanded === true,
+                ).length,
         ).toEqual(0);
     });
 
@@ -157,8 +164,9 @@ describe('Accordion', () => {
         expect(
             wrapper
                 .instance()
-                .accordionStore.items.filter(item => item.expanded === true)
-                .length,
+                .accordionStore.state.items.filter(
+                    item => item.expanded === true,
+                ).length,
         ).toEqual(1);
     });
 
@@ -184,7 +192,8 @@ describe('Accordion', () => {
         expect(
             wrapper
                 .instance()
-                .accordionStore.items.filter(item => item.expanded).length,
+                .accordionStore.state.items.filter(item => item.expanded)
+                .length,
         ).toEqual(1);
         expect(
             wrapper.findWhere(item => item.hasClass(hideBodyClassName)).length,
@@ -202,8 +211,9 @@ describe('Accordion', () => {
         expect(
             wrapper
                 .instance()
-                .accordionStore.items.filter(item => item.expanded === true)
-                .length,
+                .accordionStore.state.items.filter(
+                    item => item.expanded === true,
+                ).length,
         ).toEqual(2);
     });
 

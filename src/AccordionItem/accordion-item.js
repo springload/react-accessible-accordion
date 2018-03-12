@@ -2,10 +2,10 @@
 
 import React, { Component } from 'react';
 import type { ElementProps } from 'react';
-import { inject, observer, Provider } from 'mobx-react';
 import consecutive from 'consecutive';
 import classNames from 'classnames';
-import type { Store } from '../accordionStore/accordionStore';
+import { Subscribe } from 'unstated';
+import AccordionContainer from '../Accordion/accordion.container';
 
 let nextUuid = consecutive();
 export function resetNextUuid() {
@@ -14,19 +14,20 @@ export function resetNextUuid() {
 
 type AccordionItemProps = ElementProps<'div'> & {
     hideBodyClassName: string,
-    accordionStore: Store,
     disabled: boolean,
     expanded: boolean,
+    accordionStore: ?AccordionContainer,
+};
+
+const defaultProps = {
+    className: 'accordion__item',
+    hideBodyClassName: '',
+    disabled: false,
+    expanded: false,
+    accordionStore: undefined,
 };
 
 class AccordionItem extends Component<AccordionItemProps, *> {
-    static defaultProps = {
-        className: 'accordion__item',
-        hideBodyClassName: '',
-        disabled: false,
-        expanded: false,
-    };
-
     uuid = nextUuid();
 
     componentWillMount() {
@@ -63,7 +64,7 @@ class AccordionItem extends Component<AccordionItemProps, *> {
             ...rest
         } = this.props;
 
-        const currentItem = accordionStore.items.find(
+        const currentItem = accordionStore.state.items.find(
             item => item.uuid === this.uuid,
         );
 
@@ -73,16 +74,23 @@ class AccordionItem extends Component<AccordionItemProps, *> {
         const { expanded } = currentItem;
 
         return (
-            <Provider uuid={this.uuid}>
-                <div
-                    className={classNames(className, {
-                        [hideBodyClassName]: !expanded && hideBodyClassName,
-                    })}
-                    {...rest}
-                />
-            </Provider>
+            <div
+                className={classNames(className, {
+                    [hideBodyClassName]: !expanded && hideBodyClassName,
+                })}
+                {...rest}
+            />
         );
     }
 }
 
-export default inject('accordionStore')(observer(AccordionItem));
+const AccordionItemSubscriber = (props: AccordionItemProps) => (
+    <Subscribe to={[AccordionContainer]}>
+        {accordionStore => (
+            <AccordionItem {...props} accordionStore={accordionStore} />
+        )}
+    </Subscribe>
+);
+AccordionItemSubscriber.defaultProps = defaultProps;
+
+export default AccordionItemSubscriber;

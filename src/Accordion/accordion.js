@@ -1,37 +1,47 @@
 // @flow
 
-import React, { Component, type ElementProps } from 'react';
-import { Provider } from 'mobx-react';
-import { createAccordionStore } from '../accordionStore/accordionStore';
+import React, { type ElementProps } from 'react';
+import { Provider, Subscribe } from 'unstated';
+import AccordionContainer from './accordion.container';
 
 type AccordionProps = ElementProps<'div'> & {
     accordion: boolean,
     onChange: Function,
+    accordionStore: ?AccordionContainer,
 };
 
-class Accordion extends Component<AccordionProps, *> {
-    static defaultProps = {
-        accordion: true,
-        onChange: () => {},
-        className: 'accordion',
-        children: null,
-    };
+const defaultProps: AccordionProps = {
+    accordion: true,
+    onChange: () => {},
+    className: 'accordion',
+    children: null,
+    accordionStore: undefined,
+};
 
-    accordionStore = createAccordionStore({
-        accordion: this.props.accordion,
-        onChange: this.props.onChange,
-    });
+const Accordion = (props: AccordionProps) => {
+    const { accordion, onChange, accordionStore, ...rest } = props;
+    accordionStore.init(accordion, onChange);
+    return (
+        <div
+            role={accordionStore.state.accordion ? 'tablist' : null}
+            {...rest}
+        />
+    );
+};
 
-    render() {
-        const { accordion: accordionProp, onChange, ...rest } = this.props;
-        const { accordion } = this.accordionStore;
+const AccordionSubscriber = (props: AccordionProps) => (
+    <Subscribe to={[AccordionContainer]}>
+        {accordionStore => (
+            <Accordion {...props} accordionStore={accordionStore} />
+        )}
+    </Subscribe>
+);
 
-        return (
-            <Provider accordionStore={this.accordionStore}>
-                <div role={accordion ? 'tablist' : null} {...rest} />
-            </Provider>
-        );
-    }
-}
+const AccordionProvider = (props: AccordionProps) => (
+    <Provider>
+        <AccordionSubscriber {...props} />
+    </Provider>
+);
+AccordionProvider.defaultProps = defaultProps;
 
-export default Accordion;
+export default AccordionProvider;

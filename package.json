@@ -127,8 +127,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "consecutive": "^5.0.4",
-    "mobx": "^3.4.0",
-    "mobx-react": "^4.3.5"
+    "unstated": "^1.0.3"
   },
   "peerDependencies": {
     "react": "^15.4.0 || ^16.0.0",

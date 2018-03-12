@@ -3,7 +3,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
-import { Provider } from 'mobx-react';
 import AccordionItemTitle from './accordion-item-title';
 import { createAccordionStore } from '../accordionStore/accordionStore';
 
