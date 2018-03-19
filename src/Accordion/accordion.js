@@ -1,47 +1,67 @@
 // @flow
 
-import React, { type ElementProps } from 'react';
+import React, { Component, type ElementProps } from 'react';
 import { Provider, Subscribe } from 'unstated';
-import AccordionContainer from './accordion.container';
+import AccordionContainer from '../AccordionContainer/AccordionContainer';
 
-type AccordionProps = ElementProps<'div'> & {
+type AccordionWrapperProps = ElementProps<'div'> & {
     accordion: boolean,
     onChange: Function,
-    accordionStore: ?AccordionContainer,
 };
 
-const defaultProps: AccordionProps = {
+const defaultProps: AccordionWrapperProps = {
     accordion: true,
     onChange: () => {},
     className: 'accordion',
     children: null,
-    accordionStore: undefined,
 };
 
-const Accordion = (props: AccordionProps) => {
-    const { accordion, onChange, accordionStore, ...rest } = props;
-    accordionStore.init(accordion, onChange);
-    return (
-        <div
-            role={accordionStore.state.accordion ? 'tablist' : null}
-            {...rest}
-        />
-    );
+class AccordionWrapper extends Component<AccordionWrapperProps> {
+    accordionStore = new AccordionContainer();
+
+    static defaultProps = defaultProps;
+
+    componentWillMount() {
+        if (this.accordionStore) {
+            this.accordionStore.setAccordion(this.props.accordion);
+        }
+        if (this.accordionStore) {
+            this.accordionStore.setOnChange(this.props.onChange);
+        }
+    }
+
+    componentWillUpdate(nextProps: AccordionWrapperProps) {
+        if (this.accordionStore) {
+            this.accordionStore.setAccordion(nextProps.accordion);
+        }
+        if (this.accordionStore) {
+            this.accordionStore.setOnChange(nextProps.onChange);
+        }
+    }
+
+    render() {
+        const { accordion, onChange, ...rest } = this.props;
+        return (
+            <Provider inject={[this.accordionStore]}>
+                <Subscribe to={[AccordionContainer]}>
+                    {accordionStore => (
+                        <Accordion
+                            accordion={accordionStore.state.accordion}
+                            {...rest}
+                        />
+                    )}
+                </Subscribe>
+            </Provider>
+        );
+    }
+}
+
+type AccordionProps = ElementProps<'div'> & {
+    accordion: boolean,
 };
 
-const AccordionSubscriber = (props: AccordionProps) => (
-    <Subscribe to={[AccordionContainer]}>
-        {accordionStore => (
-            <Accordion {...props} accordionStore={accordionStore} />
-        )}
-    </Subscribe>
+const Accordion = ({ accordion, ...rest }: AccordionProps) => (
+    <div role={accordion ? 'tablist' : null} {...rest} />
 );
 
-const AccordionProvider = (props: AccordionProps) => (
-    <Provider>
-        <AccordionSubscriber {...props} />
-    </Provider>
-);
-AccordionProvider.defaultProps = defaultProps;
-
-export default AccordionProvider;
+export default AccordionWrapper;
