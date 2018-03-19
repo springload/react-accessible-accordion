@@ -20,11 +20,6 @@ class AccordionContainer extends Container<StoreState> {
         onChange: () => {},
     };
 
-    init(accordion: boolean, onChange: Function) {
-        this.setAccordion(accordion);
-        this.setOnChange(onChange);
-    }
-
     setAccordion(accordion: boolean) {
         if (accordion !== this.state.accordion) {
             this.setState({ accordion });
