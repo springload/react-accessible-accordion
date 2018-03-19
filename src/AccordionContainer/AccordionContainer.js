@@ -62,7 +62,7 @@ class AccordionContainer extends Container<StoreState> {
                         ...item,
                         expanded,
                     };
-                } else if (this.accordion && expanded) {
+                } else if (this.state.accordion && expanded) {
                     // If this is an accordion, we might need to collapse the other expanded item.
                     return {
                         ...item,
