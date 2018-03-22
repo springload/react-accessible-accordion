@@ -3,11 +3,16 @@
 import React, { Component, type ElementProps } from 'react';
 import classNames from 'classnames';
 import { Subscribe } from 'unstated';
-import AccordionContainer from '../Accordion/accordion.container';
+import AccordionContainer from '../AccordionContainer/AccordionContainer';
+import ItemContainer from '../ItemContainer/ItemContainer';
 
 type AccordionItemTitleProps = ElementProps<'div'> & {
     hideBodyClassName: string,
     uuid: string | number,
+};
+
+type AccordionItemTitleWrapperProps = ElementProps<'div'> & {
+    hideBodyClassName: string,
 };
 
 type AccordionItemTitleState = {};
@@ -105,13 +110,17 @@ class AccordionItemTitle extends Component<
     }
 }
 
-const AccordionItemTitleSubscriber = (props: AccordionItemTitleProps) => (
-    <Subscribe to={[AccordionContainer]}>
-        {accordionStore => (
-            <AccordionItemTitle {...props} accordionStore={accordionStore} />
+const AccordionItemTitleWrapper = (props: AccordionItemTitleWrapperProps) => (
+    <Subscribe to={[AccordionContainer, ItemContainer]}>
+        {(accordionStore, itemStore) => (
+            <AccordionItemTitle
+                {...props}
+                uuid={itemStore.state.uuid}
+                accordionStore={accordionStore}
+            />
         )}
     </Subscribe>
 );
-AccordionItemTitleSubscriber.defaultProps = defaultProps;
+AccordionItemTitleWrapper.defaultProps = defaultProps;
 
-export default AccordionItemTitleSubscriber;
+export default AccordionItemTitleWrapper;

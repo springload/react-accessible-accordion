@@ -57,11 +57,17 @@ class AccordionWrapper extends Component<AccordionWrapperProps> {
 }
 
 type AccordionProps = ElementProps<'div'> & {
-    accordion: boolean,
+    accordion: ?boolean,
+};
+
+const accordionDefaultProps = {
+    accordion: true,
 };
 
 const Accordion = ({ accordion, ...rest }: AccordionProps) => (
     <div role={accordion ? 'tablist' : null} {...rest} />
 );
+Accordion.defaultProps = accordionDefaultProps;
 
+export { Accordion };
 export default AccordionWrapper;

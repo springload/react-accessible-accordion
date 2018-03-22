@@ -3,26 +3,32 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import renderer from 'react-test-renderer';
+import { Provider } from 'unstated';
 import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title';
 import AccordionItemBody from '../AccordionItemBody/accordion-item-body';
-import AccordionItem, { resetNextUuid } from './accordion-item';
-import AccordionContainer from '../Accordion/accordion.container';
+import AccordionItem from './accordion-item-wrapper';
+import ItemContainer, { resetNextUuid } from '../ItemContainer/ItemContainer';
+import AccordionContainer from '../AccordionContainer/AccordionContainer';
 
 describe('AccordionItem', () => {
     let accordionStore;
+    let itemStore;
 
     beforeEach(() => {
+        const itemContainer = new ItemContainer();
         resetNextUuid();
         const accordionContainer = new AccordionContainer();
-        accordionContainer.init(false, jest.fn());
+        accordionContainer.setAccordion(false);
+        accordionContainer.setOnChange(jest.fn());
         accordionStore = accordionContainer;
+        itemStore = itemContainer;
     });
 
     it('renders correctly with accordion true', () => {
         accordionStore.setAccordion(true);
         const tree = renderer
             .create(
-                <Provider accordionStore={accordionStore}>
+                <Provider inject={[accordionStore, itemStore]}>
                     <AccordionItem className="accordion__item">
                         <AccordionItemTitle className="accordion__title">
                             <div>Fake title</div>
@@ -41,7 +47,7 @@ describe('AccordionItem', () => {
         accordionStore.setAccordion(false);
         const tree = renderer
             .create(
-                <Provider accordionStore={accordionStore}>
+                <Provider inject={[accordionStore]}>
                     <AccordionItem className="accordion__item">
                         <AccordionItemTitle className="accordion__title">
                             <div>Fake title</div>
@@ -58,7 +64,7 @@ describe('AccordionItem', () => {
 
     it('renders with multiple AccordionItems', () => {
         const wrapper = mount(
-            <Provider accordionStore={accordionStore}>
+            <Provider inject={[accordionStore]}>
                 <div>
                     <AccordionItem>
                         <div>Fake title</div>
@@ -77,7 +83,7 @@ describe('AccordionItem', () => {
     it('still renders with no AccordionItemTitle or AccordionItemBody', () => {
         const tree = renderer
             .create(
-                <Provider accordionStore={accordionStore}>
+                <Provider inject={[accordionStore]}>
                     <AccordionItem>
                         <div>Fake title</div>
                         <div>Fake body</div>
@@ -91,7 +97,7 @@ describe('AccordionItem', () => {
     it('still renders with no children at all', () => {
         const tree = renderer
             .create(
-                <Provider accordionStore={accordionStore}>
+                <Provider inject={[accordionStore]}>
                     <AccordionItem />
                 </Provider>,
             )
@@ -101,7 +107,7 @@ describe('AccordionItem', () => {
 
     it('renders with different className', () => {
         const tree = renderer.create(
-            <Provider accordionStore={accordionStore}>
+            <Provider inject={[accordionStore]}>
                 <AccordionItem className="testCSSClass" />
             </Provider>,
         );
@@ -112,7 +118,7 @@ describe('AccordionItem', () => {
 
     it('renders with different hideBodyClassName', () => {
         const tree = renderer.create(
-            <Provider accordionStore={accordionStore}>
+            <Provider inject={[accordionStore]}>
                 <AccordionItem
                     expanded={false}
                     className="accordion-item"
@@ -128,7 +134,7 @@ describe('AccordionItem', () => {
     it('renders correctly with other blocks inside', () => {
         const tree = renderer
             .create(
-                <Provider accordionStore={accordionStore}>
+                <Provider inject={[accordionStore]}>
                     <AccordionItem>
                         <AccordionItemTitle>
                             <div>Fake title</div>
@@ -147,7 +153,7 @@ describe('AccordionItem', () => {
     it('renders correctly with other blocks inside 2', () => {
         const tree = renderer
             .create(
-                <Provider accordionStore={accordionStore}>
+                <Provider inject={[accordionStore]}>
                     <AccordionItem>
                         <AccordionItemTitle>
                             <div>Fake title</div>
@@ -165,7 +171,7 @@ describe('AccordionItem', () => {
 
     it('can dynamically set expanded prop', () => {
         const Wrapper = ({ expanded }: { expanded: boolean }) => (
-            <Provider accordionStore={accordionStore}>
+            <Provider inject={[accordionStore]}>
                 <AccordionItem expanded={expanded}>
                     <AccordionItemTitle>
                         <div>Fake title</div>
@@ -183,7 +189,7 @@ describe('AccordionItem', () => {
 
     it('can dynamically unset expanded prop', () => {
         const Wrapper = ({ expanded }: { expanded: boolean }) => (
-            <Provider accordionStore={accordionStore}>
+            <Provider inject={[accordionStore]}>
                 <AccordionItem expanded={expanded}>
                     <AccordionItemTitle>
                         <div>Fake title</div>
@@ -201,7 +207,7 @@ describe('AccordionItem', () => {
 
     it('dynamically changing arbitrary props does not affect expanded state', () => {
         const Wrapper = ({ className }: { className: string }) => (
-            <Provider accordionStore={accordionStore}>
+            <Provider inject={[accordionStore]}>
                 <AccordionItem className={className}>
                     <AccordionItemTitle>
                         <div>Fake title</div>
@@ -222,7 +228,7 @@ describe('AccordionItem', () => {
         accordionStore.addItem = jest.fn();
 
         const wrapper = mount(
-            <Provider accordionStore={accordionStore}>
+            <Provider inject={[accordionStore]}>
                 <AccordionItem>Fake Title</AccordionItem>
             </Provider>,
         );
@@ -234,13 +240,13 @@ describe('AccordionItem', () => {
 
     it('can manually reset the uuid', () => {
         const wrapperOne = mount(
-            <Provider accordionStore={accordionStore}>
+            <Provider inject={[accordionStore]}>
                 <AccordionItem />
             </Provider>,
         );
         resetNextUuid();
         const wrapperTwo = mount(
-            <Provider accordionStore={accordionStore}>
+            <Provider inject={[accordionStore]}>
                 <AccordionItem />
             </Provider>,
         );
@@ -259,13 +265,13 @@ describe('AccordionItem', () => {
 
     it('can manually reset the uuid', () => {
         const wrapperOne = mount(
-            <Provider accordionStore={accordionStore}>
+            <Provider inject={[accordionStore]}>
                 <AccordionItem />
             </Provider>,
         );
         resetNextUuid();
         const wrapperTwo = mount(
-            <Provider accordionStore={accordionStore}>
+            <Provider inject={[accordionStore]}>
                 <AccordionItem />
             </Provider>,
         );
@@ -284,7 +290,7 @@ describe('AccordionItem', () => {
 
     it('correctly unregisters itself on unmount', () => {
         const wrapper = mount(
-            <Provider accordionStore={accordionStore}>
+            <Provider inject={[accordionStore]}>
                 <AccordionItem>
                     <AccordionItemTitle>
                         <div>Fake title</div>
@@ -302,7 +308,7 @@ describe('AccordionItem', () => {
 
     it('respects arbitrary user-defined props', () => {
         const wrapper = mount(
-            <Provider accordionStore={accordionStore}>
+            <Provider inject={[accordionStore]}>
                 <AccordionItem lang="en" />
             </Provider>,
         );

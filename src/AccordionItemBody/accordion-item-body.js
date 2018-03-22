@@ -3,7 +3,8 @@
 import React, { type ElementProps } from 'react';
 import classNames from 'classnames';
 import { Subscribe } from 'unstated';
-import AccordionContainer from '../Accordion/accordion.container';
+import AccordionContainer from '../AccordionContainer/AccordionContainer';
+import ItemContainer from '../ItemContainer/ItemContainer';
 
 const defaultProps = {
     className: 'accordion__body',
@@ -13,6 +14,10 @@ const defaultProps = {
 type AccordionItemBodyProps = ElementProps<'div'> & {
     hideBodyClassName: string,
     uuid: string | number,
+};
+
+type AccordionItemBodyWrapperProps = ElementProps<'div'> & {
+    hideBodyClassName: string,
 };
 
 const AccordionItemBody = (props: AccordionItemBodyProps) => {
@@ -48,13 +53,17 @@ const AccordionItemBody = (props: AccordionItemBodyProps) => {
     );
 };
 
-const AccordionItemBodySubscriber = (props: AccordionItemBodyProps) => (
-    <Subscribe to={[AccordionContainer]}>
-        {accordionStore => (
-            <AccordionItemBody {...props} accordionStore={accordionStore} />
+const AccordionItemBodyWrapper = (props: AccordionItemBodyWrapperProps) => (
+    <Subscribe to={[AccordionContainer, ItemContainer]}>
+        {(accordionStore, itemStore) => (
+            <AccordionItemBody
+                {...props}
+                uuid={itemStore.state.uuid}
+                accordionStore={accordionStore}
+            />
         )}
     </Subscribe>
 );
-AccordionItemBodySubscriber.defaultProps = defaultProps;
+AccordionItemBodyWrapper.defaultProps = defaultProps;
 
-export default AccordionItemBodySubscriber;
+export default AccordionItemBodyWrapper;
