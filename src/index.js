@@ -1,7 +1,8 @@
 // @flow
 
+// eslint-disable-next-line
 import Accordion from './Accordion/accordion';
-import AccordionItem from './AccordionItem/accordion-item';
+import AccordionItem from './AccordionItem/accordion-item-wrapper';
 import AccordionItemTitle from './AccordionItemTitle/accordion-item-title';
 import AccordionItemBody from './AccordionItemBody/accordion-item-body';
 import { resetNextUuid } from './ItemContainer/ItemContainer';
