@@ -2,11 +2,11 @@
 
 exports[`AccordionItemTitle renders correctly with min params 1`] = `
 <div
-  aria-controls="accordion__body-item-one-uuid"
+  aria-controls="accordion__body-0"
   aria-expanded={false}
   className="accordion__title"
   disabled={false}
-  id="accordion__title-item-one-uuid"
+  id="accordion__title-0"
   onClick={[Function]}
   onKeyPress={[Function]}
   role="button"

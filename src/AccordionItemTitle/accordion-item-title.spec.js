@@ -23,12 +23,12 @@ describe('AccordionItemTitle', () => {
         accordionContainer.setOnChange(jest.fn());
 
         accordionContainer.addItem({
-            uuid: 'item-one-uuid',
+            uuid: 0, // because `nextUuid` in ItemContainer starts at zero.
             expanded: false,
             disabled: false,
         });
         accordionContainer.addItem({
-            uuid: 'item-two-uuid',
+            uuid: 1, // because `nextUuid` in ItemContainer starts at zero.
             expanded: true,
             disabled: false,
         });
