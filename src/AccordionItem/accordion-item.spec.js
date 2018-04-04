@@ -11,24 +11,22 @@ import ItemContainer, { resetNextUuid } from '../ItemContainer/ItemContainer';
 import AccordionContainer from '../AccordionContainer/AccordionContainer';
 
 describe('AccordionItem', () => {
-    let accordionStore;
-    let itemStore;
+    let accordionContainer;
+    let itemContainer;
 
     beforeEach(() => {
-        const itemContainer = new ItemContainer();
         resetNextUuid();
-        const accordionContainer = new AccordionContainer();
+        itemContainer = new ItemContainer();
+        accordionContainer = new AccordionContainer();
         accordionContainer.setAccordion(false);
         accordionContainer.setOnChange(jest.fn());
-        accordionStore = accordionContainer;
-        itemStore = itemContainer;
     });
 
     it('renders correctly with accordion true', () => {
-        accordionStore.setAccordion(true);
+        accordionContainer.setAccordion(true);
         const tree = renderer
             .create(
-                <Provider inject={[accordionStore, itemStore]}>
+                <Provider inject={[accordionContainer, itemContainer]}>
                     <AccordionItem className="accordion__item">
                         <AccordionItemTitle className="accordion__title">
                             <div>Fake title</div>
@@ -44,10 +42,10 @@ describe('AccordionItem', () => {
     });
 
     it('renders correctly with accordion false', () => {
-        accordionStore.setAccordion(false);
+        accordionContainer.setAccordion(false);
         const tree = renderer
             .create(
-                <Provider inject={[accordionStore]}>
+                <Provider inject={[accordionContainer]}>
                     <AccordionItem className="accordion__item">
                         <AccordionItemTitle className="accordion__title">
                             <div>Fake title</div>
@@ -64,7 +62,7 @@ describe('AccordionItem', () => {
 
     it('renders with multiple AccordionItems', () => {
         const wrapper = mount(
-            <Provider inject={[accordionStore]}>
+            <Provider inject={[accordionContainer]}>
                 <div>
                     <AccordionItem>
                         <div>Fake title</div>
@@ -83,7 +81,7 @@ describe('AccordionItem', () => {
     it('still renders with no AccordionItemTitle or AccordionItemBody', () => {
         const tree = renderer
             .create(
-                <Provider inject={[accordionStore]}>
+                <Provider inject={[accordionContainer]}>
                     <AccordionItem>
                         <div>Fake title</div>
                         <div>Fake body</div>
@@ -97,7 +95,7 @@ describe('AccordionItem', () => {
     it('still renders with no children at all', () => {
         const tree = renderer
             .create(
-                <Provider inject={[accordionStore]}>
+                <Provider inject={[accordionContainer]}>
                     <AccordionItem />
                 </Provider>,
             )
@@ -107,7 +105,7 @@ describe('AccordionItem', () => {
 
     it('renders with different className', () => {
         const tree = renderer.create(
-            <Provider inject={[accordionStore]}>
+            <Provider inject={[accordionContainer]}>
                 <AccordionItem className="testCSSClass" />
             </Provider>,
         );
@@ -118,7 +116,7 @@ describe('AccordionItem', () => {
 
     it('renders with different hideBodyClassName', () => {
         const tree = renderer.create(
-            <Provider inject={[accordionStore]}>
+            <Provider inject={[accordionContainer]}>
                 <AccordionItem
                     expanded={false}
                     className="accordion-item"
@@ -134,7 +132,7 @@ describe('AccordionItem', () => {
     it('renders correctly with other blocks inside', () => {
         const tree = renderer
             .create(
-                <Provider inject={[accordionStore]}>
+                <Provider inject={[accordionContainer]}>
                     <AccordionItem>
                         <AccordionItemTitle>
                             <div>Fake title</div>
@@ -153,7 +151,7 @@ describe('AccordionItem', () => {
     it('renders correctly with other blocks inside 2', () => {
         const tree = renderer
             .create(
-                <Provider inject={[accordionStore]}>
+                <Provider inject={[accordionContainer]}>
                     <AccordionItem>
                         <AccordionItemTitle>
                             <div>Fake title</div>
@@ -171,7 +169,7 @@ describe('AccordionItem', () => {
 
     it('can dynamically set expanded prop', () => {
         const Wrapper = ({ expanded }: { expanded: boolean }) => (
-            <Provider inject={[accordionStore]}>
+            <Provider inject={[accordionContainer]}>
                 <AccordionItem expanded={expanded}>
                     <AccordionItemTitle>
                         <div>Fake title</div>
@@ -183,13 +181,15 @@ describe('AccordionItem', () => {
         wrapper.setProps({ expanded: true });
 
         expect(
-            accordionStore.items.filter(item => item.expanded === true).length,
+            accordionContainer.state.items.filter(
+                item => item.expanded === true,
+            ).length,
         ).toEqual(1);
     });
 
     it('can dynamically unset expanded prop', () => {
         const Wrapper = ({ expanded }: { expanded: boolean }) => (
-            <Provider inject={[accordionStore]}>
+            <Provider inject={[accordionContainer]}>
                 <AccordionItem expanded={expanded}>
                     <AccordionItemTitle>
                         <div>Fake title</div>
@@ -201,13 +201,15 @@ describe('AccordionItem', () => {
         wrapper.setProps({ expanded: undefined });
 
         expect(
-            accordionStore.items.filter(item => item.expanded === true).length,
+            accordionContainer.state.items.filter(
+                item => item.expanded === true,
+            ).length,
         ).toEqual(0);
     });
 
     it('dynamically changing arbitrary props does not affect expanded state', () => {
         const Wrapper = ({ className }: { className: string }) => (
-            <Provider inject={[accordionStore]}>
+            <Provider inject={[accordionContainer]}>
                 <AccordionItem className={className}>
                     <AccordionItemTitle>
                         <div>Fake title</div>
@@ -219,16 +221,19 @@ describe('AccordionItem', () => {
         wrapper.setProps({ className: 'bar' });
 
         expect(
-            accordionStore.items.filter(item => item.expanded === true).length,
+            accordionContainer.state.items.filter(
+                item => item.expanded === true,
+            ).length,
         ).toEqual(0);
     });
 
-    it('does not render if its uuid is not registered in accordionStore', () => {
+    it('does not render if its uuid is not registered in accordionContainer', () => {
         // prevent AccordionItem from being able to register itself, for the sake of testing.
-        accordionStore.addItem = jest.fn();
+        // $FlowFixMe
+        accordionContainer.addItem = jest.fn();
 
         const wrapper = mount(
-            <Provider inject={[accordionStore]}>
+            <Provider inject={[accordionContainer]}>
                 <AccordionItem>Fake Title</AccordionItem>
             </Provider>,
         );
@@ -240,13 +245,13 @@ describe('AccordionItem', () => {
 
     it('can manually reset the uuid', () => {
         const wrapperOne = mount(
-            <Provider inject={[accordionStore]}>
+            <Provider inject={[accordionContainer]}>
                 <AccordionItem />
             </Provider>,
         );
         resetNextUuid();
         const wrapperTwo = mount(
-            <Provider inject={[accordionStore]}>
+            <Provider inject={[accordionContainer]}>
                 <AccordionItem />
             </Provider>,
         );
@@ -265,13 +270,13 @@ describe('AccordionItem', () => {
 
     it('can manually reset the uuid', () => {
         const wrapperOne = mount(
-            <Provider inject={[accordionStore]}>
+            <Provider inject={[accordionContainer]}>
                 <AccordionItem />
             </Provider>,
         );
         resetNextUuid();
         const wrapperTwo = mount(
-            <Provider inject={[accordionStore]}>
+            <Provider inject={[accordionContainer]}>
                 <AccordionItem />
             </Provider>,
         );
@@ -290,7 +295,7 @@ describe('AccordionItem', () => {
 
     it('correctly unregisters itself on unmount', () => {
         const wrapper = mount(
-            <Provider inject={[accordionStore]}>
+            <Provider inject={[accordionContainer]}>
                 <AccordionItem>
                     <AccordionItemTitle>
                         <div>Fake title</div>
@@ -299,16 +304,16 @@ describe('AccordionItem', () => {
             </Provider>,
         );
 
-        expect(accordionStore.items.length).toEqual(1);
+        expect(accordionContainer.state.items.length).toEqual(1);
 
         wrapper.unmount();
 
-        expect(accordionStore.items.length).toEqual(0);
+        expect(accordionContainer.state.items.length).toEqual(0);
     });
 
     it('respects arbitrary user-defined props', () => {
         const wrapper = mount(
-            <Provider inject={[accordionStore]}>
+            <Provider inject={[accordionContainer]}>
                 <AccordionItem lang="en" />
             </Provider>,
         );
