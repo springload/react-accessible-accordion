@@ -4,7 +4,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 // import { mount } from 'enzyme';
 import { Provider } from 'unstated';
-import ItemContainer from '../ItemContainer/ItemContainer';
+import ItemContainer, { resetNextUuid } from '../ItemContainer/ItemContainer';
 import AccordionContainer from '../AccordionContainer/AccordionContainer';
 import AccordionItemBody from './accordion-item-body';
 
@@ -17,7 +17,7 @@ describe('AccordionItemBody', () => {
         // onChange = jest.fn();
 
         const itemContainer = new ItemContainer();
-        itemContainer.resetNextUuid();
+        resetNextUuid();
         const accordionContainer = new AccordionContainer();
         accordionContainer.setAccordion(true);
         accordionContainer.setOnChange(jest.fn());
