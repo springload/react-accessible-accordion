@@ -5,31 +5,29 @@ import renderer from 'react-test-renderer';
 // import { mount } from 'enzyme';
 import { Provider } from 'unstated';
 import AccordionItemTitle from './accordion-item-title';
-import ItemContainer from '../ItemContainer/ItemContainer';
+import ItemContainer, { resetNextUuid } from '../ItemContainer/ItemContainer';
 import AccordionContainer from '../AccordionContainer/AccordionContainer';
 
 describe('AccordionItemTitle', () => {
-    let accordionStore;
-    let itemStore;
+    let accordionContainer;
+    let itemContainer;
     // let onChange;
 
     beforeEach(() => {
+        resetNextUuid();
         // onChange = jest.fn();
 
-        const itemContainer = new ItemContainer();
-        itemContainer.resetNextUuid();
-        const accordionContainer = new AccordionContainer();
+        itemContainer = new ItemContainer();
+        accordionContainer = new AccordionContainer();
         accordionContainer.setAccordion(false);
         accordionContainer.setOnChange(jest.fn());
-        accordionStore = accordionContainer;
-        itemStore = itemContainer;
 
-        accordionStore.addItem({
+        accordionContainer.addItem({
             uuid: 'item-one-uuid',
             expanded: false,
             disabled: false,
         });
-        accordionStore.addItem({
+        accordionContainer.addItem({
             uuid: 'item-two-uuid',
             expanded: true,
             disabled: false,
@@ -39,7 +37,7 @@ describe('AccordionItemTitle', () => {
     it('renders correctly with min params', () => {
         const tree = renderer
             .create(
-                <Provider inject={[accordionStore, itemStore]}>
+                <Provider inject={[accordionContainer, itemContainer]}>
                     <AccordionItemTitle>
                         <div>Fake Title</div>
                     </AccordionItemTitle>
@@ -54,7 +52,7 @@ describe('AccordionItemTitle', () => {
     //     const wrapper = mount(
     //         <AccordionItemTitle
     //             className={className}
-    //             accordionStore={accordionStore}
+    //             accordionContainer={accordionContainer}
     //             uuid="item-one-uuid"
     //         />,
     //     );
@@ -66,7 +64,7 @@ describe('AccordionItemTitle', () => {
     //     const wrapper = mount(
     //         <AccordionItemTitle
     //             hideBodyClassName={hideBodyClassName}
-    //             accordionStore={accordionStore}
+    //             accordionContainer={accordionContainer}
     //             uuid="item-one-uuid"
     //         />,
     //     );
@@ -78,7 +76,7 @@ describe('AccordionItemTitle', () => {
     //     const wrapper = mount(
     //         <AccordionItemTitle
     //             hideBodyClassName={hideBodyClassName}
-    //             accordionStore={accordionStore}
+    //             accordionContainer={accordionContainer}
     //             uuid="item-two-uuid"
     //         />,
     //     );
@@ -88,7 +86,7 @@ describe('AccordionItemTitle', () => {
     // it('renders correctly when pressing enter', async () => {
     //     const wrapper = mount(
     //         <AccordionItemTitle
-    //             accordionStore={accordionStore}
+    //             accordionContainer={accordionContainer}
     //             uuid="item-one-uuid"
     //         >
     //             Fake Title
@@ -99,14 +97,14 @@ describe('AccordionItemTitle', () => {
 
     //     expect(onChange.mock.calls.length).toEqual(1);
     //     expect(
-    //         accordionStore.items.filter(item => item.expanded === true).length,
+    //         accordionContainer.items.filter(item => item.expanded === true).length,
     //     ).toEqual(2);
     // });
 
     // it('renders correctly when pressing space', async () => {
     //     const wrapper = mount(
     //         <AccordionItemTitle
-    //             accordionStore={accordionStore}
+    //             accordionContainer={accordionContainer}
     //             uuid="item-one-uuid"
     //         >
     //             Fake Title
@@ -117,14 +115,14 @@ describe('AccordionItemTitle', () => {
 
     //     expect(onChange.mock.calls.length).toEqual(1);
     //     expect(
-    //         accordionStore.items.filter(item => item.expanded === true).length,
+    //         accordionContainer.items.filter(item => item.expanded === true).length,
     //     ).toEqual(2);
     // });
 
     // it('renders correctly when pressing another key', async () => {
     //     const wrapper = mount(
     //         <AccordionItemTitle
-    //             accordionStore={accordionStore}
+    //             accordionContainer={accordionContainer}
     //             uuid="item-one-uuid"
     //         >
     //             Fake Title
@@ -135,14 +133,14 @@ describe('AccordionItemTitle', () => {
 
     //     expect(onChange.mock.calls.length).toEqual(0);
     //     expect(
-    //         accordionStore.items.filter(item => item.expanded === true).length,
+    //         accordionContainer.items.filter(item => item.expanded === true).length,
     //     ).toEqual(1);
     // });
 
-    // it('renders null if an associated AccordionItem is not registered in accordionStore', () => {
+    // it('renders null if an associated AccordionItem is not registered in accordionContainer', () => {
     //     const className = 'className';
     //     const wrapper = mount(
-    //         <Provider accordionStore={accordionStore} uuid="foo">
+    //         <Provider accordionContainer={accordionContainer} uuid="foo">
     //             <AccordionItemTitle className={className}>
     //                 <div>Fake body</div>
     //             </AccordionItemTitle>
@@ -157,7 +155,7 @@ describe('AccordionItemTitle', () => {
     // it('respects arbitrary user-defined props', () => {
     //     const wrapper = mount(
     //         <AccordionItemTitle
-    //             accordionStore={accordionStore}
+    //             accordionContainer={accordionContainer}
     //             uuid="item-one-uuid"
     //             lang="en"
     //         >
