@@ -47,6 +47,7 @@ class AccordionItem extends Component<AccordionItemProps, *> {
             hideBodyClassName,
             accordionStore,
             disabled,
+            expanded,
             ...rest
         } = this.props;
 
@@ -57,12 +58,12 @@ class AccordionItem extends Component<AccordionItemProps, *> {
         if (!currentItem) {
             return null;
         }
-        const { expanded } = currentItem;
 
         return (
             <div
                 className={classNames(className, {
-                    [hideBodyClassName]: !expanded && hideBodyClassName,
+                    [hideBodyClassName]:
+                        !currentItem.expanded && hideBodyClassName,
                 })}
                 {...rest}
             />
