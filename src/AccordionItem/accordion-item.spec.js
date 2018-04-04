@@ -7,16 +7,14 @@ import { Provider } from 'unstated';
 import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title';
 import AccordionItemBody from '../AccordionItemBody/accordion-item-body';
 import AccordionItem from './accordion-item-wrapper';
-import ItemContainer, { resetNextUuid } from '../ItemContainer/ItemContainer';
+import { resetNextUuid } from '../ItemContainer/ItemContainer';
 import AccordionContainer from '../AccordionContainer/AccordionContainer';
 
 describe('AccordionItem', () => {
     let accordionContainer;
-    let itemContainer;
 
     beforeEach(() => {
         resetNextUuid();
-        itemContainer = new ItemContainer();
         accordionContainer = new AccordionContainer();
         accordionContainer.setAccordion(false);
         accordionContainer.setOnChange(jest.fn());
@@ -26,7 +24,7 @@ describe('AccordionItem', () => {
         accordionContainer.setAccordion(true);
         const tree = renderer
             .create(
-                <Provider inject={[accordionContainer, itemContainer]}>
+                <Provider inject={[accordionContainer]}>
                     <AccordionItem className="accordion__item">
                         <AccordionItemTitle className="accordion__title">
                             <div>Fake title</div>
