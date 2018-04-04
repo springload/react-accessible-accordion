@@ -127,7 +127,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "consecutive": "^5.0.4",
-    "unstated": "^1.0.3"
+    "unstated": "^1.2.0"
   },
   "peerDependencies": {
     "react": "^15.4.0 || ^16.0.0",
