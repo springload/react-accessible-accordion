@@ -27,10 +27,6 @@ class AccordionItemWrapper extends Component<AccordionItemWrapperProps> {
     itemContainer = new ItemContainer();
     static defaultProps = defaultProps;
 
-    resetNextUuid() {
-        this.itemContainer.resetNextUuid();
-    }
-
     render() {
         return (
             <Provider inject={[this.itemContainer]}>
