@@ -30,20 +30,18 @@ class AccordionItemTitle extends Component<
 
     handleClick = () => {
         const { uuid, accordionStore } = this.props;
-        const { accordion, onChange, items } = accordionStore;
+        const { state } = accordionStore;
+        const { accordion, onChange, items } = state;
         const foundItem = items.find(item => item.uuid === uuid);
         if (!foundItem) return;
 
-        this.props.accordionStore.setExpanded(
-            foundItem.uuid,
-            !foundItem.expanded,
-        );
+        accordionStore.setExpanded(foundItem.uuid, !foundItem.expanded);
 
         if (accordion) {
             onChange(foundItem.uuid);
         } else {
             onChange(
-                this.props.accordionStore.items
+                accordionStore.state.items
                     .filter(item => item.expanded)
                     .map(item => item.uuid),
             );
