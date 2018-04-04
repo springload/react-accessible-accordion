@@ -11,21 +11,21 @@ import AccordionItemBody from './accordion-item-body';
 describe('AccordionItemBody', () => {
     let accordionStore;
     let itemStore;
-    // let onChange;
+    let onChange;
 
     beforeEach(() => {
-        // onChange = jest.fn();
+        onChange = jest.fn();
 
         const itemContainer = new ItemContainer();
         resetNextUuid();
         const accordionContainer = new AccordionContainer();
         accordionContainer.setAccordion(true);
-        accordionContainer.setOnChange(jest.fn());
+        accordionContainer.setOnChange(onChange);
         accordionStore = accordionContainer;
         itemStore = itemContainer;
 
         accordionStore.addItem({
-            uuid: 'item-one-uuid',
+            uuid: 0, // because `nextUuid` in ItemContainer starts at zero.
             expanded: false,
             disabled: false,
         });
