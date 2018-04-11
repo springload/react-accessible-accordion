@@ -25,21 +25,13 @@ class AccordionWrapper extends Component<AccordionWrapperProps> {
     static defaultProps = defaultProps;
 
     componentWillMount() {
-        if (this.accordionStore) {
-            this.accordionStore.setAccordion(this.props.accordion);
-        }
-        if (this.accordionStore) {
-            this.accordionStore.setOnChange(this.props.onChange);
-        }
+        this.accordionStore.setAccordion(this.props.accordion);
+        this.accordionStore.setOnChange(this.props.onChange);
     }
 
     componentWillUpdate(nextProps: AccordionWrapperProps) {
-        if (this.accordionStore) {
-            this.accordionStore.setAccordion(nextProps.accordion);
-        }
-        if (this.accordionStore) {
-            this.accordionStore.setOnChange(nextProps.onChange);
-        }
+        this.accordionStore.setAccordion(nextProps.accordion);
+        this.accordionStore.setOnChange(nextProps.onChange);
     }
 
     render() {
