@@ -221,8 +221,9 @@ describe('Accordion', () => {
 
     it('renders correctly after update', () => {
         const tree = mount(<Accordion accordion={false} />);
-        tree.setProps({ accordion: true });
+        expect(tree.find('div').props().role).toEqual(null);
 
+        tree.setProps({ accordion: true });
         expect(tree.find('div').props().role).toEqual('tablist');
     });
 });
