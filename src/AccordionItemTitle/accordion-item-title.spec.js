@@ -4,7 +4,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import { Provider } from 'unstated';
-import AccordionItemTitle from './accordion-item-title';
+import AccordionItemTitle from './accordion-item-title-wrapper';
 import ItemContainer, { resetNextUuid } from '../ItemContainer/ItemContainer';
 import AccordionContainer from '../AccordionContainer/AccordionContainer';
 

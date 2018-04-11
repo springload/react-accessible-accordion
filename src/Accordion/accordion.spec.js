@@ -4,7 +4,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Accordion from './accordion-wrapper'; // eslint-disable-line
 import AccordionItem from '../AccordionItem/accordion-item-wrapper';
-import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title';
+import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title-wrapper';
 
 describe('Accordion', () => {
     it('renders correctly with min params', () => {
