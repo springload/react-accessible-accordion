@@ -6,7 +6,7 @@ import { mount } from 'enzyme';
 import { Provider } from 'unstated';
 import ItemContainer, { resetNextUuid } from '../ItemContainer/ItemContainer';
 import AccordionContainer from '../AccordionContainer/AccordionContainer';
-import AccordionItemBody from './accordion-item-body';
+import AccordionItemBody from './accordion-item-body-wrapper';
 
 describe('AccordionItemBody', () => {
     let accordionStore;

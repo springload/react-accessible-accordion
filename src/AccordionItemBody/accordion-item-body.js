@@ -2,22 +2,10 @@
 
 import React, { type ElementProps } from 'react';
 import classNames from 'classnames';
-import { Subscribe } from 'unstated';
-import AccordionContainer from '../AccordionContainer/AccordionContainer';
-import ItemContainer from '../ItemContainer/ItemContainer';
-
-const defaultProps = {
-    className: 'accordion__body',
-    hideBodyClassName: 'accordion__body--hidden',
-};
 
 type AccordionItemBodyProps = ElementProps<'div'> & {
     hideBodyClassName: string,
     uuid: string | number,
-};
-
-type AccordionItemBodyWrapperProps = ElementProps<'div'> & {
-    hideBodyClassName: string,
 };
 
 const AccordionItemBody = (props: AccordionItemBodyProps) => {
@@ -53,17 +41,4 @@ const AccordionItemBody = (props: AccordionItemBodyProps) => {
     );
 };
 
-const AccordionItemBodyWrapper = (props: AccordionItemBodyWrapperProps) => (
-    <Subscribe to={[AccordionContainer, ItemContainer]}>
-        {(accordionStore, itemStore) => (
-            <AccordionItemBody
-                {...props}
-                uuid={itemStore.state.uuid}
-                accordionStore={accordionStore}
-            />
-        )}
-    </Subscribe>
-);
-AccordionItemBodyWrapper.defaultProps = defaultProps;
-
-export default AccordionItemBodyWrapper;
+export default AccordionItemBody;

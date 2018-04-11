@@ -4,7 +4,7 @@
 import Accordion from './Accordion/accordion-wrapper';
 import AccordionItem from './AccordionItem/accordion-item-wrapper';
 import AccordionItemTitle from './AccordionItemTitle/accordion-item-title';
-import AccordionItemBody from './AccordionItemBody/accordion-item-body';
+import AccordionItemBody from './AccordionItemBody/accordion-item-body-wrapper';
 import { resetNextUuid } from './ItemContainer/ItemContainer';
 
 export {

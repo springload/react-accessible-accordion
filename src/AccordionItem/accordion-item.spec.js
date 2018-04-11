@@ -5,7 +5,7 @@ import { mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { Provider } from 'unstated';
 import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title';
-import AccordionItemBody from '../AccordionItemBody/accordion-item-body';
+import AccordionItemBody from '../AccordionItemBody/accordion-item-body-wrapper';
 import AccordionItem from './accordion-item-wrapper';
 import { resetNextUuid } from '../ItemContainer/ItemContainer';
 import AccordionContainer from '../AccordionContainer/AccordionContainer';
