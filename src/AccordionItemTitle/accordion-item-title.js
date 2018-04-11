@@ -21,7 +21,6 @@ class AccordionItemTitle extends Component<
         const { state } = accordionStore;
         const { accordion, onChange, items } = state;
         const foundItem = items.find(item => item.uuid === uuid);
-        if (!foundItem) return;
 
         accordionStore.setExpanded(foundItem.uuid, !foundItem.expanded);
 
