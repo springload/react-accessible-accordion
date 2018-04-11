@@ -51,7 +51,6 @@ class AccordionItemTitle extends Component<
             ...rest
         } = this.props;
         const foundItem = items.find(item => item.uuid === uuid);
-        if (!foundItem) return null;
 
         const { expanded, disabled } = foundItem;
 
