@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import Accordion from './accordion'; // eslint-disable-line
+import Accordion from './accordion-wrapper'; // eslint-disable-line
 import AccordionItem from '../AccordionItem/accordion-item-wrapper';
 import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title';
 
