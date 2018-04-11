@@ -18,7 +18,6 @@ const AccordionItemBody = (props: AccordionItemBodyProps) => {
     } = props;
     const { state: { items, accordion } } = props.accordionStore;
     const foundItem = items.find(item => item.uuid === uuid);
-    if (!foundItem) return null;
 
     const { expanded } = foundItem;
     const id = `accordion__body-${uuid}`;
