@@ -72,6 +72,47 @@ describe('AccordionItemTitle', () => {
         expect(wrapper.find('div').hasClass(hideBodyClassName)).toEqual(true);
     });
 
+    it('renders correctly when clicking', async () => {
+        const wrapper = mount(
+            <Provider inject={[accordionContainer, itemContainer]}>
+                <AccordionItemTitle>Fake Title</AccordionItemTitle>
+            </Provider>,
+        );
+
+        wrapper.find('div').simulate('click');
+
+        expect(onChange.mock.calls.length).toEqual(1);
+        expect(
+            accordionContainer.state.items.filter(
+                item => item.expanded === true,
+            ).length,
+        ).toEqual(1);
+    });
+
+    it('renders correctly when trying to click but disabled', async () => {
+        accordionContainer.removeItem(0);
+        accordionContainer.addItem({
+            uuid: 0, // because `nextUuid` in ItemContainer starts at zero.
+            expanded: false,
+            disabled: true,
+        });
+
+        const wrapper = mount(
+            <Provider inject={[accordionContainer, itemContainer]}>
+                <AccordionItemTitle>Fake Title</AccordionItemTitle>
+            </Provider>,
+        );
+
+        wrapper.find('div').simulate('click');
+
+        expect(onChange.mock.calls.length).toEqual(0);
+        expect(
+            accordionContainer.state.items.filter(
+                item => item.expanded === true,
+            ).length,
+        ).toEqual(0);
+    });
+
     it('renders correctly when pressing enter', async () => {
         const wrapper = mount(
             <Provider inject={[accordionContainer, itemContainer]}>
@@ -146,5 +187,31 @@ describe('AccordionItemTitle', () => {
         );
 
         expect(wrapper.find('div').instance().lang).toEqual('en');
+    });
+
+    // edge case to cover branch
+    it('renders correctly when trying to click but disabled & accordion === true', async () => {
+        accordionContainer.setAccordion(true);
+        accordionContainer.removeItem(0);
+        accordionContainer.addItem({
+            uuid: 0, // because `nextUuid` in ItemContainer starts at zero.
+            expanded: false,
+            disabled: true,
+        });
+
+        const wrapper = mount(
+            <Provider inject={[accordionContainer, itemContainer]}>
+                <AccordionItemTitle>Fake Title</AccordionItemTitle>
+            </Provider>,
+        );
+
+        wrapper.find('div').simulate('click');
+
+        expect(onChange.mock.calls.length).toEqual(0);
+        expect(
+            accordionContainer.state.items.filter(
+                item => item.expanded === true,
+            ).length,
+        ).toEqual(0);
     });
 });
