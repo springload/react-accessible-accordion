@@ -2,12 +2,9 @@
 
 import React, { Component, type ElementProps } from 'react';
 import classNames from 'classnames';
-import { inject, observer } from 'mobx-react';
-import { type Store } from '../accordionStore/accordionStore';
 
 type AccordionItemTitleProps = ElementProps<'div'> & {
     hideBodyClassName: string,
-    accordionStore: Store,
     uuid: string | number,
 };
 
@@ -19,27 +16,19 @@ class AccordionItemTitle extends Component<
 > {
     static accordionElementName = 'AccordionItemTitle';
 
-    static defaultProps = {
-        className: 'accordion__title',
-        hideBodyClassName: '',
-    };
-
     handleClick = () => {
         const { uuid, accordionStore } = this.props;
-        const { accordion, onChange, items } = accordionStore;
+        const { state } = accordionStore;
+        const { accordion, onChange, items } = state;
         const foundItem = items.find(item => item.uuid === uuid);
-        if (!foundItem) return;
 
-        this.props.accordionStore.setExpanded(
-            foundItem.uuid,
-            !foundItem.expanded,
-        );
+        accordionStore.setExpanded(foundItem.uuid, !foundItem.expanded);
 
         if (accordion) {
             onChange(foundItem.uuid);
         } else {
             onChange(
-                this.props.accordionStore.items
+                accordionStore.state.items
                     .filter(item => item.expanded)
                     .map(item => item.uuid),
             );
@@ -53,7 +42,7 @@ class AccordionItemTitle extends Component<
     };
 
     render() {
-        const { items, accordion } = this.props.accordionStore;
+        const { state: { items, accordion } } = this.props.accordionStore;
         const {
             uuid,
             className,
@@ -62,7 +51,6 @@ class AccordionItemTitle extends Component<
             ...rest
         } = this.props;
         const foundItem = items.find(item => item.uuid === uuid);
-        if (!foundItem) return null;
 
         const { expanded, disabled } = foundItem;
 
@@ -106,4 +94,4 @@ class AccordionItemTitle extends Component<
     }
 }
 
-export default inject('accordionStore', 'uuid')(observer(AccordionItemTitle));
+export default AccordionItemTitle;

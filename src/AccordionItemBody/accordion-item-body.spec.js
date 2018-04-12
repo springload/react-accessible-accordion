@@ -1,23 +1,31 @@
 // @flow
 
 import React from 'react';
-import { Provider } from 'mobx-react';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
-import { createAccordionStore } from '../accordionStore/accordionStore';
-import AccordionItemBody from './accordion-item-body';
+import { Provider } from 'unstated';
+import ItemContainer, { resetNextUuid } from '../ItemContainer/ItemContainer';
+import AccordionContainer from '../AccordionContainer/AccordionContainer';
+import AccordionItemBody from './accordion-item-body-wrapper';
 
 describe('AccordionItemBody', () => {
     let accordionStore;
-    const uuid = 'asdf-1234';
+    let itemStore;
+    let onChange;
 
     beforeEach(() => {
-        accordionStore = createAccordionStore({
-            accordion: true,
-            onChange: jest.fn(),
-        });
+        onChange = jest.fn();
+
+        const itemContainer = new ItemContainer();
+        resetNextUuid();
+        const accordionContainer = new AccordionContainer();
+        accordionContainer.setAccordion(true);
+        accordionContainer.setOnChange(onChange);
+        accordionStore = accordionContainer;
+        itemStore = itemContainer;
+
         accordionStore.addItem({
-            uuid,
+            uuid: 0, // because `nextUuid` in ItemContainer starts at zero.
             expanded: false,
             disabled: false,
         });
@@ -26,7 +34,7 @@ describe('AccordionItemBody', () => {
     it('renders correctly with min params', () => {
         const tree = renderer
             .create(
-                <Provider accordionStore={accordionStore} uuid={uuid}>
+                <Provider inject={[accordionStore, itemStore]}>
                     <AccordionItemBody>
                         <div>Fake body</div>
                     </AccordionItemBody>
@@ -39,7 +47,7 @@ describe('AccordionItemBody', () => {
     it('renders correctly with different className', () => {
         const className = 'className';
         const wrapper = mount(
-            <Provider accordionStore={accordionStore} uuid={uuid}>
+            <Provider inject={[accordionStore, itemStore]}>
                 <AccordionItemBody className={className} />
             </Provider>,
         );
@@ -49,7 +57,7 @@ describe('AccordionItemBody', () => {
     it('renders correctly with different hideBodyClassName', () => {
         const hideBodyClassName = 'hideBodyClassName';
         const wrapper = mount(
-            <Provider accordionStore={accordionStore} uuid={uuid}>
+            <Provider inject={[accordionStore, itemStore]}>
                 <AccordionItemBody hideBodyClassName={hideBodyClassName} />
             </Provider>,
         );
@@ -59,7 +67,7 @@ describe('AccordionItemBody', () => {
     it('renders null if an associated AccordionItem is not registered in accordionStore', () => {
         const className = 'className';
         const wrapper = mount(
-            <Provider accordionStore={accordionStore} uuid="foo">
+            <Provider inject={[accordionStore, itemStore]}>
                 <AccordionItemBody className={className}>
                     <div>Fake body</div>
                 </AccordionItemBody>
@@ -73,7 +81,7 @@ describe('AccordionItemBody', () => {
 
     it('respects arbitrary user-defined props', () => {
         const wrapper = mount(
-            <Provider accordionStore={accordionStore} uuid={uuid}>
+            <Provider inject={[accordionStore, itemStore]}>
                 <AccordionItemBody lang="en" />
             </Provider>,
         );

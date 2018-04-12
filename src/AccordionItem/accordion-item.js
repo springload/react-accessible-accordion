@@ -2,87 +2,73 @@
 
 import React, { Component } from 'react';
 import type { ElementProps } from 'react';
-import { inject, observer, Provider } from 'mobx-react';
-import consecutive from 'consecutive';
-import classNames from 'classnames';
-import type { Store } from '../accordionStore/accordionStore';
 
-let nextUuid = consecutive();
-export function resetNextUuid() {
-    nextUuid = consecutive();
-}
+import classNames from 'classnames';
+import AccordionContainer from '../AccordionContainer/AccordionContainer';
 
 type AccordionItemProps = ElementProps<'div'> & {
-    hideBodyClassName: string,
-    accordionStore: Store,
-    disabled: boolean,
-    expanded: boolean,
+    uuid: string | number,
+    hideBodyClassName: ?string,
+    disabled: ?boolean,
+    expanded: ?boolean,
+    accordionStore: AccordionContainer,
 };
 
 class AccordionItem extends Component<AccordionItemProps, *> {
-    static defaultProps = {
-        className: 'accordion__item',
-        hideBodyClassName: '',
-        disabled: false,
-        expanded: false,
-    };
-
-    uuid = nextUuid();
-
     componentWillMount() {
-        const { accordionStore, disabled } = this.props;
+        const { uuid, accordionStore, disabled } = this.props;
 
         accordionStore.addItem({
-            uuid: this.uuid,
+            uuid,
             expanded: this.props.expanded || false,
             disabled,
         });
     }
 
     componentWillUnmount() {
-        this.props.accordionStore.removeItem(this.uuid);
+        this.props.accordionStore.removeItem(this.props.uuid);
     }
 
     // This is here so that the user can dynamically set the 'expanded' state using the 'expanded' prop.
     componentWillReceiveProps({
+        uuid,
         expanded,
         accordionStore,
     }: AccordionItemProps) {
         if (expanded !== this.props.expanded) {
-            accordionStore.setExpanded(this.uuid, expanded);
+            accordionStore.setExpanded(uuid, expanded);
         }
     }
 
     render() {
         const {
+            uuid,
             className,
             hideBodyClassName,
             accordionStore,
             disabled,
-            expanded: expandedProp,
+            expanded,
             ...rest
         } = this.props;
 
-        const currentItem = accordionStore.items.find(
-            item => item.uuid === this.uuid,
+        const currentItem = accordionStore.state.items.find(
+            item => item.uuid === uuid,
         );
 
         if (!currentItem) {
             return null;
         }
-        const { expanded } = currentItem;
 
         return (
-            <Provider uuid={this.uuid}>
-                <div
-                    className={classNames(className, {
-                        [hideBodyClassName]: !expanded && hideBodyClassName,
-                    })}
-                    {...rest}
-                />
-            </Provider>
+            <div
+                className={classNames(className, {
+                    [hideBodyClassName]:
+                        !currentItem.expanded && hideBodyClassName,
+                })}
+                {...rest}
+            />
         );
     }
 }
 
-export default inject('accordionStore')(observer(AccordionItem));
+export default AccordionItem;

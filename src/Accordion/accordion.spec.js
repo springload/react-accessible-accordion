@@ -2,15 +2,11 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-// import renderer from 'react-test-renderer';
-
-import Accordion from './accordion';
-import AccordionItem from '../AccordionItem/accordion-item';
-import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title';
-// import AccordionItemBody from '../AccordionItemBody/accordion-item-body';
+import Accordion from './accordion-wrapper'; // eslint-disable-line
+import AccordionItem from '../AccordionItem/accordion-item-wrapper';
+import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title-wrapper';
 
 describe('Accordion', () => {
-    //
     it('renders correctly with min params', () => {
         const tree = mount(<Accordion />);
         expect(tree.find('div').props().role).toEqual('tablist');
@@ -49,8 +45,9 @@ describe('Accordion', () => {
             expect(
                 wrapper
                     .instance()
-                    .accordionStore.items.filter(item => item.expanded === true)
-                    .length,
+                    .accordionStore.state.items.filter(
+                        item => item.expanded === true,
+                    ).length,
             ).toEqual(1);
         });
 
@@ -59,8 +56,9 @@ describe('Accordion', () => {
             expect(
                 wrapper
                     .instance()
-                    .accordionStore.items.filter(item => item.expanded === true)
-                    .length,
+                    .accordionStore.state.items.filter(
+                        item => item.expanded === true,
+                    ).length,
             ).toEqual(1);
         });
 
@@ -69,8 +67,9 @@ describe('Accordion', () => {
             expect(
                 wrapper
                     .instance()
-                    .accordionStore.items.filter(item => item.expanded === true)
-                    .length,
+                    .accordionStore.state.items.filter(
+                        item => item.expanded === true,
+                    ).length,
             ).toEqual(0);
         });
     });
@@ -98,8 +97,9 @@ describe('Accordion', () => {
             expect(
                 wrapper
                     .instance()
-                    .accordionStore.items.filter(item => item.expanded === true)
-                    .length,
+                    .accordionStore.state.items.filter(
+                        item => item.expanded === true,
+                    ).length,
             ).toEqual(1);
         });
 
@@ -108,8 +108,9 @@ describe('Accordion', () => {
             expect(
                 wrapper
                     .instance()
-                    .accordionStore.items.filter(item => item.expanded === true)
-                    .length,
+                    .accordionStore.state.items.filter(
+                        item => item.expanded === true,
+                    ).length,
             ).toEqual(2);
         });
 
@@ -118,8 +119,9 @@ describe('Accordion', () => {
             expect(
                 wrapper
                     .instance()
-                    .accordionStore.items.filter(item => item.expanded === true)
-                    .length,
+                    .accordionStore.state.items.filter(
+                        item => item.expanded === true,
+                    ).length,
             ).toEqual(1);
         });
     });
@@ -141,8 +143,9 @@ describe('Accordion', () => {
         expect(
             wrapper
                 .instance()
-                .accordionStore.items.filter(item => item.expanded === true)
-                .length,
+                .accordionStore.state.items.filter(
+                    item => item.expanded === true,
+                ).length,
         ).toEqual(0);
     });
 
@@ -157,8 +160,9 @@ describe('Accordion', () => {
         expect(
             wrapper
                 .instance()
-                .accordionStore.items.filter(item => item.expanded === true)
-                .length,
+                .accordionStore.state.items.filter(
+                    item => item.expanded === true,
+                ).length,
         ).toEqual(1);
     });
 
@@ -184,7 +188,8 @@ describe('Accordion', () => {
         expect(
             wrapper
                 .instance()
-                .accordionStore.items.filter(item => item.expanded).length,
+                .accordionStore.state.items.filter(item => item.expanded)
+                .length,
         ).toEqual(1);
         expect(
             wrapper.findWhere(item => item.hasClass(hideBodyClassName)).length,
@@ -202,8 +207,9 @@ describe('Accordion', () => {
         expect(
             wrapper
                 .instance()
-                .accordionStore.items.filter(item => item.expanded === true)
-                .length,
+                .accordionStore.state.items.filter(
+                    item => item.expanded === true,
+                ).length,
         ).toEqual(2);
     });
 
@@ -211,5 +217,13 @@ describe('Accordion', () => {
         const wrapper = mount(<Accordion lang="en" />);
 
         expect(wrapper.find('div').instance().lang).toEqual('en');
+    });
+
+    it('renders correctly after update', () => {
+        const tree = mount(<Accordion accordion={false} />);
+        expect(tree.find('div').props().role).toEqual(null);
+
+        tree.setProps({ accordion: true });
+        expect(tree.find('div').props().role).toEqual('tablist');
     });
 });

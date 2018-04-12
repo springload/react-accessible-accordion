@@ -3,21 +3,26 @@
 > All notable changes to this project are documented in this file.
 > This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Next
+
+### Changed
+
+* Refactored to use `unstated` for state-management instead of `mobx` + `mobx-react`, cutting the
+  size of the bundle by approximately 60% 🎉.
+
 ## [[v2.2.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.2.1)
 
 ### Changed
 
 * Fixes mixed up filenames in the README
 
-
 ## [[v2.2.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.2.0)
 
 ### Added
 
 * Demo styles added to the bundle as two optional files:
-  - `minimal-example.css`: 'Minimal' theme - hide/show the AccordionBody component
-  - `fancy-example.css`: 'Fancy' theme - boilerplate styles for all components, as seen on our demo
-
+    * `minimal-example.css`: 'Minimal' theme - hide/show the AccordionBody component
+    * `fancy-example.css`: 'Fancy' theme - boilerplate styles for all components, as seen on our demo
 
 ## [[v2.1.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.1.0)
 

@@ -1,9 +1,11 @@
 // @flow
 
-import Accordion from './Accordion/accordion';
-import AccordionItem, { resetNextUuid } from './AccordionItem/accordion-item';
-import AccordionItemTitle from './AccordionItemTitle/accordion-item-title';
-import AccordionItemBody from './AccordionItemBody/accordion-item-body';
+// eslint-disable-next-line
+import Accordion from './Accordion/accordion-wrapper';
+import AccordionItem from './AccordionItem/accordion-item-wrapper';
+import AccordionItemTitle from './AccordionItemTitle/accordion-item-title-wrapper';
+import AccordionItemBody from './AccordionItemBody/accordion-item-body-wrapper';
+import { resetNextUuid } from './ItemContainer/ItemContainer';
 
 export {
     Accordion,

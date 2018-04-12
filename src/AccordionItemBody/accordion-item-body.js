@@ -2,17 +2,9 @@
 
 import React, { type ElementProps } from 'react';
 import classNames from 'classnames';
-import { inject, observer } from 'mobx-react';
-import { type Store } from '../accordionStore/accordionStore';
-
-const defaultProps = {
-    className: 'accordion__body',
-    hideBodyClassName: 'accordion__body--hidden',
-};
 
 type AccordionItemBodyProps = ElementProps<'div'> & {
     hideBodyClassName: string,
-    accordionStore: Store,
     uuid: string | number,
 };
 
@@ -24,9 +16,8 @@ const AccordionItemBody = (props: AccordionItemBodyProps) => {
         hideBodyClassName,
         ...rest
     } = props;
-    const { items, accordion } = props.accordionStore;
+    const { state: { items, accordion } } = props.accordionStore;
     const foundItem = items.find(item => item.uuid === uuid);
-    if (!foundItem) return null;
 
     const { expanded } = foundItem;
     const id = `accordion__body-${uuid}`;
@@ -49,6 +40,4 @@ const AccordionItemBody = (props: AccordionItemBodyProps) => {
     );
 };
 
-AccordionItemBody.defaultProps = defaultProps;
-
-export default inject('accordionStore', 'uuid')(observer(AccordionItemBody));
+export default AccordionItemBody;
