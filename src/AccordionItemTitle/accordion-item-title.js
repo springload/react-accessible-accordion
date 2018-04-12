@@ -35,14 +35,16 @@ class AccordionItemTitle extends Component<
         }
     };
 
-    handleKeyPress = (evt: SyntheticInputEvent<HTMLButtonElement>) => {
+    handleKeyPress = (evt: SyntheticKeyboardEvent<HTMLButtonElement>) => {
         if (evt.charCode === 13 || evt.charCode === 32) {
             this.handleClick();
         }
     };
 
     render() {
-        const { state: { items, accordion } } = this.props.accordionStore;
+        const {
+            state: { items, accordion },
+        } = this.props.accordionStore;
         const {
             uuid,
             className,
