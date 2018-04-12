@@ -9,6 +9,10 @@
 
 *   Add `dist` folder to list of Flow ignores, so Flow doesn’t error after a build.
 
+### Changed
+
+*   Upgraded a bunch of devDependencies, including Webpack which required a bit of a config refactor.
+
 ## [[v2.3.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.3.0)
 
 ### Changed
