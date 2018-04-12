@@ -42,7 +42,9 @@ class AccordionItemTitle extends Component<
     };
 
     render() {
-        const { state: { items, accordion } } = this.props.accordionStore;
+        const {
+            state: { items, accordion },
+        } = this.props.accordionStore;
         const {
             uuid,
             className,
