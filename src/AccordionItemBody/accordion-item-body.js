@@ -16,7 +16,9 @@ const AccordionItemBody = (props: AccordionItemBodyProps) => {
         hideBodyClassName,
         ...rest
     } = props;
-    const { state: { items, accordion } } = props.accordionStore;
+    const {
+        state: { items, accordion },
+    } = props.accordionStore;
     const foundItem = items.find(item => item.uuid === uuid);
 
     const { expanded } = foundItem;
