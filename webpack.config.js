@@ -9,7 +9,10 @@ module.exports = (env, options) => ({
     entry: path.resolve(__dirname, 'demo/js/demo.js'),
     output: {
         path: path.resolve(__dirname, 'pages'),
-        filename: '[name][chunkhash].js',
+        filename:
+            options.mode === 'production'
+                ? '[name][chunkhash].js'
+                : '[name].js',
     },
     module: {
         rules: [
