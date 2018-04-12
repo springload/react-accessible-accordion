@@ -5,16 +5,20 @@
 
 ## Next
 
+### Fixed
+
+*   Add `dist` folder to list of Flow ignores, so Flow doesn’t error after a build.
+
 ### Changed
 
-*   Refactored to use `unstated` for state-management instead of `mobx` + `mobx-react`, cutting the
-    size of the bundle by approximately 60% 🎉.
+*   Upgraded a bunch of devDependencies, including Webpack which required a bit of a config refactor.
 
 ## [[v2.3.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.3.0)
 
 ### Changed
 
-*   Upgraded a bunch of devDependencies, including Webpack which required a bit of a config refactor.
+*   Refactored to use `unstated` for state-management instead of `mobx` + `mobx-react`, cutting the
+    size of the bundle by approximately 60% 🎉.
 
 ## [[v2.2.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.2.1)
 
