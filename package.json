@@ -15,13 +15,10 @@
     "build:clean": "rm -rf dist/*",
     "build:rollup": "NODE_ENV=production rollup -c",
     "build:flow": "flow-copy-source src dist/es -i \"**/*.spec.js\"",
-    "build":
-      "npm run build:clean && npm run build:css && npm run build:flow && npm run build:rollup",
+    "build": "npm run build:clean && npm run build:css && npm run build:flow && npm run build:rollup",
     "start": "npm run js:watch",
-    "start-demo":
-      "webpack-dev-server --config ./webpack/webpack.config.demo.js",
-    "pages":
-      "rm -rf pages && cp -R demo pages && webpack --config=./webpack/webpack.config.pages.js",
+    "start-demo": "webpack-dev-server --mode=development",
+    "pages": "rm -rf pages && webpack --mode=production --progress",
     "deploy": "npm run pages && ./bin/deploy.sh",
     "prettier": "prettier **/*.js --write",
     "prepublishOnly": "npm run build"
@@ -43,13 +40,22 @@
     ],
     "env": {
       "test": {
-        "presets": ["es2015", "react", "stage-2"]
+        "presets": [
+          "es2015",
+          "react",
+          "stage-2"
+        ]
       }
     }
   },
   "jest": {
-    "setupFiles": ["./src/setupTests.js"],
-    "testPathIgnorePatterns": ["/node_modules/", "/dist/"]
+    "setupFiles": [
+      "./src/setupTests.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/"
+    ]
   },
   "keywords": [
     "react",
@@ -59,7 +65,9 @@
     "accessible",
     "accessibility"
   ],
-  "authors": ["Vincent Audebert <vincent@springload.co.nz>"],
+  "authors": [
+    "Vincent Audebert <vincent@springload.co.nz>"
+  ],
   "contributors": [
     {
       "name": "Mitch Ryan",
