@@ -8,6 +8,7 @@
 ### Fixed
 
 *   Add `dist` folder to list of Flow ignores, so Flow doesn’t error after a build.
+*   Issue with babel helpers. Just reverted commit 6f9f2c324a6fad4a35a84307241f4f710407f242 for now.
 
 ### Changed
 
