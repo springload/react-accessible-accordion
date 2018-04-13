@@ -3,6 +3,13 @@
 > All notable changes to this project are documented in this file.
 > This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Next
+
+### Fixed
+
+*   Fix rollup config after version bump - https://gist.github.com/Rich-Harris/d472c50732dab03efeb37472b08a3f32
+
+
 ##  [[v2.3.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.3.1)
 
 ### Fixed
