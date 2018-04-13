@@ -21,10 +21,7 @@ export default [
                 browser: true,
             }),
             eslint(),
-            babel({
-                plugins: ['external-helpers'],
-                externalHelpers: true,
-            }),
+            babel(),
             commonjs(),
             replace({
                 exclude: 'node_modules/**',
