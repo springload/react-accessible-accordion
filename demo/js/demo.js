@@ -9,7 +9,6 @@ import {
     AccordionItemBody,
 } from '../../src';
 
-import '../main.css';
 import '../../src/css/fancy-example.css';
 
 const Example = () => (
