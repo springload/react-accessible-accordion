@@ -8,7 +8,7 @@
 ### Fixed
 
 *   Fix rollup config after version bump - https://gist.github.com/Rich-Harris/d472c50732dab03efeb37472b08a3f32
-
+*   Adds existing arrow animation for aria-selected=true in fancy CSS
 
 ##  [[v2.3.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.3.1)
 
