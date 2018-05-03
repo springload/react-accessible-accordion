@@ -13,6 +13,7 @@ type AccordionItemWrapperProps = ElementProps<'div'> & {
     disabled: ?boolean,
     expanded: ?boolean,
     accordionStore: AccordionContainer,
+    uuid?: string,
 };
 
 const defaultProps = {
@@ -21,6 +22,7 @@ const defaultProps = {
     disabled: false,
     expanded: false,
     accordionStore: new AccordionContainer(),
+    uuid: null,
 };
 
 class AccordionItemWrapper extends Component<AccordionItemWrapperProps> {
@@ -31,13 +33,18 @@ class AccordionItemWrapper extends Component<AccordionItemWrapperProps> {
         return (
             <Provider inject={[this.itemContainer]}>
                 <Subscribe to={[AccordionContainer, ItemContainer]}>
-                    {(accordionStore, itemStore) => (
-                        <AccordionItem
-                            {...this.props}
-                            uuid={itemStore.state.uuid}
-                            accordionStore={accordionStore}
-                        />
-                    )}
+                    {(accordionStore, itemStore) => {
+                        let uuid = itemStore.state.uuid;
+                        if (this.props.uuid) uuid = this.props.uuid;
+                        return (
+                            <AccordionItem
+                                {...this.props}
+                                uuid={uuid}
+                                accordionStore={accordionStore}
+                                itemstore={itemStore}
+                            />
+                        );
+                    }}
                 </Subscribe>
             </Provider>
         );

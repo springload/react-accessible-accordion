@@ -15,6 +15,12 @@ class ItemContainer extends Container<StoreState> {
     state = {
         uuid: nextUuid(),
     };
+
+    setUuid(customUuid: string) {
+        this.setState({
+            uuid: customUuid,
+        });
+    }
 }
 
 export default ItemContainer;

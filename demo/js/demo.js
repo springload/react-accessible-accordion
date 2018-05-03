@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -565,6 +567,39 @@ const Example = () => (
                 </AccordionItemTitle>
                 <AccordionItemBody>
                     <p>Why would you need more than one?</p>
+                </AccordionItemBody>
+            </AccordionItem>
+        </Accordion>
+
+        <h2 className="u-margin-top">Informative onChange</h2>
+
+        <Accordion onChange={itemUuid => console.log(itemUuid)}>
+            <AccordionItem uuid="uniqueItem-1">
+                <AccordionItemTitle>
+                    <h3 className="u-position-relative">
+                        Unique Item #1
+                        <div className="accordion__arrow" role="presentation" />
+                    </h3>
+                </AccordionItemTitle>
+                <AccordionItemBody>
+                    <p>
+                        If you open/close this item you should see
+                        `uniqueItem-1` printed in the console.
+                    </p>
+                </AccordionItemBody>
+            </AccordionItem>
+            <AccordionItem uuid="uniqueItem-2">
+                <AccordionItemTitle>
+                    <h3 className="u-position-relative">
+                        Unique Item #2
+                        <div className="accordion__arrow" role="presentation" />
+                    </h3>
+                </AccordionItemTitle>
+                <AccordionItemBody>
+                    <p>
+                        If you open/close this item you should see
+                        `uniqueItem-2` printed in the console.
+                    </p>
                 </AccordionItemBody>
             </AccordionItem>
         </Accordion>

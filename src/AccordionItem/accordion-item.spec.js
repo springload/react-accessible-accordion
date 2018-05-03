@@ -248,31 +248,12 @@ describe('AccordionItem', () => {
             </Provider>,
         );
         resetNextUuid();
-        const wrapperTwo = mount(
-            <Provider inject={[accordionContainer]}>
-                <AccordionItem />
-            </Provider>,
-        );
-        expect(
-            wrapperOne
-                .find(Provider)
-                .last()
-                .props().uuid,
-        ).toEqual(
-            wrapperTwo
-                .find(Provider)
-                .last()
-                .props().uuid,
-        );
-    });
 
-    it('can manually reset the uuid', () => {
-        const wrapperOne = mount(
-            <Provider inject={[accordionContainer]}>
-                <AccordionItem />
-            </Provider>,
-        );
-        resetNextUuid();
+        // Needed to avoid duplicate uuid error
+        accordionContainer = new AccordionContainer();
+        accordionContainer.setAccordion(false);
+        accordionContainer.setOnChange(jest.fn());
+
         const wrapperTwo = mount(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem />
@@ -317,5 +298,45 @@ describe('AccordionItem', () => {
         );
 
         expect(wrapper.find('div').instance().lang).toEqual('en');
+    });
+
+    it('supports custom uuid', () => {
+        const uuid = 'uniqueCustomID';
+        mount(
+            <Provider inject={[accordionContainer]}>
+                <AccordionItem uuid={uuid}>
+                    <AccordionItemTitle>
+                        <div>Fake title</div>
+                    </AccordionItemTitle>
+                </AccordionItem>
+            </Provider>,
+        );
+
+        expect(
+            accordionContainer.state.items.filter(item => item.uuid === uuid)
+                .length,
+        ).toEqual(1);
+    });
+
+    it('raises console error in case of duplicate uuid', () => {
+        const uuid = 'uniqueCustomID';
+        jest.spyOn(global.console, 'error');
+        mount(
+            <Provider inject={[accordionContainer]}>
+                <AccordionItem uuid={uuid}>
+                    <AccordionItemTitle>
+                        <div>Fake title</div>
+                    </AccordionItemTitle>
+                </AccordionItem>
+                <AccordionItem uuid={uuid}>
+                    <AccordionItemTitle>
+                        <div>Fake title</div>
+                    </AccordionItemTitle>
+                </AccordionItem>
+            </Provider>,
+        );
+
+        // eslint-disable-next-line no-console
+        expect(console.error).toBeCalled();
     });
 });

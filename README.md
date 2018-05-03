@@ -139,6 +139,12 @@ We recommend that you copy them into your own app and modify them to suit your n
           <td>null</td>
           <td>Class name for hidden body state</td>
       </tr>
+      <tr>
+          <td>uuid</td>
+          <td>String</td>
+          <td>null</td>
+          <td>Custom uuid to be passed to Accordion - onChange. Has to be unique.</td>
+      </tr>
     </tbody>
 </table>
 

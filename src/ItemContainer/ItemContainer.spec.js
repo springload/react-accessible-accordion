@@ -6,6 +6,14 @@ describe('ItemContainer', () => {
     it('correctly instantiates with all expected methods/state', () => {
         const itemContainer = new ItemContainer();
         expect(itemContainer.state.uuid).toBeDefined();
+        expect(itemContainer.setUuid).toBeDefined();
+    });
+
+    it('correctly sets the value', () => {
+        const itemContainer = new ItemContainer();
+        const uuid = 'uniqueID';
+        itemContainer.setUuid(uuid);
+        expect(itemContainer.state.uuid).toBe(uuid);
     });
 
     it('generated uuids are different', () => {

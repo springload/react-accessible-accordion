@@ -3,6 +3,18 @@
 exports[`AccordionItem renders correctly with accordion false 1`] = `
 <div
   className="accordion__item"
+  itemstore={
+    ItemContainer {
+      "_listeners": Array [
+        [Function],
+        [Function],
+        [Function],
+      ],
+      "state": Object {
+        "uuid": 0,
+      },
+    }
+  }
 >
   <div
     aria-controls="accordion__body-0"
@@ -36,6 +48,18 @@ exports[`AccordionItem renders correctly with accordion false 1`] = `
 exports[`AccordionItem renders correctly with accordion true 1`] = `
 <div
   className="accordion__item"
+  itemstore={
+    ItemContainer {
+      "_listeners": Array [
+        [Function],
+        [Function],
+        [Function],
+      ],
+      "state": Object {
+        "uuid": 0,
+      },
+    }
+  }
 >
   <div
     aria-controls="accordion__body-0"
@@ -69,6 +93,18 @@ exports[`AccordionItem renders correctly with accordion true 1`] = `
 exports[`AccordionItem renders correctly with other blocks inside 1`] = `
 <div
   className="accordion__item"
+  itemstore={
+    ItemContainer {
+      "_listeners": Array [
+        [Function],
+        [Function],
+        [Function],
+      ],
+      "state": Object {
+        "uuid": 0,
+      },
+    }
+  }
 >
   <div
     aria-controls="accordion__body-0"
@@ -105,6 +141,18 @@ exports[`AccordionItem renders correctly with other blocks inside 1`] = `
 exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
 <div
   className="accordion__item"
+  itemstore={
+    ItemContainer {
+      "_listeners": Array [
+        [Function],
+        [Function],
+        [Function],
+      ],
+      "state": Object {
+        "uuid": 0,
+      },
+    }
+  }
 >
   <div
     aria-controls="accordion__body-0"
@@ -141,6 +189,16 @@ exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
 exports[`AccordionItem still renders with no AccordionItemTitle or AccordionItemBody 1`] = `
 <div
   className="accordion__item"
+  itemstore={
+    ItemContainer {
+      "_listeners": Array [
+        [Function],
+      ],
+      "state": Object {
+        "uuid": 0,
+      },
+    }
+  }
 >
   <div>
     Fake title
@@ -154,5 +212,15 @@ exports[`AccordionItem still renders with no AccordionItemTitle or AccordionItem
 exports[`AccordionItem still renders with no children at all 1`] = `
 <div
   className="accordion__item"
+  itemstore={
+    ItemContainer {
+      "_listeners": Array [
+        [Function],
+      ],
+      "state": Object {
+        "uuid": 0,
+      },
+    }
+  }
 />
 `;

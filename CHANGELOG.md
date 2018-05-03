@@ -5,6 +5,10 @@
 
 ## Next
 
+### Added
+
+*   Possibility to have custom uuid on `AccordionItem` - suggested by https://github.com/springload/react-accessible-accordion/issues/70
+
 ### Fixed
 
 *   Fix rollup config after version bump - https://gist.github.com/Rich-Harris/d472c50732dab03efeb37472b08a3f32
