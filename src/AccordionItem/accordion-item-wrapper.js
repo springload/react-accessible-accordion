@@ -22,7 +22,7 @@ const defaultProps = {
     disabled: false,
     expanded: false,
     accordionStore: new AccordionContainer(),
-    uuid: null,
+    uuid: undefined,
 };
 
 class AccordionItemWrapper extends Component<AccordionItemWrapperProps> {
@@ -41,7 +41,7 @@ class AccordionItemWrapper extends Component<AccordionItemWrapperProps> {
                                 {...this.props}
                                 uuid={uuid}
                                 accordionStore={accordionStore}
-                                itemstore={itemStore}
+                                itemStore={itemStore}
                             />
                         );
                     }}
