@@ -2,6 +2,8 @@
 [![Accessibility status](https://img.shields.io/badge/a11y-tested-brightgreen.svg)](http://wave.webaim.org/report#/https://springload.github.io/react-accessible-accordion/)
 =========
 
+## Demo
+
 [Try a demo now](https://springload.github.io/react-accessible-accordion/).
 
 ## Usage
