@@ -5,6 +5,7 @@ import type { ElementProps } from 'react';
 
 import classNames from 'classnames';
 import AccordionContainer from '../AccordionContainer/AccordionContainer';
+import ItemContainer from '../ItemContainer/ItemContainer';
 
 type AccordionItemProps = ElementProps<'div'> & {
     uuid: string | number,
@@ -12,11 +13,23 @@ type AccordionItemProps = ElementProps<'div'> & {
     disabled: ?boolean,
     expanded: ?boolean,
     accordionStore: AccordionContainer,
+    itemStore: ItemContainer,
 };
 
 class AccordionItem extends Component<AccordionItemProps, *> {
     componentWillMount() {
-        const { uuid, accordionStore, disabled } = this.props;
+        const { uuid, accordionStore, itemStore, disabled } = this.props;
+
+        itemStore.setUuid(uuid);
+
+        const currentItem = accordionStore.state.items.find(
+            item => item.uuid === uuid,
+        );
+        if (currentItem)
+            // eslint-disable-next-line no-console
+            console.error(
+                `AccordionItem error: One item already has the uuid "${uuid}". Uuid property must be unique. See: https://github.com/springload/react-accessible-accordion#accordionitem`,
+            );
 
         accordionStore.addItem({
             uuid,
@@ -48,6 +61,7 @@ class AccordionItem extends Component<AccordionItemProps, *> {
             accordionStore,
             disabled,
             expanded,
+            itemStore,
             ...rest
         } = this.props;
 
