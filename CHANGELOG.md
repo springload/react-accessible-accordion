@@ -5,6 +5,8 @@
 
 ## Next
 
+##  [[v2.4.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.4.0)
+
 ### Added
 
 *   Possibility to have custom uuid on `AccordionItem` - suggested by https://github.com/springload/react-accessible-accordion/issues/70
