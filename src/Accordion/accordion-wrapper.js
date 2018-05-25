@@ -29,9 +29,9 @@ class AccordionWrapper extends Component<AccordionWrapperProps> {
         this.accordionStore.setOnChange(this.props.onChange);
     }
 
-    componentDidUpdate(nextProps: AccordionWrapperProps) {
-        this.accordionStore.setAccordion(nextProps.accordion);
-        this.accordionStore.setOnChange(nextProps.onChange);
+    componentDidUpdate() {
+        this.accordionStore.setAccordion(this.props.accordion);
+        this.accordionStore.setOnChange(this.props.onChange);
     }
 
     render() {
