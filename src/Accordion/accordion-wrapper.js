@@ -24,12 +24,12 @@ class AccordionWrapper extends Component<AccordionWrapperProps> {
 
     static defaultProps = defaultProps;
 
-    componentWillMount() {
+    componentDidMount() {
         this.accordionStore.setAccordion(this.props.accordion);
         this.accordionStore.setOnChange(this.props.onChange);
     }
 
-    componentWillUpdate(nextProps: AccordionWrapperProps) {
+    componentDidUpdate(nextProps: AccordionWrapperProps) {
         this.accordionStore.setAccordion(nextProps.accordion);
         this.accordionStore.setOnChange(nextProps.onChange);
     }
