@@ -19,6 +19,19 @@ describe('Accordion', () => {
         expect(container.setExpanded).toBeDefined();
     });
 
+    it('can be initialized with values in the constructor', () => {
+        expect(
+            new AccordionContainer({ accordion: true }).state.accordion,
+        ).toBe(true);
+        expect(
+            new AccordionContainer({ accordion: false }).state.accordion,
+        ).toBe(false);
+        const mock = jest.fn();
+        expect(new AccordionContainer({ onChange: mock }).state.onChange).toBe(
+            mock,
+        );
+    });
+
     it('can set "accordion" state', () => {
         expect(container.state.accordion).toBe(true);
         container.setAccordion(false);
