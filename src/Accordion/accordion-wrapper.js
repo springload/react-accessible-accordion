@@ -20,7 +20,10 @@ const defaultProps: AccordionWrapperProps = {
 };
 
 class AccordionWrapper extends Component<AccordionWrapperProps> {
-    accordionStore = new AccordionContainer();
+    accordionStore = new AccordionContainer({
+        accordion: this.props.accordion,
+        onChange: this.props.onChange,
+    });
 
     static defaultProps = defaultProps;
 
