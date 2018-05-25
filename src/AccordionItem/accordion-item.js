@@ -43,12 +43,9 @@ class AccordionItem extends Component<AccordionItemProps, *> {
     }
 
     // This is here so that the user can dynamically set the 'expanded' state using the 'expanded' prop.
-    componentWillReceiveProps({
-        uuid,
-        expanded,
-        accordionStore,
-    }: AccordionItemProps) {
-        if (expanded !== this.props.expanded) {
+    componentDidUpdate(prevProps: AccordionItemProps) {
+        const { uuid, expanded, accordionStore } = this.props;
+        if (expanded !== prevProps.expanded) {
             accordionStore.setExpanded(uuid, expanded);
         }
     }
