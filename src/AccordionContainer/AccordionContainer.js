@@ -26,14 +26,16 @@ class AccordionContainer extends Container<StoreState> {
 
     setAccordion(accordion: boolean) {
         if (accordion !== this.state.accordion) {
-            this.setState({ accordion });
+            return this.setState({ accordion });
         }
+        return null;
     }
 
     setOnChange(onChange: Function) {
         if (onChange !== this.state.onChange) {
-            this.setState({ onChange });
+            return this.setState({ onChange });
         }
+        return null;
     }
 
     addItem(newItem: Item) {
@@ -47,19 +49,19 @@ class AccordionContainer extends Container<StoreState> {
         } else {
             items = [...this.state.items, newItem];
         }
-        this.setState({
+        return this.setState({
             items,
         });
     }
 
     removeItem(key: string | number) {
-        this.setState({
+        return this.setState({
             items: this.state.items.filter(item => item.uuid !== key),
         });
     }
 
     setExpanded(key: string | number, expanded: boolean) {
-        this.setState({
+        return this.setState({
             items: this.state.items.map(item => {
                 if (item.uuid === key) {
                     return {
