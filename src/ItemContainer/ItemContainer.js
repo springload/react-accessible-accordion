@@ -15,9 +15,11 @@ class ItemContainer extends Container<StoreState> {
     constructor(args?: $Shape<StoreState> = {}) {
         super();
         this.state = {
-            uuid: nextUuid(),
             ...args,
         };
+        if (this.state.uuid === undefined) {
+            this.state.uuid = nextUuid();
+        }
     }
 
     setUuid(customUuid: string) {
