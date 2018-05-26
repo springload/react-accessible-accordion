@@ -16,13 +16,13 @@ class AccordionItemTitle extends Component<
 > {
     static accordionElementName = 'AccordionItemTitle';
 
-    handleClick = () => {
+    handleClick = async () => {
         const { uuid, accordionStore } = this.props;
         const { state } = accordionStore;
         const { accordion, onChange, items } = state;
         const foundItem = items.find(item => item.uuid === uuid);
 
-        accordionStore.setExpanded(foundItem.uuid, !foundItem.expanded);
+        await accordionStore.setExpanded(foundItem.uuid, !foundItem.expanded);
 
         if (accordion) {
             onChange(foundItem.uuid);

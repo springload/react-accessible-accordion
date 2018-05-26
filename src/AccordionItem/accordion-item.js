@@ -17,10 +17,10 @@ type AccordionItemProps = ElementProps<'div'> & {
 };
 
 class AccordionItem extends Component<AccordionItemProps, *> {
-    componentDidMount() {
+    async componentDidMount() {
         const { uuid, accordionStore, itemStore, disabled } = this.props;
 
-        itemStore.setUuid(uuid);
+        await itemStore.setUuid(uuid);
 
         const currentItem = accordionStore.state.items.find(
             item => item.uuid === uuid,
