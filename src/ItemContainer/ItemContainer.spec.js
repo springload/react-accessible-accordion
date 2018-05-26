@@ -9,10 +9,15 @@ describe('ItemContainer', () => {
         expect(itemContainer.setUuid).toBeDefined();
     });
 
-    it('correctly sets the value', () => {
+    it('can be initialized with values in the constructor', () => {
+        const itemContainer = new ItemContainer({ uuid: 'foo' });
+        expect(itemContainer.state.uuid).toBe('foo');
+    });
+
+    it('correctly sets the value', async () => {
         const itemContainer = new ItemContainer();
         const uuid = 'uniqueID';
-        itemContainer.setUuid(uuid);
+        await itemContainer.setUuid(uuid);
         expect(itemContainer.state.uuid).toBe(uuid);
     });
 
