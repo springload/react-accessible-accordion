@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import { Provider } from 'unstated';
 import AccordionItemTitle from './accordion-item-title-wrapper';
@@ -32,15 +31,13 @@ describe('AccordionItemTitle', () => {
     });
 
     it('renders correctly with min params', () => {
-        const wrapper = renderer
-            .create(
-                <Provider inject={[accordionContainer, itemContainer]}>
-                    <AccordionItemTitle>
-                        <div>Fake Title</div>
-                    </AccordionItemTitle>
-                </Provider>,
-            )
-            .toJSON();
+        const wrapper = mount(
+            <Provider inject={[accordionContainer, itemContainer]}>
+                <AccordionItemTitle>
+                    <div>Fake Title</div>
+                </AccordionItemTitle>
+            </Provider>,
+        );
         expect(wrapper).toMatchSnapshot();
     });
 
