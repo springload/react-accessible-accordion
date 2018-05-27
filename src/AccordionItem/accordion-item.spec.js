@@ -26,7 +26,7 @@ describe('AccordionItem', () => {
     it('renders correctly with accordion true', async () => {
         await accordionContainer.setAccordion(true);
 
-        const tree = await mountComplete(
+        const wrapper = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem className="accordion__item">
                     <AccordionItemTitle className="accordion__title">
@@ -39,12 +39,12 @@ describe('AccordionItem', () => {
             </Provider>,
         );
 
-        expect(tree).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('renders correctly with accordion false', async () => {
         await accordionContainer.setAccordion(false);
-        const tree = await mountComplete(
+        const wrapper = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem className="accordion__item">
                     <AccordionItemTitle className="accordion__title">
@@ -57,7 +57,7 @@ describe('AccordionItem', () => {
             </Provider>,
         );
 
-        expect(tree).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('renders with multiple AccordionItems', async () => {
@@ -80,7 +80,7 @@ describe('AccordionItem', () => {
     });
 
     it('still renders with no AccordionItemTitle or AccordionItemBody', async () => {
-        const tree = await mountComplete(
+        const wrapper = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem>
                     <div>Fake title</div>
@@ -89,31 +89,31 @@ describe('AccordionItem', () => {
             </Provider>,
         );
 
-        expect(tree).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('still renders with no children at all', async () => {
-        const tree = await mountComplete(
+        const wrapper = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem />
             </Provider>,
         );
 
-        expect(tree).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('renders with different className', async () => {
-        const tree = await mountComplete(
+        const wrapper = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem className="testCSSClass" />
             </Provider>,
         );
 
-        expect(tree.find('div').prop('className')).toBe('testCSSClass');
+        expect(wrapper.find('div').prop('className')).toBe('testCSSClass');
     });
 
     it('renders with different hideBodyClassName', async () => {
-        const tree = await mountComplete(
+        const wrapper = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem
                     expanded={false}
@@ -123,14 +123,14 @@ describe('AccordionItem', () => {
             </Provider>,
         );
 
-        expect(tree.find('div').prop('className')).toEqual(
+        expect(wrapper.find('div').prop('className')).toEqual(
             'accordion-item accordion-item--hidden',
         );
     });
 
     it('renders correctly with other blocks inside', async () => {
         await accordionContainer.setAccordion(false);
-        const tree = await mountComplete(
+        const wrapper = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem>
                     <AccordionItemTitle>
@@ -144,12 +144,12 @@ describe('AccordionItem', () => {
             </Provider>,
         );
 
-        expect(tree).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('renders correctly with other blocks inside 2', async () => {
         await accordionContainer.setAccordion(false);
-        const tree = await mountComplete(
+        const wrapper = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem>
                     <AccordionItemTitle>
@@ -163,7 +163,7 @@ describe('AccordionItem', () => {
             </Provider>,
         );
 
-        expect(tree).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('can dynamically set expanded prop', async () => {

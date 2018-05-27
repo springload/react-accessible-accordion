@@ -8,20 +8,20 @@ import { setStateComplete, mountComplete } from '../unstated-test-helpers';
 
 describe('Accordion', () => {
     it('renders correctly with min params', async () => {
-        const tree = await mountComplete(<Accordion />);
-        expect(tree.find('div').props().role).toEqual('tablist');
+        const wrapper = await mountComplete(<Accordion />);
+        expect(wrapper.find('div').props().role).toEqual('tablist');
     });
 
     it('renders correctly with accordion false', async () => {
-        const tree = await mountComplete(<Accordion accordion={false} />);
-        expect(tree.find('div').props().role).toEqual(null);
+        const wrapper = await mountComplete(<Accordion accordion={false} />);
+        expect(wrapper.find('div').props().role).toEqual(null);
     });
 
     it('different className', async () => {
-        const tree = await mountComplete(
+        const wrapper = await mountComplete(
             <Accordion className="testCSSClass" />,
         );
-        expect(tree.find('div').props().className).toEqual('testCSSClass');
+        expect(wrapper.find('div').props().className).toEqual('testCSSClass');
     });
 
     describe('<Accordion accordion="true" />', () => {
@@ -245,11 +245,11 @@ describe('Accordion', () => {
     });
 
     it('renders correctly after update', async () => {
-        const tree = await mountComplete(<Accordion accordion={false} />);
-        expect(tree.find('div').props().role).toEqual(null);
+        const wrapper = await mountComplete(<Accordion accordion={false} />);
+        expect(wrapper.find('div').props().role).toEqual(null);
 
-        tree.setProps({ accordion: true });
-        await setStateComplete(tree);
-        expect(tree.find('div').props().role).toEqual('tablist');
+        wrapper.setProps({ accordion: true });
+        await setStateComplete(wrapper);
+        expect(wrapper.find('div').props().role).toEqual('tablist');
     });
 });

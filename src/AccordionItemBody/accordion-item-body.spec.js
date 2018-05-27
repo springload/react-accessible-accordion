@@ -32,7 +32,7 @@ describe('AccordionItemBody', () => {
     });
 
     it('renders correctly with min params', () => {
-        const tree = renderer
+        const wrapper = renderer
             .create(
                 <Provider inject={[accordionStore, itemStore]}>
                     <AccordionItemBody>
@@ -41,7 +41,7 @@ describe('AccordionItemBody', () => {
                 </Provider>,
             )
             .toJSON();
-        expect(tree).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('renders correctly with different className', () => {
