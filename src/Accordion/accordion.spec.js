@@ -5,27 +5,19 @@ import { mount } from 'enzyme';
 import Accordion from './accordion-wrapper'; // eslint-disable-line
 import AccordionItem from '../AccordionItem/accordion-item-wrapper';
 import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title-wrapper';
-import AccordionContainer from '../AccordionContainer/AccordionContainer';
-import ItemContainer from '../ItemContainer/ItemContainer';
+import { Container } from 'unstated';
 
 describe('Accordion', () => {
-    let accordionSetStateSpy;
-    let itemSetStateSpy;
+    let setStateSpy;
 
     beforeEach(() => {
-        accordionSetStateSpy = jest.spyOn(
-            AccordionContainer.prototype,
-            'setState',
-        );
-        itemSetStateSpy = jest.spyOn(ItemContainer.prototype, 'setState');
+        setStateSpy = jest.spyOn(Container.prototype, 'setState');
     });
 
     function completeSetStateChanges() {
-        return Promise.all([
-            ...accordionSetStateSpy.mock.results,
-            ...itemSetStateSpy.mock.results,
-        ]);
+        return Promise.all(setStateSpy.mock.results);
     }
+
     async function mountComplete(node) {
         const mounted = mount(node);
 
