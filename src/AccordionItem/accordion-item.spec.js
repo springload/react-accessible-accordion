@@ -9,40 +9,24 @@ import AccordionItemBody from '../AccordionItemBody/accordion-item-body-wrapper'
 import AccordionItem from './accordion-item-wrapper';
 import { resetNextUuid } from '../ItemContainer/ItemContainer';
 import AccordionContainer from '../AccordionContainer/AccordionContainer';
+import { setStateComplete, mountComplete } from '../unstated-test-helpers';
 
 expect.addSnapshotSerializer(createSerializer({ mode: 'deep' }));
 
 describe('AccordionItem', () => {
     let accordionContainer;
-    let addItemSpy;
-    let setStateSpy;
-
-    function completeStateChanges() {
-        // $FlowFixMe
-        return Promise.all(setStateSpy.mock.results);
-    }
-
-    async function mountCompleted(node) {
-        const mounted = mount(node);
-
-        await completeStateChanges();
-        mounted.update();
-
-        return mounted;
-    }
 
     beforeEach(() => {
         resetNextUuid();
         accordionContainer = new AccordionContainer({
             accordion: true,
         });
-        setStateSpy = jest.spyOn(accordionContainer, 'setState');
     });
 
     it('renders correctly with accordion true', async () => {
         await accordionContainer.setAccordion(true);
 
-        const tree = await mountCompleted(
+        const tree = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem className="accordion__item">
                     <AccordionItemTitle className="accordion__title">
@@ -60,7 +44,7 @@ describe('AccordionItem', () => {
 
     it('renders correctly with accordion false', async () => {
         await accordionContainer.setAccordion(false);
-        const tree = await mountCompleted(
+        const tree = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem className="accordion__item">
                     <AccordionItemTitle className="accordion__title">
@@ -77,7 +61,7 @@ describe('AccordionItem', () => {
     });
 
     it('renders with multiple AccordionItems', async () => {
-        const wrapper = await mountCompleted(
+        const wrapper = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <div>
                     <AccordionItem>
@@ -96,7 +80,7 @@ describe('AccordionItem', () => {
     });
 
     it('still renders with no AccordionItemTitle or AccordionItemBody', async () => {
-        const tree = await mountCompleted(
+        const tree = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem>
                     <div>Fake title</div>
@@ -109,7 +93,7 @@ describe('AccordionItem', () => {
     });
 
     it('still renders with no children at all', async () => {
-        const tree = await mountCompleted(
+        const tree = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem />
             </Provider>,
@@ -119,7 +103,7 @@ describe('AccordionItem', () => {
     });
 
     it('renders with different className', async () => {
-        const tree = await mountCompleted(
+        const tree = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem className="testCSSClass" />
             </Provider>,
@@ -129,7 +113,7 @@ describe('AccordionItem', () => {
     });
 
     it('renders with different hideBodyClassName', async () => {
-        const tree = await mountCompleted(
+        const tree = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem
                     expanded={false}
@@ -146,7 +130,7 @@ describe('AccordionItem', () => {
 
     it('renders correctly with other blocks inside', async () => {
         await accordionContainer.setAccordion(false);
-        const tree = await mountCompleted(
+        const tree = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem>
                     <AccordionItemTitle>
@@ -165,7 +149,7 @@ describe('AccordionItem', () => {
 
     it('renders correctly with other blocks inside 2', async () => {
         await accordionContainer.setAccordion(false);
-        const tree = await mountCompleted(
+        const tree = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem>
                     <AccordionItemTitle>
@@ -178,8 +162,6 @@ describe('AccordionItem', () => {
                 </AccordionItem>
             </Provider>,
         );
-
-        tree.update();
 
         expect(tree).toMatchSnapshot();
     });
@@ -195,14 +177,11 @@ describe('AccordionItem', () => {
             </Provider>
         );
 
-        const wrapper = await mountCompleted(<Wrapper expanded={false} />);
-
-        wrapper.update();
+        const wrapper = await mountComplete(<Wrapper expanded={false} />);
 
         wrapper.setProps({ expanded: true });
 
-        await completeStateChanges();
-        wrapper.update();
+        await setStateComplete(wrapper);
 
         expect(
             accordionContainer.state.items.filter(
@@ -221,10 +200,10 @@ describe('AccordionItem', () => {
                 </AccordionItem>
             </Provider>
         );
-        const wrapper = await mountCompleted(<Wrapper expanded={true} />);
+        const wrapper = await mountComplete(<Wrapper expanded={true} />);
         wrapper.setProps({ expanded: undefined });
 
-        await completeStateChanges();
+        await setStateComplete(wrapper);
 
         expect(
             accordionContainer.state.items.filter(
@@ -243,10 +222,10 @@ describe('AccordionItem', () => {
                 </AccordionItem>
             </Provider>
         );
-        const wrapper = await mountCompleted(<Wrapper className="foo" />);
+        const wrapper = await mountComplete(<Wrapper className="foo" />);
         wrapper.setProps({ className: 'bar' });
 
-        await completeStateChanges();
+        await setStateComplete(wrapper);
 
         expect(
             accordionContainer.state.items.filter(
@@ -260,7 +239,7 @@ describe('AccordionItem', () => {
         // $FlowFixMe
         accordionContainer.addItem = jest.fn();
 
-        const wrapper = await mountCompleted(
+        const wrapper = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem>Fake Title</AccordionItem>
             </Provider>,
@@ -272,7 +251,7 @@ describe('AccordionItem', () => {
     });
 
     it('can manually reset the uuid', async () => {
-        const wrapperOne = await mountCompleted(
+        const wrapperOne = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem />
             </Provider>,
@@ -284,7 +263,7 @@ describe('AccordionItem', () => {
         accordionContainer.setAccordion(false);
         accordionContainer.setOnChange(jest.fn());
 
-        const wrapperTwo = await mountCompleted(
+        const wrapperTwo = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem />
             </Provider>,
@@ -303,7 +282,7 @@ describe('AccordionItem', () => {
     });
 
     it('correctly unregisters itself on unmount', async () => {
-        const wrapper = await mountCompleted(
+        const wrapper = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem>
                     <AccordionItemTitle>
@@ -317,13 +296,13 @@ describe('AccordionItem', () => {
 
         wrapper.unmount();
 
-        await completeStateChanges();
+        await setStateComplete(wrapper);
 
         expect(accordionContainer.state.items.length).toEqual(0);
     });
 
     it('respects arbitrary user-defined props', async () => {
-        const wrapper = await mountCompleted(
+        const wrapper = await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem lang="en" />
             </Provider>,
@@ -334,7 +313,7 @@ describe('AccordionItem', () => {
 
     it('supports custom uuid', async () => {
         const uuid = 'uniqueCustomID';
-        await mountCompleted(
+        await mountComplete(
             <Provider inject={[accordionContainer]}>
                 <AccordionItem uuid={uuid}>
                     <AccordionItemTitle>
