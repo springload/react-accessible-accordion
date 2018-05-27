@@ -5,25 +5,13 @@ import { mount } from 'enzyme';
 import Accordion from './accordion-wrapper'; // eslint-disable-line
 import AccordionItem from '../AccordionItem/accordion-item-wrapper';
 import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title-wrapper';
-import { Container } from 'unstated';
+import { setStateComplete } from '../unstated-test-helpers';
 
 describe('Accordion', () => {
-    let setStateSpy;
-
-    beforeEach(() => {
-        setStateSpy = jest.spyOn(Container.prototype, 'setState');
-    });
-
-    function completeSetStateChanges() {
-        return Promise.all(setStateSpy.mock.results);
-    }
-
     async function mountComplete(node) {
         const mounted = mount(node);
 
-        await completeSetStateChanges();
-
-        mounted.update();
+        await setStateComplete(mounted);
 
         return mounted;
     }
@@ -71,8 +59,7 @@ describe('Accordion', () => {
 
         it('expands a collapsed item when its title is clicked', async () => {
             fooTitle.simulate('click');
-            await completeSetStateChanges();
-            wrapper.update();
+            await setStateComplete(wrapper);
             expect(
                 wrapper
                     .instance()
@@ -84,8 +71,7 @@ describe('Accordion', () => {
 
         it('expands a collapsed item when its title is clicked, and closes the others', async () => {
             barTitle.simulate('click');
-            await completeSetStateChanges();
-            wrapper.update();
+            await setStateComplete(wrapper);
             expect(
                 wrapper
                     .instance()
@@ -97,10 +83,9 @@ describe('Accordion', () => {
 
         it('collapses an expanded item when its title is clicked', async () => {
             fooTitle.simulate('click'); // open
-            await completeSetStateChanges();
+            await setStateComplete(wrapper);
             fooTitle.simulate('click'); // close
-            await completeSetStateChanges();
-            wrapper.update();
+            await setStateComplete(wrapper);
             expect(
                 wrapper
                     .instance()
@@ -137,8 +122,7 @@ describe('Accordion', () => {
 
         it('expands a collapsed item when its title is clicked', async () => {
             fooTitle.simulate('click');
-            await completeSetStateChanges();
-            wrapper.update();
+            await setStateComplete(wrapper);
             expect(
                 wrapper
                     .instance()
@@ -151,8 +135,7 @@ describe('Accordion', () => {
         it("expands a collapsed item when its title is clicked, and doesn't close the others", async () => {
             fooTitle.simulate('click');
             barTitle.simulate('click');
-            await completeSetStateChanges();
-            wrapper.update();
+            await setStateComplete(wrapper);
             expect(
                 wrapper
                     .instance()
@@ -164,10 +147,9 @@ describe('Accordion', () => {
 
         it('collapses an expanded item when its title is clicked', async () => {
             fooTitle.simulate('click'); // open
-            await completeSetStateChanges();
+            await setStateComplete(wrapper);
             fooTitle.simulate('click'); // close
-            await completeSetStateChanges();
-            wrapper.update();
+            await setStateComplete(wrapper);
             expect(
                 wrapper
                     .instance()
@@ -276,8 +258,7 @@ describe('Accordion', () => {
         expect(tree.find('div').props().role).toEqual(null);
 
         tree.setProps({ accordion: true });
-        await completeSetStateChanges();
-        tree.update();
+        await setStateComplete(tree);
         expect(tree.find('div').props().role).toEqual('tablist');
     });
 });
