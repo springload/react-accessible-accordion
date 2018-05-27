@@ -3,15 +3,12 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'unstated';
-import { createSerializer } from 'enzyme-to-json';
 import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title-wrapper';
 import AccordionItemBody from '../AccordionItemBody/accordion-item-body-wrapper';
 import AccordionItem from './accordion-item-wrapper';
 import { resetNextUuid } from '../ItemContainer/ItemContainer';
 import AccordionContainer from '../AccordionContainer/AccordionContainer';
 import { setStateComplete, mountComplete } from '../unstated-test-helpers';
-
-expect.addSnapshotSerializer(createSerializer({ mode: 'deep' }));
 
 describe('AccordionItem', () => {
     let accordionContainer;
