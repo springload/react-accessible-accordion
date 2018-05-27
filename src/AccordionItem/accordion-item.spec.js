@@ -349,26 +349,4 @@ describe('AccordionItem', () => {
                 .length,
         ).toEqual(1);
     });
-
-    it('raises console error in case of duplicate uuid', async () => {
-        const uuid = 'uniqueCustomID';
-        jest.spyOn(global.console, 'error');
-        await mountCompleted(
-            <Provider inject={[accordionContainer]}>
-                <AccordionItem uuid={uuid}>
-                    <AccordionItemTitle>
-                        <div>Fake title</div>
-                    </AccordionItemTitle>
-                </AccordionItem>
-                <AccordionItem uuid={uuid}>
-                    <AccordionItemTitle>
-                        <div>Fake title</div>
-                    </AccordionItemTitle>
-                </AccordionItem>
-            </Provider>,
-        );
-
-        // eslint-disable-next-line no-console
-        expect(console.error).toBeCalled();
-    });
 });
