@@ -1,21 +1,12 @@
 // @flow
 
 import React from 'react';
-import { mount } from 'enzyme';
 import Accordion from './accordion-wrapper'; // eslint-disable-line
 import AccordionItem from '../AccordionItem/accordion-item-wrapper';
 import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title-wrapper';
-import { setStateComplete } from '../unstated-test-helpers';
+import { setStateComplete, mountComplete } from '../unstated-test-helpers';
 
 describe('Accordion', () => {
-    async function mountComplete(node) {
-        const mounted = mount(node);
-
-        await setStateComplete(mounted);
-
-        return mounted;
-    }
-
     it('renders correctly with min params', async () => {
         const tree = await mountComplete(<Accordion />);
         expect(tree.find('div').props().role).toEqual('tablist');
