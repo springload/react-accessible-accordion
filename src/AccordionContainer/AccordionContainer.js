@@ -40,8 +40,17 @@ class AccordionContainer extends Container<StoreState> {
 
     addItem(newItem: Item) {
         // Need to use callback style otherwise race-conditions are created by concurrent registrations.
-        return this.setState(state => {
+        this.setState(state => {
             let items;
+
+            if (state.items.some(item => item.uuid === newItem.uuid)) {
+                // eslint-disable-next-line no-console
+                console.error(
+                    `AccordionItem error: One item already has the uuid "${
+                        newItem.uuid
+                    }". Uuid property must be unique. See: https://github.com/springload/react-accessible-accordion#accordionitem`,
+                );
+            }
             if (state.accordion && newItem.expanded) {
                 // If this is a true accordion and the new item is expanded, then the others must be closed.
                 items = [

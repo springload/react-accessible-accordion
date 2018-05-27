@@ -18,15 +18,6 @@ class AccordionItem extends Component<AccordionItemProps, *> {
     async componentDidMount() {
         const { uuid, accordionStore, disabled } = this.props;
 
-        const currentItem = accordionStore.state.items.find(
-            item => item.uuid === uuid,
-        );
-        if (currentItem)
-            // eslint-disable-next-line no-console
-            console.error(
-                `AccordionItem error: One item already has the uuid "${uuid}". Uuid property must be unique. See: https://github.com/springload/react-accessible-accordion#accordionitem`,
-            );
-
         accordionStore.addItem({
             uuid,
             expanded: this.props.expanded || false,

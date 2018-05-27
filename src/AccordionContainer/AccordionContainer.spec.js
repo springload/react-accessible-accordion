@@ -183,4 +183,21 @@ describe('Accordion', () => {
 
         expect(container.state.items.length).toBe(2);
     });
+
+    it('raises console error in case of duplicate uuid', async () => {
+        const uuid = 'uniqueCustomID';
+        jest.spyOn(global.console, 'error');
+
+        await Promise.all([
+            container.addItem({
+                uuid,
+            }),
+            container.addItem({
+                uuid,
+            }),
+        ]);
+
+        // eslint-disable-next-line no-console
+        expect(console.error).toBeCalled();
+    });
 });
