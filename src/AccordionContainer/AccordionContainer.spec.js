@@ -184,6 +184,24 @@ describe('Accordion', () => {
         expect(container.state.items.length).toBe(2);
     });
 
+    it('can remove multiple items at the same time', async () => {
+        await Promise.all([
+            container.addItem({
+                uuid: 'foo',
+            }),
+            container.addItem({
+                uuid: 'bar',
+            }),
+        ]);
+
+        await Promise.all([
+            container.removeItem('foo'),
+            container.removeItem('bar'),
+        ]);
+
+        expect(container.state.items.length).toBe(0);
+    });
+
     it('raises console error in case of duplicate uuid', async () => {
         const uuid = 'uniqueCustomID';
         jest.spyOn(global.console, 'error');
