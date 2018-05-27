@@ -78,14 +78,14 @@ class AccordionContainer extends Container<StoreState> {
     }
 
     setExpanded(key: string | number, expanded: boolean) {
-        return this.setState({
-            items: this.state.items.map(item => {
+        return this.setState(state => ({
+            items: state.items.map(item => {
                 if (item.uuid === key) {
                     return {
                         ...item,
                         expanded,
                     };
-                } else if (this.state.accordion && expanded) {
+                } else if (state.accordion && expanded) {
                     // If this is an accordion, we might need to collapse the other expanded item.
                     return {
                         ...item,
@@ -94,7 +94,7 @@ class AccordionContainer extends Container<StoreState> {
                 }
                 return item;
             }),
-        });
+        }));
     }
 }
 
