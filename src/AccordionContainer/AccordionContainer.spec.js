@@ -202,6 +202,27 @@ describe('Accordion', () => {
         expect(container.state.items.length).toBe(0);
     });
 
+    it('can update expanded state of multiple items at the same time', async () => {
+        await container.setAccordion(false);
+        await container.addItem({
+            uuid: 'foo',
+            expanded: true,
+        });
+        await container.addItem({
+            uuid: 'bar',
+            expanded: true,
+        });
+
+        await Promise.all([
+            container.setExpanded('foo', false),
+            container.setExpanded('bar', false),
+        ]);
+
+        expect(
+            container.state.items.filter(item => item.expanded === true).length,
+        ).toBe(0);
+    });
+
     it('raises console error in case of duplicate uuid', async () => {
         const uuid = 'uniqueCustomID';
         jest.spyOn(global.console, 'error');
