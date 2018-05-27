@@ -170,4 +170,17 @@ describe('Accordion', () => {
         expect(container.state.items[0].expanded).toBe(true);
         expect(container.state.items[1].expanded).toBe(true);
     });
+
+    it('can add multiple items at the same time', async () => {
+        await Promise.all([
+            container.addItem({
+                uuid: 'foo',
+            }),
+            container.addItem({
+                uuid: 'bar',
+            }),
+        ]);
+
+        expect(container.state.items.length).toBe(2);
+    });
 });
