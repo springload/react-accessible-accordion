@@ -39,18 +39,24 @@ class AccordionContainer extends Container<StoreState> {
     }
 
     addItem(newItem: Item) {
-        let items;
-        if (this.state.accordion && newItem.expanded) {
-            // If this is a true accordion and the new item is expanded, then the others must be closed.
-            items = [
-                ...this.state.items.map(item => ({ ...item, expanded: false })),
-                newItem,
-            ];
-        } else {
-            items = [...this.state.items, newItem];
-        }
-        return this.setState({
-            items,
+        // Need to use callback style otherwise race-conditions are created by concurrent registrations.
+        return this.setState(state => {
+            let items;
+            if (state.accordion && newItem.expanded) {
+                // If this is a true accordion and the new item is expanded, then the others must be closed.
+                items = [
+                    ...state.items.map(item => ({
+                        ...item,
+                        expanded: false,
+                    })),
+                    newItem,
+                ];
+            } else {
+                items = [...state.items, newItem];
+            }
+            return {
+                items,
+            };
         });
     }
 
