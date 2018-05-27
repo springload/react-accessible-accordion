@@ -72,6 +72,7 @@ describe('Accordion', () => {
         it('expands a collapsed item when its title is clicked', async () => {
             fooTitle.simulate('click');
             await completeSetStateChanges();
+            wrapper.update();
             expect(
                 wrapper
                     .instance()
@@ -84,6 +85,7 @@ describe('Accordion', () => {
         it('expands a collapsed item when its title is clicked, and closes the others', async () => {
             barTitle.simulate('click');
             await completeSetStateChanges();
+            wrapper.update();
             expect(
                 wrapper
                     .instance()
@@ -94,8 +96,11 @@ describe('Accordion', () => {
         });
 
         it('collapses an expanded item when its title is clicked', async () => {
-            barTitle.simulate('click');
+            fooTitle.simulate('click'); // open
             await completeSetStateChanges();
+            fooTitle.simulate('click'); // close
+            await completeSetStateChanges();
+            wrapper.update();
             expect(
                 wrapper
                     .instance()
@@ -133,6 +138,7 @@ describe('Accordion', () => {
         it('expands a collapsed item when its title is clicked', async () => {
             fooTitle.simulate('click');
             await completeSetStateChanges();
+            wrapper.update();
             expect(
                 wrapper
                     .instance()
@@ -143,8 +149,10 @@ describe('Accordion', () => {
         });
 
         it("expands a collapsed item when its title is clicked, and doesn't close the others", async () => {
+            fooTitle.simulate('click');
             barTitle.simulate('click');
             await completeSetStateChanges();
+            wrapper.update();
             expect(
                 wrapper
                     .instance()
@@ -155,15 +163,18 @@ describe('Accordion', () => {
         });
 
         it('collapses an expanded item when its title is clicked', async () => {
-            barTitle.simulate('click');
+            fooTitle.simulate('click'); // open
             await completeSetStateChanges();
+            fooTitle.simulate('click'); // close
+            await completeSetStateChanges();
+            wrapper.update();
             expect(
                 wrapper
                     .instance()
                     .accordionStore.state.items.filter(
                         item => item.expanded === true,
                     ).length,
-            ).toEqual(1);
+            ).toEqual(0);
         });
     });
 
