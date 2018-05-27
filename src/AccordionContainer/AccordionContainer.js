@@ -70,8 +70,10 @@ class AccordionContainer extends Container<StoreState> {
     }
 
     removeItem(key: string | number) {
-        return this.setState({
-            items: this.state.items.filter(item => item.uuid !== key),
+        return this.setState(state => {
+            return {
+                items: state.items.filter(item => item.uuid !== key),
+            };
         });
     }
 
