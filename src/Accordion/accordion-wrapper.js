@@ -20,18 +20,21 @@ const defaultProps: AccordionWrapperProps = {
 };
 
 class AccordionWrapper extends Component<AccordionWrapperProps> {
-    accordionStore = new AccordionContainer();
+    accordionStore = new AccordionContainer({
+        accordion: this.props.accordion,
+        onChange: this.props.onChange,
+    });
 
     static defaultProps = defaultProps;
 
-    componentWillMount() {
+    componentDidMount() {
         this.accordionStore.setAccordion(this.props.accordion);
         this.accordionStore.setOnChange(this.props.onChange);
     }
 
-    componentWillUpdate(nextProps: AccordionWrapperProps) {
-        this.accordionStore.setAccordion(nextProps.accordion);
-        this.accordionStore.setOnChange(nextProps.onChange);
+    componentDidUpdate() {
+        this.accordionStore.setAccordion(this.props.accordion);
+        this.accordionStore.setOnChange(this.props.onChange);
     }
 
     render() {

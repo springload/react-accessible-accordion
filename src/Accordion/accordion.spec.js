@@ -224,6 +224,7 @@ describe('Accordion', () => {
         expect(tree.find('div').props().role).toEqual(null);
 
         tree.setProps({ accordion: true });
+        tree.update();
         expect(tree.find('div').props().role).toEqual('tablist');
     });
 });

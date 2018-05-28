@@ -14,11 +14,15 @@ export type StoreState = {
 };
 
 class AccordionContainer extends Container<StoreState> {
-    state = {
-        items: [],
-        accordion: true,
-        onChange: () => {},
-    };
+    constructor(args: $Shape<StoreState> = {}) {
+        super();
+        this.state = {
+            items: [],
+            accordion: true,
+            onChange: () => {},
+            ...args,
+        };
+    }
 
     setAccordion(accordion: boolean) {
         if (accordion !== this.state.accordion) {
