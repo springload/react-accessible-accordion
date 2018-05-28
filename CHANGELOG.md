@@ -5,6 +5,10 @@
 
 ## Next
 
+### Changed
+
+*   Upgrade one forgotten devDependency.
+
 ## [[v2.4.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.4.1)
 
 This release brings support for React 16.3+ by way of some minor refactoring to remove deprecated lifecycle methods.
