@@ -32,32 +32,32 @@ describe('Accordion', () => {
         );
     });
 
-    it('can set "accordion" state', () => {
+    it('can set "accordion" state', async () => {
         expect(container.state.accordion).toBe(true);
-        container.setAccordion(false);
+        await container.setAccordion(false);
         expect(container.state.accordion).toBe(false);
     });
 
-    it('can set "onChange" state', () => {
+    it('can set "onChange" state', async () => {
         const newFn = jest.fn();
-        container.setOnChange(newFn);
+        await container.setOnChange(newFn);
         container.state.onChange();
         expect(newFn).toHaveBeenCalled();
     });
 
-    it('can add an item', () => {
+    it('can add an item', async () => {
         const item = {
             uuid: 'foo',
             expanded: true,
             disabled: true,
         };
         expect(container.state.items).toHaveLength(0);
-        container.addItem(item);
+        await container.addItem(item);
         expect(container.state.items).toHaveLength(1);
         expect(container.state.items[0]).toEqual(item);
     });
 
-    it('can remove an item', () => {
+    it('can remove an item', async () => {
         const fooItem = {
             uuid: 'foo',
             expanded: true,
@@ -69,15 +69,15 @@ describe('Accordion', () => {
             disabled: true,
         };
         expect(container.state.items).toHaveLength(0);
-        container.addItem(fooItem);
-        container.addItem(barItem);
+        await container.addItem(fooItem);
+        await container.addItem(barItem);
         expect(container.state.items).toHaveLength(2);
-        container.removeItem(fooItem.uuid);
+        await container.removeItem(fooItem.uuid);
         expect(container.state.items).toHaveLength(1);
         expect(container.state.items[0]).toEqual(barItem);
     });
 
-    it('adding an expanded item to a strict-accordion closes other items', () => {
+    it('adding an expanded item to a strict-accordion closes other items', async () => {
         const fooItem = {
             uuid: 'foo',
             expanded: true,
@@ -88,17 +88,17 @@ describe('Accordion', () => {
             expanded: true,
             disabled: true,
         };
-        container.setAccordion(true);
-        container.addItem(fooItem);
+        await container.setAccordion(true);
+        await container.addItem(fooItem);
         expect(container.state.items).toHaveLength(1);
         expect(container.state.items[0].expanded).toBe(true);
-        container.addItem(barItem);
+        await container.addItem(barItem);
         expect(container.state.items).toHaveLength(2);
         expect(container.state.items[0].expanded).toBe(false);
         expect(container.state.items[1].expanded).toBe(true);
     });
 
-    it("adding an expanded item to a non-strict-accordion doesn't close other items", () => {
+    it("adding an expanded item to a non-strict-accordion doesn't close other items", async () => {
         const fooItem = {
             uuid: 'foo',
             expanded: true,
@@ -109,29 +109,29 @@ describe('Accordion', () => {
             expanded: true,
             disabled: true,
         };
-        container.setAccordion(false);
-        container.addItem(fooItem);
+        await container.setAccordion(false);
+        await container.addItem(fooItem);
         expect(container.state.items).toHaveLength(1);
         expect(container.state.items[0].expanded).toBe(true);
-        container.addItem(barItem);
+        await container.addItem(barItem);
         expect(container.state.items).toHaveLength(2);
         expect(container.state.items[0].expanded).toBe(true);
         expect(container.state.items[1].expanded).toBe(true);
     });
 
-    it('can set the expanded property of an item', () => {
+    it('can set the expanded property of an item', async () => {
         const item = {
             uuid: 'foo',
             expanded: true,
             disabled: true,
         };
-        container.addItem(item);
+        await container.addItem(item);
         expect(container.state.items).toHaveLength(1);
-        container.setExpanded(item.uuid, false);
+        await container.setExpanded(item.uuid, false);
         expect(container.state.items[0].expanded).toBe(false);
     });
 
-    it('setting the expanded property to true in a strict accordion closes all other items', () => {
+    it('setting the expanded property to true in a strict accordion closes all other items', async () => {
         const fooItem = {
             uuid: 'foo',
             expanded: true,
@@ -142,16 +142,16 @@ describe('Accordion', () => {
             expanded: false,
             disabled: true,
         };
-        container.setAccordion(true);
-        container.addItem(fooItem);
-        container.addItem(barItem);
+        await container.setAccordion(true);
+        await container.addItem(fooItem);
+        await container.addItem(barItem);
         expect(container.state.items).toHaveLength(2);
-        container.setExpanded(barItem.uuid, true);
+        await container.setExpanded(barItem.uuid, true);
         expect(container.state.items[0].expanded).toBe(false);
         expect(container.state.items[1].expanded).toBe(true);
     });
 
-    it('setting the expanded property to true in a non-strict accordion does not close all other items', () => {
+    it('setting the expanded property to true in a non-strict accordion does not close all other items', async () => {
         const fooItem = {
             uuid: 'foo',
             expanded: true,
@@ -162,12 +162,81 @@ describe('Accordion', () => {
             expanded: false,
             disabled: true,
         };
-        container.setAccordion(false);
-        container.addItem(fooItem);
-        container.addItem(barItem);
+        await container.setAccordion(false);
+        await container.addItem(fooItem);
+        await container.addItem(barItem);
         expect(container.state.items).toHaveLength(2);
-        container.setExpanded(barItem.uuid, true);
+        await container.setExpanded(barItem.uuid, true);
         expect(container.state.items[0].expanded).toBe(true);
         expect(container.state.items[1].expanded).toBe(true);
+    });
+
+    it('can add multiple items at the same time', async () => {
+        await Promise.all([
+            container.addItem({
+                uuid: 'foo',
+            }),
+            container.addItem({
+                uuid: 'bar',
+            }),
+        ]);
+
+        expect(container.state.items.length).toBe(2);
+    });
+
+    it('can remove multiple items at the same time', async () => {
+        await Promise.all([
+            container.addItem({
+                uuid: 'foo',
+            }),
+            container.addItem({
+                uuid: 'bar',
+            }),
+        ]);
+
+        await Promise.all([
+            container.removeItem('foo'),
+            container.removeItem('bar'),
+        ]);
+
+        expect(container.state.items.length).toBe(0);
+    });
+
+    it('can update expanded state of multiple items at the same time', async () => {
+        await container.setAccordion(false);
+        await container.addItem({
+            uuid: 'foo',
+            expanded: true,
+        });
+        await container.addItem({
+            uuid: 'bar',
+            expanded: true,
+        });
+
+        await Promise.all([
+            container.setExpanded('foo', false),
+            container.setExpanded('bar', false),
+        ]);
+
+        expect(
+            container.state.items.filter(item => item.expanded === true).length,
+        ).toBe(0);
+    });
+
+    it('raises console error in case of duplicate uuid', async () => {
+        const uuid = 'uniqueCustomID';
+        jest.spyOn(global.console, 'error');
+
+        await Promise.all([
+            container.addItem({
+                uuid,
+            }),
+            container.addItem({
+                uuid,
+            }),
+        ]);
+
+        // eslint-disable-next-line no-console
+        expect(console.error).toBeCalled();
     });
 });

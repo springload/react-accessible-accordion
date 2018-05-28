@@ -12,12 +12,18 @@ export function resetNextUuid() {
 }
 
 class ItemContainer extends Container<StoreState> {
-    state = {
-        uuid: nextUuid(),
-    };
+    constructor(args?: $Shape<StoreState> = {}) {
+        super();
+        this.state = {
+            ...args,
+        };
+        if (this.state.uuid === undefined) {
+            this.state.uuid = nextUuid();
+        }
+    }
 
     setUuid(customUuid: string) {
-        this.setState({
+        return this.setState({
             uuid: customUuid,
         });
     }

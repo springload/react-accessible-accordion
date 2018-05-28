@@ -10,6 +10,7 @@ This release brings support for React 16.3+ by way of some minor refactoring to 
 ### Changed
 
 *   Replace deprecated lifecycle methods 'componentWillReceiveProps', 'componentWillUpdate' and 'componentWillMount'.
+*   Updated `unstated` (internal dependency) to latest major release.
 
 ## [[v2.4.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.4.0)
 

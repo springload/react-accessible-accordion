@@ -26,7 +26,10 @@ const defaultProps = {
 };
 
 class AccordionItemWrapper extends Component<AccordionItemWrapperProps> {
-    itemContainer = new ItemContainer();
+    itemContainer = new ItemContainer({
+        uuid: this.props.uuid,
+    });
+
     static defaultProps = defaultProps;
 
     render() {
@@ -34,14 +37,12 @@ class AccordionItemWrapper extends Component<AccordionItemWrapperProps> {
             <Provider inject={[this.itemContainer]}>
                 <Subscribe to={[AccordionContainer, ItemContainer]}>
                     {(accordionStore, itemStore) => {
-                        let uuid = itemStore.state.uuid;
-                        if (this.props.uuid) uuid = this.props.uuid;
+                        const { uuid } = itemStore.state;
                         return (
                             <AccordionItem
                                 {...this.props}
                                 uuid={uuid}
                                 accordionStore={accordionStore}
-                                itemStore={itemStore}
                             />
                         );
                     }}

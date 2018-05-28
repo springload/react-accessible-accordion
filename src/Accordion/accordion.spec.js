@@ -1,47 +1,56 @@
 // @flow
 
 import React from 'react';
-import { mount } from 'enzyme';
 import Accordion from './accordion-wrapper'; // eslint-disable-line
 import AccordionItem from '../AccordionItem/accordion-item-wrapper';
 import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title-wrapper';
+import { setStateComplete, mountComplete } from '../unstated-test-helpers';
 
 describe('Accordion', () => {
-    it('renders correctly with min params', () => {
-        const tree = mount(<Accordion />);
-        expect(tree.find('div').props().role).toEqual('tablist');
+    it('renders correctly with min params', async () => {
+        const wrapper = await mountComplete(<Accordion />);
+        expect(wrapper.find('div').props().role).toEqual('tablist');
     });
 
-    it('renders correctly with accordion false', () => {
-        const tree = mount(<Accordion accordion={false} />);
-        expect(tree.find('div').props().role).toEqual(null);
+    it('renders correctly with accordion false', async () => {
+        const wrapper = await mountComplete(<Accordion accordion={false} />);
+        expect(wrapper.find('div').props().role).toEqual(null);
     });
 
-    it('different className', () => {
-        const tree = mount(<Accordion className="testCSSClass" />);
-        expect(tree.find('div').props().className).toEqual('testCSSClass');
+    it('different className', async () => {
+        const wrapper = await mountComplete(
+            <Accordion className="testCSSClass" />,
+        );
+        expect(wrapper.find('div').props().className).toEqual('testCSSClass');
     });
 
     describe('<Accordion accordion="true" />', () => {
-        const wrapper = mount(
-            <Accordion accordion={true}>
-                <AccordionItem>
-                    <AccordionItemTitle className="foo">
-                        Foo Title
-                    </AccordionItemTitle>
-                </AccordionItem>
-                <AccordionItem>
-                    <AccordionItemTitle className="bar">
-                        Foo Title
-                    </AccordionItemTitle>
-                </AccordionItem>
-            </Accordion>,
-        );
-        const fooTitle = wrapper.find('div.foo').first();
-        const barTitle = wrapper.find('div.bar').first();
+        let wrapper;
+        let fooTitle;
+        let barTitle;
 
-        it('expands a collapsed item when its title is clicked', () => {
+        beforeEach(async () => {
+            wrapper = await mountComplete(
+                <Accordion accordion={true}>
+                    <AccordionItem>
+                        <AccordionItemTitle className="foo">
+                            Foo Title
+                        </AccordionItemTitle>
+                    </AccordionItem>
+                    <AccordionItem>
+                        <AccordionItemTitle className="bar">
+                            Foo Title
+                        </AccordionItemTitle>
+                    </AccordionItem>
+                </Accordion>,
+            );
+            fooTitle = wrapper.find('div.foo').first();
+            barTitle = wrapper.find('div.bar').first();
+        });
+
+        it('expands a collapsed item when its title is clicked', async () => {
             fooTitle.simulate('click');
+            await setStateComplete(wrapper);
             expect(
                 wrapper
                     .instance()
@@ -51,8 +60,9 @@ describe('Accordion', () => {
             ).toEqual(1);
         });
 
-        it('expands a collapsed item when its title is clicked, and closes the others', () => {
+        it('expands a collapsed item when its title is clicked, and closes the others', async () => {
             barTitle.simulate('click');
+            await setStateComplete(wrapper);
             expect(
                 wrapper
                     .instance()
@@ -62,8 +72,11 @@ describe('Accordion', () => {
             ).toEqual(1);
         });
 
-        it('collapses an expanded item when its title is clicked', () => {
-            barTitle.simulate('click');
+        it('collapses an expanded item when its title is clicked', async () => {
+            fooTitle.simulate('click'); // open
+            await setStateComplete(wrapper);
+            fooTitle.simulate('click'); // close
+            await setStateComplete(wrapper);
             expect(
                 wrapper
                     .instance()
@@ -75,25 +88,32 @@ describe('Accordion', () => {
     });
 
     describe('<Accordion accordion="false" />', () => {
-        const wrapper = mount(
-            <Accordion accordion={false}>
-                <AccordionItem>
-                    <AccordionItemTitle className="foo">
-                        Foo Title
-                    </AccordionItemTitle>
-                </AccordionItem>
-                <AccordionItem>
-                    <AccordionItemTitle className="bar">
-                        Foo Title
-                    </AccordionItemTitle>
-                </AccordionItem>
-            </Accordion>,
-        );
-        const fooTitle = wrapper.find('div.foo').first();
-        const barTitle = wrapper.find('div.bar').first();
+        let wrapper;
+        let fooTitle;
+        let barTitle;
 
-        it('expands a collapsed item when its title is clicked', () => {
+        beforeEach(async () => {
+            wrapper = await mountComplete(
+                <Accordion accordion={false}>
+                    <AccordionItem>
+                        <AccordionItemTitle className="foo">
+                            Foo Title
+                        </AccordionItemTitle>
+                    </AccordionItem>
+                    <AccordionItem>
+                        <AccordionItemTitle className="bar">
+                            Foo Title
+                        </AccordionItemTitle>
+                    </AccordionItem>
+                </Accordion>,
+            );
+            fooTitle = wrapper.find('div.foo').first();
+            barTitle = wrapper.find('div.bar').first();
+        });
+
+        it('expands a collapsed item when its title is clicked', async () => {
             fooTitle.simulate('click');
+            await setStateComplete(wrapper);
             expect(
                 wrapper
                     .instance()
@@ -103,8 +123,10 @@ describe('Accordion', () => {
             ).toEqual(1);
         });
 
-        it("expands a collapsed item when its title is clicked, and doesn't close the others", () => {
+        it("expands a collapsed item when its title is clicked, and doesn't close the others", async () => {
+            fooTitle.simulate('click');
             barTitle.simulate('click');
+            await setStateComplete(wrapper);
             expect(
                 wrapper
                     .instance()
@@ -114,20 +136,23 @@ describe('Accordion', () => {
             ).toEqual(2);
         });
 
-        it('collapses an expanded item when its title is clicked', () => {
-            barTitle.simulate('click');
+        it('collapses an expanded item when its title is clicked', async () => {
+            fooTitle.simulate('click'); // open
+            await setStateComplete(wrapper);
+            fooTitle.simulate('click'); // close
+            await setStateComplete(wrapper);
             expect(
                 wrapper
                     .instance()
                     .accordionStore.state.items.filter(
                         item => item.expanded === true,
                     ).length,
-            ).toEqual(1);
+            ).toEqual(0);
         });
     });
 
-    it('does not expanded disabled items on click', () => {
-        const wrapper = mount(
+    it('does not expanded disabled items on click', async () => {
+        const wrapper = await mountComplete(
             <Accordion accordion={false}>
                 <AccordionItem disabled>
                     <AccordionItemTitle className="foo" disabled>
@@ -149,8 +174,8 @@ describe('Accordion', () => {
         ).toEqual(0);
     });
 
-    it('pre expanded accordion', () => {
-        const wrapper = mount(
+    it('pre expanded accordion', async () => {
+        const wrapper = await mountComplete(
             <Accordion>
                 <AccordionItem expanded={true}>Fake Child</AccordionItem>
                 <AccordionItem>Fake Child</AccordionItem>
@@ -166,9 +191,9 @@ describe('Accordion', () => {
         ).toEqual(1);
     });
 
-    it('works with multiple pre expanded accordion. Extra expands are just ignored.', () => {
+    it('works with multiple pre expanded accordion. Extra expands are just ignored.', async () => {
         const hideBodyClassName = 'HIDE';
-        const wrapper = mount(
+        const wrapper = await mountComplete(
             <Accordion accordion={true}>
                 <AccordionItem
                     expanded={true}
@@ -196,8 +221,8 @@ describe('Accordion', () => {
         ).toEqual(1);
     });
 
-    it('pre expanded accordion when accordion is false', () => {
-        const wrapper = mount(
+    it('pre expanded accordion when accordion is false', async () => {
+        const wrapper = await mountComplete(
             <Accordion accordion={false}>
                 <AccordionItem expanded={true}>Fake Child</AccordionItem>
                 <AccordionItem expanded={true}>Fake Child</AccordionItem>
@@ -213,18 +238,18 @@ describe('Accordion', () => {
         ).toEqual(2);
     });
 
-    it('respects arbitrary user-defined props', () => {
-        const wrapper = mount(<Accordion lang="en" />);
+    it('respects arbitrary user-defined props', async () => {
+        const wrapper = await mountComplete(<Accordion lang="en" />);
 
         expect(wrapper.find('div').instance().lang).toEqual('en');
     });
 
-    it('renders correctly after update', () => {
-        const tree = mount(<Accordion accordion={false} />);
-        expect(tree.find('div').props().role).toEqual(null);
+    it('renders correctly after update', async () => {
+        const wrapper = await mountComplete(<Accordion accordion={false} />);
+        expect(wrapper.find('div').props().role).toEqual(null);
 
-        tree.setProps({ accordion: true });
-        tree.update();
-        expect(tree.find('div').props().role).toEqual('tablist');
+        wrapper.setProps({ accordion: true });
+        await setStateComplete(wrapper);
+        expect(wrapper.find('div').props().role).toEqual('tablist');
     });
 });

@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import { Provider } from 'unstated';
 import AccordionItemTitle from './accordion-item-title-wrapper';
@@ -11,35 +10,35 @@ import AccordionContainer from '../AccordionContainer/AccordionContainer';
 describe('AccordionItemTitle', () => {
     let accordionContainer;
     let itemContainer;
-    let onChange;
+    let setExpandedSpy;
 
     beforeEach(() => {
         resetNextUuid();
-        onChange = jest.fn();
 
         itemContainer = new ItemContainer();
-        accordionContainer = new AccordionContainer();
-        accordionContainer.setAccordion(false);
-        accordionContainer.setOnChange(onChange);
-
-        accordionContainer.addItem({
-            uuid: 0, // because `nextUuid` in ItemContainer starts at zero.
-            expanded: false,
-            disabled: false,
+        accordionContainer = new AccordionContainer({
+            accordion: false,
+            items: [
+                {
+                    uuid: 0, // because `nextUuid` in ItemContainer starts at zero.
+                    expanded: false,
+                    disabled: false,
+                },
+            ],
         });
+
+        setExpandedSpy = jest.spyOn(accordionContainer, 'setExpanded');
     });
 
     it('renders correctly with min params', () => {
-        const tree = renderer
-            .create(
-                <Provider inject={[accordionContainer, itemContainer]}>
-                    <AccordionItemTitle>
-                        <div>Fake Title</div>
-                    </AccordionItemTitle>
-                </Provider>,
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
+        const wrapper = mount(
+            <Provider inject={[accordionContainer, itemContainer]}>
+                <AccordionItemTitle>
+                    <div>Fake Title</div>
+                </AccordionItemTitle>
+            </Provider>,
+        );
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('renders correctly with different className', () => {
@@ -72,26 +71,21 @@ describe('AccordionItemTitle', () => {
         expect(wrapper.find('div').hasClass(hideBodyClassName)).toEqual(true);
     });
 
-    it('renders correctly when clicking', async () => {
+    it('toggles state when clicked', async () => {
         const wrapper = mount(
             <Provider inject={[accordionContainer, itemContainer]}>
                 <AccordionItemTitle>Fake Title</AccordionItemTitle>
             </Provider>,
         );
 
+        expect(setExpandedSpy).not.toHaveBeenCalled();
         wrapper.find('div').simulate('click');
-
-        expect(onChange.mock.calls.length).toEqual(1);
-        expect(
-            accordionContainer.state.items.filter(
-                item => item.expanded === true,
-            ).length,
-        ).toEqual(1);
+        expect(setExpandedSpy).toHaveBeenCalled();
     });
 
-    it('renders correctly when trying to click but disabled', async () => {
-        accordionContainer.removeItem(0);
-        accordionContainer.addItem({
+    it('doesn’t toggle state when trying to click but disabled', async () => {
+        await accordionContainer.removeItem(0);
+        await accordionContainer.addItem({
             uuid: 0, // because `nextUuid` in ItemContainer starts at zero.
             expanded: false,
             disabled: true,
@@ -105,63 +99,45 @@ describe('AccordionItemTitle', () => {
 
         wrapper.find('div').simulate('click');
 
-        expect(onChange.mock.calls.length).toEqual(0);
-        expect(
-            accordionContainer.state.items.filter(
-                item => item.expanded === true,
-            ).length,
-        ).toEqual(0);
+        expect(setExpandedSpy).not.toHaveBeenCalled();
     });
 
-    it('renders correctly when pressing enter', async () => {
+    it('toggles state when pressing enter', async () => {
         const wrapper = mount(
             <Provider inject={[accordionContainer, itemContainer]}>
                 <AccordionItemTitle>Fake Title</AccordionItemTitle>
             </Provider>,
         );
+
+        expect(setExpandedSpy).not.toHaveBeenCalled();
 
         wrapper.find('div').simulate('keypress', { charCode: 13 });
 
-        expect(onChange.mock.calls.length).toEqual(1);
-        expect(
-            accordionContainer.state.items.filter(
-                item => item.expanded === true,
-            ).length,
-        ).toEqual(1);
+        expect(setExpandedSpy).toHaveBeenCalled();
     });
 
-    it('renders correctly when pressing space', async () => {
+    it('toggles state when pressing space', async () => {
         const wrapper = mount(
             <Provider inject={[accordionContainer, itemContainer]}>
                 <AccordionItemTitle>Fake Title</AccordionItemTitle>
             </Provider>,
         );
 
+        expect(setExpandedSpy).not.toHaveBeenCalled();
         wrapper.find('div').simulate('keypress', { charCode: 32 });
-
-        expect(onChange.mock.calls.length).toEqual(1);
-        expect(
-            accordionContainer.state.items.filter(
-                item => item.expanded === true,
-            ).length,
-        ).toEqual(1);
+        expect(setExpandedSpy).toHaveBeenCalled();
     });
 
-    it('renders correctly when pressing another key', async () => {
+    it('doesn’t toggle state when pressing another key', async () => {
         const wrapper = mount(
             <Provider inject={[accordionContainer, itemContainer]}>
                 <AccordionItemTitle>Fake Title</AccordionItemTitle>
             </Provider>,
         );
 
+        expect(setExpandedSpy).not.toHaveBeenCalled();
         wrapper.find('div').simulate('keypress', { charCode: 35 });
-
-        expect(onChange.mock.calls.length).toEqual(0);
-        expect(
-            accordionContainer.state.items.filter(
-                item => item.expanded === true,
-            ).length,
-        ).toEqual(0);
+        expect(setExpandedSpy).not.toHaveBeenCalled();
     });
 
     it('renders null if an associated AccordionItem is not registered in accordionContainer', () => {
@@ -190,10 +166,10 @@ describe('AccordionItemTitle', () => {
     });
 
     // edge case to cover branch
-    it('renders correctly when trying to click but disabled & accordion === true', async () => {
-        accordionContainer.setAccordion(true);
-        accordionContainer.removeItem(0);
-        accordionContainer.addItem({
+    it('doesn’t toggle state when clicking but disabled & accordion === true', async () => {
+        await accordionContainer.setAccordion(true);
+        await accordionContainer.removeItem(0);
+        await accordionContainer.addItem({
             uuid: 0, // because `nextUuid` in ItemContainer starts at zero.
             expanded: false,
             disabled: true,
@@ -205,13 +181,8 @@ describe('AccordionItemTitle', () => {
             </Provider>,
         );
 
+        expect(setExpandedSpy).not.toHaveBeenCalled();
         wrapper.find('div').simulate('click');
-
-        expect(onChange.mock.calls.length).toEqual(0);
-        expect(
-            accordionContainer.state.items.filter(
-                item => item.expanded === true,
-            ).length,
-        ).toEqual(0);
+        expect(setExpandedSpy).not.toHaveBeenCalled();
     });
 });

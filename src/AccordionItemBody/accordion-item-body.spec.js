@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import { Provider } from 'unstated';
 import ItemContainer, { resetNextUuid } from '../ItemContainer/ItemContainer';
@@ -32,16 +31,14 @@ describe('AccordionItemBody', () => {
     });
 
     it('renders correctly with min params', () => {
-        const tree = renderer
-            .create(
-                <Provider inject={[accordionStore, itemStore]}>
-                    <AccordionItemBody>
-                        <div>Fake body</div>
-                    </AccordionItemBody>
-                </Provider>,
-            )
-            .toJSON();
-        expect(tree).toMatchSnapshot();
+        const wrapper = mount(
+            <Provider inject={[accordionStore, itemStore]}>
+                <AccordionItemBody>
+                    <div>Fake body</div>
+                </AccordionItemBody>
+            </Provider>,
+        );
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('renders correctly with different className', () => {
