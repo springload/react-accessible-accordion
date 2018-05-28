@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import { mount } from 'enzyme';
 import { Provider } from 'unstated';
 import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title-wrapper';
 import AccordionItemBody from '../AccordionItemBody/accordion-item-body-wrapper';

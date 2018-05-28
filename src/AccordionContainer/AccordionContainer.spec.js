@@ -175,9 +175,13 @@ describe('Accordion', () => {
         await Promise.all([
             container.addItem({
                 uuid: 'foo',
+                expanded: false,
+                disabled: false,
             }),
             container.addItem({
                 uuid: 'bar',
+                expanded: false,
+                disabled: false,
             }),
         ]);
 
@@ -188,9 +192,13 @@ describe('Accordion', () => {
         await Promise.all([
             container.addItem({
                 uuid: 'foo',
+                expanded: false,
+                disabled: false,
             }),
             container.addItem({
                 uuid: 'bar',
+                expanded: false,
+                disabled: false,
             }),
         ]);
 
@@ -207,10 +215,12 @@ describe('Accordion', () => {
         await container.addItem({
             uuid: 'foo',
             expanded: true,
+            disabled: false,
         });
         await container.addItem({
             uuid: 'bar',
             expanded: true,
+            disabled: false,
         });
 
         await Promise.all([
@@ -230,9 +240,13 @@ describe('Accordion', () => {
         await Promise.all([
             container.addItem({
                 uuid,
+                expanded: false,
+                disabled: false,
             }),
             container.addItem({
                 uuid,
+                expanded: false,
+                disabled: false,
             }),
         ]);
 
