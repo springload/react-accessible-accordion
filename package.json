@@ -56,9 +56,6 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/dist/"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
     ]
   },
   "keywords": [

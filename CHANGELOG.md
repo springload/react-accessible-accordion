@@ -7,6 +7,7 @@
 
 ### Changed
 
+*   Minor change to package.json to remove some redundant Jest config.
 *   Upgrade one forgotten devDependency.
 
 ## [[v2.4.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.4.1)
