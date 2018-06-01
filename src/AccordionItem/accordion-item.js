@@ -15,7 +15,7 @@ type AccordionItemProps = ElementProps<'div'> & {
 };
 
 class AccordionItem extends Component<AccordionItemProps, *> {
-    async componentDidMount() {
+    componentDidMount() {
         const { uuid, accordionStore, disabled } = this.props;
 
         accordionStore.addItem({
