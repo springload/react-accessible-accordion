@@ -5,8 +5,12 @@
 
 ## Next
 
+## [[v2.4.2]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.4.2)
+
 ### Changed
 
+*   Emergency bug fix to remove asyc/await from the code (see PR#95)
+*   Removes invalid test
 *   Minor change to package.json to remove some redundant Jest config.
 *   Upgrade one forgotten devDependency.
 
