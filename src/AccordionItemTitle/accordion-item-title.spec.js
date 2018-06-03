@@ -140,21 +140,6 @@ describe('AccordionItemTitle', () => {
         expect(setExpandedSpy).not.toHaveBeenCalled();
     });
 
-    it('renders null if an associated AccordionItem is not registered in accordionContainer', () => {
-        const className = 'className';
-        const wrapper = mount(
-            <Provider inject={[accordionContainer, itemContainer]}>
-                <AccordionItemTitle className={className}>
-                    <div>Fake body</div>
-                </AccordionItemTitle>
-            </Provider>,
-        );
-
-        expect(
-            wrapper.findWhere(item => item.className === className).length,
-        ).toEqual(0);
-    });
-
     it('respects arbitrary user-defined props', () => {
         const wrapper = mount(
             <Provider inject={[accordionContainer, itemContainer]}>

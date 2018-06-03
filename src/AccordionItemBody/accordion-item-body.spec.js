@@ -61,21 +61,6 @@ describe('AccordionItemBody', () => {
         expect(wrapper.find('div').hasClass(hideBodyClassName)).toEqual(true);
     });
 
-    it('renders null if an associated AccordionItem is not registered in accordionStore', () => {
-        const className = 'className';
-        const wrapper = mount(
-            <Provider inject={[accordionStore, itemStore]}>
-                <AccordionItemBody className={className}>
-                    <div>Fake body</div>
-                </AccordionItemBody>
-            </Provider>,
-        );
-
-        expect(
-            wrapper.findWhere(item => item.className === className).length,
-        ).toEqual(0);
-    });
-
     it('respects arbitrary user-defined props', () => {
         const wrapper = mount(
             <Provider inject={[accordionStore, itemStore]}>
