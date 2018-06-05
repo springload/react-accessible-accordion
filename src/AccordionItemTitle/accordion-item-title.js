@@ -39,6 +39,7 @@ class AccordionItemTitle extends Component<
 
     handleKeyPress = (evt: SyntheticKeyboardEvent<HTMLButtonElement>) => {
         if (evt.charCode === 13 || evt.charCode === 32) {
+            evt.preventDefault();
             this.handleClick();
         }
     };
