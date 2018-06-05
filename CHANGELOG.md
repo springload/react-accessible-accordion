@@ -5,7 +5,7 @@
 
 ## Next
 
-### Changed
+### Fixed
 
 *   Fixes issue with spacebar scrolling the page (see PR#99)
 
@@ -13,10 +13,13 @@
 
 ### Changed
 
-*   Emergency bug fix to remove asyc/await from the code (see PR#95)
 *   Removes invalid test
 *   Minor change to package.json to remove some redundant Jest config.
 *   Upgrade one forgotten devDependency.
+
+### Fixed
+
+*   Emergency bug fix to remove asyc/await from the code (see PR#95)
 
 ## [[v2.4.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.4.1)
 
