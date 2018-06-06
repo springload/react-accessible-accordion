@@ -21,7 +21,7 @@ const AccordionItemTitleWrapper = (props: AccordionItemTitleWrapperProps) => (
     <Subscribe to={[AccordionContainer, ItemContainer]}>
         {(accordionStore, itemStore) => {
             const { uuid } = itemStore.state;
-            const { items } = accordionStore.state;
+            const { items, accordion } = accordionStore.state;
             const item = items.find(stateItem => stateItem.uuid === uuid);
 
             return (
@@ -29,7 +29,7 @@ const AccordionItemTitleWrapper = (props: AccordionItemTitleWrapperProps) => (
                     {...props}
                     {...item}
                     setExpanded={accordionStore.setExpanded}
-                    accordion={accordionStore.state.accordion}
+                    accordion={accordion}
                 />
             );
         }}
