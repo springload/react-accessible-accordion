@@ -6,37 +6,31 @@ import classNames from 'classnames';
 type AccordionItemBodyProps = ElementProps<'div'> & {
     hideBodyClassName: string,
     uuid: string | number,
+    expanded: boolean,
+    disabled: boolean,
+    accordion: boolean,
 };
 
 const AccordionItemBody = (props: AccordionItemBodyProps) => {
     const {
-        accordionStore,
-        uuid,
         className,
         hideBodyClassName,
+        uuid,
+        expanded,
+        disabled,
+        accordion,
         ...rest
     } = props;
-    const {
-        state: { items, accordion },
-    } = props.accordionStore;
-    const foundItem = items.find(item => item.uuid === uuid);
 
-    const { expanded } = foundItem;
-    const id = `accordion__body-${uuid}`;
-    const ariaLabelledby = `accordion__title-${uuid}`;
-    const role = accordion ? 'tabpanel' : null;
-
-    const bodyClass = classNames(className, {
-        [hideBodyClassName]: !expanded,
-    });
-    const ariaHidden = !expanded;
     return (
         <div
-            id={id}
-            className={bodyClass}
-            aria-hidden={ariaHidden}
-            aria-labelledby={ariaLabelledby}
-            role={role}
+            id={`accordion__body-${uuid}`}
+            className={classNames(className, {
+                [hideBodyClassName]: !expanded,
+            })}
+            aria-hidden={!expanded}
+            aria-labelledby={`accordion__title-${uuid}`}
+            role={accordion ? 'tabpanel' : null}
             {...rest}
         />
     );
