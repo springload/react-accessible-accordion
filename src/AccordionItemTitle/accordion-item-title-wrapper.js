@@ -19,13 +19,19 @@ type AccordionItemTitleWrapperProps = ElementProps<'div'> & {
 
 const AccordionItemTitleWrapper = (props: AccordionItemTitleWrapperProps) => (
     <Subscribe to={[AccordionContainer, ItemContainer]}>
-        {(accordionStore, itemStore) => (
-            <AccordionItemTitle
-                {...props}
-                uuid={itemStore.state.uuid}
-                accordionStore={accordionStore}
-            />
-        )}
+        {(accordionStore, itemStore) => {
+            const { uuid } = itemStore.state;
+            const { items } = accordionStore.state;
+            const item = items.find(stateItem => stateItem.uuid === uuid);
+
+            return (
+                <AccordionItemTitle
+                    {...props}
+                    item={item}
+                    accordionStore={accordionStore}
+                />
+            );
+        }}
     </Subscribe>
 );
 AccordionItemTitleWrapper.defaultProps = defaultProps;
