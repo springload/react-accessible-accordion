@@ -75,8 +75,8 @@ class AccordionContainer extends Container<StoreState> {
         }));
     }
 
-    setExpanded(key: string | number, expanded: boolean) {
-        return this.setState(state => ({
+    setExpanded = (key: string | number, expanded: boolean) =>
+        this.setState(state => ({
             items: state.items.map(item => {
                 if (item.uuid === key) {
                     return {
@@ -103,7 +103,6 @@ class AccordionContainer extends Container<StoreState> {
                 );
             }
         });
-    }
 }
 
 export default AccordionContainer;
