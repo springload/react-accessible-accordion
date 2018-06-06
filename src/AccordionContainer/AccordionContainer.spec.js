@@ -253,4 +253,26 @@ describe('Accordion', () => {
         // eslint-disable-next-line no-console
         expect(console.error).toBeCalled();
     });
+
+    it('triggers "onChange" with uuid when a true accordion', async () => {
+        const uuid = 'foo';
+        const onChange = jest.fn();
+        await container.setAccordion(true);
+        await container.addItem({ uuid, disabled: false, expanded: false });
+        await container.setOnChange(onChange);
+        expect(onChange).not.toHaveBeenCalledWith(uuid);
+        await container.setExpanded(uuid, true);
+        expect(onChange).toHaveBeenCalledWith(uuid);
+    });
+
+    it('triggers "onChange" with array of expanded uuids when not a true accordion', async () => {
+        const uuid = 'foo';
+        const onChange = jest.fn();
+        await container.setAccordion(false);
+        await container.addItem({ uuid, disabled: false, expanded: false });
+        await container.setOnChange(onChange);
+        expect(onChange).not.toHaveBeenCalledWith(uuid);
+        await container.setExpanded(uuid, true);
+        expect(onChange).toHaveBeenCalledWith([uuid]);
+    });
 });
