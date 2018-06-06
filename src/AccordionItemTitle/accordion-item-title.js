@@ -19,22 +19,10 @@ class AccordionItemTitle extends Component<
     handleClick = () => {
         const { uuid, accordionStore } = this.props;
         const { state } = accordionStore;
-        const { accordion, onChange, items } = state;
+        const { items } = state;
         const foundItem = items.find(item => item.uuid === uuid);
 
-        accordionStore
-            .setExpanded(foundItem.uuid, !foundItem.expanded)
-            .then(() => {
-                if (accordion) {
-                    onChange(foundItem.uuid);
-                } else {
-                    onChange(
-                        accordionStore.state.items
-                            .filter(item => item.expanded)
-                            .map(item => item.uuid),
-                    );
-                }
-            });
+        accordionStore.setExpanded(foundItem.uuid, !foundItem.expanded);
     };
 
     handleKeyPress = (evt: SyntheticKeyboardEvent<HTMLButtonElement>) => {

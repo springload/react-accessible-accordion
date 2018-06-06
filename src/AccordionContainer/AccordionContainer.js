@@ -92,7 +92,17 @@ class AccordionContainer extends Container<StoreState> {
                 }
                 return item;
             }),
-        }));
+        })).then(() => {
+            if (this.state.accordion) {
+                this.state.onChange(key);
+            } else {
+                this.state.onChange(
+                    this.state.items
+                        .filter(item => item.expanded)
+                        .map(item => item.uuid),
+                );
+            }
+        });
     }
 }
 
