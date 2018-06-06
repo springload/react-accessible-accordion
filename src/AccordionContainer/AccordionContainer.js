@@ -24,21 +24,21 @@ class AccordionContainer extends Container<StoreState> {
         };
     }
 
-    setAccordion(accordion: boolean) {
+    setAccordion = (accordion: boolean) => {
         if (accordion !== this.state.accordion) {
             return this.setState({ accordion });
         }
         return null;
-    }
+    };
 
-    setOnChange(onChange: Function) {
+    setOnChange = (onChange: Function) => {
         if (onChange !== this.state.onChange) {
             return this.setState({ onChange });
         }
         return null;
-    }
+    };
 
-    addItem(newItem: Item) {
+    addItem = (newItem: Item) => {
         // Need to use callback style otherwise race-conditions are created by concurrent registrations.
         this.setState(state => {
             let items;
@@ -67,13 +67,12 @@ class AccordionContainer extends Container<StoreState> {
                 items,
             };
         });
-    }
+    };
 
-    removeItem(key: string | number) {
-        return this.setState(state => ({
+    removeItem = (key: string | number) =>
+        this.setState(state => ({
             items: state.items.filter(item => item.uuid !== key),
         }));
-    }
 
     setExpanded = (key: string | number, expanded: boolean) =>
         this.setState(state => ({
