@@ -27,8 +27,9 @@ const AccordionItemTitleWrapper = (props: AccordionItemTitleWrapperProps) => (
             return (
                 <AccordionItemTitle
                     {...props}
-                    item={item}
-                    accordionStore={accordionStore}
+                    {...item}
+                    setExpanded={accordionStore.setExpanded}
+                    accordion={accordionStore.state.accordion}
                 />
             );
         }}
