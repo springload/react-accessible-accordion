@@ -22,7 +22,7 @@ const AccordionItemBodyWrapper = (props: AccordionItemBodyWrapperProps) => (
         {(accordionStore, itemStore) => {
             const { uuid } = itemStore.state;
             const { items, accordion } = accordionStore.state;
-            const item = items.find(stateItem => stateItem.uuid === uuid);
+            const item = items.filter(stateItem => stateItem.uuid === uuid)[0];
             return (
                 <AccordionItemBody {...props} {...item} accordion={accordion} />
             );
