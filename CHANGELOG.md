@@ -8,6 +8,7 @@
 ### Fixed
 
 *   Fixes issue with spacebar scrolling the page (see PR#99)
+*   Fixes IE compatibility by replacing uses of Array.prototype.find.
 
 ## [[v2.4.2]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.4.2)
 

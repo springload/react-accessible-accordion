@@ -21,7 +21,7 @@ const AccordionItemBody = (props: AccordionItemBodyProps) => {
         accordion,
         ...rest
     } = props;
-
+  
     return (
         <div
             id={`accordion__body-${uuid}`}
