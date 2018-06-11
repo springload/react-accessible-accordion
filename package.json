@@ -30,7 +30,7 @@
   "babel": {
     "presets": [
       [
-        "es2015",
+        "env",
         {
           "modules": false
         }
@@ -41,7 +41,7 @@
     "env": {
       "test": {
         "presets": [
-          "es2015",
+          "env",
           "react",
           "stage-2"
         ]
@@ -92,7 +92,7 @@
     "babel-jest": "^23.0.1",
     "babel-loader": "^7.1.4",
     "babel-polyfill": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "coveralls": "^3.0.0",
