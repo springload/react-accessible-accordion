@@ -15,6 +15,9 @@ export default [
         ],
         name: 'reactAccessibleAccordion',
         plugins: [
+            replace({
+                'process.env.NODE_ENV': JSON.stringify('production'),
+            }),
             resolve({
                 jsnext: true,
                 main: true,
@@ -23,10 +26,6 @@ export default [
             eslint(),
             babel(),
             commonjs(),
-            replace({
-                exclude: 'node_modules/**',
-                ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
-            }),
         ],
     },
 ];
