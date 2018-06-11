@@ -5,7 +5,11 @@ import classNames from 'classnames';
 
 type AccordionItemTitleProps = ElementProps<'div'> & {
     hideBodyClassName: string,
+    expanded: boolean,
     uuid: string | number,
+    disabled: boolean,
+    accordion: boolean,
+    setExpanded: (string | number, boolean) => any,
 };
 
 type AccordionItemTitleState = {};
@@ -17,12 +21,9 @@ class AccordionItemTitle extends Component<
     static accordionElementName = 'AccordionItemTitle';
 
     handleClick = () => {
-        const { uuid, accordionStore } = this.props;
-        const { state } = accordionStore;
-        const { items } = state;
-        const foundItem = items.find(item => item.uuid === uuid);
+        const { uuid, expanded, setExpanded } = this.props;
 
-        accordionStore.setExpanded(foundItem.uuid, !foundItem.expanded);
+        setExpanded(uuid, !expanded);
     };
 
     handleKeyPress = (evt: SyntheticKeyboardEvent<HTMLButtonElement>) => {
@@ -34,18 +35,17 @@ class AccordionItemTitle extends Component<
 
     render() {
         const {
-            state: { items, accordion },
-        } = this.props.accordionStore;
-        const {
-            uuid,
             className,
             hideBodyClassName,
             accordionStore,
+            item,
+            accordion,
+            setExpanded,
+            expanded,
+            uuid,
+            disabled,
             ...rest
         } = this.props;
-        const foundItem = items.find(item => item.uuid === uuid);
-
-        const { expanded, disabled } = foundItem;
 
         const id = `accordion__title-${uuid}`;
         const ariaControls = `accordion__body-${uuid}`;
