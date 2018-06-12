@@ -1,0 +1,91 @@
+version: 2
+jobs:
+  install-job:
+    docker:
+      - image: circleci/node:8.9
+    working_directory: ~/repo
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - node-modules-{{ checksum "package-lock.json" }}
+            - node-modules-
+
+      - run: npm install
+
+      - save_cache:
+          key: node-modules-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - node_modules/*
+
+  test-job:
+    docker:
+      - image: circleci/node:8.9
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run: npm run test
+
+  lint-job:
+    docker:
+      - image: circleci/node:8.9
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run: npm run lint
+
+  build-job:
+    docker:
+      - image: circleci/node:8.9
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run: npm run build
+
+  coverage-job:
+    docker:
+      - image: circleci/node:8.9
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run: npm run test:coverage
+      - run: npm run coveralls
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - install-job
+      - build-job:
+          requires:
+            - install-job
+      - test-job:
+          requires:
+            - install-job
+      - lint-job:
+          requires:
+            - install-job
+      - coverage-job:
+          requires:
+            - install-job
