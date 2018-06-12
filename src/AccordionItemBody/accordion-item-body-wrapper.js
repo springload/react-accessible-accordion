@@ -19,13 +19,14 @@ type AccordionItemBodyWrapperProps = ElementProps<'div'> & {
 
 const AccordionItemBodyWrapper = (props: AccordionItemBodyWrapperProps) => (
     <Subscribe to={[AccordionContainer, ItemContainer]}>
-        {(accordionStore, itemStore) => (
-            <AccordionItemBody
-                {...props}
-                uuid={itemStore.state.uuid}
-                accordionStore={accordionStore}
-            />
-        )}
+        {(accordionStore, itemStore) => {
+            const { uuid } = itemStore.state;
+            const { items, accordion } = accordionStore.state;
+            const item = items.filter(stateItem => stateItem.uuid === uuid)[0];
+            return (
+                <AccordionItemBody {...props} {...item} accordion={accordion} />
+            );
+        }}
     </Subscribe>
 );
 AccordionItemBodyWrapper.defaultProps = defaultProps;
