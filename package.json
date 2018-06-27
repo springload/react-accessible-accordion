@@ -1,6 +1,6 @@
 {
   "name": "react-accessible-accordion",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "Accessible Accordion component for React",
   "main": "dist/umd/index.js",
   "jsnext:main": "dist/es/index.js",
@@ -15,12 +15,10 @@
     "build:clean": "mkdir dist && rm -rf dist/*",
     "build:rollup": "rollup -c",
     "build:flow": "flow-copy-source src dist/es -i \"**/*.spec.js\"",
-    "build":
-      "npm run build:clean && npm run build:css && npm run build:flow && npm run build:rollup",
+    "build": "npm run build:clean && npm run build:css && npm run build:flow && npm run build:rollup",
     "start": "npm run js:watch",
     "start-demo": "webpack-dev-server --mode=development",
-    "pages":
-      "rm -rf pages && webpack --mode=production --progress && cp demo/*.css pages && cp demo/*.ico pages",
+    "pages": "rm -rf pages && webpack --mode=production --progress && cp demo/*.css pages && cp demo/*.ico pages",
     "deploy": "npm run pages && ./bin/deploy.sh",
     "prettier": "prettier **/*.js --write",
     "prepublishOnly": "npm run build"
@@ -30,9 +28,14 @@
     "url": "git+https://github.com/springload/react-accessible-accordion.git"
   },
   "jest": {
-    "setupFiles": ["./src/setupTests.js"],
+    "setupFiles": [
+      "./src/setupTests.js"
+    ],
     "setupTestFrameworkScriptFile": "./src/setupTestFramework.js",
-    "testPathIgnorePatterns": ["/node_modules/", "/dist/"]
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/"
+    ]
   },
   "keywords": [
     "react",
@@ -42,7 +45,9 @@
     "accessible",
     "accessibility"
   ],
-  "authors": ["Vincent Audebert <vincent@springload.co.nz>"],
+  "authors": [
+    "Vincent Audebert <vincent@springload.co.nz>"
+  ],
   "contributors": [
     {
       "name": "Mitch Ryan",
