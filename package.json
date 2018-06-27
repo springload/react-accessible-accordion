@@ -12,7 +12,7 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "lint": "eslint .",
     "build:css": "cp src/css/*.css dist",
-    "build:clean": "mkdir dist && rm -rf dist/*",
+    "build:clean": "mkdir dist || true & rm -rf dist/*",
     "build:rollup": "rollup -c",
     "build:flow": "flow-copy-source src dist/es -i \"**/*.spec.js\"",
     "build": "npm run build:clean && npm run build:css && npm run build:flow && npm run build:rollup",
