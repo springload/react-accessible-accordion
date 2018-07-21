@@ -3,7 +3,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'unstated';
-import AccordionItemTitle from './accordion-item-title-wrapper';
+import AccordionItemTitle from './AccordionItemTitle.wrapper';
 import ItemContainer, { resetNextUuid } from '../ItemContainer/ItemContainer';
 import AccordionContainer from '../AccordionContainer/AccordionContainer';
 

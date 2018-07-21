@@ -6,7 +6,7 @@ import type { ElementProps } from 'react';
 import { Provider, Subscribe } from 'unstated';
 import AccordionContainer from '../AccordionContainer/AccordionContainer';
 import ItemContainer from '../ItemContainer/ItemContainer';
-import AccordionItem from './accordion-item';
+import AccordionItem from './AccordionItem';
 
 type AccordionItemWrapperProps = ElementProps<'div'> & {
     hideBodyClassName: ?string,

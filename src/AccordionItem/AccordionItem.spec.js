@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { Provider } from 'unstated';
-import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title-wrapper';
-import AccordionItemBody from '../AccordionItemBody/accordion-item-body-wrapper';
-import AccordionItem from './accordion-item-wrapper';
+import AccordionItemTitle from '../AccordionItemTitle/AccordionItemTitle.wrapper';
+import AccordionItemBody from '../AccordionItemBody/AccordionItemBody.wrapper';
+import AccordionItem from './AccordionItem.wrapper';
 import { resetNextUuid } from '../ItemContainer/ItemContainer';
 import AccordionContainer from '../AccordionContainer/AccordionContainer';
 import { setStateComplete, mountComplete } from '../unstated-test-helpers';
@@ -113,14 +113,14 @@ describe('AccordionItem', () => {
             <Provider inject={[accordionContainer]}>
                 <AccordionItem
                     expanded={false}
-                    className="accordion-item"
-                    hideBodyClassName="accordion-item--hidden"
+                    className="AccordionItem"
+                    hideBodyClassName="AccordionItem--hidden"
                 />
             </Provider>,
         );
 
         expect(wrapper.find('div').prop('className')).toEqual(
-            'accordion-item accordion-item--hidden',
+            'AccordionItem AccordionItem--hidden',
         );
     });
 
