@@ -16,7 +16,6 @@
     "build:rollup": "rollup -c",
     "build:flow": "flow-copy-source src dist/es -i \"**/*.spec.js\"",
     "build": "npm run build:clean && npm run build:css && npm run build:flow && npm run build:rollup",
-    "start": "npm run js:watch",
     "start-demo": "webpack-dev-server --mode=development",
     "pages": "rm -rf pages && webpack --mode=production --progress && cp demo/*.css pages && cp demo/*.ico pages",
     "deploy": "npm run pages && ./bin/deploy.sh",
