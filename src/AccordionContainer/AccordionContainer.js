@@ -1,5 +1,8 @@
 // @flow
 
+// Eslint doesn't understand that this 'Container' component is not a Stateless Functional Component.
+/* eslint-disable react/no-this-in-sfc */
+
 import { Container } from 'unstated';
 
 export type Item = {
@@ -82,7 +85,8 @@ class AccordionContainer extends Container<StoreState> {
                         ...item,
                         expanded,
                     };
-                } else if (state.accordion && expanded) {
+                }
+                if (state.accordion && expanded) {
                     // If this is an accordion, we might need to collapse the other expanded item.
                     return {
                         ...item,
