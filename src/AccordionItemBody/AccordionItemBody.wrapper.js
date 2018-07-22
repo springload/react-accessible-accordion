@@ -6,7 +6,7 @@ import type { ElementProps } from 'react';
 import { Subscribe } from 'unstated';
 import AccordionContainer from '../AccordionContainer/AccordionContainer';
 import ItemContainer from '../ItemContainer/ItemContainer';
-import AccordionItemBody from './accordion-item-body';
+import AccordionItemBody from './AccordionItemBody';
 
 const defaultProps = {
     className: 'accordion__body',

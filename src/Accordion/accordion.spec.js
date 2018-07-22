@@ -1,9 +1,9 @@
 // @flow
 
 import React from 'react';
-import Accordion from './accordion-wrapper'; // eslint-disable-line
-import AccordionItem from '../AccordionItem/accordion-item-wrapper';
-import AccordionItemTitle from '../AccordionItemTitle/accordion-item-title-wrapper';
+import Accordion from './Accordion.wrapper'; // eslint-disable-line
+import AccordionItem from '../AccordionItem/AccordionItem.wrapper';
+import AccordionItemTitle from '../AccordionItemTitle/AccordionItemTitle.wrapper';
 import { setStateComplete, mountComplete } from '../unstated-test-helpers';
 
 describe('Accordion', () => {

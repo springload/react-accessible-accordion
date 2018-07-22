@@ -6,7 +6,7 @@ import type { ElementProps } from 'react';
 import { Subscribe } from 'unstated';
 import AccordionContainer from '../AccordionContainer/AccordionContainer';
 import ItemContainer from '../ItemContainer/ItemContainer';
-import AccordionItemTitle from './accordion-item-title';
+import AccordionItemTitle from './AccordionItemTitle';
 
 const defaultProps = {
     className: 'accordion__title',
