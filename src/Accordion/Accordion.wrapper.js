@@ -37,17 +37,18 @@ class AccordionWrapper extends Component<AccordionWrapperProps> {
         this.accordionStore.setOnChange(this.props.onChange);
     }
 
-    render() {
+    renderAccordion = (accordionStore: AccordionContainer) => {
         const { accordion, onChange, ...rest } = this.props;
+        return (
+            <Accordion accordion={accordionStore.state.accordion} {...rest} />
+        );
+    };
+
+    render() {
         return (
             <Provider inject={[this.accordionStore]}>
                 <Subscribe to={[AccordionContainer]}>
-                    {accordionStore => (
-                        <Accordion
-                            accordion={accordionStore.state.accordion}
-                            {...rest}
-                        />
-                    )}
+                    {this.renderAccordion}
                 </Subscribe>
             </Provider>
         );
