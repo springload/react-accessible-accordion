@@ -32,20 +32,25 @@ class AccordionItemWrapper extends Component<AccordionItemWrapperProps> {
 
     static defaultProps = defaultProps;
 
+    renderItem = (
+        accordionStore: AccordionContainer,
+        itemStore: ItemContainer,
+    ) => {
+        const { uuid } = itemStore.state;
+        return (
+            <AccordionItem
+                {...this.props}
+                uuid={uuid}
+                accordionStore={accordionStore}
+            />
+        );
+    };
+
     render() {
         return (
             <Provider inject={[this.itemContainer]}>
                 <Subscribe to={[AccordionContainer, ItemContainer]}>
-                    {(accordionStore, itemStore) => {
-                        const { uuid } = itemStore.state;
-                        return (
-                            <AccordionItem
-                                {...this.props}
-                                uuid={uuid}
-                                accordionStore={accordionStore}
-                            />
-                        );
-                    }}
+                    {this.renderItem}
                 </Subscribe>
             </Provider>
         );

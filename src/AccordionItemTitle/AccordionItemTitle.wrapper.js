@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import React, { Component } from 'react';
 import type { ElementProps } from 'react';
 
 import { Subscribe } from 'unstated';
@@ -8,33 +8,43 @@ import AccordionContainer from '../AccordionContainer/AccordionContainer';
 import ItemContainer from '../ItemContainer/ItemContainer';
 import AccordionItemTitle from './AccordionItemTitle';
 
-const defaultProps = {
-    className: 'accordion__title',
-    hideBodyClassName: '',
-};
-
 type AccordionItemTitleWrapperProps = ElementProps<'div'> & {
     hideBodyClassName: string,
 };
 
-const AccordionItemTitleWrapper = (props: AccordionItemTitleWrapperProps) => (
-    <Subscribe to={[AccordionContainer, ItemContainer]}>
-        {(accordionStore, itemStore) => {
-            const { uuid } = itemStore.state;
-            const { items, accordion } = accordionStore.state;
-            const item = items.filter(stateItem => stateItem.uuid === uuid)[0];
+class AccordionItemTitleWrapper extends Component<
+    AccordionItemTitleWrapperProps,
+> {
+    static defaultProps = {
+        className: 'accordion__title',
+        hideBodyClassName: '',
+    };
 
-            return (
-                <AccordionItemTitle
-                    {...props}
-                    {...item}
-                    setExpanded={accordionStore.setExpanded}
-                    accordion={accordion}
-                />
-            );
-        }}
-    </Subscribe>
-);
-AccordionItemTitleWrapper.defaultProps = defaultProps;
+    renderItemTitle = (
+        accordionStore: AccordionContainer,
+        itemStore: ItemContainer,
+    ) => {
+        const { uuid } = itemStore.state;
+        const { items, accordion } = accordionStore.state;
+        const item = items.filter(stateItem => stateItem.uuid === uuid)[0];
+
+        return (
+            <AccordionItemTitle
+                {...this.props}
+                {...item}
+                setExpanded={accordionStore.setExpanded}
+                accordion={accordion}
+            />
+        );
+    };
+
+    render() {
+        return (
+            <Subscribe to={[AccordionContainer, ItemContainer]}>
+                {this.renderItemTitle}
+            </Subscribe>
+        );
+    }
+}
 
 export default AccordionItemTitleWrapper;

@@ -5,6 +5,10 @@
 
 ## Next
 
+### Fixed
+
+*   Fixes [performance issue](https://github.com/springload/react-accessible-accordion/issues/110) with not re-instantiating render-prop callbacks on each re-render.
+
 ## [[v2.4.3]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.4.3)
 
 ### Fixed
