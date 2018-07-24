@@ -5,7 +5,7 @@ import type { ElementProps } from 'react';
 
 import { Provider, Subscribe } from 'unstated';
 import AccordionContainer from '../AccordionContainer/AccordionContainer';
-import Accordion from './accordion';
+import Accordion from './Accordion';
 
 type AccordionWrapperProps = ElementProps<'div'> & {
     accordion: boolean,
