@@ -26,7 +26,7 @@ class AccordionItemTitleWrapper extends Component<
     ) => {
         const { uuid } = itemStore.state;
         const { items, accordion } = accordionStore.state;
-        const item = items.filter(stateItem => stateItem.uuid === uuid)[0];
+        const item = items.find(stateItem => stateItem.uuid === uuid);
 
         return (
             <AccordionItemTitle
