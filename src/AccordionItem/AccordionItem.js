@@ -48,9 +48,9 @@ class AccordionItem extends Component<AccordionItemProps, *> {
             ...rest
         } = this.props;
 
-        const currentItem = accordionStore.state.items.filter(
+        const currentItem = accordionStore.state.items.find(
             item => item.uuid === uuid,
-        )[0];
+        );
 
         if (!currentItem) {
             return null;
