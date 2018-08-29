@@ -1,6 +1,6 @@
 /* eslint no-console: 0 */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import 'babel-polyfill';
+import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 

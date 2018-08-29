@@ -1,17 +1,18 @@
 {
     "presets": [
         [
-            "env",
+            "@babel/preset-env",
             {
                 "modules": false
             }
         ],
-        "react",
-        "stage-2"
+        "@babel/preset-react",
+        "@babel/preset-flow"
     ],
     "env": {
         "test": {
-            "presets": ["env", "react", "stage-2"]
+            "presets": ["@babel/preset-env", "@babel/preset-react"],
         }
-    }
+    },
+    "plugins": ["@babel/plugin-proposal-class-properties"]
 }
