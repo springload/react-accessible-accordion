@@ -34,7 +34,10 @@ const Example = () => (
     <Accordion>
         <AccordionItem>
             <AccordionItemTitle>
-                <h3>Simple title</h3>
+                <h3 className="u-position-relative">
+                    Simple title
+                    <div className="accordion__arrow" role="presentation"></div>
+                </h3>
             </AccordionItemTitle>
             <AccordionItemBody>
                 <p>Body content</p>
