@@ -1,26 +1,24 @@
 // @flow
 
 import React from 'react';
+import { mount } from 'enzyme';
 import Accordion from './Accordion.wrapper'; // eslint-disable-line
 import AccordionItem from '../AccordionItem/AccordionItem.wrapper';
 import AccordionItemTitle from '../AccordionItemTitle/AccordionItemTitle.wrapper';
-import { setStateComplete, mountComplete } from '../unstated-test-helpers';
 
 describe('Accordion', () => {
-    it('renders correctly with min params', async () => {
-        const wrapper = await mountComplete(<Accordion />);
+    it.only('renders correctly with min params', async () => {
+        const wrapper = await mount(<Accordion />);
         expect(wrapper.find('div').props().role).toEqual('tablist');
     });
 
-    it('renders correctly with accordion false', async () => {
-        const wrapper = await mountComplete(<Accordion accordion={false} />);
+    it.only('renders correctly with accordion false', async () => {
+        const wrapper = await mount(<Accordion accordion={false} />);
         expect(wrapper.find('div').props().role).toEqual(null);
     });
 
-    it('different className', async () => {
-        const wrapper = await mountComplete(
-            <Accordion className="testCSSClass" />,
-        );
+    it.only('different className', async () => {
+        const wrapper = await mount(<Accordion className="testCSSClass" />);
         expect(wrapper.find('div').props().className).toEqual('testCSSClass');
     });
 
@@ -30,7 +28,7 @@ describe('Accordion', () => {
         let barTitle;
 
         beforeEach(async () => {
-            wrapper = await mountComplete(
+            wrapper = await mount(
                 <Accordion accordion={true}>
                     <AccordionItem>
                         <AccordionItemTitle className="foo">
@@ -93,7 +91,7 @@ describe('Accordion', () => {
         let barTitle;
 
         beforeEach(async () => {
-            wrapper = await mountComplete(
+            wrapper = await mount(
                 <Accordion accordion={false}>
                     <AccordionItem>
                         <AccordionItemTitle className="foo">
@@ -152,7 +150,7 @@ describe('Accordion', () => {
     });
 
     it('does not expanded disabled items on click', async () => {
-        const wrapper = await mountComplete(
+        const wrapper = await mount(
             <Accordion accordion={false}>
                 <AccordionItem disabled>
                     <AccordionItemTitle className="foo" disabled>
@@ -175,7 +173,7 @@ describe('Accordion', () => {
     });
 
     it('pre expanded accordion', async () => {
-        const wrapper = await mountComplete(
+        const wrapper = await mount(
             <Accordion>
                 <AccordionItem expanded={true}>Fake Child</AccordionItem>
                 <AccordionItem>Fake Child</AccordionItem>
@@ -193,7 +191,7 @@ describe('Accordion', () => {
 
     it('works with multiple pre expanded accordion. Extra expands are just ignored.', async () => {
         const hideBodyClassName = 'HIDE';
-        const wrapper = await mountComplete(
+        const wrapper = await mount(
             <Accordion accordion={true}>
                 <AccordionItem
                     expanded={true}
@@ -222,7 +220,7 @@ describe('Accordion', () => {
     });
 
     it('pre expanded accordion when accordion is false', async () => {
-        const wrapper = await mountComplete(
+        const wrapper = await mount(
             <Accordion accordion={false}>
                 <AccordionItem expanded={true}>Fake Child</AccordionItem>
                 <AccordionItem expanded={true}>Fake Child</AccordionItem>
@@ -239,13 +237,13 @@ describe('Accordion', () => {
     });
 
     it('respects arbitrary user-defined props', async () => {
-        const wrapper = await mountComplete(<Accordion lang="en" />);
+        const wrapper = await mount(<Accordion lang="en" />);
 
         expect(wrapper.find('div').instance().lang).toEqual('en');
     });
 
     it('renders correctly after update', async () => {
-        const wrapper = await mountComplete(<Accordion accordion={false} />);
+        const wrapper = await mount(<Accordion accordion={false} />);
         expect(wrapper.find('div').props().role).toEqual(null);
 
         wrapper.setProps({ accordion: true });
