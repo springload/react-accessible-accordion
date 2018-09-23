@@ -4,7 +4,10 @@ import React, { Component } from 'react';
 import type { ElementProps } from 'react';
 
 import { Provider, Subscribe } from 'unstated';
-import AccordionContainer from '../AccordionContainer/AccordionContainer';
+import {
+    Consumer,
+    type AccordionContainer,
+} from '../AccordionContainer/AccordionContainer';
 import ItemContainer from '../ItemContainer/ItemContainer';
 import AccordionItem from './AccordionItem';
 
@@ -12,7 +15,7 @@ type AccordionItemWrapperProps = ElementProps<'div'> & {
     hideBodyClassName: ?string,
     disabled: ?boolean,
     expanded: ?boolean,
-    accordionStore: AccordionContainer,
+    // accordionStore: AccordionContainer,
     uuid?: string,
 };
 
@@ -21,7 +24,6 @@ const defaultProps = {
     hideBodyClassName: '',
     disabled: false,
     expanded: false,
-    accordionStore: new AccordionContainer(),
     uuid: undefined,
 };
 
@@ -32,28 +34,32 @@ class AccordionItemWrapper extends Component<AccordionItemWrapperProps> {
 
     static defaultProps = defaultProps;
 
-    renderItem = (
-        accordionStore: AccordionContainer,
-        itemStore: ItemContainer,
-    ) => {
+    accordionContainer: AccordionContainer;
+
+    renderAccordionChildren = (accordionStore: AccordionContainer) => {
+        this.accordionContainer = accordionStore;
+        return (
+            <Provider inject={[this.itemContainer]}>
+                <Subscribe to={[ItemContainer]}>
+                    {this.renderItemChildren}
+                </Subscribe>
+            </Provider>
+        );
+    };
+
+    renderItemChildren = (itemStore: ItemContainer) => {
         const { uuid } = itemStore.state;
         return (
             <AccordionItem
                 {...this.props}
                 uuid={uuid}
-                accordionStore={accordionStore}
+                accordionStore={this.accordionContainer}
             />
         );
     };
 
     render() {
-        return (
-            <Provider inject={[this.itemContainer]}>
-                <Subscribe to={[AccordionContainer, ItemContainer]}>
-                    {this.renderItem}
-                </Subscribe>
-            </Provider>
-        );
+        return <Consumer>{this.renderAccordionChildren}</Consumer>;
     }
 }
 

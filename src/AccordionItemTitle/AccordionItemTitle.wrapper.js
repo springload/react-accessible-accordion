@@ -4,7 +4,10 @@ import React, { Component } from 'react';
 import type { ElementProps } from 'react';
 
 import { Subscribe } from 'unstated';
-import AccordionContainer from '../AccordionContainer/AccordionContainer';
+import {
+    Consumer,
+    type AccordionContainer,
+} from '../AccordionContainer/AccordionContainer';
 import ItemContainer from '../ItemContainer/ItemContainer';
 import AccordionItemTitle from './AccordionItemTitle';
 
@@ -20,30 +23,32 @@ class AccordionItemTitleWrapper extends Component<
         hideBodyClassName: '',
     };
 
-    renderItemTitle = (
-        accordionStore: AccordionContainer,
-        itemStore: ItemContainer,
-    ) => {
+    accordionStore: AccordionContainer;
+
+    renderItemTitle = (itemStore: ItemContainer) => {
         const { uuid } = itemStore.state;
-        const { items, accordion } = accordionStore.state;
+        const { items, accordion } = this.accordionStore;
         const item = items.filter(stateItem => stateItem.uuid === uuid)[0];
 
         return (
             <AccordionItemTitle
                 {...this.props}
                 {...item}
-                setExpanded={accordionStore.setExpanded}
+                setExpanded={this.accordionStore.setExpanded}
                 accordion={accordion}
             />
         );
     };
 
-    render() {
+    renderAccordionChildren = (accordionStore: AccordionContainer) => {
+        this.accordionStore = accordionStore;
         return (
-            <Subscribe to={[AccordionContainer, ItemContainer]}>
-                {this.renderItemTitle}
-            </Subscribe>
+            <Subscribe to={[ItemContainer]}>{this.renderItemTitle}</Subscribe>
         );
+    };
+
+    render() {
+        return <Consumer>{this.renderAccordionChildren}</Consumer>;
     }
 }
 
