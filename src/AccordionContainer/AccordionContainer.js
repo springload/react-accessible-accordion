@@ -15,8 +15,9 @@ export type ProviderState = {
 
 export type ProviderProps = {
     accordion: boolean,
-    onChange: Function,
+    onChange?: Function,
     children: Node,
+    items?: Array<Item>,
 };
 
 export type AccordionContainer = {
@@ -41,10 +42,15 @@ export class Provider extends Component<ProviderProps, ProviderState> {
         [CONTEXT_KEY]: () => null,
     };
 
-    state = {
+    static defaultProps = {
         items: [],
-        accordion: true,
         onChange: () => {},
+    };
+
+    state = {
+        items: this.props.items || [],
+        accordion: true,
+        onChange: this.props.onChange || (() => {}),
     };
 
     getChildContext() {
