@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import type { ElementProps } from 'react';
 
 import classNames from 'classnames';
-import AccordionContainer from '../AccordionContainer/AccordionContainer';
+import { type AccordionContainer } from '../AccordionContainer/AccordionContainer';
 
 type AccordionItemProps = ElementProps<'div'> & {
     uuid: string | number,
@@ -14,7 +14,7 @@ type AccordionItemProps = ElementProps<'div'> & {
     accordionStore: AccordionContainer,
 };
 
-class AccordionItem extends Component<AccordionItemProps, *> {
+class AccordionItem extends Component<AccordionItemProps> {
     componentDidMount() {
         const { uuid, accordionStore, disabled } = this.props;
 
@@ -48,7 +48,7 @@ class AccordionItem extends Component<AccordionItemProps, *> {
             ...rest
         } = this.props;
 
-        const currentItem = accordionStore.state.items.filter(
+        const currentItem = accordionStore.items.filter(
             item => item.uuid === uuid,
         )[0];
 
