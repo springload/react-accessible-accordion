@@ -3,52 +3,46 @@
 import React, { Component } from 'react';
 import type { ElementProps } from 'react';
 
-import { Provider, Subscribe } from 'unstated';
 import {
-    Consumer,
+    Consumer as AccordionConsumer,
     type AccordionContainer,
 } from '../AccordionContainer/AccordionContainer';
-import ItemContainer from '../ItemContainer/ItemContainer';
+import {
+    Provider as ItemProvider,
+    Consumer as ItemConsumer,
+    type ItemContainer,
+} from '../ItemContainer/ItemContainer';
 import AccordionItem from './AccordionItem';
 
 type AccordionItemWrapperProps = ElementProps<'div'> & {
     hideBodyClassName: ?string,
     disabled: ?boolean,
     expanded: ?boolean,
-    // accordionStore: AccordionContainer,
     uuid?: string,
 };
 
-const defaultProps = {
-    className: 'accordion__item',
-    hideBodyClassName: '',
-    disabled: false,
-    expanded: false,
-    uuid: undefined,
-};
-
 class AccordionItemWrapper extends Component<AccordionItemWrapperProps> {
-    itemContainer = new ItemContainer({
-        uuid: this.props.uuid,
-    });
-
-    static defaultProps = defaultProps;
+    static defaultProps = {
+        className: 'accordion__item',
+        hideBodyClassName: '',
+        disabled: false,
+        expanded: false,
+        uuid: undefined,
+    };
 
     accordionContainer: AccordionContainer;
 
     renderAccordionChildren = (accordionStore: AccordionContainer) => {
         this.accordionContainer = accordionStore;
         return (
-            <Provider inject={[this.itemContainer]}>
-                <Subscribe to={[ItemContainer]}>
-                    {this.renderItemChildren}
-                </Subscribe>
-            </Provider>
+            <ItemProvider uuid={this.props.uuid}>
+                <ItemConsumer>{this.renderItemChildren}</ItemConsumer>
+            </ItemProvider>
         );
     };
 
     renderItemChildren = (itemStore: ItemContainer) => {
-        const { uuid } = itemStore.state;
+        const { uuid } = itemStore;
         return (
             <AccordionItem
                 {...this.props}
@@ -59,7 +53,11 @@ class AccordionItemWrapper extends Component<AccordionItemWrapperProps> {
     };
 
     render() {
-        return <Consumer>{this.renderAccordionChildren}</Consumer>;
+        return (
+            <AccordionConsumer>
+                {this.renderAccordionChildren}
+            </AccordionConsumer>
+        );
     }
 }
 
