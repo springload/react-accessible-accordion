@@ -48,6 +48,7 @@ class AccordionItem extends Component<AccordionItemProps> {
             ...rest
         } = this.props;
 
+        // Deliberately not using 'find' because IE compat.
         const currentItem = accordionStore.items.filter(
             item => item.uuid === uuid,
         )[0];
