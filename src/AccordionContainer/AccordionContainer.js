@@ -14,9 +14,9 @@ export type ProviderState = {
 };
 
 export type ProviderProps = {
-    accordion: boolean,
+    accordion?: boolean,
     onChange?: Function,
-    children: Node,
+    children?: ?Node,
     items?: Array<Item>,
 };
 
@@ -44,12 +44,15 @@ export class Provider extends Component<ProviderProps, ProviderState> {
 
     static defaultProps = {
         items: [],
+        accordion: true,
         onChange: () => {},
+        children: null,
     };
 
     state = {
         items: this.props.items || [],
-        accordion: true,
+        accordion:
+            this.props.accordion === undefined ? this.props.accordion : true,
         onChange: this.props.onChange || (() => {}),
     };
 
@@ -140,7 +143,7 @@ export class Provider extends Component<ProviderProps, ProviderState> {
         );
 
     render() {
-        return this.props.children;
+        return this.props.children || null;
     }
 }
 
