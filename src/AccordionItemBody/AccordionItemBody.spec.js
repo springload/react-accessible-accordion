@@ -2,71 +2,52 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import { Provider } from 'unstated';
-import ItemContainer, { resetNextUuid } from '../ItemContainer/ItemContainer';
-import AccordionContainer from '../AccordionContainer/AccordionContainer';
+import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
+import {
+    Provider as AccordionProvider,
+    type Item,
+} from '../AccordionContainer/AccordionContainer';
 import AccordionItemBody from './AccordionItemBody.wrapper';
 
 describe('AccordionItemBody', () => {
-    let accordionStore;
-    let itemStore;
-    let onChange;
-
-    beforeEach(() => {
-        onChange = jest.fn();
-
-        const itemContainer = new ItemContainer();
-        resetNextUuid();
-        const accordionContainer = new AccordionContainer();
-        accordionContainer.setAccordion(true);
-        accordionContainer.setOnChange(onChange);
-        accordionStore = accordionContainer;
-        itemStore = itemContainer;
-
-        accordionStore.addItem({
-            uuid: 0, // because `nextUuid` in ItemContainer starts at zero.
+    function mountItem(Node) {
+        const item: Item = {
+            uuid: 0,
             expanded: false,
             disabled: false,
-        });
-    });
+        };
+        return mount(
+            <AccordionProvider accordion items={[item]}>
+                <ItemProvider uuid={item.uuid}>{Node}</ItemProvider>
+            </AccordionProvider>,
+        );
+    }
 
     it('renders correctly with min params', () => {
-        const wrapper = mount(
-            <Provider inject={[accordionStore, itemStore]}>
-                <AccordionItemBody>
-                    <div>Fake body</div>
-                </AccordionItemBody>
-            </Provider>,
+        const wrapper = mountItem(
+            <AccordionItemBody>
+                <div>Fake body</div>
+            </AccordionItemBody>,
         );
         expect(wrapper).toMatchSnapshot();
     });
 
     it('renders correctly with different className', () => {
         const className = 'className';
-        const wrapper = mount(
-            <Provider inject={[accordionStore, itemStore]}>
-                <AccordionItemBody className={className} />
-            </Provider>,
-        );
+        const wrapper = mountItem(<AccordionItemBody className={className} />);
         expect(wrapper.find('div').hasClass(className)).toEqual(true);
     });
 
     it('renders correctly with different hideBodyClassName', () => {
         const hideBodyClassName = 'hideBodyClassName';
-        const wrapper = mount(
-            <Provider inject={[accordionStore, itemStore]}>
-                <AccordionItemBody hideBodyClassName={hideBodyClassName} />
-            </Provider>,
+        const wrapper = mountItem(
+            <AccordionItemBody hideBodyClassName={hideBodyClassName} />,
         );
         expect(wrapper.find('div').hasClass(hideBodyClassName)).toEqual(true);
     });
 
     it('respects arbitrary user-defined props', () => {
-        const wrapper = mount(
-            <Provider inject={[accordionStore, itemStore]}>
-                <AccordionItemBody lang="en" />
-            </Provider>,
-        );
+        const wrapper = mountItem(<AccordionItemBody lang="en" />);
         expect(wrapper.find('div').instance().lang).toEqual('en');
     });
 });

@@ -3,12 +3,14 @@
 import React, { Component } from 'react';
 import type { ElementProps } from 'react';
 
-import { Subscribe } from 'unstated';
 import {
-    Consumer,
+    Consumer as AccordionConsumer,
     type AccordionContainer,
 } from '../AccordionContainer/AccordionContainer';
-import ItemContainer from '../ItemContainer/ItemContainer';
+import {
+    Consumer as ItemConsumer,
+    type ItemContainer,
+} from '../ItemContainer/ItemContainer';
 import AccordionItemBody from './AccordionItemBody';
 
 type AccordionItemBodyWrapperProps = ElementProps<'div'> & {
@@ -24,7 +26,7 @@ class AccordionItemBodyWrapper extends Component<
     };
 
     renderItemBody = (itemStore: ItemContainer) => {
-        const { uuid } = itemStore.state;
+        const { uuid } = itemStore;
         const { items, accordion } = this.accordionStore;
         const item = items.filter(stateItem => stateItem.uuid === uuid)[0];
         return item ? (
@@ -40,13 +42,15 @@ class AccordionItemBodyWrapper extends Component<
 
     renderAccordionChildren = (accordionStore: AccordionContainer) => {
         this.accordionStore = accordionStore;
-        return (
-            <Subscribe to={[ItemContainer]}>{this.renderItemBody}</Subscribe>
-        );
+        return <ItemConsumer>{this.renderItemBody}</ItemConsumer>;
     };
 
     render() {
-        return <Consumer>{this.renderAccordionChildren}</Consumer>;
+        return (
+            <AccordionConsumer>
+                {this.renderAccordionChildren}
+            </AccordionConsumer>
+        );
     }
 }
 
