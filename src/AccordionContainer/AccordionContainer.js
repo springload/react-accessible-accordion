@@ -10,7 +10,6 @@ export type Item = {
 
 export type ProviderState = {
     items: Array<Item>,
-    onChange: Function,
 };
 
 export type ProviderProps = {
@@ -22,7 +21,6 @@ export type ProviderProps = {
 
 export type AccordionContainer = {
     accordion: boolean,
-    onChange: Function,
     items: Array<Item>,
     addItem: Item => void,
     removeItem: (string | number) => void,
@@ -42,30 +40,17 @@ export class Provider extends Component<ProviderProps, ProviderState> {
         [CONTEXT_KEY]: () => null,
     };
 
-    static defaultProps = {
-        items: [],
-        accordion: true,
-        onChange: () => {},
-        children: null,
-    };
-
     state = {
         items: this.props.items || [],
-        accordion:
-            this.props.accordion === undefined ? this.props.accordion : true,
-        onChange: this.props.onChange || (() => {}),
     };
 
     getChildContext() {
-        const { addItem, removeItem, setExpanded, state } = this;
-
         const context: AccordionContainer = {
-            ...state,
-            addItem,
-            removeItem,
-            setExpanded,
-            accordion: this.props.accordion,
-            onChange: this.props.onChange,
+            items: this.state.items,
+            accordion: !!this.props.accordion,
+            addItem: this.addItem,
+            removeItem: this.removeItem,
+            setExpanded: this.setExpanded,
         };
 
         return {
@@ -130,13 +115,13 @@ export class Provider extends Component<ProviderProps, ProviderState> {
                 }),
             }),
             () => {
-                if (this.state.accordion) {
-                    this.state.onChange(key);
-                } else {
-                    this.state.onChange(
-                        this.state.items
-                            .filter(item => item.expanded)
-                            .map(item => item.uuid),
+                if (this.props.onChange) {
+                    this.props.onChange(
+                        this.props.accordion
+                            ? key
+                            : this.state.items
+                                  .filter(item => item.expanded)
+                                  .map(item => item.uuid),
                     );
                 }
             },
