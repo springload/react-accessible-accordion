@@ -27,11 +27,11 @@ export class Provider extends Component<ProviderProps> {
         [CONTEXT_KEY]: () => null,
     };
 
-    // uuid = nextUuid();
+    id = nextUuid();
 
     getChildContext() {
         const context: ItemContainer = {
-            uuid: this.props.uuid !== undefined ? this.props.uuid : nextUuid(),
+            uuid: this.props.uuid !== undefined ? this.props.uuid : this.id,
         };
 
         return {
