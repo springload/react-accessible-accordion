@@ -50,4 +50,18 @@ describe('AccordionItemBody', () => {
         const wrapper = mountItem(<AccordionItemBody lang="en" />);
         expect(wrapper.find('div').instance().lang).toEqual('en');
     });
+
+    it('does not render if no associated item found in context', () => {
+        const wrapper = mount(
+            <AccordionProvider accordion items={[]}>
+                <ItemProvider uuid="foo">
+                    <AccordionItemBody>
+                        <div data-enzyme>Hello World</div>
+                    </AccordionItemBody>
+                </ItemProvider>
+            </AccordionProvider>,
+        );
+
+        expect(wrapper.find('div[data-enzyme]').length).toEqual(0);
+    });
 });
