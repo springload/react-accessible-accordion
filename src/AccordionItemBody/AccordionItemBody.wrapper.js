@@ -4,7 +4,10 @@ import React, { Component } from 'react';
 import type { ElementProps } from 'react';
 
 import { Subscribe } from 'unstated';
-import AccordionContainer from '../AccordionContainer/AccordionContainer';
+import {
+    Consumer,
+    type AccordionContainer,
+} from '../AccordionContainer/AccordionContainer';
 import ItemContainer from '../ItemContainer/ItemContainer';
 import AccordionItemBody from './AccordionItemBody';
 
@@ -20,28 +23,30 @@ class AccordionItemBodyWrapper extends Component<
         hideBodyClassName: 'accordion__body--hidden',
     };
 
-    renderItemBody = (
-        accordionStore: AccordionContainer,
-        itemStore: ItemContainer,
-    ) => {
+    renderItemBody = (itemStore: ItemContainer) => {
         const { uuid } = itemStore.state;
-        const { items, accordion } = accordionStore.state;
+        const { items, accordion } = this.accordionStore;
         const item = items.filter(stateItem => stateItem.uuid === uuid)[0];
-        return (
+        return item ? (
             <AccordionItemBody
                 {...this.props}
                 {...item}
                 accordion={accordion}
             />
+        ) : null;
+    };
+
+    accordionStore: AccordionContainer;
+
+    renderAccordionChildren = (accordionStore: AccordionContainer) => {
+        this.accordionStore = accordionStore;
+        return (
+            <Subscribe to={[ItemContainer]}>{this.renderItemBody}</Subscribe>
         );
     };
 
     render() {
-        return (
-            <Subscribe to={[AccordionContainer, ItemContainer]}>
-                {this.renderItemBody}
-            </Subscribe>
-        );
+        return <Consumer>{this.renderAccordionChildren}</Consumer>;
     }
 }
 
