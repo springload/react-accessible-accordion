@@ -19,7 +19,14 @@ export type ProviderProps = {
     children: Node,
 };
 
-export type AccordionContainer = ProviderProps & ProviderState;
+export type AccordionContainer = {
+    accordion: boolean,
+    onChange: Function,
+    items: Array<Item>,
+    addItem: Item => void,
+    removeItem: (string | number) => void,
+    setExpanded: (key: string | number, expanded: boolean) => void,
+};
 
 export type ConsumerProps = {
     children: ($Shape<AccordionContainer>) => Node,
@@ -43,15 +50,17 @@ export class Provider extends Component<ProviderProps, ProviderState> {
     getChildContext() {
         const { addItem, removeItem, setExpanded, state } = this;
 
+        const context: AccordionContainer = {
+            ...state,
+            addItem,
+            removeItem,
+            setExpanded,
+            accordion: this.props.accordion,
+            onChange: this.props.onChange,
+        };
+
         return {
-            [CONTEXT_KEY]: {
-                ...state,
-                addItem,
-                removeItem,
-                setExpanded,
-                accordion: this.props.accordion,
-                onChange: this.props.onChange,
-            },
+            [CONTEXT_KEY]: context,
         };
     }
 
