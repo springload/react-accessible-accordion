@@ -1,37 +1,64 @@
 // @flow
 
-import ItemContainer, { resetNextUuid } from './ItemContainer';
+import React, { Fragment } from 'react';
+import { mount } from 'enzyme';
+import { Provider, Consumer, resetNextUuid } from './ItemContainer';
 
 describe('ItemContainer', () => {
-    it('correctly instantiates with all expected methods/state', () => {
-        const itemContainer = new ItemContainer();
-        expect(itemContainer.state.uuid).toBeDefined();
-        expect(itemContainer.setUuid).toBeDefined();
+    let mock;
+    beforeEach(() => {
+        mock = jest.fn(() => null);
     });
 
-    it('can be initialized with values in the constructor', () => {
-        const itemContainer = new ItemContainer({ uuid: 'foo' });
-        expect(itemContainer.state.uuid).toBe('foo');
-    });
+    it('can initialize uuid by prop', () => {
+        const uuid = 'foo';
 
-    it('correctly sets the value', async () => {
-        const itemContainer = new ItemContainer();
-        const uuid = 'uniqueID';
-        await itemContainer.setUuid(uuid);
-        expect(itemContainer.state.uuid).toBe(uuid);
+        mount(
+            <Provider uuid={uuid}>
+                <Consumer>{mock}</Consumer>
+            </Provider>,
+        ).instance();
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                uuid,
+            }),
+        );
     });
 
     it('generated uuids are different', () => {
-        const itemContainer1 = new ItemContainer();
-        const itemContainer2 = new ItemContainer();
-        expect(itemContainer1.state.uuid).not.toBe(itemContainer2.state.uuid);
+        mount(
+            <Fragment>
+                <Provider>
+                    <Consumer>{mock}</Consumer>
+                </Provider>
+                <Provider>
+                    <Consumer>{mock}</Consumer>
+                </Provider>
+            </Fragment>,
+        );
+        const { calls } = mock.mock;
+        expect(calls[0][0]).toBeDefined();
+        expect(calls[1][0]).toBeDefined();
+        expect(calls[0][0]).not.toEqual(calls[1][0]);
     });
 
     it('reset uuids works', () => {
+        const doMount = () =>
+            mount(
+                <Provider>
+                    <Consumer>{mock}</Consumer>
+                </Provider>,
+            );
+
         resetNextUuid();
-        const itemContainer1 = new ItemContainer();
+        doMount();
         resetNextUuid();
-        const itemContainer2 = new ItemContainer();
-        expect(itemContainer1.state.uuid).toBe(itemContainer2.state.uuid);
+        doMount();
+
+        const { calls } = mock.mock;
+        expect(calls[0][0]).toBeDefined();
+        expect(calls[1][0]).toBeDefined();
+        expect(calls[0][0]).toEqual(calls[1][0]);
     });
 });
