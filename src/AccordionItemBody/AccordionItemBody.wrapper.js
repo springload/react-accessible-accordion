@@ -1,7 +1,7 @@
 // @flow
 
-import React, { Component } from 'react';
-import type { ElementProps } from 'react';
+import React, { Component, type ElementProps } from 'react';
+import { compose, fromRenderProps } from 'recompose';
 
 import {
     Consumer as AccordionConsumer,
@@ -15,8 +15,11 @@ import AccordionItemBody from './AccordionItemBody';
 
 type AccordionItemBodyWrapperProps = ElementProps<'div'> & {
     hideBodyClassName: string,
+    itemStore: ItemContainer,
+    accordionStore: AccordionContainer,
 };
 
+// eslint-disable-next-line react/prefer-stateless-function
 class AccordionItemBodyWrapper extends Component<
     AccordionItemBodyWrapperProps,
 > {
@@ -25,33 +28,19 @@ class AccordionItemBodyWrapper extends Component<
         hideBodyClassName: 'accordion__body--hidden',
     };
 
-    renderItemBody = (itemStore: ItemContainer) => {
+    render() {
+        const { itemStore, accordionStore, ...rest } = this.props;
         const { uuid } = itemStore;
-        const { items, accordion } = this.accordionStore;
+        const { items, accordion } = accordionStore;
         const item = items.filter(stateItem => stateItem.uuid === uuid)[0];
         return item ? (
-            <AccordionItemBody
-                {...this.props}
-                {...item}
-                accordion={accordion}
-            />
+            <AccordionItemBody {...rest} {...item} accordion={accordion} />
         ) : null;
-    };
-
-    accordionStore: AccordionContainer;
-
-    renderAccordionChildren = (accordionStore: AccordionContainer) => {
-        this.accordionStore = accordionStore;
-        return <ItemConsumer>{this.renderItemBody}</ItemConsumer>;
-    };
-
-    render() {
-        return (
-            <AccordionConsumer>
-                {this.renderAccordionChildren}
-            </AccordionConsumer>
-        );
     }
 }
 
-export default AccordionItemBodyWrapper;
+export default compose(
+    fromRenderProps(AccordionConsumer, accordionStore => ({ accordionStore })),
+    fromRenderProps(ItemConsumer, itemStore => ({ itemStore })),
+)(AccordionItemBodyWrapper);
+
