@@ -1,8 +1,7 @@
 // @flow
 
-import React, { Component } from 'react';
-import type { ElementProps } from 'react';
-
+import React, { Component, type ElementProps } from 'react';
+import { fromRenderProps, compose } from 'recompose';
 import {
     Consumer as AccordionConsumer,
     type AccordionContainer,
@@ -15,8 +14,11 @@ import AccordionItemTitle from './AccordionItemTitle';
 
 type AccordionItemTitleWrapperProps = ElementProps<'div'> & {
     hideBodyClassName: string,
+    accordionStore: AccordionContainer,
+    itemStore: ItemContainer,
 };
 
+// eslint-disable-next-line react/prefer-stateless-function
 class AccordionItemTitleWrapper extends Component<
     AccordionItemTitleWrapperProps,
 > {
@@ -25,35 +27,24 @@ class AccordionItemTitleWrapper extends Component<
         hideBodyClassName: '',
     };
 
-    accordionStore: AccordionContainer;
-
-    renderItemTitle = (itemStore: ItemContainer) => {
+    render() {
+        const { itemStore, accordionStore, ...rest } = this.props;
         const { uuid } = itemStore;
-        const { items, accordion } = this.accordionStore;
+        const { items, accordion } = accordionStore;
         const item = items.filter(stateItem => stateItem.uuid === uuid)[0];
 
         return (
             <AccordionItemTitle
-                {...this.props}
+                {...rest}
                 {...item}
-                setExpanded={this.accordionStore.setExpanded}
+                setExpanded={accordionStore.setExpanded}
                 accordion={accordion}
             />
-        );
-    };
-
-    renderAccordionChildren = (accordionStore: AccordionContainer) => {
-        this.accordionStore = accordionStore;
-        return <ItemConsumer>{this.renderItemTitle}</ItemConsumer>;
-    };
-
-    render() {
-        return (
-            <AccordionConsumer>
-                {this.renderAccordionChildren}
-            </AccordionConsumer>
         );
     }
 }
 
-export default AccordionItemTitleWrapper;
+export default compose(
+    fromRenderProps(AccordionConsumer, accordionStore => ({ accordionStore })),
+    fromRenderProps(ItemConsumer, itemStore => ({ itemStore })),
+)(AccordionItemTitleWrapper);

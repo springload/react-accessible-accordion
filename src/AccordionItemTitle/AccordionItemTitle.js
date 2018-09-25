@@ -37,7 +37,6 @@ class AccordionItemTitle extends Component<
         const {
             className,
             hideBodyClassName,
-            accordionStore,
             item,
             accordion,
             setExpanded,
