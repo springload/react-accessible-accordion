@@ -1,17 +1,14 @@
 // @flow
 
-import React, { Component } from 'react';
-import type { ElementProps } from 'react';
+import React, { Component, type ElementProps } from 'react';
+import { compose, fromRenderProps } from 'recompose';
+import consecutive from 'consecutive';
 
 import {
     Consumer as AccordionConsumer,
     type AccordionContainer,
 } from '../AccordionContainer/AccordionContainer';
-import {
-    Provider as ItemProvider,
-    Consumer as ItemConsumer,
-    type ItemContainer,
-} from '../ItemContainer/ItemContainer';
+import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
 import AccordionItem from './AccordionItem';
 
 type AccordionItemWrapperProps = ElementProps<'div'> & {
@@ -19,7 +16,13 @@ type AccordionItemWrapperProps = ElementProps<'div'> & {
     disabled: ?boolean,
     expanded: ?boolean,
     uuid?: string,
+    accordionStore: AccordionContainer,
 };
+
+let nextUuid = consecutive();
+export function resetNextUuid() {
+    nextUuid = consecutive();
+}
 
 class AccordionItemWrapper extends Component<AccordionItemWrapperProps> {
     static defaultProps = {
@@ -30,35 +33,24 @@ class AccordionItemWrapper extends Component<AccordionItemWrapperProps> {
         uuid: undefined,
     };
 
-    accordionContainer: AccordionContainer;
-
-    renderAccordionChildren = (accordionStore: AccordionContainer) => {
-        this.accordionContainer = accordionStore;
-        return (
-            <ItemProvider uuid={this.props.uuid}>
-                <ItemConsumer>{this.renderItemChildren}</ItemConsumer>
-            </ItemProvider>
-        );
-    };
-
-    renderItemChildren = (itemStore: ItemContainer) => {
-        const { uuid } = itemStore;
-        return (
-            <AccordionItem
-                {...this.props}
-                uuid={uuid}
-                accordionStore={this.accordionContainer}
-            />
-        );
-    };
+    id = nextUuid();
 
     render() {
+        const { accordionStore, uuid, ...rest } = this.props;
+        const itemUuid = uuid !== undefined ? uuid : this.id;
+
         return (
-            <AccordionConsumer>
-                {this.renderAccordionChildren}
-            </AccordionConsumer>
+            <ItemProvider uuid={itemUuid}>
+                <AccordionItem
+                    {...rest}
+                    uuid={itemUuid}
+                    accordionStore={accordionStore}
+                />
+            </ItemProvider>
         );
     }
 }
 
-export default AccordionItemWrapper;
+export default compose(
+    fromRenderProps(AccordionConsumer, accordionStore => ({ accordionStore })),
+)(AccordionItemWrapper);

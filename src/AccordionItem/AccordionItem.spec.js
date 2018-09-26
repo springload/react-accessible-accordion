@@ -4,9 +4,9 @@ import React from 'react';
 import { mount } from 'enzyme';
 import AccordionItemTitle from '../AccordionItemTitle/AccordionItemTitle.wrapper';
 import AccordionItemBody from '../AccordionItemBody/AccordionItemBody.wrapper';
-import AccordionItem from './AccordionItem.wrapper';
-import { resetNextUuid } from '../ItemContainer/ItemContainer';
+import AccordionItem, { resetNextUuid } from './AccordionItem.wrapper';
 import { Provider as AccordionProvider } from '../AccordionContainer/AccordionContainer';
+import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
 
 describe('AccordionItem', () => {
     beforeEach(() => {
@@ -270,6 +270,22 @@ describe('AccordionItem', () => {
         expect(wrapper.find('div').instance().lang).toEqual('en');
     });
 
+    it('generates unique uuids', () => {
+        const wrapper = mount(
+            <AccordionProvider>
+                <AccordionItem />
+                <AccordionItem />
+            </AccordionProvider>,
+        );
+
+        const uuids = wrapper
+            .find(ItemProvider)
+            .map(provider => provider.props().uuid);
+
+        expect(uuids.length).toEqual(2);
+        expect(uuids[0]).not.toEqual(uuids[1]);
+    });
+
     it('supports custom uuid', () => {
         const uuid = 'uniqueCustomID';
         const wrapper = mount(
@@ -290,5 +306,27 @@ describe('AccordionItem', () => {
         ).toEqual(1);
 
         expect(wrapper.find('div[data-enzyme]').length).toEqual(1);
+    });
+});
+
+describe('resetNextUuid', () => {
+    it('reset uuids works', () => {
+        const mountedUuid = () =>
+            mount(
+                <AccordionProvider>
+                    <AccordionItem />
+                </AccordionProvider>,
+            )
+                .find(ItemProvider)
+                .props().uuid;
+
+        resetNextUuid();
+        const firstUuid = mountedUuid();
+        resetNextUuid();
+        const secondUuid = mountedUuid();
+
+        expect(firstUuid).toBeDefined();
+        expect(secondUuid).toBeDefined();
+        expect(firstUuid).toEqual(secondUuid);
     });
 });

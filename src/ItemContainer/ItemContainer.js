@@ -1,22 +1,16 @@
 // @flow
 import { Component, type Node } from 'react';
-import consecutive from 'consecutive';
 
 type UUID = string | number;
 
 export type ProviderProps = {
     children?: ?Node,
-    uuid?: UUID,
+    uuid: UUID,
 };
 
 export type ItemContainer = {
     uuid: UUID,
 };
-
-let nextUuid = consecutive();
-export function resetNextUuid() {
-    nextUuid = consecutive();
-}
 
 // Arbitrary, but ought to be unique to avoid context namespace clashes.
 const CONTEXT_KEY = 'react-accessible-accordion@ItemContainer';
@@ -27,11 +21,10 @@ export class Provider extends Component<ProviderProps> {
         [CONTEXT_KEY]: () => null,
     };
 
-    id = nextUuid();
-
     getChildContext() {
+        const { uuid } = this.props;
         const context: ItemContainer = {
-            uuid: this.props.uuid !== undefined ? this.props.uuid : this.id,
+            uuid,
         };
 
         return {

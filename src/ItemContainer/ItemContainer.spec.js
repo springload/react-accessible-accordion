@@ -1,8 +1,8 @@
 // @flow
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import { mount } from 'enzyme';
-import { Provider, Consumer, resetNextUuid } from './ItemContainer';
+import { Provider, Consumer } from './ItemContainer';
 
 describe('ItemContainer', () => {
     let mock;
@@ -10,7 +10,7 @@ describe('ItemContainer', () => {
         mock = jest.fn(() => null);
     });
 
-    it('can initialize uuid by prop', () => {
+    it('Propagates uuid by context', () => {
         const uuid = 'foo';
 
         mount(
@@ -24,41 +24,5 @@ describe('ItemContainer', () => {
                 uuid,
             }),
         );
-    });
-
-    it('generated uuids are different', () => {
-        mount(
-            <Fragment>
-                <Provider>
-                    <Consumer>{mock}</Consumer>
-                </Provider>
-                <Provider>
-                    <Consumer>{mock}</Consumer>
-                </Provider>
-            </Fragment>,
-        );
-        const { calls } = mock.mock;
-        expect(calls[0][0]).toBeDefined();
-        expect(calls[1][0]).toBeDefined();
-        expect(calls[0][0]).not.toEqual(calls[1][0]);
-    });
-
-    it('reset uuids works', () => {
-        const doMount = () =>
-            mount(
-                <Provider>
-                    <Consumer>{mock}</Consumer>
-                </Provider>,
-            );
-
-        resetNextUuid();
-        doMount();
-        resetNextUuid();
-        doMount();
-
-        const { calls } = mock.mock;
-        expect(calls[0][0]).toBeDefined();
-        expect(calls[1][0]).toBeDefined();
-        expect(calls[0][0]).toEqual(calls[1][0]);
     });
 });
