@@ -174,6 +174,29 @@ describe('AccordionItem', () => {
         ).toEqual(1);
     });
 
+    it('can dynamically set disabled prop', async () => {
+        const Wrapper = ({ disabled }: { disabled: boolean }) => (
+            <AccordionProvider>
+                <AccordionItem disabled={disabled}>
+                    <AccordionItemTitle>
+                        <div>Fake title</div>
+                    </AccordionItemTitle>
+                </AccordionItem>
+            </AccordionProvider>
+        );
+
+        const wrapper = await mount(<Wrapper disabled={false} />);
+        wrapper.setProps({ disabled: true });
+
+        expect(
+            wrapper
+                .find(AccordionProvider)
+                .instance().state.items.filter(
+                    item => item.disabled === true,
+                ).length,
+        ).toEqual(1);
+    });
+
     it('can dynamically unset expanded prop', () => {
         const Wrapper = ({ expanded }: { expanded: boolean }) => (
             <AccordionProvider>

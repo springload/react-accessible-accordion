@@ -26,6 +26,8 @@ export type AccordionContainer = {
     addItem: Item => void,
     removeItem: UUID => void,
     setExpanded: (key: UUID, expanded: boolean) => void,
+    setDisabled: (key: string | number, disabled: boolean) => void,
+
 };
 
 export type ConsumerProps = {
@@ -52,6 +54,7 @@ export class Provider extends Component<ProviderProps, ProviderState> {
             addItem: this.addItem,
             removeItem: this.removeItem,
             setExpanded: this.setExpanded,
+            setDisabled: this.setDisabled,
         };
 
         return {
@@ -130,6 +133,20 @@ export class Provider extends Component<ProviderProps, ProviderState> {
 
     render() {
         return this.props.children || null;
+    }
+
+    setDisabled = (key: string | number, disabled: boolean) => {
+        this.setState(state => ({
+            items: state.items.map(item => {
+                if (item.uuid === key) {
+                    return {
+                        ...item,
+                        disabled,
+                    };
+                }
+                return item;
+            }),
+        }))
     }
 }
 
