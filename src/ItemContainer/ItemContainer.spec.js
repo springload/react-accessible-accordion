@@ -25,4 +25,8 @@ describe('ItemContainer', () => {
             }),
         );
     });
+
+    it('renders Provider without children', () => {
+        expect(() => mount(<Provider uuid="foo" />)).not.toThrow();
+    });
 });
