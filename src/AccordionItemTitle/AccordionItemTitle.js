@@ -2,14 +2,15 @@
 
 import React, { Component, type ElementProps } from 'react';
 import classNames from 'classnames';
+import { type UUID } from '../ItemContainer/ItemContainer';
 
 type AccordionItemTitleProps = ElementProps<'div'> & {
     hideBodyClassName: string,
     expanded: boolean,
-    uuid: string | number,
+    uuid: UUID,
     disabled: boolean,
     accordion: boolean,
-    setExpanded: (string | number, boolean) => any,
+    setExpanded: (UUID, boolean) => any,
 };
 
 type AccordionItemTitleState = {};
@@ -37,7 +38,6 @@ class AccordionItemTitle extends Component<
         const {
             className,
             hideBodyClassName,
-            accordionStore,
             item,
             accordion,
             setExpanded,

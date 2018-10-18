@@ -1,20 +1,19 @@
 // @flow
 
-import React, { Component } from 'react';
-import type { ElementProps } from 'react';
-
+import React, { Component, type ElementProps } from 'react';
 import classNames from 'classnames';
-import AccordionContainer from '../AccordionContainer/AccordionContainer';
+import { type UUID } from '../ItemContainer/ItemContainer';
+import { type AccordionContainer } from '../AccordionContainer/AccordionContainer';
 
 type AccordionItemProps = ElementProps<'div'> & {
-    uuid: string | number,
+    uuid: UUID,
     hideBodyClassName: ?string,
     disabled: ?boolean,
     expanded: ?boolean,
     accordionStore: AccordionContainer,
 };
 
-class AccordionItem extends Component<AccordionItemProps, *> {
+class AccordionItem extends Component<AccordionItemProps> {
     componentDidMount() {
         const { uuid, accordionStore, disabled } = this.props;
 
@@ -48,7 +47,8 @@ class AccordionItem extends Component<AccordionItemProps, *> {
             ...rest
         } = this.props;
 
-        const currentItem = accordionStore.state.items.filter(
+        // Deliberately not using 'find' because IE compat.
+        const currentItem = accordionStore.items.filter(
             item => item.uuid === uuid,
         )[0];
 

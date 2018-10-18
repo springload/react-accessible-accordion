@@ -21,7 +21,8 @@
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/default-props-match-prop-types": "off",
         "jsx-a11y/no-static-element-interactions": [0],
-        "react/destructuring-assignment": "off"
+        "react/destructuring-assignment": "off",
+        "react/require-default-props": "off" // because Flow isn't smart enough to derive actual prop types from defaults.
     },
     "env": {
         "jest": true,

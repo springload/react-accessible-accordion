@@ -1,32 +1,54 @@
 // @flow
-import { Container } from 'unstated';
-import consecutive from 'consecutive';
+import { Component, type Node } from 'react';
 
-export type StoreState = {
-    uuid: string | number,
+export type UUID = string | number;
+
+export type ProviderProps = {
+    children?: ?Node,
+    uuid: UUID,
 };
 
-let nextUuid = consecutive();
-export function resetNextUuid() {
-    nextUuid = consecutive();
-}
+export type ItemContainer = {
+    uuid: UUID,
+};
 
-class ItemContainer extends Container<StoreState> {
-    constructor(args?: $Shape<StoreState> = {}) {
-        super();
-        this.state = {
-            ...args,
+// Arbitrary, but ought to be unique to avoid context namespace clashes.
+const CONTEXT_KEY = 'react-accessible-accordion@ItemContainer';
+
+export class Provider extends Component<ProviderProps> {
+    static childContextTypes = {
+        // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
+        [CONTEXT_KEY]: () => null,
+    };
+
+    getChildContext() {
+        const { uuid } = this.props;
+        const context: ItemContainer = {
+            uuid,
         };
-        if (this.state.uuid === undefined) {
-            this.state.uuid = nextUuid();
-        }
+
+        return {
+            [CONTEXT_KEY]: context,
+        };
     }
 
-    setUuid(customUuid: string) {
-        return this.setState({
-            uuid: customUuid,
-        });
+    render() {
+        return this.props.children || null;
     }
 }
 
-export default ItemContainer;
+type ConsumerProps = {
+    children: ($Shape<ItemContainer>) => Node,
+};
+
+// eslint-disable-next-line react/no-multi-comp
+export class Consumer extends Component<ConsumerProps> {
+    static contextTypes = {
+        // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
+        [CONTEXT_KEY]: () => null,
+    };
+
+    render() {
+        return this.props.children(this.context[CONTEXT_KEY]);
+    }
+}

@@ -1,17 +1,24 @@
 // @flow
 
-import React, { Component } from 'react';
-import type { ElementProps } from 'react';
-
-import { Subscribe } from 'unstated';
-import AccordionContainer from '../AccordionContainer/AccordionContainer';
-import ItemContainer from '../ItemContainer/ItemContainer';
+import React, { Component, type ElementProps } from 'react';
+import { fromRenderProps, compose } from 'recompose';
+import {
+    Consumer as AccordionConsumer,
+    type AccordionContainer,
+} from '../AccordionContainer/AccordionContainer';
+import {
+    Consumer as ItemConsumer,
+    type ItemContainer,
+} from '../ItemContainer/ItemContainer';
 import AccordionItemTitle from './AccordionItemTitle';
 
 type AccordionItemTitleWrapperProps = ElementProps<'div'> & {
     hideBodyClassName: string,
+    accordionStore: AccordionContainer,
+    itemStore: ItemContainer,
 };
 
+// eslint-disable-next-line react/prefer-stateless-function
 class AccordionItemTitleWrapper extends Component<
     AccordionItemTitleWrapperProps,
 > {
@@ -20,31 +27,24 @@ class AccordionItemTitleWrapper extends Component<
         hideBodyClassName: '',
     };
 
-    renderItemTitle = (
-        accordionStore: AccordionContainer,
-        itemStore: ItemContainer,
-    ) => {
-        const { uuid } = itemStore.state;
-        const { items, accordion } = accordionStore.state;
+    render() {
+        const { itemStore, accordionStore, ...rest } = this.props;
+        const { uuid } = itemStore;
+        const { items, accordion } = accordionStore;
         const item = items.filter(stateItem => stateItem.uuid === uuid)[0];
 
         return (
             <AccordionItemTitle
-                {...this.props}
+                {...rest}
                 {...item}
                 setExpanded={accordionStore.setExpanded}
                 accordion={accordion}
             />
         );
-    };
-
-    render() {
-        return (
-            <Subscribe to={[AccordionContainer, ItemContainer]}>
-                {this.renderItemTitle}
-            </Subscribe>
-        );
     }
 }
 
-export default AccordionItemTitleWrapper;
+export default compose(
+    fromRenderProps(AccordionConsumer, accordionStore => ({ accordionStore })),
+    fromRenderProps(ItemConsumer, itemStore => ({ itemStore })),
+)(AccordionItemTitleWrapper);

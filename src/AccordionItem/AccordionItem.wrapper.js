@@ -1,60 +1,56 @@
 // @flow
 
-import React, { Component } from 'react';
-import type { ElementProps } from 'react';
+import React, { Component, type ElementProps } from 'react';
+import { compose, fromRenderProps } from 'recompose';
+import consecutive from 'consecutive';
 
-import { Provider, Subscribe } from 'unstated';
-import AccordionContainer from '../AccordionContainer/AccordionContainer';
-import ItemContainer from '../ItemContainer/ItemContainer';
+import {
+    Consumer as AccordionConsumer,
+    type AccordionContainer,
+} from '../AccordionContainer/AccordionContainer';
+import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
 import AccordionItem from './AccordionItem';
 
 type AccordionItemWrapperProps = ElementProps<'div'> & {
     hideBodyClassName: ?string,
     disabled: ?boolean,
     expanded: ?boolean,
-    accordionStore: AccordionContainer,
     uuid?: string,
+    accordionStore: AccordionContainer,
 };
 
-const defaultProps = {
-    className: 'accordion__item',
-    hideBodyClassName: '',
-    disabled: false,
-    expanded: false,
-    accordionStore: new AccordionContainer(),
-    uuid: undefined,
-};
+let nextUuid = consecutive();
+export function resetNextUuid() {
+    nextUuid = consecutive();
+}
 
 class AccordionItemWrapper extends Component<AccordionItemWrapperProps> {
-    itemContainer = new ItemContainer({
-        uuid: this.props.uuid,
-    });
-
-    static defaultProps = defaultProps;
-
-    renderItem = (
-        accordionStore: AccordionContainer,
-        itemStore: ItemContainer,
-    ) => {
-        const { uuid } = itemStore.state;
-        return (
-            <AccordionItem
-                {...this.props}
-                uuid={uuid}
-                accordionStore={accordionStore}
-            />
-        );
+    static defaultProps = {
+        className: 'accordion__item',
+        hideBodyClassName: '',
+        disabled: false,
+        expanded: false,
+        uuid: undefined,
     };
 
+    id = nextUuid();
+
     render() {
+        const { accordionStore, uuid, ...rest } = this.props;
+        const itemUuid = uuid !== undefined ? uuid : this.id;
+
         return (
-            <Provider inject={[this.itemContainer]}>
-                <Subscribe to={[AccordionContainer, ItemContainer]}>
-                    {this.renderItem}
-                </Subscribe>
-            </Provider>
+            <ItemProvider uuid={itemUuid}>
+                <AccordionItem
+                    {...rest}
+                    uuid={itemUuid}
+                    accordionStore={accordionStore}
+                />
+            </ItemProvider>
         );
     }
 }
 
-export default AccordionItemWrapper;
+export default compose(
+    fromRenderProps(AccordionConsumer, accordionStore => ({ accordionStore })),
+)(AccordionItemWrapper);

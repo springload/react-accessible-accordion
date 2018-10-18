@@ -3,8 +3,11 @@
 import React, { Component } from 'react';
 import type { ElementProps } from 'react';
 
-import { Provider, Subscribe } from 'unstated';
-import AccordionContainer from '../AccordionContainer/AccordionContainer';
+import {
+    Provider,
+    Consumer,
+    type AccordionContainer,
+} from '../AccordionContainer/AccordionContainer';
 import Accordion from './Accordion';
 
 type AccordionWrapperProps = ElementProps<'div'> & {
@@ -20,36 +23,20 @@ const defaultProps: AccordionWrapperProps = {
 };
 
 class AccordionWrapper extends Component<AccordionWrapperProps> {
-    accordionStore = new AccordionContainer({
-        accordion: this.props.accordion,
-        onChange: this.props.onChange,
-    });
-
     static defaultProps = defaultProps;
-
-    componentDidMount() {
-        this.accordionStore.setAccordion(this.props.accordion);
-        this.accordionStore.setOnChange(this.props.onChange);
-    }
-
-    componentDidUpdate() {
-        this.accordionStore.setAccordion(this.props.accordion);
-        this.accordionStore.setOnChange(this.props.onChange);
-    }
 
     renderAccordion = (accordionStore: AccordionContainer) => {
         const { accordion, onChange, ...rest } = this.props;
-        return (
-            <Accordion accordion={accordionStore.state.accordion} {...rest} />
-        );
+        return <Accordion accordion={accordionStore.accordion} {...rest} />;
     };
 
     render() {
         return (
-            <Provider inject={[this.accordionStore]}>
-                <Subscribe to={[AccordionContainer]}>
-                    {this.renderAccordion}
-                </Subscribe>
+            <Provider
+                accordion={this.props.accordion}
+                onChange={this.props.onChange}
+            >
+                <Consumer>{this.renderAccordion}</Consumer>
             </Provider>
         );
     }
