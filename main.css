@@ -1,0 +1,517 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: #fff;
+    padding: 50px;
+    font: 16px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #727272;
+    font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #222;
+    margin: 0 0 15px;
+}
+
+p,
+ul,
+ol,
+table,
+dl {
+    margin: 0 0 20px;
+}
+
+pre {
+    margin: 0;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.1;
+}
+
+h1 {
+    font-size: 22px;
+}
+
+h2 {
+    color: #393939;
+}
+
+h3,
+h4,
+h5,
+h6 {
+    color: #494949;
+}
+
+a {
+    color: #39c;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #069;
+}
+
+a small {
+    font-size: 11px;
+    color: #777;
+    margin-top: -0.3em;
+    display: block;
+}
+
+a:hover small {
+    color: #777;
+}
+
+.wrapper {
+    width: 860px;
+    margin: 0 auto;
+}
+
+blockquote {
+    border-left: 1px solid #e5e5e5;
+    margin: 0;
+    padding: 0 0 0 20px;
+    font-style: italic;
+}
+
+code,
+pre {
+    font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal,
+        Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
+    color: #333;
+    font-size: 12px;
+}
+
+pre {
+    padding: 8px 15px;
+    background: #f8f8f8;
+    border-radius: 5px;
+    border: 1px solid #e5e5e5;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 5px 10px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+dt {
+    color: #444;
+    font-weight: 700;
+}
+
+th {
+    color: #444;
+}
+
+img {
+    max-width: 100%;
+}
+
+header {
+    width: 270px;
+    float: left;
+    position: fixed;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+header ul {
+    list-style: none;
+    height: 40px;
+    padding: 0;
+    background: #f4f4f4;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    width: 270px;
+}
+
+header li {
+    width: 89px;
+    float: left;
+    border-right: 1px solid #e0e0e0;
+    height: 40px;
+}
+
+header li:first-child a {
+    border-radius: 5px 0 0 5px;
+}
+
+header li:last-child a {
+    border-radius: 0 5px 5px 0;
+}
+
+header ul a {
+    line-height: 1;
+    font-size: 11px;
+    color: #999;
+    display: block;
+    text-align: center;
+    padding-top: 6px;
+    height: 34px;
+}
+
+header ul a:hover {
+    color: #999;
+}
+
+header ul a:active {
+    background-color: #f0f0f0;
+}
+
+strong {
+    color: #222;
+    font-weight: 700;
+}
+
+header ul li + li + li {
+    border-right: none;
+    width: 89px;
+}
+
+header ul a strong {
+    font-size: 14px;
+    display: block;
+    color: #222;
+}
+
+section {
+    width: 500px;
+    float: right;
+    padding-bottom: 25px;
+}
+
+small {
+    font-size: 11px;
+}
+
+hr {
+    border: 0;
+    background: #e5e5e5;
+    height: 1px;
+    margin: 0 0 20px;
+}
+
+footer {
+    width: 270px;
+    float: left;
+    position: fixed;
+    bottom: 50px;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+@media print, screen and (max-width: 960px) {
+    div.wrapper {
+        width: auto;
+        margin: 0;
+    }
+
+    header,
+    section,
+    footer {
+        float: none;
+        position: static;
+        width: auto;
+    }
+
+    header {
+        padding-right: 320px;
+    }
+
+    section {
+        border: 1px solid #e5e5e5;
+        border-width: 1px 0;
+        padding: 20px 0;
+        margin: 0 0 20px;
+    }
+
+    header a small {
+        display: inline;
+    }
+
+    header ul {
+        position: absolute;
+        right: 50px;
+        top: 52px;
+    }
+}
+
+@media print, screen and (max-width: 720px) {
+    body {
+        word-wrap: break-word;
+    }
+
+    header {
+        padding: 0;
+    }
+
+    header ul,
+    header p.view {
+        position: static;
+    }
+
+    pre,
+    code {
+        word-wrap: normal;
+    }
+}
+
+@media print, screen and (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+
+    header ul {
+        width: 99%;
+    }
+
+    header li,
+    header ul li + li + li {
+        width: 33%;
+    }
+}
+
+@media print {
+    body {
+        padding: 0.4in;
+        font-size: 12pt;
+        color: #444;
+    }
+}
+
+/*
+   Copyright 2014 GitHub Inc.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+
+.pl-c {
+    color: #969896;
+}
+
+.pl-c1      /* constant, markup.raw, meta.diff.header, meta.module-reference, meta.property-name, support, support.constant, support.variable, variable.other.constant */,
+.pl-s .pl-v {
+    color: #0086b3;
+}
+
+.pl-e  /* entity */,
+.pl-en {
+    color: #795da3;
+}
+
+.pl-s .pl-s1 /* string source */,
+.pl-smi {
+    color: #333;
+}
+
+.pl-ent {
+    color: #63a35c;
+}
+
+.pl-k {
+    color: #a71d5d;
+}
+
+.pl-pds              /* punctuation.definition.string, string.regexp.character-class */,
+.pl-s                /* string */,
+.pl-s .pl-pse .pl-s1 /* string punctuation.section.embedded source */,
+.pl-sr               /* string.regexp */,
+.pl-sr .pl-cce       /* string.regexp constant.character.escape */,
+.pl-sr .pl-sra       /* string.regexp string.regexp.arbitrary-repitition */,
+.pl-sr .pl-sre {
+    color: #183691;
+}
+
+.pl-v {
+    color: #ed6a43;
+}
+
+.pl-id {
+    color: #b52a1d;
+}
+
+.pl-ii {
+    background-color: #b52a1d;
+    color: #f8f8f8;
+}
+
+.pl-sr .pl-cce {
+    color: #63a35c;
+    font-weight: bold;
+}
+
+.pl-ml {
+    color: #693a17;
+}
+
+.pl-mh        /* markup.heading */,
+.pl-mh .pl-en /* markup.heading entity.name */,
+.pl-ms {
+    color: #1d3e81;
+    font-weight: bold;
+}
+
+.pl-mq {
+    color: #008080;
+}
+
+.pl-mi {
+    color: #333;
+    font-style: italic;
+}
+
+.pl-mb {
+    color: #333;
+    font-weight: bold;
+}
+
+.pl-md {
+    background-color: #ffecec;
+    color: #bd2c00;
+}
+
+.pl-mi1 {
+    background-color: #eaffea;
+    color: #55a532;
+}
+
+.pl-mdr {
+    color: #795da3;
+    font-weight: bold;
+}
+
+.pl-mo {
+    color: #1d3e81;
+}
+
+/*
+ * Styles of the examples
+ */
+
+.example {
+    padding: 12.5px 0;
+}
+
+.u-border {
+    border: 3px solid blue;
+}
+
+.example {
+    padding: 0 25px;
+}
+
+.i {
+    width: 96px;
+    height: 96px;
+}
+.i--red {
+    fill: #cc0000;
+}
+
+.i {
+    width: 96px;
+    height: 96px;
+}
+.i--blue {
+    fill: #0000cc;
+}
+.i--white {
+    fill: #ffffff;
+    stroke: black;
+    stroke-width: 3;
+    opacity: 0.7;
+}
+.i--red {
+    fill: #cc0000;
+}
+.middle-icon {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.footer-menu {
+    padding: 25px 25px;
+}
+
+.btn {
+    display: inline-block;
+    text-align: center;
+    margin: 0;
+    cursor: pointer;
+    background-color: #fff;
+    color: #333;
+    padding: 0.5em;
+    line-height: 1;
+    border: solid #333 2px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.btn:hover {
+    color: #fff;
+    background-color: #333;
+}
+
+.btn .i {
+    width: 64px;
+    height: 64px;
+    fill: currentColor;
+}
+
+.anchor {
+    display: none;
+}
+
+h4:hover .anchor {
+    display: inline;
+}
+
+.u-margin-top {
+    margin-top: 1.875rem;
+}
+
+.u-margin-right {
+    margin-right: 1.875rem;
+}
+
+.block {
+    padding: 1.25rem;
+}
+
+.u-margin-bottom-s {
+    margin-bottom: 0.5rem;
+}
