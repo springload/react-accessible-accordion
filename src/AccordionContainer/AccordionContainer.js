@@ -1,9 +1,10 @@
 // @flow
 
 import { Component, type Node } from 'react';
+import { type UUID } from '../ItemContainer/ItemContainer';
 
 export type Item = {
-    uuid: string | number,
+    uuid: UUID,
     expanded: boolean,
     disabled: boolean,
 };
@@ -23,8 +24,8 @@ export type AccordionContainer = {
     accordion: boolean,
     items: Array<Item>,
     addItem: Item => void,
-    removeItem: (string | number) => void,
-    setExpanded: (key: string | number, expanded: boolean) => void,
+    removeItem: UUID => void,
+    setExpanded: (key: UUID, expanded: boolean) => void,
 };
 
 export type ConsumerProps = {
@@ -89,12 +90,12 @@ export class Provider extends Component<ProviderProps, ProviderState> {
         });
     };
 
-    removeItem = (key: string | number) =>
+    removeItem = (key: UUID) =>
         this.setState(state => ({
             items: state.items.filter(item => item.uuid !== key),
         }));
 
-    setExpanded = (key: string | number, expanded: boolean) =>
+    setExpanded = (key: UUID, expanded: boolean) =>
         this.setState(
             state => ({
                 items: state.items.map(item => {

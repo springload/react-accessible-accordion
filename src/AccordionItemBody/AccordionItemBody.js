@@ -2,10 +2,11 @@
 
 import React, { type ElementProps } from 'react';
 import classNames from 'classnames';
+import { type UUID } from '../ItemContainer/ItemContainer';
 
 type AccordionItemBodyProps = ElementProps<'div'> & {
     hideBodyClassName: string,
-    uuid: string | number,
+    uuid: UUID,
     expanded: boolean,
     disabled: boolean,
     accordion: boolean,
@@ -21,7 +22,7 @@ const AccordionItemBody = (props: AccordionItemBodyProps) => {
         accordion,
         ...rest
     } = props;
-  
+
     return (
         <div
             id={`accordion__body-${uuid}`}

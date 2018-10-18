@@ -1,7 +1,7 @@
 // @flow
 import { Component, type Node } from 'react';
 
-type UUID = string | number;
+export type UUID = string | number;
 
 export type ProviderProps = {
     children?: ?Node,

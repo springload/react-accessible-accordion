@@ -1,13 +1,12 @@
 // @flow
 
-import React, { Component } from 'react';
-import type { ElementProps } from 'react';
-
+import React, { Component, type ElementProps } from 'react';
 import classNames from 'classnames';
+import { type UUID } from '../ItemContainer/ItemContainer';
 import { type AccordionContainer } from '../AccordionContainer/AccordionContainer';
 
 type AccordionItemProps = ElementProps<'div'> & {
-    uuid: string | number,
+    uuid: UUID,
     hideBodyClassName: ?string,
     disabled: ?boolean,
     expanded: ?boolean,
