@@ -6,6 +6,7 @@ import { type UUID } from '../ItemContainer/ItemContainer';
 export type Item = {
     uuid: UUID,
     expanded: boolean,
+    focus: boolean,
     disabled: boolean,
 };
 
@@ -26,6 +27,11 @@ export type AccordionContainer = {
     addItem: Item => void,
     removeItem: UUID => void,
     setExpanded: (key: UUID, expanded: boolean) => void,
+    removeFocus: UUID => void,
+    setFocusToHead: () => void,
+    setFocusToTail: () => void,
+    setFocusToPrevious: UUID => void,
+    setFocusToNext: UUID => void
 };
 
 export type ConsumerProps = {
@@ -52,6 +58,11 @@ export class Provider extends Component<ProviderProps, ProviderState> {
             addItem: this.addItem,
             removeItem: this.removeItem,
             setExpanded: this.setExpanded,
+            setFocusToHead: this.setFocusToHead,
+            setFocusToTail: this.setFocusToTail,
+            setFocusToPrevious: this.setFocusToPrevious,
+            setFocusToNext: this.setFocusToNext,
+            removeFocus: this.removeFocus
         };
 
         return {
@@ -127,6 +138,103 @@ export class Provider extends Component<ProviderProps, ProviderState> {
                 }
             },
         );
+
+    removeFocus = (key: UUID) =>
+        this.setState(
+            state => ({
+                items: state.items.map(item => {
+                    if (item.uuid === key) {
+                        return {
+                            ...item,
+                            focus: false,
+                        };
+                    }
+                    return item;
+                }),
+            })
+        );
+
+    setFocusToHead = () =>
+        this.setState(
+            state => ({
+                items: state.items.map((item, index) => {
+                    if(index === 0) {
+                        return {
+                            ...item,
+                            focus: true
+                        }
+                    }
+                    return {
+                        ...item,
+                        focus: false
+                    };
+                }),
+            })
+        );
+
+
+    setFocusToTail = () =>
+        this.setState(
+            state => ({
+                items: state.items.map((item, index) => {
+                    if(index === state.items.length - 1) {
+                        return {
+                            ...item,
+                            focus: true
+                        }
+                    }
+                    return {
+                        ...item,
+                        focus: false
+                    };
+                }),
+            })
+        );
+
+
+    setFocusToPrevious = (key: UUID) => {
+        const focusIndex = this.state.items.findIndex(item => item.uuid === key);
+        if (focusIndex !== -1) {
+            this.setState(
+                state => ({
+                    items: state.items.map((item, index) => {
+                        if(index === focusIndex - 1) {
+                            return {
+                                ...item,
+                                focus: true
+                            }
+                        }
+                        return {
+                            ...item,
+                            focus: false
+                        };
+                    }),
+                })
+            );
+        }
+    }
+
+    setFocusToNext = (key: UUID) => {
+        const focusIndex = this.state.items.findIndex(item => item.uuid === key);
+        if (focusIndex !== -1) {
+            this.setState(
+                state => ({
+                    items: state.items.map((item, index) => {
+                        if(index === focusIndex + 1) {
+                            return {
+                                ...item,
+                                focus: true
+                            }
+                        }
+                        return {
+                            ...item,
+                            focus: false
+                        };
+                    }),
+                })
+            );
+        }
+    }
 
     render() {
         return this.props.children || null;

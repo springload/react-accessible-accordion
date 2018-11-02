@@ -8,6 +8,7 @@ type AccordionItemBodyProps = ElementProps<'div'> & {
     hideBodyClassName: string,
     uuid: UUID,
     expanded: boolean,
+    focus: boolean,
     disabled: boolean,
     accordion: boolean,
 };
@@ -18,6 +19,7 @@ const AccordionItemBody = (props: AccordionItemBodyProps) => {
         hideBodyClassName,
         uuid,
         expanded,
+        focus,
         disabled,
         accordion,
         ...rest

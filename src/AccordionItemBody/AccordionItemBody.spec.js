@@ -15,6 +15,7 @@ describe('AccordionItemBody', () => {
             uuid: 0,
             expanded: false,
             disabled: false,
+            focus: false
         };
         return mount(
             <AccordionProvider accordion items={[item]}>

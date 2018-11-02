@@ -1,16 +1,21 @@
 // @flow
 
-import React, { Component, type ElementProps } from 'react';
+import React, { Component, createRef, type ElementProps } from 'react';
 import classNames from 'classnames';
 import { type UUID } from '../ItemContainer/ItemContainer';
 
 type AccordionItemTitleProps = ElementProps<'div'> & {
     hideBodyClassName: string,
     expanded: boolean,
+    focus: boolean,
     uuid: UUID,
     disabled: boolean,
     accordion: boolean,
     setExpanded: (UUID, boolean) => any,
+    setFocusToHead: () => any,
+    setFocusToTail: () => any,
+    setFocusToPrevious: UUID => any,
+    setFocusToNext: UUID => any
 };
 
 type AccordionItemTitleState = {};
@@ -20,6 +25,15 @@ class AccordionItemTitle extends Component<
     AccordionItemTitleState,
 > {
     static accordionElementName = 'AccordionItemTitle';
+
+    focusRef = createRef()
+
+    componentDidUpdate() {
+        if(this.props.focus) {
+            // eslint-disable-next-line flowtype-errors/show-errors
+            this.focusRef.current.focus();
+        }
+    }
 
     handleClick = () => {
         const { uuid, expanded, setExpanded } = this.props;
@@ -34,6 +48,33 @@ class AccordionItemTitle extends Component<
         }
     };
 
+    handleKeyDown = (evt: SyntheticKeyboardEvent<HTMLButtonElement>) => {
+        const { uuid, setFocusToHead, setFocusToTail, setFocusToPrevious, setFocusToNext } = this.props;
+
+        switch(evt.which) {
+            case 35:
+                evt.preventDefault();
+                setFocusToTail();
+                break;
+            case 36:
+                evt.preventDefault();
+                setFocusToHead();
+                break;
+            case 38:
+                evt.preventDefault();
+                setFocusToPrevious(uuid);
+                break;
+            case 40:
+                evt.preventDefault();
+                setFocusToNext(uuid);
+                break;
+        }
+    };
+
+    handleBlur = () => {
+        this.props.removeFocus(this.props.uuid);
+    }
+
     render() {
         const {
             className,
@@ -41,7 +82,13 @@ class AccordionItemTitle extends Component<
             item,
             accordion,
             setExpanded,
+            setFocusToHead,
+            setFocusToTail,
+            setFocusToPrevious,
+            setFocusToNext,
+            removeFocus,
             expanded,
+            focus,
             uuid,
             disabled,
             ...rest
@@ -58,6 +105,7 @@ class AccordionItemTitle extends Component<
             return (
                 <div
                     id={id}
+                    ref={this.focusRef}
                     aria-selected={expanded}
                     aria-controls={ariaControls}
                     className={titleClassName}
@@ -65,6 +113,8 @@ class AccordionItemTitle extends Component<
                     role={role}
                     tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
                     onKeyPress={this.handleKeyPress}
+                    onKeyDown={this.handleKeyDown}
+                    onBlur={this.handleBlur}
                     disabled={disabled}
                     {...rest}
                 />
@@ -73,6 +123,7 @@ class AccordionItemTitle extends Component<
         return (
             <div
                 id={id}
+                ref={this.focusRef}
                 aria-expanded={expanded}
                 aria-controls={ariaControls}
                 className={titleClassName}
@@ -80,6 +131,8 @@ class AccordionItemTitle extends Component<
                 role={role}
                 tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
                 onKeyPress={this.handleKeyPress}
+                onKeyDown={this.handleKeyDown}
+                onBlur={this.handleBlur}
                 disabled={disabled}
                 {...rest}
             />

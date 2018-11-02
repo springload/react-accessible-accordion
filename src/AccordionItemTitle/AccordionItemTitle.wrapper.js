@@ -38,6 +38,11 @@ class AccordionItemTitleWrapper extends Component<
                 {...rest}
                 {...item}
                 setExpanded={accordionStore.setExpanded}
+                setFocusToHead={accordionStore.setFocusToHead}
+                setFocusToTail={accordionStore.setFocusToTail}
+                setFocusToPrevious={accordionStore.setFocusToPrevious}
+                setFocusToNext={accordionStore.setFocusToNext}
+                removeFocus={accordionStore.removeFocus}
                 accordion={accordion}
             />
         );
