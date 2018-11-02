@@ -31,7 +31,7 @@ export type AccordionContainer = {
     setFocusToHead: () => void,
     setFocusToTail: () => void,
     setFocusToPrevious: UUID => void,
-    setFocusToNext: UUID => void
+    setFocusToNext: UUID => void,
 };
 
 export type ConsumerProps = {
@@ -62,7 +62,7 @@ export class Provider extends Component<ProviderProps, ProviderState> {
             setFocusToTail: this.setFocusToTail,
             setFocusToPrevious: this.setFocusToPrevious,
             setFocusToNext: this.setFocusToNext,
-            removeFocus: this.removeFocus
+            removeFocus: this.removeFocus,
         };
 
         return {
@@ -140,101 +140,93 @@ export class Provider extends Component<ProviderProps, ProviderState> {
         );
 
     removeFocus = (key: UUID) =>
-        this.setState(
-            state => ({
-                items: state.items.map(item => {
-                    if (item.uuid === key) {
-                        return {
-                            ...item,
-                            focus: false,
-                        };
-                    }
-                    return item;
-                }),
-            })
-        );
+        this.setState(state => ({
+            items: state.items.map(item => {
+                if (item.uuid === key) {
+                    return {
+                        ...item,
+                        focus: false,
+                    };
+                }
+                return item;
+            }),
+        }));
 
     setFocusToHead = () =>
-        this.setState(
-            state => ({
-                items: state.items.map((item, index) => {
-                    if(index === 0) {
-                        return {
-                            ...item,
-                            focus: true
-                        }
-                    }
+        this.setState(state => ({
+            items: state.items.map((item, index) => {
+                if (index === 0) {
                     return {
                         ...item,
-                        focus: false
+                        focus: true,
                     };
-                }),
-            })
-        );
-
+                }
+                return {
+                    ...item,
+                    focus: false,
+                };
+            }),
+        }));
 
     setFocusToTail = () =>
-        this.setState(
-            state => ({
+        this.setState(state => ({
+            items: state.items.map((item, index) => {
+                if (index === state.items.length - 1) {
+                    return {
+                        ...item,
+                        focus: true,
+                    };
+                }
+                return {
+                    ...item,
+                    focus: false,
+                };
+            }),
+        }));
+
+    setFocusToPrevious = (key: UUID) => {
+        const focusIndex = this.state.items.findIndex(
+            item => item.uuid === key,
+        );
+        if (focusIndex !== -1) {
+            this.setState(state => ({
                 items: state.items.map((item, index) => {
-                    if(index === state.items.length - 1) {
+                    if (index === focusIndex - 1) {
                         return {
                             ...item,
-                            focus: true
-                        }
+                            focus: true,
+                        };
                     }
                     return {
                         ...item,
-                        focus: false
+                        focus: false,
                     };
                 }),
-            })
-        );
-
-
-    setFocusToPrevious = (key: UUID) => {
-        const focusIndex = this.state.items.findIndex(item => item.uuid === key);
-        if (focusIndex !== -1) {
-            this.setState(
-                state => ({
-                    items: state.items.map((item, index) => {
-                        if(index === focusIndex - 1) {
-                            return {
-                                ...item,
-                                focus: true
-                            }
-                        }
-                        return {
-                            ...item,
-                            focus: false
-                        };
-                    }),
-                })
-            );
+            }));
         }
-    }
+    };
 
     setFocusToNext = (key: UUID) => {
-        const focusIndex = this.state.items.findIndex(item => item.uuid === key);
+        const focusIndex = this.state.items.findIndex(
+            item => item.uuid === key,
+        );
         if (focusIndex !== -1) {
-            this.setState(
-                state => ({
-                    items: state.items.map((item, index) => {
-                        if(index === focusIndex + 1) {
-                            return {
-                                ...item,
-                                focus: true
-                            }
-                        }
+            this.setState(state => ({
+                items: state.items.map((item, index) => {
+                    if (index === focusIndex + 1) {
                         return {
                             ...item,
-                            focus: false
+                            focus: true,
                         };
-                    }),
-                })
-            );
+                    }
+                    return {
+                        ...item,
+                        focus: false,
+                    };
+                }),
+            }));
         }
-    }
+    };
 
     render() {
         return this.props.children || null;

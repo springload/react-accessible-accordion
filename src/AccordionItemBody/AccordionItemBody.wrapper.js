@@ -43,4 +43,3 @@ export default compose(
     fromRenderProps(AccordionConsumer, accordionStore => ({ accordionStore })),
     fromRenderProps(ItemConsumer, itemStore => ({ itemStore })),
 )(AccordionItemBodyWrapper);
-

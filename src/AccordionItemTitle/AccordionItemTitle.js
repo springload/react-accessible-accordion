@@ -15,7 +15,7 @@ type AccordionItemTitleProps = ElementProps<'div'> & {
     setFocusToHead: () => any,
     setFocusToTail: () => any,
     setFocusToPrevious: UUID => any,
-    setFocusToNext: UUID => any
+    setFocusToNext: UUID => any,
 };
 
 type AccordionItemTitleState = {};
@@ -26,10 +26,10 @@ class AccordionItemTitle extends Component<
 > {
     static accordionElementName = 'AccordionItemTitle';
 
-    focusRef = createRef()
+    focusRef = createRef();
 
     componentDidUpdate() {
-        if(this.props.focus) {
+        if (this.props.focus) {
             // eslint-disable-next-line flowtype-errors/show-errors
             this.focusRef.current.focus();
         }
@@ -49,9 +49,15 @@ class AccordionItemTitle extends Component<
     };
 
     handleKeyDown = (evt: SyntheticKeyboardEvent<HTMLButtonElement>) => {
-        const { uuid, setFocusToHead, setFocusToTail, setFocusToPrevious, setFocusToNext } = this.props;
+        const {
+            uuid,
+            setFocusToHead,
+            setFocusToTail,
+            setFocusToPrevious,
+            setFocusToNext,
+        } = this.props;
 
-        switch(evt.which) {
+        switch (evt.which) {
             case 35:
                 evt.preventDefault();
                 setFocusToTail();
@@ -73,7 +79,7 @@ class AccordionItemTitle extends Component<
 
     handleBlur = () => {
         this.props.removeFocus(this.props.uuid);
-    }
+    };
 
     render() {
         const {

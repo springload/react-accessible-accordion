@@ -8,7 +8,7 @@ const DEFAULT_ITEM = {
     uuid: 'foo',
     expanded: false,
     disabled: false,
-    focus: false
+    focus: false,
 };
 
 describe('Accordion', () => {
@@ -42,7 +42,7 @@ describe('Accordion', () => {
             setFocusToHead: expect.anything(),
             setFocusToTail: expect.anything(),
             setFocusToPrevious: expect.anything(),
-            setFocusToNext: expect.anything()
+            setFocusToNext: expect.anything(),
         });
     });
 
@@ -446,9 +446,7 @@ describe('Accordion', () => {
 
         expect(mock).toHaveBeenCalledWith(
             expect.objectContaining({
-                items: [
-                    expect.objectContaining({ focus: false })
-                ],
+                items: [expect.objectContaining({ focus: false })],
             }),
         );
     });
@@ -471,9 +469,7 @@ describe('Accordion', () => {
 
         expect(mock).toHaveBeenCalledWith(
             expect.objectContaining({
-                items: [
-                    expect.objectContaining({ focus: true })
-                ],
+                items: [expect.objectContaining({ focus: true })],
             }),
         );
     });
@@ -497,7 +493,7 @@ describe('Accordion', () => {
             expect.objectContaining({
                 items: [
                     expect.objectContaining({ uuid: 'foo', focus: true }),
-                    expect.objectContaining({ uuid: 'bar', focus: false })
+                    expect.objectContaining({ uuid: 'bar', focus: false }),
                 ],
             }),
         );
@@ -522,7 +518,7 @@ describe('Accordion', () => {
             expect.objectContaining({
                 items: [
                     expect.objectContaining({ uuid: 'foo', focus: false }),
-                    expect.objectContaining({ uuid: 'bar', focus: true })
+                    expect.objectContaining({ uuid: 'bar', focus: true }),
                 ],
             }),
         );
@@ -549,7 +545,7 @@ describe('Accordion', () => {
                 items: [
                     expect.objectContaining({ uuid: 'foo', focus: false }),
                     expect.objectContaining({ uuid: 'bar', focus: true }),
-                    expect.objectContaining({ uuid: 'foobar', focus: false })
+                    expect.objectContaining({ uuid: 'foobar', focus: false }),
                 ],
             }),
         );
@@ -576,7 +572,7 @@ describe('Accordion', () => {
                 items: [
                     expect.objectContaining({ uuid: 'foo', focus: true }),
                     expect.objectContaining({ uuid: 'bar', focus: false }),
-                    expect.objectContaining({ uuid: 'foobar', focus: false })
+                    expect.objectContaining({ uuid: 'foobar', focus: false }),
                 ],
             }),
         );
@@ -603,7 +599,7 @@ describe('Accordion', () => {
                 items: [
                     expect.objectContaining({ uuid: 'foo', focus: false }),
                     expect.objectContaining({ uuid: 'bar', focus: true }),
-                    expect.objectContaining({ uuid: 'foobar', focus: false })
+                    expect.objectContaining({ uuid: 'foobar', focus: false }),
                 ],
             }),
         );
@@ -630,7 +626,7 @@ describe('Accordion', () => {
                 items: [
                     expect.objectContaining({ uuid: 'foo', focus: false }),
                     expect.objectContaining({ uuid: 'bar', focus: true }),
-                    expect.objectContaining({ uuid: 'foobar', focus: false })
+                    expect.objectContaining({ uuid: 'foobar', focus: false }),
                 ],
             }),
         );
@@ -657,7 +653,7 @@ describe('Accordion', () => {
                 items: [
                     expect.objectContaining({ uuid: 'foo', focus: false }),
                     expect.objectContaining({ uuid: 'bar', focus: false }),
-                    expect.objectContaining({ uuid: 'foobar', focus: true })
+                    expect.objectContaining({ uuid: 'foobar', focus: true }),
                 ],
             }),
         );
@@ -684,7 +680,7 @@ describe('Accordion', () => {
                 items: [
                     expect.objectContaining({ uuid: 'foo', focus: false }),
                     expect.objectContaining({ uuid: 'bar', focus: true }),
-                    expect.objectContaining({ uuid: 'foobar', focus: false })
+                    expect.objectContaining({ uuid: 'foobar', focus: false }),
                 ],
             }),
         );

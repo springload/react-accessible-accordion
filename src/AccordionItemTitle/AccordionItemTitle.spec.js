@@ -11,7 +11,7 @@ describe('AccordionItemTitle', () => {
         uuid: 0,
         expanded: false,
         disabled: false,
-        focus: false
+        focus: false,
     };
 
     function mountItem(node, item = DEFAULT_ITEM) {
@@ -25,7 +25,11 @@ describe('AccordionItemTitle', () => {
     function mountItems(node, items = [DEFAULT_ITEM]) {
         return mount(
             <AccordionProvider accordion={false} items={items}>
-                {items.map((item, index) => <ItemProvider key={index} uuid={item.uuid}>{node}</ItemProvider>)}
+                {items.map((item, index) => (
+                    <ItemProvider key={index} uuid={item.uuid}>
+                        {node}
+                    </ItemProvider>
+                ))}
             </AccordionProvider>,
         );
     }
@@ -173,7 +177,7 @@ describe('AccordionItemTitle', () => {
             {
                 ...DEFAULT_ITEM,
                 focus: true,
-            }
+            },
         );
 
         expect(isFocused(wrapper, DEFAULT_ITEM.uuid)).toBeTruthy();
@@ -194,12 +198,15 @@ describe('AccordionItemTitle', () => {
                     ...DEFAULT_ITEM,
                     uuid: 'bar',
                     focus: false,
-                }
-            ]
+                },
+            ],
         );
 
         expect(findFocusedIndex(wrapper)).toBe(0);
-        wrapper.find('div').first().simulate('keydown', { which: 35 });
+        wrapper
+            .find('div')
+            .first()
+            .simulate('keydown', { which: 35 });
         expect(findFocusedIndex(wrapper)).toBe(1);
     });
 
@@ -216,12 +223,15 @@ describe('AccordionItemTitle', () => {
                     ...DEFAULT_ITEM,
                     uuid: 'bar',
                     focus: true,
-                }
-            ]
+                },
+            ],
         );
 
         expect(findFocusedIndex(wrapper)).toBe(1);
-        wrapper.find('div').first().simulate('keydown', { which: 36 });
+        wrapper
+            .find('div')
+            .first()
+            .simulate('keydown', { which: 36 });
         expect(findFocusedIndex(wrapper)).toBe(0);
     });
 
@@ -238,12 +248,15 @@ describe('AccordionItemTitle', () => {
                     ...DEFAULT_ITEM,
                     uuid: 'bar',
                     focus: true,
-                }
-            ]
+                },
+            ],
         );
 
         expect(findFocusedIndex(wrapper)).toBe(1);
-        wrapper.find('div').last().simulate('keydown', { which: 38 });
+        wrapper
+            .find('div')
+            .last()
+            .simulate('keydown', { which: 38 });
         expect(findFocusedIndex(wrapper)).toBe(0);
     });
 
@@ -260,12 +273,15 @@ describe('AccordionItemTitle', () => {
                     ...DEFAULT_ITEM,
                     uuid: 'bar',
                     focus: false,
-                }
-            ]
+                },
+            ],
         );
 
         expect(findFocusedIndex(wrapper)).toBe(0);
-        wrapper.find('div').first().simulate('keydown', { which: 40 });
+        wrapper
+            .find('div')
+            .first()
+            .simulate('keydown', { which: 40 });
         expect(findFocusedIndex(wrapper)).toBe(1);
     });
 });
