@@ -1,0 +1,166 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccordionItem renders correctly with accordion false 1`] = `
+<div
+  className="accordion__item"
+>
+  <div
+    aria-controls="accordion__body-0"
+    aria-expanded={false}
+    className="accordion__title"
+    disabled={false}
+    id="accordion__title-0"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyPress={[Function]}
+    role="button"
+    tabIndex="0"
+  >
+    <div>
+      Fake title
+    </div>
+  </div>
+  <div
+    aria-hidden={true}
+    aria-labelledby="accordion__title-0"
+    className="accordion__body accordion__body--hidden"
+    id="accordion__body-0"
+    role={null}
+  >
+    <div>
+      Fake body
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AccordionItem renders correctly with accordion true 1`] = `
+<div
+  className="accordion__item"
+>
+  <div
+    aria-controls="accordion__body-0"
+    aria-selected={false}
+    className="accordion__title"
+    disabled={false}
+    id="accordion__title-0"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyPress={[Function]}
+    role="tab"
+    tabIndex="0"
+  >
+    <div>
+      Fake title
+    </div>
+  </div>
+  <div
+    aria-hidden={true}
+    aria-labelledby="accordion__title-0"
+    className="accordion__body accordion__body--hidden"
+    id="accordion__body-0"
+    role="tabpanel"
+  >
+    <div>
+      Fake body
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AccordionItem renders correctly with other blocks inside 1`] = `
+<div
+  className="accordion__item"
+>
+  <div
+    aria-controls="accordion__body-0"
+    aria-expanded={false}
+    className="accordion__title"
+    disabled={false}
+    id="accordion__title-0"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyPress={[Function]}
+    role="button"
+    tabIndex="0"
+  >
+    <div>
+      Fake title
+    </div>
+  </div>
+  <div>
+    Just another block
+  </div>
+  <div
+    aria-hidden={true}
+    aria-labelledby="accordion__title-0"
+    className="accordion__body accordion__body--hidden"
+    id="accordion__body-0"
+    role={null}
+  >
+    <div>
+      Fake body
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
+<div
+  className="accordion__item"
+>
+  <div
+    aria-controls="accordion__body-0"
+    aria-expanded={false}
+    className="accordion__title"
+    disabled={false}
+    id="accordion__title-0"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyPress={[Function]}
+    role="button"
+    tabIndex="0"
+  >
+    <div>
+      Fake title
+    </div>
+  </div>
+  <div
+    aria-hidden={true}
+    aria-labelledby="accordion__title-0"
+    className="accordion__body accordion__body--hidden"
+    id="accordion__body-0"
+    role={null}
+  >
+    <div>
+      Fake body
+    </div>
+  </div>
+  <div>
+    Just another block
+  </div>
+</div>
+`;
+
+exports[`AccordionItem still renders with no AccordionItemTitle or AccordionItemBody 1`] = `
+<div
+  className="accordion__item"
+>
+  <div>
+    Fake title
+  </div>
+  <div>
+    Fake body
+  </div>
+</div>
+`;
+
+exports[`AccordionItem still renders with no children at all 1`] = `
+<div
+  className="accordion__item"
+/>
+`;

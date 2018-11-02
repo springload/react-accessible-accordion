@@ -13,6 +13,7 @@ const DEFAULT_ITEM: Item = {
     uuid: 'foo',
     expanded: false,
     disabled: false,
+    focus: false,
 };
 
 describe('Accordion', () => {
@@ -22,6 +23,11 @@ describe('Accordion', () => {
         expect(container.addItem).toBeDefined();
         expect(container.removeItem).toBeDefined();
         expect(container.setExpanded).toBeDefined();
+        expect(container.removeFocus).toBeDefined();
+        expect(container.setFocusToHead).toBeDefined();
+        expect(container.setFocusToTail).toBeDefined();
+        expect(container.setFocusToPrevious).toBeDefined();
+        expect(container.setFocusToNext).toBeDefined();
     });
 
     it('works without any props', () => {
@@ -40,6 +46,11 @@ describe('Accordion', () => {
             addItem: expect.anything(),
             removeItem: expect.anything(),
             setExpanded: expect.anything(),
+            removeFocus: expect.anything(),
+            setFocusToHead: expect.anything(),
+            setFocusToTail: expect.anything(),
+            setFocusToPrevious: expect.anything(),
+            setFocusToNext: expect.anything(),
         });
     });
 
@@ -405,6 +416,254 @@ describe('Accordion', () => {
                 items: [
                     expect.objectContaining({ expanded: false }),
                     expect.objectContaining({ expanded: true }),
+                ],
+            }),
+        );
+    });
+
+    it('removes focus on item that matches uuid input', () => {
+        const mock = jest.fn(() => null);
+        const item = {
+            ...DEFAULT_ITEM,
+            focus: true,
+        };
+
+        const instance = mount(
+            <Provider items={[item]}>
+                <Consumer>{mock}</Consumer>
+            </Provider>,
+        ).instance() as Provider;
+
+        instance.removeFocus(item.uuid);
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                items: [expect.objectContaining({ focus: false })],
+            }),
+        );
+    });
+
+    it('does not remove focus on item if no match is found', () => {
+        const mock = jest.fn(() => null);
+        const item = {
+            ...DEFAULT_ITEM,
+            focus: true,
+        };
+
+        const instance = mount(
+            <Provider items={[item]}>
+                <Consumer>{mock}</Consumer>
+            </Provider>,
+        ).instance() as Provider;
+
+        instance.removeFocus('bar');
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                items: [expect.objectContaining({ focus: true })],
+            }),
+        );
+    });
+
+    it('sets focus to first item', () => {
+        const mock = jest.fn(() => null);
+        const itemFoo = { ...DEFAULT_ITEM, focus: false, uuid: 'foo' };
+        const itemBar = { ...DEFAULT_ITEM, focus: true, uuid: 'bar' };
+        const items = [itemFoo, itemBar];
+
+        const instance = mount(
+            <Provider items={items}>
+                <Consumer>{mock}</Consumer>
+            </Provider>,
+        ).instance() as Provider;
+
+        instance.setFocusToHead();
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                items: [
+                    expect.objectContaining({ uuid: 'foo', focus: true }),
+                    expect.objectContaining({ uuid: 'bar', focus: false }),
+                ],
+            }),
+        );
+    });
+
+    it('sets focus to last item', () => {
+        const mock = jest.fn(() => null);
+        const itemFoo = { ...DEFAULT_ITEM, focus: true, uuid: 'foo' };
+        const itemBar = { ...DEFAULT_ITEM, focus: false, uuid: 'bar' };
+        const items = [itemFoo, itemBar];
+
+        const instance = mount(
+            <Provider items={items}>
+                <Consumer>{mock}</Consumer>
+            </Provider>,
+        ).instance() as Provider;
+
+        instance.setFocusToTail();
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                items: [
+                    expect.objectContaining({ uuid: 'foo', focus: false }),
+                    expect.objectContaining({ uuid: 'bar', focus: true }),
+                ],
+            }),
+        );
+    });
+
+    it('sets focus to previous item', () => {
+        const mock = jest.fn(() => null);
+        const itemFoo = { ...DEFAULT_ITEM, focus: false, uuid: 'foo' };
+        const itemBar = { ...DEFAULT_ITEM, focus: false, uuid: 'bar' };
+        const itemFoobar = { ...DEFAULT_ITEM, focus: true, uuid: 'foobar' };
+        const items = [itemFoo, itemBar, itemFoobar];
+
+        const instance = mount(
+            <Provider items={items}>
+                <Consumer>{mock}</Consumer>
+            </Provider>,
+        ).instance() as Provider;
+
+        instance.setFocusToPrevious('foobar');
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                items: [
+                    expect.objectContaining({ uuid: 'foo', focus: false }),
+                    expect.objectContaining({ uuid: 'bar', focus: true }),
+                    expect.objectContaining({ uuid: 'foobar', focus: false }),
+                ],
+            }),
+        );
+    });
+
+    it('never sets focus to previous item past the first', () => {
+        const mock = jest.fn(() => null);
+        const itemFoo = { ...DEFAULT_ITEM, focus: true, uuid: 'foo' };
+        const itemBar = { ...DEFAULT_ITEM, focus: false, uuid: 'bar' };
+        const itemFoobar = { ...DEFAULT_ITEM, focus: false, uuid: 'foobar' };
+        const items = [itemFoo, itemBar, itemFoobar];
+
+        const instance = mount(
+            <Provider items={items}>
+                <Consumer>{mock}</Consumer>
+            </Provider>,
+        ).instance() as Provider;
+
+        instance.setFocusToPrevious('foo');
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                items: [
+                    expect.objectContaining({ uuid: 'foo', focus: true }),
+                    expect.objectContaining({ uuid: 'bar', focus: false }),
+                    expect.objectContaining({ uuid: 'foobar', focus: false }),
+                ],
+            }),
+        );
+    });
+
+    it('never sets focus to previous item if item is not found', () => {
+        const mock = jest.fn(() => null);
+        const itemFoo = { ...DEFAULT_ITEM, focus: false, uuid: 'foo' };
+        const itemBar = { ...DEFAULT_ITEM, focus: true, uuid: 'bar' };
+        const itemFoobar = { ...DEFAULT_ITEM, focus: false, uuid: 'foobar' };
+        const items = [itemFoo, itemBar, itemFoobar];
+
+        const instance = mount(
+            <Provider items={items}>
+                <Consumer>{mock}</Consumer>
+            </Provider>,
+        ).instance() as Provider;
+
+        instance.setFocusToPrevious('barfoo');
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                items: [
+                    expect.objectContaining({ uuid: 'foo', focus: false }),
+                    expect.objectContaining({ uuid: 'bar', focus: true }),
+                    expect.objectContaining({ uuid: 'foobar', focus: false }),
+                ],
+            }),
+        );
+    });
+
+    it('sets focus to next item', () => {
+        const mock = jest.fn(() => null);
+        const itemFoo = { ...DEFAULT_ITEM, focus: true, uuid: 'foo' };
+        const itemBar = { ...DEFAULT_ITEM, focus: false, uuid: 'bar' };
+        const itemFoobar = { ...DEFAULT_ITEM, focus: false, uuid: 'foobar' };
+        const items = [itemFoo, itemBar, itemFoobar];
+
+        const instance = mount(
+            <Provider items={items}>
+                <Consumer>{mock}</Consumer>
+            </Provider>,
+        ).instance() as Provider;
+
+        instance.setFocusToNext('foo');
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                items: [
+                    expect.objectContaining({ uuid: 'foo', focus: false }),
+                    expect.objectContaining({ uuid: 'bar', focus: true }),
+                    expect.objectContaining({ uuid: 'foobar', focus: false }),
+                ],
+            }),
+        );
+    });
+
+    it('never sets focus to next item past the last', () => {
+        const mock = jest.fn(() => null);
+        const itemFoo = { ...DEFAULT_ITEM, focus: false, uuid: 'foo' };
+        const itemBar = { ...DEFAULT_ITEM, focus: false, uuid: 'bar' };
+        const itemFoobar = { ...DEFAULT_ITEM, focus: true, uuid: 'foobar' };
+        const items = [itemFoo, itemBar, itemFoobar];
+
+        const instance = mount(
+            <Provider items={items}>
+                <Consumer>{mock}</Consumer>
+            </Provider>,
+        ).instance() as Provider;
+
+        instance.setFocusToNext('foobar');
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                items: [
+                    expect.objectContaining({ uuid: 'foo', focus: false }),
+                    expect.objectContaining({ uuid: 'bar', focus: false }),
+                    expect.objectContaining({ uuid: 'foobar', focus: true }),
+                ],
+            }),
+        );
+    });
+
+    it('never sets focus to next item if item is not found', () => {
+        const mock = jest.fn(() => null);
+        const itemFoo = { ...DEFAULT_ITEM, focus: false, uuid: 'foo' };
+        const itemBar = { ...DEFAULT_ITEM, focus: true, uuid: 'bar' };
+        const itemFoobar = { ...DEFAULT_ITEM, focus: false, uuid: 'foobar' };
+        const items = [itemFoo, itemBar, itemFoobar];
+
+        const instance = mount(
+            <Provider items={items}>
+                <Consumer>{mock}</Consumer>
+            </Provider>,
+        ).instance() as Provider;
+
+        instance.setFocusToNext('barfoo');
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                items: [
+                    expect.objectContaining({ uuid: 'foo', focus: false }),
+                    expect.objectContaining({ uuid: 'bar', focus: true }),
+                    expect.objectContaining({ uuid: 'foobar', focus: false }),
                 ],
             }),
         );

@@ -69,6 +69,11 @@ export default class AccordionItemHeadingWrapper extends React.Component<
                 {...this.props}
                 {...item}
                 setExpanded={accordionStore.setExpanded}
+                setFocusToHead={accordionStore.setFocusToHead}
+                setFocusToTail={accordionStore.setFocusToTail}
+                setFocusToPrevious={accordionStore.setFocusToPrevious}
+                setFocusToNext={accordionStore.setFocusToNext}
+                removeFocus={accordionStore.removeFocus}
             />
         );
     }

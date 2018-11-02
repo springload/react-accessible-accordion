@@ -11,6 +11,7 @@ export type Item = {
     uuid: UUID;
     expanded: boolean;
     disabled: boolean;
+    focus: boolean;
 };
 
 export type ProviderState = {
@@ -32,6 +33,11 @@ export type AccordionContainer = {
     addItem(item: Item): void;
     removeItem(uuid: UUID): void;
     setExpanded(uuid: UUID, expanded: boolean): void;
+    removeFocus(uuid: UUID): void;
+    setFocusToHead(): void;
+    setFocusToTail(): void;
+    setFocusToPrevious(uuid: UUID): void;
+    setFocusToNext(uuid: UUID): void;
 };
 
 export type ConsumerProps = {
@@ -63,6 +69,11 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
             addItem: this.addItem,
             removeItem: this.removeItem,
             setExpanded: this.setExpanded,
+            setFocusToHead: this.setFocusToHead,
+            setFocusToTail: this.setFocusToTail,
+            setFocusToPrevious: this.setFocusToPrevious,
+            setFocusToNext: this.setFocusToNext,
+            removeFocus: this.removeFocus,
         };
 
         return {
@@ -146,6 +157,103 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
                 }
             },
         );
+    };
+
+    removeFocus = (key: UUID): void => {
+        this.setState((state: ProviderState) => ({
+            items: state.items.map((item: Item) => {
+                if (item.uuid === key) {
+                    return {
+                        ...item,
+                        focus: false,
+                    };
+                }
+
+                return item;
+            }),
+        }));
+    };
+
+    setFocusToHead = (): void => {
+        this.setState((state: ProviderState) => ({
+            items: state.items.map((item: Item, index: number) => {
+                if (index === 0) {
+                    return {
+                        ...item,
+                        focus: true,
+                    };
+                }
+
+                return {
+                    ...item,
+                    focus: false,
+                };
+            }),
+        }));
+    };
+
+    setFocusToTail = (): void => {
+        this.setState((state: ProviderState) => ({
+            items: state.items.map((item: Item, index: number) => {
+                if (index === state.items.length - 1) {
+                    return {
+                        ...item,
+                        focus: true,
+                    };
+                }
+
+                return {
+                    ...item,
+                    focus: false,
+                };
+            }),
+        }));
+    };
+
+    setFocusToPrevious = (key: UUID): void => {
+        const focusIndex = this.state.items.findIndex(
+            (item: Item) => item.uuid === key,
+        );
+        if (focusIndex !== -1) {
+            this.setState((state: ProviderState) => ({
+                items: state.items.map((item: Item, index: number) => {
+                    if (index === focusIndex - 1) {
+                        return {
+                            ...item,
+                            focus: true,
+                        };
+                    }
+
+                    return {
+                        ...item,
+                        focus: false,
+                    };
+                }),
+            }));
+        }
+    };
+
+    setFocusToNext = (key: UUID): void => {
+        const focusIndex = this.state.items.findIndex(
+            (item: Item) => item.uuid === key,
+        );
+        if (focusIndex !== -1) {
+            this.setState((state: ProviderState) => ({
+                items: state.items.map((item: Item, index: number) => {
+                    if (index === focusIndex + 1) {
+                        return {
+                            ...item,
+                            focus: true,
+                        };
+                    }
+
+                    return {
+                        ...item,
+                        focus: false,
+                    };
+                }),
+            }));
+        }
     };
 
     render(): React.ReactNode {

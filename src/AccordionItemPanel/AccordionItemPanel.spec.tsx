@@ -13,6 +13,7 @@ describe('AccordionItemPanel', () => {
             uuid: 0,
             expanded: false,
             disabled: false,
+            focus: false,
         };
 
         return mount(

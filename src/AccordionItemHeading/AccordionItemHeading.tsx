@@ -7,7 +7,13 @@ type AccordionItemHeadingProps = React.HTMLAttributes<HTMLDivElement> & {
     expanded: boolean;
     uuid: UUID;
     disabled: boolean;
+    focus: boolean;
+    removeFocus(uuid: UUID): void;
     setExpanded(uuid: UUID, expanded: boolean): void;
+    setFocusToHead(): void;
+    setFocusToTail(): void;
+    setFocusToPrevious(uuid: UUID): void;
+    setFocusToNext(uuid: UUID): void;
 };
 
 type AccordionItemHeadingState = {};
@@ -16,6 +22,14 @@ export default class AccordionItemHeading extends React.Component<
     AccordionItemHeadingProps,
     AccordionItemHeadingState
 > {
+    focusRef: React.RefObject<HTMLDivElement> = React.createRef();
+
+    componentDidUpdate(): void {
+        if (this.props.focus) {
+            this.focusRef.current.focus();
+        }
+    }
+
     handleClick = (): void => {
         const { uuid, expanded, setExpanded } = this.props;
 
@@ -29,6 +43,41 @@ export default class AccordionItemHeading extends React.Component<
         }
     };
 
+    handleKeyDown = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
+        const {
+            uuid,
+            setFocusToHead,
+            setFocusToTail,
+            setFocusToPrevious,
+            setFocusToNext,
+        } = this.props;
+
+        switch (evt.which) {
+            case 35:
+                evt.preventDefault();
+                setFocusToTail();
+                break;
+            case 36:
+                evt.preventDefault();
+                setFocusToHead();
+                break;
+            case 38:
+                evt.preventDefault();
+                setFocusToPrevious(uuid);
+                break;
+            case 40:
+                evt.preventDefault();
+                setFocusToNext(uuid);
+                break;
+            default:
+                evt.preventDefault();
+        }
+    };
+
+    handleBlur = (): void => {
+        this.props.removeFocus(this.props.uuid);
+    };
+
     render(): JSX.Element {
         const {
             className,
@@ -37,6 +86,12 @@ export default class AccordionItemHeading extends React.Component<
             expanded,
             uuid,
             disabled,
+            focus,
+            setFocusToHead,
+            setFocusToTail,
+            setFocusToPrevious,
+            setFocusToNext,
+            removeFocus,
             ...rest
         } = this.props;
 
@@ -51,6 +106,7 @@ export default class AccordionItemHeading extends React.Component<
         return (
             <div
                 id={id}
+                ref={this.focusRef}
                 aria-expanded={expanded}
                 aria-controls={ariaControls}
                 className={titleClassName}
@@ -58,6 +114,8 @@ export default class AccordionItemHeading extends React.Component<
                 role={role}
                 tabIndex={0}
                 onKeyPress={this.handleKeyPress}
+                onKeyDown={this.handleKeyDown}
+                onBlur={this.handleBlur}
                 {...rest}
             />
         );
