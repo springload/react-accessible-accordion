@@ -4,6 +4,7 @@
   "description": "Accessible Accordion component for React",
   "main": "dist/umd/index.js",
   "jsnext:main": "dist/es/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
@@ -72,6 +73,7 @@
     "@babel/preset-env": "7.0.0",
     "@babel/preset-flow": "7.0.0",
     "@babel/preset-react": "7.0.0",
+    "@types/react": "^16.7.17",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^23.4.2",
