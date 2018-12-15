@@ -7,5 +7,5 @@ type Props = {
     expanded?: boolean;
 };
 
-declare var AccordionItem: React.Component<Props>;
+declare class AccordionItem extends React.Component<Props> {}
 export default AccordionItem;

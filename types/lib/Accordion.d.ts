@@ -6,5 +6,5 @@ type Props = {
     className?: string;
 };
 
-declare var Accordion: React.Component<Props>;
+declare class Accordion extends React.Component<Props> {}
 export default Accordion;

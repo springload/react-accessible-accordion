@@ -5,5 +5,5 @@ type Props = {
     hideBodyClassName?: string;
 }
 
-declare var AccordionItemBody: React.Component<Props>;
+declare class AccordionItemBody extends React.Component<Props> {}
 export default AccordionItemBody;
