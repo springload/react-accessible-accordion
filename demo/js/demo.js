@@ -42,7 +42,8 @@ const Example = () => (
                             rel="noopener noreferrer"
                         >
                             react-sanfona
-                        </a>.
+                        </a>
+                        .
                     </p>
                 </AccordionItemBody>
             </AccordionItem>
@@ -406,12 +407,18 @@ const Example = () => (
                         This project also uses nvm.
                     </p>
                     <p>
-                        nvm install<br />
-                        # Then, install all project dependencies.<br />
-                        npm install<br />
-                        # Install the git hooks.<br />
-                        ./.githooks/deploy<br />
-                        # Set up a `.env` file with the appropriate secrets.<br />
+                        nvm install
+                        <br />
+                        # Then, install all project dependencies.
+                        <br />
+                        npm install
+                        <br />
+                        # Install the git hooks.
+                        <br />
+                        ./.githooks/deploy
+                        <br />
+                        # Set up a `.env` file with the appropriate secrets.
+                        <br />
                         touch .env
                     </p>
                 </AccordionItemBody>
@@ -434,16 +441,25 @@ const Example = () => (
                         already be done.
                     </p>
                     <p>
-                        # Make sure you use the right node version.<br />
-                        nvm use<br />
-                        # Start the the development tools in watch mode.<br />
-                        npm run start<br />
-                        # Runs linting.<br />
-                        npm run lint<br />
-                        # Runs tests.<br />
-                        npm run test<br />
-                        # View other available commands with:<br />
-                        npm run
+                        # Make sure you use the right node version.
+                        <br />
+                        nvm use
+                        <br />
+                        # Start the the development tools in watch mode.
+                        <br />
+                        yarn start
+                        <br />
+                        # Runs linting.
+                        <br />
+                        yarn lint
+                        <br />
+                        # Runs tests.
+                        <br />
+                        yarn test
+                        <br />
+                        # View other available commands with:
+                        <br />
+                        yarn
                     </p>
                 </AccordionItemBody>
             </AccordionItem>
@@ -461,10 +477,13 @@ const Example = () => (
                         already be done.
                     </p>
                     <p>
-                        # Make sure you use the right node version.<br />
-                        nvm use<br />
-                        # Start the server and the development tools.<br />
-                        npm run start-demo
+                        # Make sure you use the right node version.
+                        <br />
+                        nvm use
+                        <br />
+                        # Start the server and the development tools.
+                        <br />
+                        yarn start-demo
                     </p>
                 </AccordionItemBody>
             </AccordionItem>
@@ -486,16 +505,25 @@ const Example = () => (
                         already be done.
                     </p>
                     <p>
-                        # Make sure you use the right node version.<br />
-                        nvm use<br />
-                        # Start the the development tools in watch mode.<br />
-                        npm run start<br />
-                        # Runs linting.<br />
-                        npm run lint<br />
-                        # Runs tests.<br />
-                        npm run test<br />
-                        # View other available commands with:<br />
-                        npm run
+                        # Make sure you use the right node version.
+                        <br />
+                        nvm use
+                        <br />
+                        # Start the the development tools in watch mode.
+                        <br />
+                        yarn start
+                        <br />
+                        # Runs linting.
+                        <br />
+                        yarn lint
+                        <br />
+                        # Runs tests.
+                        <br />
+                        yarn test
+                        <br />
+                        # View other available commands with:
+                        <br />
+                        yarn
                     </p>
                 </AccordionItemBody>
                 <div className="block">
@@ -519,10 +547,13 @@ const Example = () => (
                         already be done.
                     </p>
                     <p>
-                        # Make sure you use the right node version.<br />
-                        nvm use<br />
-                        # Start the server and the development tools.<br />
-                        npm run start-demo
+                        # Make sure you use the right node version.
+                        <br />
+                        nvm use
+                        <br />
+                        # Start the server and the development tools.
+                        <br />
+                        yarn start-demo
                     </p>
                 </AccordionItemBody>
             </AccordionItem>

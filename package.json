@@ -15,26 +15,21 @@
     "build:clean": "mkdir dist || true & rm -rf dist/*",
     "build:rollup": "rollup -c",
     "build:flow": "flow-copy-source src dist/es -i \"**/*.spec.js\"",
-    "build": "npm run build:clean && npm run build:css && npm run build:flow && npm run build:rollup",
+    "build": "yarn build:clean && yarn build:css && yarn build:flow && yarn build:rollup",
     "start-demo": "webpack-dev-server --mode=development",
     "pages": "rm -rf pages && webpack --mode=production --progress && cp demo/*.css pages && cp demo/*.ico pages",
-    "deploy": "npm run pages && ./bin/deploy.sh",
+    "deploy": "yarn pages && ./bin/deploy.sh",
     "prettier": "prettier **/*.js --write",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "yarn build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/springload/react-accessible-accordion.git"
   },
   "jest": {
-    "setupFiles": [
-      "./src/setupTests.js"
-    ],
+    "setupFiles": ["./src/setupTests.js"],
     "setupTestFrameworkScriptFile": "./src/setupTestFramework.js",
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/dist/"
-    ]
+    "testPathIgnorePatterns": ["/node_modules/", "/dist/"]
   },
   "keywords": [
     "react",
@@ -44,9 +39,7 @@
     "accessible",
     "accessibility"
   ],
-  "authors": [
-    "Vincent Audebert <vincent@springload.co.nz>"
-  ],
+  "authors": ["Vincent Audebert <vincent@springload.co.nz>"],
   "contributors": [
     {
       "name": "Mitch Ryan",
@@ -65,13 +58,13 @@
   },
   "homepage": "https://github.com/springload/react-accessible-accordion#readme",
   "devDependencies": {
-    "@babel/cli": "7.0.0",
-    "@babel/core": "7.0.0",
-    "@babel/plugin-proposal-class-properties": "7.0.0",
-    "@babel/polyfill": "7.0.0",
-    "@babel/preset-env": "7.0.0",
-    "@babel/preset-flow": "7.0.0",
-    "@babel/preset-react": "7.0.0",
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.2.2",
     "babel-jest": "^23.4.2",

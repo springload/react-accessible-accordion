@@ -24,13 +24,11 @@ touch .env
 # Make sure you use the right node version.
 nvm use
 # Start the the development tools in watch mode.
-npm run start
+yarn start
 # Runs linting.
-npm run lint
+yarn lint
 # Runs tests.
-npm run test
-# View other available commands with:
-npm run
+yarn test
 ```
 
 ### Run the demo
@@ -41,7 +39,7 @@ npm run
 # Make sure you use the right node version.
 nvm use
 # Start the server and the development tools.
-npm run start-demo
+yarn start-demo
 ```
 
 ### Publish

@@ -23,12 +23,12 @@ else
 
     if [ -n "$JS_FILES" ];
     then
-        npm run linter:js -s -- $JS_FILES
+        yarn linter:js -s -- $JS_FILES
     fi
 
     if [ -n "$JS_FILES" ] || [ -n "$SNAPSHOT_FILES" ];
     then
-        npm run test -s
+        yarn test -s
     fi
 
     exit 0
