@@ -1,5 +1,8 @@
 node_modules
 flow-typed
 bin
-.githooks
 dist
+.prettierignore
+.nvmrc
+__snapshots__
+coverage/**/*
