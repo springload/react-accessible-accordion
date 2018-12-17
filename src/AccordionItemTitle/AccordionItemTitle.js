@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component, type ElementProps } from 'react';
 import classNames from 'classnames';
 import { type UUID } from '../ItemContainer/ItemContainer';

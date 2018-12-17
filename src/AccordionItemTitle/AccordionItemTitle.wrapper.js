@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component, type ElementProps } from 'react';
 import { fromRenderProps, compose } from 'recompose';
 import {

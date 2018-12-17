@@ -1,4 +1,3 @@
-// @flow
 import { Component, type Node } from 'react';
 
 export type UUID = string | number;

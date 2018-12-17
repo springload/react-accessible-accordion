@@ -1,5 +1,3 @@
-// @flow
-
 import React, { type ElementProps } from 'react';
 
 type AccordionProps = ElementProps<'div'> & {

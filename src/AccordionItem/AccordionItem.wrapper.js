@@ -1,5 +1,3 @@
-// @flow
-
 import React, { Component, type ElementProps } from 'react';
 import { compose, fromRenderProps } from 'recompose';
 import consecutive from 'consecutive';

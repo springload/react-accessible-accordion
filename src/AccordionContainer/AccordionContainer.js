@@ -1,5 +1,3 @@
-// @flow
-
 import { Component, type Node } from 'react';
 import { type UUID } from '../ItemContainer/ItemContainer';
 

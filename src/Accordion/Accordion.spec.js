@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 import { mount } from 'enzyme';
 import Accordion from './Accordion.wrapper'; // eslint-disable-line
