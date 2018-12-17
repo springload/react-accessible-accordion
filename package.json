@@ -27,14 +27,12 @@
     "url": "git+https://github.com/springload/react-accessible-accordion.git"
   },
   "jest": {
-    "setupFiles": [
-      "./src/setupTests.js"
-    ],
+    "setupFiles": ["./src/setupTests.js"],
     "setupTestFrameworkScriptFile": "./src/setupTestFramework.js",
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/dist/"
-    ]
+    "testPathIgnorePatterns": ["/node_modules/", "/dist/"],
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   },
   "keywords": [
     "react",
@@ -44,9 +42,7 @@
     "accessible",
     "accessibility"
   ],
-  "authors": [
-    "Vincent Audebert <vincent@springload.co.nz>"
-  ],
+  "authors": ["Vincent Audebert <vincent@springload.co.nz>"],
   "contributors": [
     {
       "name": "Mitch Ryan",
@@ -127,9 +123,7 @@
   },
   "lint-staged": {
     "linters": {
-      "*.{js,jsx}": [
-        "eslint"
-      ]
+      "*.{js,jsx}": ["eslint"]
     }
   }
 }
