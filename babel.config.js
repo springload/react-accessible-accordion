@@ -4,9 +4,11 @@ module.exports = api => {
     const presets = [
         [
             '@babel/preset-env',
-            {
-                modules: false,
-            },
+            process.env.NODE_ENV === 'test'
+                ? {}
+                : {
+                      modules: false,
+                  },
         ],
         '@babel/preset-react',
         '@babel/preset-flow',
