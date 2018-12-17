@@ -413,10 +413,6 @@ const Example = () => (
                         <br />
                         npm install
                         <br />
-                        # Install the git hooks.
-                        <br />
-                        ./.githooks/deploy
-                        <br />
                         # Set up a `.env` file with the appropriate secrets.
                         <br />
                         touch .env

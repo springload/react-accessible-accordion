@@ -10,8 +10,6 @@
 nvm install
 # Then, install all project dependencies.
 npm install
-# Install the git hooks.
-./.githooks/deploy
 # Set up a `.env` file with the appropriate secrets.
 touch .env
 ```
