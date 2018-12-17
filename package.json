@@ -27,9 +27,14 @@
     "url": "git+https://github.com/springload/react-accessible-accordion.git"
   },
   "jest": {
-    "setupFiles": ["./src/setupTests.js"],
+    "setupFiles": [
+      "./src/setupTests.js"
+    ],
     "setupTestFrameworkScriptFile": "./src/setupTestFramework.js",
-    "testPathIgnorePatterns": ["/node_modules/", "/dist/"]
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/"
+    ]
   },
   "keywords": [
     "react",
@@ -39,7 +44,9 @@
     "accessible",
     "accessibility"
   ],
-  "authors": ["Vincent Audebert <vincent@springload.co.nz>"],
+  "authors": [
+    "Vincent Audebert <vincent@springload.co.nz>"
+  ],
   "contributors": [
     {
       "name": "Mitch Ryan",
@@ -93,12 +100,12 @@
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-test-renderer": "^16.4.0",
-    "rollup": "^0.59.4",
-    "rollup-plugin-babel": "^4.0.2",
-    "rollup-plugin-commonjs": "^9.1.0",
-    "rollup-plugin-eslint": "^4.0.0",
-    "rollup-plugin-node-resolve": "^3.3.0",
-    "rollup-plugin-replace": "^2.0.0",
+    "rollup": "^0.68.0",
+    "rollup-plugin-babel": "^4.1.0",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-eslint": "^5.0.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-replace": "^2.1.0",
     "style-loader": "^0.21.0",
     "webpack": "^4.5.0",
     "webpack-cli": "^3.1.0",
@@ -120,7 +127,9 @@
   },
   "lint-staged": {
     "linters": {
-      "*.{js,jsx}": ["eslint"]
+      "*.{js,jsx}": [
+        "eslint"
+      ]
     }
   }
 }
