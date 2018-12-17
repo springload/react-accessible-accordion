@@ -230,10 +230,10 @@ This project manages two types of Accordions, with single or multiple items open
 
 For this type of Accordion, you will get the following `role` set up on your elements:
 
-*   Accordion: `tablist`
-*   AccordionItem: no specific role
-*   AccordionItemTitle: `tab`
-*   AccordionItemBody: `tabpanel`
+-   Accordion: `tablist`
+-   AccordionItem: no specific role
+-   AccordionItemTitle: `tab`
+-   AccordionItemBody: `tabpanel`
 
 #### Multiple items
 
@@ -241,10 +241,10 @@ For this type of Accordion, you will get the following `role` set up on your ele
 
 > Use this with with props `accordion` set to `false` on `Accordion`.
 
-*   Accordion: no specific role
-*   AccordionItem: no specific role
-*   AccordionItemTitle: `button`
-*   AccordionItemBody: no specific role
+-   Accordion: no specific role
+-   AccordionItem: no specific role
+-   AccordionItemTitle: `button`
+-   AccordionItemBody: no specific role
 
 # Browser support
 

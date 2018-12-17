@@ -8,14 +8,13 @@
         "prettier/react",
         "prettier/flowtype"
     ],
-    "plugins": [
-        "react",
-        "flowtype",
-        "flowtype-errors",
-    ],
+    "plugins": ["react", "flowtype", "flowtype-errors"],
     "rules": {
         "flowtype-errors/show-errors": 2,
-        "no-warning-comments": [1, { "terms": ["todo", "fixme", "xxx"], "location": "start" }],
+        "no-warning-comments": [
+            1,
+            { "terms": ["todo", "fixme", "xxx"], "location": "start" }
+        ],
         "react/sort-comp": [0],
         "react/jsx-boolean-value": [0],
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
@@ -28,5 +27,5 @@
         "jest": true,
         "es6": true,
         "browser": true
-    },
+    }
 }
