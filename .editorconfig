@@ -12,11 +12,3 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 indent_style = space
 indent_size = 4
-
-# Rules for tool configuration.
-[{package.json, *.yml, *.yaml}]
-indent_size = 2
-
-# Rules for markdown documents.
-[*.md]
-trim_trailing_whitespace = false

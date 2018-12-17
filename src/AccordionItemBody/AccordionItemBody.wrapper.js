@@ -20,9 +20,7 @@ type AccordionItemBodyWrapperProps = ElementProps<'div'> & {
 };
 
 // eslint-disable-next-line react/prefer-stateless-function
-class AccordionItemBodyWrapper extends Component<
-    AccordionItemBodyWrapperProps,
-> {
+class AccordionItemBodyWrapper extends Component<AccordionItemBodyWrapperProps> {
     static defaultProps = {
         className: 'accordion__body',
         hideBodyClassName: 'accordion__body--hidden',
@@ -43,4 +41,3 @@ export default compose(
     fromRenderProps(AccordionConsumer, accordionStore => ({ accordionStore })),
     fromRenderProps(ItemConsumer, itemStore => ({ itemStore })),
 )(AccordionItemBodyWrapper);
-

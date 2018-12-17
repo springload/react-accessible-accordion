@@ -19,9 +19,7 @@ type AccordionItemTitleWrapperProps = ElementProps<'div'> & {
 };
 
 // eslint-disable-next-line react/prefer-stateless-function
-class AccordionItemTitleWrapper extends Component<
-    AccordionItemTitleWrapperProps,
-> {
+class AccordionItemTitleWrapper extends Component<AccordionItemTitleWrapperProps> {
     static defaultProps = {
         className: 'accordion__title',
         hideBodyClassName: '',

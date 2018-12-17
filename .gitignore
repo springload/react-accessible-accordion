@@ -8,7 +8,7 @@
 core/static
 core/svg.html
 static
-yarn.lock
+package-lock.json
 
 # -------------------------------------------------
 # OS generated files

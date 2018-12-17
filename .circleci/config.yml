@@ -1,91 +1,91 @@
 version: 2
 jobs:
-  install-job:
-    docker:
-      - image: circleci/node:8.9
-    working_directory: ~/repo
-    steps:
-      - checkout
+    install-job:
+        docker:
+            - image: circleci/node:dubnium
+        working_directory: ~/repo
+        steps:
+            - checkout
 
-      - restore_cache:
-          keys:
-            - node-modules-{{ checksum "package-lock.json" }}
-            - node-modules-
+            - restore_cache:
+                  keys:
+                      - node-modules-{{ checksum "yarn.lock" }}
+                      - node-modules-
 
-      - run: npm install
+            - run: yarn install --frozen-lockfile
 
-      - save_cache:
-          key: node-modules-{{ checksum "package-lock.json" }}
-          paths:
-            - node_modules
-      - persist_to_workspace:
-          root: ~/repo
-          paths:
-            - node_modules/*
+            - save_cache:
+                  key: node-modules-{{ checksum "yarn.lock" }}
+                  paths:
+                      - node_modules
+            - persist_to_workspace:
+                  root: ~/repo
+                  paths:
+                      - node_modules/*
 
-  test-job:
-    docker:
-      - image: circleci/node:8.9
+    test-job:
+        docker:
+            - image: circleci/node:dubnium
 
-    working_directory: ~/repo
+        working_directory: ~/repo
 
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/repo
-      - run: npm run test
+        steps:
+            - checkout
+            - attach_workspace:
+                  at: ~/repo
+            - run: yarn test
 
-  lint-job:
-    docker:
-      - image: circleci/node:8.9
+    lint-job:
+        docker:
+            - image: circleci/node:dubnium
 
-    working_directory: ~/repo
+        working_directory: ~/repo
 
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/repo
-      - run: npm run lint
+        steps:
+            - checkout
+            - attach_workspace:
+                  at: ~/repo
+            - run: yarn lint
 
-  build-job:
-    docker:
-      - image: circleci/node:8.9
+    build-job:
+        docker:
+            - image: circleci/node:dubnium
 
-    working_directory: ~/repo
+        working_directory: ~/repo
 
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/repo
-      - run: npm run build
+        steps:
+            - checkout
+            - attach_workspace:
+                  at: ~/repo
+            - run: yarn build
 
-  coverage-job:
-    docker:
-      - image: circleci/node:8.9
+    coverage-job:
+        docker:
+            - image: circleci/node:dubnium
 
-    working_directory: ~/repo
+        working_directory: ~/repo
 
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/repo
-      - run: npm run test:coverage
-      - run: npm run coveralls
+        steps:
+            - checkout
+            - attach_workspace:
+                  at: ~/repo
+            - run: yarn test:coverage
+            - run: yarn coveralls
 
 workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - install-job
-      - build-job:
-          requires:
+    version: 2
+    build-deploy:
+        jobs:
             - install-job
-      - test-job:
-          requires:
-            - install-job
-      - lint-job:
-          requires:
-            - install-job
-      - coverage-job:
-          requires:
-            - install-job
+            - build-job:
+                  requires:
+                      - install-job
+            - test-job:
+                  requires:
+                      - install-job
+            - lint-job:
+                  requires:
+                      - install-job
+            - coverage-job:
+                  requires:
+                      - install-job
