@@ -19,8 +19,8 @@
     "start-demo": "webpack-dev-server --mode=development",
     "pages": "rm -rf pages && webpack --mode=production --progress && cp demo/*.css pages && cp demo/*.ico pages",
     "deploy": "yarn pages && ./bin/deploy.sh",
-    "prettier": "prettier **/*.js --write",
-    "prepublishOnly": "yarn build"
+    "format": "prettier **/*.js --write",
+    "prepublishOnly": "yarn lint && yarn test && yarn build"
   },
   "repository": {
     "type": "git",
