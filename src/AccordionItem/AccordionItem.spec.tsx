@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
 import AccordionItemTitle from '../AccordionItemTitle/AccordionItemTitle.wrapper';
 import AccordionItemBody from '../AccordionItemBody/AccordionItemBody.wrapper';
