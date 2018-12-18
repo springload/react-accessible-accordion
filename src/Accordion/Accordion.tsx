@@ -1,10 +1,10 @@
 import * as React from 'react';
 
 type AccordionProps = React.HTMLProps<HTMLDivElement> & {
-	accordion?: boolean;
+	accordion: boolean;
 };
 
-const Accordion = ({ accordion = true, ...rest }: AccordionProps) => (
+const Accordion = ({ accordion, ...rest }: AccordionProps) => (
 	<div role={accordion ? 'tablist' : null} {...rest} />
 );
 

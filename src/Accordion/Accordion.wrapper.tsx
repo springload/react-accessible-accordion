@@ -1,27 +1,24 @@
-import React, { Component } from 'react';
-import type { ElementProps } from 'react';
+import * as React from 'react';
 
 import {
     Provider,
     Consumer,
-    type AccordionContainer,
+    AccordionContainer,
 } from '../AccordionContainer/AccordionContainer';
 import Accordion from './Accordion';
 
-type AccordionWrapperProps = ElementProps<'div'> & {
-    accordion: boolean,
-    onChange: Function,
+type AccordionWrapperProps = React.HTMLProps<HTMLDivElement> & {
+    accordion?: boolean;
+    onChange(any): any; // todo, stricter.
 };
 
-const defaultProps: AccordionWrapperProps = {
-    accordion: true,
-    onChange: () => {},
-    className: 'accordion',
-    children: null,
-};
-
-class AccordionWrapper extends Component<AccordionWrapperProps> {
-    static defaultProps = defaultProps;
+class AccordionWrapper extends React.Component<AccordionWrapperProps> {
+    static defaultProps = {
+        accordion: true,
+        onChange: () => {},
+        className: 'accordion',
+        children: null,
+    };
 
     renderAccordion = (accordionStore: AccordionContainer) => {
         const { accordion, onChange, ...rest } = this.props;
