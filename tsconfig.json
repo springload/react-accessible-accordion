@@ -1,0 +1,8 @@
+{
+    "include": ["src/**/*.ts", "src/**/*.tsx"],
+    "compilerOptions": {
+        "noEmit": true,
+        "jsx": "react",
+        "baseUrl": "./"
+    }
+}
