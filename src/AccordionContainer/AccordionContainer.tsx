@@ -1,39 +1,45 @@
-import { Component, type Node } from 'react';
-import { type UUID } from '../ItemContainer/ItemContainer';
+import * as React from 'react';
+import { UUID } from '../ItemContainer/ItemContainer';
 
 export type Item = {
-    uuid: UUID,
-    expanded: boolean,
-    disabled: boolean,
+    uuid: UUID;
+    expanded: boolean;
+    disabled: boolean;
 };
 
 export type ProviderState = {
-    items: Array<Item>,
+    items: Array<Item>;
 };
 
 export type ProviderProps = {
-    accordion?: boolean,
-    onChange?: Function,
-    children?: ?Node,
-    items?: Array<Item>,
+    accordion?: boolean;
+    onChange?: Function;
+    children?: React.ReactNode;
+    items?: Array<Item>;
 };
 
 export type AccordionContainer = {
-    accordion: boolean,
-    items: Array<Item>,
-    addItem: Item => void,
-    removeItem: UUID => void,
-    setExpanded: (key: UUID, expanded: boolean) => void,
+    accordion: boolean;
+    items: Array<Item>;
+    addItem(Item): void;
+    removeItem(UUID): void;
+    setExpanded(UUID, boolean): void;
+};
+
+type PartialAccordionContainer = {
+    [P in keyof AccordionContainer]?: AccordionContainer[P]
 };
 
 export type ConsumerProps = {
-    children: ($Shape<AccordionContainer>) => Node,
+    children(
+        container: { [P in keyof AccordionContainer]?: AccordionContainer[P] },
+    ): React.ReactNode;
 };
 
 // Arbitrary, but ought to be unique to avoid context namespace clashes.
 const CONTEXT_KEY = 'react-accessible-accordion@AccordionContainer';
 
-export class Provider extends Component<ProviderProps, ProviderState> {
+export class Provider extends React.Component<ProviderProps, ProviderState> {
     static childContextTypes = {
         // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
         [CONTEXT_KEY]: () => null,
@@ -132,7 +138,7 @@ export class Provider extends Component<ProviderProps, ProviderState> {
 }
 
 // eslint-disable-next-line react/no-multi-comp
-export class Consumer extends Component<ConsumerProps> {
+export class Consumer extends React.Component<ConsumerProps> {
     static contextTypes = {
         [CONTEXT_KEY]: () => null,
     };
