@@ -1,17 +1,17 @@
-import React, { Component, type ElementProps } from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
-import { type UUID } from '../ItemContainer/ItemContainer';
-import { type AccordionContainer } from '../AccordionContainer/AccordionContainer';
+import { UUID } from '../ItemContainer/ItemContainer';
+import { AccordionContainer } from '../AccordionContainer/AccordionContainer';
 
-type AccordionItemProps = ElementProps<'div'> & {
-    uuid: UUID,
-    hideBodyClassName: ?string,
-    disabled: ?boolean,
-    expanded: ?boolean,
-    accordionStore: AccordionContainer,
+type AccordionItemProps = React.HTMLProps<HTMLDivElement> & {
+    uuid: UUID;
+    hideBodyClassName: string | null;
+    disabled: boolean | null;
+    expanded: boolean | null;
+    accordionStore: AccordionContainer;
 };
 
-class AccordionItem extends Component<AccordionItemProps> {
+class AccordionItem extends React.Component<AccordionItemProps> {
     componentDidMount() {
         const { uuid, accordionStore, disabled } = this.props;
 
