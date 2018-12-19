@@ -1,20 +1,20 @@
-import { Component, type Node } from 'react';
+import * as React from 'react';
 
 export type UUID = string | number;
 
 export type ProviderProps = {
-    children?: ?Node,
-    uuid: UUID,
+    children?: React.ReactNode;
+    uuid: UUID;
 };
 
 export type ItemContainer = {
-    uuid: UUID,
+    uuid: UUID;
 };
 
 // Arbitrary, but ought to be unique to avoid context namespace clashes.
 const CONTEXT_KEY = 'react-accessible-accordion@ItemContainer';
 
-export class Provider extends Component<ProviderProps> {
+export class Provider extends React.Component<ProviderProps> {
     static childContextTypes = {
         // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
         [CONTEXT_KEY]: () => null,
@@ -37,11 +37,11 @@ export class Provider extends Component<ProviderProps> {
 }
 
 type ConsumerProps = {
-    children: ($Shape<ItemContainer>) => Node,
+    children(container: ItemContainer): React.ReactNode;
 };
 
 // eslint-disable-next-line react/no-multi-comp
-export class Consumer extends Component<ConsumerProps> {
+export class Consumer extends React.Component<ConsumerProps> {
     static contextTypes = {
         // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
         [CONTEXT_KEY]: () => null,
