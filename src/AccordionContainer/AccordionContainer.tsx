@@ -26,10 +26,6 @@ export type AccordionContainer = {
     setExpanded(UUID, boolean): void;
 };
 
-type PartialAccordionContainer = {
-    [P in keyof AccordionContainer]?: AccordionContainer[P]
-};
-
 export type ConsumerProps = {
     children(
         container: { [P in keyof AccordionContainer]?: AccordionContainer[P] },
