@@ -1,9 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
 import {
     Provider as AccordionProvider,
-    type Item,
+    Item,
 } from '../AccordionContainer/AccordionContainer';
 import AccordionItemBody from './AccordionItemBody.wrapper';
 
