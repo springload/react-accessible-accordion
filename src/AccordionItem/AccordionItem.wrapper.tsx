@@ -1,7 +1,10 @@
 import * as React from 'react';
 import consecutive from 'consecutive';
 
-import { getAccordionStore } from '../AccordionContainer/AccordionContainer';
+import {
+    getAccordionStore,
+    contextTypes,
+} from '../AccordionContainer/AccordionContainer';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
 import AccordionItem from './AccordionItem';
 
@@ -20,6 +23,8 @@ export function resetNextUuid() {
 export default class AccordionItemWrapper extends React.Component<
     AccordionItemWrapperProps
 > {
+    static contextTypes = contextTypes;
+
     static defaultProps = {
         className: 'accordion__item',
         hideBodyClassName: '',

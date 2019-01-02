@@ -2,9 +2,12 @@ import * as React from 'react';
 import { fromRenderProps, compose } from 'recompose';
 import {
     getAccordionStore,
-    AccordionContainer,
+    contextTypes as accordionContextTypes,
 } from '../AccordionContainer/AccordionContainer';
-import { getItemStore, ItemContainer } from '../ItemContainer/ItemContainer';
+import {
+    getItemStore,
+    contextTypes as itemContextTypes,
+} from '../ItemContainer/ItemContainer';
 import AccordionItemTitle from './AccordionItemTitle';
 
 type AccordionItemTitleWrapperProps = React.HTMLProps<HTMLDivElement> & {
@@ -15,6 +18,11 @@ type AccordionItemTitleWrapperProps = React.HTMLProps<HTMLDivElement> & {
 export default class AccordionItemTitleWrapper extends React.Component<
     AccordionItemTitleWrapperProps
 > {
+    static contextTypes = {
+        ...itemContextTypes,
+        ...accordionContextTypes,
+    };
+
     static defaultProps = {
         className: 'accordion__title',
         hideBodyClassName: '',

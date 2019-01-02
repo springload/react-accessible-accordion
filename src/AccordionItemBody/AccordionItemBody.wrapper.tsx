@@ -1,14 +1,27 @@
 import * as React from 'react';
 
-import { getAccordionStore } from '../AccordionContainer/AccordionContainer';
-import { getItemStore } from '../ItemContainer/ItemContainer';
+import {
+    getAccordionStore,
+    contextTypes as accordionContextTypes,
+} from '../AccordionContainer/AccordionContainer';
+import {
+    getItemStore,
+    contextTypes as itemContextTypes,
+} from '../ItemContainer/ItemContainer';
 import AccordionItemBody from './AccordionItemBody';
 
 type AccordionItemBodyWrapperProps = React.HTMLProps<HTMLDivElement> & {
-    hideBodyClassName: string,
+    hideBodyClassName: string;
 };
 
-export default class AccordionItemBodyWrapper extends React.Component<AccordionItemBodyWrapperProps> {
+export default class AccordionItemBodyWrapper extends React.Component<
+    AccordionItemBodyWrapperProps
+> {
+    static contextTypes = {
+        ...accordionContextTypes,
+        ...itemContextTypes,
+    };
+
     static defaultProps = {
         className: 'accordion__body',
         hideBodyClassName: 'accordion__body--hidden',
