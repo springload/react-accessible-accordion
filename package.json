@@ -10,6 +10,7 @@
         "test:coverage": "jest --coverage",
         "test:coverage:watch": "jest --coverage --watch",
         "coveralls": "cat ./coverage/lcov.info | coveralls",
+        "lint": "tslint --project .",
         "build:css": "cp src/css/*.css dist",
         "build:clean": "mkdir dist || true & rm -rf dist/*",
         "build:rollup": "rollup -c",
