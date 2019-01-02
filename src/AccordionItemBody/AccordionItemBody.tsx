@@ -1,13 +1,13 @@
-import React, { type ElementProps } from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
-import { type UUID } from '../ItemContainer/ItemContainer';
+import { UUID } from '../ItemContainer/ItemContainer';
 
-type AccordionItemBodyProps = ElementProps<'div'> & {
-    hideBodyClassName: string,
-    uuid: UUID,
-    expanded: boolean,
-    disabled: boolean,
-    accordion: boolean,
+type AccordionItemBodyProps = React.HTMLProps<HTMLDivElement> & {
+    hideBodyClassName: string;
+    uuid: UUID;
+    expanded: boolean;
+    disabled: boolean;
+    accordion: boolean;
 };
 
 const AccordionItemBody = (props: AccordionItemBodyProps) => {
