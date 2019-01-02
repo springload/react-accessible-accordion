@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { fromRenderProps, compose } from 'recompose';
 import {
     getAccordionStore,
     contextTypes as accordionContextTypes,
