@@ -1,20 +1,15 @@
-import React, { Component, type ElementProps } from 'react';
-import { compose, fromRenderProps } from 'recompose';
+import * as React from 'react';
 import consecutive from 'consecutive';
 
-import {
-    Consumer as AccordionConsumer,
-    type AccordionContainer,
-} from '../AccordionContainer/AccordionContainer';
+import { getAccordionStore } from '../AccordionContainer/AccordionContainer';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
 import AccordionItem from './AccordionItem';
 
-type AccordionItemWrapperProps = ElementProps<'div'> & {
-    hideBodyClassName: ?string,
-    disabled: ?boolean,
-    expanded: ?boolean,
-    uuid?: string,
-    accordionStore: AccordionContainer,
+type AccordionItemWrapperProps = React.HTMLProps<HTMLDivElement> & {
+    hideBodyClassName: string | undefined;
+    disabled: boolean | undefined;
+    expanded: boolean | undefined;
+    uuid?: string;
 };
 
 let nextUuid = consecutive();
@@ -22,7 +17,9 @@ export function resetNextUuid() {
     nextUuid = consecutive();
 }
 
-class AccordionItemWrapper extends Component<AccordionItemWrapperProps> {
+export default class AccordionItemWrapper extends React.Component<
+    AccordionItemWrapperProps
+> {
     static defaultProps = {
         className: 'accordion__item',
         hideBodyClassName: '',
@@ -34,7 +31,8 @@ class AccordionItemWrapper extends Component<AccordionItemWrapperProps> {
     id = nextUuid();
 
     render() {
-        const { accordionStore, uuid, ...rest } = this.props;
+        const accordionStore = getAccordionStore(this.context);
+        const { uuid, ...rest } = this.props;
         const itemUuid = uuid !== undefined ? uuid : this.id;
 
         return (
@@ -48,7 +46,3 @@ class AccordionItemWrapper extends Component<AccordionItemWrapperProps> {
         );
     }
 }
-
-export default compose(
-    fromRenderProps(AccordionConsumer, accordionStore => ({ accordionStore })),
-)(AccordionItemWrapper);
