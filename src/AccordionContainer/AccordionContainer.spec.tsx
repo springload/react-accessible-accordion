@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { Provider, Consumer } from './AccordionContainer';
+import {
+    Provider,
+    Consumer,
+    contextTypes,
+    getAccordionStore,
+} from './AccordionContainer';
 
 const DEFAULT_ITEM = {
     uuid: 'foo',
@@ -418,5 +423,22 @@ describe('Accordion', () => {
         instance.setExpanded(item.uuid, true);
 
         expect(onChange).toHaveBeenCalledWith([item.uuid]);
+    });
+
+    it('fetches context with getAccordionStore', () => {
+        expect.assertions(1);
+
+        const Test = (props, context) => {
+            const accordionStore = getAccordionStore(context);
+            expect(accordionStore).toBeDefined();
+            return null;
+        };
+        Test.contextTypes = contextTypes;
+
+        mount(
+            <Provider>
+                <Test />
+            </Provider>,
+        );
     });
 });

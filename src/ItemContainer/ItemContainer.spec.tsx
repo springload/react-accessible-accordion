@@ -1,6 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
-import { Provider, Consumer } from './ItemContainer';
+import {
+    Provider,
+    Consumer,
+    getItemStore,
+    contextTypes,
+} from './ItemContainer';
 
 describe('ItemContainer', () => {
     let mock;
@@ -26,5 +31,22 @@ describe('ItemContainer', () => {
 
     it('renders Provider without children', () => {
         expect(() => mount(<Provider uuid="foo" />)).not.toThrow();
+    });
+
+    it('fetches context with getItemStore', () => {
+        expect.assertions(1);
+
+        const Test = (props, context) => {
+            const accordionStore = getItemStore(context);
+            expect(accordionStore).toBeDefined();
+            return null;
+        };
+        Test.contextTypes = contextTypes;
+
+        mount(
+            <Provider uuid="uuid">
+                <Test />
+            </Provider>,
+        );
     });
 });

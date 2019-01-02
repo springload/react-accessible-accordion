@@ -40,12 +40,14 @@ type ConsumerProps = {
     children(container: ItemContainer): React.ReactNode;
 };
 
+export const contextTypes = {
+    // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
+    [CONTEXT_KEY]: () => null,
+};
+
 // eslint-disable-next-line react/no-multi-comp
 export class Consumer extends React.Component<ConsumerProps> {
-    static contextTypes = {
-        // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
-        [CONTEXT_KEY]: () => null,
-    };
+    static contextTypes = contextTypes;
 
     render() {
         return this.props.children(this.context[CONTEXT_KEY]);
