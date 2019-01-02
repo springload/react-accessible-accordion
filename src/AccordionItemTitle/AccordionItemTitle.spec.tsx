@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
 import AccordionItemTitle from './AccordionItemTitle.wrapper';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
