@@ -140,7 +140,7 @@ describe('Accordion', () => {
         const wrapper = mount(
             <Accordion accordion={false}>
                 <AccordionItem disabled>
-                    <AccordionItemTitle className="foo" disabled>
+                    <AccordionItemTitle className="foo">
                         Foo Title
                     </AccordionItemTitle>
                 </AccordionItem>

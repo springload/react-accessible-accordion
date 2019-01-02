@@ -8,10 +8,10 @@ import {
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
 import AccordionItem from './AccordionItem';
 
-type AccordionItemWrapperProps = React.HTMLProps<HTMLDivElement> & {
-    hideBodyClassName: string | undefined;
-    disabled: boolean | undefined;
-    expanded: boolean | undefined;
+type AccordionItemWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
+    hideBodyClassName?: string;
+    disabled?: boolean;
+    expanded?: boolean;
     uuid?: string;
 };
 
@@ -37,6 +37,10 @@ export default class AccordionItemWrapper extends React.Component<
 
     render() {
         const accordionStore = getAccordionStore(this.context);
+        if (!accordionStore) {
+            // TODO: log an error/warning?
+            return null;
+        }
         const { uuid, ...rest } = this.props;
         const itemUuid = uuid !== undefined ? uuid : this.id;
 

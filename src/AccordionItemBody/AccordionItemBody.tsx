@@ -2,7 +2,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { UUID } from '../ItemContainer/ItemContainer';
 
-type AccordionItemBodyProps = React.HTMLProps<HTMLDivElement> & {
+type AccordionItemBodyProps = React.HTMLAttributes<HTMLDivElement> & {
     hideBodyClassName: string;
     uuid: UUID;
     expanded: boolean;

@@ -3,11 +3,11 @@ import classNames from 'classnames';
 import { UUID } from '../ItemContainer/ItemContainer';
 import { AccordionContainer } from '../AccordionContainer/AccordionContainer';
 
-type AccordionItemProps = React.HTMLProps<HTMLDivElement> & {
+type AccordionItemProps = React.HTMLAttributes<HTMLDivElement> & {
     uuid: UUID;
-    hideBodyClassName: string | null;
-    disabled: boolean | null;
-    expanded: boolean | null;
+    hideBodyClassName?: string;
+    disabled?: boolean;
+    expanded?: boolean;
     accordionStore: AccordionContainer;
 };
 
@@ -57,7 +57,7 @@ class AccordionItem extends React.Component<AccordionItemProps> {
         return (
             <div
                 className={classNames(className, {
-                    [hideBodyClassName]:
+                    [String(hideBodyClassName)]:
                         !currentItem.expanded && hideBodyClassName,
                 })}
                 {...rest}

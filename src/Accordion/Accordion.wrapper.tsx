@@ -7,7 +7,7 @@ import {
 } from '../AccordionContainer/AccordionContainer';
 import Accordion from './Accordion';
 
-type AccordionWrapperProps = React.HTMLProps<HTMLDivElement> & {
+type AccordionWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     accordion?: boolean;
     onChange(any): any; // todo, stricter.
 };

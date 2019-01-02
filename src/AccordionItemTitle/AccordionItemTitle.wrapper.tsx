@@ -9,7 +9,7 @@ import {
 } from '../ItemContainer/ItemContainer';
 import AccordionItemTitle from './AccordionItemTitle';
 
-type AccordionItemTitleWrapperProps = React.HTMLProps<HTMLDivElement> & {
+type AccordionItemTitleWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     hideBodyClassName: string;
 };
 

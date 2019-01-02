@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-type AccordionProps = React.HTMLProps<HTMLDivElement> & {
+type AccordionProps = React.HTMLAttributes<HTMLDivElement> & {
 	accordion: boolean;
 };
 
