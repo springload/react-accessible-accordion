@@ -1,21 +1,21 @@
-import React, { Component, type ElementProps } from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
-import { type UUID } from '../ItemContainer/ItemContainer';
+import { UUID } from '../ItemContainer/ItemContainer';
 
-type AccordionItemTitleProps = ElementProps<'div'> & {
-    hideBodyClassName: string,
-    expanded: boolean,
-    uuid: UUID,
-    disabled: boolean,
-    accordion: boolean,
-    setExpanded: (UUID, boolean) => any,
+type AccordionItemTitleProps = React.HTMLProps<HTMLDivElement> & {
+    hideBodyClassName: string;
+    expanded: boolean;
+    uuid: UUID;
+    disabled: boolean;
+    accordion: boolean;
+    setExpanded: (UUID, boolean) => any;
 };
 
 type AccordionItemTitleState = {};
 
-class AccordionItemTitle extends Component<
+class AccordionItemTitle extends React.Component<
     AccordionItemTitleProps,
-    AccordionItemTitleState,
+    AccordionItemTitleState
 > {
     static accordionElementName = 'AccordionItemTitle';
 
@@ -25,7 +25,7 @@ class AccordionItemTitle extends Component<
         setExpanded(uuid, !expanded);
     };
 
-    handleKeyPress = (evt: SyntheticKeyboardEvent<HTMLButtonElement>) => {
+    handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>) => {
         if (evt.charCode === 13 || evt.charCode === 32) {
             evt.preventDefault();
             this.handleClick();
@@ -36,7 +36,6 @@ class AccordionItemTitle extends Component<
         const {
             className,
             hideBodyClassName,
-            item,
             accordion,
             setExpanded,
             expanded,
@@ -61,9 +60,8 @@ class AccordionItemTitle extends Component<
                     className={titleClassName}
                     onClick={disabled ? undefined : this.handleClick}
                     role={role}
-                    tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+                    tabIndex={0} // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
                     onKeyPress={this.handleKeyPress}
-                    disabled={disabled}
                     {...rest}
                 />
             );
@@ -76,9 +74,8 @@ class AccordionItemTitle extends Component<
                 className={titleClassName}
                 onClick={disabled ? undefined : this.handleClick}
                 role={role}
-                tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+                tabIndex={0} // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
                 onKeyPress={this.handleKeyPress}
-                disabled={disabled}
                 {...rest}
             />
         );
