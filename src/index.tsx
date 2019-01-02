@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import Accordion from './Accordion/Accordion.wrapper';
 import AccordionItem, {
 	resetNextUuid,

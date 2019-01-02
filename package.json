@@ -10,12 +10,10 @@
         "test:coverage": "jest --coverage",
         "test:coverage:watch": "jest --coverage --watch",
         "coveralls": "cat ./coverage/lcov.info | coveralls",
-        "lint": "eslint .",
         "build:css": "cp src/css/*.css dist",
         "build:clean": "mkdir dist || true & rm -rf dist/*",
         "build:rollup": "rollup -c",
-        "build:flow": "flow-copy-source src dist/es -i \"**/*.spec.js\"",
-        "build": "yarn build:clean && yarn build:css && yarn build:flow && yarn build:rollup",
+        "build": "yarn build:clean && yarn build:css && yarn build:rollup",
         "start-demo": "webpack-dev-server --mode=development",
         "pages": "rm -rf pages && webpack --mode=production --progress && cp demo/*.css pages && cp demo/*.ico pages",
         "deploy": "yarn pages && ./bin/deploy.sh",
@@ -64,7 +62,6 @@
         "@types/react": "^16.7.17",
         "@types/react-dom": "^16.0.11",
         "babel-core": "^7.0.0-bridge.0",
-        "babel-eslint": "^10.0.1",
         "babel-jest": "^23.6.0",
         "babel-loader": "^8.0.4",
         "coveralls": "^3.0.0",
@@ -72,16 +69,6 @@
         "enzyme": "^3.3.0",
         "enzyme-adapter-react-16": "^1.1.1",
         "enzyme-to-json": "^3.3.4",
-        "eslint": "^5.1.0",
-        "eslint-config-airbnb": "^17.0.0",
-        "eslint-config-prettier": "^3.3.0",
-        "eslint-plugin-flowtype": "^2.50.0",
-        "eslint-plugin-flowtype-errors": "^3.6.0",
-        "eslint-plugin-import": "^2.13.0",
-        "eslint-plugin-jsx-a11y": "^6.1.1",
-        "eslint-plugin-react": "^7.10.0",
-        "flow-bin": "^0.89.0",
-        "flow-copy-source": "^2.0.2",
         "html-webpack-plugin": "^3.2.0",
         "husky": "^1.2.1",
         "jest": "^23.6.0",
@@ -94,7 +81,6 @@
         "rollup": "^0.68.0",
         "rollup-plugin-babel": "^4.1.0",
         "rollup-plugin-commonjs": "^9.2.0",
-        "rollup-plugin-eslint": "^5.0.0",
         "rollup-plugin-node-resolve": "^4.0.0",
         "rollup-plugin-replace": "^2.1.0",
         "style-loader": "^0.23.1",
@@ -117,8 +103,6 @@
         }
     },
     "lint-staged": {
-        "linters": {
-            "*.{js,jsx}": ["eslint"]
-        }
+        "linters": {}
     }
 }
