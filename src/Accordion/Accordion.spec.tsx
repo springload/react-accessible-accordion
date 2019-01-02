@@ -1,9 +1,9 @@
-import * as React from 'react';
 import { mount } from 'enzyme';
-import Accordion from './Accordion.wrapper';
+import * as React from 'react';
+import { Provider } from '../AccordionContainer/AccordionContainer';
 import AccordionItem from '../AccordionItem/AccordionItem.wrapper';
 import AccordionItemTitle from '../AccordionItemTitle/AccordionItemTitle.wrapper';
-import { Provider } from '../AccordionContainer/AccordionContainer';
+import Accordion from './Accordion.wrapper';
 
 describe('Accordion', () => {
     it('renders correctly with min params', () => {

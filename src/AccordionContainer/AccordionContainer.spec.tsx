@@ -1,10 +1,10 @@
-import * as React from 'react';
 import { mount } from 'enzyme';
+import * as React from 'react';
 import {
-    Provider,
     Consumer,
     contextTypes,
     getAccordionStore,
+    Provider,
 } from './AccordionContainer';
 
 const DEFAULT_ITEM = {
@@ -391,6 +391,7 @@ describe('Accordion', () => {
             expanded: false,
         });
 
+        // tslint:disable-next-line:no-console
         expect(console.error).toBeCalled();
     });
 

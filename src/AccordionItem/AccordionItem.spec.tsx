@@ -1,10 +1,10 @@
-import * as React from 'react';
 import { mount } from 'enzyme';
-import AccordionItemTitle from '../AccordionItemTitle/AccordionItemTitle.wrapper';
-import AccordionItemBody from '../AccordionItemBody/AccordionItemBody.wrapper';
-import AccordionItem, { resetNextUuid } from './AccordionItem.wrapper';
+import * as React from 'react';
 import { Provider as AccordionProvider } from '../AccordionContainer/AccordionContainer';
+import AccordionItemBody from '../AccordionItemBody/AccordionItemBody.wrapper';
+import AccordionItemTitle from '../AccordionItemTitle/AccordionItemTitle.wrapper';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
+import AccordionItem, { resetNextUuid } from './AccordionItem.wrapper';
 
 describe('AccordionItem', () => {
     beforeEach(() => {

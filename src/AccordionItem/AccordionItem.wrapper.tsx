@@ -1,9 +1,9 @@
-import * as React from 'react';
 import consecutive from 'consecutive';
+import * as React from 'react';
 
 import {
-    getAccordionStore,
     contextTypes,
+    getAccordionStore,
 } from '../AccordionContainer/AccordionContainer';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
 import AccordionItem from './AccordionItem';

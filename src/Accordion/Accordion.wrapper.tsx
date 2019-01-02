@@ -1,21 +1,23 @@
 import * as React from 'react';
 
 import {
-    Provider,
-    Consumer,
     AccordionContainer,
+    Consumer,
+    Provider,
 } from '../AccordionContainer/AccordionContainer';
 import Accordion from './Accordion';
 
 type AccordionWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     accordion?: boolean;
-    onChange(any): any; // todo, stricter.
+    onChange(args: any): any; // todo, stricter.
 };
 
 class AccordionWrapper extends React.Component<AccordionWrapperProps> {
     static defaultProps = {
         accordion: true,
-        onChange: () => {},
+        onChange: () => {
+            //
+        },
         className: 'accordion',
         children: null,
     };

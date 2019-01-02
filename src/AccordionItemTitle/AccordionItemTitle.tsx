@@ -1,5 +1,5 @@
-import * as React from 'react';
 import classNames from 'classnames';
+import * as React from 'react';
 import { UUID } from '../ItemContainer/ItemContainer';
 
 type AccordionItemTitleProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -8,7 +8,7 @@ type AccordionItemTitleProps = React.HTMLAttributes<HTMLDivElement> & {
     uuid: UUID;
     disabled: boolean;
     accordion: boolean;
-    setExpanded: (UUID, boolean) => any;
+    setExpanded: (uuid: UUID, expanded: boolean) => void;
 };
 
 type AccordionItemTitleState = {};

@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import {
-    getAccordionStore,
     contextTypes as accordionContextTypes,
+    getAccordionStore,
 } from '../AccordionContainer/AccordionContainer';
 import {
-    getItemStore,
     contextTypes as itemContextTypes,
+    getItemStore,
 } from '../ItemContainer/ItemContainer';
 import AccordionItemBody from './AccordionItemBody';
 

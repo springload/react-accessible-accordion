@@ -107,6 +107,8 @@
         }
     },
     "lint-staged": {
-        "linters": {}
+        "linters": {
+            "*.{ts,tsx}": ["tslint"]
+        }
     }
 }

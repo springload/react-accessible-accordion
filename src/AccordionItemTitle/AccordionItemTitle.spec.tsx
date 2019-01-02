@@ -1,8 +1,8 @@
-import * as React from 'react';
 import { mount } from 'enzyme';
-import AccordionItemTitle from './AccordionItemTitle.wrapper';
-import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
+import * as React from 'react';
 import { Provider as AccordionProvider } from '../AccordionContainer/AccordionContainer';
+import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
+import AccordionItemTitle from './AccordionItemTitle.wrapper';
 
 describe('AccordionItemTitle', () => {
     const DEFAULT_ITEM = {

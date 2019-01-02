@@ -1,10 +1,10 @@
-import * as React from 'react';
 import { mount } from 'enzyme';
-import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
+import * as React from 'react';
 import {
-    Provider as AccordionProvider,
     Item,
+    Provider as AccordionProvider,
 } from '../AccordionContainer/AccordionContainer';
+import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
 import AccordionItemBody from './AccordionItemBody.wrapper';
 
 describe('AccordionItemBody', () => {

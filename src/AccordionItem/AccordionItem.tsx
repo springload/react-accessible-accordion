@@ -1,7 +1,7 @@
-import * as React from 'react';
 import classNames from 'classnames';
-import { UUID } from '../ItemContainer/ItemContainer';
+import * as React from 'react';
 import { AccordionContainer } from '../AccordionContainer/AccordionContainer';
+import { UUID } from '../ItemContainer/ItemContainer';
 
 type AccordionItemProps = React.HTMLAttributes<HTMLDivElement> & {
     uuid: UUID;

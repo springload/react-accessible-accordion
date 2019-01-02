@@ -1,10 +1,10 @@
-import * as React from 'react';
 import { mount } from 'enzyme';
+import * as React from 'react';
 import {
-    Provider,
     Consumer,
-    getItemStore,
     contextTypes,
+    getItemStore,
+    Provider,
 } from './ItemContainer';
 
 describe('ItemContainer', () => {

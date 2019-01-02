@@ -1,3 +1,5 @@
+// tslint:disable:max-classes-per-file
+
 import * as React from 'react';
 import { UUID } from '../ItemContainer/ItemContainer';
 
@@ -8,22 +10,22 @@ export type Item = {
 };
 
 export type ProviderState = {
-    items: Array<Item>;
+    items: Item[];
 };
 
 export type ProviderProps = {
     accordion?: boolean;
-    onChange?: Function;
     children?: React.ReactNode;
-    items?: Array<Item>;
+    items?: Item[];
+    onChange?(args: UUID | UUID[]): void;
 };
 
 export type AccordionContainer = {
     accordion: boolean;
-    items: Array<Item>;
-    addItem(Item): void;
-    removeItem(UUID): void;
-    setExpanded(UUID, boolean): void;
+    items: Item[];
+    addItem(item: Item): void;
+    removeItem(uuid: UUID): void;
+    setExpanded(uuid: UUID, expanded: boolean): void;
 };
 
 export type ConsumerProps = {
@@ -65,6 +67,7 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
             let items;
 
             if (state.items.some(item => item.uuid === newItem.uuid)) {
+                // tslint:disable-next-line:no-console
                 console.error(
                     `AccordionItem error: One item already has the uuid "${
                         newItem.uuid
