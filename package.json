@@ -63,7 +63,6 @@
         "@types/jest": "^23.3.10",
         "@types/react": "^16.7.17",
         "@types/react-dom": "^16.0.11",
-        "@types/recompose": "^0.30.2",
         "babel-core": "^7.0.0-bridge.0",
         "babel-eslint": "^10.0.1",
         "babel-jest": "^23.6.0",
@@ -106,8 +105,7 @@
     },
     "dependencies": {
         "classnames": "^2.2.6",
-        "consecutive": "^5.0.4",
-        "recompose": "^0.30.0"
+        "consecutive": "^5.0.4"
     },
     "peerDependencies": {
         "react": "^15.4.0 || ^16.0.0",
