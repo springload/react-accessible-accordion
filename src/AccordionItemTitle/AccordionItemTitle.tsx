@@ -60,7 +60,7 @@ class AccordionItemTitle extends React.Component<
                     className={titleClassName}
                     onClick={disabled ? undefined : this.handleClick}
                     role={role}
-                    tabIndex={0} // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+                    tabIndex={0}
                     onKeyPress={this.handleKeyPress}
                     {...rest}
                 />
@@ -74,7 +74,7 @@ class AccordionItemTitle extends React.Component<
                 className={titleClassName}
                 onClick={disabled ? undefined : this.handleClick}
                 role={role}
-                tabIndex={0} // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+                tabIndex={0}
                 onKeyPress={this.handleKeyPress}
                 {...rest}
             />

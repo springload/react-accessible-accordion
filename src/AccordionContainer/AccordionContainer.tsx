@@ -65,7 +65,6 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
             let items;
 
             if (state.items.some(item => item.uuid === newItem.uuid)) {
-                // eslint-disable-next-line no-console
                 console.error(
                     `AccordionItem error: One item already has the uuid "${
                         newItem.uuid

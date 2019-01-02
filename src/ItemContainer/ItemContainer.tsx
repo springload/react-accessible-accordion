@@ -45,7 +45,6 @@ export const contextTypes = {
     [CONTEXT_KEY]: () => null,
 };
 
-// eslint-disable-next-line react/no-multi-comp
 export class Consumer extends React.Component<ConsumerProps> {
     static contextTypes = contextTypes;
 

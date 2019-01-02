@@ -13,7 +13,6 @@ type AccordionItemTitleWrapperProps = React.HTMLProps<HTMLDivElement> & {
     hideBodyClassName: string;
 };
 
-// eslint-disable-next-line react/prefer-stateless-function
 export default class AccordionItemTitleWrapper extends React.Component<
     AccordionItemTitleWrapperProps
 > {

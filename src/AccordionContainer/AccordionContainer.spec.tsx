@@ -391,7 +391,6 @@ describe('Accordion', () => {
             expanded: false,
         });
 
-        // eslint-disable-next-line no-console
         expect(console.error).toBeCalled();
     });
 

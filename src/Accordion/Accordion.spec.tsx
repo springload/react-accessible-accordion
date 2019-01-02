@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import Accordion from './Accordion.wrapper'; // eslint-disable-line
+import Accordion from './Accordion.wrapper';
 import AccordionItem from '../AccordionItem/AccordionItem.wrapper';
 import AccordionItemTitle from '../AccordionItemTitle/AccordionItemTitle.wrapper';
 import { Provider } from '../AccordionContainer/AccordionContainer';
