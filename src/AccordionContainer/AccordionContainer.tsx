@@ -143,3 +143,6 @@ export class Consumer extends React.Component<ConsumerProps> {
         return this.props.children(this.context[CONTEXT_KEY]);
     }
 }
+
+export const getAccordionStore = (context): AccordionContainer | undefined =>
+    context[CONTEXT_KEY];

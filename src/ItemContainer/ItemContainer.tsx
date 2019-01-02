@@ -51,3 +51,7 @@ export class Consumer extends React.Component<ConsumerProps> {
         return this.props.children(this.context[CONTEXT_KEY]);
     }
 }
+
+export const getItemStore = (context): ItemContainer | undefined => {
+    return context[CONTEXT_KEY];
+};
