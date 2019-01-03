@@ -15,6 +15,11 @@ describe('AccordionItem', () => {
         resetNextUuid();
     });
 
+    it('renders null outside the context of an accordion', () => {
+        const wrapper = mount(<AccordionItem />);
+        expect(wrapper.html()).toBeNull();
+    });
+
     it('renders correctly with accordion true', () => {
         const wrapper = mount(
             <AccordionProvider accordion={true}>

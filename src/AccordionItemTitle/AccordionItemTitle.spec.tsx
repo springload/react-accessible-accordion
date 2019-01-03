@@ -14,6 +14,26 @@ describe('AccordionItemTitle', () => {
         disabled: false,
     };
 
+    it('renders null outside the context of an ‘Accordion’', () => {
+        const wrapper = mount(
+            <ItemProvider uuid="foo">
+                <AccordionItemTitle />
+            </ItemProvider>,
+        );
+
+        expect(wrapper.html()).toBeNull();
+    });
+
+    it('renders null outside the context of an ‘AccordionItem’', () => {
+        const wrapper = mount(
+            <AccordionProvider items={[DEFAULT_ITEM]}>
+                <AccordionItemTitle />
+            </AccordionProvider>,
+        );
+
+        expect(wrapper.html()).toBeNull();
+    });
+
     function mountItem(
         node: React.ReactNode,
         item: Item = DEFAULT_ITEM,
