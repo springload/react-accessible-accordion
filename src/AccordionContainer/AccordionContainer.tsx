@@ -35,7 +35,7 @@ export type ConsumerProps = {
 };
 
 // Arbitrary, but ought to be unique to avoid context namespace clashes.
-const CONTEXT_KEY = 'react-accessible-accordion@AccordionContainer';
+export const CONTEXT_KEY = 'react-accessible-accordion@AccordionContainer';
 
 export class Provider extends React.Component<ProviderProps, ProviderState> {
     static childContextTypes = {
@@ -135,21 +135,11 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
     }
 }
 
-/*
- * By explictly/strictly typing this, we don't need to do the same with
- * 'static contextTypes' declarations inside class definitions.
- */
-export type ContextTypes = {
-    [CONTEXT_KEY](): null;
-};
-
-export const contextTypes: ContextTypes = {
-    // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
-    [CONTEXT_KEY]: () => null,
-};
-
 export class Consumer extends React.Component<ConsumerProps> {
-    static contextTypes = contextTypes;
+    static contextTypes = {
+        // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
+        [CONTEXT_KEY]: () => null,
+    };
 
     render() {
         return this.props.children(this.context[CONTEXT_KEY]);

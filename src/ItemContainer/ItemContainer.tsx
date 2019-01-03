@@ -14,7 +14,7 @@ export type ItemContainer = {
 };
 
 // Arbitrary, but ought to be unique to avoid context namespace clashes.
-const CONTEXT_KEY = 'react-accessible-accordion@ItemContainer';
+export const CONTEXT_KEY = 'react-accessible-accordion@ItemContainer';
 
 export class Provider extends React.Component<ProviderProps> {
     static childContextTypes = {
@@ -42,13 +42,11 @@ type ConsumerProps = {
     children(container: ItemContainer): React.ReactNode;
 };
 
-export const contextTypes = {
-    // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
-    [CONTEXT_KEY]: () => null,
-};
-
 export class Consumer extends React.Component<ConsumerProps> {
-    static contextTypes = contextTypes;
+    static contextTypes = {
+        // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
+        [CONTEXT_KEY]: () => null,
+    };
 
     render() {
         return this.props.children(this.context[CONTEXT_KEY]);

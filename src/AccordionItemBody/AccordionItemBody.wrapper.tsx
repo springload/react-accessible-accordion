@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 import {
-    contextTypes as accordionContextTypes,
+    CONTEXT_KEY as ACCORDION_CONTEXT_KEY,
     getAccordionStore,
 } from '../AccordionContainer/AccordionContainer';
 import {
-    contextTypes as itemContextTypes,
+    CONTEXT_KEY as ITEM_CONTEXT_KEY,
     getItemStore,
 } from '../ItemContainer/ItemContainer';
 import AccordionItemBody from './AccordionItemBody';
@@ -18,8 +18,9 @@ export default class AccordionItemBodyWrapper extends React.Component<
     AccordionItemBodyWrapperProps
 > {
     static contextTypes = {
-        ...accordionContextTypes,
-        ...itemContextTypes,
+        // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
+        [ACCORDION_CONTEXT_KEY]: () => null,
+        [ITEM_CONTEXT_KEY]: () => null,
     };
 
     static defaultProps = {

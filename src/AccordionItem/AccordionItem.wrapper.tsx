@@ -2,7 +2,7 @@ import consecutive from 'consecutive';
 import * as React from 'react';
 
 import {
-    contextTypes,
+    CONTEXT_KEY,
     getAccordionStore,
 } from '../AccordionContainer/AccordionContainer';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
@@ -23,7 +23,10 @@ export function resetNextUuid() {
 export default class AccordionItemWrapper extends React.Component<
     AccordionItemWrapperProps
 > {
-    static contextTypes = contextTypes;
+    static contextTypes = {
+        // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
+        [CONTEXT_KEY]: () => null,
+    };
 
     static defaultProps = {
         className: 'accordion__item',
