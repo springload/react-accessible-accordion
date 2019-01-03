@@ -4,6 +4,7 @@
     "description": "Accessible Accordion component for React",
     "main": "dist/umd/index.js",
     "jsnext:main": "dist/es/index.js",
+    "types": "./lib/types/index.d.ts",
     "scripts": {
         "test": "jest",
         "test:watch": "jest --watch",
@@ -11,10 +12,11 @@
         "test:coverage:watch": "jest --coverage --watch",
         "coveralls": "cat ./coverage/lcov.info | coveralls",
         "lint": "tslint --project .",
-        "typecheck": "tsc",
+        "typecheck": "tsc --project .",
         "build:css": "cp src/css/*.css dist",
         "build:clean": "mkdir dist || true & rm -rf dist/*",
         "build:rollup": "rollup -c",
+        "build:types": "yarn tsc --project tsconfig.declaration.json",
         "build": "yarn build:clean && yarn build:css && yarn build:rollup",
         "start-demo": "webpack-dev-server --mode=development",
         "pages": "rm -rf pages && webpack --mode=production --progress && cp demo/*.css pages && cp demo/*.ico pages",
@@ -104,12 +106,12 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged && yarn tsc"
+            "pre-commit": "lint-staged && yarn typecheck"
         }
     },
     "lint-staged": {
         "linters": {
-            "*.{ts,tsx}": ["tslint"]
+            "*.{ts,tsx}": ["yarn lint"]
         }
     }
 }
