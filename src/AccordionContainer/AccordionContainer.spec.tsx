@@ -2,7 +2,7 @@ import { mount } from 'enzyme';
 import * as React from 'react';
 import {
     Consumer,
-    contextTypes,
+    CONTEXT_KEY,
     getAccordionStore,
     Provider,
 } from './AccordionContainer';
@@ -433,7 +433,9 @@ describe('Accordion', () => {
             expect(accordionStore).toBeDefined();
             return null;
         };
-        Test.contextTypes = contextTypes;
+        Test.contextTypes = {
+            [CONTEXT_KEY]: () => null,
+        };
 
         mount(
             <Provider>

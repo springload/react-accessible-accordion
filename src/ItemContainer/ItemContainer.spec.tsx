@@ -1,11 +1,6 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
-import {
-    Consumer,
-    contextTypes,
-    getItemStore,
-    Provider,
-} from './ItemContainer';
+import { Consumer, CONTEXT_KEY, getItemStore, Provider } from './ItemContainer';
 
 describe('ItemContainer', () => {
     let mock;
@@ -41,7 +36,9 @@ describe('ItemContainer', () => {
             expect(accordionStore).toBeDefined();
             return null;
         };
-        Test.contextTypes = contextTypes;
+        Test.contextTypes = {
+            [CONTEXT_KEY]: () => null,
+        };
 
         mount(
             <Provider uuid="uuid">
