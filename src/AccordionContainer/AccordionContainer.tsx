@@ -69,10 +69,10 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
 
     addItem = (newItem: Item): void => {
         // Need to use callback style otherwise race-conditions are created by concurrent registrations.
-        this.setState(state => {
+        this.setState((state: ProviderState) => {
             let items: Item[];
 
-            if (state.items.some(item => item.uuid === newItem.uuid)) {
+            if (state.items.some((item: Item) => item.uuid === newItem.uuid)) {
                 // tslint:disable-next-line:no-console
                 console.error(
                     `AccordionItem error: One item already has the uuid "${
@@ -83,7 +83,7 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
             if (this.props.accordion && newItem.expanded) {
                 // If this is a true accordion and the new item is expanded, then the others must be closed.
                 items = [
-                    ...state.items.map(item => ({
+                    ...state.items.map((item: Item) => ({
                         ...item,
                         expanded: false,
                     })),
@@ -100,15 +100,15 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
     };
 
     removeItem = (key: UUID): void => {
-        this.setState(state => ({
-            items: state.items.filter(item => item.uuid !== key),
+        this.setState((state: ProviderState) => ({
+            items: state.items.filter((item: Item) => item.uuid !== key),
         }));
     };
 
     setExpanded = (key: UUID, expanded: boolean): void => {
         this.setState(
-            state => ({
-                items: state.items.map(item => {
+            (state: ProviderState) => ({
+                items: state.items.map((item: Item) => {
                     if (item.uuid === key) {
                         return {
                             ...item,
@@ -132,8 +132,8 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
                         this.props.accordion
                             ? key
                             : this.state.items
-                                  .filter(item => item.expanded)
-                                  .map(item => item.uuid),
+                                  .filter((item: Item) => item.expanded)
+                                  .map((item: Item) => item.uuid),
                     );
                 }
             },

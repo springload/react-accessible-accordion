@@ -1,6 +1,7 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
 import {
+    AccordionContainer,
     Consumer,
     CONTEXT_KEY,
     getAccordionStore,
@@ -416,7 +417,10 @@ describe('Accordion', () => {
     it('fetches context with getAccordionStore', () => {
         expect.assertions(1);
 
-        const Test = (props, context): null => {
+        const Test = (
+            props: {},
+            context: { [CONTEXT_KEY]: AccordionContainer },
+        ): null => {
             const accordionStore = getAccordionStore(context);
             expect(accordionStore).toBeDefined();
 

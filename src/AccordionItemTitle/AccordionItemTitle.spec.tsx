@@ -30,7 +30,8 @@ describe('AccordionItemTitle', () => {
             .find(AccordionProvider)
             .instance() as AccordionProvider;
 
-        return !!instance.state.items.find(item => item.uuid === uuid).expanded;
+        return !!instance.state.items.find((item: Item) => item.uuid === uuid)
+            .expanded;
     }
 
     it('renders correctly with min params', () => {

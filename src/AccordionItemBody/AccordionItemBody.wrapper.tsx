@@ -3,6 +3,7 @@ import * as React from 'react';
 import {
     CONTEXT_KEY as ACCORDION_CONTEXT_KEY,
     getAccordionStore,
+    Item,
 } from '../AccordionContainer/AccordionContainer';
 import {
     CONTEXT_KEY as ITEM_CONTEXT_KEY,
@@ -42,7 +43,9 @@ export default class AccordionItemBodyWrapper extends React.Component<
         const accordionStore = getAccordionStore(this.context);
         const { uuid } = itemStore;
         const { items, accordion } = accordionStore;
-        const item = items.filter(stateItem => stateItem.uuid === uuid)[0];
+        const item = items.filter(
+            (stateItem: Item) => stateItem.uuid === uuid,
+        )[0];
 
         return item ? (
             <AccordionItemBody

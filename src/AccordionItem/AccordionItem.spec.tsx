@@ -1,6 +1,9 @@
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
-import { Provider as AccordionProvider } from '../AccordionContainer/AccordionContainer';
+import {
+    Item,
+    Provider as AccordionProvider,
+} from '../AccordionContainer/AccordionContainer';
 import { default as AccordionItemBody } from '../AccordionItemBody/AccordionItemBody.wrapper';
 import { default as AccordionItemTitle } from '../AccordionItemTitle/AccordionItemTitle.wrapper';
 import { resetNextUuid } from '../helpers/uuid';
@@ -169,7 +172,8 @@ describe('AccordionItem', () => {
         wrapper.setProps({ expanded: true });
 
         expect(
-            instance.state.items.filter(item => item.expanded === true).length,
+            instance.state.items.filter((item: Item) => item.expanded === true)
+                .length,
         ).toEqual(1);
     });
 
@@ -192,7 +196,8 @@ describe('AccordionItem', () => {
         wrapper.setProps({ expanded: undefined });
 
         expect(
-            instance.state.items.filter(item => item.expanded === true).length,
+            instance.state.items.filter((item: Item) => item.expanded === true)
+                .length,
         ).toEqual(0);
     });
 
@@ -214,7 +219,8 @@ describe('AccordionItem', () => {
         wrapper.setProps({ className: 'bar' });
 
         expect(
-            instance.state.items.filter(item => item.expanded === true).length,
+            instance.state.items.filter((item: Item) => item.expanded === true)
+                .length,
         ).toEqual(0);
     });
 
@@ -286,7 +292,7 @@ describe('AccordionItem', () => {
 
         const uuids = wrapper
             .find(ItemProvider)
-            .map(provider => provider.props().uuid);
+            .map((provider: ReactWrapper) => provider.prop('uuid'));
 
         expect(uuids.length).toEqual(2);
         expect(uuids[0]).not.toEqual(uuids[1]);
@@ -309,7 +315,8 @@ describe('AccordionItem', () => {
             .instance() as AccordionProvider;
 
         expect(
-            instance.state.items.filter(item => item.uuid === uuid).length,
+            instance.state.items.filter((item: Item) => item.uuid === uuid)
+                .length,
         ).toEqual(1);
 
         expect(wrapper.find('div[data-enzyme]').length).toEqual(1);

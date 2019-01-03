@@ -1,6 +1,12 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
-import { Consumer, CONTEXT_KEY, getItemStore, Provider } from './ItemContainer';
+import {
+    Consumer,
+    CONTEXT_KEY,
+    getItemStore,
+    ItemContainer,
+    Provider,
+} from './ItemContainer';
 
 describe('ItemContainer', () => {
     it('Propagates uuid by context', () => {
@@ -27,7 +33,10 @@ describe('ItemContainer', () => {
     it('fetches context with getItemStore', () => {
         expect.assertions(1);
 
-        const Test = (props, context): null => {
+        const Test = (
+            props: {},
+            context: { [CONTEXT_KEY]: ItemContainer },
+        ): null => {
             const accordionStore = getItemStore(context);
             expect(accordionStore).toBeDefined();
 

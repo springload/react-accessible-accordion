@@ -1,6 +1,9 @@
 import { default as classnames } from 'classnames';
 import * as React from 'react';
-import { AccordionContainer } from '../AccordionContainer/AccordionContainer';
+import {
+    AccordionContainer,
+    Item,
+} from '../AccordionContainer/AccordionContainer';
 import { UUID } from '../ItemContainer/ItemContainer';
 
 type AccordionItemProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -47,7 +50,7 @@ class AccordionItem extends React.Component<AccordionItemProps> {
 
         // Deliberately not using 'find' because IE compat.
         const currentItem = accordionStore.items.filter(
-            item => item.uuid === uuid,
+            (item: Item) => item.uuid === uuid,
         )[0];
 
         if (!currentItem) {

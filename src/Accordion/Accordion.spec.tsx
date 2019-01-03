@@ -117,8 +117,9 @@ describe('Accordion', () => {
             const instance = wrapper.find(Provider).instance() as Provider;
 
             expect(
-                instance.state.items.filter(item => item.expanded === true)
-                    .length,
+                instance.state.items.filter(
+                    (item: Item) => item.expanded === true,
+                ).length,
             ).toEqual(1);
         });
 
@@ -131,8 +132,9 @@ describe('Accordion', () => {
             const instance = wrapper.find(Provider).instance() as Provider;
 
             expect(
-                instance.state.items.filter(item => item.expanded === true)
-                    .length,
+                instance.state.items.filter(
+                    (item: Item) => item.expanded === true,
+                ).length,
             ).toEqual(2);
         });
 
@@ -145,8 +147,9 @@ describe('Accordion', () => {
             const instance = wrapper.find(Provider).instance() as Provider;
 
             expect(
-                instance.state.items.filter(item => item.expanded === true)
-                    .length,
+                instance.state.items.filter(
+                    (item: Item) => item.expanded === true,
+                ).length,
             ).toEqual(0);
         });
     });
@@ -169,7 +172,8 @@ describe('Accordion', () => {
             .first()
             .simulate('click');
         expect(
-            instance.state.items.filter(item => item.expanded === true).length,
+            instance.state.items.filter((item: Item) => item.expanded === true)
+                .length,
         ).toEqual(0);
     });
 
@@ -184,7 +188,8 @@ describe('Accordion', () => {
         const instance = wrapper.find(Provider).instance() as Provider;
 
         expect(
-            instance.state.items.filter(item => item.expanded === true).length,
+            instance.state.items.filter((item: Item) => item.expanded === true)
+                .length,
         ).toEqual(1);
     });
 
@@ -210,10 +215,12 @@ describe('Accordion', () => {
         const instance = wrapper.find(Provider).instance() as Provider;
 
         expect(
-            instance.state.items.filter(item => item.expanded).length,
+            instance.state.items.filter((item: Item) => item.expanded).length,
         ).toEqual(1);
         expect(
-            wrapper.findWhere(item => item.hasClass(hideBodyClassName)).length,
+            wrapper.findWhere((item: ReactWrapper) =>
+                item.hasClass(hideBodyClassName),
+            ).length,
         ).toEqual(1);
     });
 
@@ -228,7 +235,8 @@ describe('Accordion', () => {
         const instance = wrapper.find(Provider).instance() as Provider;
 
         expect(
-            instance.state.items.filter(item => item.expanded === true).length,
+            instance.state.items.filter((item: Item) => item.expanded === true)
+                .length,
         ).toEqual(2);
     });
 
