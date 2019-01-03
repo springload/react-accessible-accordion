@@ -62,6 +62,8 @@
         "@babel/preset-env": "^7.2.0",
         "@babel/preset-react": "^7.0.0",
         "@babel/preset-typescript": "^7.1.0",
+        "@types/classnames": "^2.2.6",
+        "@types/enzyme": "^3.1.15",
         "@types/jest": "^23.3.10",
         "@types/react": "^16.7.17",
         "@types/react-dom": "^16.0.11",
@@ -90,6 +92,7 @@
         "style-loader": "^0.23.1",
         "tslint": "^5.12.0",
         "tslint-config-prettier": "^1.17.0",
+        "tslint-microsoft-contrib": "^6.0.0",
         "tslint-plugin-prettier": "^2.0.1",
         "tslint-react": "^3.6.0",
         "typescript": "^3.2.2",
@@ -98,8 +101,7 @@
         "webpack-dev-server": "^3.1.3"
     },
     "dependencies": {
-        "classnames": "^2.2.6",
-        "consecutive": "^5.0.4"
+        "classnames": "^2.2.6"
     },
     "peerDependencies": {
         "react": "^15.4.0 || ^16.0.0",

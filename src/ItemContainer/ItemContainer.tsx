@@ -17,12 +17,12 @@ export type ItemContainer = {
 export const CONTEXT_KEY = 'react-accessible-accordion@ItemContainer';
 
 export class Provider extends React.Component<ProviderProps> {
-    static childContextTypes = {
+    static childContextTypes: { [CONTEXT_KEY](): null } = {
         // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
         [CONTEXT_KEY]: () => null,
     };
 
-    getChildContext() {
+    getChildContext(): { [CONTEXT_KEY]: ItemContainer } {
         const { uuid } = this.props;
         const context: ItemContainer = {
             uuid,
@@ -33,7 +33,7 @@ export class Provider extends React.Component<ProviderProps> {
         };
     }
 
-    render() {
+    render(): React.ReactNode {
         return this.props.children || null;
     }
 }
@@ -42,17 +42,33 @@ type ConsumerProps = {
     children(container: ItemContainer): React.ReactNode;
 };
 
-export class Consumer extends React.Component<ConsumerProps> {
-    static contextTypes = {
+type ConsumerState = {};
+
+type ConsumerContext = {
+    [CONTEXT_KEY](): null;
+};
+
+export class Consumer extends React.Component<
+    ConsumerProps,
+    ConsumerState,
+    ConsumerContext
+> {
+    static contextTypes: ConsumerContext = {
         // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
         [CONTEXT_KEY]: () => null,
     };
 
-    render() {
+    context: {
+        [CONTEXT_KEY]: ItemContainer;
+    };
+
+    render(): React.ReactNode {
         return this.props.children(this.context[CONTEXT_KEY]);
     }
 }
 
-export const getItemStore = (context): ItemContainer | undefined => {
+export const getItemStore = <T extends { [CONTEXT_KEY]: ItemContainer }>(
+    context: T,
+): ItemContainer | undefined => {
     return context[CONTEXT_KEY];
 };

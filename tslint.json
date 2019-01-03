@@ -1,14 +1,35 @@
 {
     "extends": [
         "tslint:recommended",
+        "tslint-microsoft-contrib",
         "tslint-react",
         "tslint-config-prettier",
         "tslint-plugin-prettier"
     ],
+    "rulesDirectory": ["node_modules/tslint-microsoft-contrib"],
     "rules": {
         "prettier": true,
         "object-literal-sort-keys": false,
         "member-access": false,
-        "interface-over-type-literal": false
+        "interface-over-type-literal": false,
+        "no-relative-imports": false,
+        "typedef": [
+            true,
+            "call-signature",
+            // "arrow-call-signature",
+            "parameter",
+            // "arrow-parameter",
+            "property-declaration",
+            // "variable-declaration",
+            "member-variable-declaration"
+        ],
+        "variable-name": false,
+        "no-default-export": false,
+        "no-implicit-dependencies": [true, ["enzyme"]],
+        "no-null-keyword": false,
+        "no-suspicious-comment": false,
+        "export-name": false,
+        "completed-docs": false,
+        "strict-boolean-expressions": false
     }
 }

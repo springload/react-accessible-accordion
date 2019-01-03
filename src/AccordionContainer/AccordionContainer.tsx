@@ -3,6 +3,9 @@
 import * as React from 'react';
 import { UUID } from '../ItemContainer/ItemContainer';
 
+// Arbitrary, but ought to be unique to avoid context namespace clashes.
+export const CONTEXT_KEY = 'react-accessible-accordion@AccordionContainer';
+
 export type Item = {
     uuid: UUID;
     expanded: boolean;
@@ -34,20 +37,23 @@ export type ConsumerProps = {
     ): React.ReactNode;
 };
 
-// Arbitrary, but ought to be unique to avoid context namespace clashes.
-export const CONTEXT_KEY = 'react-accessible-accordion@AccordionContainer';
+type ConsumerState = {};
+
+type ConsumerContext = {
+    [CONTEXT_KEY](): null;
+};
 
 export class Provider extends React.Component<ProviderProps, ProviderState> {
-    static childContextTypes = {
+    static childContextTypes: { [CONTEXT_KEY](): null } = {
         // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
         [CONTEXT_KEY]: () => null,
     };
 
-    state = {
+    state: ProviderState = {
         items: this.props.items || [],
     };
 
-    getChildContext() {
+    getChildContext(): { [CONTEXT_KEY]: AccordionContainer } {
         const context: AccordionContainer = {
             items: this.state.items,
             accordion: !!this.props.accordion,
@@ -61,10 +67,10 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
         };
     }
 
-    addItem = (newItem: Item) => {
+    addItem = (newItem: Item): void => {
         // Need to use callback style otherwise race-conditions are created by concurrent registrations.
         this.setState(state => {
-            let items;
+            let items: Item[];
 
             if (state.items.some(item => item.uuid === newItem.uuid)) {
                 // tslint:disable-next-line:no-console
@@ -86,18 +92,20 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
             } else {
                 items = [...state.items, newItem];
             }
+
             return {
                 items,
             };
         });
     };
 
-    removeItem = (key: UUID) =>
+    removeItem = (key: UUID): void => {
         this.setState(state => ({
             items: state.items.filter(item => item.uuid !== key),
         }));
+    };
 
-    setExpanded = (key: UUID, expanded: boolean) =>
+    setExpanded = (key: UUID, expanded: boolean): void => {
         this.setState(
             state => ({
                 items: state.items.map(item => {
@@ -114,6 +122,7 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
                             expanded: false,
                         };
                     }
+
                     return item;
                 }),
             }),
@@ -129,22 +138,34 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
                 }
             },
         );
+    };
 
-    render() {
+    render(): React.ReactNode {
         return this.props.children || null;
     }
 }
 
-export class Consumer extends React.Component<ConsumerProps> {
-    static contextTypes = {
+export class Consumer extends React.Component<
+    ConsumerProps,
+    ConsumerState,
+    ConsumerContext
+> {
+    static contextTypes: ConsumerContext = {
         // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
         [CONTEXT_KEY]: () => null,
     };
 
-    render() {
+    context: {
+        [CONTEXT_KEY]: AccordionContainer;
+    };
+
+    render(): React.ReactNode {
         return this.props.children(this.context[CONTEXT_KEY]);
     }
 }
 
-export const getAccordionStore = (context): AccordionContainer | undefined =>
-    context[CONTEXT_KEY];
+export const getAccordionStore = <
+    T extends { [CONTEXT_KEY]: AccordionContainer }
+>(
+    context: T,
+): AccordionContainer | undefined => context[CONTEXT_KEY];

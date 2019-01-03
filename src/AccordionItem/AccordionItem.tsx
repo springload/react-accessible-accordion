@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import { default as classnames } from 'classnames';
 import * as React from 'react';
 import { AccordionContainer } from '../AccordionContainer/AccordionContainer';
 import { UUID } from '../ItemContainer/ItemContainer';
@@ -12,7 +12,7 @@ type AccordionItemProps = React.HTMLAttributes<HTMLDivElement> & {
 };
 
 class AccordionItem extends React.Component<AccordionItemProps> {
-    componentDidMount() {
+    componentDidMount(): void {
         const { uuid, accordionStore, disabled } = this.props;
 
         accordionStore.addItem({
@@ -22,19 +22,19 @@ class AccordionItem extends React.Component<AccordionItemProps> {
         });
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         this.props.accordionStore.removeItem(this.props.uuid);
     }
 
     // This is here so that the user can dynamically set the 'expanded' state using the 'expanded' prop.
-    componentDidUpdate(prevProps: AccordionItemProps) {
+    componentDidUpdate(prevProps: AccordionItemProps): void {
         const { uuid, expanded, accordionStore } = this.props;
         if (expanded !== prevProps.expanded) {
             accordionStore.setExpanded(uuid, expanded);
         }
     }
 
-    render() {
+    render(): JSX.Element {
         const {
             uuid,
             className,
@@ -56,7 +56,7 @@ class AccordionItem extends React.Component<AccordionItemProps> {
 
         return (
             <div
-                className={classNames(className, {
+                className={classnames(className, {
                     [String(hideBodyClassName)]:
                         !currentItem.expanded && hideBodyClassName,
                 })}

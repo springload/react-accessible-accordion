@@ -4,6 +4,6 @@
 		"noEmit": true,
 		"jsx": "react",
 		"baseUrl": "./",
-		"lib": ["es2015"]
+		"lib": ["dom", "es2015"]
 	}
 }

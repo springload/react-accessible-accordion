@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { UUID } from '../ItemContainer/ItemContainer';
 
 import {
     AccordionContainer,
@@ -9,25 +10,28 @@ import Accordion from './Accordion';
 
 type AccordionWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     accordion?: boolean;
-    onChange(args: any): any; // todo, stricter.
+    onChange(args: UUID | UUID[]): void; // todo, stricter.
 };
 
-class AccordionWrapper extends React.Component<AccordionWrapperProps> {
-    static defaultProps = {
+export default class AccordionWrapper extends React.Component<
+    AccordionWrapperProps
+> {
+    static defaultProps: AccordionWrapperProps = {
         accordion: true,
         onChange: () => {
             //
         },
         className: 'accordion',
-        children: null,
+        children: undefined,
     };
 
     renderAccordion = (accordionStore: AccordionContainer) => {
         const { accordion, onChange, ...rest } = this.props;
+
         return <Accordion accordion={accordionStore.accordion} {...rest} />;
     };
 
-    render() {
+    render(): JSX.Element {
         return (
             <Provider
                 accordion={this.props.accordion}
@@ -38,5 +42,3 @@ class AccordionWrapper extends React.Component<AccordionWrapperProps> {
         );
     }
 }
-
-export default AccordionWrapper;

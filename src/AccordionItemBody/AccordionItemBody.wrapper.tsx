@@ -14,26 +14,36 @@ type AccordionItemBodyWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     hideBodyClassName: string;
 };
 
+type AccordionItemBodyWrapperState = {};
+
+type AccordionItemBodyWrapperContext = {
+    [ACCORDION_CONTEXT_KEY](): null;
+    [ITEM_CONTEXT_KEY](): null;
+};
+
 export default class AccordionItemBodyWrapper extends React.Component<
-    AccordionItemBodyWrapperProps
+    AccordionItemBodyWrapperProps,
+    AccordionItemBodyWrapperState,
+    AccordionItemBodyWrapperContext
 > {
-    static contextTypes = {
+    static contextTypes: AccordionItemBodyWrapperContext = {
         // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
         [ACCORDION_CONTEXT_KEY]: () => null,
         [ITEM_CONTEXT_KEY]: () => null,
     };
 
-    static defaultProps = {
+    static defaultProps: AccordionItemBodyWrapperProps = {
         className: 'accordion__body',
         hideBodyClassName: 'accordion__body--hidden',
     };
 
-    render() {
+    render(): JSX.Element {
         const itemStore = getItemStore(this.context);
         const accordionStore = getAccordionStore(this.context);
         const { uuid } = itemStore;
         const { items, accordion } = accordionStore;
         const item = items.filter(stateItem => stateItem.uuid === uuid)[0];
+
         return item ? (
             <AccordionItemBody
                 {...this.props}

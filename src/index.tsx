@@ -1,14 +1,13 @@
-import Accordion from './Accordion/Accordion.wrapper';
-import AccordionItem, {
-    resetNextUuid,
-} from './AccordionItem/AccordionItem.wrapper';
-import AccordionItemBody from './AccordionItemBody/AccordionItemBody.wrapper';
-import AccordionItemTitle from './AccordionItemTitle/AccordionItemTitle.wrapper';
+import AccordionWrapper from './Accordion/Accordion.wrapper';
+import AccordionItemWrapper from './AccordionItem/AccordionItem.wrapper';
+import AccordionItemBodyWrapper from './AccordionItemBody/AccordionItemBody.wrapper';
+import AccordionItemTitleWrapper from './AccordionItemTitle/AccordionItemTitle.wrapper';
+import { resetNextUuid } from './helpers/uuid';
 
 export {
-    Accordion,
-    AccordionItem,
-    AccordionItemTitle,
-    AccordionItemBody,
+    AccordionWrapper as Accordion,
+    AccordionItemWrapper as AccordionItem,
+    AccordionItemTitleWrapper as AccordionItemTitle,
+    AccordionItemBodyWrapper as AccordionItemBody,
     resetNextUuid,
 };

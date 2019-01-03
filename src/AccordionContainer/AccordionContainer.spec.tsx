@@ -4,23 +4,19 @@ import {
     Consumer,
     CONTEXT_KEY,
     getAccordionStore,
+    Item,
     Provider,
 } from './AccordionContainer';
 
-const DEFAULT_ITEM = {
+const DEFAULT_ITEM: Item = {
     uuid: 'foo',
     expanded: false,
     disabled: false,
 };
 
 describe('Accordion', () => {
-    let mock;
-    beforeEach(() => {
-        mock = jest.fn(() => null);
-    });
-
     it('correctly instantiates with all expected methods', () => {
-        const container = mount(<Provider />).instance();
+        const container = mount(<Provider />).instance() as Provider;
         expect(container).toBeDefined();
         expect(container.addItem).toBeDefined();
         expect(container.removeItem).toBeDefined();
@@ -28,6 +24,8 @@ describe('Accordion', () => {
     });
 
     it('works without any props', () => {
+        const mock = jest.fn(() => null);
+
         mount(
             <Provider>
                 <Consumer>{mock}</Consumer>
@@ -44,6 +42,8 @@ describe('Accordion', () => {
     });
 
     it('respects the `accordion` prop', () => {
+        const mock = jest.fn(() => null);
+
         mount(
             <Provider accordion={true}>
                 <Consumer>{mock}</Consumer>
@@ -58,7 +58,9 @@ describe('Accordion', () => {
     });
 
     it('respects the `items` prop', () => {
+        const mock = jest.fn(() => null);
         const items = [DEFAULT_ITEM];
+
         mount(
             <Provider items={items}>
                 <Consumer>{mock}</Consumer>
@@ -73,20 +75,19 @@ describe('Accordion', () => {
     });
 
     it('can add an item', () => {
-        const wrapper = mount(
+        const mock = jest.fn(() => null);
+
+        const instance = mount(
             <Provider>
                 <Consumer>{mock}</Consumer>
             </Provider>,
-        );
+        ).instance() as Provider;
 
         expect(mock).toHaveBeenCalledWith(
             expect.objectContaining({ items: [] }),
         );
 
-        wrapper
-            .find(Provider)
-            .instance()
-            .addItem(DEFAULT_ITEM);
+        instance.addItem(DEFAULT_ITEM);
 
         expect(mock).toHaveBeenCalledWith(
             expect.objectContaining({ items: [DEFAULT_ITEM] }),
@@ -94,15 +95,16 @@ describe('Accordion', () => {
     });
 
     it('can remove an item', () => {
+        const mock = jest.fn(() => null);
         const itemFoo = { ...DEFAULT_ITEM, uuid: 'foo' };
         const itemBar = { ...DEFAULT_ITEM, uuid: 'bar' };
         const items = [itemFoo, itemBar];
 
-        const wrapper = mount(
+        const instance = mount(
             <Provider items={items}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
-        );
+        ).instance() as Provider;
 
         expect(mock).toHaveBeenCalledWith(
             expect.objectContaining({
@@ -110,10 +112,7 @@ describe('Accordion', () => {
             }),
         );
 
-        wrapper
-            .find(Provider)
-            .instance()
-            .removeItem(itemFoo.uuid);
+        instance.removeItem(itemFoo.uuid);
 
         expect(mock).toHaveBeenCalledWith(
             expect.objectContaining({
@@ -123,23 +122,21 @@ describe('Accordion', () => {
     });
 
     it('adding an expanded item to a strict-accordion closes other items', () => {
-        const wrapper = mount(
+        const mock = jest.fn(() => null);
+        const instance = mount(
             <Provider
                 accordion={true}
                 items={[{ ...DEFAULT_ITEM, uuid: 'foo', expanded: true }]}
             >
                 <Consumer>{mock}</Consumer>
             </Provider>,
-        );
+        ).instance() as Provider;
 
-        wrapper
-            .find(Provider)
-            .instance()
-            .addItem({
-                ...DEFAULT_ITEM,
-                uuid: 'bar',
-                expanded: true,
-            });
+        instance.addItem({
+            ...DEFAULT_ITEM,
+            uuid: 'bar',
+            expanded: true,
+        });
 
         expect(mock).toHaveBeenCalledWith(
             expect.objectContaining({
@@ -152,22 +149,20 @@ describe('Accordion', () => {
     });
 
     it("adding an expanded item to a non-strict-accordion doesn't close other items", () => {
-        const wrapper = mount(
+        const mock = jest.fn(() => null);
+        const instance = mount(
             <Provider
                 items={[{ ...DEFAULT_ITEM, uuid: 'foo', expanded: true }]}
             >
                 <Consumer>{mock}</Consumer>
             </Provider>,
-        );
+        ).instance() as Provider;
 
-        wrapper
-            .find(Provider)
-            .instance()
-            .addItem({
-                ...DEFAULT_ITEM,
-                uuid: 'bar',
-                expanded: true,
-            });
+        instance.addItem({
+            ...DEFAULT_ITEM,
+            uuid: 'bar',
+            expanded: true,
+        });
 
         expect(mock).toHaveBeenCalledWith(
             expect.objectContaining({
@@ -180,21 +175,19 @@ describe('Accordion', () => {
     });
 
     it('can expand an item', () => {
+        const mock = jest.fn(() => null);
         const item = {
             ...DEFAULT_ITEM,
             expanded: false,
         };
 
-        const wrapper = mount(
+        const instance = mount(
             <Provider items={[item]}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
-        );
+        ).instance() as Provider;
 
-        wrapper
-            .find(Provider)
-            .instance()
-            .setExpanded(item.uuid, !item.expanded);
+        instance.setExpanded(item.uuid, !item.expanded);
 
         expect(mock).toHaveBeenCalledWith(
             expect.objectContaining({
@@ -209,6 +202,7 @@ describe('Accordion', () => {
     });
 
     it('setting the expanded property to true in a strict accordion closes all other items', () => {
+        const mock = jest.fn(() => null);
         const fooItem = {
             ...DEFAULT_ITEM,
             uuid: 'foo',
@@ -220,16 +214,13 @@ describe('Accordion', () => {
             expanded: false,
         };
 
-        const wrapper = mount(
+        const instance = mount(
             <Provider accordion={true} items={[fooItem, barItem]}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
-        );
+        ).instance() as Provider;
 
-        wrapper
-            .find(Provider)
-            .instance()
-            .setExpanded(barItem.uuid, true);
+        instance.setExpanded(barItem.uuid, true);
 
         expect(mock).toHaveBeenCalledWith(
             expect.objectContaining({
@@ -242,6 +233,7 @@ describe('Accordion', () => {
     });
 
     it('setting the expanded property to true in a non-strict accordion does not close all other items', () => {
+        const mock = jest.fn(() => null);
         const fooItem = {
             ...DEFAULT_ITEM,
             uuid: 'foo',
@@ -253,16 +245,13 @@ describe('Accordion', () => {
             expanded: false,
         };
 
-        const wrapper = mount(
+        const instance = mount(
             <Provider items={[fooItem, barItem]}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
-        );
+        ).instance() as Provider;
 
-        wrapper
-            .find(Provider)
-            .instance()
-            .setExpanded(barItem.uuid, true);
+        instance.setExpanded(barItem.uuid, true);
 
         expect(mock).toHaveBeenCalledWith(
             expect.objectContaining({
@@ -281,6 +270,7 @@ describe('Accordion', () => {
      */
     describe('Race conditions', () => {
         it('can add multiple items at the same time', () => {
+            const mock = jest.fn(() => null);
             const fooItem = {
                 ...DEFAULT_ITEM,
                 uuid: 'foo',
@@ -292,13 +282,11 @@ describe('Accordion', () => {
                 expanded: false,
             };
 
-            const wrapper = mount(
+            const instance = mount(
                 <Provider>
                     <Consumer>{mock}</Consumer>
                 </Provider>,
-            );
-
-            const instance = wrapper.find(Provider).instance();
+            ).instance() as Provider;
 
             instance.addItem(fooItem);
             instance.addItem(barItem);
@@ -311,6 +299,7 @@ describe('Accordion', () => {
         });
 
         it('can remove multiple items at the same time', () => {
+            const mock = jest.fn(() => null);
             const fooItem = {
                 ...DEFAULT_ITEM,
                 uuid: 'foo',
@@ -322,13 +311,11 @@ describe('Accordion', () => {
                 expanded: false,
             };
 
-            const wrapper = mount(
+            const instance = mount(
                 <Provider items={[fooItem, barItem]}>
                     <Consumer>{mock}</Consumer>
                 </Provider>,
-            );
-
-            const instance = wrapper.find(Provider).instance();
+            ).instance() as Provider;
 
             instance.removeItem(fooItem.uuid);
             instance.removeItem(barItem.uuid);
@@ -341,6 +328,7 @@ describe('Accordion', () => {
         });
 
         it('can update expanded state of multiple items at the same time', () => {
+            const mock = jest.fn(() => null);
             const fooItem = {
                 ...DEFAULT_ITEM,
                 uuid: 'foo',
@@ -352,13 +340,11 @@ describe('Accordion', () => {
                 expanded: false,
             };
 
-            const wrapper = mount(
+            const instance = mount(
                 <Provider items={[fooItem, barItem]}>
                     <Consumer>{mock}</Consumer>
                 </Provider>,
-            );
-
-            const instance = wrapper.find(Provider).instance();
+            ).instance() as Provider;
 
             instance.setExpanded(fooItem.uuid, true);
             instance.setExpanded(barItem.uuid, true);
@@ -378,7 +364,7 @@ describe('Accordion', () => {
         const uuid = 'uniqueCustomID';
         jest.spyOn(global.console, 'error');
 
-        const instance = mount(<Provider />).instance();
+        const instance = mount(<Provider />).instance() as Provider;
 
         instance.addItem({
             ...DEFAULT_ITEM,
@@ -404,7 +390,8 @@ describe('Accordion', () => {
 
         const instance = mount(
             <Provider accordion={true} items={[item]} onChange={onChange} />,
-        ).instance();
+        ).instance() as Provider;
+
         instance.setExpanded(item.uuid, true);
 
         expect(onChange).toHaveBeenCalledWith(item.uuid);
@@ -419,7 +406,8 @@ describe('Accordion', () => {
 
         const instance = mount(
             <Provider items={[item]} onChange={onChange} />,
-        ).instance();
+        ).instance() as Provider;
+
         instance.setExpanded(item.uuid, true);
 
         expect(onChange).toHaveBeenCalledWith([item.uuid]);
@@ -431,6 +419,7 @@ describe('Accordion', () => {
         const Test = (props, context) => {
             const accordionStore = getAccordionStore(context);
             expect(accordionStore).toBeDefined();
+
             return null;
         };
         Test.contextTypes = {

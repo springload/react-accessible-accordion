@@ -1,10 +1,10 @@
-import consecutive from 'consecutive';
 import * as React from 'react';
 
 import {
     CONTEXT_KEY,
     getAccordionStore,
 } from '../AccordionContainer/AccordionContainer';
+import { nextUuid } from '../helpers/uuid';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
 import AccordionItem from './AccordionItem';
 
@@ -15,20 +15,23 @@ type AccordionItemWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     uuid?: string;
 };
 
-let nextUuid = consecutive();
-export function resetNextUuid() {
-    nextUuid = consecutive();
-}
+type AccordionItemWrapperState = {};
+
+type AccordionItemWrapperContext = {
+    [CONTEXT_KEY](): null;
+};
 
 export default class AccordionItemWrapper extends React.Component<
-    AccordionItemWrapperProps
+    AccordionItemWrapperProps,
+    AccordionItemWrapperState,
+    AccordionItemWrapperContext
 > {
-    static contextTypes = {
+    static contextTypes: AccordionItemWrapperContext = {
         // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
         [CONTEXT_KEY]: () => null,
     };
 
-    static defaultProps = {
+    static defaultProps: AccordionItemWrapperProps = {
         className: 'accordion__item',
         hideBodyClassName: '',
         disabled: false,
@@ -36,9 +39,9 @@ export default class AccordionItemWrapper extends React.Component<
         uuid: undefined,
     };
 
-    id = nextUuid();
+    id: number = nextUuid();
 
-    render() {
+    render(): JSX.Element {
         const accordionStore = getAccordionStore(this.context);
         if (!accordionStore) {
             // TODO: log an error/warning?

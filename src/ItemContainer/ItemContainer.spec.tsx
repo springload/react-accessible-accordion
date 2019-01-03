@@ -3,12 +3,8 @@ import * as React from 'react';
 import { Consumer, CONTEXT_KEY, getItemStore, Provider } from './ItemContainer';
 
 describe('ItemContainer', () => {
-    let mock;
-    beforeEach(() => {
-        mock = jest.fn(() => null);
-    });
-
     it('Propagates uuid by context', () => {
+        const mock = jest.fn(() => null);
         const uuid = 'foo';
 
         mount(
@@ -34,6 +30,7 @@ describe('ItemContainer', () => {
         const Test = (props, context) => {
             const accordionStore = getItemStore(context);
             expect(accordionStore).toBeDefined();
+
             return null;
         };
         Test.contextTypes = {

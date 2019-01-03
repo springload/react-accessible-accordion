@@ -7,27 +7,34 @@ import {
     CONTEXT_KEY as ITEM_CONTEXT_KEY,
     getItemStore,
 } from '../ItemContainer/ItemContainer';
-import AccordionItemTitle from './AccordionItemTitle';
+import { default as AccordionItemTitle } from './AccordionItemTitle';
 
 type AccordionItemTitleWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     hideBodyClassName: string;
 };
 
+type AccordionItemTitleWrapperState = {};
+
+type AccordionItemTitleWrapperContext = {
+    [ACCORDION_CONTEXT_KEY](): null;
+    [ITEM_CONTEXT_KEY](): null;
+};
+
 export default class AccordionItemTitleWrapper extends React.Component<
     AccordionItemTitleWrapperProps
 > {
-    static contextTypes = {
+    static contextTypes: AccordionItemTitleWrapperContext = {
         // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
         [ACCORDION_CONTEXT_KEY]: () => null,
         [ITEM_CONTEXT_KEY]: () => null,
     };
 
-    static defaultProps = {
+    static defaultProps: AccordionItemTitleWrapperProps = {
         className: 'accordion__title',
         hideBodyClassName: '',
     };
 
-    render() {
+    render(): JSX.Element {
         const itemStore = getItemStore(this.context);
         const accordionStore = getAccordionStore(this.context);
 

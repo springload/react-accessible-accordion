@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import { default as classnames } from 'classnames';
 import * as React from 'react';
 import { UUID } from '../ItemContainer/ItemContainer';
 
@@ -10,7 +10,7 @@ type AccordionItemBodyProps = React.HTMLAttributes<HTMLDivElement> & {
     accordion: boolean;
 };
 
-const AccordionItemBody = (props: AccordionItemBodyProps) => {
+const AccordionItemBody = (props: AccordionItemBodyProps): JSX.Element => {
     const {
         className,
         hideBodyClassName,
@@ -21,15 +21,17 @@ const AccordionItemBody = (props: AccordionItemBodyProps) => {
         ...rest
     } = props;
 
+    const role = accordion ? 'tabpanel' : null;
+
     return (
         <div
             id={`accordion__body-${uuid}`}
-            className={classNames(className, {
+            className={classnames(className, {
                 [hideBodyClassName]: !expanded,
             })}
             aria-hidden={!expanded}
             aria-labelledby={`accordion__title-${uuid}`}
-            role={accordion ? 'tabpanel' : null}
+            role={role}
             {...rest}
         />
     );

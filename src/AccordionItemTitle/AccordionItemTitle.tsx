@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import { default as classnames } from 'classnames';
 import * as React from 'react';
 import { UUID } from '../ItemContainer/ItemContainer';
 
@@ -8,17 +8,15 @@ type AccordionItemTitleProps = React.HTMLAttributes<HTMLDivElement> & {
     uuid: UUID;
     disabled: boolean;
     accordion: boolean;
-    setExpanded: (uuid: UUID, expanded: boolean) => void;
+    setExpanded(uuid: UUID, expanded: boolean): void;
 };
 
 type AccordionItemTitleState = {};
 
-class AccordionItemTitle extends React.Component<
+export default class AccordionItemTitle extends React.Component<
     AccordionItemTitleProps,
     AccordionItemTitleState
 > {
-    static accordionElementName = 'AccordionItemTitle';
-
     handleClick = () => {
         const { uuid, expanded, setExpanded } = this.props;
 
@@ -32,7 +30,7 @@ class AccordionItemTitle extends React.Component<
         }
     };
 
-    render() {
+    render(): JSX.Element {
         const {
             className,
             hideBodyClassName,
@@ -47,39 +45,42 @@ class AccordionItemTitle extends React.Component<
         const id = `accordion__title-${uuid}`;
         const ariaControls = `accordion__body-${uuid}`;
         const role = accordion ? 'tab' : 'button';
-        const titleClassName = classNames(className, {
+        const titleClassName = classnames(className, {
             [hideBodyClassName]: hideBodyClassName && !expanded,
         });
+        const onClick = disabled ? undefined : this.handleClick;
 
-        if (role === 'tab') {
-            return (
-                <div
-                    id={id}
-                    aria-selected={expanded}
-                    aria-controls={ariaControls}
-                    className={titleClassName}
-                    onClick={disabled ? undefined : this.handleClick}
-                    role={role}
-                    tabIndex={0}
-                    onKeyPress={this.handleKeyPress}
-                    {...rest}
-                />
-            );
+        switch (role) {
+            case 'tab': {
+                return (
+                    <div
+                        id={id}
+                        aria-selected={expanded}
+                        aria-controls={ariaControls}
+                        className={titleClassName}
+                        onClick={onClick}
+                        role={role}
+                        tabIndex={0}
+                        onKeyPress={this.handleKeyPress}
+                        {...rest}
+                    />
+                );
+            }
+            default: {
+                return (
+                    <div
+                        id={id}
+                        aria-expanded={expanded}
+                        aria-controls={ariaControls}
+                        className={titleClassName}
+                        onClick={onClick}
+                        role={role}
+                        tabIndex={0}
+                        onKeyPress={this.handleKeyPress}
+                        {...rest}
+                    />
+                );
+            }
         }
-        return (
-            <div
-                id={id}
-                aria-expanded={expanded}
-                aria-controls={ariaControls}
-                className={titleClassName}
-                onClick={disabled ? undefined : this.handleClick}
-                role={role}
-                tabIndex={0}
-                onKeyPress={this.handleKeyPress}
-                {...rest}
-            />
-        );
     }
 }
-
-export default AccordionItemTitle;

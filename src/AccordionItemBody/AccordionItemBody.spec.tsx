@@ -1,22 +1,23 @@
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
 import {
     Item,
     Provider as AccordionProvider,
 } from '../AccordionContainer/AccordionContainer';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
-import AccordionItemBody from './AccordionItemBody.wrapper';
+import { default as AccordionItemBody } from './AccordionItemBody.wrapper';
 
 describe('AccordionItemBody', () => {
-    function mountItem(Node) {
+    function mountItem(children: React.ReactNode): ReactWrapper {
         const item: Item = {
             uuid: 0,
             expanded: false,
             disabled: false,
         };
+
         return mount(
             <AccordionProvider accordion={true} items={[item]}>
-                <ItemProvider uuid={item.uuid}>{Node}</ItemProvider>
+                <ItemProvider uuid={item.uuid}>{children}</ItemProvider>
             </AccordionProvider>,
         );
     }
@@ -46,7 +47,9 @@ describe('AccordionItemBody', () => {
 
     it('respects arbitrary user-defined props', () => {
         const wrapper = mountItem(<AccordionItemBody lang="en" />);
-        expect(wrapper.find('div').instance().lang).toEqual('en');
+        const div = wrapper.find('div').getDOMNode();
+
+        expect(div.getAttribute('lang')).toEqual('en');
     });
 
     it('does not render if no associated item found in context', () => {
