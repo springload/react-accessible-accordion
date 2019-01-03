@@ -11,6 +11,8 @@ const output = {
     },
 };
 
+const extensions = ['.ts', '.tsx', '.js', '.jsx', '.json'];
+
 export default [
     {
         input: 'src/index.tsx',
@@ -35,9 +37,11 @@ export default [
                 jsnext: true,
                 main: true,
                 browser: true,
+                extensions,
             }),
             babel({
                 exclude: 'node_modules/**',
+                extensions,
             }),
             commonjs(),
         ],
