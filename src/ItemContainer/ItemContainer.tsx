@@ -19,7 +19,7 @@ export const CONTEXT_KEY = 'react-accessible-accordion@ItemContainer';
 export class Provider extends React.Component<ProviderProps> {
     static childContextTypes: { [CONTEXT_KEY](): null } = {
         // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
-        [CONTEXT_KEY]: () => null,
+        [CONTEXT_KEY]: (): null => null,
     };
 
     getChildContext(): { [CONTEXT_KEY]: ItemContainer } {
@@ -55,7 +55,7 @@ export class Consumer extends React.Component<
 > {
     static contextTypes: ConsumerContext = {
         // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
-        [CONTEXT_KEY]: () => null,
+        [CONTEXT_KEY]: (): null => null,
     };
 
     context: {

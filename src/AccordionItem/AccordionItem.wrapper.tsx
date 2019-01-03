@@ -28,7 +28,7 @@ export default class AccordionItemWrapper extends React.Component<
 > {
     static contextTypes: AccordionItemWrapperContext = {
         // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
-        [CONTEXT_KEY]: () => null,
+        [CONTEXT_KEY]: (): null => null,
     };
 
     static defaultProps: AccordionItemWrapperProps = {

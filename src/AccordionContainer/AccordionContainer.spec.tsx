@@ -416,14 +416,14 @@ describe('Accordion', () => {
     it('fetches context with getAccordionStore', () => {
         expect.assertions(1);
 
-        const Test = (props, context) => {
+        const Test = (props, context): null => {
             const accordionStore = getAccordionStore(context);
             expect(accordionStore).toBeDefined();
 
             return null;
         };
         Test.contextTypes = {
-            [CONTEXT_KEY]: () => null,
+            [CONTEXT_KEY]: (): null => null,
         };
 
         mount(

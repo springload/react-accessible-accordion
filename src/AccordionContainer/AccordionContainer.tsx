@@ -46,7 +46,7 @@ type ConsumerContext = {
 export class Provider extends React.Component<ProviderProps, ProviderState> {
     static childContextTypes: { [CONTEXT_KEY](): null } = {
         // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
-        [CONTEXT_KEY]: () => null,
+        [CONTEXT_KEY]: (): null => null,
     };
 
     state: ProviderState = {
@@ -152,7 +152,7 @@ export class Consumer extends React.Component<
 > {
     static contextTypes: ConsumerContext = {
         // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
-        [CONTEXT_KEY]: () => null,
+        [CONTEXT_KEY]: (): null => null,
     };
 
     context: {

@@ -18,14 +18,14 @@ export default class AccordionWrapper extends React.Component<
 > {
     static defaultProps: AccordionWrapperProps = {
         accordion: true,
-        onChange: () => {
+        onChange: (): void => {
             //
         },
         className: 'accordion',
         children: undefined,
     };
 
-    renderAccordion = (accordionStore: AccordionContainer) => {
+    renderAccordion = (accordionStore: AccordionContainer): JSX.Element => {
         const { accordion, onChange, ...rest } = this.props;
 
         return <Accordion accordion={accordionStore.accordion} {...rest} />;

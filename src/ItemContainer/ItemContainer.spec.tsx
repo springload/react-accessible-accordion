@@ -27,14 +27,14 @@ describe('ItemContainer', () => {
     it('fetches context with getItemStore', () => {
         expect.assertions(1);
 
-        const Test = (props, context) => {
+        const Test = (props, context): null => {
             const accordionStore = getItemStore(context);
             expect(accordionStore).toBeDefined();
 
             return null;
         };
         Test.contextTypes = {
-            [CONTEXT_KEY]: () => null,
+            [CONTEXT_KEY]: (): null => null,
         };
 
         mount(

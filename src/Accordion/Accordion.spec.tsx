@@ -27,8 +27,8 @@ describe('Accordion', () => {
 
     describe('<Accordion accordion="true" />', () => {
         const [FooTitle, BarTitle] = [
-            () => <AccordionItemTitle>Foo</AccordionItemTitle>,
-            () => <AccordionItemTitle>Bar</AccordionItemTitle>,
+            (): JSX.Element => <AccordionItemTitle>Foo</AccordionItemTitle>,
+            (): JSX.Element => <AccordionItemTitle>Bar</AccordionItemTitle>,
         ];
 
         function mountAccordion(): ReactWrapper {
@@ -92,8 +92,8 @@ describe('Accordion', () => {
 
     describe('<Accordion accordion="false" /> (‘tabpanel’)', () => {
         const [FooTitle, BarTitle] = [
-            () => <AccordionItemTitle>Foo</AccordionItemTitle>,
-            () => <AccordionItemTitle>Bar</AccordionItemTitle>,
+            (): JSX.Element => <AccordionItemTitle>Foo</AccordionItemTitle>,
+            (): JSX.Element => <AccordionItemTitle>Bar</AccordionItemTitle>,
         ];
 
         function mountTabpanel(): ReactWrapper {

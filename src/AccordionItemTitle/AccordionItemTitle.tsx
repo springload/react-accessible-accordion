@@ -17,13 +17,13 @@ export default class AccordionItemTitle extends React.Component<
     AccordionItemTitleProps,
     AccordionItemTitleState
 > {
-    handleClick = () => {
+    handleClick = (): void => {
         const { uuid, expanded, setExpanded } = this.props;
 
         setExpanded(uuid, !expanded);
     };
 
-    handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>) => {
+    handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
         if (evt.charCode === 13 || evt.charCode === 32) {
             evt.preventDefault();
             this.handleClick();
