@@ -13,7 +13,7 @@ describe('AccordionItem', () => {
 
     it('renders correctly with accordion true', () => {
         const wrapper = mount(
-            <AccordionProvider accordion>
+            <AccordionProvider accordion={true}>
                 <AccordionItem className="accordion__item">
                     <AccordionItemTitle className="accordion__title">
                         <div>Fake title</div>
@@ -245,7 +245,7 @@ describe('AccordionItem', () => {
             </AccordionProvider>
         );
 
-        const wrapper = mount(<Wrapper showChild />);
+        const wrapper = mount(<Wrapper showChild={true} />);
 
         expect(
             wrapper.find(AccordionProvider).instance().state.items.length,
@@ -290,7 +290,7 @@ describe('AccordionItem', () => {
             <AccordionProvider>
                 <AccordionItem uuid={uuid}>
                     <AccordionItemTitle>
-                        <div data-enzyme>Fake title</div>
+                        <div data-enzyme={true}>Fake title</div>
                     </AccordionItemTitle>
                 </AccordionItem>
             </AccordionProvider>,

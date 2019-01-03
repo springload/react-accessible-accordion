@@ -123,7 +123,7 @@ describe('AccordionItemTitle', () => {
     it('doesn’t toggle state when clicking but disabled & accordion === true', async () => {
         const wrapper = mount(
             <AccordionProvider
-                accordion
+                accordion={true}
                 items={[
                     {
                         ...DEFAULT_ITEM,

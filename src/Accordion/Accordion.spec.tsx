@@ -139,7 +139,7 @@ describe('Accordion', () => {
     it('does not expanded disabled items on click', () => {
         const wrapper = mount(
             <Accordion accordion={false}>
-                <AccordionItem disabled>
+                <AccordionItem disabled={true}>
                     <AccordionItemTitle className="foo">
                         Foo Title
                     </AccordionItemTitle>

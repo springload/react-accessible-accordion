@@ -45,7 +45,7 @@ describe('Accordion', () => {
 
     it('respects the `accordion` prop', () => {
         mount(
-            <Provider accordion>
+            <Provider accordion={true}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
         );
@@ -125,7 +125,7 @@ describe('Accordion', () => {
     it('adding an expanded item to a strict-accordion closes other items', () => {
         const wrapper = mount(
             <Provider
-                accordion
+                accordion={true}
                 items={[{ ...DEFAULT_ITEM, uuid: 'foo', expanded: true }]}
             >
                 <Consumer>{mock}</Consumer>
@@ -221,7 +221,7 @@ describe('Accordion', () => {
         };
 
         const wrapper = mount(
-            <Provider accordion items={[fooItem, barItem]}>
+            <Provider accordion={true} items={[fooItem, barItem]}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
         );
@@ -403,7 +403,7 @@ describe('Accordion', () => {
         };
 
         const instance = mount(
-            <Provider accordion items={[item]} onChange={onChange} />,
+            <Provider accordion={true} items={[item]} onChange={onChange} />,
         ).instance();
         instance.setExpanded(item.uuid, true);
 
