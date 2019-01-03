@@ -13,7 +13,7 @@ const output = {
 
 export default [
     {
-        input: 'src/index.js',
+        input: 'src/index.tsx',
         external: ['react', 'react-dom'],
         output: [
             {
