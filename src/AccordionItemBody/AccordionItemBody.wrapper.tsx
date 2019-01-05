@@ -39,8 +39,28 @@ export default class AccordionItemBodyWrapper extends React.Component<
     };
 
     render(): JSX.Element {
-        const itemStore = getItemStore(this.context);
         const accordionStore = getAccordionStore(this.context);
+
+        if (!accordionStore) {
+            // tslint:disable-next-line:no-console
+            console.error(
+                'AccordionItemBody component cannot render because it has not been nested inside an Accordion component.',
+            );
+
+            return null;
+        }
+
+        const itemStore = getItemStore(this.context);
+
+        if (!itemStore) {
+            // tslint:disable-next-line:no-console
+            console.error(
+                'AccordionItemBody component cannot render because it has not been nested inside an AccordionItem component.',
+            );
+
+            return null;
+        }
+
         const { uuid } = itemStore;
         const { items, accordion } = accordionStore;
         const item = items.filter(

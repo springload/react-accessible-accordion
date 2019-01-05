@@ -36,11 +36,25 @@ export default class AccordionItemTitleWrapper extends React.Component<
     };
 
     render(): JSX.Element {
-        const itemStore = getItemStore(this.context);
         const accordionStore = getAccordionStore(this.context);
 
-        if (!itemStore || !accordionStore) {
-            // TODO: log some warning/error?
+        if (!accordionStore) {
+            // tslint:disable-next-line:no-console
+            console.error(
+                'AccordionItemTitle component cannot render because it has not been nested inside an Accordion component.',
+            );
+
+            return null;
+        }
+
+        const itemStore = getItemStore(this.context);
+
+        if (!itemStore) {
+            // tslint:disable-next-line:no-console
+            console.error(
+                'AccordionItemTitle component cannot render because it has not been nested inside an AccordionItem component.',
+            );
+
             return null;
         }
 

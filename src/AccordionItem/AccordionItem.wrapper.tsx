@@ -44,7 +44,11 @@ export default class AccordionItemWrapper extends React.Component<
     render(): JSX.Element {
         const accordionStore = getAccordionStore(this.context);
         if (!accordionStore) {
-            // TODO: log an error/warning?
+            // tslint:disable-next-line:no-console
+            console.error(
+                'AccordionItem component cannot render because it has not been nested inside an Accordion component.',
+            );
+
             return null;
         }
         const { uuid, ...rest } = this.props;
