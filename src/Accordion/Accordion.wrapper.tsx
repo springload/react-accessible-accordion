@@ -10,7 +10,7 @@ import Accordion from './Accordion';
 
 type AccordionWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     accordion?: boolean;
-    onChange(args: UUID | UUID[]): void; // todo, stricter.
+    onChange(args: UUID | UUID[]): void;
 };
 
 export default class AccordionWrapper extends React.Component<
