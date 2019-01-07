@@ -4,6 +4,7 @@ import {
     getAccordionStore,
     Item,
 } from '../AccordionContainer/AccordionContainer';
+import * as propTypes from '../helpers/propTypes';
 import {
     CONTEXT_KEY as ITEM_CONTEXT_KEY,
     getItemStore,
@@ -25,9 +26,8 @@ export default class AccordionItemTitleWrapper extends React.Component<
     AccordionItemTitleWrapperProps
 > {
     static contextTypes: AccordionItemTitleWrapperContext = {
-        // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
-        [ACCORDION_CONTEXT_KEY]: (): null => null,
-        [ITEM_CONTEXT_KEY]: (): null => null,
+        [ACCORDION_CONTEXT_KEY]: propTypes.wildcard,
+        [ITEM_CONTEXT_KEY]: propTypes.wildcard,
     };
 
     static defaultProps: AccordionItemTitleWrapperProps = {

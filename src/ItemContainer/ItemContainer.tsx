@@ -1,6 +1,7 @@
 // tslint:disable:max-classes-per-file
 
 import * as React from 'react';
+import * as propTypes from '../helpers/propTypes';
 
 export type UUID = string | number;
 
@@ -18,8 +19,7 @@ export const CONTEXT_KEY = 'react-accessible-accordion@ItemContainer';
 
 export class Provider extends React.Component<ProviderProps> {
     static childContextTypes: { [CONTEXT_KEY](): null } = {
-        // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
-        [CONTEXT_KEY]: (): null => null,
+        [CONTEXT_KEY]: propTypes.wildcard,
     };
 
     getChildContext(): { [CONTEXT_KEY]: ItemContainer } {
@@ -54,8 +54,7 @@ export class Consumer extends React.Component<
     ConsumerContext
 > {
     static contextTypes: ConsumerContext = {
-        // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
-        [CONTEXT_KEY]: (): null => null,
+        [CONTEXT_KEY]: propTypes.wildcard,
     };
 
     context: {

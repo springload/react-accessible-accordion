@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as propTypes from '../helpers/propTypes';
 
 import {
     CONTEXT_KEY as ACCORDION_CONTEXT_KEY,
@@ -28,9 +29,8 @@ export default class AccordionItemBodyWrapper extends React.Component<
     AccordionItemBodyWrapperContext
 > {
     static contextTypes: AccordionItemBodyWrapperContext = {
-        // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
-        [ACCORDION_CONTEXT_KEY]: (): null => null,
-        [ITEM_CONTEXT_KEY]: (): null => null,
+        [ACCORDION_CONTEXT_KEY]: propTypes.wildcard,
+        [ITEM_CONTEXT_KEY]: propTypes.wildcard,
     };
 
     static defaultProps: AccordionItemBodyWrapperProps = {

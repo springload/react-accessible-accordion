@@ -4,6 +4,7 @@ import {
     CONTEXT_KEY,
     getAccordionStore,
 } from '../AccordionContainer/AccordionContainer';
+import * as propTypes from '../helpers/propTypes';
 import { nextUuid } from '../helpers/uuid';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
 import AccordionItem from './AccordionItem';
@@ -27,8 +28,7 @@ export default class AccordionItemWrapper extends React.Component<
     AccordionItemWrapperContext
 > {
     static contextTypes: AccordionItemWrapperContext = {
-        // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
-        [CONTEXT_KEY]: (): null => null,
+        [CONTEXT_KEY]: propTypes.wildcard,
     };
 
     static defaultProps: AccordionItemWrapperProps = {
