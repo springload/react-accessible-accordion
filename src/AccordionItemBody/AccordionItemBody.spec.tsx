@@ -52,14 +52,24 @@ describe('AccordionItemBody', () => {
         expect(div.getAttribute('lang')).toEqual('en');
     });
 
-    it('does not render if no associated item found in context', () => {
+    it('does not render if no accordionStore found in context', () => {
+        const wrapper = mount(
+            <ItemProvider uuid="foo">
+                <AccordionItemBody>
+                    <div data-enzyme={true}>Hello World</div>
+                </AccordionItemBody>
+            </ItemProvider>,
+        );
+
+        expect(wrapper.find('div[data-enzyme]').length).toEqual(0);
+    });
+
+    it('does not render if no itemStore found in context', () => {
         const wrapper = mount(
             <AccordionProvider accordion={true} items={[]}>
-                <ItemProvider uuid="foo">
-                    <AccordionItemBody>
-                        <div data-enzyme={true}>Hello World</div>
-                    </AccordionItemBody>
-                </ItemProvider>
+                <AccordionItemBody>
+                    <div data-enzyme={true}>Hello World</div>
+                </AccordionItemBody>
             </AccordionProvider>,
         );
 
