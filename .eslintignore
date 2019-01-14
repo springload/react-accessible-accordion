@@ -1,7 +1,0 @@
-node_modules
-dist
-demo/bundle.js
-demo/bundle.js.map
-coverage/
-flow-typed/
-pages/

@@ -1,51 +1,59 @@
-// @flow
+// tslint:disable:max-classes-per-file
 
-import { Component, type Node } from 'react';
-import { type UUID } from '../ItemContainer/ItemContainer';
+import * as React from 'react';
+import * as propTypes from '../helpers/propTypes';
+import { UUID } from '../ItemContainer/ItemContainer';
+
+// Arbitrary, but ought to be unique to avoid context namespace clashes.
+export const CONTEXT_KEY = 'react-accessible-accordion@AccordionContainer';
 
 export type Item = {
-    uuid: UUID,
-    expanded: boolean,
-    disabled: boolean,
+    uuid: UUID;
+    expanded: boolean;
+    disabled: boolean;
 };
 
 export type ProviderState = {
-    items: Array<Item>,
+    items: Item[];
 };
 
 export type ProviderProps = {
-    accordion?: boolean,
-    onChange?: Function,
-    children?: ?Node,
-    items?: Array<Item>,
+    accordion?: boolean;
+    children?: React.ReactNode;
+    items?: Item[];
+    onChange?(args: UUID | UUID[]): void;
 };
 
 export type AccordionContainer = {
-    accordion: boolean,
-    items: Array<Item>,
-    addItem: Item => void,
-    removeItem: UUID => void,
-    setExpanded: (key: UUID, expanded: boolean) => void,
+    accordion: boolean;
+    items: Item[];
+    addItem(item: Item): void;
+    removeItem(uuid: UUID): void;
+    setExpanded(uuid: UUID, expanded: boolean): void;
 };
 
 export type ConsumerProps = {
-    children: ($Shape<AccordionContainer>) => Node,
+    children(
+        container: { [P in keyof AccordionContainer]?: AccordionContainer[P] },
+    ): React.ReactNode;
 };
 
-// Arbitrary, but ought to be unique to avoid context namespace clashes.
-const CONTEXT_KEY = 'react-accessible-accordion@AccordionContainer';
+type ConsumerState = {};
 
-export class Provider extends Component<ProviderProps, ProviderState> {
-    static childContextTypes = {
-        // Empty anonymous callback is a hacky 'wildcard' workaround for bypassing prop-types.
-        [CONTEXT_KEY]: () => null,
+type ConsumerContext = {
+    [CONTEXT_KEY](): null;
+};
+
+export class Provider extends React.Component<ProviderProps, ProviderState> {
+    static childContextTypes: { [CONTEXT_KEY](): null } = {
+        [CONTEXT_KEY]: propTypes.wildcard,
     };
 
-    state = {
+    state: ProviderState = {
         items: this.props.items || [],
     };
 
-    getChildContext() {
+    getChildContext(): { [CONTEXT_KEY]: AccordionContainer } {
         const context: AccordionContainer = {
             items: this.state.items,
             accordion: !!this.props.accordion,
@@ -59,13 +67,13 @@ export class Provider extends Component<ProviderProps, ProviderState> {
         };
     }
 
-    addItem = (newItem: Item) => {
+    addItem = (newItem: Item): void => {
         // Need to use callback style otherwise race-conditions are created by concurrent registrations.
-        this.setState(state => {
-            let items;
+        this.setState((state: ProviderState) => {
+            let items: Item[];
 
-            if (state.items.some(item => item.uuid === newItem.uuid)) {
-                // eslint-disable-next-line no-console
+            if (state.items.some((item: Item) => item.uuid === newItem.uuid)) {
+                // tslint:disable-next-line:no-console
                 console.error(
                     `AccordionItem error: One item already has the uuid "${
                         newItem.uuid
@@ -75,7 +83,7 @@ export class Provider extends Component<ProviderProps, ProviderState> {
             if (this.props.accordion && newItem.expanded) {
                 // If this is a true accordion and the new item is expanded, then the others must be closed.
                 items = [
-                    ...state.items.map(item => ({
+                    ...state.items.map((item: Item) => ({
                         ...item,
                         expanded: false,
                     })),
@@ -84,21 +92,23 @@ export class Provider extends Component<ProviderProps, ProviderState> {
             } else {
                 items = [...state.items, newItem];
             }
+
             return {
                 items,
             };
         });
     };
 
-    removeItem = (key: UUID) =>
-        this.setState(state => ({
-            items: state.items.filter(item => item.uuid !== key),
+    removeItem = (key: UUID): void => {
+        this.setState((state: ProviderState) => ({
+            items: state.items.filter((item: Item) => item.uuid !== key),
         }));
+    };
 
-    setExpanded = (key: UUID, expanded: boolean) =>
+    setExpanded = (key: UUID, expanded: boolean): void => {
         this.setState(
-            state => ({
-                items: state.items.map(item => {
+            (state: ProviderState) => ({
+                items: state.items.map((item: Item) => {
                     if (item.uuid === key) {
                         return {
                             ...item,
@@ -112,6 +122,7 @@ export class Provider extends Component<ProviderProps, ProviderState> {
                             expanded: false,
                         };
                     }
+
                     return item;
                 }),
             }),
@@ -121,25 +132,39 @@ export class Provider extends Component<ProviderProps, ProviderState> {
                         this.props.accordion
                             ? key
                             : this.state.items
-                                  .filter(item => item.expanded)
-                                  .map(item => item.uuid),
+                                  .filter((item: Item) => item.expanded)
+                                  .map((item: Item) => item.uuid),
                     );
                 }
             },
         );
+    };
 
-    render() {
+    render(): React.ReactNode {
         return this.props.children || null;
     }
 }
 
-// eslint-disable-next-line react/no-multi-comp
-export class Consumer extends Component<ConsumerProps> {
-    static contextTypes = {
-        [CONTEXT_KEY]: () => null,
+export class Consumer extends React.Component<
+    ConsumerProps,
+    ConsumerState,
+    ConsumerContext
+> {
+    static contextTypes: ConsumerContext = {
+        [CONTEXT_KEY]: propTypes.wildcard,
     };
 
-    render() {
+    context: {
+        [CONTEXT_KEY]: AccordionContainer;
+    };
+
+    render(): React.ReactNode {
         return this.props.children(this.context[CONTEXT_KEY]);
     }
 }
+
+export const getAccordionStore = <
+    T extends { [CONTEXT_KEY]: AccordionContainer }
+>(
+    context: T,
+): AccordionContainer | undefined => context[CONTEXT_KEY];

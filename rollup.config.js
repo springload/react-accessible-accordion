@@ -1,5 +1,4 @@
 import resolve from 'rollup-plugin-node-resolve';
-import { eslint } from 'rollup-plugin-eslint';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
@@ -12,9 +11,11 @@ const output = {
     },
 };
 
+const extensions = ['.ts', '.tsx', '.js', '.jsx', '.json'];
+
 export default [
     {
-        input: 'src/index.js',
+        input: 'src/index.tsx',
         external: ['react', 'react-dom'],
         output: [
             {
@@ -36,10 +37,11 @@ export default [
                 jsnext: true,
                 main: true,
                 browser: true,
+                extensions,
             }),
-            eslint(),
             babel({
                 exclude: 'node_modules/**',
+                extensions,
             }),
             commonjs(),
         ],

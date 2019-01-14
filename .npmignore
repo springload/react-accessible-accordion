@@ -8,8 +8,8 @@ src
 webpack
 .nvmrc
 .travis.yml
-.eslintignore
-.eslintrc
+tsconfig.*
+tslint.json
 .editorconfig
 .githooks
 bin

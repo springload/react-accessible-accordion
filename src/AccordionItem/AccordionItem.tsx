@@ -1,20 +1,21 @@
-// @flow
+import { default as classnames } from 'classnames';
+import * as React from 'react';
+import {
+    AccordionContainer,
+    Item,
+} from '../AccordionContainer/AccordionContainer';
+import { UUID } from '../ItemContainer/ItemContainer';
 
-import React, { Component, type ElementProps } from 'react';
-import classNames from 'classnames';
-import { type UUID } from '../ItemContainer/ItemContainer';
-import { type AccordionContainer } from '../AccordionContainer/AccordionContainer';
-
-type AccordionItemProps = ElementProps<'div'> & {
-    uuid: UUID,
-    hideBodyClassName: ?string,
-    disabled: ?boolean,
-    expanded: ?boolean,
-    accordionStore: AccordionContainer,
+type AccordionItemProps = React.HTMLAttributes<HTMLDivElement> & {
+    uuid: UUID;
+    hideBodyClassName?: string;
+    disabled?: boolean;
+    expanded?: boolean;
+    accordionStore: AccordionContainer;
 };
 
-class AccordionItem extends Component<AccordionItemProps> {
-    componentDidMount() {
+class AccordionItem extends React.Component<AccordionItemProps> {
+    componentDidMount(): void {
         const { uuid, accordionStore, disabled } = this.props;
 
         accordionStore.addItem({
@@ -24,19 +25,19 @@ class AccordionItem extends Component<AccordionItemProps> {
         });
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         this.props.accordionStore.removeItem(this.props.uuid);
     }
 
     // This is here so that the user can dynamically set the 'expanded' state using the 'expanded' prop.
-    componentDidUpdate(prevProps: AccordionItemProps) {
+    componentDidUpdate(prevProps: AccordionItemProps): void {
         const { uuid, expanded, accordionStore } = this.props;
         if (expanded !== prevProps.expanded) {
             accordionStore.setExpanded(uuid, expanded);
         }
     }
 
-    render() {
+    render(): JSX.Element {
         const {
             uuid,
             className,
@@ -49,7 +50,7 @@ class AccordionItem extends Component<AccordionItemProps> {
 
         // Deliberately not using 'find' because IE compat.
         const currentItem = accordionStore.items.filter(
-            item => item.uuid === uuid,
+            (item: Item) => item.uuid === uuid,
         )[0];
 
         if (!currentItem) {
@@ -58,8 +59,8 @@ class AccordionItem extends Component<AccordionItemProps> {
 
         return (
             <div
-                className={classNames(className, {
-                    [hideBodyClassName]:
+                className={classnames(className, {
+                    [String(hideBodyClassName)]:
                         !currentItem.expanded && hideBodyClassName,
                 })}
                 {...rest}

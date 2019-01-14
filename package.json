@@ -4,23 +4,25 @@
     "description": "Accessible Accordion component for React",
     "main": "dist/umd/index.js",
     "jsnext:main": "dist/es/index.js",
+    "types": "./lib/types/index.d.ts",
     "scripts": {
         "test": "jest",
         "test:watch": "jest --watch",
         "test:coverage": "jest --coverage",
         "test:coverage:watch": "jest --coverage --watch",
         "coveralls": "cat ./coverage/lcov.info | coveralls",
-        "lint": "eslint .",
+        "lint": "tslint --project .",
+        "typecheck": "tsc --project .",
         "build:css": "cp src/css/*.css dist",
         "build:clean": "mkdir dist || true & rm -rf dist/*",
         "build:rollup": "rollup -c",
-        "build:flow": "flow-copy-source src dist/es -i \"**/*.spec.js\"",
-        "build": "yarn build:clean && yarn build:css && yarn build:flow && yarn build:rollup",
+        "build:types": "yarn tsc --project tsconfig.declaration.json",
+        "build": "yarn build:clean && yarn build:css && yarn build:rollup",
         "start-demo": "webpack-dev-server --mode=development",
         "pages": "rm -rf pages && webpack --mode=production --progress && cp demo/*.css pages && cp demo/*.ico pages",
         "deploy": "yarn pages && ./bin/deploy.sh",
         "format": "prettier \"**/*\" --write",
-        "prepublishOnly": "yarn lint && yarn test && yarn build"
+        "prepublishOnly": "yarn typecheck && yarn lint && yarn test && yarn build"
     },
     "repository": {
         "type": "git",
@@ -58,10 +60,14 @@
         "@babel/plugin-proposal-class-properties": "^7.2.1",
         "@babel/polyfill": "^7.0.0",
         "@babel/preset-env": "^7.2.0",
-        "@babel/preset-flow": "^7.0.0",
         "@babel/preset-react": "^7.0.0",
+        "@babel/preset-typescript": "^7.1.0",
+        "@types/classnames": "^2.2.6",
+        "@types/enzyme": "^3.1.15",
+        "@types/jest": "^23.3.10",
+        "@types/react": "^16.7.17",
+        "@types/react-dom": "^16.0.11",
         "babel-core": "^7.0.0-bridge.0",
-        "babel-eslint": "^10.0.1",
         "babel-jest": "^23.6.0",
         "babel-loader": "^8.0.4",
         "coveralls": "^3.0.0",
@@ -69,16 +75,6 @@
         "enzyme": "^3.3.0",
         "enzyme-adapter-react-16": "^1.1.1",
         "enzyme-to-json": "^3.3.4",
-        "eslint": "^5.1.0",
-        "eslint-config-airbnb": "^17.0.0",
-        "eslint-config-prettier": "^3.3.0",
-        "eslint-plugin-flowtype": "^2.50.0",
-        "eslint-plugin-flowtype-errors": "^3.6.0",
-        "eslint-plugin-import": "^2.13.0",
-        "eslint-plugin-jsx-a11y": "^6.1.1",
-        "eslint-plugin-react": "^7.10.0",
-        "flow-bin": "^0.89.0",
-        "flow-copy-source": "^2.0.2",
         "html-webpack-plugin": "^3.2.0",
         "husky": "^1.2.1",
         "jest": "^23.6.0",
@@ -88,21 +84,24 @@
         "react": "^16.4.0",
         "react-dom": "^16.4.0",
         "react-test-renderer": "^16.4.0",
-        "rollup": "^0.68.0",
-        "rollup-plugin-babel": "^4.1.0",
+        "rollup": "^1.0.1",
+        "rollup-plugin-babel": "^4.2.0",
         "rollup-plugin-commonjs": "^9.2.0",
-        "rollup-plugin-eslint": "^5.0.0",
         "rollup-plugin-node-resolve": "^4.0.0",
         "rollup-plugin-replace": "^2.1.0",
         "style-loader": "^0.23.1",
+        "tslint": "^5.12.0",
+        "tslint-config-prettier": "^1.17.0",
+        "tslint-microsoft-contrib": "^6.0.0",
+        "tslint-plugin-prettier": "^2.0.1",
+        "tslint-react": "^3.6.0",
+        "typescript": "^3.2.2",
         "webpack": "^4.5.0",
         "webpack-cli": "^3.1.0",
         "webpack-dev-server": "^3.1.3"
     },
     "dependencies": {
-        "classnames": "^2.2.6",
-        "consecutive": "^5.0.4",
-        "recompose": "^0.30.0"
+        "classnames": "^2.2.6"
     },
     "peerDependencies": {
         "react": "^15.4.0 || ^16.0.0",
@@ -110,12 +109,12 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged && yarn flow"
+            "pre-commit": "lint-staged && yarn typecheck"
         }
     },
     "lint-staged": {
         "linters": {
-            "*.{js,jsx}": ["eslint"]
+            "*.{ts,tsx}": ["yarn lint"]
         }
     }
 }

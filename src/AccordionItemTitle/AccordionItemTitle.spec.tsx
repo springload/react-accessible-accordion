@@ -1,19 +1,43 @@
-// @flow
-
-import React from 'react';
-import { mount } from 'enzyme';
-import AccordionItemTitle from './AccordionItemTitle.wrapper';
+import { mount, ReactWrapper } from 'enzyme';
+import * as React from 'react';
+import {
+    Item,
+    Provider as AccordionProvider,
+} from '../AccordionContainer/AccordionContainer';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
-import { Provider as AccordionProvider } from '../AccordionContainer/AccordionContainer';
+import { default as AccordionItemTitle } from './AccordionItemTitle.wrapper';
 
 describe('AccordionItemTitle', () => {
-    const DEFAULT_ITEM = {
+    const DEFAULT_ITEM: Item = {
         uuid: 0,
         expanded: false,
         disabled: false,
     };
 
-    function mountItem(node, item = DEFAULT_ITEM) {
+    it('renders null outside the context of an ‘Accordion’', () => {
+        const wrapper = mount(
+            <ItemProvider uuid="foo">
+                <AccordionItemTitle />
+            </ItemProvider>,
+        );
+
+        expect(wrapper.html()).toBeNull();
+    });
+
+    it('renders null outside the context of an ‘AccordionItem’', () => {
+        const wrapper = mount(
+            <AccordionProvider items={[DEFAULT_ITEM]}>
+                <AccordionItemTitle />
+            </AccordionProvider>,
+        );
+
+        expect(wrapper.html()).toBeNull();
+    });
+
+    function mountItem(
+        node: React.ReactNode,
+        item: Item = DEFAULT_ITEM,
+    ): ReactWrapper {
         return mount(
             <AccordionProvider accordion={false} items={[item]}>
                 <ItemProvider uuid={item.uuid}>{node}</ItemProvider>
@@ -21,11 +45,13 @@ describe('AccordionItemTitle', () => {
         );
     }
 
-    function isExpanded(wrapper, uuid) {
-        return !!wrapper
+    function isExpanded(wrapper: ReactWrapper, uuid: string | number): boolean {
+        const instance = wrapper
             .find(AccordionProvider)
-            .instance()
-            .state.items.find(item => item.uuid === uuid).expanded;
+            .instance() as AccordionProvider;
+
+        return !!instance.state.items.find((item: Item) => item.uuid === uuid)
+            .expanded;
     }
 
     it('renders correctly with min params', () => {
@@ -118,14 +144,16 @@ describe('AccordionItemTitle', () => {
             <AccordionItemTitle lang="en">Fake Title</AccordionItemTitle>,
         );
 
-        expect(wrapper.find('div').instance().lang).toEqual('en');
+        const div = wrapper.find('div').getDOMNode();
+
+        expect(div.getAttribute('lang')).toEqual('en');
     });
 
     // edge case to cover branch
     it('doesn’t toggle state when clicking but disabled & accordion === true', async () => {
         const wrapper = mount(
             <AccordionProvider
-                accordion
+                accordion={true}
                 items={[
                     {
                         ...DEFAULT_ITEM,
