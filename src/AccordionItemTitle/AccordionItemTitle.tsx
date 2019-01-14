@@ -44,43 +44,24 @@ export default class AccordionItemTitle extends React.Component<
 
         const id = `accordion__title-${uuid}`;
         const ariaControls = `accordion__body-${uuid}`;
-        const role = accordion ? 'tab' : 'button';
+        const role = 'button';
         const titleClassName = classnames(className, {
             [hideBodyClassName]: hideBodyClassName && !expanded,
         });
         const onClick = disabled ? undefined : this.handleClick;
 
-        switch (role) {
-            case 'tab': {
-                return (
-                    <div
-                        id={id}
-                        aria-selected={expanded}
-                        aria-controls={ariaControls}
-                        className={titleClassName}
-                        onClick={onClick}
-                        role={role}
-                        tabIndex={0}
-                        onKeyPress={this.handleKeyPress}
-                        {...rest}
-                    />
-                );
-            }
-            default: {
-                return (
-                    <div
-                        id={id}
-                        aria-expanded={expanded}
-                        aria-controls={ariaControls}
-                        className={titleClassName}
-                        onClick={onClick}
-                        role={role}
-                        tabIndex={0}
-                        onKeyPress={this.handleKeyPress}
-                        {...rest}
-                    />
-                );
-            }
-        }
+        return (
+            <div
+                id={id}
+                aria-expanded={expanded}
+                aria-controls={ariaControls}
+                className={titleClassName}
+                onClick={onClick}
+                role={role}
+                tabIndex={0}
+                onKeyPress={this.handleKeyPress}
+                {...rest}
+            />
+        );
     }
 }
