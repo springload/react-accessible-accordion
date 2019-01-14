@@ -10,16 +10,6 @@ import { default as AccordionItemTitle } from '../AccordionItemTitle/AccordionIt
 import { default as Accordion } from './Accordion.wrapper';
 
 describe('Accordion', () => {
-    it('renders correctly with min params', () => {
-        const wrapper = mount(<Accordion />);
-        expect(wrapper.find('div').props().role).toEqual('tablist');
-    });
-
-    it('renders correctly with accordion false', () => {
-        const wrapper = mount(<Accordion accordion={false} />);
-        expect(wrapper.find('div').props().role).toBeUndefined();
-    });
-
     it('different className', () => {
         const wrapper = mount(<Accordion className="testCSSClass" />);
         expect(wrapper.find('div').props().className).toEqual('testCSSClass');
@@ -245,13 +235,5 @@ describe('Accordion', () => {
         const div = wrapper.find('div').getDOMNode();
 
         expect(div.getAttribute('lang')).toEqual('en');
-    });
-
-    it('renders correctly after update', () => {
-        const wrapper = mount(<Accordion accordion={false} />);
-        expect(wrapper.find('div').props().role).toBeUndefined();
-
-        wrapper.setProps({ accordion: true });
-        expect(wrapper.find('div').props().role).toEqual('tablist');
     });
 });
