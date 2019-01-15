@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = (env, options) => ({
     mode: options.mode,
     devtool: 'source-map',
-    entry: path.resolve(__dirname, 'demo/js/demo.js'),
+    entry: path.resolve(__dirname, 'demo/js/demo.tsx'),
     output: {
         path: path.resolve(__dirname, 'pages'),
         filename:
@@ -17,7 +17,7 @@ module.exports = (env, options) => ({
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|ts)x?$/,
                 exclude: [/node_modules/],
                 use: [
                     {
@@ -30,6 +30,9 @@ module.exports = (env, options) => ({
                 loaders: ['style-loader', 'css-loader'],
             },
         ],
+    },
+    resolve: {
+        extensions: ['.wasm', '.mjs', '.js', '.jsx', '.json', '.ts', '.tsx'],
     },
 
     plugins: [
