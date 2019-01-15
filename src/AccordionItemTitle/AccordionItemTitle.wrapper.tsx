@@ -59,7 +59,7 @@ export default class AccordionItemTitleWrapper extends React.Component<
         }
 
         const { uuid } = itemStore;
-        const { items, accordion } = accordionStore;
+        const { items } = accordionStore;
         const item = items.filter(
             (stateItem: Item) => stateItem.uuid === uuid,
         )[0];
@@ -69,7 +69,6 @@ export default class AccordionItemTitleWrapper extends React.Component<
                 {...this.props}
                 {...item}
                 setExpanded={accordionStore.setExpanded}
-                accordion={accordion}
             />
         );
     }

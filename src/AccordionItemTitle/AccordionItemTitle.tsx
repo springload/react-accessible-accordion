@@ -7,7 +7,6 @@ type AccordionItemTitleProps = React.HTMLAttributes<HTMLDivElement> & {
     expanded: boolean;
     uuid: UUID;
     disabled: boolean;
-    accordion: boolean;
     setExpanded(uuid: UUID, expanded: boolean): void;
 };
 
@@ -34,7 +33,6 @@ export default class AccordionItemTitle extends React.Component<
         const {
             className,
             hideBodyClassName,
-            accordion,
             setExpanded,
             expanded,
             uuid,
