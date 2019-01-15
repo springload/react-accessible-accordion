@@ -8,7 +8,12 @@ import {
 } from '../AccordionContainer/AccordionContainer';
 import Accordion from './Accordion';
 
-type AccordionWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+
+type AccordionWrapperProps = Omit<
+    React.HTMLAttributes<HTMLDivElement>,
+    'onChange'
+> & {
     accordion?: boolean;
     onChange(args: UUID | UUID[]): void;
 };

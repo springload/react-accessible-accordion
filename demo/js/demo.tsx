@@ -1,3 +1,4 @@
+// tslint:disable-next-line no-implicit-dependencies no-import-side-effect
 import '@babel/polyfill';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -5,13 +6,15 @@ import * as ReactDOM from 'react-dom';
 import {
     Accordion,
     AccordionItem,
-    AccordionItemTitle,
     AccordionItemBody,
+    AccordionItemTitle,
 } from '../../src';
 
+// tslint:disable-next-line no-import-side-effect
 import '../../src/css/fancy-example.css';
 
-const Example = () => (
+// tslint:disable-next-line max-func-body-length
+const Example = (): JSX.Element => (
     <div className="demo-container">
         <h2>Default settings</h2>
 
@@ -598,7 +601,13 @@ const Example = () => (
 
         <h2 className="u-margin-top">Informative onChange</h2>
 
-        <Accordion onChange={itemUuid => console.log(itemUuid)}>
+        <Accordion
+            // tslint:disable-next-line react-this-binding-issue jsx-no-lambda
+            onChange={(itemUuid: string | number): void => {
+                // tslint:disable-next-line no-console
+                console.log(itemUuid);
+            }}
+        >
             <AccordionItem uuid="uniqueItem-1">
                 <AccordionItemTitle>
                     <h3 className="u-position-relative">
