@@ -22,7 +22,7 @@ const AccordionItemBody = (props: AccordionItemBodyProps): JSX.Element => {
     } = props;
 
     const role = accordion ? 'region' : null;
-    const hideAriaAttribute = accordion ? !expanded : null;
+    const hideAriaAttribute = accordion ? null : !expanded;
 
     return (
         <div

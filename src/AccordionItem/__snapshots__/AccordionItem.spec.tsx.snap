@@ -38,12 +38,12 @@ exports[`AccordionItem renders correctly with accordion true 1`] = `
 >
   <div
     aria-controls="accordion__body-0"
-    aria-selected={false}
+    aria-expanded={false}
     className="accordion__title"
     id="accordion__title-0"
     onClick={[Function]}
     onKeyPress={[Function]}
-    role="tab"
+    role="button"
     tabIndex={0}
   >
     <div>
@@ -51,11 +51,11 @@ exports[`AccordionItem renders correctly with accordion true 1`] = `
     </div>
   </div>
   <div
-    aria-hidden={true}
+    aria-hidden={null}
     aria-labelledby="accordion__title-0"
     className="accordion__body accordion__body--hidden"
     id="accordion__body-0"
-    role="tabpanel"
+    role="region"
   >
     <div>
       Fake body
