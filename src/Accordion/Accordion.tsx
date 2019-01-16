@@ -1,13 +1,9 @@
 import * as React from 'react';
 
-type AccordionProps = React.HTMLAttributes<HTMLDivElement> & {
-    accordion: boolean;
-};
+type AccordionProps = React.HTMLAttributes<HTMLDivElement>;
 
-const Accordion = ({ accordion, ...rest }: AccordionProps): JSX.Element => {
-    const role = accordion ? 'tablist' : undefined;
-
-    return <div role={role} {...rest} />;
+const Accordion = ({ ...rest }: AccordionProps): JSX.Element => {
+    return <div {...rest} />;
 };
 
 export default Accordion;

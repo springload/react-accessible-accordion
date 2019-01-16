@@ -21,7 +21,8 @@ const AccordionItemBody = (props: AccordionItemBodyProps): JSX.Element => {
         ...rest
     } = props;
 
-    const role = accordion ? 'tabpanel' : null;
+    const role = accordion ? 'region' : null;
+    const hideAriaAttribute = accordion ? null : !expanded;
 
     return (
         <div
@@ -29,7 +30,7 @@ const AccordionItemBody = (props: AccordionItemBodyProps): JSX.Element => {
             className={classnames(className, {
                 [hideBodyClassName]: !expanded,
             })}
-            aria-hidden={!expanded}
+            aria-hidden={hideAriaAttribute}
             aria-labelledby={`accordion__title-${uuid}`}
             role={role}
             {...rest}

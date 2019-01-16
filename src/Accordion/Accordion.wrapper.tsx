@@ -33,7 +33,7 @@ export default class AccordionWrapper extends React.Component<
     renderAccordion = (accordionStore: AccordionContainer): JSX.Element => {
         const { accordion, onChange, ...rest } = this.props;
 
-        return <Accordion accordion={accordionStore.accordion} {...rest} />;
+        return <Accordion {...rest} />;
     };
 
     render(): JSX.Element {

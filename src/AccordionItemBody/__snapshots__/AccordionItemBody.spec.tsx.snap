@@ -2,11 +2,11 @@
 
 exports[`AccordionItemBody renders correctly with min params 1`] = `
 <div
-  aria-hidden={true}
+  aria-hidden={null}
   aria-labelledby="accordion__title-0"
   className="accordion__body accordion__body--hidden"
   id="accordion__body-0"
-  role="tabpanel"
+  role="region"
 >
   <div>
     Fake body
