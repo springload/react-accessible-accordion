@@ -1,7 +1,7 @@
-.accordion__body {
+.accordion__panel {
     display: block;
 }
 
-.accordion__body--hidden {
+.accordion__panel--hidden {
     display: none;
 }

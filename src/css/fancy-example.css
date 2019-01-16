@@ -24,7 +24,7 @@
     position: relative;
 }
 
-.accordion__title {
+.accordion__heading {
     background-color: #f4f4f4;
     color: #444;
     cursor: pointer;
@@ -34,24 +34,24 @@
     border: none;
 }
 
-.accordion__title:hover {
+.accordion__heading:hover {
     background-color: #ddd;
 }
 
-.accordion__body {
+.accordion__panel {
     padding: 20px;
     display: block;
     animation: fadein 0.35s ease-in;
 }
 
-.accordion__body--hidden {
+.accordion__panel--hidden {
     display: none;
     opacity: 0;
     animation: fadein 0.35s ease-in;
 }
 
-.accordion__title > *:last-child,
-.accordion__body > *:last-child {
+.accordion__heading > *:last-child,
+.accordion__panel > *:last-child {
     margin-bottom: 0;
 }
 
@@ -152,12 +152,12 @@
     }
 }
 
-.accordion__title--animated:hover .accordion__arrow {
+.accordion__heading--animated:hover .accordion__arrow {
     animation-name: move-down;
     animation-duration: 1.5s;
 }
 
-.accordion__title--animated[aria-expanded='true']:hover .accordion__arrow {
+.accordion__heading--animated[aria-expanded='true']:hover .accordion__arrow {
     animation-name: move-up;
     animation-duration: 1.5s;
 }

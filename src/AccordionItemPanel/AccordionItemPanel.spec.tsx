@@ -5,9 +5,9 @@ import {
     Provider as AccordionProvider,
 } from '../AccordionContainer/AccordionContainer';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
-import { default as AccordionItemBody } from './AccordionItemBody.wrapper';
+import { default as AccordionItemPanel } from './AccordionItemPanel.wrapper';
 
-describe('AccordionItemBody', () => {
+describe('AccordionItemPanel', () => {
     function mountItem(children: React.ReactNode): ReactWrapper {
         const item: Item = {
             uuid: 0,
@@ -24,29 +24,29 @@ describe('AccordionItemBody', () => {
 
     it('renders correctly with min params', () => {
         const wrapper = mountItem(
-            <AccordionItemBody>
+            <AccordionItemPanel>
                 <div>Fake body</div>
-            </AccordionItemBody>,
+            </AccordionItemPanel>,
         );
         expect(wrapper).toMatchSnapshot();
     });
 
     it('renders correctly with different className', () => {
         const className = 'className';
-        const wrapper = mountItem(<AccordionItemBody className={className} />);
+        const wrapper = mountItem(<AccordionItemPanel className={className} />);
         expect(wrapper.find('div').hasClass(className)).toEqual(true);
     });
 
     it('renders correctly with different hideBodyClassName', () => {
         const hideBodyClassName = 'hideBodyClassName';
         const wrapper = mountItem(
-            <AccordionItemBody hideBodyClassName={hideBodyClassName} />,
+            <AccordionItemPanel hideBodyClassName={hideBodyClassName} />,
         );
         expect(wrapper.find('div').hasClass(hideBodyClassName)).toEqual(true);
     });
 
     it('respects arbitrary user-defined props', () => {
-        const wrapper = mountItem(<AccordionItemBody lang="en" />);
+        const wrapper = mountItem(<AccordionItemPanel lang="en" />);
         const div = wrapper.find('div').getDOMNode();
 
         expect(div.getAttribute('lang')).toEqual('en');
@@ -55,9 +55,9 @@ describe('AccordionItemBody', () => {
     it('does not render if no accordionStore found in context', () => {
         const wrapper = mount(
             <ItemProvider uuid="foo">
-                <AccordionItemBody>
+                <AccordionItemPanel>
                     <div data-enzyme={true}>Hello World</div>
-                </AccordionItemBody>
+                </AccordionItemPanel>
             </ItemProvider>,
         );
 
@@ -67,9 +67,9 @@ describe('AccordionItemBody', () => {
     it('does not render if no itemStore found in context', () => {
         const wrapper = mount(
             <AccordionProvider accordion={true} items={[]}>
-                <AccordionItemBody>
+                <AccordionItemPanel>
                     <div data-enzyme={true}>Hello World</div>
-                </AccordionItemBody>
+                </AccordionItemPanel>
             </AccordionProvider>,
         );
 
