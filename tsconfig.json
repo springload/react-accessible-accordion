@@ -4,6 +4,7 @@
         "noEmit": true,
         "jsx": "react",
         "baseUrl": "./",
-        "lib": ["dom", "es2015"]
+        "lib": ["dom", "es2015"],
+        "types": ["node", "react", "react-dom", "classnames", "jest"]
     }
 }

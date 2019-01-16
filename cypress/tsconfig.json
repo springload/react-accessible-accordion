@@ -1,0 +1,8 @@
+{
+    "extends": "../tsconfig",
+    "compilerOptions": {
+        "baseUrl": "../node_modules", // needed if your tests import npm modules
+        "types": ["react", "react-dom", "cypress"]
+    },
+    "include": ["../node_modules/cypress/types", "**/*.ts"]
+}
