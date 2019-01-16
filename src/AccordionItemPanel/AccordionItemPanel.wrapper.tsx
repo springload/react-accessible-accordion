@@ -10,32 +10,32 @@ import {
     CONTEXT_KEY as ITEM_CONTEXT_KEY,
     getItemStore,
 } from '../ItemContainer/ItemContainer';
-import AccordionItemBody from './AccordionItemBody';
+import AccordionItemPanel from './AccordionItemPanel';
 
-type AccordionItemBodyWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
+type AccordionItemPanelWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     hideBodyClassName: string;
 };
 
-type AccordionItemBodyWrapperState = {};
+type AccordionItemPanelWrapperState = {};
 
-type AccordionItemBodyWrapperContext = {
+type AccordionItemPanelWrapperContext = {
     [ACCORDION_CONTEXT_KEY](): null;
     [ITEM_CONTEXT_KEY](): null;
 };
 
-export default class AccordionItemBodyWrapper extends React.Component<
-    AccordionItemBodyWrapperProps,
-    AccordionItemBodyWrapperState,
-    AccordionItemBodyWrapperContext
+export default class AccordionItemPanelWrapper extends React.Component<
+    AccordionItemPanelWrapperProps,
+    AccordionItemPanelWrapperState,
+    AccordionItemPanelWrapperContext
 > {
-    static contextTypes: AccordionItemBodyWrapperContext = {
+    static contextTypes: AccordionItemPanelWrapperContext = {
         [ACCORDION_CONTEXT_KEY]: propTypes.wildcard,
         [ITEM_CONTEXT_KEY]: propTypes.wildcard,
     };
 
-    static defaultProps: AccordionItemBodyWrapperProps = {
-        className: 'accordion__body',
-        hideBodyClassName: 'accordion__body--hidden',
+    static defaultProps: AccordionItemPanelWrapperProps = {
+        className: 'accordion__panel',
+        hideBodyClassName: 'accordion__panel--hidden',
     };
 
     render(): JSX.Element {
@@ -44,7 +44,7 @@ export default class AccordionItemBodyWrapper extends React.Component<
         if (!accordionStore) {
             // tslint:disable-next-line:no-console
             console.error(
-                'AccordionItemBody component cannot render because it has not been nested inside an Accordion component.',
+                'AccordionItemPanel component cannot render because it has not been nested inside an Accordion component.',
             );
 
             return null;
@@ -55,7 +55,7 @@ export default class AccordionItemBodyWrapper extends React.Component<
         if (!itemStore) {
             // tslint:disable-next-line:no-console
             console.error(
-                'AccordionItemBody component cannot render because it has not been nested inside an AccordionItem component.',
+                'AccordionItemPanel component cannot render because it has not been nested inside an AccordionItem component.',
             );
 
             return null;
@@ -68,7 +68,7 @@ export default class AccordionItemBodyWrapper extends React.Component<
         )[0];
 
         return item ? (
-            <AccordionItemBody
+            <AccordionItemPanel
                 {...this.props}
                 {...item}
                 accordion={accordion}

@@ -5,9 +5,9 @@ import {
     Provider as AccordionProvider,
 } from '../AccordionContainer/AccordionContainer';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
-import { default as AccordionItemTitle } from './AccordionItemTitle.wrapper';
+import { default as AccordionItemHeading } from './AccordionItemHeading.wrapper';
 
-describe('AccordionItemTitle', () => {
+describe('AccordionItemHeading', () => {
     const DEFAULT_ITEM: Item = {
         uuid: 0,
         expanded: false,
@@ -17,7 +17,7 @@ describe('AccordionItemTitle', () => {
     it('renders null outside the context of an ‘Accordion’', () => {
         const wrapper = mount(
             <ItemProvider uuid="foo">
-                <AccordionItemTitle />
+                <AccordionItemHeading />
             </ItemProvider>,
         );
 
@@ -27,7 +27,7 @@ describe('AccordionItemTitle', () => {
     it('renders null outside the context of an ‘AccordionItem’', () => {
         const wrapper = mount(
             <AccordionProvider items={[DEFAULT_ITEM]}>
-                <AccordionItemTitle />
+                <AccordionItemHeading />
             </AccordionProvider>,
         );
 
@@ -56,23 +56,25 @@ describe('AccordionItemTitle', () => {
 
     it('renders correctly with min params', () => {
         const wrapper = mountItem(
-            <AccordionItemTitle>
+            <AccordionItemHeading>
                 <div>Fake Title</div>
-            </AccordionItemTitle>,
+            </AccordionItemHeading>,
         );
         expect(wrapper).toMatchSnapshot();
     });
 
     it('renders correctly with different className', () => {
         const className = 'className';
-        const wrapper = mountItem(<AccordionItemTitle className={className} />);
+        const wrapper = mountItem(
+            <AccordionItemHeading className={className} />,
+        );
         expect(wrapper.find('div').hasClass(className)).toEqual(true);
     });
 
     it('renders with different hideBodyClassName', () => {
         const hideBodyClassName = 'hideBodyClassName';
         const wrapper = mountItem(
-            <AccordionItemTitle hideBodyClassName={hideBodyClassName} />,
+            <AccordionItemHeading hideBodyClassName={hideBodyClassName} />,
         );
         expect(wrapper.find('div').hasClass(hideBodyClassName)).toEqual(true);
     });
@@ -80,14 +82,14 @@ describe('AccordionItemTitle', () => {
     it("doesn't present hideBodyClassName when collapsed", () => {
         const hideBodyClassName = 'hideBodyClassName';
         const wrapper = mountItem(
-            <AccordionItemTitle hideBodyClassName={hideBodyClassName} />,
+            <AccordionItemHeading hideBodyClassName={hideBodyClassName} />,
         );
         expect(wrapper.find('div').hasClass(hideBodyClassName)).toEqual(true);
     });
 
     it('toggles state when clicked', async () => {
         const wrapper = mountItem(
-            <AccordionItemTitle>Fake Title</AccordionItemTitle>,
+            <AccordionItemHeading>Fake Title</AccordionItemHeading>,
         );
 
         expect(isExpanded(wrapper, DEFAULT_ITEM.uuid)).toBeFalsy();
@@ -97,7 +99,7 @@ describe('AccordionItemTitle', () => {
 
     it('doesn’t toggle state when trying to click but disabled', async () => {
         const wrapper = mountItem(
-            <AccordionItemTitle>Fake Title</AccordionItemTitle>,
+            <AccordionItemHeading>Fake Title</AccordionItemHeading>,
             {
                 ...DEFAULT_ITEM,
                 disabled: true,
@@ -111,7 +113,7 @@ describe('AccordionItemTitle', () => {
 
     it('toggles state when pressing enter', async () => {
         const wrapper = mountItem(
-            <AccordionItemTitle>Fake Title</AccordionItemTitle>,
+            <AccordionItemHeading>Fake Title</AccordionItemHeading>,
         );
 
         expect(isExpanded(wrapper, DEFAULT_ITEM.uuid)).toBeFalsy();
@@ -121,7 +123,7 @@ describe('AccordionItemTitle', () => {
 
     it('toggles state when pressing space', async () => {
         const wrapper = mountItem(
-            <AccordionItemTitle>Fake Title</AccordionItemTitle>,
+            <AccordionItemHeading>Fake Title</AccordionItemHeading>,
         );
 
         expect(isExpanded(wrapper, DEFAULT_ITEM.uuid)).toBeFalsy();
@@ -131,7 +133,7 @@ describe('AccordionItemTitle', () => {
 
     it('doesn’t toggle state when pressing another key', async () => {
         const wrapper = mountItem(
-            <AccordionItemTitle>Fake Title</AccordionItemTitle>,
+            <AccordionItemHeading>Fake Title</AccordionItemHeading>,
         );
 
         expect(isExpanded(wrapper, DEFAULT_ITEM.uuid)).toBeFalsy();
@@ -141,7 +143,7 @@ describe('AccordionItemTitle', () => {
 
     it('respects arbitrary user-defined props', () => {
         const wrapper = mountItem(
-            <AccordionItemTitle lang="en">Fake Title</AccordionItemTitle>,
+            <AccordionItemHeading lang="en">Fake Title</AccordionItemHeading>,
         );
 
         const div = wrapper.find('div').getDOMNode();
@@ -162,7 +164,7 @@ describe('AccordionItemTitle', () => {
                 ]}
             >
                 <ItemProvider uuid={DEFAULT_ITEM.uuid}>
-                    <AccordionItemTitle>Fake Title</AccordionItemTitle>
+                    <AccordionItemHeading>Fake Title</AccordionItemHeading>
                 </ItemProvider>
             </AccordionProvider>,
         );
