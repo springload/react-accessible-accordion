@@ -6,7 +6,7 @@ import {
     ProviderState,
 } from '../AccordionContainer/AccordionContainer';
 import { default as AccordionItem } from '../AccordionItem/AccordionItem.wrapper';
-import { default as AccordionItemHeading } from '../AccordionItemHeading/AccordionItemHeading.wrapper';
+import { default as AccordionItemTitle } from '../AccordionItemTitle/AccordionItemTitle.wrapper';
 import { default as Accordion } from './Accordion.wrapper';
 
 describe('Accordion', () => {
@@ -17,8 +17,8 @@ describe('Accordion', () => {
 
     describe('<Accordion accordion="true" />', () => {
         const [FooTitle, BarTitle] = [
-            (): JSX.Element => <AccordionItemHeading>Foo</AccordionItemHeading>,
-            (): JSX.Element => <AccordionItemHeading>Bar</AccordionItemHeading>,
+            (): JSX.Element => <AccordionItemTitle>Foo</AccordionItemTitle>,
+            (): JSX.Element => <AccordionItemTitle>Bar</AccordionItemTitle>,
         ];
 
         function mountAccordion(): ReactWrapper {
@@ -82,8 +82,8 @@ describe('Accordion', () => {
 
     describe('<Accordion accordion="false" /> (‘tabpanel’)', () => {
         const [FooTitle, BarTitle] = [
-            (): JSX.Element => <AccordionItemHeading>Foo</AccordionItemHeading>,
-            (): JSX.Element => <AccordionItemHeading>Bar</AccordionItemHeading>,
+            (): JSX.Element => <AccordionItemTitle>Foo</AccordionItemTitle>,
+            (): JSX.Element => <AccordionItemTitle>Bar</AccordionItemTitle>,
         ];
 
         function mountTabpanel(): ReactWrapper {
@@ -148,9 +148,9 @@ describe('Accordion', () => {
         const wrapper = mount(
             <Accordion accordion={false}>
                 <AccordionItem disabled={true}>
-                    <AccordionItemHeading className="foo">
+                    <AccordionItemTitle className="foo">
                         Foo Title
-                    </AccordionItemHeading>
+                    </AccordionItemTitle>
                 </AccordionItem>
             </Accordion>,
         );

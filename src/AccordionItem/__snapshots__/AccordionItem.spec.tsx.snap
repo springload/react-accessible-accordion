@@ -5,10 +5,10 @@ exports[`AccordionItem renders correctly with accordion false 1`] = `
   className="accordion__item"
 >
   <div
-    aria-controls="accordion__panel-0"
+    aria-controls="accordion__body-0"
     aria-expanded={false}
-    className="accordion__heading"
-    id="accordion__heading-0"
+    className="accordion__title"
+    id="accordion__title-0"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
@@ -20,9 +20,9 @@ exports[`AccordionItem renders correctly with accordion false 1`] = `
   </div>
   <div
     aria-hidden={true}
-    aria-labelledby="accordion__heading-0"
-    className="accordion__panel accordion__panel--hidden"
-    id="accordion__panel-0"
+    aria-labelledby="accordion__title-0"
+    className="accordion__body accordion__body--hidden"
+    id="accordion__body-0"
     role={null}
   >
     <div>
@@ -37,10 +37,10 @@ exports[`AccordionItem renders correctly with accordion true 1`] = `
   className="accordion__item"
 >
   <div
-    aria-controls="accordion__panel-0"
+    aria-controls="accordion__body-0"
     aria-expanded={false}
-    className="accordion__heading"
-    id="accordion__heading-0"
+    className="accordion__title"
+    id="accordion__title-0"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
@@ -52,9 +52,9 @@ exports[`AccordionItem renders correctly with accordion true 1`] = `
   </div>
   <div
     aria-hidden={null}
-    aria-labelledby="accordion__heading-0"
-    className="accordion__panel accordion__panel--hidden"
-    id="accordion__panel-0"
+    aria-labelledby="accordion__title-0"
+    className="accordion__body accordion__body--hidden"
+    id="accordion__body-0"
     role="region"
   >
     <div>
@@ -69,10 +69,10 @@ exports[`AccordionItem renders correctly with other blocks inside 1`] = `
   className="accordion__item"
 >
   <div
-    aria-controls="accordion__panel-0"
+    aria-controls="accordion__body-0"
     aria-expanded={false}
-    className="accordion__heading"
-    id="accordion__heading-0"
+    className="accordion__title"
+    id="accordion__title-0"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
@@ -87,9 +87,9 @@ exports[`AccordionItem renders correctly with other blocks inside 1`] = `
   </div>
   <div
     aria-hidden={true}
-    aria-labelledby="accordion__heading-0"
-    className="accordion__panel accordion__panel--hidden"
-    id="accordion__panel-0"
+    aria-labelledby="accordion__title-0"
+    className="accordion__body accordion__body--hidden"
+    id="accordion__body-0"
     role={null}
   >
     <div>
@@ -104,10 +104,10 @@ exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
   className="accordion__item"
 >
   <div
-    aria-controls="accordion__panel-0"
+    aria-controls="accordion__body-0"
     aria-expanded={false}
-    className="accordion__heading"
-    id="accordion__heading-0"
+    className="accordion__title"
+    id="accordion__title-0"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
@@ -119,9 +119,9 @@ exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
   </div>
   <div
     aria-hidden={true}
-    aria-labelledby="accordion__heading-0"
-    className="accordion__panel accordion__panel--hidden"
-    id="accordion__panel-0"
+    aria-labelledby="accordion__title-0"
+    className="accordion__body accordion__body--hidden"
+    id="accordion__body-0"
     role={null}
   >
     <div>
@@ -134,7 +134,7 @@ exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
 </div>
 `;
 
-exports[`AccordionItem still renders with no AccordionItemHeading or AccordionItemPanel 1`] = `
+exports[`AccordionItem still renders with no AccordionItemTitle or AccordionItemBody 1`] = `
 <div
   className="accordion__item"
 >

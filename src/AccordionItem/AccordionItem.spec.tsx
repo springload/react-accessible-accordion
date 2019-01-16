@@ -4,8 +4,8 @@ import {
     Item,
     Provider as AccordionProvider,
 } from '../AccordionContainer/AccordionContainer';
-import { default as AccordionItemHeading } from '../AccordionItemHeading/AccordionItemHeading.wrapper';
-import { default as AccordionItemPanel } from '../AccordionItemPanel/AccordionItemPanel.wrapper';
+import { default as AccordionItemBody } from '../AccordionItemBody/AccordionItemBody.wrapper';
+import { default as AccordionItemTitle } from '../AccordionItemTitle/AccordionItemTitle.wrapper';
 import { resetNextUuid } from '../helpers/uuid';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
 import { default as AccordionItem } from './AccordionItem.wrapper';
@@ -24,12 +24,12 @@ describe('AccordionItem', () => {
         const wrapper = mount(
             <AccordionProvider accordion={true}>
                 <AccordionItem className="accordion__item">
-                    <AccordionItemHeading className="accordion__heading">
+                    <AccordionItemTitle className="accordion__title">
                         <div>Fake title</div>
-                    </AccordionItemHeading>
-                    <AccordionItemPanel className="accordion__panel">
+                    </AccordionItemTitle>
+                    <AccordionItemBody className="accordion__body">
                         <div>Fake body</div>
-                    </AccordionItemPanel>
+                    </AccordionItemBody>
                 </AccordionItem>
             </AccordionProvider>,
         );
@@ -41,12 +41,12 @@ describe('AccordionItem', () => {
         const wrapper = mount(
             <AccordionProvider>
                 <AccordionItem className="accordion__item">
-                    <AccordionItemHeading className="accordion__heading">
+                    <AccordionItemTitle className="accordion__title">
                         <div>Fake title</div>
-                    </AccordionItemHeading>
-                    <AccordionItemPanel className="accordion__panel">
+                    </AccordionItemTitle>
+                    <AccordionItemBody className="accordion__body">
                         <div>Fake body</div>
-                    </AccordionItemPanel>
+                    </AccordionItemBody>
                 </AccordionItem>
             </AccordionProvider>,
         );
@@ -73,7 +73,7 @@ describe('AccordionItem', () => {
         expect(wrapper.find(AccordionItem).length).toEqual(2);
     });
 
-    it('still renders with no AccordionItemHeading or AccordionItemPanel', () => {
+    it('still renders with no AccordionItemTitle or AccordionItemBody', () => {
         const wrapper = mount(
             <AccordionProvider>
                 <AccordionItem>
@@ -126,13 +126,13 @@ describe('AccordionItem', () => {
         const wrapper = mount(
             <AccordionProvider>
                 <AccordionItem>
-                    <AccordionItemHeading>
+                    <AccordionItemTitle>
                         <div>Fake title</div>
-                    </AccordionItemHeading>
+                    </AccordionItemTitle>
                     <div>Just another block</div>
-                    <AccordionItemPanel>
+                    <AccordionItemBody>
                         <div>Fake body</div>
-                    </AccordionItemPanel>
+                    </AccordionItemBody>
                 </AccordionItem>
             </AccordionProvider>,
         );
@@ -144,12 +144,12 @@ describe('AccordionItem', () => {
         const wrapper = mount(
             <AccordionProvider>
                 <AccordionItem>
-                    <AccordionItemHeading>
+                    <AccordionItemTitle>
                         <div>Fake title</div>
-                    </AccordionItemHeading>
-                    <AccordionItemPanel>
+                    </AccordionItemTitle>
+                    <AccordionItemBody>
                         <div>Fake body</div>
-                    </AccordionItemPanel>
+                    </AccordionItemBody>
                     <div>Just another block</div>
                 </AccordionItem>
             </AccordionProvider>,
@@ -162,9 +162,9 @@ describe('AccordionItem', () => {
         const Wrapper = ({ expanded }: { expanded: boolean }): JSX.Element => (
             <AccordionProvider>
                 <AccordionItem expanded={expanded}>
-                    <AccordionItemHeading>
+                    <AccordionItemTitle>
                         <div>Fake title</div>
-                    </AccordionItemHeading>
+                    </AccordionItemTitle>
                 </AccordionItem>
             </AccordionProvider>
         );
@@ -186,9 +186,9 @@ describe('AccordionItem', () => {
         const Wrapper = ({ expanded }: { expanded: boolean }): JSX.Element => (
             <AccordionProvider>
                 <AccordionItem expanded={expanded}>
-                    <AccordionItemHeading>
+                    <AccordionItemTitle>
                         <div>Fake title</div>
-                    </AccordionItemHeading>
+                    </AccordionItemTitle>
                 </AccordionItem>
             </AccordionProvider>
         );
@@ -210,9 +210,9 @@ describe('AccordionItem', () => {
         const Wrapper = ({ className }: { className: string }): JSX.Element => (
             <AccordionProvider>
                 <AccordionItem className={className}>
-                    <AccordionItemHeading>
+                    <AccordionItemTitle>
                         <div>Fake title</div>
-                    </AccordionItemHeading>
+                    </AccordionItemTitle>
                 </AccordionItem>
             </AccordionProvider>
         );
@@ -255,9 +255,9 @@ describe('AccordionItem', () => {
             <AccordionProvider>
                 {showChild && (
                     <AccordionItem>
-                        <AccordionItemHeading>
+                        <AccordionItemTitle>
                             <div>Fake title</div>
-                        </AccordionItemHeading>
+                        </AccordionItemTitle>
                     </AccordionItem>
                 )}
             </AccordionProvider>
@@ -308,9 +308,9 @@ describe('AccordionItem', () => {
         const wrapper = mount(
             <AccordionProvider>
                 <AccordionItem uuid={uuid}>
-                    <AccordionItemHeading>
+                    <AccordionItemTitle>
                         <div data-enzyme={true}>Fake title</div>
-                    </AccordionItemHeading>
+                    </AccordionItemTitle>
                 </AccordionItem>
             </AccordionProvider>,
         );

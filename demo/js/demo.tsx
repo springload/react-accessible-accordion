@@ -6,8 +6,8 @@ import * as ReactDOM from 'react-dom';
 import {
     Accordion,
     AccordionItem,
-    AccordionItemHeading,
-    AccordionItemPanel,
+    AccordionItemBody,
+    AccordionItemTitle,
 } from '../../src';
 
 // tslint:disable-next-line no-import-side-effect
@@ -20,13 +20,13 @@ const Example = (): JSX.Element => (
 
         <Accordion>
             <AccordionItem>
-                <AccordionItemHeading>
+                <AccordionItemTitle>
                     <h3 className="u-position-relative">
                         Accessible Accordion
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
+                </AccordionItemTitle>
+                <AccordionItemBody>
                     <p>
                         Accessible Accordion component for React. Inspired by{' '}
                         <a
@@ -46,24 +46,24 @@ const Example = (): JSX.Element => (
                         </a>
                         .
                     </p>
-                </AccordionItemPanel>
+                </AccordionItemBody>
             </AccordionItem>
             <AccordionItem className="accordion__item">
-                <AccordionItemHeading>
+                <AccordionItemTitle>
                     <h3 className=" u-position-relative u-margin-bottom-s">
                         Components
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
                     <div>See all the components from this package</div>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
+                </AccordionItemTitle>
+                <AccordionItemBody>
                     <ul>
                         <li>Accordion</li>
                         <li>AccordionItem</li>
-                        <li>AccordionItemHeading</li>
-                        <li>AccordionItemPanel</li>
+                        <li>AccordionItemTitle</li>
+                        <li>AccordionItemBody</li>
                     </ul>
-                </AccordionItemPanel>
+                </AccordionItemBody>
             </AccordionItem>
         </Accordion>
 
@@ -71,13 +71,13 @@ const Example = (): JSX.Element => (
 
         <Accordion accordion={false}>
             <AccordionItem>
-                <AccordionItemHeading>
+                <AccordionItemTitle>
                     <h3 className="u-position-relative">
                         Accordion
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
+                </AccordionItemTitle>
+                <AccordionItemBody>
                     <table>
                         <thead>
                             <tr>
@@ -108,16 +108,16 @@ const Example = (): JSX.Element => (
                             </tr>
                         </tbody>
                     </table>
-                </AccordionItemPanel>
+                </AccordionItemBody>
             </AccordionItem>
             <AccordionItem>
-                <AccordionItemHeading>
+                <AccordionItemTitle>
                     <h3 className="u-position-relative">
                         AccordionItem
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
+                </AccordionItemTitle>
+                <AccordionItemBody>
                     <table>
                         <thead>
                             <tr>
@@ -142,16 +142,16 @@ const Example = (): JSX.Element => (
                             </tr>
                         </tbody>
                     </table>
-                </AccordionItemPanel>
+                </AccordionItemBody>
             </AccordionItem>
             <AccordionItem>
-                <AccordionItemHeading>
+                <AccordionItemTitle>
                     <h3 className="u-position-relative">
-                        AccordionItemHeading
+                        AccordionItemTitle
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
+                </AccordionItemTitle>
+                <AccordionItemBody>
                     <table>
                         <thead>
                             <tr>
@@ -165,21 +165,21 @@ const Example = (): JSX.Element => (
                             <tr>
                                 <td>className</td>
                                 <td>String</td>
-                                <td>accordion__heading</td>
+                                <td>accordion__title</td>
                                 <td>CSS class(es) applied to the component</td>
                             </tr>
                         </tbody>
                     </table>
-                </AccordionItemPanel>
+                </AccordionItemBody>
             </AccordionItem>
             <AccordionItem>
-                <AccordionItemHeading>
+                <AccordionItemTitle>
                     <h3 className="u-position-relative">
-                        AccordionItemPanel
+                        AccordionItemBody
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
+                </AccordionItemTitle>
+                <AccordionItemBody>
                     <table>
                         <thead>
                             <tr>
@@ -193,18 +193,18 @@ const Example = (): JSX.Element => (
                             <tr>
                                 <td>className</td>
                                 <td>String</td>
-                                <td>accordion__panel</td>
+                                <td>accordion__body</td>
                                 <td>CSS class(es) applied to the component</td>
                             </tr>
                             <tr>
                                 <td>hideBody ClassName</td>
                                 <td>String</td>
-                                <td>accordion__panel--hidden</td>
+                                <td>accordion__body--hidden</td>
                                 <td>Class name for hidden body state</td>
                             </tr>
                         </tbody>
                     </table>
-                </AccordionItemPanel>
+                </AccordionItemBody>
             </AccordionItem>
         </Accordion>
 
@@ -212,16 +212,16 @@ const Example = (): JSX.Element => (
 
         <Accordion>
             <AccordionItem>
-                <AccordionItemHeading>
+                <AccordionItemTitle>
                     <h3 className="u-position-relative">
                         Components API
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
+                </AccordionItemTitle>
+                <AccordionItemBody>
                     <Accordion accordion={false}>
                         <AccordionItem>
-                            <AccordionItemHeading>
+                            <AccordionItemTitle>
                                 <h3 className="u-position-relative">
                                     Accordion
                                     <div
@@ -229,8 +229,8 @@ const Example = (): JSX.Element => (
                                         role="presentation"
                                     />
                                 </h3>
-                            </AccordionItemHeading>
-                            <AccordionItemPanel>
+                            </AccordionItemTitle>
+                            <AccordionItemBody>
                                 <table>
                                     <thead>
                                         <tr>
@@ -270,10 +270,10 @@ const Example = (): JSX.Element => (
                                         </tr>
                                     </tbody>
                                 </table>
-                            </AccordionItemPanel>
+                            </AccordionItemBody>
                         </AccordionItem>
                         <AccordionItem>
-                            <AccordionItemHeading>
+                            <AccordionItemTitle>
                                 <h3 className="u-position-relative">
                                     AccordionItem
                                     <div
@@ -281,8 +281,8 @@ const Example = (): JSX.Element => (
                                         role="presentation"
                                     />
                                 </h3>
-                            </AccordionItemHeading>
-                            <AccordionItemPanel>
+                            </AccordionItemTitle>
+                            <AccordionItemBody>
                                 <table>
                                     <thead>
                                         <tr>
@@ -313,19 +313,19 @@ const Example = (): JSX.Element => (
                                         </tr>
                                     </tbody>
                                 </table>
-                            </AccordionItemPanel>
+                            </AccordionItemBody>
                         </AccordionItem>
                         <AccordionItem>
-                            <AccordionItemHeading>
+                            <AccordionItemTitle>
                                 <h3 className="u-position-relative">
-                                    AccordionItemHeading
+                                    AccordionItemTitle
                                     <div
                                         className="accordion__arrow"
                                         role="presentation"
                                     />
                                 </h3>
-                            </AccordionItemHeading>
-                            <AccordionItemPanel>
+                            </AccordionItemTitle>
+                            <AccordionItemBody>
                                 <table>
                                     <thead>
                                         <tr>
@@ -339,7 +339,7 @@ const Example = (): JSX.Element => (
                                         <tr>
                                             <td>className</td>
                                             <td>String</td>
-                                            <td>accordion__heading</td>
+                                            <td>accordion__title</td>
                                             <td>
                                                 CSS class(es) applied to the
                                                 component
@@ -347,19 +347,19 @@ const Example = (): JSX.Element => (
                                         </tr>
                                     </tbody>
                                 </table>
-                            </AccordionItemPanel>
+                            </AccordionItemBody>
                         </AccordionItem>
                         <AccordionItem>
-                            <AccordionItemHeading>
+                            <AccordionItemTitle>
                                 <h3 className="u-position-relative">
-                                    AccordionItemPanel
+                                    AccordionItemBody
                                     <div
                                         className="accordion__arrow"
                                         role="presentation"
                                     />
                                 </h3>
-                            </AccordionItemHeading>
-                            <AccordionItemPanel>
+                            </AccordionItemTitle>
+                            <AccordionItemBody>
                                 <table>
                                     <thead>
                                         <tr>
@@ -373,7 +373,7 @@ const Example = (): JSX.Element => (
                                         <tr>
                                             <td>className</td>
                                             <td>String</td>
-                                            <td>accordion__panel</td>
+                                            <td>accordion__body</td>
                                             <td>
                                                 CSS class(es) applied to the
                                                 component
@@ -382,27 +382,27 @@ const Example = (): JSX.Element => (
                                         <tr>
                                             <td>hideBody ClassName</td>
                                             <td>String</td>
-                                            <td>accordion__panel--hidden</td>
+                                            <td>accordion__body--hidden</td>
                                             <td>
                                                 Class name for hidden body state
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                            </AccordionItemPanel>
+                            </AccordionItemBody>
                         </AccordionItem>
                     </Accordion>
-                </AccordionItemPanel>
+                </AccordionItemBody>
             </AccordionItem>
             <AccordionItem>
-                <AccordionItemHeading>
+                <AccordionItemTitle>
                     <h3 className=" u-position-relative u-margin-bottom-s">
                         Development
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
                     <div>How to install the project</div>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
+                </AccordionItemTitle>
+                <AccordionItemBody>
                     <p>
                         Clone the project on your computer, and install Node.
                         This project also uses nvm.
@@ -418,7 +418,7 @@ const Example = (): JSX.Element => (
                         <br />
                         touch .env
                     </p>
-                </AccordionItemPanel>
+                </AccordionItemBody>
             </AccordionItem>
         </Accordion>
 
@@ -426,13 +426,13 @@ const Example = (): JSX.Element => (
 
         <Accordion>
             <AccordionItem expanded={true}>
-                <AccordionItemHeading>
+                <AccordionItemTitle>
                     <h3 className="u-position-relative">
                         Working on the project
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
+                </AccordionItemTitle>
+                <AccordionItemBody>
                     <p>
                         Everything mentioned in the installation process should
                         already be done.
@@ -458,17 +458,17 @@ const Example = (): JSX.Element => (
                         <br />
                         yarn
                     </p>
-                </AccordionItemPanel>
+                </AccordionItemBody>
             </AccordionItem>
             <AccordionItem>
-                <AccordionItemHeading>
+                <AccordionItemTitle>
                     <h3 className=" u-position-relative u-margin-bottom-s">
                         Run the demo
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
                     <div>To have an easy play around</div>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
+                </AccordionItemTitle>
+                <AccordionItemBody>
                     <p>
                         Everything mentioned in the installation process should
                         already be done.
@@ -482,7 +482,7 @@ const Example = (): JSX.Element => (
                         <br />
                         yarn start-demo
                     </p>
-                </AccordionItemPanel>
+                </AccordionItemBody>
             </AccordionItem>
         </Accordion>
 
@@ -490,13 +490,13 @@ const Example = (): JSX.Element => (
 
         <Accordion>
             <AccordionItem expanded={false}>
-                <AccordionItemHeading>
+                <AccordionItemTitle>
                     <h3 className="u-position-relative">
                         Working on the project
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
+                </AccordionItemTitle>
+                <AccordionItemBody>
                     <p>
                         Everything mentioned in the installation process should
                         already be done.
@@ -522,23 +522,23 @@ const Example = (): JSX.Element => (
                         <br />
                         yarn
                     </p>
-                </AccordionItemPanel>
+                </AccordionItemBody>
                 <div className="block">
                     Please feel free to contribute to this repository
                 </div>
             </AccordionItem>
             <AccordionItem>
-                <AccordionItemHeading>
+                <AccordionItemTitle>
                     <h3 className=" u-position-relative u-margin-bottom-s">
                         Run the demo
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
                     <div>To have an easy play around</div>
-                </AccordionItemHeading>
+                </AccordionItemTitle>
                 <div className="block">
                     This block fits in between the title and the body.
                 </div>
-                <AccordionItemPanel>
+                <AccordionItemBody>
                     <p>
                         Everything mentioned in the installation process should
                         already be done.
@@ -552,7 +552,7 @@ const Example = (): JSX.Element => (
                         <br />
                         yarn start-demo
                     </p>
-                </AccordionItemPanel>
+                </AccordionItemBody>
             </AccordionItem>
         </Accordion>
 
@@ -560,26 +560,26 @@ const Example = (): JSX.Element => (
 
         <Accordion>
             <AccordionItem>
-                <AccordionItemHeading className="accordion__heading accordion__heading--animated">
+                <AccordionItemTitle className="accordion__title accordion__title--animated">
                     <h3 className="u-position-relative">
                         Animated Accessible Accordion
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
+                </AccordionItemTitle>
+                <AccordionItemBody>
                     <p>Did you notice the animation on the arrow?</p>
-                </AccordionItemPanel>
+                </AccordionItemBody>
             </AccordionItem>
             <AccordionItem className="accordion__item">
-                <AccordionItemHeading className="accordion__heading accordion__heading--animated">
+                <AccordionItemTitle className="accordion__title accordion__title--animated">
                     <h3 className="u-position-relative">
                         How to?
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
+                </AccordionItemTitle>
+                <AccordionItemBody>
                     <p>Check css/demo.css in the demo/ folder :)</p>
-                </AccordionItemPanel>
+                </AccordionItemBody>
             </AccordionItem>
         </Accordion>
 
@@ -587,15 +587,15 @@ const Example = (): JSX.Element => (
 
         <Accordion>
             <AccordionItem>
-                <AccordionItemHeading>
+                <AccordionItemTitle>
                     <h3 className="u-position-relative">
                         Single item
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
+                </AccordionItemTitle>
+                <AccordionItemBody>
                     <p>Why would you need more than one?</p>
-                </AccordionItemPanel>
+                </AccordionItemBody>
             </AccordionItem>
         </Accordion>
 
@@ -609,32 +609,32 @@ const Example = (): JSX.Element => (
             }}
         >
             <AccordionItem uuid="uniqueItem-1">
-                <AccordionItemHeading>
+                <AccordionItemTitle>
                     <h3 className="u-position-relative">
                         Unique Item #1
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
+                </AccordionItemTitle>
+                <AccordionItemBody>
                     <p>
                         If you open/close this item you should see
                         `uniqueItem-1` printed in the console.
                     </p>
-                </AccordionItemPanel>
+                </AccordionItemBody>
             </AccordionItem>
             <AccordionItem uuid="uniqueItem-2">
-                <AccordionItemHeading>
+                <AccordionItemTitle>
                     <h3 className="u-position-relative">
                         Unique Item #2
                         <div className="accordion__arrow" role="presentation" />
                     </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
+                </AccordionItemTitle>
+                <AccordionItemBody>
                     <p>
                         If you open/close this item you should see
                         `uniqueItem-2` printed in the console.
                     </p>
-                </AccordionItemPanel>
+                </AccordionItemBody>
             </AccordionItem>
         </Accordion>
     </div>

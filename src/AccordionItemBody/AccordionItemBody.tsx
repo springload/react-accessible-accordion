@@ -2,7 +2,7 @@ import { default as classnames } from 'classnames';
 import * as React from 'react';
 import { UUID } from '../ItemContainer/ItemContainer';
 
-type AccordionItemPanelProps = React.HTMLAttributes<HTMLDivElement> & {
+type AccordionItemBodyProps = React.HTMLAttributes<HTMLDivElement> & {
     hideBodyClassName: string;
     uuid: UUID;
     expanded: boolean;
@@ -10,7 +10,7 @@ type AccordionItemPanelProps = React.HTMLAttributes<HTMLDivElement> & {
     accordion: boolean;
 };
 
-const AccordionItemPanel = (props: AccordionItemPanelProps): JSX.Element => {
+const AccordionItemBody = (props: AccordionItemBodyProps): JSX.Element => {
     const {
         className,
         hideBodyClassName,
@@ -26,16 +26,16 @@ const AccordionItemPanel = (props: AccordionItemPanelProps): JSX.Element => {
 
     return (
         <div
-            id={`accordion__panel-${uuid}`}
+            id={`accordion__body-${uuid}`}
             className={classnames(className, {
                 [hideBodyClassName]: !expanded,
             })}
             aria-hidden={hideAriaAttribute}
-            aria-labelledby={`accordion__heading-${uuid}`}
+            aria-labelledby={`accordion__title-${uuid}`}
             role={role}
             {...rest}
         />
     );
 };
 
-export default AccordionItemPanel;
+export default AccordionItemBody;

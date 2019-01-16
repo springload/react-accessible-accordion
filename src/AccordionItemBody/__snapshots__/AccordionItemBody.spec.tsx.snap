@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccordionItemBody renders correctly with min params 1`] = `
+<div
+  aria-hidden={null}
+  aria-labelledby="accordion__title-0"
+  className="accordion__body accordion__body--hidden"
+  id="accordion__body-0"
+  role="region"
+>
+  <div>
+    Fake body
+  </div>
+</div>
+`;

@@ -2,7 +2,7 @@ import { default as classnames } from 'classnames';
 import * as React from 'react';
 import { UUID } from '../ItemContainer/ItemContainer';
 
-type AccordionItemHeadingProps = React.HTMLAttributes<HTMLDivElement> & {
+type AccordionItemTitleProps = React.HTMLAttributes<HTMLDivElement> & {
     hideBodyClassName: string;
     expanded: boolean;
     uuid: UUID;
@@ -10,11 +10,11 @@ type AccordionItemHeadingProps = React.HTMLAttributes<HTMLDivElement> & {
     setExpanded(uuid: UUID, expanded: boolean): void;
 };
 
-type AccordionItemHeadingState = {};
+type AccordionItemTitleState = {};
 
-export default class AccordionItemHeading extends React.Component<
-    AccordionItemHeadingProps,
-    AccordionItemHeadingState
+export default class AccordionItemTitle extends React.Component<
+    AccordionItemTitleProps,
+    AccordionItemTitleState
 > {
     handleClick = (): void => {
         const { uuid, expanded, setExpanded } = this.props;
@@ -40,8 +40,8 @@ export default class AccordionItemHeading extends React.Component<
             ...rest
         } = this.props;
 
-        const id = `accordion__heading-${uuid}`;
-        const ariaControls = `accordion__panel-${uuid}`;
+        const id = `accordion__title-${uuid}`;
+        const ariaControls = `accordion__body-${uuid}`;
         const role = 'button';
         const titleClassName = classnames(className, {
             [hideBodyClassName]: hideBodyClassName && !expanded,

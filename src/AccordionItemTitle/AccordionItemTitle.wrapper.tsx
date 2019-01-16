@@ -9,29 +9,29 @@ import {
     CONTEXT_KEY as ITEM_CONTEXT_KEY,
     getItemStore,
 } from '../ItemContainer/ItemContainer';
-import { default as AccordionItemHeading } from './AccordionItemHeading';
+import { default as AccordionItemTitle } from './AccordionItemTitle';
 
-type AccordionItemHeadingWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
+type AccordionItemTitleWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     hideBodyClassName: string;
 };
 
-type AccordionItemHeadingWrapperState = {};
+type AccordionItemTitleWrapperState = {};
 
-type AccordionItemHeadingWrapperContext = {
+type AccordionItemTitleWrapperContext = {
     [ACCORDION_CONTEXT_KEY](): null;
     [ITEM_CONTEXT_KEY](): null;
 };
 
-export default class AccordionItemHeadingWrapper extends React.Component<
-    AccordionItemHeadingWrapperProps
+export default class AccordionItemTitleWrapper extends React.Component<
+    AccordionItemTitleWrapperProps
 > {
-    static contextTypes: AccordionItemHeadingWrapperContext = {
+    static contextTypes: AccordionItemTitleWrapperContext = {
         [ACCORDION_CONTEXT_KEY]: propTypes.wildcard,
         [ITEM_CONTEXT_KEY]: propTypes.wildcard,
     };
 
-    static defaultProps: AccordionItemHeadingWrapperProps = {
-        className: 'accordion__heading',
+    static defaultProps: AccordionItemTitleWrapperProps = {
+        className: 'accordion__title',
         hideBodyClassName: '',
     };
 
@@ -41,7 +41,7 @@ export default class AccordionItemHeadingWrapper extends React.Component<
         if (!accordionStore) {
             // tslint:disable-next-line:no-console
             console.error(
-                'AccordionItemHeading component cannot render because it has not been nested inside an Accordion component.',
+                'AccordionItemTitle component cannot render because it has not been nested inside an Accordion component.',
             );
 
             return null;
@@ -52,7 +52,7 @@ export default class AccordionItemHeadingWrapper extends React.Component<
         if (!itemStore) {
             // tslint:disable-next-line:no-console
             console.error(
-                'AccordionItemHeading component cannot render because it has not been nested inside an AccordionItem component.',
+                'AccordionItemTitle component cannot render because it has not been nested inside an AccordionItem component.',
             );
 
             return null;
@@ -65,7 +65,7 @@ export default class AccordionItemHeadingWrapper extends React.Component<
         )[0];
 
         return (
-            <AccordionItemHeading
+            <AccordionItemTitle
                 {...this.props}
                 {...item}
                 setExpanded={accordionStore.setExpanded}
