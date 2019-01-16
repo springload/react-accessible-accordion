@@ -36,7 +36,9 @@
         "accessible",
         "accessibility"
     ],
-    "authors": ["Vincent Audebert <vincent@springload.co.nz>"],
+    "authors": [
+        "Vincent Audebert <vincent@springload.co.nz>"
+    ],
     "contributors": [
         {
             "name": "Mitch Ryan",
@@ -72,6 +74,7 @@
         "babel-loader": "^8.0.4",
         "coveralls": "^3.0.0",
         "css-loader": "^2.0.1",
+        "cypress": "^3.1.4",
         "enzyme": "^3.3.0",
         "enzyme-adapter-react-16": "^1.1.1",
         "enzyme-to-json": "^3.3.4",
@@ -114,7 +117,9 @@
     },
     "lint-staged": {
         "linters": {
-            "*.{ts,tsx}": ["yarn lint"]
+            "*.{ts,tsx}": [
+                "yarn lint"
+            ]
         }
     }
 }
