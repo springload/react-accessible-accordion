@@ -99,9 +99,9 @@ This release brings support for React 16.3+ by way of some minor refactoring to 
 
 -   Update all React components to accept arbitrary HTMLDivElement props (eg. 'lang', 'role' etc).
 -   Upgrade all dev-dependencies except the eslint configs.
--   Replace snapshot tests with explicit assertions in AccordionItemBody and AccordionItemTitle.
+-   Replace snapshot tests with explicit assertions in AccordionItemPanel and AccordionItemHeading.
 -   Add specific assertions to tests in accordionStore.
--   Minor syntax change in AccordionItemBody
+-   Minor syntax change in AccordionItemPanel
 
 ## [[v2.0.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.0.0)
 
@@ -120,7 +120,7 @@ As this is a major release, users should expect some breaking changes - though t
 -   Defect where React Accessible Accordion's components could not be extended.
 -   Defect where the `children` of `Accordion` or `AccordionItem` could not be arbitrary.
 -   Defect where `AccordionItem` had to be a child of `Accordion` (as opposed to to an arbitrary-level descendant).
--   Defect where `AccordionItemBody` and `AccordionItemTitle` had to be children of `AccordionItem` (as opposed to arbitrary-level descendants).
+-   Defect where `AccordionItemPanel` and `AccordionItemHeading` had to be children of `AccordionItem` (as opposed to arbitrary-level descendants).
 
 ### Removed:
 

@@ -23,8 +23,8 @@ import ReactDOM from 'react-dom';
 import {
     Accordion,
     AccordionItem,
-    AccordionItemTitle,
-    AccordionItemBody,
+    AccordionItemHeading,
+    AccordionItemPanel,
 } from 'react-accessible-accordion';
 
 // Demo styles, see 'Styles' section below for some notes on use.
@@ -33,21 +33,21 @@ import 'react-accessible-accordion/dist/fancy-example.css';
 const Example = () => (
     <Accordion>
         <AccordionItem>
-            <AccordionItemTitle>
+            <AccordionItemHeading>
                 <h3>Simple title</h3>
-            </AccordionItemTitle>
-            <AccordionItemBody>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
                 <p>Body content</p>
-            </AccordionItemBody>
+            </AccordionItemPanel>
         </AccordionItem>
         <AccordionItem>
-            <AccordionItemTitle>
+            <AccordionItemHeading>
                 <h3>Complex title</h3>
                 <div>With a bit of description</div>
-            </AccordionItemTitle>
-            <AccordionItemBody>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
                 <p>Body content</p>
-            </AccordionItemBody>
+            </AccordionItemPanel>
         </AccordionItem>
     </Accordion>
 );
@@ -147,7 +147,7 @@ We recommend that you copy them into your own app and modify them to suit your n
     </tbody>
 </table>
 
-### AccordionItemTitle
+### AccordionItemHeading
 
 #### props:
 
@@ -164,7 +164,7 @@ We recommend that you copy them into your own app and modify them to suit your n
       <tr>
           <td>className</td>
           <td>String</td>
-          <td>accordion__title</td>
+          <td>accordion__heading</td>
           <td>CSS class(es) applied to the component</td>
       </tr>
       <tr>
@@ -176,7 +176,7 @@ We recommend that you copy them into your own app and modify them to suit your n
     </tbody>
 </table>
 
-### AccordionItemBody
+### AccordionItemPanel
 
 #### props:
 
@@ -193,13 +193,13 @@ We recommend that you copy them into your own app and modify them to suit your n
       <tr>
           <td>className</td>
           <td>String</td>
-          <td>accordion__body</td>
+          <td>accordion__panel</td>
           <td>CSS class(es) applied to the component</td>
       </tr>
       <tr>
           <td>hideBodyClassName</td>
           <td>String</td>
-          <td>accordion__body--hidden</td>
+          <td>accordion__panel--hidden</td>
           <td>Class name for hidden body state</td>
       </tr>
     </tbody>
@@ -232,8 +232,8 @@ For this type of Accordion, you will get the following `role` set up on your ele
 
 -   Accordion: `tablist`
 -   AccordionItem: no specific role
--   AccordionItemTitle: `tab`
--   AccordionItemBody: `tabpanel`
+-   AccordionItemHeading: `tab`
+-   AccordionItemPanel: `tabpanel`
 
 #### Multiple items
 
@@ -243,8 +243,8 @@ For this type of Accordion, you will get the following `role` set up on your ele
 
 -   Accordion: no specific role
 -   AccordionItem: no specific role
--   AccordionItemTitle: `button`
--   AccordionItemBody: no specific role
+-   AccordionItemHeading: `button`
+-   AccordionItemPanel: no specific role
 
 # Browser support
 
