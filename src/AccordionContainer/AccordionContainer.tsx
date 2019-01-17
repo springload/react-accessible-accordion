@@ -21,7 +21,7 @@ export type ProviderProps = {
     allowMultipleExpanded?: boolean;
     children?: React.ReactNode;
     items?: Item[];
-    onChange?(args: UUID | UUID[]): void;
+    onChange?(args: UUID[]): void;
 };
 
 export type AccordionContainer = {
@@ -128,11 +128,9 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
             () => {
                 if (this.props.onChange) {
                     this.props.onChange(
-                        !this.props.allowMultipleExpanded
-                            ? key
-                            : this.state.items
-                                  .filter((item: Item) => item.expanded)
-                                  .map((item: Item) => item.uuid),
+                        this.state.items
+                            .filter((item: Item) => item.expanded)
+                            .map((item: Item) => item.uuid),
                     );
                 }
             },

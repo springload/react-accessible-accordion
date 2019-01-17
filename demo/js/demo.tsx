@@ -606,9 +606,9 @@ const Example = (): JSX.Element => (
 
         <Accordion
             // tslint:disable-next-line react-this-binding-issue jsx-no-lambda
-            onChange={(itemUuid: string | number): void => {
+            onChange={(itemUuids: (string | number)[]): void => {
                 // tslint:disable-next-line no-console
-                console.log(itemUuid);
+                console.log(itemUuids);
             }}
         >
             <AccordionItem uuid="uniqueItem-1">
