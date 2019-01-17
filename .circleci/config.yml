@@ -9,19 +9,20 @@ jobs:
 
             - restore_cache:
                   keys:
-                      - node-modules-{{ checksum "yarn.lock" }}
-                      - node-modules-
+                      - node-modules-{{ checksum "yarn.lock" }}-v6
 
             - run: yarn install --frozen-lockfile
 
             - save_cache:
-                  key: node-modules-{{ checksum "yarn.lock" }}
+                  key: node-modules-{{ checksum "yarn.lock" }}-v6
                   paths:
                       - node_modules
+                      - ~/.cache
             - persist_to_workspace:
-                  root: ~/repo
+                  root: ~/
                   paths:
-                      - node_modules/*
+                      - repo/node_modules/*
+                      - .cache/*
 
     test-job:
         docker:
@@ -32,7 +33,7 @@ jobs:
         steps:
             - checkout
             - attach_workspace:
-                  at: ~/repo
+                  at: ~/
             - run: yarn test
 
     lint-job:
@@ -44,7 +45,7 @@ jobs:
         steps:
             - checkout
             - attach_workspace:
-                  at: ~/repo
+                  at: ~/
             - run: yarn lint
 
     build-job:
@@ -56,7 +57,7 @@ jobs:
         steps:
             - checkout
             - attach_workspace:
-                  at: ~/repo
+                  at: ~/
             - run: yarn build
 
     coverage-job:
@@ -68,9 +69,21 @@ jobs:
         steps:
             - checkout
             - attach_workspace:
-                  at: ~/repo
+                  at: ~/
             - run: yarn test:coverage
             - run: yarn coveralls
+
+    cypress-job:
+        docker:
+            - image: circleci/node:dubnium-browsers
+
+        working_directory: ~/repo
+
+        steps:
+            - checkout
+            - attach_workspace:
+                  at: ~/
+            - run: yarn cypress run
 
 workflows:
     version: 2
@@ -87,5 +100,8 @@ workflows:
                   requires:
                       - install-job
             - coverage-job:
+                  requires:
+                      - install-job
+            - cypress-job:
                   requires:
                       - install-job
