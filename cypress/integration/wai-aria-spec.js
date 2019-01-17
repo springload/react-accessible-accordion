@@ -172,7 +172,19 @@ describe('WAI ARIA Spec', function() {
         });
 
         it('Optionally, each element that serves as a container for panel content has role region and aria-labelledby with a value that refers to the button that controls display of the panel.', () => {
-            // todo
+            cy.get('.accordion__item').each(item => {
+                cy.wrap(item).within(() => {
+                    cy.get('.accordion__heading').then(heading => {
+                        cy.get('.accordion__panel')
+                            .should(
+                                'have.attr',
+                                'aria-labelledby',
+                                heading.attr('id'),
+                            )
+                            .should('have.attr', 'role', 'region');
+                    });
+                });
+            });
         });
     });
 });
