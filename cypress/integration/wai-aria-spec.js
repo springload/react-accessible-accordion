@@ -135,7 +135,7 @@ describe('WAI ARIA Spec', function() {
         });
 
         it('Each accordion header button is wrapped in an element with role heading that has a value set for aria-level that is appropriate for the information architecture of the page.', () => {
-            // todo
+            // Not yet supported.
         });
 
         it('If the native host language has an element with an implicit heading and aria-level, such as an HTML heading tag, a native host language element may be used.', () => {
@@ -147,7 +147,14 @@ describe('WAI ARIA Spec', function() {
         });
 
         it('If the accordion panel associated with an accordion header is visible, the header button element has aria-expanded set to true. If the panel is not visible, aria-expanded is set to false.', () => {
-            // todo
+            const heading = cy
+                .get('.accordion__heading')
+                .first()
+                // Panel not visible by default:
+                .should('have.attr', 'aria-expanded', 'false')
+                // But will be after a click
+                .click()
+                .should('have.attr', 'aria-expanded', 'true');
         });
 
         it('The accordion header button element has aria-controls set to the ID of the element containing the accordion panel content.', () => {
