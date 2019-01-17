@@ -24,7 +24,7 @@ jobs:
                       - repo/node_modules/*
                       - .cache/*
 
-    test-job:
+    unit-test-job:
         docker:
             - image: circleci/node:dubnium
 
@@ -73,7 +73,7 @@ jobs:
             - run: yarn test:coverage
             - run: yarn coveralls
 
-    cypress-job:
+    integration-test-job:
         docker:
             - image: circleci/node:dubnium-browsers
 
@@ -83,7 +83,7 @@ jobs:
             - checkout
             - attach_workspace:
                   at: ~/
-            - run: yarn cypress run
+            - run: yarn test:integration
 
 workflows:
     version: 2
@@ -93,7 +93,7 @@ workflows:
             - build-job:
                   requires:
                       - install-job
-            - test-job:
+            - unit-test-job:
                   requires:
                       - install-job
             - lint-job:
@@ -102,6 +102,6 @@ workflows:
             - coverage-job:
                   requires:
                       - install-job
-            - cypress-job:
+            - integration-test-job:
                   requires:
                       - install-job

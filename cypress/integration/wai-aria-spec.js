@@ -2,10 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 describe('WAI ARIA Spec', function() {
-    before(() => {
-        cy.exec('yarn build');
-    });
-
     beforeEach(() => {
         cy.visit('cypress/index.html');
         cy.document().then(document => {
