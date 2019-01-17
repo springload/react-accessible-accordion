@@ -79,6 +79,8 @@ dist
 pages
 /demo/js/bundle.js
 /demo/js/bundle.map.js
+cypress/screenshots
+cypress/videos
 
 # -------------------------------------------------
 # Visual Studio Code
