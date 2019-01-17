@@ -129,7 +129,9 @@ describe('WAI ARIA Spec', function() {
 
     context('WAI-ARIA Roles, States, and Properties', () => {
         it('The title of each accordion header is contained in an element with role button.', () => {
-            // todo
+            cy.get('.accordion__heading')
+                .should('have.length', 3)
+                .should('have.attr', 'role', 'button');
         });
 
         it('Each accordion header button is wrapped in an element with role heading that has a value set for aria-level that is appropriate for the information architecture of the page.', () => {
