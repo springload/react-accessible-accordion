@@ -92,7 +92,10 @@ const Example = (): JSX.Element => (
                                 <td>allowMultipleExpanded</td>
                                 <td>Boolean</td>
                                 <td>false</td>
-                                <td>Open only one item at a time or not</td>
+                                <td>
+                                    Don't close all the others when expanding an
+                                    AccordionItem
+                                </td>
                             </tr>
                             <tr>
                                 <td>onChange</td>

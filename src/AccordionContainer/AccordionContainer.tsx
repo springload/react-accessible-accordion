@@ -81,7 +81,6 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
                 );
             }
             if (!this.props.allowMultipleExpanded && newItem.expanded) {
-                // If this is a true accordion that doesn't allow multiple expansions and the new item is expanded, then the others must be closed.
                 items = [
                     ...state.items.map((item: Item) => ({
                         ...item,

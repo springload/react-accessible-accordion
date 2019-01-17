@@ -122,7 +122,7 @@ describe('Accordion', () => {
         );
     });
 
-    it("adding an expanded item to an accordion that doesn't allow mutliple expansions closes other items", () => {
+    it("adding an expanded item to an accordion that doesn't allow multiple expansions closes other items", () => {
         const mock = jest.fn(() => null);
         const instance = mount(
             <Provider
@@ -385,7 +385,7 @@ describe('Accordion', () => {
         expect(console.error).toBeCalled();
     });
 
-    it("triggers 'onChange' with uuid when accordion doesn't allow mutiple expansions", () => {
+    it("triggers 'onChange' with uuid when accordion doesn't allow multiple expansions", () => {
         const onChange = jest.fn();
         const item = {
             ...DEFAULT_ITEM,
