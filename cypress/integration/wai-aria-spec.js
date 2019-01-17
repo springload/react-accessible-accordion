@@ -126,4 +126,46 @@ describe('WAI ARIA Spec', function() {
             });
         });
     });
+
+    context('WAI-ARIA Roles, States, and Properties', () => {
+        it('The title of each accordion header is contained in an element with role button.', () => {
+            // todo
+        });
+
+        it('Each accordion header button is wrapped in an element with role heading that has a value set for aria-level that is appropriate for the information architecture of the page.', () => {
+            // todo
+        });
+
+        it('If the native host language has an element with an implicit heading and aria-level, such as an HTML heading tag, a native host language element may be used.', () => {
+            // todo
+        });
+
+        it('The button element is the only element inside the heading element. That is, if there are other visually persistent elements, they are not included inside the heading element.', () => {
+            // todo
+        });
+
+        it('If the accordion panel associated with an accordion header is visible, the header button element has aria-expanded set to true. If the panel is not visible, aria-expanded is set to false.', () => {
+            // todo
+        });
+
+        it('The accordion header button element has aria-controls set to the ID of the element containing the accordion panel content.', () => {
+            // todo
+        });
+
+        it('If the accordion panel associated with an accordion header is visible, and if the accordion does not permit the panel to be collapsed, the header button element has aria-disabled set to true.', () => {
+            // todo
+        });
+
+        it('Optionally, each element that serves as a container for panel content has role region and aria-labelledby with a value that refers to the button that controls display of the panel.', () => {
+            // todo
+        });
+
+        it('Avoid using the region role in circumstances that create landmark region proliferation, e.g., in an accordion that contains more than approximately 6 panels that can be expanded at the same time.', () => {
+            // todo
+        });
+
+        it('Role region is especially helpful to the perception of structure by screen reader users when panels contain heading elements or a nested accordion.', () => {
+            // todo
+        });
+    });
 });
