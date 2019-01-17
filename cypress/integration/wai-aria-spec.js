@@ -78,4 +78,52 @@ describe('WAI ARIA Spec', function() {
             cy.get('#classic-accordion');
         });
     });
+
+    context('Keyboard Interaction', () => {
+        context('Enter or Space', () => {
+            it('When focus is on the accordion header for a collapsed panel, expands the associated panel. If the implementation allows only one panel to be expanded, and if another panel is expanded, collapses that panel.', () => {
+                // todo
+            });
+
+            it('When focus is on the accordion header for an expanded panel, collapses the panel if the implementation supports collapsing. Some implementations require one panel to be expanded at all times and allow only one panel to be expanded; so, they do not support a collapse function.', () => {
+                // todo
+            });
+        });
+
+        context('Tab', () => {
+            it('Moves focus to the next focusable element; all focusable elements in the accordion are included in the page Tab sequence.', () => {
+                // todo
+            });
+        });
+
+        context('Shift + Tab', () => {
+            it('Moves focus to the previous focusable element; all focusable elements in the accordion are included in the page Tab sequence.', () => {
+                // todo
+            });
+        });
+
+        context('Down Arrow (Optional)', () => {
+            it('If focus is on an accordion header, moves focus to the next accordion header. If focus is on the last accordion header, either does nothing or moves focus to the first accordion header.', () => {
+                // todo
+            });
+        });
+
+        context('Up Arrow (Optional)', () => {
+            it('If focus is on an accordion header, moves focus to the previous accordion header. If focus is on the first accordion header, either does nothing or moves focus to the last accordion header.', () => {
+                // todo
+            });
+        });
+
+        context('Home (Optional)', () => {
+            it('When focus is on an accordion header, moves focus to the first accordion header.', () => {
+                // todo
+            });
+        });
+
+        context('End (Optional)', () => {
+            it('When focus is on an accordion header, moves focus to the last accordion header.', () => {
+                // todo
+            });
+        });
+    });
 });
