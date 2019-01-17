@@ -154,7 +154,17 @@ describe('WAI ARIA Spec', function() {
         });
 
         it('The accordion header button element has aria-controls set to the ID of the element containing the accordion panel content.', () => {
-            // todo
+            cy.get('.accordion__item').each(item => {
+                cy.wrap(item).within(() => {
+                    cy.get('.accordion__panel').then(panel => {
+                        cy.get('.accordion__heading').should(
+                            'have.attr',
+                            'aria-controls',
+                            `${panel.attr('id')}`,
+                        );
+                    });
+                });
+            });
         });
 
         it('If the accordion panel associated with an accordion header is visible, and if the accordion does not permit the panel to be collapsed, the header button element has aria-disabled set to true.', () => {
