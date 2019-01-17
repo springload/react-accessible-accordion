@@ -20,9 +20,9 @@ describe('AccordionItem', () => {
         expect(wrapper.html()).toBeNull();
     });
 
-    it('renders correctly with accordion true', () => {
+    it('renders correctly with allowMultipleExpanded false', () => {
         const wrapper = mount(
-            <AccordionProvider accordion={true}>
+            <AccordionProvider>
                 <AccordionItem className="accordion__item">
                     <AccordionItemHeading className="accordion__heading">
                         <div>Fake title</div>
@@ -37,9 +37,9 @@ describe('AccordionItem', () => {
         expect(wrapper).toMatchSnapshot();
     });
 
-    it('renders correctly with accordion false', () => {
+    it('renders correctly with allowMultipleExpanded true', () => {
         const wrapper = mount(
-            <AccordionProvider>
+            <AccordionProvider allowMultipleExpanded={true}>
                 <AccordionItem className="accordion__item">
                     <AccordionItemHeading className="accordion__heading">
                         <div>Fake title</div>

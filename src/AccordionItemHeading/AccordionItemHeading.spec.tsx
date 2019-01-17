@@ -39,7 +39,7 @@ describe('AccordionItemHeading', () => {
         item: Item = DEFAULT_ITEM,
     ): ReactWrapper {
         return mount(
-            <AccordionProvider accordion={false} items={[item]}>
+            <AccordionProvider allowMultipleExpanded={true} items={[item]}>
                 <ItemProvider uuid={item.uuid}>{node}</ItemProvider>
             </AccordionProvider>,
         );
@@ -152,10 +152,9 @@ describe('AccordionItemHeading', () => {
     });
 
     // edge case to cover branch
-    it('doesn’t toggle state when clicking but disabled & accordion === true', async () => {
+    it('doesn’t toggle state when clicking but disabled & allowMultipleExpanded === false', async () => {
         const wrapper = mount(
             <AccordionProvider
-                accordion={true}
                 items={[
                     {
                         ...DEFAULT_ITEM,

@@ -1,38 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AccordionItem renders correctly with accordion false 1`] = `
-<div
-  className="accordion__item"
->
-  <div
-    aria-controls="accordion__panel-0"
-    aria-expanded={false}
-    className="accordion__heading"
-    id="accordion__heading-0"
-    onClick={[Function]}
-    onKeyPress={[Function]}
-    role="button"
-    tabIndex={0}
-  >
-    <div>
-      Fake title
-    </div>
-  </div>
-  <div
-    aria-hidden={true}
-    aria-labelledby="accordion__heading-0"
-    className="accordion__panel accordion__panel--hidden"
-    id="accordion__panel-0"
-    role={null}
-  >
-    <div>
-      Fake body
-    </div>
-  </div>
-</div>
-`;
-
-exports[`AccordionItem renders correctly with accordion true 1`] = `
+exports[`AccordionItem renders correctly with allowMultipleExpanded false 1`] = `
 <div
   className="accordion__item"
 >
@@ -64,6 +32,38 @@ exports[`AccordionItem renders correctly with accordion true 1`] = `
 </div>
 `;
 
+exports[`AccordionItem renders correctly with allowMultipleExpanded true 1`] = `
+<div
+  className="accordion__item"
+>
+  <div
+    aria-controls="accordion__panel-0"
+    aria-expanded={false}
+    className="accordion__heading"
+    id="accordion__heading-0"
+    onClick={[Function]}
+    onKeyPress={[Function]}
+    role="button"
+    tabIndex={0}
+  >
+    <div>
+      Fake title
+    </div>
+  </div>
+  <div
+    aria-hidden={true}
+    aria-labelledby="accordion__heading-0"
+    className="accordion__panel accordion__panel--hidden"
+    id="accordion__panel-0"
+    role={null}
+  >
+    <div>
+      Fake body
+    </div>
+  </div>
+</div>
+`;
+
 exports[`AccordionItem renders correctly with other blocks inside 1`] = `
 <div
   className="accordion__item"
@@ -86,11 +86,11 @@ exports[`AccordionItem renders correctly with other blocks inside 1`] = `
     Just another block
   </div>
   <div
-    aria-hidden={true}
+    aria-hidden={null}
     aria-labelledby="accordion__heading-0"
     className="accordion__panel accordion__panel--hidden"
     id="accordion__panel-0"
-    role={null}
+    role="region"
   >
     <div>
       Fake body
@@ -118,11 +118,11 @@ exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
     </div>
   </div>
   <div
-    aria-hidden={true}
+    aria-hidden={null}
     aria-labelledby="accordion__heading-0"
     className="accordion__panel accordion__panel--hidden"
     id="accordion__panel-0"
-    role={null}
+    role="region"
   >
     <div>
       Fake body

@@ -15,7 +15,7 @@ describe('Accordion', () => {
         expect(wrapper.find('div').props().className).toEqual('testCSSClass');
     });
 
-    describe('<Accordion accordion="true" />', () => {
+    describe('<Accordion allowMultipleExpanded="false" />', () => {
         const [FooTitle, BarTitle] = [
             (): JSX.Element => <AccordionItemHeading>Foo</AccordionItemHeading>,
             (): JSX.Element => <AccordionItemHeading>Bar</AccordionItemHeading>,
@@ -23,7 +23,7 @@ describe('Accordion', () => {
 
         function mountAccordion(): ReactWrapper {
             return mount(
-                <Accordion accordion={true}>
+                <Accordion allowMultipleExpanded={false}>
                     <AccordionItem>
                         <FooTitle />
                     </AccordionItem>
@@ -80,15 +80,15 @@ describe('Accordion', () => {
         });
     });
 
-    describe('<Accordion accordion="false" /> (‘tabpanel’)', () => {
+    describe('<Accordion allowMultipleExpanded="true" />', () => {
         const [FooTitle, BarTitle] = [
             (): JSX.Element => <AccordionItemHeading>Foo</AccordionItemHeading>,
             (): JSX.Element => <AccordionItemHeading>Bar</AccordionItemHeading>,
         ];
 
-        function mountTabpanel(): ReactWrapper {
+        function mountMultipleExpanded(): ReactWrapper {
             return mount(
-                <Accordion accordion={false}>
+                <Accordion allowMultipleExpanded={true}>
                     <AccordionItem>
                         <FooTitle />
                     </AccordionItem>
@@ -100,7 +100,7 @@ describe('Accordion', () => {
         }
 
         it('expands a collapsed item when its title is clicked', () => {
-            const wrapper = mountTabpanel();
+            const wrapper = mountMultipleExpanded();
 
             wrapper.find(FooTitle).simulate('click');
 
@@ -114,7 +114,7 @@ describe('Accordion', () => {
         });
 
         it("expands a collapsed item when its title is clicked, and doesn't close the others", () => {
-            const wrapper = mountTabpanel();
+            const wrapper = mountMultipleExpanded();
 
             wrapper.find(FooTitle).simulate('click');
             wrapper.find(BarTitle).simulate('click');
@@ -129,7 +129,7 @@ describe('Accordion', () => {
         });
 
         it('collapses an expanded item when its title is clicked', () => {
-            const wrapper = mountTabpanel();
+            const wrapper = mountMultipleExpanded();
 
             wrapper.find(FooTitle).simulate('click'); // open
             wrapper.find(FooTitle).simulate('click'); // close
@@ -144,9 +144,9 @@ describe('Accordion', () => {
         });
     });
 
-    it('does not expanded disabled items on click', () => {
+    it('does not expand disabled items on click', () => {
         const wrapper = mount(
-            <Accordion accordion={false}>
+            <Accordion allowMultipleExpanded={true}>
                 <AccordionItem disabled={true}>
                     <AccordionItemHeading className="foo">
                         Foo Title
@@ -186,7 +186,7 @@ describe('Accordion', () => {
     it('works with multiple pre expanded accordion. Extra expands are just ignored.', () => {
         const hideBodyClassName = 'HIDE';
         const wrapper = mount(
-            <Accordion accordion={true}>
+            <Accordion allowMultipleExpanded={false}>
                 <AccordionItem
                     expanded={true}
                     hideBodyClassName={hideBodyClassName}
@@ -214,9 +214,9 @@ describe('Accordion', () => {
         ).toEqual(1);
     });
 
-    it('pre expanded accordion when accordion is false', () => {
+    it('pre expanded accordion when allowMultipleExpanded is true', () => {
         const wrapper = mount(
-            <Accordion accordion={false}>
+            <Accordion allowMultipleExpanded={true}>
                 <AccordionItem expanded={true}>Fake Child</AccordionItem>
                 <AccordionItem expanded={true}>Fake Child</AccordionItem>
             </Accordion>,

@@ -7,7 +7,7 @@ type AccordionItemPanelProps = React.HTMLAttributes<HTMLDivElement> & {
     uuid: UUID;
     expanded: boolean;
     disabled: boolean;
-    accordion: boolean;
+    allowMultipleExpanded: boolean;
 };
 
 const AccordionItemPanel = (props: AccordionItemPanelProps): JSX.Element => {
@@ -17,12 +17,12 @@ const AccordionItemPanel = (props: AccordionItemPanelProps): JSX.Element => {
         uuid,
         expanded,
         disabled,
-        accordion,
+        allowMultipleExpanded,
         ...rest
     } = props;
 
-    const role = accordion ? 'region' : null;
-    const hideAriaAttribute = accordion ? null : !expanded;
+    const role = allowMultipleExpanded ? null : 'region';
+    const hideAriaAttribute = allowMultipleExpanded ? !expanded : null;
 
     return (
         <div

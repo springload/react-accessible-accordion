@@ -14,7 +14,7 @@ type AccordionWrapperProps = Omit<
     React.HTMLAttributes<HTMLDivElement>,
     'onChange'
 > & {
-    accordion?: boolean;
+    allowMultipleExpanded?: boolean;
     onChange(args: UUID | UUID[]): void;
 };
 
@@ -22,7 +22,7 @@ export default class AccordionWrapper extends React.Component<
     AccordionWrapperProps
 > {
     static defaultProps: AccordionWrapperProps = {
-        accordion: true,
+        allowMultipleExpanded: false,
         onChange: (): void => {
             //
         },
@@ -31,7 +31,7 @@ export default class AccordionWrapper extends React.Component<
     };
 
     renderAccordion = (accordionStore: AccordionContainer): JSX.Element => {
-        const { accordion, onChange, ...rest } = this.props;
+        const { allowMultipleExpanded, onChange, ...rest } = this.props;
 
         return <Accordion {...rest} />;
     };
@@ -39,7 +39,7 @@ export default class AccordionWrapper extends React.Component<
     render(): JSX.Element {
         return (
             <Provider
-                accordion={this.props.accordion}
+                allowMultipleExpanded={this.props.allowMultipleExpanded}
                 onChange={this.props.onChange}
             >
                 <Consumer>{this.renderAccordion}</Consumer>

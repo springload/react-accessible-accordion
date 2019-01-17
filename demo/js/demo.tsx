@@ -69,7 +69,7 @@ const Example = (): JSX.Element => (
 
         <h2 className="u-margin-top">Allow multiple</h2>
 
-        <Accordion accordion={false}>
+        <Accordion allowMultipleExpanded={true}>
             <AccordionItem>
                 <AccordionItemHeading>
                     <h3 className="u-position-relative">
@@ -89,9 +89,9 @@ const Example = (): JSX.Element => (
                         </thead>
                         <tbody>
                             <tr>
-                                <td>accordion</td>
+                                <td>allowMultipleExpanded</td>
                                 <td>Boolean</td>
-                                <td>true</td>
+                                <td>false</td>
                                 <td>Open only one item at a time or not</td>
                             </tr>
                             <tr>
@@ -219,7 +219,7 @@ const Example = (): JSX.Element => (
                     </h3>
                 </AccordionItemHeading>
                 <AccordionItemPanel>
-                    <Accordion accordion={false}>
+                    <Accordion allowMultipleExpanded={true}>
                         <AccordionItem>
                             <AccordionItemHeading>
                                 <h3 className="u-position-relative">
@@ -242,9 +242,9 @@ const Example = (): JSX.Element => (
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>accordion</td>
+                                            <td>allowMultipleExpanded</td>
                                             <td>Boolean</td>
-                                            <td>true</td>
+                                            <td>false</td>
                                             <td>
                                                 Open only one item at a time or
                                                 not
