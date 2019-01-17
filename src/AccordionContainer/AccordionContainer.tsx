@@ -18,14 +18,14 @@ export type ProviderState = {
 };
 
 export type ProviderProps = {
-    accordion?: boolean;
+    allowMultipleExpanded?: boolean;
     children?: React.ReactNode;
     items?: Item[];
     onChange?(args: UUID | UUID[]): void;
 };
 
 export type AccordionContainer = {
-    accordion: boolean;
+    allowMultipleExpanded: boolean;
     items: Item[];
     addItem(item: Item): void;
     removeItem(uuid: UUID): void;
@@ -56,7 +56,7 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
     getChildContext(): { [CONTEXT_KEY]: AccordionContainer } {
         const context: AccordionContainer = {
             items: this.state.items,
-            accordion: !!this.props.accordion,
+            allowMultipleExpanded: !!this.props.allowMultipleExpanded,
             addItem: this.addItem,
             removeItem: this.removeItem,
             setExpanded: this.setExpanded,
@@ -80,8 +80,7 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
                     }". Uuid property must be unique. See: https://github.com/springload/react-accessible-accordion#accordionitem`,
                 );
             }
-            if (this.props.accordion && newItem.expanded) {
-                // If this is a true accordion and the new item is expanded, then the others must be closed.
+            if (!this.props.allowMultipleExpanded && newItem.expanded) {
                 items = [
                     ...state.items.map((item: Item) => ({
                         ...item,
@@ -115,8 +114,8 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
                             expanded,
                         };
                     }
-                    if (this.props.accordion && expanded) {
-                        // If this is an accordion, we might need to collapse the other expanded item.
+                    if (!this.props.allowMultipleExpanded && expanded) {
+                        // If this is an accordion that doesn't allow multiple expansions, we might need to collapse the other expanded item.
                         return {
                             ...item,
                             expanded: false,
@@ -129,7 +128,7 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
             () => {
                 if (this.props.onChange) {
                     this.props.onChange(
-                        this.props.accordion
+                        !this.props.allowMultipleExpanded
                             ? key
                             : this.state.items
                                   .filter((item: Item) => item.expanded)

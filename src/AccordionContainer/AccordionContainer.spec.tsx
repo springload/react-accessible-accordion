@@ -34,7 +34,7 @@ describe('Accordion', () => {
         );
 
         expect(mock).toHaveBeenCalledWith({
-            accordion: false,
+            allowMultipleExpanded: false,
             items: [],
             addItem: expect.anything(),
             removeItem: expect.anything(),
@@ -42,18 +42,18 @@ describe('Accordion', () => {
         });
     });
 
-    it('respects the `accordion` prop', () => {
+    it('respects the `allowMultipleExpanded` prop', () => {
         const mock = jest.fn(() => null);
 
         mount(
-            <Provider accordion={true}>
+            <Provider allowMultipleExpanded={true}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
         );
 
         expect(mock).toHaveBeenCalledWith(
             expect.objectContaining({
-                accordion: true,
+                allowMultipleExpanded: true,
             }),
         );
     });
@@ -122,11 +122,10 @@ describe('Accordion', () => {
         );
     });
 
-    it('adding an expanded item to a strict-accordion closes other items', () => {
+    it("adding an expanded item to an accordion that doesn't allow multiple expansions closes other items", () => {
         const mock = jest.fn(() => null);
         const instance = mount(
             <Provider
-                accordion={true}
                 items={[{ ...DEFAULT_ITEM, uuid: 'foo', expanded: true }]}
             >
                 <Consumer>{mock}</Consumer>
@@ -149,10 +148,11 @@ describe('Accordion', () => {
         );
     });
 
-    it("adding an expanded item to a non-strict-accordion doesn't close other items", () => {
+    it("adding an expanded item to an accordion that allows multiple expansions doesn't close other items", () => {
         const mock = jest.fn(() => null);
         const instance = mount(
             <Provider
+                allowMultipleExpanded={true}
                 items={[{ ...DEFAULT_ITEM, uuid: 'foo', expanded: true }]}
             >
                 <Consumer>{mock}</Consumer>
@@ -202,7 +202,7 @@ describe('Accordion', () => {
         );
     });
 
-    it('setting the expanded property to true in a strict accordion closes all other items', () => {
+    it("setting the expanded property to true in an accordion that doesn't allow multiple expansions closes all other items", () => {
         const mock = jest.fn(() => null);
         const fooItem = {
             ...DEFAULT_ITEM,
@@ -216,7 +216,7 @@ describe('Accordion', () => {
         };
 
         const instance = mount(
-            <Provider accordion={true} items={[fooItem, barItem]}>
+            <Provider items={[fooItem, barItem]}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
         ).instance() as Provider;
@@ -233,7 +233,7 @@ describe('Accordion', () => {
         );
     });
 
-    it('setting the expanded property to true in a non-strict accordion does not close all other items', () => {
+    it("setting the expanded property to true in an accordion that allows multiple expansions doesn't close all other items", () => {
         const mock = jest.fn(() => null);
         const fooItem = {
             ...DEFAULT_ITEM,
@@ -247,7 +247,7 @@ describe('Accordion', () => {
         };
 
         const instance = mount(
-            <Provider items={[fooItem, barItem]}>
+            <Provider allowMultipleExpanded={true} items={[fooItem, barItem]}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
         ).instance() as Provider;
@@ -328,7 +328,7 @@ describe('Accordion', () => {
             );
         });
 
-        it('can update expanded state of multiple items at the same time', () => {
+        it('can update expanded state of multiple items at the same time in an accordion that allows multiple expansions', () => {
             const mock = jest.fn(() => null);
             const fooItem = {
                 ...DEFAULT_ITEM,
@@ -342,7 +342,10 @@ describe('Accordion', () => {
             };
 
             const instance = mount(
-                <Provider items={[fooItem, barItem]}>
+                <Provider
+                    allowMultipleExpanded={true}
+                    items={[fooItem, barItem]}
+                >
                     <Consumer>{mock}</Consumer>
                 </Provider>,
             ).instance() as Provider;
@@ -382,23 +385,7 @@ describe('Accordion', () => {
         expect(console.error).toBeCalled();
     });
 
-    it('triggers "onChange" with uuid when a true accordion', () => {
-        const onChange = jest.fn();
-        const item = {
-            ...DEFAULT_ITEM,
-            expanded: false,
-        };
-
-        const instance = mount(
-            <Provider accordion={true} items={[item]} onChange={onChange} />,
-        ).instance() as Provider;
-
-        instance.setExpanded(item.uuid, true);
-
-        expect(onChange).toHaveBeenCalledWith(item.uuid);
-    });
-
-    it('triggers "onChange" with array of expanded uuids when not a true accordion', () => {
+    it("triggers 'onChange' with uuid when accordion doesn't allow multiple expansions", () => {
         const onChange = jest.fn();
         const item = {
             ...DEFAULT_ITEM,
@@ -407,6 +394,26 @@ describe('Accordion', () => {
 
         const instance = mount(
             <Provider items={[item]} onChange={onChange} />,
+        ).instance() as Provider;
+
+        instance.setExpanded(item.uuid, true);
+
+        expect(onChange).toHaveBeenCalledWith(item.uuid);
+    });
+
+    it('triggers "onChange" with array of expanded uuids when accordion allows multiple expansions', () => {
+        const onChange = jest.fn();
+        const item = {
+            ...DEFAULT_ITEM,
+            expanded: false,
+        };
+
+        const instance = mount(
+            <Provider
+                allowMultipleExpanded={true}
+                items={[item]}
+                onChange={onChange}
+            />,
         ).instance() as Provider;
 
         instance.setExpanded(item.uuid, true);

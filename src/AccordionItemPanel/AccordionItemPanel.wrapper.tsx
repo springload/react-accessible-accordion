@@ -62,7 +62,7 @@ export default class AccordionItemPanelWrapper extends React.Component<
         }
 
         const { uuid } = itemStore;
-        const { items, accordion } = accordionStore;
+        const { items, allowMultipleExpanded } = accordionStore;
         const item = items.filter(
             (stateItem: Item) => stateItem.uuid === uuid,
         )[0];
@@ -71,7 +71,7 @@ export default class AccordionItemPanelWrapper extends React.Component<
             <AccordionItemPanel
                 {...this.props}
                 {...item}
-                accordion={accordion}
+                allowMultipleExpanded={allowMultipleExpanded}
             />
         ) : null;
     }
