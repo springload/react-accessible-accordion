@@ -19,6 +19,7 @@ export type ProviderState = {
 
 export type ProviderProps = {
     allowMultipleExpanded?: boolean;
+    allowZeroExpanded?: boolean;
     children?: React.ReactNode;
     items?: Item[];
     onChange?(args: UUID[]): void;
@@ -26,6 +27,7 @@ export type ProviderProps = {
 
 export type AccordionContainer = {
     allowMultipleExpanded: boolean;
+    allowZeroExpanded?: boolean;
     items: Item[];
     addItem(item: Item): void;
     removeItem(uuid: UUID): void;
@@ -57,6 +59,7 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
         const context: AccordionContainer = {
             items: this.state.items,
             allowMultipleExpanded: !!this.props.allowMultipleExpanded,
+            allowZeroExpanded: !!this.props.allowZeroExpanded,
             addItem: this.addItem,
             removeItem: this.removeItem,
             setExpanded: this.setExpanded,
@@ -99,9 +102,22 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
     };
 
     removeItem = (key: UUID): void => {
-        this.setState((state: ProviderState) => ({
-            items: state.items.filter((item: Item) => item.uuid !== key),
-        }));
+        this.setState((state: ProviderState) => {
+            let items: Item[];
+
+            if (
+                this.props.allowZeroExpanded ||
+                state.items.filter((item: Item) => item.expanded).length > 1
+            ) {
+                items = state.items.filter((item: Item) => item.uuid !== key);
+            } else {
+                items = state.items;
+            }
+
+            return {
+                items,
+            };
+        });
     };
 
     setExpanded = (key: UUID, expanded: boolean): void => {

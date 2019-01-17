@@ -35,6 +35,7 @@ describe('Accordion', () => {
 
         expect(mock).toHaveBeenCalledWith({
             allowMultipleExpanded: false,
+            allowZeroExpanded: false,
             items: [],
             addItem: expect.anything(),
             removeItem: expect.anything(),

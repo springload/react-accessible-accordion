@@ -23,7 +23,7 @@ describe('Accordion', () => {
 
         function mountAccordion(): ReactWrapper {
             return mount(
-                <Accordion allowMultipleExpanded={false}>
+                <Accordion>
                     <AccordionItem>
                         <FooTitle />
                     </AccordionItem>
