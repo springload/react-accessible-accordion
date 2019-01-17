@@ -385,7 +385,7 @@ describe('Accordion', () => {
         expect(console.error).toBeCalled();
     });
 
-    it("triggers 'onChange' with uuid when accordion doesn't allow multiple expansions", () => {
+    it("triggers 'onChange' with array of expanded uuids when accordion doesn't allow multiple expansions", () => {
         const onChange = jest.fn();
         const item = {
             ...DEFAULT_ITEM,
@@ -398,7 +398,7 @@ describe('Accordion', () => {
 
         instance.setExpanded(item.uuid, true);
 
-        expect(onChange).toHaveBeenCalledWith(item.uuid);
+        expect(onChange).toHaveBeenCalledWith([item.uuid]);
     });
 
     it('triggers "onChange" with array of expanded uuids when accordion allows multiple expansions', () => {
