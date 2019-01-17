@@ -174,13 +174,5 @@ describe('WAI ARIA Spec', function() {
         it('Optionally, each element that serves as a container for panel content has role region and aria-labelledby with a value that refers to the button that controls display of the panel.', () => {
             // todo
         });
-
-        it('Avoid using the region role in circumstances that create landmark region proliferation, e.g., in an accordion that contains more than approximately 6 panels that can be expanded at the same time.', () => {
-            // todo
-        });
-
-        it('Role region is especially helpful to the perception of structure by screen reader users when panels contain heading elements or a nested accordion.', () => {
-            // todo
-        });
     });
 });
