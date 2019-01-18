@@ -54,6 +54,40 @@ describe('AccordionItem', () => {
         expect(wrapper).toMatchSnapshot();
     });
 
+    it('renders correctly with allowZeroExpanded false', () => {
+        const wrapper = mount(
+            <AccordionProvider>
+                <AccordionItem className="accordion__item">
+                    <AccordionItemHeading className="accordion__heading">
+                        <div>Fake title</div>
+                    </AccordionItemHeading>
+                    <AccordionItemPanel className="accordion__panel">
+                        <div>Fake body</div>
+                    </AccordionItemPanel>
+                </AccordionItem>
+            </AccordionProvider>,
+        );
+
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    it('renders correctly with allowZeroExpanded true', () => {
+        const wrapper = mount(
+            <AccordionProvider allowZeroExpanded={true}>
+                <AccordionItem className="accordion__item">
+                    <AccordionItemHeading className="accordion__heading">
+                        <div>Fake title</div>
+                    </AccordionItemHeading>
+                    <AccordionItemPanel className="accordion__panel">
+                        <div>Fake body</div>
+                    </AccordionItemPanel>
+                </AccordionItem>
+            </AccordionProvider>,
+        );
+
+        expect(wrapper).toMatchSnapshot();
+    });
+
     it('renders with multiple AccordionItems', () => {
         const wrapper = mount(
             <AccordionProvider>
@@ -246,7 +280,36 @@ describe('AccordionItem', () => {
         ).toEqual(0);
     });
 
-    it('correctly unregisters itself on unmount', () => {
+    it('correctly unregisters itself on unmount in an accordion that allows zero items to be expanded', () => {
+        const Wrapper = ({
+            showChild,
+        }: {
+            showChild: boolean;
+        }): JSX.Element => (
+            <AccordionProvider allowZeroExpanded={true}>
+                {showChild && (
+                    <AccordionItem>
+                        <AccordionItemHeading>
+                            <div>Fake title</div>
+                        </AccordionItemHeading>
+                    </AccordionItem>
+                )}
+            </AccordionProvider>
+        );
+
+        const wrapper = mount(<Wrapper showChild={true} />);
+        const instance = wrapper
+            .find(AccordionProvider)
+            .instance() as AccordionProvider;
+
+        expect(instance.state.items.length).toEqual(1);
+
+        wrapper.setProps({ showChild: false });
+
+        expect(instance.state.items.length).toEqual(0);
+    });
+
+    it("doesn't unregister itself on unmount in an accordion that doesn't allow zero items to be expanded", () => {
         const Wrapper = ({
             showChild,
         }: {
@@ -272,7 +335,7 @@ describe('AccordionItem', () => {
 
         wrapper.setProps({ showChild: false });
 
-        expect(instance.state.items.length).toEqual(0);
+        expect(instance.state.items.length).toEqual(1);
     });
 
     it('respects arbitrary user-defined props', () => {

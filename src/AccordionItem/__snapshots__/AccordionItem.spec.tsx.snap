@@ -64,6 +64,70 @@ exports[`AccordionItem renders correctly with allowMultipleExpanded true 1`] = `
 </div>
 `;
 
+exports[`AccordionItem renders correctly with allowZeroExpanded false 1`] = `
+<div
+  className="accordion__item"
+>
+  <div
+    aria-controls="accordion__panel-0"
+    aria-expanded={false}
+    className="accordion__heading"
+    id="accordion__heading-0"
+    onClick={[Function]}
+    onKeyPress={[Function]}
+    role="button"
+    tabIndex={0}
+  >
+    <div>
+      Fake title
+    </div>
+  </div>
+  <div
+    aria-hidden={null}
+    aria-labelledby="accordion__heading-0"
+    className="accordion__panel accordion__panel--hidden"
+    id="accordion__panel-0"
+    role="region"
+  >
+    <div>
+      Fake body
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AccordionItem renders correctly with allowZeroExpanded true 1`] = `
+<div
+  className="accordion__item"
+>
+  <div
+    aria-controls="accordion__panel-0"
+    aria-expanded={false}
+    className="accordion__heading"
+    id="accordion__heading-0"
+    onClick={[Function]}
+    onKeyPress={[Function]}
+    role="button"
+    tabIndex={0}
+  >
+    <div>
+      Fake title
+    </div>
+  </div>
+  <div
+    aria-hidden={null}
+    aria-labelledby="accordion__heading-0"
+    className="accordion__panel accordion__panel--hidden"
+    id="accordion__panel-0"
+    role="region"
+  >
+    <div>
+      Fake body
+    </div>
+  </div>
+</div>
+`;
+
 exports[`AccordionItem renders correctly with other blocks inside 1`] = `
 <div
   className="accordion__item"

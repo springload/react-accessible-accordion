@@ -106,12 +106,12 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
             let items: Item[];
 
             if (
-                this.props.allowZeroExpanded ||
-                state.items.filter((item: Item) => item.expanded).length > 1
+                !this.props.allowZeroExpanded &&
+                state.items.filter((item: Item) => item.expanded).length < 2
             ) {
-                items = state.items.filter((item: Item) => item.uuid !== key);
-            } else {
                 items = state.items;
+            } else {
+                items = state.items.filter((item: Item) => item.uuid !== key);
             }
 
             return {

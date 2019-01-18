@@ -59,6 +59,22 @@ describe('Accordion', () => {
         );
     });
 
+    it('respects the `allowZeroExpanded` prop', () => {
+        const mock = jest.fn(() => null);
+
+        mount(
+            <Provider allowZeroExpanded={true}>
+                <Consumer>{mock}</Consumer>
+            </Provider>,
+        );
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                allowZeroExpanded: true,
+            }),
+        );
+    });
+
     it('respects the `items` prop', () => {
         const mock = jest.fn(() => null);
         const items = [DEFAULT_ITEM];
@@ -96,10 +112,10 @@ describe('Accordion', () => {
         );
     });
 
-    it('can remove an item', () => {
+    it('can remove an item when more than one is expanded', () => {
         const mock = jest.fn(() => null);
-        const itemFoo = { ...DEFAULT_ITEM, uuid: 'foo' };
-        const itemBar = { ...DEFAULT_ITEM, uuid: 'bar' };
+        const itemFoo = { ...DEFAULT_ITEM, expanded: true, uuid: 'foo' };
+        const itemBar = { ...DEFAULT_ITEM, expanded: true, uuid: 'bar' };
         const items = [itemFoo, itemBar];
 
         const instance = mount(
@@ -119,6 +135,58 @@ describe('Accordion', () => {
         expect(mock).toHaveBeenCalledWith(
             expect.objectContaining({
                 items: [itemBar],
+            }),
+        );
+    });
+
+    it("can't remove an item when only one is expanded and the accordion doesn't allow zero expansions", () => {
+        const mock = jest.fn(() => null);
+        const itemFoo = { ...DEFAULT_ITEM, expanded: true, uuid: 'foo' };
+        const items = [itemFoo];
+
+        const instance = mount(
+            <Provider items={items}>
+                <Consumer>{mock}</Consumer>
+            </Provider>,
+        ).instance() as Provider;
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                items,
+            }),
+        );
+
+        instance.removeItem(itemFoo.uuid);
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                items: [itemFoo],
+            }),
+        );
+    });
+
+    it('can remove an item in an accordion that allows zero expansions when only one item is expanded', () => {
+        const mock = jest.fn(() => null);
+        const itemFoo = { ...DEFAULT_ITEM, expanded: true, uuid: 'foo' };
+        const items = [itemFoo];
+
+        const instance = mount(
+            <Provider allowZeroExpanded={true} items={items}>
+                <Consumer>{mock}</Consumer>
+            </Provider>,
+        ).instance() as Provider;
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                items,
+            }),
+        );
+
+        instance.removeItem(itemFoo.uuid);
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                items: [],
             }),
         );
     });
@@ -265,6 +333,83 @@ describe('Accordion', () => {
         );
     });
 
+    it('setting the expanded property to false in an accordion that allows zero expansions when there is only one item expanded closes that item', () => {
+        const mock = jest.fn(() => null);
+        const fooItem = {
+            ...DEFAULT_ITEM,
+            uuid: 'foo',
+            expanded: true,
+        };
+
+        const instance = mount(
+            <Provider allowZeroExpanded={true} items={[fooItem]}>
+                <Consumer>{mock}</Consumer>
+            </Provider>,
+        ).instance() as Provider;
+
+        instance.setExpanded(fooItem.uuid, false);
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                items: [expect.objectContaining({ expanded: false })],
+            }),
+        );
+    });
+
+    it("setting the expanded property to false in an accordion that doesn't allow zero expansions when there is only one item expanded doesn't close that item", () => {
+        const mock = jest.fn(() => null);
+        const fooItem = {
+            ...DEFAULT_ITEM,
+            uuid: 'foo',
+            expanded: true,
+        };
+
+        const instance = mount(
+            <Provider items={[fooItem]}>
+                <Consumer>{mock}</Consumer>
+            </Provider>,
+        ).instance() as Provider;
+
+        instance.setExpanded(fooItem.uuid, false);
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                items: [expect.objectContaining({ expanded: true })],
+            }),
+        );
+    });
+
+    it("setting the expanded property to false on an item in an accordion that doesn't allow zero expansions when there are more than one item expanded closes that item", () => {
+        const mock = jest.fn(() => null);
+        const fooItem = {
+            ...DEFAULT_ITEM,
+            uuid: 'foo',
+            expanded: true,
+        };
+        const barItem = {
+            ...DEFAULT_ITEM,
+            uuid: 'bar',
+            expanded: true,
+        };
+
+        const instance = mount(
+            <Provider items={[fooItem, barItem]}>
+                <Consumer>{mock}</Consumer>
+            </Provider>,
+        ).instance() as Provider;
+
+        instance.setExpanded(fooItem.uuid, false);
+
+        expect(mock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                items: [
+                    expect.objectContaining({ expanded: false }),
+                    expect.objectContaining({ expanded: true }),
+                ],
+            }),
+        );
+    });
+
     /*
      * These tests were mostly added to assert that the callback-style setState
      * was being used and race-conditions weren't causing multiple setState
@@ -300,7 +445,73 @@ describe('Accordion', () => {
             );
         });
 
-        it('can remove multiple items at the same time', () => {
+        it('can remove multiple items at the same time in an accordion that allows zero items to be expanded', () => {
+            const mock = jest.fn(() => null);
+            const fooItem = {
+                ...DEFAULT_ITEM,
+                uuid: 'foo',
+                expanded: true,
+            };
+            const barItem = {
+                ...DEFAULT_ITEM,
+                uuid: 'bar',
+                expanded: false,
+            };
+
+            const instance = mount(
+                <Provider allowZeroExpanded={true} items={[fooItem, barItem]}>
+                    <Consumer>{mock}</Consumer>
+                </Provider>,
+            ).instance() as Provider;
+
+            instance.removeItem(fooItem.uuid);
+            instance.removeItem(barItem.uuid);
+
+            expect(mock).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    items: [],
+                }),
+            );
+        });
+
+        it('can remove multiple items at the same time when there are more than that number of items expanded', () => {
+            const mock = jest.fn(() => null);
+            const fooItem = {
+                ...DEFAULT_ITEM,
+                uuid: 'foo',
+                expanded: true,
+            };
+            const barItem = {
+                ...DEFAULT_ITEM,
+                uuid: 'bar',
+                expanded: false,
+            };
+            const bazItem = {
+                ...DEFAULT_ITEM,
+                uuid: 'baz',
+                expanded: false,
+            };
+
+            const instance = mount(
+                <Provider
+                    allowZeroExpanded={true}
+                    items={[fooItem, barItem, bazItem]}
+                >
+                    <Consumer>{mock}</Consumer>
+                </Provider>,
+            ).instance() as Provider;
+
+            instance.removeItem(fooItem.uuid);
+            instance.removeItem(barItem.uuid);
+
+            expect(mock).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    items: [bazItem],
+                }),
+            );
+        });
+
+        it("can't remove multiple items at the same time when there are only that number of items expanded in an accordion that doesn't allow zero expansions", () => {
             const mock = jest.fn(() => null);
             const fooItem = {
                 ...DEFAULT_ITEM,
@@ -324,7 +535,7 @@ describe('Accordion', () => {
 
             expect(mock).toHaveBeenCalledWith(
                 expect.objectContaining({
-                    items: [],
+                    items: [fooItem, barItem],
                 }),
             );
         });

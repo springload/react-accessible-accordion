@@ -67,9 +67,9 @@ const Example = (): JSX.Element => (
             </AccordionItem>
         </Accordion>
 
-        <h2 className="u-margin-top">Allow multiple</h2>
+        <h2 className="u-margin-top">Allow multiple/zero</h2>
 
-        <Accordion allowMultipleExpanded={true}>
+        <Accordion allowMultipleExpanded={true} allowZeroExpanded={true}>
             <AccordionItem>
                 <AccordionItemHeading>
                     <h3 className="u-position-relative">
@@ -95,6 +95,15 @@ const Example = (): JSX.Element => (
                                 <td>
                                     Don't close all the others when expanding an
                                     AccordionItem
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>allowZeroExpanded</td>
+                                <td>Boolean</td>
+                                <td>false</td>
+                                <td>
+                                    Close an AccordionItem when it's the only
+                                    one expanded
                                 </td>
                             </tr>
                             <tr>
