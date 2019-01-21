@@ -108,26 +108,22 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
     };
 
     setExpanded = (key: UUID, expanded: boolean): void => {
+        if (
+            !expanded &&
+            !this.props.allowZeroExpanded &&
+            this.state.items.filter((item: Item) => item.expanded).length === 1
+        ) {
+            // If this is an accordion that doesn't allow all items to be closed and the current item is the only one open, don't allow it to close.
+            return;
+        }
         this.setState(
             (state: ProviderState) => ({
                 items: state.items.map((item: Item) => {
                     if (item.uuid === key) {
-                        if (
-                            !expanded &&
-                            !this.props.allowZeroExpanded &&
-                            state.items.filter((item_: Item) => item_.expanded)
-                                .length < 2
-                        ) {
-                            // If this is an accordion that doesn't allow all items to be closed and the current item is the only one open, don't allow it to close.
-                            return {
-                                ...item,
-                            };
-                        } else {
-                            return {
-                                ...item,
-                                expanded,
-                            };
-                        }
+                        return {
+                            ...item,
+                            expanded,
+                        };
                     }
                     if (!this.props.allowMultipleExpanded && expanded) {
                         // If this is an accordion that doesn't allow multiple expansions, we might need to collapse the other expanded item.
