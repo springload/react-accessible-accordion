@@ -15,6 +15,7 @@ type AccordionWrapperProps = Omit<
     'onChange'
 > & {
     allowMultipleExpanded?: boolean;
+    allowZeroExpanded?: boolean;
     onChange(args: UUID[]): void;
 };
 
@@ -23,6 +24,7 @@ export default class AccordionWrapper extends React.Component<
 > {
     static defaultProps: AccordionWrapperProps = {
         allowMultipleExpanded: false,
+        allowZeroExpanded: false,
         onChange: (): void => {
             //
         },
@@ -31,7 +33,12 @@ export default class AccordionWrapper extends React.Component<
     };
 
     renderAccordion = (accordionStore: AccordionContainer): JSX.Element => {
-        const { allowMultipleExpanded, onChange, ...rest } = this.props;
+        const {
+            allowMultipleExpanded,
+            allowZeroExpanded,
+            onChange,
+            ...rest
+        } = this.props;
 
         return <Accordion {...rest} />;
     };
@@ -40,6 +47,7 @@ export default class AccordionWrapper extends React.Component<
         return (
             <Provider
                 allowMultipleExpanded={this.props.allowMultipleExpanded}
+                allowZeroExpanded={this.props.allowZeroExpanded}
                 onChange={this.props.onChange}
             >
                 <Consumer>{this.renderAccordion}</Consumer>

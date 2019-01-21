@@ -19,6 +19,7 @@ export type ProviderState = {
 
 export type ProviderProps = {
     allowMultipleExpanded?: boolean;
+    allowZeroExpanded?: boolean;
     children?: React.ReactNode;
     items?: Item[];
     onChange?(args: UUID[]): void;
@@ -26,6 +27,7 @@ export type ProviderProps = {
 
 export type AccordionContainer = {
     allowMultipleExpanded: boolean;
+    allowZeroExpanded: boolean;
     items: Item[];
     addItem(item: Item): void;
     removeItem(uuid: UUID): void;
@@ -57,6 +59,7 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
         const context: AccordionContainer = {
             items: this.state.items,
             allowMultipleExpanded: !!this.props.allowMultipleExpanded,
+            allowZeroExpanded: !!this.props.allowZeroExpanded,
             addItem: this.addItem,
             removeItem: this.removeItem,
             setExpanded: this.setExpanded,
@@ -105,6 +108,14 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
     };
 
     setExpanded = (key: UUID, expanded: boolean): void => {
+        if (
+            !expanded &&
+            !this.props.allowZeroExpanded &&
+            this.state.items.filter((item: Item) => item.expanded).length === 1
+        ) {
+            // If this is an accordion that doesn't allow all items to be closed and the current item is the only one open, don't allow it to close.
+            return;
+        }
         this.setState(
             (state: ProviderState) => ({
                 items: state.items.map((item: Item) => {

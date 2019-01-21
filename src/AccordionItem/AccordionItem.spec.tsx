@@ -54,6 +54,40 @@ describe('AccordionItem', () => {
         expect(wrapper).toMatchSnapshot();
     });
 
+    it('renders correctly with allowZeroExpanded false', () => {
+        const wrapper = mount(
+            <AccordionProvider>
+                <AccordionItem className="accordion__item">
+                    <AccordionItemHeading className="accordion__heading">
+                        <div>Fake title</div>
+                    </AccordionItemHeading>
+                    <AccordionItemPanel className="accordion__panel">
+                        <div>Fake body</div>
+                    </AccordionItemPanel>
+                </AccordionItem>
+            </AccordionProvider>,
+        );
+
+        expect(wrapper).toMatchSnapshot();
+    });
+
+    it('renders correctly with allowZeroExpanded true', () => {
+        const wrapper = mount(
+            <AccordionProvider allowZeroExpanded={true}>
+                <AccordionItem className="accordion__item">
+                    <AccordionItemHeading className="accordion__heading">
+                        <div>Fake title</div>
+                    </AccordionItemHeading>
+                    <AccordionItemPanel className="accordion__panel">
+                        <div>Fake body</div>
+                    </AccordionItemPanel>
+                </AccordionItem>
+            </AccordionProvider>,
+        );
+
+        expect(wrapper).toMatchSnapshot();
+    });
+
     it('renders with multiple AccordionItems', () => {
         const wrapper = mount(
             <AccordionProvider>
@@ -182,9 +216,9 @@ describe('AccordionItem', () => {
         ).toEqual(1);
     });
 
-    it('can dynamically unset expanded prop', () => {
+    it('can dynamically unset expanded prop when there is only one item expanded and allowZeroExpanded is set to true', () => {
         const Wrapper = ({ expanded }: { expanded: boolean }): JSX.Element => (
-            <AccordionProvider>
+            <AccordionProvider allowZeroExpanded={true}>
                 <AccordionItem expanded={expanded}>
                     <AccordionItemHeading>
                         <div>Fake title</div>
@@ -204,6 +238,35 @@ describe('AccordionItem', () => {
             instance.state.items.filter((item: Item) => item.expanded === true)
                 .length,
         ).toEqual(0);
+    });
+
+    it('can dynamically unset expanded prop when there is more than one item expanded', () => {
+        const Wrapper = ({ expanded }: { expanded: boolean }): JSX.Element => (
+            <AccordionProvider>
+                <AccordionItem expanded={expanded}>
+                    <AccordionItemHeading>
+                        <div>Fake title</div>
+                    </AccordionItemHeading>
+                </AccordionItem>
+                <AccordionItem expanded={true}>
+                    <AccordionItemHeading>
+                        <div>Fake title</div>
+                    </AccordionItemHeading>
+                </AccordionItem>
+            </AccordionProvider>
+        );
+
+        const wrapper = mount(<Wrapper expanded={true} />);
+        const instance = wrapper
+            .find(AccordionProvider)
+            .instance() as AccordionProvider;
+
+        wrapper.setProps({ expanded: undefined });
+
+        expect(
+            instance.state.items.filter((item: Item) => item.expanded === true)
+                .length,
+        ).toEqual(1);
     });
 
     it('dynamically changing arbitrary props does not affect expanded state', () => {
@@ -246,13 +309,13 @@ describe('AccordionItem', () => {
         ).toEqual(0);
     });
 
-    it('correctly unregisters itself on unmount', () => {
+    it('correctly unregisters itself on unmount in an accordion that allows zero items to be expanded', () => {
         const Wrapper = ({
             showChild,
         }: {
             showChild: boolean;
         }): JSX.Element => (
-            <AccordionProvider>
+            <AccordionProvider allowZeroExpanded={true}>
                 {showChild && (
                     <AccordionItem>
                         <AccordionItemHeading>
