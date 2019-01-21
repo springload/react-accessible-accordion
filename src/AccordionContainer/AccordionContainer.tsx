@@ -27,7 +27,7 @@ export type ProviderProps = {
 
 export type AccordionContainer = {
     allowMultipleExpanded: boolean;
-    allowZeroExpanded?: boolean;
+    allowZeroExpanded: boolean;
     items: Item[];
     addItem(item: Item): void;
     removeItem(uuid: UUID): void;
