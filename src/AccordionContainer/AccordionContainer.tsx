@@ -102,22 +102,9 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
     };
 
     removeItem = (key: UUID): void => {
-        this.setState((state: ProviderState) => {
-            let items: Item[];
-
-            if (
-                !this.props.allowZeroExpanded &&
-                state.items.filter((item: Item) => item.expanded).length < 2
-            ) {
-                items = state.items;
-            } else {
-                items = state.items.filter((item: Item) => item.uuid !== key);
-            }
-
-            return {
-                items,
-            };
-        });
+        this.setState((state: ProviderState) => ({
+            items: state.items.filter((item: Item) => item.uuid !== key),
+        }));
     };
 
     setExpanded = (key: UUID, expanded: boolean): void => {
@@ -125,10 +112,22 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
             (state: ProviderState) => ({
                 items: state.items.map((item: Item) => {
                     if (item.uuid === key) {
-                        return {
-                            ...item,
-                            expanded,
-                        };
+                        if (
+                            !expanded &&
+                            !this.props.allowZeroExpanded &&
+                            state.items.filter((item_: Item) => item_.expanded)
+                                .length < 2
+                        ) {
+                            // If this is an accordion that doesn't allow all items to be closed and the current item is the only one open, don't allow it to close.
+                            return {
+                                ...item,
+                            };
+                        } else {
+                            return {
+                                ...item,
+                                expanded,
+                            };
+                        }
                     }
                     if (!this.props.allowMultipleExpanded && expanded) {
                         // If this is an accordion that doesn't allow multiple expansions, we might need to collapse the other expanded item.

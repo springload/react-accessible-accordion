@@ -216,9 +216,9 @@ describe('AccordionItem', () => {
         ).toEqual(1);
     });
 
-    it('can dynamically unset expanded prop', () => {
+    it('can dynamically unset expanded prop when there is only one item expanded and allowZeroExpanded is set to true', () => {
         const Wrapper = ({ expanded }: { expanded: boolean }): JSX.Element => (
-            <AccordionProvider>
+            <AccordionProvider allowZeroExpanded={true}>
                 <AccordionItem expanded={expanded}>
                     <AccordionItemHeading>
                         <div>Fake title</div>
@@ -238,6 +238,35 @@ describe('AccordionItem', () => {
             instance.state.items.filter((item: Item) => item.expanded === true)
                 .length,
         ).toEqual(0);
+    });
+
+    it('can dynamically unset expanded prop when there is more than one item expanded', () => {
+        const Wrapper = ({ expanded }: { expanded: boolean }): JSX.Element => (
+            <AccordionProvider>
+                <AccordionItem expanded={expanded}>
+                    <AccordionItemHeading>
+                        <div>Fake title</div>
+                    </AccordionItemHeading>
+                </AccordionItem>
+                <AccordionItem expanded={true}>
+                    <AccordionItemHeading>
+                        <div>Fake title</div>
+                    </AccordionItemHeading>
+                </AccordionItem>
+            </AccordionProvider>
+        );
+
+        const wrapper = mount(<Wrapper expanded={true} />);
+        const instance = wrapper
+            .find(AccordionProvider)
+            .instance() as AccordionProvider;
+
+        wrapper.setProps({ expanded: undefined });
+
+        expect(
+            instance.state.items.filter((item: Item) => item.expanded === true)
+                .length,
+        ).toEqual(1);
     });
 
     it('dynamically changing arbitrary props does not affect expanded state', () => {
@@ -307,35 +336,6 @@ describe('AccordionItem', () => {
         wrapper.setProps({ showChild: false });
 
         expect(instance.state.items.length).toEqual(0);
-    });
-
-    it("doesn't unregister itself on unmount in an accordion that doesn't allow zero items to be expanded", () => {
-        const Wrapper = ({
-            showChild,
-        }: {
-            showChild: boolean;
-        }): JSX.Element => (
-            <AccordionProvider>
-                {showChild && (
-                    <AccordionItem>
-                        <AccordionItemHeading>
-                            <div>Fake title</div>
-                        </AccordionItemHeading>
-                    </AccordionItem>
-                )}
-            </AccordionProvider>
-        );
-
-        const wrapper = mount(<Wrapper showChild={true} />);
-        const instance = wrapper
-            .find(AccordionProvider)
-            .instance() as AccordionProvider;
-
-        expect(instance.state.items.length).toEqual(1);
-
-        wrapper.setProps({ showChild: false });
-
-        expect(instance.state.items.length).toEqual(1);
     });
 
     it('respects arbitrary user-defined props', () => {

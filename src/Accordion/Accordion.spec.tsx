@@ -62,13 +62,13 @@ describe('Accordion', () => {
             ).toEqual(1);
         });
 
-        it('collapses an expanded item when its title is clicked', () => {
-            const wrapper = mountAccordion();
-
-            const fooTitle = wrapper.find(FooTitle);
-
-            fooTitle.simulate('click'); // open
-            fooTitle.simulate('click'); // close
+        it('pre expanded accordion', () => {
+            const wrapper = mount(
+                <Accordion>
+                    <AccordionItem expanded={true}>Fake Child</AccordionItem>
+                    <AccordionItem>Fake Child</AccordionItem>
+                </Accordion>,
+            );
 
             const instance = wrapper.find(Provider).instance() as Provider;
 
@@ -76,7 +76,46 @@ describe('Accordion', () => {
                 instance.state.items.filter(
                     (item: Item) => item.expanded === true,
                 ).length,
-            ).toEqual(0);
+            ).toEqual(1);
+        });
+
+        it('works with multiple pre expanded accordion. Extra expands are just ignored.', () => {
+            const hideBodyClassName = 'HIDE';
+            const wrapper = mount(
+                <Accordion allowMultipleExpanded={false}>
+                    <AccordionItem
+                        expanded={true}
+                        hideBodyClassName={hideBodyClassName}
+                    >
+                        Fake Child
+                    </AccordionItem>
+                    <AccordionItem
+                        expanded={true}
+                        hideBodyClassName={hideBodyClassName}
+                    >
+                        Fake Child
+                    </AccordionItem>
+                </Accordion>,
+            );
+
+            const instance = wrapper.find(Provider).instance() as Provider;
+
+            expect(
+                instance.state.items.filter((item: Item) => item.expanded)
+                    .length,
+            ).toEqual(1);
+            expect(
+                wrapper.findWhere((item: ReactWrapper) =>
+                    item.hasClass(hideBodyClassName),
+                ).length,
+            ).toEqual(1);
+        });
+
+        it('respects arbitrary user-defined props', () => {
+            const wrapper = mount(<Accordion lang="en" />);
+            const div = wrapper.find('div').getDOMNode();
+
+            expect(div.getAttribute('lang')).toEqual('en');
         });
     });
 
@@ -128,10 +167,11 @@ describe('Accordion', () => {
             ).toEqual(2);
         });
 
-        it('collapses an expanded item when its title is clicked', () => {
+        it('collapses an expanded item when its title is clicked and there is more than one item expanded', () => {
             const wrapper = mountMultipleExpanded();
 
             wrapper.find(FooTitle).simulate('click'); // open
+            wrapper.find(BarTitle).simulate('click'); // open
             wrapper.find(FooTitle).simulate('click'); // close
 
             const instance = wrapper.find(Provider).instance() as Provider;
@@ -140,7 +180,7 @@ describe('Accordion', () => {
                 instance.state.items.filter(
                     (item: Item) => item.expanded === true,
                 ).length,
-            ).toEqual(0);
+            ).toEqual(1);
         });
     });
 
@@ -167,53 +207,6 @@ describe('Accordion', () => {
         ).toEqual(0);
     });
 
-    it('pre expanded accordion', () => {
-        const wrapper = mount(
-            <Accordion>
-                <AccordionItem expanded={true}>Fake Child</AccordionItem>
-                <AccordionItem>Fake Child</AccordionItem>
-            </Accordion>,
-        );
-
-        const instance = wrapper.find(Provider).instance() as Provider;
-
-        expect(
-            instance.state.items.filter((item: Item) => item.expanded === true)
-                .length,
-        ).toEqual(1);
-    });
-
-    it('works with multiple pre expanded accordion. Extra expands are just ignored.', () => {
-        const hideBodyClassName = 'HIDE';
-        const wrapper = mount(
-            <Accordion allowMultipleExpanded={false}>
-                <AccordionItem
-                    expanded={true}
-                    hideBodyClassName={hideBodyClassName}
-                >
-                    Fake Child
-                </AccordionItem>
-                <AccordionItem
-                    expanded={true}
-                    hideBodyClassName={hideBodyClassName}
-                >
-                    Fake Child
-                </AccordionItem>
-            </Accordion>,
-        );
-
-        const instance = wrapper.find(Provider).instance() as Provider;
-
-        expect(
-            instance.state.items.filter((item: Item) => item.expanded).length,
-        ).toEqual(1);
-        expect(
-            wrapper.findWhere((item: ReactWrapper) =>
-                item.hasClass(hideBodyClassName),
-            ).length,
-        ).toEqual(1);
-    });
-
     it('pre expanded accordion when allowMultipleExpanded is true', () => {
         const wrapper = mount(
             <Accordion allowMultipleExpanded={true}>
@@ -229,11 +222,64 @@ describe('Accordion', () => {
                 .length,
         ).toEqual(2);
     });
+});
 
-    it('respects arbitrary user-defined props', () => {
-        const wrapper = mount(<Accordion lang="en" />);
-        const div = wrapper.find('div').getDOMNode();
+describe('<Accordion allowZeroExpanded="false" />', () => {
+    const [FooTitle] = [
+        (): JSX.Element => <AccordionItemHeading>Foo</AccordionItemHeading>,
+    ];
 
-        expect(div.getAttribute('lang')).toEqual('en');
+    function mountAccordion(): ReactWrapper {
+        return mount(
+            <Accordion>
+                <AccordionItem>
+                    <FooTitle />
+                </AccordionItem>
+            </Accordion>,
+        );
+    }
+
+    it("doesn't collapse an expanded item when it's the only item expanded", () => {
+        const wrapper = mountAccordion();
+
+        wrapper.find(FooTitle).simulate('click'); // open
+        wrapper.find(FooTitle).simulate('click'); // close
+
+        const instance = wrapper.find(Provider).instance() as Provider;
+
+        expect(
+            instance.state.items.filter((item: Item) => item.expanded === true)
+                .length,
+        ).toEqual(1);
+    });
+});
+
+describe('<Accordion allowZeroExpanded="true" />', () => {
+    const [FooTitle] = [
+        (): JSX.Element => <AccordionItemHeading>Foo</AccordionItemHeading>,
+    ];
+
+    function mountZeroExpanded(): ReactWrapper {
+        return mount(
+            <Accordion allowZeroExpanded={true}>
+                <AccordionItem>
+                    <FooTitle />
+                </AccordionItem>
+            </Accordion>,
+        );
+    }
+
+    it("collapses an expanded item when its title is clicked and it's the only item open", () => {
+        const wrapper = mountZeroExpanded();
+
+        wrapper.find(FooTitle).simulate('click'); // open
+        wrapper.find(FooTitle).simulate('click'); // close
+
+        const provider = wrapper.find(Provider).instance() as Provider;
+
+        expect(
+            provider.state.items.filter((item: Item) => item.expanded === true)
+                .length,
+        ).toEqual(0);
     });
 });
