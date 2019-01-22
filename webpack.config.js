@@ -2,13 +2,11 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env, options) => ({
     mode: options.mode,
-    devtool: 'source-map',
-    entry: path.resolve(__dirname, 'demo/js/demo.tsx'),
     output: {
-        path: path.resolve(__dirname, 'pages'),
         filename:
             options.mode === 'production'
                 ? '[name][chunkhash].js'
@@ -27,7 +25,16 @@ module.exports = (env, options) => ({
             },
             {
                 test: /\.css$/,
-                loaders: ['style-loader', 'css-loader'],
+                use: [
+                    options.mode === 'production'
+                        ? MiniCssExtractPlugin.loader
+                        : 'style-loader',
+                    'css-loader',
+                ],
+            },
+            {
+                test: /\.ico$/,
+                loaders: ['file-loader'],
             },
         ],
     },
@@ -36,15 +43,11 @@ module.exports = (env, options) => ({
     },
 
     plugins: [
-        options.mode === 'development'
-            ? new webpack.HotModuleReplacementPlugin()
-            : () => {},
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'demo/index.html'),
+            template: 'src/index.html',
+        }),
+        new MiniCssExtractPlugin({
+            filename: '[name][contenthash].css',
         }),
     ],
-
-    devServer: {
-        contentBase: './demo',
-    },
 });
