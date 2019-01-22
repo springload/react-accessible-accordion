@@ -1,8 +1,71 @@
+import path from 'path';
+import { spawnSync } from 'child_process';
+
 describe('WAI ARIA Spec', () => {
+    beforeEach(async () => {
+        await page.goto(`file:${path.resolve(__dirname, 'dist/index.html')}`);
+    });
+
+    describe('Canary tests', () => {
+        it('Loads the Cypress Testing Sandbox', async () => {
+            const title = await page.evaluate(() => document.title);
+            expect(title).toBe(
+                'React Accessible Accordion - Integration Test Sandbox',
+            );
+        });
+        it('has rendered the "classic accordion" example', async () => {
+            const qtyClassicAccordion = await page.evaluate(
+                () => document.querySelectorAll('#classic-accordion').length,
+            );
+            expect(qtyClassicAccordion).toEqual(1);
+        });
+    });
+
+    describe('Chrome Accessibility Tree', () => {
+        it('matches snapshots', async () => {
+            expect(await page.accessibility.snapshot()).toMatchSnapshot();
+        });
+    });
+
     describe('Keyboard Interaction', () => {
         describe('Enter or Space', () => {
-            it('When focus is on the accordion header for a collapsed panel, expands the associated panel. If the implementation allows only one panel to be expanded, and if another panel is expanded, collapses that panel.', () => {
-                // todo
+            it('When focus is on the accordion header for a collapsed panel, expands the associated panel. If the implementation allows only one panel to be expanded, and if another panel is expanded, collapses that panel.', async () => {
+                const headingHandles = await page.$$(
+                    '#classic-accordion .accordion__heading',
+                );
+                expect(headingHandles.length).toEqual(3);
+
+                const firstHeadingHandle = headingHandles[0];
+                const secondHeadingHandle = headingHandles[1];
+
+                function evaluateIsExpanded(headingHandle) {
+                    return page
+                        .evaluate(
+                            heading => heading.getAttribute('aria-expanded'),
+                            headingHandle,
+                        )
+                        .then(ariaExpanded => ariaExpanded === 'true');
+                }
+
+                // ENTER key
+                await firstHeadingHandle.focus();
+                expect(await evaluateIsExpanded(firstHeadingHandle)).toEqual(
+                    false,
+                );
+                await page.keyboard.press('Enter');
+                expect(await evaluateIsExpanded(firstHeadingHandle)).toEqual(
+                    true,
+                );
+
+                // SPACE key
+                await secondHeadingHandle.focus();
+                expect(await evaluateIsExpanded(secondHeadingHandle)).toEqual(
+                    false,
+                );
+                await page.keyboard.press('Space');
+                expect(await evaluateIsExpanded(secondHeadingHandle)).toEqual(
+                    true,
+                );
             });
 
             it('When focus is on the accordion header for an expanded panel, collapses the panel if the implementation supports collapsing. Some implementations require one panel to be expanded at all times and allow only one panel to be expanded; so, they do not support a collapse function.', () => {
@@ -11,14 +74,38 @@ describe('WAI ARIA Spec', () => {
         });
 
         describe('Tab', () => {
-            it('Moves focus to the next focusable element; all focusable elements in the accordion are included in the page Tab sequence.', () => {
-                // todo
+            it('Moves focus to the next focusable element; all focusable elements in the accordion are included in the page Tab sequence.', async () => {
+                const headingHandles = await page.$$(
+                    '#classic-accordion .accordion__heading',
+                );
+                const firstHeadingHandle = headingHandles[0];
+                const secondHeadingHandle = headingHandles[1];
+                await firstHeadingHandle.focus();
+                await page.keyboard.press('Tab');
+                const secondIsFocussed = await page.evaluate(
+                    heading => document.activeElement === heading,
+                    secondHeadingHandle,
+                );
+                expect(secondIsFocussed).toEqual(true);
             });
         });
 
         describe('Shift + Tab', () => {
-            it('Moves focus to the previous focusable element; all focusable elements in the accordion are included in the page Tab sequence.', () => {
-                // todo
+            it('Moves focus to the previous focusable element; all focusable elements in the accordion are included in the page Tab sequence.', async () => {
+                const headingHandles = await page.$$(
+                    '#classic-accordion .accordion__heading',
+                );
+                const firstHeadingHandle = headingHandles[0];
+                const secondHeadingHandle = headingHandles[1];
+                await secondHeadingHandle.focus();
+                await page.keyboard.down('Shift');
+                await page.keyboard.press('Tab');
+                await page.keyboard.up('Shift');
+                const firstIsFocussed = await page.evaluate(
+                    heading => document.activeElement === heading,
+                    firstHeadingHandle,
+                );
+                expect(firstIsFocussed).toEqual(true);
             });
         });
 
@@ -48,13 +135,21 @@ describe('WAI ARIA Spec', () => {
     });
 
     describe('WAI-ARIA Roles, States, and Properties', () => {
-        it('The title of each accordion header is contained in an element with role button.', () => {
-            // todo
+        it('The title of each accordion header is contained in an element with role button.', async () => {
+            const roles = await page.evaluate(() => {
+                const nodes = document
+                    .querySelector('#classic-accordion')
+                    .querySelectorAll('.accordion__heading');
+                return Array.from(nodes).map(heading =>
+                    heading.getAttribute('role'),
+                );
+            });
+            expect(roles).toHaveLength(3);
+            roles.forEach(role => expect(role).toBe('button'));
         });
 
-        it('Each accordion header button is wrapped in an element with role heading that has a value set for aria-level that is appropriate for the information architecture of the page.', () => {
-            // Not yet supported.
-        });
+        // Not yet supported.
+        xit('Each accordion header button is wrapped in an element with role heading that has a value set for aria-level that is appropriate for the information architecture of the page.', () => {});
 
         it('If the native host language has an element with an implicit heading and aria-level, such as an HTML heading tag, a native host language element may be used.', () => {
             // todo
@@ -64,20 +159,92 @@ describe('WAI ARIA Spec', () => {
             // todo
         });
 
-        it('If the accordion panel associated with an accordion header is visible, the header button element has aria-expanded set to true. If the panel is not visible, aria-expanded is set to false.', () => {
-            // todo
+        it('If the accordion panel associated with an accordion header is visible, the header button element has aria-expanded set to true. If the panel is not visible, aria-expanded is set to false.', async () => {
+            const headings = await page.$$(
+                '#classic-accordion .accordion__heading',
+            );
+            expect(headings.length).toEqual(3);
+
+            for (const handle of headings) {
+                // Before expanding
+                expect(
+                    await page.evaluate(
+                        heading => heading.getAttribute('aria-expanded'),
+                        handle,
+                    ),
+                ).toEqual('false');
+
+                // Click to expand
+                await handle.click();
+
+                // After expanding
+                expect(
+                    await page.evaluate(
+                        heading => heading.getAttribute('aria-expanded'),
+                        handle,
+                    ),
+                ).toEqual('true');
+            }
         });
 
-        it('The accordion header button element has aria-controls set to the ID of the element containing the accordion panel content.', () => {
-            // todo
+        it('The accordion header button element has aria-controls set to the ID of the element containing the accordion panel content.', async () => {
+            const itemHandles = await page.$$(
+                '#classic-accordion .accordion__item',
+            );
+            expect(itemHandles.length).toEqual(3);
+
+            for (const itemHandle of itemHandles) {
+                const headingHandle = await itemHandle.$('.accordion__heading');
+                const panelHandle = await itemHandle.$('.accordion__panel');
+
+                const headingAriaControls = await page.evaluate(
+                    heading => heading.getAttribute('aria-controls'),
+                    headingHandle,
+                );
+                const panelId = await page.evaluate(
+                    panel => panel.id,
+                    panelHandle,
+                );
+
+                expect(headingAriaControls).toBeTruthy();
+                expect(panelId).toBeTruthy();
+                expect(headingAriaControls).toEqual(panelId);
+            }
         });
 
         it('If the accordion panel associated with an accordion header is visible, and if the accordion does not permit the panel to be collapsed, the header button element has aria-disabled set to true.', () => {
             // todo
         });
 
-        it('Optionally, each element that serves as a container for panel content has role region and aria-labelledby with a value that refers to the button that controls display of the panel.', () => {
-            // todo
+        it('Optionally, each element that serves as a container for panel content has role region and aria-labelledby with a value that refers to the button that controls display of the panel.', async () => {
+            const itemHandles = await page.$$(
+                '#classic-accordion .accordion__item',
+            );
+            expect(itemHandles.length).toEqual(3);
+
+            for (const itemHandle of itemHandles) {
+                const headingHandle = await itemHandle.$('.accordion__heading');
+                const panelHandle = await itemHandle.$('.accordion__panel');
+
+                const headingId = await page.evaluate(
+                    heading => heading.id,
+                    headingHandle,
+                );
+                const panelAriaLabelledBy = await page.evaluate(
+                    panel => panel.getAttribute('aria-labelledby'),
+                    panelHandle,
+                );
+                const panelRole = await page.evaluate(
+                    panel => panel.getAttribute('role'),
+                    panelHandle,
+                );
+
+                expect(panelAriaLabelledBy).toBeTruthy();
+                expect(headingId).toBeTruthy();
+
+                expect(panelAriaLabelledBy).toEqual(headingId);
+                expect(panelRole).toEqual('region');
+            }
         });
     });
 });

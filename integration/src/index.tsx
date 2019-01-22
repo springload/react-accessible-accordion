@@ -5,7 +5,7 @@ import {
     AccordionItem,
     AccordionItemHeading,
     AccordionItemPanel,
-} from '../src';
+} from '../../src';
 
 ReactDOM.render(
     <div id="classic-accordion">
