@@ -2,6 +2,13 @@ import path from 'path';
 import { spawnSync } from 'child_process';
 
 describe('WAI ARIA Spec', () => {
+    function evaluateHeadings() {
+        return page.$$('#classic-accordion .accordion__heading');
+    }
+    function evaluateItems() {
+        return page.$$('#classic-accordion .accordion__item');
+    }
+
     beforeEach(async () => {
         await page.goto(`file:${path.resolve(__dirname, 'dist/index.html')}`);
     });
@@ -30,9 +37,7 @@ describe('WAI ARIA Spec', () => {
     describe('Keyboard Interaction', () => {
         describe('Enter or Space', () => {
             it('When focus is on the accordion header for a collapsed panel, expands the associated panel. If the implementation allows only one panel to be expanded, and if another panel is expanded, collapses that panel.', async () => {
-                const headingHandles = await page.$$(
-                    '#classic-accordion .accordion__heading',
-                );
+                const headingHandles = await evaluateHeadings();
                 expect(headingHandles.length).toEqual(3);
 
                 const firstHeadingHandle = headingHandles[0];
@@ -75,9 +80,10 @@ describe('WAI ARIA Spec', () => {
 
         describe('Tab', () => {
             it('Moves focus to the next focusable element; all focusable elements in the accordion are included in the page Tab sequence.', async () => {
-                const [firstHeadingHandle, secondHeadingHandle] = await page.$$(
-                    '#classic-accordion .accordion__heading',
-                );
+                const [
+                    firstHeadingHandle,
+                    secondHeadingHandle,
+                ] = await evaluateHeadings();
                 await firstHeadingHandle.focus();
                 await page.keyboard.press('Tab');
                 const secondIsFocussed = await page.evaluate(
@@ -90,9 +96,10 @@ describe('WAI ARIA Spec', () => {
 
         describe('Shift + Tab', () => {
             it('Moves focus to the previous focusable element; all focusable elements in the accordion are included in the page Tab sequence.', async () => {
-                const [firstHeadingHandle, secondHeadingHandle] = await page.$$(
-                    '#classic-accordion .accordion__heading',
-                );
+                const [
+                    firstHeadingHandle,
+                    secondHeadingHandle,
+                ] = await evaluateHeadings();
                 await secondHeadingHandle.focus();
                 await page.keyboard.down('Shift');
                 await page.keyboard.press('Tab');
@@ -107,9 +114,10 @@ describe('WAI ARIA Spec', () => {
 
         describe('Down Arrow (Optional)', () => {
             xit('If focus is on an accordion header, moves focus to the next accordion header.', async () => {
-                const [firstHeadingHandle, secondHeadingHandle] = await page.$$(
-                    '#classic-accordion .accordion__heading',
-                );
+                const [
+                    firstHeadingHandle,
+                    secondHeadingHandle,
+                ] = await evaluateHeadings();
                 await firstHeadingHandle.focus();
                 await page.keyboard.press('ArrowDown');
                 const secondIsFocussed = await page.evaluate(
@@ -125,10 +133,11 @@ describe('WAI ARIA Spec', () => {
         });
 
         describe('Up Arrow (Optional)', () => {
-            xit('If focus is on an accordion header, moves focus to the previous accordion header.', () => {
-                const [firstHeadingHandle, secondHeadingHandle] = await page.$$(
-                    '#classic-accordion .accordion__heading',
-                );
+            xit('If focus is on an accordion header, moves focus to the previous accordion header.', async () => {
+                const [
+                    firstHeadingHandle,
+                    secondHeadingHandle,
+                ] = await evaluateHeadings();
                 await secondHeadingHandle.focus();
                 await page.keyboard.press('ArrowUp');
                 const firstIsFocussed = await page.evaluate(
@@ -144,12 +153,12 @@ describe('WAI ARIA Spec', () => {
         });
 
         describe('Home (Optional)', () => {
-            xit('When focus is on an accordion header, moves focus to the first accordion header.', () => {
+            xit('When focus is on an accordion header, moves focus to the first accordion header.', async () => {
                 const [
                     firstHeadingHandle,
                     secondHeadingHandle,
                     thirdHeadingHandle,
-                ] = await page.$$('#classic-accordion .accordion__heading');
+                ] = await evaluateHeadings();
                 await thirdHeadingHandle.focus();
                 await page.keyboard.press('Home');
                 const firstIsFocussed = await page.evaluate(
@@ -161,12 +170,12 @@ describe('WAI ARIA Spec', () => {
         });
 
         describe('End (Optional)', () => {
-            xit('When focus is on an accordion header, moves focus to the last accordion header.', () => {
+            xit('When focus is on an accordion header, moves focus to the last accordion header.', async () => {
                 const [
                     firstHeadingHandle,
                     secondHeadingHandle,
                     thirdHeadingHandle,
-                ] = await page.$$('#classic-accordion .accordion__heading');
+                ] = await evaluateHeadings();
                 await firstHeadingHandle.focus();
                 await page.keyboard.press('End');
                 const thirdIsFocussed = await page.evaluate(
@@ -180,16 +189,16 @@ describe('WAI ARIA Spec', () => {
 
     describe('WAI-ARIA Roles, States, and Properties', () => {
         it('The title of each accordion header is contained in an element with role button.', async () => {
-            const roles = await page.evaluate(() => {
-                const nodes = document
-                    .querySelector('#classic-accordion')
-                    .querySelectorAll('.accordion__heading');
-                return Array.from(nodes).map(heading =>
-                    heading.getAttribute('role'),
-                );
-            });
-            expect(roles).toHaveLength(3);
-            roles.forEach(role => expect(role).toBe('button'));
+            const headingHandles = await evaluateHeadings();
+            expect(headingHandles).toHaveLength(3);
+            for (const headingHandle of headingHandles) {
+                expect(
+                    await page.evaluate(
+                        heading => heading.getAttribute('role'),
+                        headingHandle,
+                    ),
+                ).toBe('button');
+            }
         });
 
         // Not yet supported.
@@ -204,9 +213,7 @@ describe('WAI ARIA Spec', () => {
         });
 
         it('If the accordion panel associated with an accordion header is visible, the header button element has aria-expanded set to true. If the panel is not visible, aria-expanded is set to false.', async () => {
-            const headings = await page.$$(
-                '#classic-accordion .accordion__heading',
-            );
+            const headings = await evaluateHeadings();
             expect(headings.length).toEqual(3);
 
             for (const handle of headings) {
@@ -232,9 +239,7 @@ describe('WAI ARIA Spec', () => {
         });
 
         it('The accordion header button element has aria-controls set to the ID of the element containing the accordion panel content.', async () => {
-            const itemHandles = await page.$$(
-                '#classic-accordion .accordion__item',
-            );
+            const itemHandles = await evaluateItems();
             expect(itemHandles.length).toEqual(3);
 
             for (const itemHandle of itemHandles) {
@@ -261,9 +266,7 @@ describe('WAI ARIA Spec', () => {
         });
 
         it('Optionally, each element that serves as a container for panel content has role region and aria-labelledby with a value that refers to the button that controls display of the panel.', async () => {
-            const itemHandles = await page.$$(
-                '#classic-accordion .accordion__item',
-            );
+            const itemHandles = await evaluateItems();
             expect(itemHandles.length).toEqual(3);
 
             for (const itemHandle of itemHandles) {
