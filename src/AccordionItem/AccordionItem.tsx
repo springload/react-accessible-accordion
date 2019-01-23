@@ -11,17 +11,19 @@ type AccordionItemProps = React.HTMLAttributes<HTMLDivElement> & {
     hideBodyClassName?: string;
     disabled?: boolean;
     expanded?: boolean;
+    focus?: boolean;
     accordionStore: AccordionContainer;
 };
 
 class AccordionItem extends React.Component<AccordionItemProps> {
     componentDidMount(): void {
-        const { uuid, accordionStore, disabled } = this.props;
+        const { uuid, accordionStore, disabled, focus } = this.props;
 
         accordionStore.addItem({
             uuid,
             expanded: this.props.expanded || false,
             disabled,
+            focus,
         });
     }
 
@@ -45,6 +47,7 @@ class AccordionItem extends React.Component<AccordionItemProps> {
             accordionStore,
             disabled,
             expanded,
+            focus,
             ...rest
         } = this.props;
 
