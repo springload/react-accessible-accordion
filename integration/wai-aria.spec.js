@@ -1,5 +1,4 @@
 import path from 'path';
-import { spawnSync } from 'child_process';
 
 describe('WAI ARIA Spec', () => {
     function evaluateHeadings() {
