@@ -75,11 +75,9 @@ describe('WAI ARIA Spec', () => {
 
         describe('Tab', () => {
             it('Moves focus to the next focusable element; all focusable elements in the accordion are included in the page Tab sequence.', async () => {
-                const headingHandles = await page.$$(
+                const [firstHeadingHandle, secondHeadingHandle] = await page.$$(
                     '#classic-accordion .accordion__heading',
                 );
-                const firstHeadingHandle = headingHandles[0];
-                const secondHeadingHandle = headingHandles[1];
                 await firstHeadingHandle.focus();
                 await page.keyboard.press('Tab');
                 const secondIsFocussed = await page.evaluate(
@@ -92,11 +90,9 @@ describe('WAI ARIA Spec', () => {
 
         describe('Shift + Tab', () => {
             it('Moves focus to the previous focusable element; all focusable elements in the accordion are included in the page Tab sequence.', async () => {
-                const headingHandles = await page.$$(
+                const [firstHeadingHandle, secondHeadingHandle] = await page.$$(
                     '#classic-accordion .accordion__heading',
                 );
-                const firstHeadingHandle = headingHandles[0];
-                const secondHeadingHandle = headingHandles[1];
                 await secondHeadingHandle.focus();
                 await page.keyboard.down('Shift');
                 await page.keyboard.press('Tab');
@@ -110,26 +106,74 @@ describe('WAI ARIA Spec', () => {
         });
 
         describe('Down Arrow (Optional)', () => {
-            it('If focus is on an accordion header, moves focus to the next accordion header. If focus is on the last accordion header, either does nothing or moves focus to the first accordion header.', () => {
+            xit('If focus is on an accordion header, moves focus to the next accordion header.', async () => {
+                const [firstHeadingHandle, secondHeadingHandle] = await page.$$(
+                    '#classic-accordion .accordion__heading',
+                );
+                await firstHeadingHandle.focus();
+                await page.keyboard.press('ArrowDown');
+                const secondIsFocussed = await page.evaluate(
+                    heading => document.activeElement === heading,
+                    secondHeadingHandle,
+                );
+                expect(secondIsFocussed).toEqual(true);
+            });
+
+            xit('If focus is on the last accordion header, either does nothing or moves focus to the first accordion header.', () => {
                 // todo
             });
         });
 
         describe('Up Arrow (Optional)', () => {
-            it('If focus is on an accordion header, moves focus to the previous accordion header. If focus is on the first accordion header, either does nothing or moves focus to the last accordion header.', () => {
+            xit('If focus is on an accordion header, moves focus to the previous accordion header.', () => {
+                const [firstHeadingHandle, secondHeadingHandle] = await page.$$(
+                    '#classic-accordion .accordion__heading',
+                );
+                await secondHeadingHandle.focus();
+                await page.keyboard.press('ArrowUp');
+                const firstIsFocussed = await page.evaluate(
+                    heading => document.activeElement === heading,
+                    firstHeadingHandle,
+                );
+                expect(firstIsFocussed).toEqual(true);
+            });
+
+            xit('If focus is on the first accordion header, either does nothing or moves focus to the last accordion header.', () => {
                 // todo
             });
         });
 
         describe('Home (Optional)', () => {
-            it('When focus is on an accordion header, moves focus to the first accordion header.', () => {
-                // todo
+            xit('When focus is on an accordion header, moves focus to the first accordion header.', () => {
+                const [
+                    firstHeadingHandle,
+                    secondHeadingHandle,
+                    thirdHeadingHandle,
+                ] = await page.$$('#classic-accordion .accordion__heading');
+                await thirdHeadingHandle.focus();
+                await page.keyboard.press('Home');
+                const firstIsFocussed = await page.evaluate(
+                    heading => document.activeElement === heading,
+                    firstHeadingHandle,
+                );
+                expect(firstIsFocussed).toEqual(true);
             });
         });
 
         describe('End (Optional)', () => {
-            it('When focus is on an accordion header, moves focus to the last accordion header.', () => {
-                // todo
+            xit('When focus is on an accordion header, moves focus to the last accordion header.', () => {
+                const [
+                    firstHeadingHandle,
+                    secondHeadingHandle,
+                    thirdHeadingHandle,
+                ] = await page.$$('#classic-accordion .accordion__heading');
+                await firstHeadingHandle.focus();
+                await page.keyboard.press('End');
+                const thirdIsFocussed = await page.evaluate(
+                    heading => document.activeElement === heading,
+                    thirdHeadingHandle,
+                );
+                expect(thirdIsFocussed).toEqual(true);
             });
         });
     });
