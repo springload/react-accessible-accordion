@@ -11,6 +11,9 @@ import {
 } from '../../src';
 
 // tslint:disable-next-line no-import-side-effect
+import './main.css';
+
+// tslint:disable-next-line no-import-side-effect ordered-imports
 import '../../src/css/fancy-example.css';
 
 // tslint:disable-next-line max-func-body-length
