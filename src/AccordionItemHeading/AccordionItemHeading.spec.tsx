@@ -11,7 +11,6 @@ describe('AccordionItemHeading', () => {
     const DEFAULT_ITEM: Item = {
         uuid: 0,
         expanded: false,
-        disabled: false,
     };
 
     it('renders null outside the context of an ‘Accordion’', () => {
@@ -97,20 +96,6 @@ describe('AccordionItemHeading', () => {
         expect(isExpanded(wrapper, DEFAULT_ITEM.uuid)).toBeTruthy();
     });
 
-    it('doesn’t toggle state when trying to click but disabled', async () => {
-        const wrapper = mountItem(
-            <AccordionItemHeading>Fake Title</AccordionItemHeading>,
-            {
-                ...DEFAULT_ITEM,
-                disabled: true,
-            },
-        );
-
-        expect(isExpanded(wrapper, DEFAULT_ITEM.uuid)).toBeFalsy();
-        wrapper.find('div').simulate('click');
-        expect(isExpanded(wrapper, DEFAULT_ITEM.uuid)).toBeFalsy();
-    });
-
     it('toggles state when pressing enter', async () => {
         const wrapper = mountItem(
             <AccordionItemHeading>Fake Title</AccordionItemHeading>,
@@ -149,27 +134,5 @@ describe('AccordionItemHeading', () => {
         const div = wrapper.find('div').getDOMNode();
 
         expect(div.getAttribute('lang')).toEqual('en');
-    });
-
-    // edge case to cover branch
-    it('doesn’t toggle state when clicking but disabled & allowMultipleExpanded === false', async () => {
-        const wrapper = mount(
-            <AccordionProvider
-                items={[
-                    {
-                        ...DEFAULT_ITEM,
-                        disabled: true,
-                    },
-                ]}
-            >
-                <ItemProvider uuid={DEFAULT_ITEM.uuid}>
-                    <AccordionItemHeading>Fake Title</AccordionItemHeading>
-                </ItemProvider>
-            </AccordionProvider>,
-        );
-
-        expect(isExpanded(wrapper, DEFAULT_ITEM.uuid)).toBeFalsy();
-        wrapper.find('div').simulate('click');
-        expect(isExpanded(wrapper, DEFAULT_ITEM.uuid)).toBeFalsy();
     });
 });

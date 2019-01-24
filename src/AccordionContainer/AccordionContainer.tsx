@@ -10,7 +10,6 @@ export const CONTEXT_KEY = 'react-accessible-accordion@AccordionContainer';
 export type Item = {
     uuid: UUID;
     expanded: boolean;
-    disabled: boolean;
 };
 
 export type ProviderState = {

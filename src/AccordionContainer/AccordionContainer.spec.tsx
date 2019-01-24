@@ -12,7 +12,6 @@ import {
 const DEFAULT_ITEM: Item = {
     uuid: 'foo',
     expanded: false,
-    disabled: false,
 };
 
 describe('Accordion', () => {

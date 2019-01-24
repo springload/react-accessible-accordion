@@ -12,7 +12,6 @@ describe('AccordionItemPanel', () => {
         const item: Item = {
             uuid: 0,
             expanded: false,
-            disabled: false,
         };
 
         return mount(

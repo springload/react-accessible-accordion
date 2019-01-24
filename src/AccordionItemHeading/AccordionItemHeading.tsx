@@ -6,7 +6,6 @@ type AccordionItemHeadingProps = React.HTMLAttributes<HTMLDivElement> & {
     hideBodyClassName: string;
     expanded: boolean;
     uuid: UUID;
-    disabled: boolean;
     setExpanded(uuid: UUID, expanded: boolean): void;
 };
 
@@ -36,7 +35,6 @@ export default class AccordionItemHeading extends React.Component<
             setExpanded,
             expanded,
             uuid,
-            disabled,
             ...rest
         } = this.props;
 
@@ -46,7 +44,6 @@ export default class AccordionItemHeading extends React.Component<
         const titleClassName = classnames(className, {
             [hideBodyClassName]: hideBodyClassName && !expanded,
         });
-        const onClick = disabled ? undefined : this.handleClick;
 
         return (
             <div
@@ -54,8 +51,8 @@ export default class AccordionItemHeading extends React.Component<
                 aria-expanded={expanded}
                 aria-controls={ariaControls}
                 className={titleClassName}
-                onClick={onClick}
-                role={role}
+                onClick={this.handleClick}
+                role="button"
                 tabIndex={0}
                 onKeyPress={this.handleKeyPress}
                 {...rest}

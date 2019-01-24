@@ -11,7 +11,6 @@ import AccordionItem from './AccordionItem';
 
 type AccordionItemWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     hideBodyClassName?: string;
-    disabled?: boolean;
     expanded?: boolean;
     uuid?: string;
 };
@@ -34,7 +33,6 @@ export default class AccordionItemWrapper extends React.Component<
     static defaultProps: AccordionItemWrapperProps = {
         className: 'accordion__item',
         hideBodyClassName: '',
-        disabled: false,
         expanded: false,
         uuid: undefined,
     };
