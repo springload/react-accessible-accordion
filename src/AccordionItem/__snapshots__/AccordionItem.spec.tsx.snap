@@ -6,6 +6,7 @@ exports[`AccordionItem renders correctly with allowMultipleExpanded false 1`] = 
 >
   <div
     aria-controls="accordion__panel-0"
+    aria-disabled={false}
     aria-expanded={false}
     className="accordion__heading"
     id="accordion__heading-0"
@@ -38,6 +39,7 @@ exports[`AccordionItem renders correctly with allowMultipleExpanded true 1`] = `
 >
   <div
     aria-controls="accordion__panel-0"
+    aria-disabled={false}
     aria-expanded={false}
     className="accordion__heading"
     id="accordion__heading-0"
@@ -70,6 +72,7 @@ exports[`AccordionItem renders correctly with allowZeroExpanded false 1`] = `
 >
   <div
     aria-controls="accordion__panel-0"
+    aria-disabled={false}
     aria-expanded={false}
     className="accordion__heading"
     id="accordion__heading-0"
@@ -102,6 +105,7 @@ exports[`AccordionItem renders correctly with allowZeroExpanded true 1`] = `
 >
   <div
     aria-controls="accordion__panel-0"
+    aria-disabled={false}
     aria-expanded={false}
     className="accordion__heading"
     id="accordion__heading-0"
@@ -134,6 +138,7 @@ exports[`AccordionItem renders correctly with other blocks inside 1`] = `
 >
   <div
     aria-controls="accordion__panel-0"
+    aria-disabled={false}
     aria-expanded={false}
     className="accordion__heading"
     id="accordion__heading-0"
@@ -169,6 +174,7 @@ exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
 >
   <div
     aria-controls="accordion__panel-0"
+    aria-disabled={false}
     aria-expanded={false}
     className="accordion__heading"
     id="accordion__heading-0"
