@@ -6,7 +6,6 @@ type AccordionItemPanelProps = React.HTMLAttributes<HTMLDivElement> & {
     hideBodyClassName: string;
     uuid: UUID;
     expanded: boolean;
-    disabled: boolean;
     allowMultipleExpanded: boolean;
 };
 
@@ -16,7 +15,6 @@ const AccordionItemPanel = (props: AccordionItemPanelProps): JSX.Element => {
         hideBodyClassName,
         uuid,
         expanded,
-        disabled,
         allowMultipleExpanded,
         ...rest
     } = props;

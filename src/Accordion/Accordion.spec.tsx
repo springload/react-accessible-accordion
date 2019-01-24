@@ -184,29 +184,6 @@ describe('Accordion', () => {
         });
     });
 
-    it('does not expand disabled items on click', () => {
-        const wrapper = mount(
-            <Accordion allowMultipleExpanded={true}>
-                <AccordionItem disabled={true}>
-                    <AccordionItemHeading className="foo">
-                        Foo Title
-                    </AccordionItemHeading>
-                </AccordionItem>
-            </Accordion>,
-        );
-
-        const instance = wrapper.find(Provider).instance() as Provider;
-
-        wrapper
-            .find('.foo')
-            .first()
-            .simulate('click');
-        expect(
-            instance.state.items.filter((item: Item) => item.expanded === true)
-                .length,
-        ).toEqual(0);
-    });
-
     it('pre expanded accordion when allowMultipleExpanded is true', () => {
         const wrapper = mount(
             <Accordion allowMultipleExpanded={true}>
