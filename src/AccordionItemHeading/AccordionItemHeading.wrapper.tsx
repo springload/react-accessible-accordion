@@ -59,7 +59,7 @@ export default class AccordionItemHeadingWrapper extends React.Component<
         }
 
         const { uuid } = itemStore;
-        const { items } = accordionStore;
+        const { items, allowZeroExpanded } = accordionStore;
         const item = items.filter(
             (stateItem: Item) => stateItem.uuid === uuid,
         )[0];
@@ -68,6 +68,7 @@ export default class AccordionItemHeadingWrapper extends React.Component<
             <AccordionItemHeading
                 {...this.props}
                 {...item}
+                allowZeroExpanded={allowZeroExpanded}
                 setExpanded={accordionStore.setExpanded}
             />
         );
