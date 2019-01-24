@@ -31,6 +31,7 @@ export type AccordionContainer = {
     addItem(item: Item): void;
     removeItem(uuid: UUID): void;
     setExpanded(uuid: UUID, expanded: boolean): void;
+    isItemDisabled(uuid: UUID): boolean;
 };
 
 export type ConsumerProps = {
@@ -62,6 +63,7 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
             addItem: this.addItem,
             removeItem: this.removeItem,
             setExpanded: this.setExpanded,
+            isItemDisabled: this.isItemDisabled,
         };
 
         return {
@@ -106,13 +108,30 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
         }));
     };
 
-    setExpanded = (key: UUID, expanded: boolean): void => {
-        if (
-            !expanded &&
+    /*
+     * From the spec:
+     *
+     * “If the accordion panel associated with an accordion header is visible,
+     * and if the accordion does not permit the panel to be collapsed, the
+     * header button element has aria-disabled set to true.”
+     */
+    isItemDisabled = (key: UUID): boolean => {
+        const item = this.state.items.find(
+            ({ uuid }: Item): boolean => uuid === key,
+        );
+        const expandedItems = this.state.items.filter(
+            ({ expanded }: Item) => expanded,
+        );
+
+        return (
+            item.expanded &&
             !this.props.allowZeroExpanded &&
-            this.state.items.filter((item: Item) => item.expanded).length === 1
-        ) {
-            // If this is an accordion that doesn't allow all items to be closed and the current item is the only one open, don't allow it to close.
+            expandedItems.length === 1
+        );
+    };
+
+    setExpanded = (key: UUID, expanded: boolean): void => {
+        if (this.isItemDisabled(key)) {
             return;
         }
         this.setState(
