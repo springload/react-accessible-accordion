@@ -40,8 +40,7 @@ export default class AccordionItemHeading extends React.Component<
 
         const id = `accordion__heading-${uuid}`;
         const ariaControls = `accordion__panel-${uuid}`;
-        const role = 'button';
-        const titleClassName = classnames(className, {
+        const headingClassName = classnames(className, {
             [hideBodyClassName]: hideBodyClassName && !expanded,
         });
 
@@ -50,7 +49,7 @@ export default class AccordionItemHeading extends React.Component<
                 id={id}
                 aria-expanded={expanded}
                 aria-controls={ariaControls}
-                className={titleClassName}
+                className={headingClassName}
                 onClick={this.handleClick}
                 role="button"
                 tabIndex={0}
