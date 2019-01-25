@@ -260,8 +260,16 @@ describe('WAI ARIA Spec', () => {
             }
         });
 
-        it('If the accordion panel associated with an accordion header is visible, and if the accordion does not permit the panel to be collapsed, the header button element has aria-disabled set to true.', () => {
-            // todo
+        it('If the accordion panel associated with an accordion header is visible, and if the accordion does not permit the panel to be collapsed, the header button element has aria-disabled set to true.', async () => {
+            const [firstHeadingHandle] = await evaluateHeadings();
+            await firstHeadingHandle.click();
+
+            const headingAriaDisabled = await page.evaluate(
+                heading => heading.getAttribute('aria-disabled'),
+                firstHeadingHandle,
+            );
+
+            expect(headingAriaDisabled).toEqual('true');
         });
 
         it('Optionally, each element that serves as a container for panel content has role region and aria-labelledby with a value that refers to the button that controls display of the panel.', async () => {

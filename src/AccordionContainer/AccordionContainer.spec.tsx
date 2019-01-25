@@ -39,6 +39,7 @@ describe('Accordion', () => {
             addItem: expect.anything(),
             removeItem: expect.anything(),
             setExpanded: expect.anything(),
+            isItemDisabled: expect.anything(),
         });
     });
 

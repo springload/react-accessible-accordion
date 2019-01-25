@@ -59,15 +59,17 @@ export default class AccordionItemHeadingWrapper extends React.Component<
         }
 
         const { uuid } = itemStore;
-        const { items } = accordionStore;
+        const { items, allowZeroExpanded, isItemDisabled } = accordionStore;
         const item = items.filter(
             (stateItem: Item) => stateItem.uuid === uuid,
         )[0];
+        const disabled = isItemDisabled(uuid);
 
         return (
             <AccordionItemHeading
                 {...this.props}
                 {...item}
+                disabled={disabled}
                 setExpanded={accordionStore.setExpanded}
             />
         );

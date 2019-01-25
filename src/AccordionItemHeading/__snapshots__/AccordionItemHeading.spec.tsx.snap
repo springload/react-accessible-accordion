@@ -3,6 +3,7 @@
 exports[`AccordionItemHeading renders correctly with min params 1`] = `
 <div
   aria-controls="accordion__panel-0"
+  aria-disabled={false}
   aria-expanded={false}
   className="accordion__heading"
   id="accordion__heading-0"
