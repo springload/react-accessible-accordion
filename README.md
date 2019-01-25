@@ -135,12 +135,6 @@ We recommend that you copy them into your own app and modify them to suit your n
           <td>Expands this item on first render</td>
       </tr>
       <tr>
-          <td>disabled</td>
-          <td>Boolean</td>
-          <td>false</td>
-          <td>Prevents item from being expanded/collapsed on click</td>
-      </tr>
-      <tr>
           <td>className</td>
           <td>String</td>
           <td>accordion__item</td>
@@ -236,29 +230,23 @@ We recommend that you copy them into your own app and modify them to suit your n
 
 ### What this project is doing accessibility-wise?
 
-This project manages two types of Accordions, with single or multiple items open.
+This project manages Accordions with several options available for allowing/not allowing multiple items to be open at once, and allowing/not allowing all items to be closed.
 
-#### Single item
+#### Single item open
 
 > Use this with with props `allowMultipleExpanded` set to `false` on `Accordion`.
 
-For this type of Accordion, you will get the following `role` set up on your elements:
-
--   Accordion: `tablist`
--   AccordionItem: no specific role
--   AccordionItemHeading: `tab`
--   AccordionItemPanel: `tabpanel`
-
-#### Multiple items
-
-For this type of Accordion, you will get the following `role` set up on your elements:
+#### Multiple items open
 
 > Use this with with props `allowMultipleExpanded` set to `true` on `Accordion`.
 
--   Accordion: no specific role
--   AccordionItem: no specific role
--   AccordionItemHeading: `button`
--   AccordionItemPanel: no specific role
+#### One item must remain open
+
+> Use this with with props `allowZeroExpanded` set to `false` on `Accordion`.
+
+#### All items can be closed
+
+> Use this with with props `allowZeroExpanded` set to `true` on `Accordion`.
 
 # Browser support
 
