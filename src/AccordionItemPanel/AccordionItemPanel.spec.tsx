@@ -11,7 +11,7 @@ describe('AccordionItemPanel', () => {
     function mountItem(children: React.ReactNode): ReactWrapper {
         const item: Item = {
             uuid: 0,
-            expanded: false,
+            expanded: true,
         };
 
         return mount(
@@ -36,7 +36,7 @@ describe('AccordionItemPanel', () => {
         expect(wrapper.find('div').hasClass(className)).toEqual(true);
     });
 
-    it('renders correctly with different expandedClassName', () => {
+    it('renders correctly with different expandedClassName when item is expanded', () => {
         const expandedClassName = 'expandedClassName';
         const wrapper = mountItem(
             <AccordionItemPanel expandedClassName={expandedClassName} />,

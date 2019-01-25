@@ -70,10 +70,17 @@ describe('AccordionItemHeading', () => {
         expect(wrapper.find('div').hasClass(className)).toEqual(true);
     });
 
-    it('renders with different expandedClassName', () => {
+    it('renders with different expandedClassName when item is expanded', () => {
         const expandedClassName = 'expandedClassName';
-        const wrapper = mountItem(
-            <AccordionItemHeading expandedClassName={expandedClassName} />,
+
+        const wrapper = mount(
+            <AccordionProvider items={[{ uuid: 0, expanded: true }]}>
+                <ItemProvider uuid={0}>
+                    <AccordionItemHeading
+                        expandedClassName={expandedClassName}
+                    />
+                </ItemProvider>
+            </AccordionProvider>,
         );
         expect(wrapper.find('div').hasClass(expandedClassName)).toEqual(true);
     });
