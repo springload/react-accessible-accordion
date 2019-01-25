@@ -80,18 +80,18 @@ describe('Accordion', () => {
         });
 
         it('works with multiple pre expanded accordion. Extra expands are just ignored.', () => {
-            const hideBodyClassName = 'HIDE';
+            const expandedClassName = 'EXPANDED';
             const wrapper = mount(
                 <Accordion allowMultipleExpanded={false}>
                     <AccordionItem
                         expanded={true}
-                        hideBodyClassName={hideBodyClassName}
+                        expandedClassName={expandedClassName}
                     >
                         Fake Child
                     </AccordionItem>
                     <AccordionItem
                         expanded={true}
-                        hideBodyClassName={hideBodyClassName}
+                        expandedClassName={expandedClassName}
                     >
                         Fake Child
                     </AccordionItem>
@@ -106,7 +106,7 @@ describe('Accordion', () => {
             ).toEqual(1);
             expect(
                 wrapper.findWhere((item: ReactWrapper) =>
-                    item.hasClass(hideBodyClassName),
+                    item.hasClass(expandedClassName),
                 ).length,
             ).toEqual(1);
         });

@@ -39,14 +39,14 @@
 }
 
 .accordion__panel {
-    padding: 20px;
-    display: block;
+    display: none;
+    opacity: 0;
     animation: fadein 0.35s ease-in;
 }
 
-.accordion__panel--hidden {
-    display: none;
-    opacity: 0;
+.accordion__panel--expanded {
+    padding: 20px;
+    display: block;
     animation: fadein 0.35s ease-in;
 }
 

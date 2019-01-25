@@ -22,7 +22,7 @@ exports[`AccordionItem renders correctly with allowMultipleExpanded false 1`] = 
   <div
     aria-hidden={null}
     aria-labelledby="accordion__heading-0"
-    className="accordion__panel accordion__panel--hidden"
+    className="accordion__panel"
     id="accordion__panel-0"
     role="region"
   >
@@ -55,7 +55,7 @@ exports[`AccordionItem renders correctly with allowMultipleExpanded true 1`] = `
   <div
     aria-hidden={true}
     aria-labelledby="accordion__heading-0"
-    className="accordion__panel accordion__panel--hidden"
+    className="accordion__panel"
     id="accordion__panel-0"
     role={null}
   >
@@ -88,7 +88,7 @@ exports[`AccordionItem renders correctly with allowZeroExpanded false 1`] = `
   <div
     aria-hidden={null}
     aria-labelledby="accordion__heading-0"
-    className="accordion__panel accordion__panel--hidden"
+    className="accordion__panel"
     id="accordion__panel-0"
     role="region"
   >
@@ -121,7 +121,7 @@ exports[`AccordionItem renders correctly with allowZeroExpanded true 1`] = `
   <div
     aria-hidden={null}
     aria-labelledby="accordion__heading-0"
-    className="accordion__panel accordion__panel--hidden"
+    className="accordion__panel"
     id="accordion__panel-0"
     role="region"
   >
@@ -157,7 +157,7 @@ exports[`AccordionItem renders correctly with other blocks inside 1`] = `
   <div
     aria-hidden={null}
     aria-labelledby="accordion__heading-0"
-    className="accordion__panel accordion__panel--hidden"
+    className="accordion__panel"
     id="accordion__panel-0"
     role="region"
   >
@@ -190,7 +190,7 @@ exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
   <div
     aria-hidden={null}
     aria-labelledby="accordion__heading-0"
-    className="accordion__panel accordion__panel--hidden"
+    className="accordion__panel"
     id="accordion__panel-0"
     role="region"
   >

@@ -86,10 +86,18 @@ We recommend that you copy them into your own app and modify them to suit your n
     </thead>
     <tbody>
       <tr>
-          <td>accordion</td>
+          <td>allowMultipleExpanded</td>
           <td>Boolean</td>
-          <td>true</td>
-          <td>Open only one item at a time or not</td>
+          <td>false</td>
+          <td>Don't close all the others when expanding an
+                                    AccordionItem</td>
+      </tr>
+      <tr>
+          <td>allowZeroExpanded</td>
+          <td>Boolean</td>
+          <td>false</td>
+          <td>Close an AccordionItem when it's the only
+                                    one expanded</td>
       </tr>
       <tr>
           <td>onChange</td>
@@ -127,16 +135,22 @@ We recommend that you copy them into your own app and modify them to suit your n
           <td>Expands this item on first render</td>
       </tr>
       <tr>
+          <td>disabled</td>
+          <td>Boolean</td>
+          <td>false</td>
+          <td>Prevents item from being expanded/collapsed on click</td>
+      </tr>
+      <tr>
           <td>className</td>
           <td>String</td>
           <td>accordion__item</td>
           <td>CSS class(es) applied to the component</td>
       </tr>
       <tr>
-          <td>hideBodyClassName</td>
+          <td>expandedClassName</td>
           <td>String</td>
           <td>null</td>
-          <td>Class name for hidden body state</td>
+          <td>Class name for expanded panel state</td>
       </tr>
       <tr>
           <td>uuid</td>
@@ -168,10 +182,10 @@ We recommend that you copy them into your own app and modify them to suit your n
           <td>CSS class(es) applied to the component</td>
       </tr>
       <tr>
-          <td>hideBodyClassName</td>
+          <td>expandedClassName</td>
           <td>String</td>
           <td>null</td>
-          <td>Class name for hidden body state</td>
+          <td>Class name for expanded panel state</td>
       </tr>
     </tbody>
 </table>
@@ -197,10 +211,10 @@ We recommend that you copy them into your own app and modify them to suit your n
           <td>CSS class(es) applied to the component</td>
       </tr>
       <tr>
-          <td>hideBodyClassName</td>
+          <td>expandedClassName</td>
           <td>String</td>
-          <td>accordion__panel--hidden</td>
-          <td>Class name for hidden body state</td>
+          <td>accordion__panel--expanded</td>
+          <td>Class name for expanded panel state</td>
       </tr>
     </tbody>
 </table>
@@ -226,7 +240,7 @@ This project manages two types of Accordions, with single or multiple items open
 
 #### Single item
 
-> Use this with with props `accordion` set to `true` on `Accordion`.
+> Use this with with props `allowMultipleExpanded` set to `false` on `Accordion`.
 
 For this type of Accordion, you will get the following `role` set up on your elements:
 
@@ -239,7 +253,7 @@ For this type of Accordion, you will get the following `role` set up on your ele
 
 For this type of Accordion, you will get the following `role` set up on your elements:
 
-> Use this with with props `accordion` set to `false` on `Accordion`.
+> Use this with with props `allowMultipleExpanded` set to `true` on `Accordion`.
 
 -   Accordion: no specific role
 -   AccordionItem: no specific role

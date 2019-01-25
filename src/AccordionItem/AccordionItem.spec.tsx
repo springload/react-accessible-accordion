@@ -140,21 +140,21 @@ describe('AccordionItem', () => {
         expect(wrapper.find('div').prop('className')).toBe('testCSSClass');
     });
 
-    it('renders with different hideBodyClassName', () => {
-        const wrapper = mount(
-            <AccordionProvider>
-                <AccordionItem
-                    expanded={false}
-                    className="AccordionItem"
-                    hideBodyClassName="AccordionItem--hidden"
-                />
-            </AccordionProvider>,
-        );
+    // it('renders with different expandedClassName', () => {
+    //     const wrapper = mount(
+    //         <AccordionProvider>
+    //             <AccordionItem
+    //                 expanded={true}
+    //                 className="AccordionItem"
+    //                 expandedClassname="AccordionItem--expanded"
+    //             />
+    //         </AccordionProvider>,
+    //     );
 
-        expect(wrapper.find('div').prop('className')).toEqual(
-            'AccordionItem AccordionItem--hidden',
-        );
-    });
+    //     expect(wrapper.find('div').prop('className')).toEqual(
+    //         'AccordionItem AccordionItem--expanded',
+    //     );
+    // });
 
     it('renders correctly with other blocks inside', () => {
         const wrapper = mount(

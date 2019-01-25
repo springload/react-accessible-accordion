@@ -36,12 +36,12 @@ describe('AccordionItemPanel', () => {
         expect(wrapper.find('div').hasClass(className)).toEqual(true);
     });
 
-    it('renders correctly with different hideBodyClassName', () => {
-        const hideBodyClassName = 'hideBodyClassName';
+    it('renders correctly with different expandedClassName', () => {
+        const expandedClassName = 'expandedClassName';
         const wrapper = mountItem(
-            <AccordionItemPanel hideBodyClassName={hideBodyClassName} />,
+            <AccordionItemPanel expandedClassName={expandedClassName} />,
         );
-        expect(wrapper.find('div').hasClass(hideBodyClassName)).toEqual(true);
+        expect(wrapper.find('div').hasClass(expandedClassName)).toEqual(true);
     });
 
     it('respects arbitrary user-defined props', () => {
