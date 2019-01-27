@@ -3,7 +3,7 @@ import * as React from 'react';
 import { UUID } from '../ItemContainer/ItemContainer';
 
 type AccordionItemHeadingProps = React.HTMLAttributes<HTMLDivElement> & {
-    hideBodyClassName: string;
+    expandedClassName: string;
     expanded: boolean;
     uuid: UUID;
     disabled: boolean;
@@ -32,7 +32,7 @@ export default class AccordionItemHeading extends React.Component<
     render(): JSX.Element {
         const {
             className,
-            hideBodyClassName,
+            expandedClassName,
             setExpanded,
             expanded,
             uuid,
@@ -42,8 +42,9 @@ export default class AccordionItemHeading extends React.Component<
 
         const id = `accordion__heading-${uuid}`;
         const ariaControls = `accordion__panel-${uuid}`;
+
         const headingClassName = classnames(className, {
-            [hideBodyClassName]: hideBodyClassName && !expanded,
+            [expandedClassName]: expandedClassName && expanded,
         });
 
         return (

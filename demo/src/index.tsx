@@ -212,10 +212,10 @@ const Example = (): JSX.Element => (
                                 <td>CSS class(es) applied to the component</td>
                             </tr>
                             <tr>
-                                <td>hideBody ClassName</td>
+                                <td>expandedClassName</td>
                                 <td>String</td>
-                                <td>accordion__panel--hidden</td>
-                                <td>Class name for hidden body state</td>
+                                <td>accordion__panel--expanded</td>
+                                <td>Class name for expanded panel state</td>
                             </tr>
                         </tbody>
                     </table>
@@ -261,8 +261,8 @@ const Example = (): JSX.Element => (
                                             <td>Boolean</td>
                                             <td>false</td>
                                             <td>
-                                                Open only one item at a time or
-                                                not
+                                                Don't close all the others when
+                                                expanding an AccordionItem
                                             </td>
                                         </tr>
                                         <tr>
@@ -395,11 +395,12 @@ const Example = (): JSX.Element => (
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>hideBody ClassName</td>
+                                            <td>expandedClassName</td>
                                             <td>String</td>
-                                            <td>accordion__panel--hidden</td>
+                                            <td>accordion__panel--expanded</td>
                                             <td>
-                                                Class name for hidden body state
+                                                Class name for expanded panel
+                                                state
                                             </td>
                                         </tr>
                                     </tbody>

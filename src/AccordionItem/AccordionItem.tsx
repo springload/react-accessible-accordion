@@ -8,7 +8,7 @@ import { UUID } from '../ItemContainer/ItemContainer';
 
 type AccordionItemProps = React.HTMLAttributes<HTMLDivElement> & {
     uuid: UUID;
-    hideBodyClassName?: string;
+    expandedClassName?: string;
     expanded?: boolean;
     accordionStore: AccordionContainer;
 };
@@ -39,7 +39,7 @@ class AccordionItem extends React.Component<AccordionItemProps> {
         const {
             uuid,
             className,
-            hideBodyClassName,
+            expandedClassName,
             accordionStore,
             expanded,
             ...rest
@@ -57,8 +57,8 @@ class AccordionItem extends React.Component<AccordionItemProps> {
         return (
             <div
                 className={classnames(className, {
-                    [String(hideBodyClassName)]:
-                        !currentItem.expanded && hideBodyClassName,
+                    [String(expandedClassName)]:
+                        currentItem.expanded && expandedClassName,
                 })}
                 {...rest}
             />

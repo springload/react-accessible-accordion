@@ -140,19 +140,19 @@ describe('AccordionItem', () => {
         expect(wrapper.find('div').prop('className')).toBe('testCSSClass');
     });
 
-    it('renders with different hideBodyClassName', () => {
+    it('renders with different expandedClassName', () => {
         const wrapper = mount(
             <AccordionProvider>
                 <AccordionItem
-                    expanded={false}
+                    expanded={true}
                     className="AccordionItem"
-                    hideBodyClassName="AccordionItem--hidden"
+                    expandedClassName="AccordionItem--expanded"
                 />
             </AccordionProvider>,
         );
 
         expect(wrapper.find('div').prop('className')).toEqual(
-            'AccordionItem AccordionItem--hidden',
+            'AccordionItem AccordionItem--expanded',
         );
     });
 

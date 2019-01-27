@@ -13,7 +13,7 @@ import {
 import AccordionItemPanel from './AccordionItemPanel';
 
 type AccordionItemPanelWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
-    hideBodyClassName: string;
+    expandedClassName: string;
 };
 
 type AccordionItemPanelWrapperState = {};
@@ -35,7 +35,7 @@ export default class AccordionItemPanelWrapper extends React.Component<
 
     static defaultProps: AccordionItemPanelWrapperProps = {
         className: 'accordion__panel',
-        hideBodyClassName: 'accordion__panel--hidden',
+        expandedClassName: 'accordion__panel--expanded',
     };
 
     render(): JSX.Element {

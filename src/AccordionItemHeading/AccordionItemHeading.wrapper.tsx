@@ -12,7 +12,7 @@ import {
 import { default as AccordionItemHeading } from './AccordionItemHeading';
 
 type AccordionItemHeadingWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
-    hideBodyClassName: string;
+    expandedClassName: string;
 };
 
 type AccordionItemHeadingWrapperState = {};
@@ -32,7 +32,7 @@ export default class AccordionItemHeadingWrapper extends React.Component<
 
     static defaultProps: AccordionItemHeadingWrapperProps = {
         className: 'accordion__heading',
-        hideBodyClassName: '',
+        expandedClassName: '',
     };
 
     render(): JSX.Element {

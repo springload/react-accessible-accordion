@@ -70,20 +70,19 @@ describe('AccordionItemHeading', () => {
         expect(wrapper.find('div').hasClass(className)).toEqual(true);
     });
 
-    it('renders with different hideBodyClassName', () => {
-        const hideBodyClassName = 'hideBodyClassName';
-        const wrapper = mountItem(
-            <AccordionItemHeading hideBodyClassName={hideBodyClassName} />,
-        );
-        expect(wrapper.find('div').hasClass(hideBodyClassName)).toEqual(true);
-    });
+    it('renders with different expandedClassName when item is expanded', () => {
+        const expandedClassName = 'expandedClassName';
 
-    it("doesn't present hideBodyClassName when collapsed", () => {
-        const hideBodyClassName = 'hideBodyClassName';
-        const wrapper = mountItem(
-            <AccordionItemHeading hideBodyClassName={hideBodyClassName} />,
+        const wrapper = mount(
+            <AccordionProvider items={[{ uuid: 0, expanded: true }]}>
+                <ItemProvider uuid={0}>
+                    <AccordionItemHeading
+                        expandedClassName={expandedClassName}
+                    />
+                </ItemProvider>
+            </AccordionProvider>,
         );
-        expect(wrapper.find('div').hasClass(hideBodyClassName)).toEqual(true);
+        expect(wrapper.find('div').hasClass(expandedClassName)).toEqual(true);
     });
 
     it('toggles state when clicked', async () => {

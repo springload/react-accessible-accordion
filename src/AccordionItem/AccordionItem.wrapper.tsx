@@ -10,7 +10,7 @@ import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
 import AccordionItem from './AccordionItem';
 
 type AccordionItemWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
-    hideBodyClassName?: string;
+    expandedClassName?: string;
     expanded?: boolean;
     uuid?: string;
 };
@@ -32,7 +32,7 @@ export default class AccordionItemWrapper extends React.Component<
 
     static defaultProps: AccordionItemWrapperProps = {
         className: 'accordion__item',
-        hideBodyClassName: '',
+        expandedClassName: '',
         expanded: false,
         uuid: undefined,
     };

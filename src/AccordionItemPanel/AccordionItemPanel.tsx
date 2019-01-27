@@ -3,7 +3,7 @@ import * as React from 'react';
 import { UUID } from '../ItemContainer/ItemContainer';
 
 type AccordionItemPanelProps = React.HTMLAttributes<HTMLDivElement> & {
-    hideBodyClassName: string;
+    expandedClassName: string;
     uuid: UUID;
     expanded: boolean;
     allowMultipleExpanded: boolean;
@@ -12,7 +12,7 @@ type AccordionItemPanelProps = React.HTMLAttributes<HTMLDivElement> & {
 const AccordionItemPanel = (props: AccordionItemPanelProps): JSX.Element => {
     const {
         className,
-        hideBodyClassName,
+        expandedClassName,
         uuid,
         expanded,
         allowMultipleExpanded,
@@ -26,7 +26,7 @@ const AccordionItemPanel = (props: AccordionItemPanelProps): JSX.Element => {
         <div
             id={`accordion__panel-${uuid}`}
             className={classnames(className, {
-                [hideBodyClassName]: !expanded,
+                [expandedClassName]: expanded,
             })}
             aria-hidden={hideAriaAttribute}
             aria-labelledby={`accordion__heading-${uuid}`}
