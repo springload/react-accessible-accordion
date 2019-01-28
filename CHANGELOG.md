@@ -3,6 +3,195 @@
 > All notable changes to this project are documented in this file. This project
 > adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [[v3.0.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v3.0.0)
+
+This release is the culmination of a massive amount of work, resulting in some
+new features and significantly stronger and more reliable WAI ARIA spec
+compliance. Notably, the project has been migrated from Flow to Typescript, and
+a full accessibility audit has been performed - revealing a few holes in our
+compliance which have now been entirely addressed.
+
+Thanks to everyone who has contributed to this release - and not just those who
+have written code. Contribution by way of issues relating to spec compliance,
+pull-request commentary, advice and assistance is all greatly appreciated.
+Thanks also to the patient users who have endured an extended period without a
+release while we made sure to get this 100% right! Release cadence should return
+to normal again now.
+
+### Breaking Changes - Upgrade Guide:
+
+1. Rename all of your `AccordionItemTitle` components to `AccordionItemHeading`
+   and then nest an `AccordionItemButton` directly inside of each one. Note that
+   in order for your Accordion to remain spec-compliant, you may _not_ put any
+   other children inside `AccordionItemHeading`.
+
+    ```tsx
+    // Before:
+    import { AccordionItemTitle } from 'react-accessible-accordion';
+
+    const headingBefore = <AccordionItemHeading>Foo</AccordionItemHeading>;
+    ```
+
+    ```tsx
+    //  After:
+    import {
+        AcccordionItemHeading,
+        AccordionItemButton,
+    } from 'react-accessible-accordion';
+
+    const headingAfter = (
+        <AccordionItemHeading>
+            <AccordionItemButton>Foo</AccordionItemButton>
+        </AccordionItemHeading>
+    );
+    ```
+
+2. Rename all of your `AccordionItemBody` components to `AccordionItemPanel`.
+
+    ```tsx
+    // Before:
+    import { AccordionItemBody } from 'react-accessible-accordion';
+
+    const panelBefore = (
+        <AccordionItemBody>
+            Voluptate elit eiusmod laborum proident esse officia dolor laboris
+            laboris amet nulla officia cillum.
+        </AccordionItemBody>
+    );
+    ```
+
+    ```tsx
+    // After:
+    import { AccordionItemPanel } from 'react-accessible-accordion';
+
+    const panelAfter = (
+        <AccordionItemPanel>
+            Voluptate elit eiusmod laborum proident esse officia dolor laboris
+            laboris amet nulla officia cillum.
+        </AccordionItemPanel>
+    );
+    ```
+
+3. Remove all instances of `hideBodyClassName`. This prop is no longer valid, as
+   `AccordionItemPanel` components are now hidden without additional styling. If
+   you _must_ have a different `className` prop when an item is collapsed, then
+   you may leverage the new `AccordionItemState` component.
+
+    ```tsx
+    // Before
+    import { AccordionItemPanel } from 'react-accessible-accordion';
+
+    const panelBefore = (
+        <AccordionItemPanel className="foo" hideBodyClassName="foo--hidden" />
+    );
+    ```
+
+    ```tsx
+    // After:
+    import {
+        AccordionItemPanel,
+        AccordionItemState,
+    } from 'react-accessible-accordion';
+
+    const panelAfter = (
+        <AccordionItemState>
+            {({ expanded }) => (
+                <AccordionItemPanel
+                    className={expanded ? 'foo' : 'foo foo--hidden'}
+                />
+            )}
+        </AccordionItemState>
+    );
+    ```
+
+4. Remove all instances of `AccordionItem`’s `expanded` prop and instead use
+   `Accordion`’s `preExpanded` prop. Note that this means that ‘controlled’
+   accordions are no longer a supported pattern. Please raise an issue if you
+   have a use-case which calls for the ability to manually control expanded
+   state.
+
+    ```tsx
+    // Before
+    import { Accordion, AccordionItem } from 'react-accessible-accordion';
+
+    const accordionBefore = (
+        <Accordion>
+            <AccordionItem expanded />
+        </Accordion>
+    );
+    ```
+
+    ```tsx
+    // After:
+    import { Accordion, AccordionItem } from 'react-accessible-accordion';
+
+    const accordionAfter = (
+        <Accordion preExpanded={['foo']}>
+            <AccordionItem uuid="foo" />
+        </Accordion>
+    );
+    ```
+
+5. Remove all instances of `Accordion`’s `accordion` prop. Instead, use a
+   combination of `allowZeroExpanded` and `allowMultipleExpanded` props to suit
+   your requirements. If you were not explicitly setting `accordion` to `false`
+   then you probably are not required to make any changes here.
+
+    ```tsx
+    // Before
+    import { Accordion } from 'react-accessible-accordion';
+
+    const accordionBefore = <Accordion accordion={false} />;
+    ```
+
+    ```tsx
+    // After:
+    import { Accordion } from 'react-accessible-accordion';
+
+    const accordionAfter = <Accordion allowMultipleExpanded />;
+    ```
+
+6. Upgrade to React v16.3+
+
+7. Remove your `minimal-example.css` import. These styles only applied
+   `display: none` to panels when collapsed, but browsers apply these styles to
+   elements with the `hidden` attribute, which the `AccordionItemPanel`
+   component now has (when collapsed).
+
+### Added
+
+-   Added `AccordionItemButton` component.
+-   Added `allowZeroExpanded` prop to `Accordion`.
+-   Added `allowMultipleExpanded` prop to `Accordion`.
+-   Out-of-the-box Typescript support.
+-   Integration tests to explicitly assert every line of the WAI ARIA
+    'Accordion' spec.
+-   Additional keyboard functionality (Up, Down, Left, Right, Home, End).
+
+### Changed
+
+-   Renamed `AccordionItemTitle` to `AccordionItemHeading` to be consistent with
+    the language used in the WAI ARIA spec.
+-   Renamed `AccordionItemBody` to `AccordionItemPanel` to be consistent with
+    the language used in the WAI ARIA spec.
+-   Updated `AccordionItemPanel` to have a `hidden` attribute.
+-   Roles and aria attributes all audited and updated to match the WAI ARIA
+    spec.
+-   Update `onChange` to always be called with an array of the currently
+    expanded items.
+
+### Fixed
+
+-   Fixes SSR (server-side rendering).
+-   Fixes incorrect roles and attributes as per the WAI ARIA spec.
+
+### Removed
+
+-   Removed Flow suppport.
+-   Removed undocumented `expanded` mechanism for `AccordionItems`.
+-   Removed undocumented `disabled` mechanism for `AccordionItems`.
+-   Remove `hideBodyClassName` prop.
+
 ## [[v2.4.5]](https://github.com/springload/react-accessible-accordion/releases/tag/v2.4.5)
 
 ### Fixed
