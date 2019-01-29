@@ -1,6 +1,7 @@
 import { default as classnames } from 'classnames';
 import * as React from 'react';
 import { UUID } from '../ItemContainer/ItemContainer';
+import { getClosestElement } from '../helpers/getClosestElement';
 
 type AccordionItemHeadingProps = React.HTMLAttributes<HTMLDivElement> & {
     expandedClassName: string;
@@ -12,9 +13,7 @@ type AccordionItemHeadingProps = React.HTMLAttributes<HTMLDivElement> & {
 
 type AccordionItemHeadingState = {};
 
-const getClosest = (el, selector) => {
-    return el && (el.matches(selector) ? el : getClosest(el.parentNode, selector));
-};
+
 
 const focusNextHeading = (evt, el) => {
     if(el !== evt.target) {
@@ -37,7 +36,7 @@ export default class AccordionItemHeading extends React.Component<
     handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
         const keyCode = evt.which.toString();
         const parentSelector = '[data-accordion-component="Accordion"]';
-        const parentAccordion = getClosest(evt.target, parentSelector);
+        const parentAccordion = getClosestElement(evt.target, parentSelector);
 
         switch (keyCode) {
             case '13':
