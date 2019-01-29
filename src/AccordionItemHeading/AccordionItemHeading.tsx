@@ -12,6 +12,18 @@ type AccordionItemHeadingProps = React.HTMLAttributes<HTMLDivElement> & {
 
 type AccordionItemHeadingState = {};
 
+const getClosest = (el, selector) => {
+    return el && (el.matches(selector) ? el : getClosest(el.parentNode, selector));
+};
+
+const focusNextHeading = (evt, el) => {
+    if(el !== evt.target) {
+        const nextControl = el.querySelector('[data-aria-control]');
+        evt.preventDefault();
+        nextControl.focus();
+    }
+};
+
 export default class AccordionItemHeading extends React.Component<
     AccordionItemHeadingProps,
     AccordionItemHeadingState
@@ -23,9 +35,26 @@ export default class AccordionItemHeading extends React.Component<
     };
 
     handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
-        if (evt.charCode === 13 || evt.charCode === 32) {
-            evt.preventDefault();
-            this.handleClick();
+        const keyCode = evt.which.toString();
+        const parentSelector = '[data-accordion]';
+        const parentAccordion = getClosest(evt.target, parentSelector);
+
+        switch (keyCode) {
+            case '13':
+            case '32':
+                evt.preventDefault();
+                this.handleClick();
+                break;
+            case '36':
+                // home
+                focusNextHeading(evt, parentAccordion.firstChild);
+                break;
+            case '35':
+                // end
+                focusNextHeading(evt, parentAccordion.lastChild);
+                break;
+            default:
+                break;
         }
     };
 
@@ -57,7 +86,8 @@ export default class AccordionItemHeading extends React.Component<
                 onClick={this.handleClick}
                 role="button"
                 tabIndex={0}
-                onKeyPress={this.handleKeyPress}
+                data-aria-control={true}
+                onKeyDown={this.handleKeyPress}
                 {...rest}
             />
         );
