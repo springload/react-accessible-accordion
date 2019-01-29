@@ -18,9 +18,9 @@ const getClosest = (el, selector) => {
 
 const focusNextHeading = (evt, el) => {
     if(el !== evt.target) {
-        const nextControl = el.querySelector('[data-aria-control]');
+        const nextAccordionItemHeading = el.querySelector('[data-accordion-component="AccordionItemHeading"]');
         evt.preventDefault();
-        nextControl.focus();
+        nextAccordionItemHeading.focus();
     }
 };
 
@@ -86,7 +86,7 @@ export default class AccordionItemHeading extends React.Component<
                 onClick={this.handleClick}
                 role="button"
                 tabIndex={0}
-                data-aria-control={true}
+                data-accordion-component="AccordionItemHeading"
                 onKeyDown={this.handleKeyPress}
                 {...rest}
             />
