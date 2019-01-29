@@ -36,7 +36,7 @@ export default class AccordionItemHeading extends React.Component<
 
     handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
         const keyCode = evt.which.toString();
-        const parentSelector = '[data-accordion]';
+        const parentSelector = '[data-accordion-component="Accordion"]';
         const parentAccordion = getClosest(evt.target, parentSelector);
 
         switch (keyCode) {
