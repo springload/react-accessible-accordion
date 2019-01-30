@@ -8,6 +8,7 @@ import {
     AccordionItem,
     AccordionItemHeading,
     AccordionItemPanel,
+    AccordionItemState,
 } from '../../src';
 
 // tslint:disable-next-line no-import-side-effect
@@ -15,6 +16,10 @@ import './main.css';
 
 // tslint:disable-next-line no-import-side-effect ordered-imports
 import '../../src/css/fancy-example.css';
+
+const renderFn = (expanded: boolean): JSX.Element => {
+    return expanded ? <>This item is expanded</> : <>This item is collapsed</>;
+};
 
 // tslint:disable-next-line max-func-body-length
 const Example = (): JSX.Element => (
@@ -649,6 +654,52 @@ const Example = (): JSX.Element => (
                     <p>
                         If you open/close this item you should see
                         `uniqueItem-2` printed in the console.
+                    </p>
+                </AccordionItemPanel>
+            </AccordionItem>
+        </Accordion>
+
+        <h2 className="u-margin-top">Conditional display</h2>
+
+        <Accordion>
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <div>
+                        <h3 className="u-position-relative">
+                            Display a different icon when expanded
+                            <div
+                                className="accordion__arrow"
+                                role="presentation"
+                            />
+                        </h3>
+                        <AccordionItemState render={renderFn} />
+                    </div>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p>
+                        When you open/close this item, you should see the icon
+                        next to the heading change.
+                    </p>
+                </AccordionItemPanel>
+            </AccordionItem>
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <div>
+                        <h3 className="u-position-relative">
+                            How to?
+                            <div
+                                className="accordion__arrow"
+                                role="presentation"
+                            />
+                        </h3>
+                        <AccordionItemState render={renderFn} />
+                    </div>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p>
+                        Use the AccordionItemState component inside an Accordion
+                        item and pass it a render prop function that takes the
+                        item's expanded/collapsed state.
                     </p>
                 </AccordionItemPanel>
             </AccordionItem>
