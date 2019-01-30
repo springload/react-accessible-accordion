@@ -35,5 +35,4 @@ const AccordionItemPanel = (props: AccordionItemPanelProps): JSX.Element => {
         />
     );
 };
-
 export default AccordionItemPanel;

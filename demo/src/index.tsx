@@ -8,6 +8,7 @@ import {
     AccordionItem,
     AccordionItemHeading,
     AccordionItemPanel,
+    AccordionItemState,
 } from '../../src';
 
 // tslint:disable-next-line no-import-side-effect
@@ -15,6 +16,10 @@ import './main.css';
 
 // tslint:disable-next-line no-import-side-effect ordered-imports
 import '../../src/css/fancy-example.css';
+
+const renderFn = (expanded: boolean): JSX.Element => {
+    return expanded ? <>This item is expanded</> : <>This item is collapsed</>;
+};
 
 // tslint:disable-next-line max-func-body-length
 const Example = (): JSX.Element => (
@@ -65,6 +70,7 @@ const Example = (): JSX.Element => (
                         <li>AccordionItem</li>
                         <li>AccordionItemHeading</li>
                         <li>AccordionItemPanel</li>
+                        <li>AccordionItemState</li>
                     </ul>
                 </AccordionItemPanel>
             </AccordionItem>
@@ -216,6 +222,43 @@ const Example = (): JSX.Element => (
                                 <td>String</td>
                                 <td>accordion__panel--expanded</td>
                                 <td>Class name for expanded panel state</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </AccordionItemPanel>
+            </AccordionItem>
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <h3 className="u-position-relative">
+                        AccordionItemState
+                        <div className="accordion__arrow" role="presentation" />
+                    </h3>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>default</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>expanded</td>
+                                <td>Boolean</td>
+                                <td>false</td>
+                                <td>Expands this item on first render</td>
+                            </tr>
+                            <tr>
+                                <td>children</td>
+                                <td>Function</td>
+                                <td>null</td>
+                                <td>
+                                    Takes expanded state as argument for
+                                    conditional rendering
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -401,6 +444,49 @@ const Example = (): JSX.Element => (
                                             <td>
                                                 Class name for expanded panel
                                                 state
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </AccordionItemPanel>
+                        </AccordionItem>
+                        <AccordionItem>
+                            <AccordionItemHeading>
+                                <h3 className="u-position-relative">
+                                    AccordionItemState
+                                    <div
+                                        className="accordion__arrow"
+                                        role="presentation"
+                                    />
+                                </h3>
+                            </AccordionItemHeading>
+                            <AccordionItemPanel>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>name</th>
+                                            <th>type</th>
+                                            <th>default</th>
+                                            <th>description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>expanded</td>
+                                            <td>Boolean</td>
+                                            <td>false</td>
+                                            <td>
+                                                Expands this item on first
+                                                render
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>children</td>
+                                            <td>Function</td>
+                                            <td>null</td>
+                                            <td>
+                                                Takes expanded state as argument
+                                                for conditional rendering
                                             </td>
                                         </tr>
                                     </tbody>
@@ -649,6 +735,55 @@ const Example = (): JSX.Element => (
                     <p>
                         If you open/close this item you should see
                         `uniqueItem-2` printed in the console.
+                    </p>
+                </AccordionItemPanel>
+            </AccordionItem>
+        </Accordion>
+
+        <h2 className="u-margin-top">Conditional display</h2>
+
+        <Accordion>
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <div>
+                        <h3 className="u-position-relative">
+                            Render something different when expanded
+                            <div
+                                className="accordion__arrow"
+                                role="presentation"
+                            />
+                        </h3>
+                        <AccordionItemState children={renderFn} />
+                    </div>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p>
+                        When you open/close this item, you should see the text
+                        under the heading change.
+                    </p>
+                </AccordionItemPanel>
+            </AccordionItem>
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <div>
+                        <h3 className="u-position-relative">
+                            How to?
+                            <div
+                                className="accordion__arrow"
+                                role="presentation"
+                            />
+                        </h3>
+                        <AccordionItemState children={renderFn} />
+                    </div>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p>
+                        Pass the AccordionItemState component a render prop
+                        function.
+                    </p>
+                    <p>
+                        This should take the item's expanded state as an
+                        argument.
                     </p>
                 </AccordionItemPanel>
             </AccordionItem>
