@@ -213,6 +213,35 @@ We recommend that you copy them into your own app and modify them to suit your n
     </tbody>
 </table>
 
+### AccordionItemState
+
+#### props:
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th style="width: 100px;">name</th>
+        <th style="width: 50px;">type</th>
+        <th>default</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td>expanded</td>
+          <td>Boolean</td>
+          <td>false</td>
+          <td>Expands this item on first render</td>
+      </tr>
+      <tr>
+          <td>render</td>
+          <td>Function</td>
+          <td>returns null</td>
+          <td>Takes expanded state as argument for conditional rendering</td>
+      </tr>
+    </tbody>
+</table>
+
 ### resetNextUuid
 
 <table class="table table-bordered table-striped">
