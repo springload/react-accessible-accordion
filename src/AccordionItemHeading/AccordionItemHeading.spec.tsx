@@ -121,7 +121,7 @@ describe('AccordionItemHeading', () => {
         );
 
         expect(isExpanded(wrapper, DEFAULT_ITEM.uuid)).toBeFalsy();
-        wrapper.find('div').simulate('keyDown', { which: 35 });
+        wrapper.find('div').simulate('keyDown', { which: 8 });
         expect(isExpanded(wrapper, DEFAULT_ITEM.uuid)).toBeFalsy();
     });
 
