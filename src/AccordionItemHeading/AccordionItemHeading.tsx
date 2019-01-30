@@ -1,7 +1,7 @@
 import { default as classnames } from 'classnames';
 import * as React from 'react';
-import { UUID } from '../ItemContainer/ItemContainer';
 import { getClosestElement } from '../helpers/getClosestElement';
+import { UUID } from '../ItemContainer/ItemContainer';
 
 type AccordionItemHeadingProps = React.HTMLAttributes<HTMLDivElement> & {
     expandedClassName: string;
@@ -25,8 +25,13 @@ export default class AccordionItemHeading extends React.Component<
 
     handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
         const keyCode = evt.which.toString();
-        const parentAccordion = getClosestElement(evt.target, '[data-accordion-component="Accordion"]');
-        const accordionItems = parentAccordion.querySelectorAll('[data-accordion-component="AccordionItemHeading"]');
+        const parentAccordion = getClosestElement(
+            evt.target,
+            '[data-accordion-component="Accordion"]',
+        );
+        const accordionItems = parentAccordion.querySelectorAll(
+            '[data-accordion-component="AccordionItemHeading"]',
+        );
 
         switch (keyCode) {
             case '13':
@@ -45,7 +50,6 @@ export default class AccordionItemHeading extends React.Component<
                 accordionItems[accordionItems.length - 1].focus();
                 break;
             default:
-                break;
         }
     };
 
