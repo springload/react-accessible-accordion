@@ -13,6 +13,17 @@ type AccordionItemHeadingProps = React.HTMLAttributes<HTMLDivElement> & {
 
 type AccordionItemHeadingState = {};
 
+const keys = {
+    DOWN: '40',
+    END: '35',
+    ENTER: '13',
+    HOME: '36',
+    LEFT: '37',
+    RIGHT: '39',
+    SPACE: '32',
+    UP: '38',
+};
+
 export default class AccordionItemHeading extends React.Component<
     AccordionItemHeadingProps,
     AccordionItemHeadingState
@@ -26,12 +37,12 @@ export default class AccordionItemHeading extends React.Component<
     handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
         const keyCode = evt.which.toString();
 
-        if (keyCode === '13' || keyCode === '32') {
+        if (keyCode === keys.ENTER || keyCode === keys.SPACE) {
             evt.preventDefault();
             this.handleClick();
         }
 
-        if (['36', '35'].indexOf(keyCode) !== -1) {
+        if ([keys.HOME, keys.END].indexOf(keyCode) !== -1) {
             const parentAccordion = getClosestElement(
                 evt.target,
                 '[data-accordion-component="Accordion"]',
@@ -49,12 +60,12 @@ export default class AccordionItemHeading extends React.Component<
 
             evt.preventDefault();
 
-            if (keyCode === '36') {
+            if (keyCode === keys.HOME) {
                 // home
                 accordionItems[0].focus();
             }
 
-            if (keyCode === '35') {
+            if (keyCode === keys.END) {
                 // end
                 accordionItems[accordionItems.length - 1].focus();
             }
