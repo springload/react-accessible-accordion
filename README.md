@@ -11,7 +11,7 @@
 First, grab the package from npm:
 
 ```sh
-npm install --save react-accessible-accordion react react-dom
+npm install --save react-accessible-accordion
 ```
 
 Then, import the editor and use it in your code. Here is a [basic example](https://springload.github.io/react-accessible-accordion/):
