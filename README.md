@@ -18,7 +18,6 @@ Then, import the editor and use it in your code. Here is a [basic example](https
 
 ```jsx
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import {
     Accordion,
@@ -30,29 +29,39 @@ import {
 // Demo styles, see 'Styles' section below for some notes on use.
 import 'react-accessible-accordion/dist/fancy-example.css';
 
-const Example = () => (
-    <Accordion>
-        <AccordionItem>
-            <AccordionItemHeading>
-                <h3>Simple title</h3>
-            </AccordionItemHeading>
-            <AccordionItemPanel>
-                <p>Body content</p>
-            </AccordionItemPanel>
-        </AccordionItem>
-        <AccordionItem>
-            <AccordionItemHeading>
-                <h3>Complex title</h3>
-                <div>With a bit of description</div>
-            </AccordionItemHeading>
-            <AccordionItemPanel>
-                <p>Body content</p>
-            </AccordionItemPanel>
-        </AccordionItem>
-    </Accordion>
-);
-
-ReactDOM.render(<Example />, document.querySelector('[data-mount]'));
+export default function Example() {
+    return (
+        <Accordion>
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <span className="accordion__arrow" role="presentation" />
+                    What harsh truths do you prefer to ignore?
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p>
+                        Exercitation in fugiat est ut ad ea cupidatat ut in
+                        cupidatat occaecat ut occaecat consequat est minim minim
+                        esse tempor laborum consequat esse adipisicing eu
+                        reprehenderit enim.
+                    </p>
+                </AccordionItemPanel>
+            </AccordionItem>
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <span className="accordion__arrow" role="presentation" />
+                    Is free will real or just an illusion?
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p>
+                        In ad velit in ex nostrud dolore cupidatat consectetur
+                        ea in ut nostrud velit in irure cillum tempor laboris
+                        sed adipisicing eu esse duis nulla non.
+                    </p>
+                </AccordionItemPanel>
+            </AccordionItem>
+        </Accordion>
+    );
+}
 ```
 
 ### Styles
