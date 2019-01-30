@@ -15,7 +15,7 @@ import AccordionItemState from './AccordionItemState';
 
 type AccordionItemStateWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     expanded?: boolean;
-    render(expanded: boolean): React.ReactNode;
+    children(expanded: boolean): React.ReactNode;
 };
 
 type AccordionItemStateWrapperContext = {
@@ -33,7 +33,7 @@ export default class AccordionItemStateWrapper extends React.Component<
     };
 
     static defaultProps: AccordionItemStateWrapperProps = {
-        render: (expanded: boolean): React.ReactNode => null,
+        children: (expanded: boolean): React.ReactNode => null,
     };
 
     render(): JSX.Element {
@@ -64,10 +64,10 @@ export default class AccordionItemStateWrapper extends React.Component<
         const item = items.filter(
             (stateItem: Item) => stateItem.uuid === uuid,
         )[0];
-        const { render } = this.props;
+        const { children } = this.props;
 
         return item ? (
-            <AccordionItemState expanded={item.expanded} render={render} />
+            <AccordionItemState expanded={item.expanded} children={children} />
         ) : null;
     }
 }

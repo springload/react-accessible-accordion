@@ -252,7 +252,7 @@ const Example = (): JSX.Element => (
                                 <td>Expands this item on first render</td>
                             </tr>
                             <tr>
-                                <td>render</td>
+                                <td>children</td>
                                 <td>Function</td>
                                 <td>null</td>
                                 <td>
@@ -481,7 +481,7 @@ const Example = (): JSX.Element => (
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>render</td>
+                                            <td>children</td>
                                             <td>Function</td>
                                             <td>null</td>
                                             <td>
@@ -753,7 +753,7 @@ const Example = (): JSX.Element => (
                                 role="presentation"
                             />
                         </h3>
-                        <AccordionItemState render={renderFn} />
+                        <AccordionItemState children={renderFn} />
                     </div>
                 </AccordionItemHeading>
                 <AccordionItemPanel>
@@ -773,7 +773,7 @@ const Example = (): JSX.Element => (
                                 role="presentation"
                             />
                         </h3>
-                        <AccordionItemState render={renderFn} />
+                        <AccordionItemState children={renderFn} />
                     </div>
                 </AccordionItemHeading>
                 <AccordionItemPanel>

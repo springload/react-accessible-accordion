@@ -46,7 +46,7 @@ describe('AccordionItemState', () => {
         expect(wrapper.find('div[data-enzyme]').length).toEqual(0);
     });
 
-    it('renders correctly with different render prop', () => {
+    it('renders correctly with different children prop', () => {
         const renderProp = (expanded: boolean): React.ReactNode =>
             expanded ? (
                 <div className="expanded" />
@@ -54,13 +54,13 @@ describe('AccordionItemState', () => {
                 <div className="collapsed" />
             );
 
-        const wrapper = mountItem(<AccordionItemState render={renderProp} />);
+        const wrapper = mountItem(<AccordionItemState children={renderProp} />);
 
         expect(wrapper.find('div').hasClass('expanded')).toEqual(true);
         expect(wrapper.find('div').hasClass('collapsed')).toEqual(false);
     });
 
-    it('renders correctly with different render prop and expanded set to false', () => {
+    it('renders correctly with different children prop and expanded set to false', () => {
         function mountExpandedFalse(children: React.ReactNode): ReactWrapper {
             const item: Item = {
                 uuid: 0,
@@ -82,7 +82,7 @@ describe('AccordionItemState', () => {
             );
 
         const wrapper = mountExpandedFalse(
-            <AccordionItemState render={renderProp} />,
+            <AccordionItemState children={renderProp} />,
         );
 
         expect(wrapper.find('div').hasClass('expanded')).toEqual(false);

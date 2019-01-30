@@ -234,7 +234,7 @@ We recommend that you copy them into your own app and modify them to suit your n
           <td>Expands this item on first render</td>
       </tr>
       <tr>
-          <td>render</td>
+          <td>children</td>
           <td>Function</td>
           <td>null</td>
           <td>Takes expanded state as argument for conditional rendering</td>
