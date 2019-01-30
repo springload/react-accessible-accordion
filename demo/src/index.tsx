@@ -658,49 +658,6 @@ const Example = (): JSX.Element => (
             </AccordionItem>
         </Accordion>
 
-        <h2 className="u-margin-top">A bit of animation on the arrow?</h2>
-
-        <Accordion>
-            <AccordionItem>
-                <AccordionItemHeading className="accordion__heading accordion__heading--animated">
-                    <h3 className="u-position-relative">
-                        Animated Accessible Accordion
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <p>Did you notice the animation on the arrow?</p>
-                </AccordionItemPanel>
-            </AccordionItem>
-            <AccordionItem className="accordion__item">
-                <AccordionItemHeading className="accordion__heading accordion__heading--animated">
-                    <h3 className="u-position-relative">
-                        How to?
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <p>Check css/demo.css in the demo/ folder :)</p>
-                </AccordionItemPanel>
-            </AccordionItem>
-        </Accordion>
-
-        <h2 className="u-margin-top">Only one item</h2>
-
-        <Accordion>
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <h3 className="u-position-relative">
-                        Single item
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <p>Why would you need more than one?</p>
-                </AccordionItemPanel>
-            </AccordionItem>
-        </Accordion>
-
         <h2 className="u-margin-top">Informative onChange</h2>
 
         <Accordion
