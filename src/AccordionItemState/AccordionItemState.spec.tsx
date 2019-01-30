@@ -22,20 +22,14 @@ describe('AccordionItemState', () => {
     }
 
     it('renders correctly with min params', () => {
-        const wrapper = mountItem(
-            <AccordionItemState>
-                <div>Fake body</div>
-            </AccordionItemState>,
-        );
+        const wrapper = mountItem(<AccordionItemState />);
         expect(wrapper).toMatchSnapshot();
     });
 
     it('does not render if no accordionStore found in context', () => {
         const wrapper = mount(
             <ItemProvider uuid="foo">
-                <AccordionItemState>
-                    <div data-enzyme={true}>Hello World</div>
-                </AccordionItemState>
+                <AccordionItemState />
             </ItemProvider>,
         );
 
@@ -44,13 +38,54 @@ describe('AccordionItemState', () => {
 
     it('does not render if no itemStore found in context', () => {
         const wrapper = mount(
-            <AccordionProvider allowMultipleExpanded={false} items={[]}>
-                <AccordionItemState>
-                    <div data-enzyme={true}>Hello World</div>
-                </AccordionItemState>
+            <AccordionProvider items={[]}>
+                <AccordionItemState />
             </AccordionProvider>,
         );
 
         expect(wrapper.find('div[data-enzyme]').length).toEqual(0);
+    });
+
+    it('renders correctly with different render prop', () => {
+        const renderProp = (expanded: boolean): React.ReactNode =>
+            expanded ? (
+                <div className="expanded" />
+            ) : (
+                <div className="collapsed" />
+            );
+
+        const wrapper = mountItem(<AccordionItemState render={renderProp} />);
+
+        expect(wrapper.find('div').hasClass('expanded')).toEqual(true);
+        expect(wrapper.find('div').hasClass('collapsed')).toEqual(false);
+    });
+
+    it('renders correctly with different render prop and expanded set to false', () => {
+        function mountExpandedFalse(children: React.ReactNode): ReactWrapper {
+            const item: Item = {
+                uuid: 0,
+                expanded: false,
+            };
+
+            return mount(
+                <AccordionProvider items={[item]}>
+                    <ItemProvider uuid={item.uuid}>{children}</ItemProvider>
+                </AccordionProvider>,
+            );
+        }
+
+        const renderProp = (expanded: boolean): React.ReactNode =>
+            expanded ? (
+                <div className="expanded" />
+            ) : (
+                <div className="collapsed" />
+            );
+
+        const wrapper = mountExpandedFalse(
+            <AccordionItemState render={renderProp} />,
+        );
+
+        expect(wrapper.find('div').hasClass('expanded')).toEqual(false);
+        expect(wrapper.find('div').hasClass('collapsed')).toEqual(true);
     });
 });

@@ -254,7 +254,7 @@ const Example = (): JSX.Element => (
                             <tr>
                                 <td>render</td>
                                 <td>Function</td>
-                                <td>returns null</td>
+                                <td>null</td>
                                 <td>
                                     Takes expanded state as argument for
                                     conditional rendering
@@ -444,6 +444,49 @@ const Example = (): JSX.Element => (
                                             <td>
                                                 Class name for expanded panel
                                                 state
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </AccordionItemPanel>
+                        </AccordionItem>
+                        <AccordionItem>
+                            <AccordionItemHeading>
+                                <h3 className="u-position-relative">
+                                    AccordionItemState
+                                    <div
+                                        className="accordion__arrow"
+                                        role="presentation"
+                                    />
+                                </h3>
+                            </AccordionItemHeading>
+                            <AccordionItemPanel>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>name</th>
+                                            <th>type</th>
+                                            <th>default</th>
+                                            <th>description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>expanded</td>
+                                            <td>Boolean</td>
+                                            <td>false</td>
+                                            <td>
+                                                Expands this item on first
+                                                render
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>render</td>
+                                            <td>Function</td>
+                                            <td>null</td>
+                                            <td>
+                                                Takes expanded state as argument
+                                                for conditional rendering
                                             </td>
                                         </tr>
                                     </tbody>

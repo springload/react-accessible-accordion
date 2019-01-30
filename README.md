@@ -236,7 +236,7 @@ We recommend that you copy them into your own app and modify them to suit your n
       <tr>
           <td>render</td>
           <td>Function</td>
-          <td>returns null</td>
+          <td>null</td>
           <td>Takes expanded state as argument for conditional rendering</td>
       </tr>
     </tbody>
