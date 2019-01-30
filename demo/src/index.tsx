@@ -70,6 +70,7 @@ const Example = (): JSX.Element => (
                         <li>AccordionItem</li>
                         <li>AccordionItemHeading</li>
                         <li>AccordionItemPanel</li>
+                        <li>AccordionItemState</li>
                     </ul>
                 </AccordionItemPanel>
             </AccordionItem>
@@ -221,6 +222,43 @@ const Example = (): JSX.Element => (
                                 <td>String</td>
                                 <td>accordion__panel--expanded</td>
                                 <td>Class name for expanded panel state</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </AccordionItemPanel>
+            </AccordionItem>
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <h3 className="u-position-relative">
+                        AccordionItemState
+                        <div className="accordion__arrow" role="presentation" />
+                    </h3>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>type</th>
+                                <th>default</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>expanded</td>
+                                <td>Boolean</td>
+                                <td>false</td>
+                                <td>Expands this item on first render</td>
+                            </tr>
+                            <tr>
+                                <td>render</td>
+                                <td>Function</td>
+                                <td>returns null</td>
+                                <td>
+                                    Takes expanded state as argument for
+                                    conditional rendering
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -666,7 +704,7 @@ const Example = (): JSX.Element => (
                 <AccordionItemHeading>
                     <div>
                         <h3 className="u-position-relative">
-                            Display a different icon when expanded
+                            Render something different when expanded
                             <div
                                 className="accordion__arrow"
                                 role="presentation"
@@ -677,8 +715,8 @@ const Example = (): JSX.Element => (
                 </AccordionItemHeading>
                 <AccordionItemPanel>
                     <p>
-                        When you open/close this item, you should see the icon
-                        next to the heading change.
+                        When you open/close this item, you should see the text
+                        under the heading change.
                     </p>
                 </AccordionItemPanel>
             </AccordionItem>
@@ -697,9 +735,12 @@ const Example = (): JSX.Element => (
                 </AccordionItemHeading>
                 <AccordionItemPanel>
                     <p>
-                        Use the AccordionItemState component inside an Accordion
-                        item and pass it a render prop function that takes the
-                        item's expanded/collapsed state.
+                        Pass the AccordionItemState component a render prop
+                        function.
+                    </p>
+                    <p>
+                        This should take the item's expanded state as an
+                        argument.
                     </p>
                 </AccordionItemPanel>
             </AccordionItem>
