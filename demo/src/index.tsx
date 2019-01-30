@@ -8,6 +8,7 @@ import {
     AccordionItem,
     AccordionItemHeading,
     AccordionItemPanel,
+    AccordionItemState,
 } from '../../src';
 
 // tslint:disable-next-line no-import-side-effect
