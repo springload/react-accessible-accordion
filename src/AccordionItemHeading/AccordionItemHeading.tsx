@@ -25,31 +25,39 @@ export default class AccordionItemHeading extends React.Component<
 
     handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
         const keyCode = evt.which.toString();
-        const parentAccordion = getClosestElement(
-            evt.target,
-            '[data-accordion-component="Accordion"]',
-        );
-        const accordionItems = parentAccordion.querySelectorAll(
-            '[data-accordion-component="AccordionItemHeading"]',
-        );
 
-        switch (keyCode) {
-            case '13':
-            case '32':
-                evt.preventDefault();
-                this.handleClick();
-                break;
-            case '36':
+        if (keyCode === '13' || keyCode === '32') {
+            evt.preventDefault();
+            this.handleClick();
+        }
+
+        if (['36', '35'].indexOf(keyCode) !== -1) {
+            const parentAccordion = getClosestElement(
+                evt.target,
+                '[data-accordion-component="Accordion"]',
+            );
+
+            const accordionItems = parentAccordion
+                ? parentAccordion.querySelectorAll(
+                      '[data-accordion-component="AccordionItemHeading"]',
+                  )
+                : null;
+
+            if (!accordionItems.length) {
+                return;
+            }
+
+            evt.preventDefault();
+
+            if (keyCode === '36') {
                 // home
-                evt.preventDefault();
                 accordionItems[0].focus();
-                break;
-            case '35':
+            }
+
+            if (keyCode === '35') {
                 // end
-                evt.preventDefault();
                 accordionItems[accordionItems.length - 1].focus();
-                break;
-            default:
+            }
         }
     };
 
