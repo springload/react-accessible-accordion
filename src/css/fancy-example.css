@@ -46,7 +46,6 @@
 
 .accordion__panel--expanded {
     display: block;
-    animation: fadein 0.35s ease-in;
 }
 
 .accordion__heading > *:last-child,
