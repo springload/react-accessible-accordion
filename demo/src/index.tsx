@@ -21,644 +21,127 @@ const renderFn = (expanded: boolean): JSX.Element => {
     return expanded ? <>This item is expanded</> : <>This item is collapsed</>;
 };
 
+type Placeholder = {
+    heading: string;
+    panel: string;
+};
+
+const placeholders: Placeholder[] = [
+    {
+        heading: 'What harsh truths do you prefer to ignore?',
+        panel:
+            'In pariatur excepteur ut do aliquip qui mollit aliqua exercitation excepteur consequat reprehenderit nostrud laborum voluptate veniam non dolore dolore aliqua incididunt amet nisi minim cillum elit.',
+    },
+    {
+        heading: 'Is free will real or just an illusion?',
+        panel:
+            'Dolor esse proident nisi minim nisi aute nulla sed proident magna id eiusmod consectetur laborum aliqua minim excepteur sunt anim anim esse aliquip et ea enim proident veniam veniam quis adipisicing nulla amet id commodo.',
+    },
+    {
+        heading: 'Is there a meaning to life? If so, what is it?',
+        panel:
+            'Consectetur pariatur proident irure proident ea laboris ut do do quis consequat sed officia dolore consequat ut deserunt ea sit sit culpa.',
+    },
+    {
+        heading: 'Is the meaning of life the same for animals and humans?',
+        panel:
+            'Ex culpa eu veniam ea quis velit exercitation reprehenderit reprehenderit dolore pariatur incididunt occaecat ut irure ut sed dolor veniam sint incididunt esse duis duis dolore sunt aute incididunt amet quis.',
+    },
+    {
+        heading: 'Where is the line between art and not art?',
+        panel:
+            'Id aute tempor ad sunt et exercitation nulla duis dolore irure elit consectetur laborum reprehenderit veniam nostrud in duis ut duis ullamco dolore do adipisicing sed proident nostrud aute ut ea cupidatat exercitation sit elit.',
+    },
+];
+
+const Arrow = (): JSX.Element => (
+    <span className="accordion__arrow" role="presentation" />
+);
+
 // tslint:disable-next-line max-func-body-length
-const Example = (): JSX.Element => (
+const App = (): JSX.Element => (
     <div className="demo-container">
-        <h2>Default settings</h2>
+        <h1>React Accessible Accordion</h1>
+
+        <p>
+            React Component for creating an 'Accordion' that adheres to the WAI
+            ARIA spec for accessibility.
+        </p>
+
+        <h2 className="u-margin-top">Default behaviour</h2>
+
+        <p>
+            By default, only one item may be expanded and it can only be
+            collapsed again by expanding another.
+        </p>
 
         <Accordion>
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <h3 className="u-position-relative">
-                        Accessible Accordion
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <p>
-                        Accessible Accordion component for React. Inspired by{' '}
-                        <a
-                            href="https://github.com/react-component/collapse"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            rc-collapse
-                        </a>{' '}
-                        and{' '}
-                        <a
-                            href="https://github.com/daviferreira/react-sanfona"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            react-sanfona
-                        </a>
-                        .
-                    </p>
-                </AccordionItemPanel>
-            </AccordionItem>
-            <AccordionItem className="accordion__item">
-                <AccordionItemHeading>
-                    <h3 className=" u-position-relative u-margin-bottom-s">
-                        Components
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                    <div>See all the components from this package</div>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <ul>
-                        <li>Accordion</li>
-                        <li>AccordionItem</li>
-                        <li>AccordionItemHeading</li>
-                        <li>AccordionItemPanel</li>
-                        <li>AccordionItemState</li>
-                    </ul>
-                </AccordionItemPanel>
-            </AccordionItem>
+            {placeholders.map((placeholder: Placeholder) => (
+                <AccordionItem key={placeholder.heading}>
+                    <AccordionItemHeading>
+                        <Arrow />
+                        {placeholder.heading}
+                    </AccordionItemHeading>
+                    <AccordionItemPanel>{placeholder.panel}</AccordionItemPanel>
+                </AccordionItem>
+            ))}
         </Accordion>
 
-        <h2 className="u-margin-top">Allow multiple/zero</h2>
+        <h2 className="u-margin-top">Expanding multiple items at once</h2>
 
-        <Accordion allowMultipleExpanded={true} allowZeroExpanded={true}>
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <h3 className="u-position-relative">
-                        Accordion
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>name</th>
-                                <th>type</th>
-                                <th>default</th>
-                                <th>description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>allowMultipleExpanded</td>
-                                <td>Boolean</td>
-                                <td>false</td>
-                                <td>
-                                    Don't close all the others when expanding an
-                                    AccordionItem
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>allowZeroExpanded</td>
-                                <td>Boolean</td>
-                                <td>false</td>
-                                <td>
-                                    Close an AccordionItem when it's the only
-                                    one expanded
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>onChange</td>
-                                <td>Function(keys)</td>
-                                <td>noop</td>
-                                <td>Triggered on change (open/close items)</td>
-                            </tr>
-                            <tr>
-                                <td>className</td>
-                                <td>String</td>
-                                <td>accordion</td>
-                                <td>CSS class(es) applied to the component</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </AccordionItemPanel>
-            </AccordionItem>
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <h3 className="u-position-relative">
-                        AccordionItem
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>name</th>
-                                <th>type</th>
-                                <th>default</th>
-                                <th>description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>expanded</td>
-                                <td>Boolean</td>
-                                <td>false</td>
-                                <td>Expands this item on first render</td>
-                            </tr>
-                            <tr>
-                                <td>className</td>
-                                <td>String</td>
-                                <td>accordion__item</td>
-                                <td>CSS class(es) applied to the component</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </AccordionItemPanel>
-            </AccordionItem>
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <h3 className="u-position-relative">
-                        AccordionItemHeading
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>name</th>
-                                <th>type</th>
-                                <th>default</th>
-                                <th>description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>className</td>
-                                <td>String</td>
-                                <td>accordion__heading</td>
-                                <td>CSS class(es) applied to the component</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </AccordionItemPanel>
-            </AccordionItem>
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <h3 className="u-position-relative">
-                        AccordionItemPanel
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>name</th>
-                                <th>type</th>
-                                <th>default</th>
-                                <th>description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>className</td>
-                                <td>String</td>
-                                <td>accordion__panel</td>
-                                <td>CSS class(es) applied to the component</td>
-                            </tr>
-                            <tr>
-                                <td>expandedClassName</td>
-                                <td>String</td>
-                                <td>accordion__panel--expanded</td>
-                                <td>Class name for expanded panel state</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </AccordionItemPanel>
-            </AccordionItem>
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <h3 className="u-position-relative">
-                        AccordionItemState
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>name</th>
-                                <th>type</th>
-                                <th>default</th>
-                                <th>description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>expanded</td>
-                                <td>Boolean</td>
-                                <td>false</td>
-                                <td>Expands this item on first render</td>
-                            </tr>
-                            <tr>
-                                <td>children</td>
-                                <td>Function</td>
-                                <td>null</td>
-                                <td>
-                                    Takes expanded state as argument for
-                                    conditional rendering
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </AccordionItemPanel>
-            </AccordionItem>
+        <p>
+            If you set <strong>allowMultipleExpanded</strong> to{' '}
+            <strong>true</strong> then the accordion will permit multiple items
+            to be expanded at once.
+        </p>
+
+        <Accordion allowMultipleExpanded={true}>
+            {placeholders.map((placeholder: Placeholder) => (
+                <AccordionItem key={placeholder.heading}>
+                    <AccordionItemHeading>
+                        <Arrow />
+                        {placeholder.heading}
+                    </AccordionItemHeading>
+                    <AccordionItemPanel>{placeholder.panel}</AccordionItemPanel>
+                </AccordionItem>
+            ))}
         </Accordion>
 
-        <h2 className="u-margin-top">Multi Accordion children</h2>
+        <h2 className="u-margin-top">Collapsing the last expanded item</h2>
 
-        <Accordion>
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <h3 className="u-position-relative">
-                        Components API
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <Accordion allowMultipleExpanded={true}>
-                        <AccordionItem>
-                            <AccordionItemHeading>
-                                <h3 className="u-position-relative">
-                                    Accordion
-                                    <div
-                                        className="accordion__arrow"
-                                        role="presentation"
-                                    />
-                                </h3>
-                            </AccordionItemHeading>
-                            <AccordionItemPanel>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>name</th>
-                                            <th>type</th>
-                                            <th>default</th>
-                                            <th>description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>allowMultipleExpanded</td>
-                                            <td>Boolean</td>
-                                            <td>false</td>
-                                            <td>
-                                                Don't close all the others when
-                                                expanding an AccordionItem
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>onChange</td>
-                                            <td>Function(keys)</td>
-                                            <td>noop</td>
-                                            <td>
-                                                Triggered on change (open/close
-                                                items)
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>className</td>
-                                            <td>String</td>
-                                            <td>accordion</td>
-                                            <td>
-                                                CSS class(es) applied to the
-                                                component
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </AccordionItemPanel>
-                        </AccordionItem>
-                        <AccordionItem>
-                            <AccordionItemHeading>
-                                <h3 className="u-position-relative">
-                                    AccordionItem
-                                    <div
-                                        className="accordion__arrow"
-                                        role="presentation"
-                                    />
-                                </h3>
-                            </AccordionItemHeading>
-                            <AccordionItemPanel>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>name</th>
-                                            <th>type</th>
-                                            <th>default</th>
-                                            <th>description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>expanded</td>
-                                            <td>Boolean</td>
-                                            <td>false</td>
-                                            <td>
-                                                Expands this item on first
-                                                render
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>className</td>
-                                            <td>String</td>
-                                            <td>accordion__item</td>
-                                            <td>
-                                                CSS class(es) applied to the
-                                                component
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </AccordionItemPanel>
-                        </AccordionItem>
-                        <AccordionItem>
-                            <AccordionItemHeading>
-                                <h3 className="u-position-relative">
-                                    AccordionItemHeading
-                                    <div
-                                        className="accordion__arrow"
-                                        role="presentation"
-                                    />
-                                </h3>
-                            </AccordionItemHeading>
-                            <AccordionItemPanel>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>name</th>
-                                            <th>type</th>
-                                            <th>default</th>
-                                            <th>description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>className</td>
-                                            <td>String</td>
-                                            <td>accordion__heading</td>
-                                            <td>
-                                                CSS class(es) applied to the
-                                                component
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </AccordionItemPanel>
-                        </AccordionItem>
-                        <AccordionItem>
-                            <AccordionItemHeading>
-                                <h3 className="u-position-relative">
-                                    AccordionItemPanel
-                                    <div
-                                        className="accordion__arrow"
-                                        role="presentation"
-                                    />
-                                </h3>
-                            </AccordionItemHeading>
-                            <AccordionItemPanel>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>name</th>
-                                            <th>type</th>
-                                            <th>default</th>
-                                            <th>description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>className</td>
-                                            <td>String</td>
-                                            <td>accordion__panel</td>
-                                            <td>
-                                                CSS class(es) applied to the
-                                                component
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>expandedClassName</td>
-                                            <td>String</td>
-                                            <td>accordion__panel--expanded</td>
-                                            <td>
-                                                Class name for expanded panel
-                                                state
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </AccordionItemPanel>
-                        </AccordionItem>
-                        <AccordionItem>
-                            <AccordionItemHeading>
-                                <h3 className="u-position-relative">
-                                    AccordionItemState
-                                    <div
-                                        className="accordion__arrow"
-                                        role="presentation"
-                                    />
-                                </h3>
-                            </AccordionItemHeading>
-                            <AccordionItemPanel>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>name</th>
-                                            <th>type</th>
-                                            <th>default</th>
-                                            <th>description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>expanded</td>
-                                            <td>Boolean</td>
-                                            <td>false</td>
-                                            <td>
-                                                Expands this item on first
-                                                render
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>children</td>
-                                            <td>Function</td>
-                                            <td>null</td>
-                                            <td>
-                                                Takes expanded state as argument
-                                                for conditional rendering
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </AccordionItemPanel>
-                        </AccordionItem>
-                    </Accordion>
-                </AccordionItemPanel>
-            </AccordionItem>
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <h3 className=" u-position-relative u-margin-bottom-s">
-                        Development
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                    <div>How to install the project</div>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <p>
-                        Clone the project on your computer, and install Node.
-                        This project also uses nvm.
-                    </p>
-                    <p>
-                        nvm install
-                        <br />
-                        # Then, install all project dependencies.
-                        <br />
-                        npm install
-                        <br />
-                        # Set up a `.env` file with the appropriate secrets.
-                        <br />
-                        touch .env
-                    </p>
-                </AccordionItemPanel>
-            </AccordionItem>
+        <p>
+            If you set <strong>allowZeroExpanded</strong> to{' '}
+            <strong>true</strong> then a solitary expanded item may be collapsed
+            again.
+        </p>
+
+        <Accordion allowZeroExpanded={true}>
+            {placeholders.map((placeholder: Placeholder) => (
+                <AccordionItem key={placeholder.heading}>
+                    <AccordionItemHeading>
+                        <Arrow />
+                        {placeholder.heading}
+                    </AccordionItemHeading>
+                    <AccordionItemPanel>{placeholder.panel}</AccordionItemPanel>
+                </AccordionItem>
+            ))}
         </Accordion>
 
         <h2 className="u-margin-top">Pre expanded children</h2>
 
-        <Accordion>
-            <AccordionItem expanded={true}>
-                <AccordionItemHeading>
-                    <h3 className="u-position-relative">
-                        Working on the project
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <p>
-                        Everything mentioned in the installation process should
-                        already be done.
-                    </p>
-                    <p>
-                        # Make sure you use the right node version.
-                        <br />
-                        nvm use
-                        <br />
-                        # Start the the development tools in watch mode.
-                        <br />
-                        yarn start
-                        <br />
-                        # Runs linting.
-                        <br />
-                        yarn lint
-                        <br />
-                        # Runs tests.
-                        <br />
-                        yarn test
-                        <br />
-                        # View other available commands with:
-                        <br />
-                        yarn
-                    </p>
-                </AccordionItemPanel>
-            </AccordionItem>
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <h3 className=" u-position-relative u-margin-bottom-s">
-                        Run the demo
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                    <div>To have an easy play around</div>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <p>
-                        Everything mentioned in the installation process should
-                        already be done.
-                    </p>
-                    <p>
-                        # Make sure you use the right node version.
-                        <br />
-                        nvm use
-                        <br />
-                        # Start the server and the development tools.
-                        <br />
-                        yarn start-demo
-                    </p>
-                </AccordionItemPanel>
-            </AccordionItem>
-        </Accordion>
-
-        <h2 className="u-margin-top">With permanent blocks</h2>
-
-        <Accordion>
-            <AccordionItem expanded={false}>
-                <AccordionItemHeading>
-                    <h3 className="u-position-relative">
-                        Working on the project
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <p>
-                        Everything mentioned in the installation process should
-                        already be done.
-                    </p>
-                    <p>
-                        # Make sure you use the right node version.
-                        <br />
-                        nvm use
-                        <br />
-                        # Start the the development tools in watch mode.
-                        <br />
-                        yarn start
-                        <br />
-                        # Runs linting.
-                        <br />
-                        yarn lint
-                        <br />
-                        # Runs tests.
-                        <br />
-                        yarn test
-                        <br />
-                        # View other available commands with:
-                        <br />
-                        yarn
-                    </p>
-                </AccordionItemPanel>
-                <div className="block">
-                    Please feel free to contribute to this repository
-                </div>
-            </AccordionItem>
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <h3 className=" u-position-relative u-margin-bottom-s">
-                        Run the demo
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                    <div>To have an easy play around</div>
-                </AccordionItemHeading>
-                <div className="block">
-                    This block fits in between the title and the body.
-                </div>
-                <AccordionItemPanel>
-                    <p>
-                        Everything mentioned in the installation process should
-                        already be done.
-                    </p>
-                    <p>
-                        # Make sure you use the right node version.
-                        <br />
-                        nvm use
-                        <br />
-                        # Start the server and the development tools.
-                        <br />
-                        yarn start-demo
-                    </p>
-                </AccordionItemPanel>
-            </AccordionItem>
-        </Accordion>
+        <p>TODO</p>
 
         <h2 className="u-margin-top">Informative onChange</h2>
+
+        <p>
+            When you use the <strong>onChange</strong> prop, you can get
+            feedback about which items are expanded.
+        </p>
+
+        <p>
+            In this example, we are simply logging the uuids of the expanded
+            items to the console.
+        </p>
 
         <Accordion
             // tslint:disable-next-line react-this-binding-issue jsx-no-lambda
@@ -667,51 +150,27 @@ const Example = (): JSX.Element => (
                 console.log(itemUuids);
             }}
         >
-            <AccordionItem uuid="uniqueItem-1">
-                <AccordionItemHeading>
-                    <h3 className="u-position-relative">
-                        Unique Item #1
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <p>
-                        If you open/close this item you should see
-                        `uniqueItem-1` printed in the console.
-                    </p>
-                </AccordionItemPanel>
-            </AccordionItem>
-            <AccordionItem uuid="uniqueItem-2">
-                <AccordionItemHeading>
-                    <h3 className="u-position-relative">
-                        Unique Item #2
-                        <div className="accordion__arrow" role="presentation" />
-                    </h3>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <p>
-                        If you open/close this item you should see
-                        `uniqueItem-2` printed in the console.
-                    </p>
-                </AccordionItemPanel>
-            </AccordionItem>
+            {placeholders.map((placeholder: Placeholder) => (
+                <AccordionItem
+                    key={placeholder.heading}
+                    uuid={placeholder.heading}
+                >
+                    <AccordionItemHeading>
+                        <Arrow />
+                        {placeholder.heading}
+                    </AccordionItemHeading>
+                    <AccordionItemPanel>{placeholder.panel}</AccordionItemPanel>
+                </AccordionItem>
+            ))}
         </Accordion>
 
-        <h2 className="u-margin-top">Conditional display</h2>
+        <h2 className="u-margin-top" />
 
         <Accordion>
             <AccordionItem>
                 <AccordionItemHeading>
-                    <div>
-                        <h3 className="u-position-relative">
-                            Render something different when expanded
-                            <div
-                                className="accordion__arrow"
-                                role="presentation"
-                            />
-                        </h3>
-                        <AccordionItemState children={renderFn} />
-                    </div>
+                    <Arrow />
+                    Render something different when expanded
                 </AccordionItemHeading>
                 <AccordionItemPanel>
                     <p>
@@ -722,16 +181,8 @@ const Example = (): JSX.Element => (
             </AccordionItem>
             <AccordionItem>
                 <AccordionItemHeading>
-                    <div>
-                        <h3 className="u-position-relative">
-                            How to?
-                            <div
-                                className="accordion__arrow"
-                                role="presentation"
-                            />
-                        </h3>
-                        <AccordionItemState children={renderFn} />
-                    </div>
+                    <Arrow />
+                    How to?
                 </AccordionItemHeading>
                 <AccordionItemPanel>
                     <p>
@@ -748,4 +199,4 @@ const Example = (): JSX.Element => (
     </div>
 );
 
-ReactDOM.render(<Example />, document.getElementById('app-root'));
+ReactDOM.render(<App />, document.getElementById('app-root'));
