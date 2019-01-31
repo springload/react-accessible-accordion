@@ -64,8 +64,15 @@ const App = (): JSX.Element => (
         <h1>React Accessible Accordion</h1>
 
         <p>
-            React Component for creating an 'Accordion' that adheres to the WAI
-            ARIA spec for accessibility.
+            React Component for creating an 'Accordion' that adheres to the{' '}
+            <a
+                href="https://www.w3.org/TR/wai-aria-practices-1.1/#accordion"
+                target="_BLANK"
+                rel="noreferrer, nofollow"
+            >
+                WAI ARIA spec
+            </a>{' '}
+            for accessibility.
         </p>
 
         <h2 className="u-margin-top">Default behaviour</h2>
