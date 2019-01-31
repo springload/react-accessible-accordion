@@ -69,191 +69,81 @@ import 'react-accessible-accordion/dist/fancy-example.css';
 
 We recommend that you copy them into your own app and modify them to suit your needs, particularly if you're using your own `className`s.
 
-## API
+## Component API
 
 ### Accordion
 
-#### props:
+#### allowMultipleExpanded : `boolean` [*optional*, default: `false`]
 
-<table class="table table-bordered table-striped">
-    <thead>
-    <tr>
-        <th style="width: 100px;">name</th>
-        <th style="width: 50px;">type</th>
-        <th>default</th>
-        <th>description</th>
-    </tr>
-    </thead>
-    <tbody>
-      <tr>
-          <td>allowMultipleExpanded</td>
-          <td>Boolean</td>
-          <td>false</td>
-          <td>Don't close all the others when expanding an
-                                    AccordionItem</td>
-      </tr>
-      <tr>
-          <td>allowZeroExpanded</td>
-          <td>Boolean</td>
-          <td>false</td>
-          <td>Close an AccordionItem when it's the only
-                                    one expanded</td>
-      </tr>
-      <tr>
-          <td>onChange</td>
-          <td>Function(keys)</td>
-          <td>noop</td>
-          <td>Triggered on change (open/close items)</td>
-      </tr>
-      <tr>
-          <td>className</td>
-          <td>String</td>
-          <td>accordion</td>
-          <td>CSS class(es) applied to the component</td>
-      </tr>
-    </tbody>
-</table>
+Don't autocollapse items when expanding other items.
+
+#### allowZeroExpanded : `boolean` [*optional*, default: `false`]
+
+Allow the only remaining expanded item to be collapsed.
+
+#### className : `string` [*optional*, default: `'accordion'`]
+
+Class(es) to apply to element.
+
+#### onChange : `(uuid[]) => void` [*optional*]
+
+Callback which is invoked when items are expanded or collapsed. Gets passed `uuid`s of the currently expanded `AccordionItem`s.
+
+---
 
 ### AccordionItem
 
-#### props:
+#### className : `string` [*optional*, default: `accordion__item`]
 
-<table class="table table-bordered table-striped">
-    <thead>
-    <tr>
-        <th style="width: 100px;">name</th>
-        <th style="width: 50px;">type</th>
-        <th>default</th>
-        <th>description</th>
-    </tr>
-    </thead>
-    <tbody>
-      <tr>
-          <td>expanded</td>
-          <td>Boolean</td>
-          <td>false</td>
-          <td>Expands this item on first render</td>
-      </tr>
-      <tr>
-          <td>className</td>
-          <td>String</td>
-          <td>accordion__item</td>
-          <td>CSS class(es) applied to the component</td>
-      </tr>
-      <tr>
-          <td>expandedClassName</td>
-          <td>String</td>
-          <td>null</td>
-          <td>Class name for expanded panel state</td>
-      </tr>
-      <tr>
-          <td>uuid</td>
-          <td>String</td>
-          <td>null</td>
-          <td>Custom uuid to be passed to Accordion - onChange. Has to be unique.</td>
-      </tr>
-    </tbody>
-</table>
+Class(es) to apply to element.
+
+#### expandedClassName : `string` [*optional*, default: `accordion__item--expanded`]
+
+Class(es) to append when item is expanded.
+
+#### uuid : `string|number` [*optional*]
+
+Recommended for use with `onChange`. Will be auto-generated if not provided.
+
+---
 
 ### AccordionItemHeading
 
-#### props:
+#### className : `string` [*optional*, default: `'accordion-item__heading'`]
 
-<table class="table table-bordered table-striped">
-    <thead>
-    <tr>
-        <th style="width: 100px;">name</th>
-        <th style="width: 50px;">type</th>
-        <th>default</th>
-        <th>description</th>
-    </tr>
-    </thead>
-    <tbody>
-      <tr>
-          <td>className</td>
-          <td>String</td>
-          <td>accordion__heading</td>
-          <td>CSS class(es) applied to the component</td>
-      </tr>
-      <tr>
-          <td>expandedClassName</td>
-          <td>String</td>
-          <td>null</td>
-          <td>Class name for expanded panel state</td>
-      </tr>
-    </tbody>
-</table>
+Class(es) to apply to element.
+
+#### expandedClassName : `string` [*optional*, default: `'accordion-item__heading--expanded'`]
+
+Class(es) to append when item is expanded.
+
+---
 
 ### AccordionItemPanel
 
-#### props:
+#### className : `string` [*optional*, default: `'accordion__panel'`]
 
-<table class="table table-bordered table-striped">
-    <thead>
-    <tr>
-        <th style="width: 100px;">name</th>
-        <th style="width: 50px;">type</th>
-        <th>default</th>
-        <th>description</th>
-    </tr>
-    </thead>
-    <tbody>
-      <tr>
-          <td>className</td>
-          <td>String</td>
-          <td>accordion__panel</td>
-          <td>CSS class(es) applied to the component</td>
-      </tr>
-      <tr>
-          <td>expandedClassName</td>
-          <td>String</td>
-          <td>accordion__panel--expanded</td>
-          <td>Class name for expanded panel state</td>
-      </tr>
-    </tbody>
-</table>
+Class(es) to apply to element.
+
+#### expandedClassName : `string` [*optional*, default: `'accordion__panel'`]
+
+Class(es) to append when item is expanded.
+
+---
 
 ### AccordionItemState
 
-#### props:
+#### children : Function(expanded: boolean): JSX.Element [**required**]
 
-<table class="table table-bordered table-striped">
-    <thead>
-    <tr>
-        <th style="width: 100px;">name</th>
-        <th style="width: 50px;">type</th>
-        <th>default</th>
-        <th>description</th>
-    </tr>
-    </thead>
-    <tbody>
-      <tr>
-          <td>expanded</td>
-          <td>Boolean</td>
-          <td>false</td>
-          <td>Expands this item on first render</td>
-      </tr>
-      <tr>
-          <td>children</td>
-          <td>Function</td>
-          <td>null</td>
-          <td>Takes expanded state as argument for conditional rendering</td>
-      </tr>
-    </tbody>
-</table>
+---
 
-### resetNextUuid
+## Helpers
 
-<table class="table table-bordered table-striped">
-    <tbody>
-      <tr>
-          <td>Function(void)</td>
-      </tr>
-      <tr>
-          <td>Resets the internal counter for Accordion items' identifiers (including `id` attributes). For use in test suites and isomorphic frameworks.</td>
-      </tr>
-    </tbody>
-</table>
+### resetNextUuid : `(): void`
+
+Resets the internal counter for Accordion items' identifiers (including `id` attributes). For use in test suites and isomorphic frameworks.
+
+---
 
 ## Accessibility
 
