@@ -133,7 +133,7 @@ Class(es) to append when item is expanded.
 
 ### AccordionItemState
 
-#### children : Function(expanded: boolean): JSX.Element [**required**]
+#### children : `(expanded: boolean): JSX.Element` [**required**]
 
 ---
 
