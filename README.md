@@ -1,4 +1,9 @@
-[react-accessible-accordion](https://springload.github.io/react-accessible-accordion/) [![npm](https://img.shields.io/npm/v/react-accessible-accordion.svg?style=flat-square)](https://www.npmjs.com/package/react-accessible-accordion) [![Build Status](https://travis-ci.org/springload/react-accessible-accordion.svg?branch=master)](https://travis-ci.org/springload/react-accessible-accordion) [![Coverage Status](https://coveralls.io/repos/github/springload/react-accessible-accordion/badge.svg)](https://coveralls.io/github/springload/react-accessible-accordion) [![Dependency Status](https://david-dm.org/springload/react-accessible-accordion.svg?style=flat-square)](https://david-dm.org/springload/react-accessible-accordion) [![devDependency Status](https://david-dm.org/springload/react-accessible-accordion/dev-status.svg?style=flat-square)](https://david-dm.org/springload/react-accessible-accordion#info=devDependencies)
+[react-accessible-accordion](https://springload.github.io/react-accessible-accordion/)
+[![npm](https://img.shields.io/npm/v/react-accessible-accordion.svg?style=flat-square)](https://www.npmjs.com/package/react-accessible-accordion)
+[![Build Status](https://travis-ci.org/springload/react-accessible-accordion.svg?branch=master)](https://travis-ci.org/springload/react-accessible-accordion)
+[![Coverage Status](https://coveralls.io/repos/github/springload/react-accessible-accordion/badge.svg)](https://coveralls.io/github/springload/react-accessible-accordion)
+[![Dependency Status](https://david-dm.org/springload/react-accessible-accordion.svg?style=flat-square)](https://david-dm.org/springload/react-accessible-accordion)
+[![devDependency Status](https://david-dm.org/springload/react-accessible-accordion/dev-status.svg?style=flat-square)](https://david-dm.org/springload/react-accessible-accordion#info=devDependencies)
 [![Accessibility status](https://img.shields.io/badge/a11y-tested-brightgreen.svg)](http://wave.webaim.org/report#/https://springload.github.io/react-accessible-accordion/)
 =========
 
@@ -14,7 +19,8 @@ First, grab the package from npm:
 npm install --save react-accessible-accordion
 ```
 
-Then, import the editor and use it in your code. Here is a [basic example](https://springload.github.io/react-accessible-accordion/):
+Then, import the editor and use it in your code. Here is a
+[basic example](https://springload.github.io/react-accessible-accordion/):
 
 ```jsx
 import React from 'react';
@@ -66,7 +72,8 @@ export default function Example() {
 
 ### Styles
 
-We strongly encourage you to write your own styles for your accordions, but we've published these two starter stylesheets to help you get up and running:
+We strongly encourage you to write your own styles for your accordions, but
+we've published these two starter stylesheets to help you get up and running:
 
 ```js
 // 'Minimal' theme - hide/show the AccordionBody component:
@@ -76,7 +83,8 @@ import 'react-accessible-accordion/dist/minimal-example.css';
 import 'react-accessible-accordion/dist/fancy-example.css';
 ```
 
-We recommend that you copy them into your own app and modify them to suit your needs, particularly if you're using your own `className`s.
+We recommend that you copy them into your own app and modify them to suit your
+needs, particularly if you're using your own `className`s.
 
 ## Component API
 
@@ -96,7 +104,8 @@ Class(es) to apply to element.
 
 #### onChange : `(uuid[]) => void` [*optional*]
 
-Callback which is invoked when items are expanded or collapsed. Gets passed `uuid`s of the currently expanded `AccordionItem`s.
+Callback which is invoked when items are expanded or collapsed. Gets passed
+`uuid`s of the currently expanded `AccordionItem`s.
 
 ---
 
@@ -150,7 +159,8 @@ Class(es) to append when item is expanded.
 
 ### resetNextUuid : `(): void`
 
-Resets the internal counter for Accordion items' identifiers (including `id` attributes). For use in test suites and isomorphic frameworks.
+Resets the internal counter for Accordion items' identifiers (including `id`
+attributes). For use in test suites and isomorphic frameworks.
 
 ---
 
