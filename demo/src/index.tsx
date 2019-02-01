@@ -2,6 +2,7 @@
 import '@babel/polyfill';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import placeholders, { Placeholder } from './placeholders';
 
 import {
     Accordion,
@@ -20,39 +21,6 @@ import '../../src/css/fancy-example.css';
 const renderFn = (expanded: boolean): JSX.Element => {
     return expanded ? <>This item is expanded</> : <>This item is collapsed</>;
 };
-
-type Placeholder = {
-    heading: string;
-    panel: string;
-};
-
-const placeholders: Placeholder[] = [
-    {
-        heading: 'What harsh truths do you prefer to ignore?',
-        panel:
-            'In pariatur excepteur ut do aliquip qui mollit aliqua exercitation excepteur consequat reprehenderit nostrud laborum voluptate veniam non dolore dolore aliqua incididunt amet nisi minim cillum elit.',
-    },
-    {
-        heading: 'Is free will real or just an illusion?',
-        panel:
-            'Dolor esse proident nisi minim nisi aute nulla sed proident magna id eiusmod consectetur laborum aliqua minim excepteur sunt anim anim esse aliquip et ea enim proident veniam veniam quis adipisicing nulla amet id commodo.',
-    },
-    {
-        heading: 'Is there a meaning to life? If so, what is it?',
-        panel:
-            'Consectetur pariatur proident irure proident ea laboris ut do do quis consequat sed officia dolore consequat ut deserunt ea sit sit culpa.',
-    },
-    {
-        heading: 'Is the meaning of life the same for animals and humans?',
-        panel:
-            'Ex culpa eu veniam ea quis velit exercitation reprehenderit reprehenderit dolore pariatur incididunt occaecat ut irure ut sed dolor veniam sint incididunt esse duis duis dolore sunt aute incididunt amet quis.',
-    },
-    {
-        heading: 'Where is the line between art and not art?',
-        panel:
-            'Id aute tempor ad sunt et exercitation nulla duis dolore irure elit consectetur laborum reprehenderit veniam nostrud in duis ut duis ullamco dolore do adipisicing sed proident nostrud aute ut ea cupidatat exercitation sit elit.',
-    },
-];
 
 const Arrow = (): JSX.Element => (
     <span className="accordion__arrow" role="presentation" />
