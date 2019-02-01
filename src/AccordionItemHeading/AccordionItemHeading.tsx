@@ -33,31 +33,40 @@ export default class AccordionItemHeading extends React.Component<
         }
 
         if ([keycodes.HOME, keycodes.END].indexOf(keyCode) !== -1) {
-            const parentAccordion = getClosestElement(
-                evt.target,
-                '[data-accordion-component="Accordion"]',
-            );
-
-            const accordionItems = parentAccordion
-                ? parentAccordion.querySelectorAll(
-                      '[data-accordion-component="AccordionItemHeading"]',
-                  )
-                : null;
-
-            if (!accordionItems.length) {
-                return;
-            }
-
             evt.preventDefault();
 
-            if (keyCode === keycodes.HOME) {
-                // home
-                accordionItems[0].focus();
-            }
+            if (evt.target instanceof HTMLElement) {
+                const parentAccordion = getClosestElement(
+                    evt.target,
+                    '[data-accordion-component="Accordion"]',
+                );
 
-            if (keyCode === keycodes.END) {
-                // end
-                accordionItems[accordionItems.length - 1].focus();
+                if (!parentAccordion) {
+                    return;
+                }
+
+                const accordionItems = parentAccordion.querySelectorAll(
+                    '[data-accordion-component="AccordionItemHeading"]',
+                );
+
+                const firstItem = accordionItems[0];
+                const lastItem = accordionItems[accordionItems.length];
+
+                // HOME
+                if (
+                    keyCode === keycodes.HOME &&
+                    firstItem instanceof HTMLElement
+                ) {
+                    firstItem.focus();
+                }
+
+                // END
+                if (
+                    keyCode === keycodes.END &&
+                    lastItem instanceof HTMLElement
+                ) {
+                    lastItem.focus();
+                }
             }
         }
     };

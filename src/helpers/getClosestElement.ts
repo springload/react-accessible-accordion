@@ -1,6 +1,11 @@
-export function getClosestElement(el, selector) {
+export function getClosestElement(
+    el: HTMLElement | null,
+    selector: string,
+): HTMLElement | null {
     return (
         el &&
-        (el.matches(selector) ? el : getClosestElement(el.parentNode, selector))
+        (el.matches(selector)
+            ? el
+            : getClosestElement(el.parentElement, selector))
     );
 }
