@@ -147,7 +147,8 @@ const App = (): JSX.Element => (
 
         <p>
             In this example, we are simply logging the uuids of the expanded
-            items to the console.
+            items to the console. Have a click around then check your console to
+            see this in action.
         </p>
 
         <Accordion
