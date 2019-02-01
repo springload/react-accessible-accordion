@@ -1,6 +1,7 @@
 import { default as classnames } from 'classnames';
 import * as React from 'react';
 import { getClosestElement } from '../helpers/getClosestElement';
+import keycodes from '../helpers/keycodes';
 import { UUID } from '../ItemContainer/ItemContainer';
 
 type AccordionItemHeadingProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -12,17 +13,6 @@ type AccordionItemHeadingProps = React.HTMLAttributes<HTMLDivElement> & {
 };
 
 type AccordionItemHeadingState = {};
-
-const keys = {
-    DOWN: '40',
-    END: '35',
-    ENTER: '13',
-    HOME: '36',
-    LEFT: '37',
-    RIGHT: '39',
-    SPACE: '32',
-    UP: '38',
-};
 
 export default class AccordionItemHeading extends React.Component<
     AccordionItemHeadingProps,
@@ -37,12 +27,12 @@ export default class AccordionItemHeading extends React.Component<
     handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
         const keyCode = evt.which.toString();
 
-        if (keyCode === keys.ENTER || keyCode === keys.SPACE) {
+        if (keyCode === keycodes.ENTER || keyCode === keycodes.SPACE) {
             evt.preventDefault();
             this.handleClick();
         }
 
-        if ([keys.HOME, keys.END].indexOf(keyCode) !== -1) {
+        if ([keycodes.HOME, keycodes.END].indexOf(keyCode) !== -1) {
             const parentAccordion = getClosestElement(
                 evt.target,
                 '[data-accordion-component="Accordion"]',
@@ -60,12 +50,12 @@ export default class AccordionItemHeading extends React.Component<
 
             evt.preventDefault();
 
-            if (keyCode === keys.HOME) {
+            if (keyCode === keycodes.HOME) {
                 // home
                 accordionItems[0].focus();
             }
 
-            if (keyCode === keys.END) {
+            if (keyCode === keycodes.END) {
                 // end
                 accordionItems[accordionItems.length - 1].focus();
             }
