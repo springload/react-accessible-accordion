@@ -180,12 +180,12 @@ This project manages Accordions with several options available for allowing/not 
 
 **Supported browser / device versions:**
 
-| Browser       | Device/OS | Version | Notes |
-| ------------- | --------- | ------- | ----- |
-| Mobile Safari | iOS       | latest  |       |
-| Chrome        | Android   | latest  |       |
-| IE            | Windows   | 11      |       |
-| MS Edge       | Windows   | latest  |       |
-| Chrome        | Desktop   | latest  |       |
-| Firefox       | Desktop   | latest  |       |
-| Safari        | OSX       | latest  |       |
+| Browser       | Device/OS | Version |
+| ------------- | --------- | ------- |
+| Mobile Safari | iOS       | latest  |
+| Chrome        | Android   | latest  |
+| IE            | Windows   | 11      |
+| MS Edge       | Windows   | latest  |
+| Chrome        | Desktop   | latest  |
+| Firefox       | Desktop   | latest  |
+| Safari        | OSX       | latest  |
