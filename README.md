@@ -109,11 +109,11 @@ Recommended for use with `onChange`. Will be auto-generated if not provided.
 
 ### AccordionItemHeading
 
-#### className : `string` [*optional*, default: `'accordion-item__heading'`]
+#### className : `string` [*optional*, default: `'accordion__heading'`]
 
 Class(es) to apply to element.
 
-#### expandedClassName : `string` [*optional*, default: `'accordion-item__heading--expanded'`]
+#### expandedClassName : `string` [*optional*, default: `'accordion__heading--expanded'`]
 
 Class(es) to append when item is expanded.
 
