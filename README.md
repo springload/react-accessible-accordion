@@ -164,6 +164,69 @@ attributes). For use in test suites and isomorphic frameworks.
 
 ---
 
+## Accessibility Best-Practice
+
+Authoring an 'accordion' component to the WAI ARIA spec can be complex, but
+React Accessible Accordion does most of the heavy lifting for you, including:
+
+-   Applying appropriate aria attributes (`aria-expanded`, `aria-controls`,
+    `aria-disabled`, `aria-hidden` and `aria-labelledby`).
+-   Applying appropriate `role` attributes (`button`, `heading`, `region`).
+-   Applying appropriate `tabindex` attributes.
+-   Applying keyboard interactivity ('space', 'end', 'tab', 'up', 'down', 'home'
+    and 'end' keys).
+
+However, there's still a couple of things you need to keep in mind to remain
+spec-compliant:
+
+-   Only ever use
+    [phrasing content](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#Phrasing_content)
+    inside of your `AccordionItemHeading` component. If in doubt, use text only.
+-   Always provide an `aria-level` prop to your `AccordionItemHeading`
+    component, _especially_ if you are nesting accordions. This attribute is a
+    signal assistive technologies (eg. screenreaders) use to determine which
+    heading level (ie. `h1`-`h6`) to treat your heading as.
+
+If you have any questions about your implementation, then please don't be afraid
+to get in touch via our
+[issues](https://github.com/springload/react-accessible-accordion/issues).
+
+## FAQs
+
+### Which design patterns does this component aim to solve?
+
+Those described by the WAI ARIA spec's description of an 'accordion':
+
+> An accordion is a vertically stacked set of interactive headings that each
+> contain a title, content snippet, or thumbnail representing a section of
+> content. The headings function as controls that enable users to reveal or hide
+> their associated sections of content. Accordions are commonly used to reduce
+> the need to scroll when presenting multiple sections of content on a single
+> page.
+
+### Which design patterns does this component NOT aim to solve?
+
+Components which are "accordion-like" but do not match the WAI ARIA spec's
+description, as written above. By "accordion-like", we mean components which
+have collapsible items but require bespoke interactive mechanisms in order to
+expand, collapse and 'disable' them. This includes (but is not limited to)
+multi-step forms, like those seen in many cart/checkout flows, which we believe
+require (other) complex markup in order to be considered 'accessible'.
+
+If you believe that you have a valid use-case for 'disabled' items, or items
+which require manual 'expanded' state-management, then please
+[let us know](https://github.com/springload/react-accessible-accordion/issues/new) -
+we're always open for critical (but polite) feedback. Otherwise, we don't plan
+on implementing this functionality in the near future.
+
+### How do I disable an item?
+
+See "Which design patterns does this component NOT aim to solve?".
+
+### How do I manually control the expanded state of an item?
+
+See "Which design patterns does this component NOT aim to solve?".
+
 ## Browser Support
 
 **Supported browser / device versions:**
