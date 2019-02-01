@@ -168,8 +168,8 @@ attributes). For use in test suites and isomorphic frameworks.
 
 Authoring an 'accordion' component to the
 [WAI ARIA spec](https://www.w3.org/TR/wai-aria-practices-1.1/#accordion) can be
-complex, but React Accessible Accordion does most of the heavy lifting for you,
-including:
+complex, but `React Accessible Accordion` does most of the heavy lifting for
+you, including:
 
 -   Applying appropriate aria attributes (`aria-expanded`, `aria-controls`,
     `aria-disabled`, `aria-hidden` and `aria-labelledby`).
