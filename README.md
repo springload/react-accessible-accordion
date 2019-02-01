@@ -176,7 +176,7 @@ This project manages Accordions with several options available for allowing/not 
 
 > Use this with with props `allowZeroExpanded` set to `true` on `Accordion`.
 
-# Browser support
+## Browser Support
 
 **Supported browser / device versions:**
 
