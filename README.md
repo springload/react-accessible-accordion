@@ -154,28 +154,6 @@ Resets the internal counter for Accordion items' identifiers (including `id` att
 
 ---
 
-## Accessibility
-
-### What this project is doing accessibility-wise?
-
-This project manages Accordions with several options available for allowing/not allowing multiple items to be open at once, and allowing/not allowing all items to be closed.
-
-#### Single item open
-
-> Use this with with props `allowMultipleExpanded` set to `false` on `Accordion`.
-
-#### Multiple items open
-
-> Use this with with props `allowMultipleExpanded` set to `true` on `Accordion`.
-
-#### One item must remain open
-
-> Use this with with props `allowZeroExpanded` set to `false` on `Accordion`.
-
-#### All items can be closed
-
-> Use this with with props `allowZeroExpanded` set to `true` on `Accordion`.
-
 ## Browser Support
 
 **Supported browser / device versions:**
