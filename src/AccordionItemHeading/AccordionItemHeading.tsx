@@ -1,6 +1,11 @@
 import { default as classnames } from 'classnames';
 import * as React from 'react';
-import { getClosestElement } from '../helpers/getClosestElement';
+import {
+    focusFirstSiblingOf,
+    focusLastSiblingOf,
+    focusNextSiblingOf,
+    focusPreviousSiblingOf,
+} from '../helpers/focus';
 import keycodes from '../helpers/keycodes';
 import { UUID } from '../ItemContainer/ItemContainer';
 
@@ -35,51 +40,25 @@ export default class AccordionItemHeading extends React.Component<
         if (evt.target instanceof HTMLElement) {
             switch (keyCode) {
                 case keycodes.HOME: {
-                    AccordionItemHeading.focusFirstSiblingOf(evt.target);
+                    focusFirstSiblingOf(evt.target);
                     break;
                 }
                 case keycodes.END: {
-                    AccordionItemHeading.focusLastSiblingOf(evt.target);
+                    focusLastSiblingOf(evt.target);
                     break;
                 }
                 case keycodes.LEFT:
                 case keycodes.UP: {
-                    AccordionItemHeading.focusPreviousSiblingOf(evt.target);
+                    focusPreviousSiblingOf(evt.target);
                     break;
                 }
                 case keycodes.RIGHT:
                 case keycodes.DOWN: {
-                    AccordionItemHeading.focusNextSiblingOf(evt.target);
+                    focusNextSiblingOf(evt.target);
                     break;
                 }
-            }
-        }
-
-        if ([keycodes.HOME, keycodes.END].indexOf(keyCode) !== -1) {
-            evt.preventDefault();
-
-            if (evt.target instanceof HTMLElement) {
-                const accordionItems = AccordionItemHeading.getSiblingItems(
-                    evt.target,
-                );
-
-                const firstItem = accordionItems[0];
-                const lastItem = accordionItems[accordionItems.length];
-
-                // HOME
-                if (
-                    keyCode === keycodes.HOME &&
-                    firstItem instanceof HTMLElement
-                ) {
-                    firstItem.focus();
-                }
-
-                // END
-                if (
-                    keyCode === keycodes.END &&
-                    lastItem instanceof HTMLElement
-                ) {
-                    lastItem.focus();
+                default: {
+                    //
                 }
             }
         }
