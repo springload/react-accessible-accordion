@@ -40,20 +40,24 @@ export default class AccordionItemHeading extends React.Component<
         if (evt.target instanceof HTMLElement) {
             switch (keyCode) {
                 case keycodes.HOME: {
+                    evt.preventDefault();
                     focusFirstSiblingOf(evt.target);
                     break;
                 }
                 case keycodes.END: {
+                    evt.preventDefault();
                     focusLastSiblingOf(evt.target);
                     break;
                 }
                 case keycodes.LEFT:
                 case keycodes.UP: {
+                    evt.preventDefault();
                     focusPreviousSiblingOf(evt.target);
                     break;
                 }
                 case keycodes.RIGHT:
                 case keycodes.DOWN: {
+                    evt.preventDefault();
                     focusNextSiblingOf(evt.target);
                     break;
                 }
