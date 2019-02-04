@@ -32,21 +32,35 @@ export default class AccordionItemHeading extends React.Component<
             this.handleClick();
         }
 
+        if (evt.target instanceof HTMLElement) {
+            switch (keyCode) {
+                case keycodes.HOME: {
+                    AccordionItemHeading.focusFirstSiblingOf(evt.target);
+                    break;
+                }
+                case keycodes.END: {
+                    AccordionItemHeading.focusLastSiblingOf(evt.target);
+                    break;
+                }
+                case keycodes.LEFT:
+                case keycodes.UP: {
+                    AccordionItemHeading.focusPreviousSiblingOf(evt.target);
+                    break;
+                }
+                case keycodes.RIGHT:
+                case keycodes.DOWN: {
+                    AccordionItemHeading.focusNextSiblingOf(evt.target);
+                    break;
+                }
+            }
+        }
+
         if ([keycodes.HOME, keycodes.END].indexOf(keyCode) !== -1) {
             evt.preventDefault();
 
             if (evt.target instanceof HTMLElement) {
-                const parentAccordion = getClosestElement(
+                const accordionItems = AccordionItemHeading.getSiblingItems(
                     evt.target,
-                    '[data-accordion-component="Accordion"]',
-                );
-
-                if (!parentAccordion) {
-                    return;
-                }
-
-                const accordionItems = parentAccordion.querySelectorAll(
-                    '[data-accordion-component="AccordionItemHeading"]',
                 );
 
                 const firstItem = accordionItems[0];
