@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import {
     focusFirstSiblingOf,
+    focusLastSiblingOf,
     getClosestAccordion,
     getSiblingHeadings,
 } from './focus';
@@ -126,12 +127,12 @@ describe('focus', () => {
         it('focuses the first heading in document flow', () => {
             const tree = createTree(`
                 <div data-accordion-component="Accordion">
-                    <div data-accordion-component="AccordionItemHeading" tabindex="0">Heading</div>
-                    <div data-accordion-component="AccordionItemHeading" tabindex="0">Heading</div>
+                    <div data-accordion-component="AccordionItemHeading" tabindex="0" id="1"></div>
+                    <div data-accordion-component="AccordionItemHeading" tabindex="0" id="2"></div>
                 </div>
             `);
 
-            const [firstHeading, secondHeading] = Array.from(
+            const [firstHeading, secondHeading]: HTMLElement[] = Array.from(
                 tree.querySelectorAll(
                     '[data-accordion-component="AccordionItemHeading"]',
                 ),
@@ -140,11 +141,39 @@ describe('focus', () => {
             // Predicate
             expect(firstHeading).toBeInstanceOf(HTMLElement);
             expect(secondHeading).toBeInstanceOf(HTMLElement);
-            expect(document.activeElement).not.toEqual(firstHeading);
+            secondHeading.focus();
+            expect(document.activeElement).toEqual(secondHeading);
 
-            // Assertions
-            focusFirstSiblingOf(secondHeading as HTMLElement);
+            // Matter
+            focusFirstSiblingOf(secondHeading);
             expect(document.activeElement).toEqual(firstHeading); // first heading
+        });
+    });
+
+    describe('focusLastSiblingOf', () => {
+        it('focuses the last heading in document flow', () => {
+            const tree = createTree(`
+                <div data-accordion-component="Accordion">
+                    <div data-accordion-component="AccordionItemHeading" tabindex="0" id="1"></div>
+                    <div data-accordion-component="AccordionItemHeading" tabindex="0" id="2"></div>
+                </div>
+            `);
+
+            const [firstHeading, secondHeading]: HTMLElement[] = Array.from(
+                tree.querySelectorAll(
+                    '[data-accordion-component="AccordionItemHeading"]',
+                ),
+            );
+
+            // Predicate
+            expect(firstHeading).toBeInstanceOf(HTMLElement);
+            expect(secondHeading).toBeInstanceOf(HTMLElement);
+            firstHeading.focus();
+            expect(document.activeElement).toEqual(firstHeading);
+
+            // Matter
+            focusLastSiblingOf(firstHeading);
+            expect(document.activeElement).toEqual(secondHeading); // first heading
         });
     });
 });
