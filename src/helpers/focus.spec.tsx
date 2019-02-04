@@ -26,12 +26,15 @@ describe('focus', () => {
                 </div>
             `);
 
-            const child = tree.querySelector('#child');
-            const parent = tree.querySelector('#parent');
+            const child: HTMLElement = tree.querySelector('#child');
+            const parent: HTMLElement = tree.querySelector('#parent');
 
-            expect(child instanceof HTMLElement).toEqual(true);
-            expect(parent instanceof HTMLElement).toEqual(true);
-            expect(getClosestAccordion(child as HTMLElement)).toEqual(parent);
+            // Predicate
+            expect(child).toBeInstanceOf(HTMLElement);
+            expect(parent).toBeInstanceOf(HTMLElement);
+
+            // Matter
+            expect(getClosestAccordion(child)).toEqual(parent);
         });
 
         it('only gets the nearest ancestral accordion element when there are more than one', () => {
@@ -43,12 +46,15 @@ describe('focus', () => {
                 </div>
             `);
 
-            const child = tree.querySelector('#child');
-            const parent = tree.querySelector('#parent');
+            const child: HTMLElement = tree.querySelector('#child');
+            const parent: HTMLElement = tree.querySelector('#parent');
 
-            expect(child instanceof HTMLElement).toEqual(true);
-            expect(parent instanceof HTMLElement).toEqual(true);
-            expect(getClosestAccordion(child as HTMLElement)).toEqual(parent);
+            // Predicate
+            expect(child).toBeInstanceOf(HTMLElement);
+            expect(parent).toBeInstanceOf(HTMLElement);
+
+            // Matter
+            expect(getClosestAccordion(child)).toEqual(parent);
         });
 
         it('recurses through intermediary elements', () => {
@@ -62,12 +68,12 @@ describe('focus', () => {
                 </div>
             `);
 
-            const child = tree.querySelector('#child');
-            const parent = tree.querySelector('#parent');
+            const child: HTMLElement = tree.querySelector('#child');
+            const parent: HTMLElement = tree.querySelector('#parent');
 
-            expect(child instanceof HTMLElement).toEqual(true);
-            expect(parent instanceof HTMLElement).toEqual(true);
-            expect(getClosestAccordion(child as HTMLElement)).toEqual(parent);
+            expect(child).toBeInstanceOf(HTMLElement);
+            expect(parent).toBeInstanceOf(HTMLElement);
+            expect(getClosestAccordion(child)).toEqual(parent);
         });
     });
 
@@ -81,12 +87,15 @@ describe('focus', () => {
                 </div>
             `);
 
-            const heading = tree.querySelector(
+            const heading: HTMLElement = tree.querySelector(
                 '[data-accordion-component="AccordionItemHeading"]',
             );
 
+            // Predicate
             expect(heading).toBeInstanceOf(HTMLElement);
-            expect(getSiblingHeadings(heading as HTMLElement)).toHaveLength(3);
+
+            // Matter
+            expect(getSiblingHeadings(heading)).toHaveLength(3);
         });
 
         it('returns nested siblings', () => {
@@ -100,12 +109,15 @@ describe('focus', () => {
                 </div>
             `);
 
-            const heading = tree.querySelector(
+            const heading: HTMLElement = tree.querySelector(
                 '[data-accordion-component="AccordionItemHeading"]',
             );
 
+            // Predicate
             expect(heading).toBeInstanceOf(HTMLElement);
-            expect(getSiblingHeadings(heading as HTMLElement)).toHaveLength(3);
+
+            // Matter
+            expect(getSiblingHeadings(heading)).toHaveLength(3);
         });
 
         it('doesn‘t return headings "above" the accordion', () => {
@@ -118,10 +130,13 @@ describe('focus', () => {
                 </div>
             `);
 
-            const heading = tree.querySelector('#first');
+            const heading: HTMLElement = tree.querySelector('#first');
 
+            // Predicate
             expect(heading).toBeInstanceOf(HTMLElement);
-            expect(getSiblingHeadings(heading as HTMLElement)).toHaveLength(2);
+
+            // Matter
+            expect(getSiblingHeadings(heading)).toHaveLength(2);
         });
     });
 
