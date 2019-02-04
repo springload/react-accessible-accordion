@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-import { getClosestAccordion, getSiblingHeadings } from './focus';
+import {
+    focusFirstSiblingOf,
+    getClosestAccordion,
+    getSiblingHeadings,
+} from './focus';
 
 describe('focus', () => {
     function createTree(innerHTML: string): DocumentFragment {
@@ -115,6 +119,32 @@ describe('focus', () => {
 
             expect(heading).toBeInstanceOf(HTMLElement);
             expect(getSiblingHeadings(heading as HTMLElement)).toHaveLength(2);
+        });
+    });
+
+    describe('focusFirstSiblingOf', () => {
+        it('focuses the first heading in document flow', () => {
+            const tree = createTree(`
+                <div data-accordion-component="Accordion">
+                    <div data-accordion-component="AccordionItemHeading" tabindex="0">Heading</div>
+                    <div data-accordion-component="AccordionItemHeading" tabindex="0">Heading</div>
+                </div>
+            `);
+
+            const [firstHeading, secondHeading] = Array.from(
+                tree.querySelectorAll(
+                    '[data-accordion-component="AccordionItemHeading"]',
+                ),
+            );
+
+            // Predicate
+            expect(firstHeading).toBeInstanceOf(HTMLElement);
+            expect(secondHeading).toBeInstanceOf(HTMLElement);
+            expect(document.activeElement).not.toEqual(firstHeading);
+
+            // Assertions
+            focusFirstSiblingOf(secondHeading as HTMLElement);
+            expect(document.activeElement).toEqual(firstHeading); // first heading
         });
     });
 });
