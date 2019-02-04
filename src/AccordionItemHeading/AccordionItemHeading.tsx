@@ -1,5 +1,12 @@
 import { default as classnames } from 'classnames';
 import * as React from 'react';
+import {
+    focusFirstSiblingOf,
+    focusLastSiblingOf,
+    focusNextSiblingOf,
+    focusPreviousSiblingOf,
+} from '../helpers/focus';
+import keycodes from '../helpers/keycodes';
 import { UUID } from '../ItemContainer/ItemContainer';
 
 type AccordionItemHeadingProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -23,9 +30,41 @@ export default class AccordionItemHeading extends React.Component<
     };
 
     handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
-        if (evt.charCode === 13 || evt.charCode === 32) {
+        const keyCode = evt.which.toString();
+
+        if (keyCode === keycodes.ENTER || keyCode === keycodes.SPACE) {
             evt.preventDefault();
             this.handleClick();
+        }
+
+        if (evt.target instanceof HTMLElement) {
+            switch (keyCode) {
+                case keycodes.HOME: {
+                    evt.preventDefault();
+                    focusFirstSiblingOf(evt.target);
+                    break;
+                }
+                case keycodes.END: {
+                    evt.preventDefault();
+                    focusLastSiblingOf(evt.target);
+                    break;
+                }
+                case keycodes.LEFT:
+                case keycodes.UP: {
+                    evt.preventDefault();
+                    focusPreviousSiblingOf(evt.target);
+                    break;
+                }
+                case keycodes.RIGHT:
+                case keycodes.DOWN: {
+                    evt.preventDefault();
+                    focusNextSiblingOf(evt.target);
+                    break;
+                }
+                default: {
+                    //
+                }
+            }
         }
     };
 
@@ -57,7 +96,8 @@ export default class AccordionItemHeading extends React.Component<
                 onClick={this.handleClick}
                 role="button"
                 tabIndex={0}
-                onKeyPress={this.handleKeyPress}
+                data-accordion-component="AccordionItemHeading"
+                onKeyDown={this.handleKeyPress}
                 {...rest}
             />
         );

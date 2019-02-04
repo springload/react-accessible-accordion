@@ -5,7 +5,9 @@ module.exports = api => {
         [
             '@babel/preset-env',
             process.env.NODE_ENV === 'test'
-                ? {}
+                ? {
+                      useBuiltIns: 'usage', // for regeneratorRuntime
+                  }
                 : {
                       modules: false,
                   },

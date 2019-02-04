@@ -101,7 +101,7 @@ describe('AccordionItemHeading', () => {
         );
 
         expect(isExpanded(wrapper, DEFAULT_ITEM.uuid)).toBeFalsy();
-        wrapper.find('div').simulate('keypress', { charCode: 13 });
+        wrapper.find('div').simulate('keyDown', { which: 13 });
         expect(isExpanded(wrapper, DEFAULT_ITEM.uuid)).toBeTruthy();
     });
 
@@ -111,7 +111,7 @@ describe('AccordionItemHeading', () => {
         );
 
         expect(isExpanded(wrapper, DEFAULT_ITEM.uuid)).toBeFalsy();
-        wrapper.find('div').simulate('keypress', { charCode: 32 });
+        wrapper.find('div').simulate('keyDown', { which: 32 });
         expect(isExpanded(wrapper, DEFAULT_ITEM.uuid)).toBeTruthy();
     });
 
@@ -121,7 +121,7 @@ describe('AccordionItemHeading', () => {
         );
 
         expect(isExpanded(wrapper, DEFAULT_ITEM.uuid)).toBeFalsy();
-        wrapper.find('div').simulate('keypress', { charCode: 35 });
+        wrapper.find('div').simulate('keyDown', { which: 8 });
         expect(isExpanded(wrapper, DEFAULT_ITEM.uuid)).toBeFalsy();
     });
 
