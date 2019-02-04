@@ -41,7 +41,7 @@ export function focusLastSiblingOf(item: HTMLElement): void {
 export function focusNextSiblingOf(item: HTMLElement): void {
     const siblings = getSiblingItems(item) || [];
     const currentIndex = siblings.indexOf(item);
-    if (currentIndex != -1) {
+    if (currentIndex !== -1) {
         const next = siblings[currentIndex + 1];
         if (next) {
             next.focus();
@@ -52,7 +52,7 @@ export function focusNextSiblingOf(item: HTMLElement): void {
 export function focusPreviousSiblingOf(item: HTMLElement): void {
     const siblings = getSiblingItems(item) || [];
     const currentIndex = siblings.indexOf(item);
-    if (currentIndex != -1) {
+    if (currentIndex !== -1) {
         const previous = siblings[currentIndex - 1];
         if (previous) {
             previous.focus();
