@@ -9,7 +9,7 @@ export function getClosestAccordion(
     );
 }
 
-export function getSiblingItems(item: HTMLElement): HTMLElement[] | null {
+export function getSiblingHeadings(item: HTMLElement): HTMLElement[] | null {
     const parentAccordion = getClosestAccordion(item);
 
     return (
@@ -23,7 +23,7 @@ export function getSiblingItems(item: HTMLElement): HTMLElement[] | null {
 }
 
 export function focusFirstSiblingOf(item: HTMLElement): void {
-    const siblings = getSiblingItems(item) || [];
+    const siblings = getSiblingHeadings(item) || [];
     const first = siblings[0];
     if (first) {
         first.focus();
@@ -31,7 +31,7 @@ export function focusFirstSiblingOf(item: HTMLElement): void {
 }
 
 export function focusLastSiblingOf(item: HTMLElement): void {
-    const siblings = getSiblingItems(item) || [];
+    const siblings = getSiblingHeadings(item) || [];
     const last = siblings[siblings.length - 1];
     if (last) {
         last.focus();
@@ -39,7 +39,7 @@ export function focusLastSiblingOf(item: HTMLElement): void {
 }
 
 export function focusNextSiblingOf(item: HTMLElement): void {
-    const siblings = getSiblingItems(item) || [];
+    const siblings = getSiblingHeadings(item) || [];
     const currentIndex = siblings.indexOf(item);
     if (currentIndex !== -1) {
         const next = siblings[currentIndex + 1];
@@ -50,7 +50,7 @@ export function focusNextSiblingOf(item: HTMLElement): void {
 }
 
 export function focusPreviousSiblingOf(item: HTMLElement): void {
-    const siblings = getSiblingItems(item) || [];
+    const siblings = getSiblingHeadings(item) || [];
     const currentIndex = siblings.indexOf(item);
     if (currentIndex !== -1) {
         const previous = siblings[currentIndex - 1];
