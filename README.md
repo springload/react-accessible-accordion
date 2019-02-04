@@ -1,4 +1,9 @@
-[react-accessible-accordion](https://springload.github.io/react-accessible-accordion/) [![npm](https://img.shields.io/npm/v/react-accessible-accordion.svg?style=flat-square)](https://www.npmjs.com/package/react-accessible-accordion) [![Build Status](https://travis-ci.org/springload/react-accessible-accordion.svg?branch=master)](https://travis-ci.org/springload/react-accessible-accordion) [![Coverage Status](https://coveralls.io/repos/github/springload/react-accessible-accordion/badge.svg)](https://coveralls.io/github/springload/react-accessible-accordion) [![Dependency Status](https://david-dm.org/springload/react-accessible-accordion.svg?style=flat-square)](https://david-dm.org/springload/react-accessible-accordion) [![devDependency Status](https://david-dm.org/springload/react-accessible-accordion/dev-status.svg?style=flat-square)](https://david-dm.org/springload/react-accessible-accordion#info=devDependencies)
+[react-accessible-accordion](https://springload.github.io/react-accessible-accordion/)
+[![npm](https://img.shields.io/npm/v/react-accessible-accordion.svg?style=flat-square)](https://www.npmjs.com/package/react-accessible-accordion)
+[![Build Status](https://travis-ci.org/springload/react-accessible-accordion.svg?branch=master)](https://travis-ci.org/springload/react-accessible-accordion)
+[![Coverage Status](https://coveralls.io/repos/github/springload/react-accessible-accordion/badge.svg)](https://coveralls.io/github/springload/react-accessible-accordion)
+[![Dependency Status](https://david-dm.org/springload/react-accessible-accordion.svg?style=flat-square)](https://david-dm.org/springload/react-accessible-accordion)
+[![devDependency Status](https://david-dm.org/springload/react-accessible-accordion/dev-status.svg?style=flat-square)](https://david-dm.org/springload/react-accessible-accordion#info=devDependencies)
 [![Accessibility status](https://img.shields.io/badge/a11y-tested-brightgreen.svg)](http://wave.webaim.org/report#/https://springload.github.io/react-accessible-accordion/)
 =========
 
@@ -14,7 +19,8 @@ First, grab the package from npm:
 npm install --save react-accessible-accordion
 ```
 
-Then, import the editor and use it in your code. Here is a [basic example](https://springload.github.io/react-accessible-accordion/):
+Then, import the editor and use it in your code. Here is a
+[basic example](https://springload.github.io/react-accessible-accordion/):
 
 ```jsx
 import React from 'react';
@@ -66,7 +72,8 @@ export default function Example() {
 
 ### Styles
 
-We strongly encourage you to write your own styles for your accordions, but we've published these two starter stylesheets to help you get up and running:
+We strongly encourage you to write your own styles for your accordions, but
+we've published these two starter stylesheets to help you get up and running:
 
 ```js
 // 'Minimal' theme - hide/show the AccordionBody component:
@@ -76,7 +83,8 @@ import 'react-accessible-accordion/dist/minimal-example.css';
 import 'react-accessible-accordion/dist/fancy-example.css';
 ```
 
-We recommend that you copy them into your own app and modify them to suit your needs, particularly if you're using your own `className`s.
+We recommend that you copy them into your own app and modify them to suit your
+needs, particularly if you're using your own `className`s.
 
 ## Component API
 
@@ -96,7 +104,8 @@ Class(es) to apply to element.
 
 #### onChange : `(uuid[]) => void` [*optional*]
 
-Callback which is invoked when items are expanded or collapsed. Gets passed `uuid`s of the currently expanded `AccordionItem`s.
+Callback which is invoked when items are expanded or collapsed. Gets passed
+`uuid`s of the currently expanded `AccordionItem`s.
 
 ---
 
@@ -150,42 +159,86 @@ Class(es) to append when item is expanded.
 
 ### resetNextUuid : `(): void`
 
-Resets the internal counter for Accordion items' identifiers (including `id` attributes). For use in test suites and isomorphic frameworks.
+Resets the internal counter for Accordion items' identifiers (including `id`
+attributes). For use in test suites and isomorphic frameworks.
 
 ---
 
-## Accessibility
+## Accessibility Best-Practice
 
-### What this project is doing accessibility-wise?
+Authoring an 'accordion' component to the
+[WAI ARIA spec](https://www.w3.org/TR/wai-aria-practices-1.1/#accordion) can be
+complex, but `React Accessible Accordion` does most of the heavy lifting for
+you, including:
 
-This project manages Accordions with several options available for allowing/not allowing multiple items to be open at once, and allowing/not allowing all items to be closed.
+-   Applying appropriate aria attributes (`aria-expanded`, `aria-controls`,
+    `aria-disabled`, `aria-hidden` and `aria-labelledby`).
+-   Applying appropriate `role` attributes (`button`, `heading`, `region`).
+-   Applying appropriate `tabindex` attributes.
+-   Applying keyboard interactivity ('space', 'end', 'tab', 'up', 'down', 'home'
+    and 'end' keys).
 
-#### Single item open
+However, there's still a couple of things you need to keep in mind to remain
+spec-compliant:
 
-> Use this with with props `allowMultipleExpanded` set to `false` on `Accordion`.
+-   Only ever use
+    [phrasing content](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#Phrasing_content)
+    inside of your `AccordionItemHeading` component. If in doubt, use text only.
+-   Always provide an `aria-level` prop to your `AccordionItemHeading`
+    component, _especially_ if you are nesting accordions. This attribute is a
+    signal assistive technologies (eg. screenreaders) use to determine which
+    heading level (ie. `h1`-`h6`) to treat your heading as.
 
-#### Multiple items open
+If you have any questions about your implementation, then please don't be afraid
+to get in touch via our
+[issues](https://github.com/springload/react-accessible-accordion/issues).
 
-> Use this with with props `allowMultipleExpanded` set to `true` on `Accordion`.
+## FAQs
 
-#### One item must remain open
+### Which design patterns does this component aim to solve?
 
-> Use this with with props `allowZeroExpanded` set to `false` on `Accordion`.
+Those described by the WAI ARIA spec's description of an 'accordion':
 
-#### All items can be closed
+> An accordion is a vertically stacked set of interactive headings that each
+> contain a title, content snippet, or thumbnail representing a section of
+> content. The headings function as controls that enable users to reveal or hide
+> their associated sections of content. Accordions are commonly used to reduce
+> the need to scroll when presenting multiple sections of content on a single
+> page.
 
-> Use this with with props `allowZeroExpanded` set to `true` on `Accordion`.
+### Which design patterns does this component NOT aim to solve?
 
-# Browser support
+Components which are "accordion-like" but do not match the WAI ARIA spec's
+description, as written above. By "accordion-like", we mean components which
+have collapsible items but require bespoke interactive mechanisms in order to
+expand, collapse and 'disable' them. This includes (but is not limited to)
+multi-step forms, like those seen in many cart/checkout flows, which we believe
+require (other) complex markup in order to be considered 'accessible'.
+
+If you believe that you have a valid use-case for 'disabled' items, or items
+which require manual 'expanded' state-management, then please
+[let us know](https://github.com/springload/react-accessible-accordion/issues/new) -
+we're always open for critical (but polite) feedback. Otherwise, we don't plan
+on implementing this functionality in the near future.
+
+### How do I disable an item?
+
+See "Which design patterns does this component NOT aim to solve?".
+
+### How do I manually control the expanded state of an item?
+
+See "Which design patterns does this component NOT aim to solve?".
+
+## Browser Support
 
 **Supported browser / device versions:**
 
-| Browser       | Device/OS | Version | Notes |
-| ------------- | --------- | ------- | ----- |
-| Mobile Safari | iOS       | latest  |       |
-| Chrome        | Android   | latest  |       |
-| IE            | Windows   | 11      |       |
-| MS Edge       | Windows   | latest  |       |
-| Chrome        | Desktop   | latest  |       |
-| Firefox       | Desktop   | latest  |       |
-| Safari        | OSX       | latest  |       |
+| Browser       | Device/OS | Version |
+| ------------- | --------- | ------- |
+| Mobile Safari | iOS       | latest  |
+| Chrome        | Android   | latest  |
+| IE            | Windows   | 11      |
+| MS Edge       | Windows   | latest  |
+| Chrome        | Desktop   | latest  |
+| Firefox       | Desktop   | latest  |
+| Safari        | OSX       | latest  |
