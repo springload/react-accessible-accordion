@@ -112,7 +112,7 @@ describe('WAI ARIA Spec', () => {
         });
 
         describe('Down Arrow (Optional)', () => {
-            xit('If focus is on an accordion header, moves focus to the next accordion header.', async () => {
+            it('If focus is on an accordion header, moves focus to the next accordion header.', async () => {
                 const [
                     firstHeadingHandle,
                     secondHeadingHandle,
@@ -132,7 +132,7 @@ describe('WAI ARIA Spec', () => {
         });
 
         describe('Up Arrow (Optional)', () => {
-            xit('If focus is on an accordion header, moves focus to the previous accordion header.', async () => {
+            it('If focus is on an accordion header, moves focus to the previous accordion header.', async () => {
                 const [
                     firstHeadingHandle,
                     secondHeadingHandle,
