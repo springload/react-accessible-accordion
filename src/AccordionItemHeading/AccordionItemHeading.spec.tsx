@@ -25,7 +25,7 @@ describe('AccordionItemHeading', () => {
 
     it('renders null outside the context of an ‘AccordionItem’', () => {
         const wrapper = mount(
-            <AccordionProvider items={[DEFAULT_ITEM]}>
+            <AccordionProvider initialItems={[DEFAULT_ITEM]}>
                 <AccordionItemHeading />
             </AccordionProvider>,
         );
@@ -34,11 +34,14 @@ describe('AccordionItemHeading', () => {
     });
 
     function mountItem(
-        node: React.ReactNode,
+        node: JSX.Element,
         item: Item = DEFAULT_ITEM,
     ): ReactWrapper {
         return mount(
-            <AccordionProvider allowMultipleExpanded={true} items={[item]}>
+            <AccordionProvider
+                allowMultipleExpanded={true}
+                initialItems={[item]}
+            >
                 <ItemProvider uuid={item.uuid}>{node}</ItemProvider>
             </AccordionProvider>,
         );
@@ -74,7 +77,7 @@ describe('AccordionItemHeading', () => {
         const expandedClassName = 'expandedClassName';
 
         const wrapper = mount(
-            <AccordionProvider items={[{ uuid: 0, expanded: true }]}>
+            <AccordionProvider initialItems={[{ uuid: 0, expanded: true }]}>
                 <ItemProvider uuid={0}>
                     <AccordionItemHeading
                         expandedClassName={expandedClassName}

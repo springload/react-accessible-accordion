@@ -14,60 +14,22 @@ export type ItemContainer = {
     uuid: UUID;
 };
 
-// Arbitrary, but ought to be unique to avoid context namespace clashes.
-export const CONTEXT_KEY = 'react-accessible-accordion@ItemContainer';
+const Context = React.createContext(null as ItemContainer | null);
 
-export class Provider extends React.Component<ProviderProps> {
-    static childContextTypes: { [CONTEXT_KEY](): null } = {
-        [CONTEXT_KEY]: propTypes.wildcard,
-    };
-
-    getChildContext(): { [CONTEXT_KEY]: ItemContainer } {
-        const { uuid } = this.props;
-        const context: ItemContainer = {
-            uuid,
-        };
-
-        return {
-            [CONTEXT_KEY]: context,
-        };
-    }
-
-    render(): React.ReactNode {
-        return this.props.children || null;
-    }
-}
+export const Provider = ({ uuid, children }: ProviderProps): JSX.Element => (
+    <Context.Provider value={{ uuid }}>{children || null}</Context.Provider>
+);
 
 type ConsumerProps = {
     children(container: ItemContainer): React.ReactNode;
 };
 
-type ConsumerState = {};
-
-type ConsumerContext = {
-    [CONTEXT_KEY](): null;
-};
-
-export class Consumer extends React.Component<
-    ConsumerProps,
-    ConsumerState,
-    ConsumerContext
-> {
-    static contextTypes: ConsumerContext = {
-        [CONTEXT_KEY]: propTypes.wildcard,
+export class Consumer extends React.Component<ConsumerProps> {
+    renderChildren = (container: ItemContainer): React.ReactNode => {
+        return container ? this.props.children(container) : null;
     };
 
-    context: {
-        [CONTEXT_KEY]: ItemContainer;
-    };
-
-    render(): React.ReactNode {
-        return this.props.children(this.context[CONTEXT_KEY]);
+    render(): JSX.Element {
+        return <Context.Consumer>{this.renderChildren}</Context.Consumer>;
     }
 }
-
-export const getItemStore = <T extends { [CONTEXT_KEY]: ItemContainer }>(
-    context: T,
-): ItemContainer | undefined => {
-    return context[CONTEXT_KEY];
-};

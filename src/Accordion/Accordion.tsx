@@ -2,7 +2,7 @@ import * as React from 'react';
 
 type AccordionProps = React.HTMLAttributes<HTMLDivElement>;
 
-const Accordion = ({ ...rest }: AccordionProps): JSX.Element => {
+const Accordion: React.SFC = ({ ...rest }: AccordionProps): JSX.Element => {
     return <div data-accordion-component="Accordion" {...rest} />;
 };
 

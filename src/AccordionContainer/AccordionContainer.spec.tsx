@@ -3,8 +3,6 @@ import * as React from 'react';
 import {
     AccordionContainer,
     Consumer,
-    CONTEXT_KEY,
-    getAccordionStore,
     Item,
     Provider,
 } from './AccordionContainer';
@@ -80,7 +78,7 @@ describe('Accordion', () => {
         const items = [DEFAULT_ITEM];
 
         mount(
-            <Provider items={items}>
+            <Provider initialItems={items}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
         );
@@ -119,7 +117,7 @@ describe('Accordion', () => {
         const items = [itemFoo, itemBar];
 
         const instance = mount(
-            <Provider items={items}>
+            <Provider initialItems={items}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
         ).instance() as Provider;
@@ -145,7 +143,7 @@ describe('Accordion', () => {
         const items = [itemFoo];
 
         const instance = mount(
-            <Provider items={items}>
+            <Provider initialItems={items}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
         ).instance() as Provider;
@@ -171,7 +169,7 @@ describe('Accordion', () => {
         const items = [itemFoo];
 
         const instance = mount(
-            <Provider allowZeroExpanded={true} items={items}>
+            <Provider allowZeroExpanded={true} initialItems={items}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
         ).instance() as Provider;
@@ -195,7 +193,9 @@ describe('Accordion', () => {
         const mock = jest.fn(() => null);
         const instance = mount(
             <Provider
-                items={[{ ...DEFAULT_ITEM, uuid: 'foo', expanded: true }]}
+                initialItems={[
+                    { ...DEFAULT_ITEM, uuid: 'foo', expanded: true },
+                ]}
             >
                 <Consumer>{mock}</Consumer>
             </Provider>,
@@ -222,7 +222,9 @@ describe('Accordion', () => {
         const instance = mount(
             <Provider
                 allowMultipleExpanded={true}
-                items={[{ ...DEFAULT_ITEM, uuid: 'foo', expanded: true }]}
+                initialItems={[
+                    { ...DEFAULT_ITEM, uuid: 'foo', expanded: true },
+                ]}
             >
                 <Consumer>{mock}</Consumer>
             </Provider>,
@@ -252,7 +254,7 @@ describe('Accordion', () => {
         };
 
         const instance = mount(
-            <Provider items={[item]}>
+            <Provider initialItems={[item]}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
         ).instance() as Provider;
@@ -285,7 +287,7 @@ describe('Accordion', () => {
         };
 
         const instance = mount(
-            <Provider items={[fooItem, barItem]}>
+            <Provider initialItems={[fooItem, barItem]}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
         ).instance() as Provider;
@@ -316,7 +318,10 @@ describe('Accordion', () => {
         };
 
         const instance = mount(
-            <Provider allowMultipleExpanded={true} items={[fooItem, barItem]}>
+            <Provider
+                allowMultipleExpanded={true}
+                initialItems={[fooItem, barItem]}
+            >
                 <Consumer>{mock}</Consumer>
             </Provider>,
         ).instance() as Provider;
@@ -342,7 +347,7 @@ describe('Accordion', () => {
         };
 
         const instance = mount(
-            <Provider allowZeroExpanded={true} items={[fooItem]}>
+            <Provider allowZeroExpanded={true} initialItems={[fooItem]}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
         ).instance() as Provider;
@@ -365,7 +370,7 @@ describe('Accordion', () => {
         };
 
         const instance = mount(
-            <Provider items={[fooItem]}>
+            <Provider initialItems={[fooItem]}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
         ).instance() as Provider;
@@ -393,7 +398,7 @@ describe('Accordion', () => {
         };
 
         const instance = mount(
-            <Provider items={[fooItem, barItem]}>
+            <Provider initialItems={[fooItem, barItem]}>
                 <Consumer>{mock}</Consumer>
             </Provider>,
         ).instance() as Provider;
@@ -459,7 +464,10 @@ describe('Accordion', () => {
             };
 
             const instance = mount(
-                <Provider allowZeroExpanded={true} items={[fooItem, barItem]}>
+                <Provider
+                    allowZeroExpanded={true}
+                    initialItems={[fooItem, barItem]}
+                >
                     <Consumer>{mock}</Consumer>
                 </Provider>,
             ).instance() as Provider;
@@ -495,7 +503,7 @@ describe('Accordion', () => {
             const instance = mount(
                 <Provider
                     allowZeroExpanded={true}
-                    items={[fooItem, barItem, bazItem]}
+                    initialItems={[fooItem, barItem, bazItem]}
                 >
                     <Consumer>{mock}</Consumer>
                 </Provider>,
@@ -525,7 +533,7 @@ describe('Accordion', () => {
             };
 
             const instance = mount(
-                <Provider items={[fooItem, barItem]}>
+                <Provider initialItems={[fooItem, barItem]}>
                     <Consumer>{mock}</Consumer>
                 </Provider>,
             ).instance() as Provider;
@@ -556,7 +564,7 @@ describe('Accordion', () => {
             const instance = mount(
                 <Provider
                     allowMultipleExpanded={true}
-                    items={[fooItem, barItem]}
+                    initialItems={[fooItem, barItem]}
                 >
                     <Consumer>{mock}</Consumer>
                 </Provider>,
@@ -605,7 +613,7 @@ describe('Accordion', () => {
         };
 
         const instance = mount(
-            <Provider items={[item]} onChange={onChange} />,
+            <Provider initialItems={[item]} onChange={onChange} />,
         ).instance() as Provider;
 
         instance.setExpanded(item.uuid, true);
@@ -623,7 +631,7 @@ describe('Accordion', () => {
         const instance = mount(
             <Provider
                 allowMultipleExpanded={true}
-                items={[item]}
+                initialItems={[item]}
                 onChange={onChange}
             />,
         ).instance() as Provider;
@@ -631,28 +639,5 @@ describe('Accordion', () => {
         instance.setExpanded(item.uuid, true);
 
         expect(onChange).toHaveBeenCalledWith([item.uuid]);
-    });
-
-    it('fetches context with getAccordionStore', () => {
-        expect.assertions(1);
-
-        const Test = (
-            props: {},
-            context: { [CONTEXT_KEY]: AccordionContainer },
-        ): null => {
-            const accordionStore = getAccordionStore(context);
-            expect(accordionStore).toBeDefined();
-
-            return null;
-        };
-        Test.contextTypes = {
-            [CONTEXT_KEY]: (): null => null,
-        };
-
-        mount(
-            <Provider>
-                <Test />
-            </Provider>,
-        );
     });
 });

@@ -193,7 +193,13 @@ describe('AccordionItem', () => {
     });
 
     it('can dynamically set expanded prop', () => {
-        const Wrapper = ({ expanded }: { expanded: boolean }): JSX.Element => (
+        interface WrapperProps {
+            expanded: boolean;
+        }
+
+        const Wrapper: React.SFC<WrapperProps> = ({
+            expanded,
+        }: WrapperProps): JSX.Element => (
             <AccordionProvider>
                 <AccordionItem expanded={expanded}>
                     <AccordionItemHeading>
@@ -217,7 +223,13 @@ describe('AccordionItem', () => {
     });
 
     it('can dynamically unset expanded prop when there is only one item expanded and allowZeroExpanded is set to true', () => {
-        const Wrapper = ({ expanded }: { expanded: boolean }): JSX.Element => (
+        interface WrapperProps {
+            expanded: boolean;
+        }
+
+        const Wrapper: React.SFC<WrapperProps> = ({
+            expanded,
+        }: WrapperProps): JSX.Element => (
             <AccordionProvider allowZeroExpanded={true}>
                 <AccordionItem expanded={expanded}>
                     <AccordionItemHeading>

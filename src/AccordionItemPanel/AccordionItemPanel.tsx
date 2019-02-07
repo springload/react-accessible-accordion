@@ -9,16 +9,14 @@ type AccordionItemPanelProps = React.HTMLAttributes<HTMLDivElement> & {
     allowMultipleExpanded: boolean;
 };
 
-const AccordionItemPanel = (props: AccordionItemPanelProps): JSX.Element => {
-    const {
-        className,
-        expandedClassName,
-        uuid,
-        expanded,
-        allowMultipleExpanded,
-        ...rest
-    } = props;
-
+const AccordionItemPanel: React.SFC<AccordionItemPanelProps> = ({
+    className,
+    expandedClassName,
+    uuid,
+    expanded,
+    allowMultipleExpanded,
+    ...rest
+}: AccordionItemPanelProps): JSX.Element => {
     const role = allowMultipleExpanded ? null : 'region';
     const hideAriaAttribute = allowMultipleExpanded ? !expanded : null;
 
