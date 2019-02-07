@@ -29,6 +29,7 @@
         "no-null-keyword": false,
         "export-name": false,
         "completed-docs": false,
-        "strict-boolean-expressions": false
+        "strict-boolean-expressions": false,
+        "interface-name": false
     }
 }
