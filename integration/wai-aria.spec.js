@@ -9,7 +9,7 @@ describe('WAI ARIA Spec', () => {
     }
 
     beforeEach(async () => {
-        await page.goto(`file:${path.resolve(__dirname, 'dist/index.html')}`);
+        await page.goto(`file://${path.resolve(__dirname, 'dist/index.html')}`);
     });
 
     describe('Canary tests', () => {
