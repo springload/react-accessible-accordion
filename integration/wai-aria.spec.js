@@ -76,7 +76,7 @@ describe('WAI ARIA Spec', () => {
                 );
             });
 
-            it('When focus is on the accordion header for an expanded panel, collapses the panel if the implementation supports collapsing. Some implementations require one panel to be expanded at all times and allow only one panel to be expanded; so, they do not support a collapse function.', () => {
+            xit('When focus is on the accordion header for an expanded panel, collapses the panel if the implementation supports collapsing. Some implementations require one panel to be expanded at all times and allow only one panel to be expanded; so, they do not support a collapse function.', () => {
                 // todo
             });
         });
@@ -204,14 +204,15 @@ describe('WAI ARIA Spec', () => {
             }
         });
 
-        // Not yet supported.
-        xit('Each accordion header button is wrapped in an element with role heading that has a value set for aria-level that is appropriate for the information architecture of the page.', () => {});
+        xit('Each accordion header button is wrapped in an element with role heading that has a value set for aria-level that is appropriate for the information architecture of the page.', () => {
+            // Not yet supported.
+        });
 
-        it('If the native host language has an element with an implicit heading and aria-level, such as an HTML heading tag, a native host language element may be used.', () => {
+        xit('If the native host language has an element with an implicit heading and aria-level, such as an HTML heading tag, a native host language element may be used.', () => {
             // todo
         });
 
-        it('The button element is the only element inside the heading element. That is, if there are other visually persistent elements, they are not included inside the heading element.', () => {
+        xit('The button element is the only element inside the heading element. That is, if there are other visually persistent elements, they are not included inside the heading element.', () => {
             // todo
         });
 
