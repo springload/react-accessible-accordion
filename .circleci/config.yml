@@ -81,7 +81,7 @@ jobs:
             - checkout
             - attach_workspace:
                   at: ~/repo
-            - run: yarn test:integration
+            - run: yarn test:integration --ci
 
 workflows:
     version: 2
