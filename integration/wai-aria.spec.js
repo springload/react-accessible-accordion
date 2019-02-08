@@ -10,6 +10,10 @@ describe('WAI ARIA Spec', () => {
 
     beforeEach(async () => {
         await page.goto(`file://${path.resolve(__dirname, 'dist/index.html')}`);
+
+        // Seems like the browser is a bit slower on CI, and we're trying to
+        // select headings before they're registered in the 'store'.
+        await page.waitForSelector('.accordion__heading');
     });
 
     describe('Canary tests', () => {
