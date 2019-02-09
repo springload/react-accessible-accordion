@@ -33,7 +33,10 @@ export interface AccordionContainer {
 
 const Context = React.createContext(null as AccordionContainer | null);
 
-export class Provider extends React.Component<ProviderProps, ProviderState> {
+export class Provider extends React.PureComponent<
+    ProviderProps,
+    ProviderState
+> {
     static defaultProps: ProviderProps = {
         allowMultipleExpanded: false,
         allowZeroExpanded: false,
@@ -160,7 +163,7 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
     }
 }
 
-export class Consumer extends React.Component<{
+export class Consumer extends React.PureComponent<{
     children(container: AccordionContainer): React.ReactNode;
 }> {
     renderChildren = (

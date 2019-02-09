@@ -24,7 +24,7 @@ type ConsumerProps = {
     children(container: ItemContainer): React.ReactNode;
 };
 
-export class Consumer extends React.Component<ConsumerProps> {
+export class Consumer extends React.PureComponent<ConsumerProps> {
     renderChildren = (container: ItemContainer): React.ReactNode => {
         return container ? this.props.children(container) : null;
     };
