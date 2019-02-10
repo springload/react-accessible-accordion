@@ -4,7 +4,6 @@ import {
     AccordionContainer,
     Consumer as AccordionConsumer,
 } from '../AccordionContainer/AccordionContainer';
-import * as propTypes from '../helpers/propTypes';
 import { nextUuid } from '../helpers/uuid';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
 import AccordionItem from './AccordionItem';

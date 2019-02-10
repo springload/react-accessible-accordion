@@ -1,6 +1,4 @@
 import * as React from 'react';
-import * as propTypes from '../helpers/propTypes';
-
 import {
     AccordionContainer,
     Consumer as AccordionConsumer,

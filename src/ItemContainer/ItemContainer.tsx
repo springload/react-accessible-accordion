@@ -1,7 +1,6 @@
 // tslint:disable:max-classes-per-file
 
 import * as React from 'react';
-import * as propTypes from '../helpers/propTypes';
 
 export type UUID = string | number;
 

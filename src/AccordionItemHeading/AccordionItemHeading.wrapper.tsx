@@ -4,7 +4,6 @@ import {
     Consumer as AccordionConsumer,
     Item,
 } from '../AccordionContainer/AccordionContainer';
-import * as propTypes from '../helpers/propTypes';
 import {
     Consumer as ItemConsumer,
     ItemContainer,
