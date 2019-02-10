@@ -23,8 +23,8 @@ export default class AccordionWrapper extends React.Component<
     AccordionWrapperProps
 > {
     static defaultProps: AccordionWrapperProps = {
-        allowMultipleExpanded: false,
-        allowZeroExpanded: false,
+        allowMultipleExpanded: undefined,
+        allowZeroExpanded: undefined,
         onChange: (): void => {
             //
         },

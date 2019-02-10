@@ -1,79 +1,53 @@
 // tslint:disable:max-classes-per-file
 
 import * as React from 'react';
-import * as propTypes from '../helpers/propTypes';
 import { UUID } from '../ItemContainer/ItemContainer';
-
-// Arbitrary, but ought to be unique to avoid context namespace clashes.
-export const CONTEXT_KEY = 'react-accessible-accordion@AccordionContainer';
 
 export type Item = {
     uuid: UUID;
     expanded: boolean;
 };
 
-export type ProviderState = {
-    items: Item[];
-};
-
-export type ProviderProps = {
+interface ProviderProps {
     allowMultipleExpanded?: boolean;
     allowZeroExpanded?: boolean;
     children?: React.ReactNode;
-    items?: Item[];
+    initialItems?: Item[];
     onChange?(args: UUID[]): void;
-};
+}
 
-export type AccordionContainer = {
+interface ProviderState {
+    items: Item[];
+}
+
+export interface AccordionContainer {
+    items: Item[];
     allowMultipleExpanded: boolean;
     allowZeroExpanded: boolean;
-    items: Item[];
     addItem(item: Item): void;
     removeItem(uuid: UUID): void;
     setExpanded(uuid: UUID, expanded: boolean): void;
     isItemDisabled(uuid: UUID): boolean;
-};
+}
 
-export type ConsumerProps = {
-    children(
-        container: { [P in keyof AccordionContainer]?: AccordionContainer[P] },
-    ): React.ReactNode;
-};
+const Context = React.createContext(null as AccordionContainer | null);
 
-type ConsumerState = {};
-
-type ConsumerContext = {
-    [CONTEXT_KEY](): null;
-};
-
-export class Provider extends React.Component<ProviderProps, ProviderState> {
-    static childContextTypes: { [CONTEXT_KEY](): null } = {
-        [CONTEXT_KEY]: propTypes.wildcard,
+export class Provider extends React.PureComponent<
+    ProviderProps,
+    ProviderState
+> {
+    static defaultProps: ProviderProps = {
+        allowMultipleExpanded: false,
+        allowZeroExpanded: false,
     };
 
     state: ProviderState = {
-        items: this.props.items || [],
+        items: this.props.initialItems || [],
     };
-
-    getChildContext(): { [CONTEXT_KEY]: AccordionContainer } {
-        const context: AccordionContainer = {
-            items: this.state.items,
-            allowMultipleExpanded: !!this.props.allowMultipleExpanded,
-            allowZeroExpanded: !!this.props.allowZeroExpanded,
-            addItem: this.addItem,
-            removeItem: this.removeItem,
-            setExpanded: this.setExpanded,
-            isItemDisabled: this.isItemDisabled,
-        };
-
-        return {
-            [CONTEXT_KEY]: context,
-        };
-    }
 
     addItem = (newItem: Item): void => {
         // Need to use callback style otherwise race-conditions are created by concurrent registrations.
-        this.setState((state: ProviderState) => {
+        this.setState((state: AccordionContainer) => {
             let items: Item[];
 
             if (state.items.some((item: Item) => item.uuid === newItem.uuid)) {
@@ -103,31 +77,9 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
     };
 
     removeItem = (key: UUID): void => {
-        this.setState((state: ProviderState) => ({
+        this.setState((state: AccordionContainer) => ({
             items: state.items.filter((item: Item) => item.uuid !== key),
         }));
-    };
-
-    /*
-     * From the spec:
-     *
-     * “If the accordion panel associated with an accordion header is visible,
-     * and if the accordion does not permit the panel to be collapsed, the
-     * header button element has aria-disabled set to true.”
-     */
-    isItemDisabled = (key: UUID): boolean => {
-        const item = this.state.items.find(
-            ({ uuid }: Item): boolean => uuid === key,
-        );
-        const expandedItems = this.state.items.filter(
-            ({ expanded }: Item) => expanded,
-        );
-
-        return (
-            item.expanded &&
-            !this.props.allowZeroExpanded &&
-            expandedItems.length === 1
-        );
     };
 
     setExpanded = (key: UUID, expanded: boolean): void => {
@@ -135,7 +87,7 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
             return;
         }
         this.setState(
-            (state: ProviderState) => ({
+            (state: AccordionContainer) => ({
                 items: state.items.map((item: Item) => {
                     if (item.uuid === key) {
                         return {
@@ -166,31 +118,60 @@ export class Provider extends React.Component<ProviderProps, ProviderState> {
         );
     };
 
-    render(): React.ReactNode {
-        return this.props.children || null;
+    /*
+     * From the spec:
+     *
+     * “If the accordion panel associated with an accordion header is visible,
+     * and if the accordion does not permit the panel to be collapsed, the
+     * header button element has aria-disabled set to true.”
+     */
+    isItemDisabled = (key: UUID): boolean => {
+        const item = this.state.items.find(
+            ({ uuid }: Item): boolean => uuid === key,
+        );
+        const expandedItems = this.state.items.filter(
+            ({ expanded }: Item) => expanded,
+        );
+
+        return (
+            item.expanded &&
+            !this.props.allowZeroExpanded &&
+            expandedItems.length === 1
+        );
+    };
+
+    render(): JSX.Element {
+        const { items } = this.state;
+        const { allowMultipleExpanded, allowZeroExpanded } = this.props;
+
+        return (
+            <Context.Provider
+                value={{
+                    items,
+                    allowMultipleExpanded,
+                    allowZeroExpanded,
+                    addItem: this.addItem,
+                    removeItem: this.removeItem,
+                    setExpanded: this.setExpanded,
+                    isItemDisabled: this.isItemDisabled,
+                }}
+            >
+                {this.props.children || null}
+            </Context.Provider>
+        );
     }
 }
 
-export class Consumer extends React.Component<
-    ConsumerProps,
-    ConsumerState,
-    ConsumerContext
-> {
-    static contextTypes: ConsumerContext = {
-        [CONTEXT_KEY]: propTypes.wildcard,
+export class Consumer extends React.PureComponent<{
+    children(container: AccordionContainer): React.ReactNode;
+}> {
+    renderChildren = (
+        container: AccordionContainer | null,
+    ): React.ReactNode => {
+        return container ? this.props.children(container) : null;
     };
 
-    context: {
-        [CONTEXT_KEY]: AccordionContainer;
-    };
-
-    render(): React.ReactNode {
-        return this.props.children(this.context[CONTEXT_KEY]);
+    render(): JSX.Element {
+        return <Context.Consumer>{this.renderChildren}</Context.Consumer>;
     }
 }
-
-export const getAccordionStore = <
-    T extends { [CONTEXT_KEY]: AccordionContainer }
->(
-    context: T,
-): AccordionContainer | undefined => context[CONTEXT_KEY];

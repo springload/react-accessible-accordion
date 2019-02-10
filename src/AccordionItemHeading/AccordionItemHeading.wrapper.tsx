@@ -1,13 +1,12 @@
 import * as React from 'react';
 import {
-    CONTEXT_KEY as ACCORDION_CONTEXT_KEY,
-    getAccordionStore,
+    AccordionContainer,
+    Consumer as AccordionConsumer,
     Item,
 } from '../AccordionContainer/AccordionContainer';
-import * as propTypes from '../helpers/propTypes';
 import {
-    CONTEXT_KEY as ITEM_CONTEXT_KEY,
-    getItemStore,
+    Consumer as ItemConsumer,
+    ItemContainer,
 } from '../ItemContainer/ItemContainer';
 import { default as AccordionItemHeading } from './AccordionItemHeading';
 
@@ -17,47 +16,19 @@ type AccordionItemHeadingWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
 
 type AccordionItemHeadingWrapperState = {};
 
-type AccordionItemHeadingWrapperContext = {
-    [ACCORDION_CONTEXT_KEY](): null;
-    [ITEM_CONTEXT_KEY](): null;
-};
-
 export default class AccordionItemHeadingWrapper extends React.Component<
-    AccordionItemHeadingWrapperProps
+    AccordionItemHeadingWrapperProps,
+    AccordionItemHeadingWrapperState
 > {
-    static contextTypes: AccordionItemHeadingWrapperContext = {
-        [ACCORDION_CONTEXT_KEY]: propTypes.wildcard,
-        [ITEM_CONTEXT_KEY]: propTypes.wildcard,
-    };
-
     static defaultProps: AccordionItemHeadingWrapperProps = {
         className: 'accordion__heading',
         expandedClassName: '',
     };
 
-    render(): JSX.Element {
-        const accordionStore = getAccordionStore(this.context);
-
-        if (!accordionStore) {
-            // tslint:disable-next-line:no-console
-            console.error(
-                'AccordionItemHeading component cannot render because it has not been nested inside an Accordion component.',
-            );
-
-            return null;
-        }
-
-        const itemStore = getItemStore(this.context);
-
-        if (!itemStore) {
-            // tslint:disable-next-line:no-console
-            console.error(
-                'AccordionItemHeading component cannot render because it has not been nested inside an AccordionItem component.',
-            );
-
-            return null;
-        }
-
+    renderChildren = (
+        accordionStore: AccordionContainer,
+        itemStore: ItemContainer,
+    ): JSX.Element => {
         const { uuid } = itemStore;
         const { items, allowZeroExpanded, isItemDisabled } = accordionStore;
         const item = items.filter(
@@ -72,6 +43,20 @@ export default class AccordionItemHeadingWrapper extends React.Component<
                 disabled={disabled}
                 setExpanded={accordionStore.setExpanded}
             />
+        );
+    };
+
+    render(): JSX.Element {
+        return (
+            <AccordionConsumer>
+                {(accordionStore: AccordionContainer): JSX.Element => (
+                    <ItemConsumer>
+                        {(itemStore: ItemContainer): JSX.Element =>
+                            this.renderChildren(accordionStore, itemStore)
+                        }
+                    </ItemConsumer>
+                )}
+            </AccordionConsumer>
         );
     }
 }

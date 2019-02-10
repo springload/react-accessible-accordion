@@ -1,12 +1,6 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
-import {
-    Consumer,
-    CONTEXT_KEY,
-    getItemStore,
-    ItemContainer,
-    Provider,
-} from './ItemContainer';
+import { Consumer, ItemContainer, Provider } from './ItemContainer';
 
 describe('ItemContainer', () => {
     it('Propagates uuid by context', () => {
@@ -28,28 +22,5 @@ describe('ItemContainer', () => {
 
     it('renders Provider without children', () => {
         expect(() => mount(<Provider uuid="foo" />)).not.toThrow();
-    });
-
-    it('fetches context with getItemStore', () => {
-        expect.assertions(1);
-
-        const Test = (
-            props: {},
-            context: { [CONTEXT_KEY]: ItemContainer },
-        ): null => {
-            const accordionStore = getItemStore(context);
-            expect(accordionStore).toBeDefined();
-
-            return null;
-        };
-        Test.contextTypes = {
-            [CONTEXT_KEY]: (): null => null,
-        };
-
-        mount(
-            <Provider uuid="uuid">
-                <Test />
-            </Provider>,
-        );
     });
 });

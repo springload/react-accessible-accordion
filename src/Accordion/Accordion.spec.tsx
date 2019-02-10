@@ -1,10 +1,6 @@
 import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
-import {
-    Item,
-    Provider,
-    ProviderState,
-} from '../AccordionContainer/AccordionContainer';
+import { Item, Provider } from '../AccordionContainer/AccordionContainer';
 import { default as AccordionItem } from '../AccordionItem/AccordionItem.wrapper';
 import { default as AccordionItemHeading } from '../AccordionItemHeading/AccordionItemHeading.wrapper';
 import { default as Accordion } from './Accordion.wrapper';
@@ -16,7 +12,7 @@ describe('Accordion', () => {
     });
 
     describe('<Accordion allowMultipleExpanded="false" />', () => {
-        const [FooTitle, BarTitle] = [
+        const [FooTitle, BarTitle]: React.SFC[] = [
             (): JSX.Element => <AccordionItemHeading>Foo</AccordionItemHeading>,
             (): JSX.Element => <AccordionItemHeading>Bar</AccordionItemHeading>,
         ];
@@ -120,7 +116,7 @@ describe('Accordion', () => {
     });
 
     describe('<Accordion allowMultipleExpanded="true" />', () => {
-        const [FooTitle, BarTitle] = [
+        const [FooTitle, BarTitle]: React.SFC[] = [
             (): JSX.Element => <AccordionItemHeading>Foo</AccordionItemHeading>,
             (): JSX.Element => <AccordionItemHeading>Bar</AccordionItemHeading>,
         ];
@@ -202,9 +198,9 @@ describe('Accordion', () => {
 });
 
 describe('<Accordion allowZeroExpanded="false" />', () => {
-    const [FooTitle] = [
-        (): JSX.Element => <AccordionItemHeading>Foo</AccordionItemHeading>,
-    ];
+    const FooTitle: React.SFC = (): JSX.Element => (
+        <AccordionItemHeading>Foo</AccordionItemHeading>
+    );
 
     function mountAccordion(): ReactWrapper {
         return mount(
@@ -232,9 +228,9 @@ describe('<Accordion allowZeroExpanded="false" />', () => {
 });
 
 describe('<Accordion allowZeroExpanded="true" />', () => {
-    const [FooTitle] = [
-        (): JSX.Element => <AccordionItemHeading>Foo</AccordionItemHeading>,
-    ];
+    const FooTitle: React.SFC = (): JSX.Element => (
+        <AccordionItemHeading>Foo</AccordionItemHeading>
+    );
 
     function mountZeroExpanded(): ReactWrapper {
         return mount(
