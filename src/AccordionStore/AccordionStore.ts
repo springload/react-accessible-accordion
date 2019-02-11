@@ -1,7 +1,7 @@
 // tslint:disable:max-classes-per-file
 
 import * as React from 'react';
-import { UUID } from '../ItemContainer/ItemContainer';
+import { UUID } from '../ItemContext/ItemContext';
 
 export type Item = {
     uuid: UUID;

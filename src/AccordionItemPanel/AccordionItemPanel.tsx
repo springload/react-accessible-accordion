@@ -1,6 +1,6 @@
 import { default as classnames } from 'classnames';
 import * as React from 'react';
-import { UUID } from '../ItemContainer/ItemContainer';
+import { UUID } from '../ItemContext/ItemContext';
 
 type AccordionItemPanelProps = React.HTMLAttributes<HTMLDivElement> & {
     expandedClassName: string;

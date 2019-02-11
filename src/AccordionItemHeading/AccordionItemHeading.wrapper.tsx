@@ -6,8 +6,8 @@ import {
 import { Item } from '../AccordionStore/AccordionStore';
 import {
     Consumer as ItemConsumer,
-    ItemContainer,
-} from '../ItemContainer/ItemContainer';
+    ItemContext,
+} from '../ItemContext/ItemContext';
 import { default as AccordionItemHeading } from './AccordionItemHeading';
 
 type AccordionItemHeadingWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -27,7 +27,7 @@ export default class AccordionItemHeadingWrapper extends React.Component<
 
     renderChildren = (
         accordionStore: AccordionContainer,
-        itemStore: ItemContainer,
+        itemStore: ItemContext,
     ): JSX.Element => {
         const { uuid } = itemStore;
         const { items, allowZeroExpanded, isItemDisabled } = accordionStore;
@@ -51,7 +51,7 @@ export default class AccordionItemHeadingWrapper extends React.Component<
             <AccordionConsumer>
                 {(accordionStore: AccordionContainer): JSX.Element => (
                     <ItemConsumer>
-                        {(itemStore: ItemContainer): JSX.Element =>
+                        {(itemStore: ItemContext): JSX.Element =>
                             this.renderChildren(accordionStore, itemStore)
                         }
                     </ItemConsumer>

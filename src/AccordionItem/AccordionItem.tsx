@@ -2,7 +2,7 @@ import { default as classnames } from 'classnames';
 import * as React from 'react';
 import { AccordionContainer } from '../AccordionContext/AccordionContext';
 import { Item } from '../AccordionStore/AccordionStore';
-import { UUID } from '../ItemContainer/ItemContainer';
+import { UUID } from '../ItemContext/ItemContext';
 
 type AccordionItemProps = React.HTMLAttributes<HTMLDivElement> & {
     uuid: UUID;

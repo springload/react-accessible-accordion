@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import AccordionStore, { Item } from '../AccordionStore/AccordionStore';
-import { UUID } from '../ItemContainer/ItemContainer';
+import { UUID } from '../ItemContext/ItemContext';
 
 interface ProviderProps {
     initialItems?: Item[];

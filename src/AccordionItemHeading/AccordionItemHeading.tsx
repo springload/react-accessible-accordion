@@ -7,7 +7,7 @@ import {
     focusPreviousSiblingOf,
 } from '../helpers/focus';
 import keycodes from '../helpers/keycodes';
-import { UUID } from '../ItemContainer/ItemContainer';
+import { UUID } from '../ItemContext/ItemContext';
 
 type AccordionItemHeadingProps = React.HTMLAttributes<HTMLDivElement> & {
     expandedClassName: string;

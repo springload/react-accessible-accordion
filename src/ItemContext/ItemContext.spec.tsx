@@ -1,8 +1,8 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
-import { Consumer, ItemContainer, Provider } from './ItemContainer';
+import { Consumer, ItemContext, Provider } from './ItemContext';
 
-describe('ItemContainer', () => {
+describe('ItemContext', () => {
     it('Propagates uuid by context', () => {
         const mock = jest.fn(() => null);
         const uuid = 'foo';

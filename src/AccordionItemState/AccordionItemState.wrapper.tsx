@@ -6,8 +6,8 @@ import {
 import { Item } from '../AccordionStore/AccordionStore';
 import {
     Consumer as ItemConsumer,
-    ItemContainer,
-} from '../ItemContainer/ItemContainer';
+    ItemContext,
+} from '../ItemContext/ItemContext';
 
 import AccordionItemState from './AccordionItemState';
 
@@ -25,7 +25,7 @@ export default class AccordionItemStateWrapper extends React.Component<
 
     renderChildren = (
         accordionStore: AccordionContainer,
-        itemStore: ItemContainer,
+        itemStore: ItemContext,
     ): JSX.Element => {
         const { uuid } = itemStore;
         const { items } = accordionStore;
@@ -44,7 +44,7 @@ export default class AccordionItemStateWrapper extends React.Component<
             <AccordionConsumer>
                 {(accordionStore: AccordionContainer): JSX.Element => (
                     <ItemConsumer>
-                        {(itemStore: ItemContainer): JSX.Element =>
+                        {(itemStore: ItemContext): JSX.Element =>
                             this.renderChildren(accordionStore, itemStore)
                         }
                     </ItemConsumer>

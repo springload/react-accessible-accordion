@@ -5,7 +5,7 @@ import { default as AccordionItemHeading } from '../AccordionItemHeading/Accordi
 import { default as AccordionItemPanel } from '../AccordionItemPanel/AccordionItemPanel.wrapper';
 import { Item } from '../AccordionStore/AccordionStore';
 import { resetNextUuid } from '../helpers/uuid';
-import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
+import { Provider as ItemProvider } from '../ItemContext/ItemContext';
 import { default as AccordionItem } from './AccordionItem.wrapper';
 
 describe('AccordionItem', () => {

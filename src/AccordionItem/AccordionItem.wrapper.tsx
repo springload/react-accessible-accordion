@@ -5,7 +5,7 @@ import {
     Consumer as AccordionConsumer,
 } from '../AccordionContext/AccordionContext';
 import { nextUuid } from '../helpers/uuid';
-import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
+import { Provider as ItemProvider } from '../ItemContext/ItemContext';
 import AccordionItem from './AccordionItem';
 
 type AccordionItemWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
