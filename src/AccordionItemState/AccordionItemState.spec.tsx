@@ -24,7 +24,7 @@ describe('AccordionItemState', () => {
         expect(wrapper).toMatchSnapshot();
     });
 
-    it('does not render if no accordionStore found in context', () => {
+    it('does not render if no accordionContext found in context', () => {
         const wrapper = mount(
             <ItemProvider uuid="foo">
                 <AccordionItemState />
@@ -34,7 +34,7 @@ describe('AccordionItemState', () => {
         expect(wrapper.find('div[data-enzyme]').length).toEqual(0);
     });
 
-    it('does not render if no itemStore found in context', () => {
+    it('does not render if no itemContext found in context', () => {
         const wrapper = mount(
             <AccordionProvider initialItems={[]}>
                 <AccordionItemState />

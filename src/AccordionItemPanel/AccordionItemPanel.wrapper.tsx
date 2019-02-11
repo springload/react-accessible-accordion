@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-    AccordionContainer,
+    AccordionContext,
     Consumer as AccordionConsumer,
 } from '../AccordionContext/AccordionContext';
 import { Item } from '../AccordionStore/AccordionStore';
@@ -23,11 +23,11 @@ export default class AccordionItemPanelWrapper extends React.Component<
     };
 
     renderChildren = (
-        accordionStore: AccordionContainer,
-        itemStore: ItemContext,
+        accordionContext: AccordionContext,
+        itemContext: ItemContext,
     ): JSX.Element => {
-        const { uuid } = itemStore;
-        const { items, allowMultipleExpanded } = accordionStore;
+        const { uuid } = itemContext;
+        const { items, allowMultipleExpanded } = accordionContext;
         const item = items.filter(
             (stateItem: Item) => stateItem.uuid === uuid,
         )[0];
@@ -44,10 +44,10 @@ export default class AccordionItemPanelWrapper extends React.Component<
     render(): JSX.Element {
         return (
             <AccordionConsumer>
-                {(accordionStore: AccordionContainer): JSX.Element => (
+                {(accordionContext: AccordionContext): JSX.Element => (
                     <ItemConsumer>
-                        {(itemStore: ItemContext): JSX.Element =>
-                            this.renderChildren(accordionStore, itemStore)
+                        {(itemContext: ItemContext): JSX.Element =>
+                            this.renderChildren(accordionContext, itemContext)
                         }
                     </ItemConsumer>
                 )}

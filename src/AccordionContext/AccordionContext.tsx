@@ -14,7 +14,7 @@ interface ProviderProps {
 
 type ProviderState = AccordionStore;
 
-export interface AccordionContainer {
+export interface AccordionContext {
     items: Item[];
     allowMultipleExpanded: boolean;
     allowZeroExpanded: boolean;
@@ -24,7 +24,7 @@ export interface AccordionContainer {
     isItemDisabled(uuid: UUID): boolean;
 }
 
-const Context = React.createContext(null as AccordionContainer | null);
+const Context = React.createContext(null as AccordionContext | null);
 
 export class Provider extends React.PureComponent<
     ProviderProps,
@@ -92,11 +92,9 @@ export class Provider extends React.PureComponent<
 }
 
 export class Consumer extends React.PureComponent<{
-    children(container: AccordionContainer): React.ReactNode;
+    children(container: AccordionContext): React.ReactNode;
 }> {
-    renderChildren = (
-        container: AccordionContainer | null,
-    ): React.ReactNode => {
+    renderChildren = (container: AccordionContext | null): React.ReactNode => {
         return container ? this.props.children(container) : null;
     };
 

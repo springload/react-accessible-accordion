@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-    AccordionContainer,
+    AccordionContext,
     Consumer as AccordionConsumer,
 } from '../AccordionContext/AccordionContext';
 import { Item } from '../AccordionStore/AccordionStore';
@@ -26,11 +26,11 @@ export default class AccordionItemHeadingWrapper extends React.Component<
     };
 
     renderChildren = (
-        accordionStore: AccordionContainer,
-        itemStore: ItemContext,
+        accordionContext: AccordionContext,
+        itemContext: ItemContext,
     ): JSX.Element => {
-        const { uuid } = itemStore;
-        const { items, allowZeroExpanded, isItemDisabled } = accordionStore;
+        const { uuid } = itemContext;
+        const { items, allowZeroExpanded, isItemDisabled } = accordionContext;
         const item = items.filter(
             (stateItem: Item) => stateItem.uuid === uuid,
         )[0];
@@ -41,7 +41,7 @@ export default class AccordionItemHeadingWrapper extends React.Component<
                 {...this.props}
                 {...item}
                 disabled={disabled}
-                setExpanded={accordionStore.setExpanded}
+                setExpanded={accordionContext.setExpanded}
             />
         );
     };
@@ -49,10 +49,10 @@ export default class AccordionItemHeadingWrapper extends React.Component<
     render(): JSX.Element {
         return (
             <AccordionConsumer>
-                {(accordionStore: AccordionContainer): JSX.Element => (
+                {(accordionContext: AccordionContext): JSX.Element => (
                     <ItemConsumer>
-                        {(itemStore: ItemContext): JSX.Element =>
-                            this.renderChildren(accordionStore, itemStore)
+                        {(itemContext: ItemContext): JSX.Element =>
+                            this.renderChildren(accordionContext, itemContext)
                         }
                     </ItemConsumer>
                 )}

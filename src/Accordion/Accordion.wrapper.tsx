@@ -2,7 +2,7 @@ import * as React from 'react';
 import { UUID } from '../ItemContext/ItemContext';
 
 import {
-    AccordionContainer,
+    AccordionContext,
     Consumer,
     Provider,
 } from '../AccordionContext/AccordionContext';
@@ -32,7 +32,7 @@ export default class AccordionWrapper extends React.Component<
         children: undefined,
     };
 
-    renderAccordion = (accordionStore: AccordionContainer): JSX.Element => {
+    renderAccordion = (accordionContext: AccordionContext): JSX.Element => {
         const {
             allowMultipleExpanded,
             allowZeroExpanded,

@@ -302,7 +302,7 @@ describe('AccordionItem', () => {
         ).toEqual(0);
     });
 
-    it('does not render if its uuid is not registered in accordionContainer', () => {
+    it('does not render if its uuid is not registered in accordionContext', () => {
         const wrapper = mount(
             <AccordionProvider>
                 <AccordionItem>Fake Title</AccordionItem>

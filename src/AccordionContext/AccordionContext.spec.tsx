@@ -1,7 +1,7 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
 import { Item } from '../AccordionStore/AccordionStore';
-import { AccordionContainer, Consumer, Provider } from './AccordionContext';
+import { Consumer, Provider } from './AccordionContext';
 
 const DEFAULT_ITEM: Item = {
     uuid: 'foo',

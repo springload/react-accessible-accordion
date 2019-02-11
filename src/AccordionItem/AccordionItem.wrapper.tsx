@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {
-    AccordionContainer,
+    AccordionContext,
     Consumer as AccordionConsumer,
 } from '../AccordionContext/AccordionContext';
 import { nextUuid } from '../helpers/uuid';
@@ -29,7 +29,7 @@ export default class AccordionItemWrapper extends React.Component<
 
     id: number = nextUuid();
 
-    renderChildren = (accordionStore: AccordionContainer): JSX.Element => {
+    renderChildren = (accordionContext: AccordionContext): JSX.Element => {
         const { uuid, ...rest } = this.props;
         const itemUuid = uuid !== undefined ? uuid : this.id;
 
@@ -38,7 +38,7 @@ export default class AccordionItemWrapper extends React.Component<
                 <AccordionItem
                     {...rest}
                     uuid={itemUuid}
-                    accordionStore={accordionStore}
+                    accordionContext={accordionContext}
                 />
             </ItemProvider>
         );
