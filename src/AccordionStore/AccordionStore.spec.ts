@@ -1,4 +1,4 @@
-import AccordionContainerStore from './AccordionContainer.store';
+import AccordionStore from './AccordionStore';
 
 enum UUIDS {
     FOO = 'FOO',
@@ -8,7 +8,7 @@ enum UUIDS {
 describe('Accordion', () => {
     describe('constructor', () => {
         it('correctly instantiates with all expected methods', () => {
-            const container = new AccordionContainerStore({});
+            const container = new AccordionStore({});
             expect(container).toBeDefined();
             expect(container.addItem).toBeDefined();
             expect(container.removeItem).toBeDefined();
@@ -17,7 +17,7 @@ describe('Accordion', () => {
         });
 
         it('respects the `allowMultipleExpanded` property', () => {
-            const container = new AccordionContainerStore({
+            const container = new AccordionStore({
                 allowMultipleExpanded: true,
             });
 
@@ -25,7 +25,7 @@ describe('Accordion', () => {
         });
 
         it('respects the `allowZeroExpanded` property', () => {
-            const container = new AccordionContainerStore({
+            const container = new AccordionStore({
                 allowZeroExpanded: true,
             });
 
@@ -35,7 +35,7 @@ describe('Accordion', () => {
         it('respects the `items` property', () => {
             const items = [{ uuid: UUIDS.FOO, expanded: false }];
 
-            const container = new AccordionContainerStore({
+            const container = new AccordionStore({
                 allowZeroExpanded: true,
                 items,
             });
@@ -48,13 +48,13 @@ describe('Accordion', () => {
         it('adds an item', () => {
             const item = { uuid: UUIDS.FOO, expanded: false };
 
-            const container = new AccordionContainerStore({}).addItem(item);
+            const container = new AccordionStore({}).addItem(item);
 
             expect(container.items).toEqual([item]);
         });
 
         it('closes expanded items', () => {
-            const container = new AccordionContainerStore({})
+            const container = new AccordionStore({})
                 .addItem({ uuid: UUIDS.FOO, expanded: true })
                 .addItem({ uuid: UUIDS.BAR, expanded: true });
 
@@ -65,7 +65,7 @@ describe('Accordion', () => {
         });
 
         it('doesnt close expanded items when allowMultipleExpanded', () => {
-            const container = new AccordionContainerStore({
+            const container = new AccordionStore({
                 allowMultipleExpanded: true,
             })
                 .addItem({ uuid: UUIDS.FOO, expanded: true })
@@ -81,7 +81,7 @@ describe('Accordion', () => {
             const uuid = 'uniqueCustomID';
             jest.spyOn(global.console, 'error');
 
-            new AccordionContainerStore({})
+            new AccordionStore({})
                 .addItem({
                     uuid,
                     expanded: false,
@@ -100,7 +100,7 @@ describe('Accordion', () => {
         it('can remove an item', () => {
             const item = { uuid: UUIDS.FOO, expanded: false };
 
-            const container = new AccordionContainerStore({
+            const container = new AccordionStore({
                 items: [item],
             }).removeItem(item.uuid);
 
@@ -111,7 +111,7 @@ describe('Accordion', () => {
     describe('setExpanded', () => {
         describe('expanding', () => {
             it('expands an item', () => {
-                const container = new AccordionContainerStore({})
+                const container = new AccordionStore({})
                     .addItem({ uuid: UUIDS.FOO, expanded: false })
                     .setExpanded(UUIDS.FOO, true);
 
@@ -121,7 +121,7 @@ describe('Accordion', () => {
             });
 
             it('collapses the currently expanded items', () => {
-                const container = new AccordionContainerStore({})
+                const container = new AccordionStore({})
                     .addItem({ uuid: UUIDS.FOO, expanded: false })
                     .addItem({ uuid: UUIDS.BAR, expanded: true })
                     .setExpanded(UUIDS.FOO, true);
@@ -135,7 +135,7 @@ describe('Accordion', () => {
 
         describe('collapsing', () => {
             it('doesnt collapse the only expanded item', () => {
-                const container = new AccordionContainerStore({})
+                const container = new AccordionStore({})
                     .addItem({ uuid: UUIDS.FOO, expanded: true })
                     .setExpanded(UUIDS.FOO, false);
 
@@ -145,7 +145,7 @@ describe('Accordion', () => {
             });
 
             it('collapses the only expanded item when allowZeroExpanded', () => {
-                const container = new AccordionContainerStore({
+                const container = new AccordionStore({
                     allowZeroExpanded: true,
                 })
                     .addItem({ uuid: UUIDS.FOO, expanded: true })
@@ -161,7 +161,7 @@ describe('Accordion', () => {
     describe('isDisabled', () => {
         describe('expanded item', () => {
             it('is disabled if alone', () => {
-                const container = new AccordionContainerStore({}).addItem({
+                const container = new AccordionStore({}).addItem({
                     uuid: UUIDS.FOO,
                     expanded: true,
                 });
@@ -170,7 +170,7 @@ describe('Accordion', () => {
             });
 
             it('is not disabled if multiple expanded', () => {
-                const container = new AccordionContainerStore({
+                const container = new AccordionStore({
                     allowMultipleExpanded: true,
                 })
                     .addItem({
@@ -186,7 +186,7 @@ describe('Accordion', () => {
             });
 
             it('is not disabled if allowZeroExpanded', () => {
-                const container = new AccordionContainerStore({
+                const container = new AccordionStore({
                     allowZeroExpanded: true,
                 }).addItem({
                     uuid: UUIDS.FOO,
@@ -199,7 +199,7 @@ describe('Accordion', () => {
 
         describe('collapsed item', () => {
             it('is not disabled', () => {
-                const container = new AccordionContainerStore({}).addItem({
+                const container = new AccordionStore({}).addItem({
                     uuid: UUIDS.FOO,
                     expanded: false,
                 });

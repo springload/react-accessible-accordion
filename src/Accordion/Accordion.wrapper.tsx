@@ -5,7 +5,7 @@ import {
     AccordionContainer,
     Consumer,
     Provider,
-} from '../AccordionContainer/AccordionContainer';
+} from '../AccordionContext/AccordionContext';
 import Accordion from './Accordion';
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;

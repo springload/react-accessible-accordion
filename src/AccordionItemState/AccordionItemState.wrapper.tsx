@@ -2,8 +2,8 @@ import * as React from 'react';
 import {
     AccordionContainer,
     Consumer as AccordionConsumer,
-    Item,
-} from '../AccordionContainer/AccordionContainer';
+} from '../AccordionContext/AccordionContext';
+import { Item } from '../AccordionStore/AccordionStore';
 import {
     Consumer as ItemConsumer,
     ItemContainer,

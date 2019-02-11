@@ -1,11 +1,9 @@
 import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
-import {
-    Item,
-    Provider as AccordionProvider,
-} from '../AccordionContainer/AccordionContainer';
+import { Provider as AccordionProvider } from '../AccordionContext/AccordionContext';
 import { default as AccordionItemHeading } from '../AccordionItemHeading/AccordionItemHeading.wrapper';
 import { default as AccordionItemPanel } from '../AccordionItemPanel/AccordionItemPanel.wrapper';
+import { Item } from '../AccordionStore/AccordionStore';
 import { resetNextUuid } from '../helpers/uuid';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
 import { default as AccordionItem } from './AccordionItem.wrapper';

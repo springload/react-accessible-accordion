@@ -1,9 +1,7 @@
 import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
-import {
-    Item,
-    Provider as AccordionProvider,
-} from '../AccordionContainer/AccordionContainer';
+import { Provider as AccordionProvider } from '../AccordionContext/AccordionContext';
+import { Item } from '../AccordionStore/AccordionStore';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
 import { default as AccordionItemState } from './AccordionItemState.wrapper';
 

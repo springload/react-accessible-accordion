@@ -3,7 +3,7 @@ import * as React from 'react';
 import {
     AccordionContainer,
     Consumer as AccordionConsumer,
-} from '../AccordionContainer/AccordionContainer';
+} from '../AccordionContext/AccordionContext';
 import { nextUuid } from '../helpers/uuid';
 import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
 import AccordionItem from './AccordionItem';
