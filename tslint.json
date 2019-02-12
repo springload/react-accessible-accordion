@@ -25,7 +25,10 @@
         ],
         "variable-name": false,
         "no-default-export": false,
-        "no-implicit-dependencies": [true, ["enzyme", "react-test-renderer"]],
+        "no-implicit-dependencies": [
+            true,
+            ["enzyme", "react-test-renderer", "uuid"]
+        ],
         "no-null-keyword": false,
         "export-name": false,
         "completed-docs": false,

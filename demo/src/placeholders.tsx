@@ -1,14 +1,17 @@
 // tslint:disable react-a11y-anchors
 
 import * as React from 'react';
+import { v4 } from 'uuid';
 
 export type Placeholder = {
+    uuid: string;
     heading: string;
     panel: JSX.Element;
 };
 
 const placeholders: Placeholder[] = [
     {
+        uuid: v4(),
         heading: 'What harsh truths do you prefer to ignore?',
         panel: (
             <>
@@ -20,6 +23,7 @@ const placeholders: Placeholder[] = [
         ),
     },
     {
+        uuid: v4(),
         heading: 'Is free will real or just an illusion?',
         panel: (
             <>
@@ -31,6 +35,7 @@ const placeholders: Placeholder[] = [
         ),
     },
     {
+        uuid: v4(),
         heading: 'Is there a meaning to life? If so, what is it?',
         panel: (
             <>
@@ -41,6 +46,7 @@ const placeholders: Placeholder[] = [
         ),
     },
     {
+        uuid: v4(),
         heading: 'Is the meaning of life the same for animals and humans?',
         panel: (
             <>
@@ -52,6 +58,7 @@ const placeholders: Placeholder[] = [
         ),
     },
     {
+        uuid: v4(),
         heading: 'Where is the line between art and not art?',
         panel: (
             <>
