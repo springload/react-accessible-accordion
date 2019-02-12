@@ -1,7 +1,7 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
 import * as ReactTestRenderer from 'react-test-renderer';
-import AccordionStore, { Item } from '../AccordionStore/AccordionStore';
+import AccordionStore from '../AccordionStore/AccordionStore';
 import { Consumer, Provider, ProviderProps } from './AccordionContext';
 
 describe('Accordion', () => {
@@ -40,11 +40,11 @@ describe('Accordion', () => {
                 expect(provider.state.allowMultipleExpanded).toEqual(true);
             });
 
-            it('respects the initialItems prop', () => {
-                const initialItems = [{ uuid: 'foo', expanded: false }];
-                const provider = createProvider({ initialItems });
+            it('respects the preExpanded prop', () => {
+                const preExpanded = ['foo'];
+                const provider = createProvider({ preExpanded });
 
-                expect(provider.state.items).toBe(initialItems);
+                expect(provider.state.expanded).toBe(preExpanded);
             });
 
             it('respects the children prop', () => {
@@ -55,110 +55,103 @@ describe('Accordion', () => {
             });
         });
 
-        describe('addItem', () => {
-            it('proxies state.addItem', () => {
-                const provider = createProvider();
-                const stateAddItem = jest.spyOn(provider.state, 'addItem');
+        // describe('addItem', () => {
+        //     it('proxies state.addItem', () => {
+        //         const provider = createProvider();
+        //         const stateAddItem = jest.spyOn(provider.state, 'addItem');
 
-                const item = { uuid: 'foo', expanded: false };
+        //         const item = { uuid: 'foo', expanded: false };
 
-                provider.addItem(item);
+        //         provider.addItem(item);
 
-                expect(stateAddItem).toHaveBeenCalledWith(item);
-            });
+        //         expect(stateAddItem).toHaveBeenCalledWith(item);
+        //     });
 
-            it('immutably updates state', () => {
-                const provider = createProvider();
-                const { state } = provider;
+        //     it('immutably updates state', () => {
+        //         const provider = createProvider();
+        //         const { state } = provider;
 
-                const item = { uuid: 'foo', expanded: false };
+        //         const item = { uuid: 'foo', expanded: false };
 
-                provider.addItem(item);
+        //         provider.addItem(item);
 
-                expect(provider.state).not.toBe(state);
-            });
-        });
+        //         expect(provider.state).not.toBe(state);
+        //     });
+        // });
 
-        describe('removeItem', () => {
-            it('proxies state.removeItem', () => {
-                const provider = createProvider();
-                const stateRemoveItem = jest.spyOn(
-                    provider.state,
-                    'removeItem',
-                );
+        // describe('removeItem', () => {
+        //     it('proxies state.removeItem', () => {
+        //         const provider = createProvider();
+        //         const stateRemoveItem = jest.spyOn(
+        //             provider.state,
+        //             'removeItem',
+        //         );
 
-                provider.removeItem('foo');
+        //         provider.removeItem('foo');
 
-                expect(stateRemoveItem).toHaveBeenCalledWith('foo');
-            });
+        //         expect(stateRemoveItem).toHaveBeenCalledWith('foo');
+        //     });
 
-            it('immutably updates state', () => {
-                const provider = createProvider();
-                const { state } = provider;
+        //     it('immutably updates state', () => {
+        //         const provider = createProvider();
+        //         const { state } = provider;
 
-                provider.removeItem('foo');
+        //         provider.removeItem('foo');
 
-                expect(provider.state).not.toBe(state);
-            });
-        });
+        //         expect(provider.state).not.toBe(state);
+        //     });
+        // });
 
         describe('setExpanded', () => {
             it('proxies state.setExpanded', () => {
-                const item = { uuid: 'foo', expanded: false };
-                const provider = createProvider({ initialItems: [item] });
+                const uuid = 'foo';
+                const provider = createProvider();
 
                 const stateSetExpanded = jest.spyOn(
                     provider.state,
                     'setExpanded',
                 );
 
-                provider.setExpanded(item.uuid, !item.expanded);
+                provider.setExpanded(uuid, true);
 
-                expect(stateSetExpanded).toHaveBeenCalledWith(
-                    item.uuid,
-                    !item.expanded,
-                );
+                expect(stateSetExpanded).toHaveBeenCalledWith(uuid, true);
             });
 
             it('immutably updates state', () => {
-                const item = { uuid: 'foo', expanded: false };
-                const provider = createProvider({ initialItems: [item] });
+                const uuid = 'foo';
+                const provider = createProvider();
                 const { state } = provider;
 
-                provider.setExpanded(item.uuid, !item.expanded);
+                provider.setExpanded(uuid, true);
 
                 expect(provider.state).not.toBe(state);
             });
 
             it("invokes 'onChange' with array of expanded uuids", () => {
                 const onChange = jest.fn();
-                const item = {
-                    uuid: 'foo',
-                    expanded: false,
-                };
+                const uuid = 'foo';
 
                 const provider = createProvider({
                     onChange,
-                    initialItems: [item],
                 });
 
-                provider.setExpanded(item.uuid, true);
+                provider.setExpanded(uuid, true);
 
-                expect(onChange).toHaveBeenCalledWith([item.uuid]);
+                expect(onChange).toHaveBeenCalledWith([uuid]);
             });
         });
 
         describe('isItemDisabled', () => {
             it('proxies state.isItemDisabled', () => {
-                const item = { uuid: 'foo', expanded: false };
-                const provider = createProvider({ initialItems: [item] });
+                const uuid = 'foo';
+                const provider = createProvider();
 
                 const stateIsItemDisabled = jest.spyOn(
                     provider.state,
                     'isItemDisabled',
                 );
 
-                provider.isItemDisabled(item.uuid);
+                provider.isItemDisabled(uuid);
 
                 expect(stateIsItemDisabled).toHaveBeenCalledWith('foo');
             });
@@ -176,13 +169,12 @@ describe('Accordion', () => {
 
                 expect(children).toHaveBeenCalledWith(
                     expect.objectContaining({
-                        items: expect.any(Array),
+                        expanded: expect.any(Array),
                         allowMultipleExpanded: expect.any(Boolean),
                         allowZeroExpanded: expect.any(Boolean),
-                        addItem: expect.any(Function),
-                        removeItem: expect.any(Function),
                         setExpanded: expect.any(Function),
                         isItemDisabled: expect.any(Function),
+                        isItemExpanded: expect.any(Function),
                     }),
                 );
             });

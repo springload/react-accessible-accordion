@@ -3,7 +3,6 @@ import {
     AccordionContext,
     Consumer as AccordionConsumer,
 } from '../AccordionContext/AccordionContext';
-import { Item } from '../AccordionStore/AccordionStore';
 import {
     Consumer as ItemConsumer,
     ItemContext,
@@ -30,16 +29,14 @@ export default class AccordionItemHeadingWrapper extends React.Component<
         itemContext: ItemContext,
     ): JSX.Element => {
         const { uuid } = itemContext;
-        const { items, allowZeroExpanded, isItemDisabled } = accordionContext;
-        const item = items.filter(
-            (stateItem: Item) => stateItem.uuid === uuid,
-        )[0];
-        const disabled = isItemDisabled(uuid);
+        const disabled = accordionContext.isItemDisabled(uuid);
+        const expanded = accordionContext.isItemExpanded(uuid);
 
         return (
             <AccordionItemHeading
                 {...this.props}
-                {...item}
+                uuid={uuid}
+                expanded={expanded}
                 disabled={disabled}
                 setExpanded={accordionContext.setExpanded}
             />

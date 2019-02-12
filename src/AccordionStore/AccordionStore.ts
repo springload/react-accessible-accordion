@@ -3,90 +3,44 @@
 import * as React from 'react';
 import { UUID } from '../ItemContext/ItemContext';
 
-export type Item = {
-    uuid: UUID;
-    expanded: boolean;
-};
-
 export default class AccordionStore {
-    public readonly items: Item[];
+    public readonly expanded: UUID[];
     public readonly allowMultipleExpanded: boolean;
     public readonly allowZeroExpanded: boolean;
 
     constructor({
-        items = [],
+        expanded = [],
         allowMultipleExpanded = false,
         allowZeroExpanded = false,
     }: {
-        items?: Item[];
+        expanded?: UUID[];
         allowMultipleExpanded?: boolean;
         allowZeroExpanded?: boolean;
     }) {
-        this.items = items;
+        this.expanded = expanded;
         this.allowMultipleExpanded = allowMultipleExpanded;
         this.allowZeroExpanded = allowZeroExpanded;
     }
 
-    public readonly addItem = (newItem: Item): AccordionStore => {
-        if (this.items.some((item: Item) => item.uuid === newItem.uuid)) {
-            // tslint:disable-next-line:no-console
-            console.error(
-                `AccordionItem error: One item already has the uuid "${
-                    newItem.uuid
-                }". Uuid property must be unique. See: https://github.com/springload/react-accessible-accordion#accordionitem`,
-            );
-        }
-        if (!this.allowMultipleExpanded && newItem.expanded) {
-            return this.augment({
-                items: [
-                    ...this.items.map((item: Item) => ({
-                        ...item,
-                        expanded: false,
-                    })),
-                    newItem,
-                ],
-            });
-        }
-
-        return this.augment({
-            ...this,
-            items: [...this.items, newItem],
-        });
-    };
-
-    public readonly removeItem = (key: UUID): AccordionStore => {
-        return this.augment({
-            items: this.items.filter((item: Item) => item.uuid !== key),
-        });
-    };
-
     public readonly setExpanded = (
-        key: UUID,
+        uuid: UUID,
         expanded: boolean,
     ): AccordionStore => {
-        if (this.isItemDisabled(key)) {
+        if (this.isItemDisabled(uuid)) {
             return this;
         }
 
-        return this.augment({
-            items: this.items.map((item: Item) => {
-                if (item.uuid === key) {
-                    return {
-                        ...item,
-                        expanded,
-                    };
-                }
-                if (!this.allowMultipleExpanded && expanded) {
-                    // If this is an accordion that doesn't allow multiple expansions, we might need to collapse the other expanded item.
-                    return {
-                        ...item,
-                        expanded: false,
-                    };
-                }
-
-                return item;
-            }),
-        });
+        if (expanded) {
+            return this.augment({
+                expanded: [...this.expanded, uuid],
+            });
+        } else {
+            return this.augment({
+                expanded: this.expanded.filter(
+                    (expandedUuid: UUID): boolean => expandedUuid !== uuid,
+                ),
+            });
+        }
     };
 
     /*
@@ -96,26 +50,30 @@ export default class AccordionStore {
      * and if the accordion does not permit the panel to be collapsed, the
      * header button element has aria-disabled set to true.”
      */
-    public readonly isItemDisabled = (key: UUID): boolean => {
-        const item = this.items.find(({ uuid }: Item): boolean => uuid === key);
-        const expandedItems = this.items.filter(
-            ({ expanded }: Item) => expanded,
-        );
+    public readonly isItemDisabled = (uuid: UUID): boolean => {
+        const isExpanded = this.isItemExpanded(uuid);
+        const isOnlyOneExpanded = this.expanded.length === 1;
 
+        return Boolean(
+            isExpanded && !this.allowZeroExpanded && isOnlyOneExpanded,
+        );
+    };
+
+    public readonly isItemExpanded = (uuid: UUID): boolean => {
         return (
-            item.expanded &&
-            !this.allowZeroExpanded &&
-            expandedItems.length === 1
+            this.expanded.findIndex(
+                (expandedUuid: UUID) => expandedUuid === uuid,
+            ) !== -1
         );
     };
 
     private readonly augment = (args: {
-        items?: Item[];
+        expanded?: UUID[];
         allowMultipleExpanded?: boolean;
         allowZeroExpanded?: boolean;
     }): AccordionStore => {
         return new AccordionStore({
-            items: this.items,
+            expanded: this.expanded,
             allowMultipleExpanded: this.allowMultipleExpanded,
             allowZeroExpanded: this.allowZeroExpanded,
             ...args,

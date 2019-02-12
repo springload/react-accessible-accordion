@@ -3,7 +3,6 @@ import {
     AccordionContext,
     Consumer as AccordionConsumer,
 } from '../AccordionContext/AccordionContext';
-import { Item } from '../AccordionStore/AccordionStore';
 import {
     Consumer as ItemConsumer,
     ItemContext,
@@ -28,15 +27,10 @@ export default class AccordionItemStateWrapper extends React.Component<
         itemContext: ItemContext,
     ): JSX.Element => {
         const { uuid } = itemContext;
-        const { items } = accordionContext;
-        const item = items.filter(
-            (stateItem: Item) => stateItem.uuid === uuid,
-        )[0];
         const { children } = this.props;
+        const expanded = accordionContext.isItemExpanded(uuid);
 
-        return item ? (
-            <AccordionItemState expanded={item.expanded} children={children} />
-        ) : null;
+        return <AccordionItemState expanded={expanded} children={children} />;
     };
 
     render(): JSX.Element {

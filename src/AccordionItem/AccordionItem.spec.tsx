@@ -3,9 +3,8 @@ import * as React from 'react';
 import { Provider as AccordionProvider } from '../AccordionContext/AccordionContext';
 import { default as AccordionItemHeading } from '../AccordionItemHeading/AccordionItemHeading.wrapper';
 import { default as AccordionItemPanel } from '../AccordionItemPanel/AccordionItemPanel.wrapper';
-import { Item } from '../AccordionStore/AccordionStore';
 import { resetNextUuid } from '../helpers/uuid';
-import { Provider as ItemProvider } from '../ItemContext/ItemContext';
+import { Provider as ItemProvider, UUID } from '../ItemContext/ItemContext';
 import { default as AccordionItem } from './AccordionItem.wrapper';
 
 describe('AccordionItem', () => {
@@ -190,95 +189,6 @@ describe('AccordionItem', () => {
         expect(wrapper).toMatchSnapshot();
     });
 
-    it('can dynamically set expanded prop', () => {
-        interface WrapperProps {
-            expanded: boolean;
-        }
-
-        const Wrapper: React.SFC<WrapperProps> = ({
-            expanded,
-        }: WrapperProps): JSX.Element => (
-            <AccordionProvider>
-                <AccordionItem expanded={expanded}>
-                    <AccordionItemHeading>
-                        <div>Fake title</div>
-                    </AccordionItemHeading>
-                </AccordionItem>
-            </AccordionProvider>
-        );
-
-        const wrapper = mount(<Wrapper expanded={false} />);
-        const instance = wrapper
-            .find(AccordionProvider)
-            .instance() as AccordionProvider;
-
-        wrapper.setProps({ expanded: true });
-
-        expect(
-            instance.state.items.filter((item: Item) => item.expanded === true)
-                .length,
-        ).toEqual(1);
-    });
-
-    it('can dynamically unset expanded prop when there is only one item expanded and allowZeroExpanded is set to true', () => {
-        interface WrapperProps {
-            expanded: boolean;
-        }
-
-        const Wrapper: React.SFC<WrapperProps> = ({
-            expanded,
-        }: WrapperProps): JSX.Element => (
-            <AccordionProvider allowZeroExpanded={true}>
-                <AccordionItem expanded={expanded}>
-                    <AccordionItemHeading>
-                        <div>Fake title</div>
-                    </AccordionItemHeading>
-                </AccordionItem>
-            </AccordionProvider>
-        );
-
-        const wrapper = mount(<Wrapper expanded={true} />);
-        const instance = wrapper
-            .find(AccordionProvider)
-            .instance() as AccordionProvider;
-
-        wrapper.setProps({ expanded: undefined });
-
-        expect(
-            instance.state.items.filter((item: Item) => item.expanded === true)
-                .length,
-        ).toEqual(0);
-    });
-
-    it('can dynamically unset expanded prop when there is more than one item expanded', () => {
-        const Wrapper = ({ expanded }: { expanded: boolean }): JSX.Element => (
-            <AccordionProvider>
-                <AccordionItem expanded={expanded}>
-                    <AccordionItemHeading>
-                        <div>Fake title</div>
-                    </AccordionItemHeading>
-                </AccordionItem>
-                <AccordionItem expanded={true}>
-                    <AccordionItemHeading>
-                        <div>Fake title</div>
-                    </AccordionItemHeading>
-                </AccordionItem>
-            </AccordionProvider>
-        );
-
-        const wrapper = mount(<Wrapper expanded={true} />);
-        const instance = wrapper
-            .find(AccordionProvider)
-            .instance() as AccordionProvider;
-
-        wrapper.setProps({ expanded: undefined });
-
-        expect(
-            instance.state.items.filter((item: Item) => item.expanded === true)
-                .length,
-        ).toEqual(1);
-    });
-
     it('dynamically changing arbitrary props does not affect expanded state', () => {
         const Wrapper = ({ className }: { className: string }): JSX.Element => (
             <AccordionProvider>
@@ -296,56 +206,7 @@ describe('AccordionItem', () => {
 
         wrapper.setProps({ className: 'bar' });
 
-        expect(
-            instance.state.items.filter((item: Item) => item.expanded === true)
-                .length,
-        ).toEqual(0);
-    });
-
-    it('does not render if its uuid is not registered in accordionContext', () => {
-        const wrapper = mount(
-            <AccordionProvider>
-                <AccordionItem>Fake Title</AccordionItem>
-            </AccordionProvider>,
-        );
-
-        wrapper.instance().setState(() => ({
-            items: [],
-        }));
-        wrapper.update();
-
-        expect(
-            wrapper.find(AccordionItem).find('div.accordion__item').length,
-        ).toEqual(0);
-    });
-
-    it('correctly unregisters itself on unmount in an accordion that allows zero items to be expanded', () => {
-        const Wrapper = ({
-            showChild,
-        }: {
-            showChild: boolean;
-        }): JSX.Element => (
-            <AccordionProvider allowZeroExpanded={true}>
-                {showChild && (
-                    <AccordionItem>
-                        <AccordionItemHeading>
-                            <div>Fake title</div>
-                        </AccordionItemHeading>
-                    </AccordionItem>
-                )}
-            </AccordionProvider>
-        );
-
-        const wrapper = mount(<Wrapper showChild={true} />);
-        const instance = wrapper
-            .find(AccordionProvider)
-            .instance() as AccordionProvider;
-
-        expect(instance.state.items.length).toEqual(1);
-
-        wrapper.setProps({ showChild: false });
-
-        expect(instance.state.items.length).toEqual(0);
+        expect(instance.state.expanded.length).toEqual(0);
     });
 
     it('respects arbitrary user-defined props', () => {
@@ -393,8 +254,9 @@ describe('AccordionItem', () => {
             .instance() as AccordionProvider;
 
         expect(
-            instance.state.items.filter((item: Item) => item.uuid === uuid)
-                .length,
+            instance.state.expanded.filter(
+                (expandedUuid: UUID) => expandedUuid === uuid,
+            ).length,
         ).toEqual(1);
 
         expect(wrapper.find('div[data-enzyme]').length).toEqual(1);

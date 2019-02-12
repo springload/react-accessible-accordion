@@ -3,7 +3,6 @@ import {
     AccordionContext,
     Consumer as AccordionConsumer,
 } from '../AccordionContext/AccordionContext';
-import { Item } from '../AccordionStore/AccordionStore';
 import {
     Consumer as ItemConsumer,
     ItemContext,
@@ -27,18 +26,17 @@ export default class AccordionItemPanelWrapper extends React.Component<
         itemContext: ItemContext,
     ): JSX.Element => {
         const { uuid } = itemContext;
-        const { items, allowMultipleExpanded } = accordionContext;
-        const item = items.filter(
-            (stateItem: Item) => stateItem.uuid === uuid,
-        )[0];
+        const { allowMultipleExpanded, isItemExpanded } = accordionContext;
+        const expanded = isItemExpanded(uuid);
 
-        return item ? (
+        return (
             <AccordionItemPanel
                 {...this.props}
-                {...item}
+                uuid={uuid}
+                expanded={expanded}
                 allowMultipleExpanded={allowMultipleExpanded}
             />
-        ) : null;
+        );
     };
 
     render(): JSX.Element {

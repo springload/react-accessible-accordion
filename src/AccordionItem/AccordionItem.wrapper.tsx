@@ -10,7 +10,6 @@ import AccordionItem from './AccordionItem';
 
 type AccordionItemWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
     expandedClassName?: string;
-    expanded?: boolean;
     uuid?: string;
 };
 
@@ -23,23 +22,19 @@ export default class AccordionItemWrapper extends React.Component<
     static defaultProps: AccordionItemWrapperProps = {
         className: 'accordion__item',
         expandedClassName: '',
-        expanded: false,
         uuid: undefined,
     };
 
     id: number = nextUuid();
 
     renderChildren = (accordionContext: AccordionContext): JSX.Element => {
-        const { uuid, ...rest } = this.props;
-        const itemUuid = uuid !== undefined ? uuid : this.id;
+        const { uuid = this.id, ...rest } = this.props;
+
+        const expanded = accordionContext.isItemExpanded(uuid);
 
         return (
-            <ItemProvider uuid={itemUuid}>
-                <AccordionItem
-                    {...rest}
-                    uuid={itemUuid}
-                    accordionContext={accordionContext}
-                />
+            <ItemProvider uuid={uuid}>
+                <AccordionItem {...rest} expanded={expanded} />
             </ItemProvider>
         );
     };
