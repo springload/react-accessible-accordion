@@ -14,6 +14,7 @@ type AccordionWrapperProps = Omit<
     React.HTMLAttributes<HTMLDivElement>,
     'onChange'
 > & {
+    preExpanded?: UUID[];
     allowMultipleExpanded?: boolean;
     allowZeroExpanded?: boolean;
     onChange(args: UUID[]): void;
@@ -46,6 +47,7 @@ export default class AccordionWrapper extends React.Component<
     render(): JSX.Element {
         return (
             <Provider
+                preExpanded={this.props.preExpanded}
                 allowMultipleExpanded={this.props.allowMultipleExpanded}
                 allowZeroExpanded={this.props.allowZeroExpanded}
                 onChange={this.props.onChange}
