@@ -1,639 +1,199 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
-import { Item } from '../AccordionStore/AccordionStore';
-import { Consumer, Provider } from './AccordionContext';
-
-const DEFAULT_ITEM: Item = {
-    uuid: 'foo',
-    expanded: false,
-};
+import * as ReactTestRenderer from 'react-test-renderer';
+import AccordionStore, { Item } from '../AccordionStore/AccordionStore';
+import { Consumer, Provider, ProviderProps } from './AccordionContext';
 
 describe('Accordion', () => {
-    it('correctly instantiates with all expected methods', () => {
-        const container = mount(<Provider />).instance() as Provider;
-        expect(container).toBeDefined();
-        expect(container.addItem).toBeDefined();
-        expect(container.removeItem).toBeDefined();
-        expect(container.setExpanded).toBeDefined();
-    });
+    describe('Provider', () => {
+        function createProvider(props: ProviderProps = {}): Provider {
+            const provider = ReactTestRenderer.create(
+                <Provider {...props} />,
+            ).getInstance();
 
-    it('works without any props', () => {
-        const mock = jest.fn(() => null);
+            // This is all just type-casting:
 
-        mount(
-            <Provider>
-                <Consumer>{mock}</Consumer>
-            </Provider>,
-        );
+            if (provider instanceof Provider) {
+                return provider;
+            }
+            throw new Error();
+        }
 
-        expect(mock).toHaveBeenCalledWith({
-            allowMultipleExpanded: false,
-            allowZeroExpanded: false,
-            items: [],
-            addItem: expect.anything(),
-            removeItem: expect.anything(),
-            setExpanded: expect.anything(),
-            isItemDisabled: expect.anything(),
-        });
-    });
+        describe('initialization', () => {
+            it('instantiates AccordionStore as state', () => {
+                const provider = createProvider();
 
-    it('respects the `allowMultipleExpanded` prop', () => {
-        const mock = jest.fn(() => null);
+                expect(provider.state).toBeInstanceOf(AccordionStore);
+            });
 
-        mount(
-            <Provider allowMultipleExpanded={true}>
-                <Consumer>{mock}</Consumer>
-            </Provider>,
-        );
+            it('respects the allowZeroExpanded prop', () => {
+                const provider = createProvider({ allowZeroExpanded: true });
 
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                allowMultipleExpanded: true,
-            }),
-        );
-    });
+                expect(provider.state.allowZeroExpanded).toEqual(true);
+            });
 
-    it('respects the `allowZeroExpanded` prop', () => {
-        const mock = jest.fn(() => null);
+            it('respects the allowMultipleExpanded prop', () => {
+                const provider = createProvider({
+                    allowMultipleExpanded: true,
+                });
 
-        mount(
-            <Provider allowZeroExpanded={true}>
-                <Consumer>{mock}</Consumer>
-            </Provider>,
-        );
+                expect(provider.state.allowMultipleExpanded).toEqual(true);
+            });
 
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                allowZeroExpanded: true,
-            }),
-        );
-    });
+            it('respects the initialItems prop', () => {
+                const initialItems = [{ uuid: 'foo', expanded: false }];
+                const provider = createProvider({ initialItems });
 
-    it('respects the `items` prop', () => {
-        const mock = jest.fn(() => null);
-        const items = [DEFAULT_ITEM];
+                expect(provider.state.items).toBe(initialItems);
+            });
 
-        mount(
-            <Provider initialItems={items}>
-                <Consumer>{mock}</Consumer>
-            </Provider>,
-        );
-
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                items,
-            }),
-        );
-    });
-
-    it('can add an item', () => {
-        const mock = jest.fn(() => null);
-
-        const instance = mount(
-            <Provider>
-                <Consumer>{mock}</Consumer>
-            </Provider>,
-        ).instance() as Provider;
-
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({ items: [] }),
-        );
-
-        instance.addItem(DEFAULT_ITEM);
-
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({ items: [DEFAULT_ITEM] }),
-        );
-    });
-
-    it('can remove an item when more than one is expanded', () => {
-        const mock = jest.fn(() => null);
-        const itemFoo = { ...DEFAULT_ITEM, expanded: true, uuid: 'foo' };
-        const itemBar = { ...DEFAULT_ITEM, expanded: true, uuid: 'bar' };
-        const items = [itemFoo, itemBar];
-
-        const instance = mount(
-            <Provider initialItems={items}>
-                <Consumer>{mock}</Consumer>
-            </Provider>,
-        ).instance() as Provider;
-
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                items,
-            }),
-        );
-
-        instance.removeItem(itemFoo.uuid);
-
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                items: [itemBar],
-            }),
-        );
-    });
-
-    it("can't remove an item when only one is expanded and the accordion doesn't allow zero expansions", () => {
-        const mock = jest.fn(() => null);
-        const itemFoo = { ...DEFAULT_ITEM, expanded: true, uuid: 'foo' };
-        const items = [itemFoo];
-
-        const instance = mount(
-            <Provider initialItems={items}>
-                <Consumer>{mock}</Consumer>
-            </Provider>,
-        ).instance() as Provider;
-
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                items,
-            }),
-        );
-
-        instance.removeItem(itemFoo.uuid);
-
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                items: [itemFoo],
-            }),
-        );
-    });
-
-    it('can remove an item in an accordion that allows zero expansions when only one item is expanded', () => {
-        const mock = jest.fn(() => null);
-        const itemFoo = { ...DEFAULT_ITEM, expanded: true, uuid: 'foo' };
-        const items = [itemFoo];
-
-        const instance = mount(
-            <Provider allowZeroExpanded={true} initialItems={items}>
-                <Consumer>{mock}</Consumer>
-            </Provider>,
-        ).instance() as Provider;
-
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                items,
-            }),
-        );
-
-        instance.removeItem(itemFoo.uuid);
-
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                items: [],
-            }),
-        );
-    });
-
-    it("adding an expanded item to an accordion that doesn't allow multiple expansions closes other items", () => {
-        const mock = jest.fn(() => null);
-        const instance = mount(
-            <Provider
-                initialItems={[
-                    { ...DEFAULT_ITEM, uuid: 'foo', expanded: true },
-                ]}
-            >
-                <Consumer>{mock}</Consumer>
-            </Provider>,
-        ).instance() as Provider;
-
-        instance.addItem({
-            ...DEFAULT_ITEM,
-            uuid: 'bar',
-            expanded: true,
+            it('respects the children prop', () => {
+                const HELLO_WORLD = 'Hello World';
+                expect(
+                    mount(<Provider>{HELLO_WORLD}</Provider>).text(),
+                ).toEqual(HELLO_WORLD);
+            });
         });
 
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                items: [
-                    expect.objectContaining({ uuid: 'foo', expanded: false }),
-                    expect.objectContaining({ uuid: 'bar', expanded: true }),
-                ],
-            }),
-        );
-    });
+        describe('addItem', () => {
+            it('proxies state.addItem', () => {
+                const provider = createProvider();
+                const stateAddItem = jest.spyOn(provider.state, 'addItem');
 
-    it("adding an expanded item to an accordion that allows multiple expansions doesn't close other items", () => {
-        const mock = jest.fn(() => null);
-        const instance = mount(
-            <Provider
-                allowMultipleExpanded={true}
-                initialItems={[
-                    { ...DEFAULT_ITEM, uuid: 'foo', expanded: true },
-                ]}
-            >
-                <Consumer>{mock}</Consumer>
-            </Provider>,
-        ).instance() as Provider;
+                const item = { uuid: 'foo', expanded: false };
 
-        instance.addItem({
-            ...DEFAULT_ITEM,
-            uuid: 'bar',
-            expanded: true,
+                provider.addItem(item);
+
+                expect(stateAddItem).toHaveBeenCalledWith(item);
+            });
+
+            it('immutably updates state', () => {
+                const provider = createProvider();
+                const { state } = provider;
+
+                const item = { uuid: 'foo', expanded: false };
+
+                provider.addItem(item);
+
+                expect(provider.state).not.toBe(state);
+            });
         });
 
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                items: [
-                    expect.objectContaining({ uuid: 'foo', expanded: true }),
-                    expect.objectContaining({ uuid: 'bar', expanded: true }),
-                ],
-            }),
-        );
-    });
+        describe('removeItem', () => {
+            it('proxies state.removeItem', () => {
+                const provider = createProvider();
+                const stateRemoveItem = jest.spyOn(
+                    provider.state,
+                    'removeItem',
+                );
 
-    it('can expand an item', () => {
-        const mock = jest.fn(() => null);
-        const item = {
-            ...DEFAULT_ITEM,
-            expanded: false,
-        };
+                provider.removeItem('foo');
 
-        const instance = mount(
-            <Provider initialItems={[item]}>
-                <Consumer>{mock}</Consumer>
-            </Provider>,
-        ).instance() as Provider;
+                expect(stateRemoveItem).toHaveBeenCalledWith('foo');
+            });
 
-        instance.setExpanded(item.uuid, !item.expanded);
+            it('immutably updates state', () => {
+                const provider = createProvider();
+                const { state } = provider;
 
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                items: [
-                    {
-                        ...item,
-                        expanded: !item.expanded,
-                    },
-                ],
-            }),
-        );
-    });
+                provider.removeItem('foo');
 
-    it("setting the expanded property to true in an accordion that doesn't allow multiple expansions closes all other items", () => {
-        const mock = jest.fn(() => null);
-        const fooItem = {
-            ...DEFAULT_ITEM,
-            uuid: 'foo',
-            expanded: true,
-        };
-        const barItem = {
-            ...DEFAULT_ITEM,
-            uuid: 'bar',
-            expanded: false,
-        };
-
-        const instance = mount(
-            <Provider initialItems={[fooItem, barItem]}>
-                <Consumer>{mock}</Consumer>
-            </Provider>,
-        ).instance() as Provider;
-
-        instance.setExpanded(barItem.uuid, true);
-
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                items: [
-                    expect.objectContaining({ expanded: false }),
-                    expect.objectContaining({ expanded: true }),
-                ],
-            }),
-        );
-    });
-
-    it("setting the expanded property to true in an accordion that allows multiple expansions doesn't close all other items", () => {
-        const mock = jest.fn(() => null);
-        const fooItem = {
-            ...DEFAULT_ITEM,
-            uuid: 'foo',
-            expanded: true,
-        };
-        const barItem = {
-            ...DEFAULT_ITEM,
-            uuid: 'bar',
-            expanded: false,
-        };
-
-        const instance = mount(
-            <Provider
-                allowMultipleExpanded={true}
-                initialItems={[fooItem, barItem]}
-            >
-                <Consumer>{mock}</Consumer>
-            </Provider>,
-        ).instance() as Provider;
-
-        instance.setExpanded(barItem.uuid, true);
-
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                items: [
-                    expect.objectContaining({ expanded: true }),
-                    expect.objectContaining({ expanded: true }),
-                ],
-            }),
-        );
-    });
-
-    it('setting the expanded property to false in an accordion that allows zero expansions when there is only one item expanded closes that item', () => {
-        const mock = jest.fn(() => null);
-        const fooItem = {
-            ...DEFAULT_ITEM,
-            uuid: 'foo',
-            expanded: true,
-        };
-
-        const instance = mount(
-            <Provider allowZeroExpanded={true} initialItems={[fooItem]}>
-                <Consumer>{mock}</Consumer>
-            </Provider>,
-        ).instance() as Provider;
-
-        instance.setExpanded(fooItem.uuid, false);
-
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                items: [expect.objectContaining({ expanded: false })],
-            }),
-        );
-    });
-
-    it("setting the expanded property to false in an accordion that doesn't allow zero expansions when there is only one item expanded doesn't close that item", () => {
-        const mock = jest.fn(() => null);
-        const fooItem = {
-            ...DEFAULT_ITEM,
-            uuid: 'foo',
-            expanded: true,
-        };
-
-        const instance = mount(
-            <Provider initialItems={[fooItem]}>
-                <Consumer>{mock}</Consumer>
-            </Provider>,
-        ).instance() as Provider;
-
-        instance.setExpanded(fooItem.uuid, false);
-
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                items: [expect.objectContaining({ expanded: true })],
-            }),
-        );
-    });
-
-    it("setting the expanded property to false on an item in an accordion that doesn't allow zero expansions when there are more than one item expanded closes that item", () => {
-        const mock = jest.fn(() => null);
-        const fooItem = {
-            ...DEFAULT_ITEM,
-            uuid: 'foo',
-            expanded: true,
-        };
-        const barItem = {
-            ...DEFAULT_ITEM,
-            uuid: 'bar',
-            expanded: true,
-        };
-
-        const instance = mount(
-            <Provider initialItems={[fooItem, barItem]}>
-                <Consumer>{mock}</Consumer>
-            </Provider>,
-        ).instance() as Provider;
-
-        instance.setExpanded(fooItem.uuid, false);
-
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                items: [
-                    expect.objectContaining({ expanded: false }),
-                    expect.objectContaining({ expanded: true }),
-                ],
-            }),
-        );
-    });
-
-    /*
-     * These tests were mostly added to assert that the callback-style setState
-     * was being used and race-conditions weren't causing multiple setState
-     * calls to cancel one-another out.
-     */
-    describe('Race conditions', () => {
-        it('can add multiple items at the same time', () => {
-            const mock = jest.fn(() => null);
-            const fooItem = {
-                ...DEFAULT_ITEM,
-                uuid: 'foo',
-                expanded: true,
-            };
-            const barItem = {
-                ...DEFAULT_ITEM,
-                uuid: 'bar',
-                expanded: false,
-            };
-
-            const instance = mount(
-                <Provider>
-                    <Consumer>{mock}</Consumer>
-                </Provider>,
-            ).instance() as Provider;
-
-            instance.addItem(fooItem);
-            instance.addItem(barItem);
-
-            expect(mock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    items: [fooItem, barItem],
-                }),
-            );
+                expect(provider.state).not.toBe(state);
+            });
         });
 
-        it('can remove multiple items at the same time in an accordion that allows zero items to be expanded', () => {
-            const mock = jest.fn(() => null);
-            const fooItem = {
-                ...DEFAULT_ITEM,
-                uuid: 'foo',
-                expanded: true,
-            };
-            const barItem = {
-                ...DEFAULT_ITEM,
-                uuid: 'bar',
-                expanded: false,
-            };
+        describe('setExpanded', () => {
+            it('proxies state.setExpanded', () => {
+                const item = { uuid: 'foo', expanded: false };
+                const provider = createProvider({ initialItems: [item] });
 
-            const instance = mount(
-                <Provider
-                    allowZeroExpanded={true}
-                    initialItems={[fooItem, barItem]}
-                >
-                    <Consumer>{mock}</Consumer>
-                </Provider>,
-            ).instance() as Provider;
+                const stateSetExpanded = jest.spyOn(
+                    provider.state,
+                    'setExpanded',
+                );
 
-            instance.removeItem(fooItem.uuid);
-            instance.removeItem(barItem.uuid);
+                provider.setExpanded(item.uuid, !item.expanded);
 
-            expect(mock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    items: [],
-                }),
-            );
+                expect(stateSetExpanded).toHaveBeenCalledWith(
+                    item.uuid,
+                    !item.expanded,
+                );
+            });
+
+            it('immutably updates state', () => {
+                const item = { uuid: 'foo', expanded: false };
+                const provider = createProvider({ initialItems: [item] });
+                const { state } = provider;
+
+                provider.setExpanded(item.uuid, !item.expanded);
+
+                expect(provider.state).not.toBe(state);
+            });
+
+            it("invokes 'onChange' with array of expanded uuids", () => {
+                const onChange = jest.fn();
+                const item = {
+                    uuid: 'foo',
+                    expanded: false,
+                };
+
+                const provider = createProvider({
+                    onChange,
+                    initialItems: [item],
+                });
+
+                provider.setExpanded(item.uuid, true);
+
+                expect(onChange).toHaveBeenCalledWith([item.uuid]);
+            });
         });
 
-        it('can remove multiple items at the same time when there are more than that number of items expanded', () => {
-            const mock = jest.fn(() => null);
-            const fooItem = {
-                ...DEFAULT_ITEM,
-                uuid: 'foo',
-                expanded: true,
-            };
-            const barItem = {
-                ...DEFAULT_ITEM,
-                uuid: 'bar',
-                expanded: false,
-            };
-            const bazItem = {
-                ...DEFAULT_ITEM,
-                uuid: 'baz',
-                expanded: false,
-            };
+        describe('isItemDisabled', () => {
+            it('proxies state.isItemDisabled', () => {
+                const item = { uuid: 'foo', expanded: false };
+                const provider = createProvider({ initialItems: [item] });
 
-            const instance = mount(
-                <Provider
-                    allowZeroExpanded={true}
-                    initialItems={[fooItem, barItem, bazItem]}
-                >
-                    <Consumer>{mock}</Consumer>
-                </Provider>,
-            ).instance() as Provider;
+                const stateIsItemDisabled = jest.spyOn(
+                    provider.state,
+                    'isItemDisabled',
+                );
 
-            instance.removeItem(fooItem.uuid);
-            instance.removeItem(barItem.uuid);
+                provider.isItemDisabled(item.uuid);
 
-            expect(mock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    items: [bazItem],
-                }),
-            );
+                expect(stateIsItemDisabled).toHaveBeenCalledWith('foo');
+            });
         });
 
-        it("can't remove multiple items at the same time when there are only that number of items expanded in an accordion that doesn't allow zero expansions", () => {
-            const mock = jest.fn(() => null);
-            const fooItem = {
-                ...DEFAULT_ITEM,
-                uuid: 'foo',
-                expanded: true,
-            };
-            const barItem = {
-                ...DEFAULT_ITEM,
-                uuid: 'bar',
-                expanded: false,
-            };
+        describe('consumer', () => {
+            it('invokes the children prop if when context is Provided', () => {
+                const children = jest.fn(() => null);
 
-            const instance = mount(
-                <Provider initialItems={[fooItem, barItem]}>
-                    <Consumer>{mock}</Consumer>
-                </Provider>,
-            ).instance() as Provider;
+                ReactTestRenderer.create(
+                    <Provider>
+                        <Consumer>{children}</Consumer>
+                    </Provider>,
+                );
 
-            instance.removeItem(fooItem.uuid);
-            instance.removeItem(barItem.uuid);
+                expect(children).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        items: expect.any(Array),
+                        allowMultipleExpanded: expect.any(Boolean),
+                        allowZeroExpanded: expect.any(Boolean),
+                        addItem: expect.any(Function),
+                        removeItem: expect.any(Function),
+                        setExpanded: expect.any(Function),
+                        isItemDisabled: expect.any(Function),
+                    }),
+                );
+            });
 
-            expect(mock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    items: [fooItem, barItem],
-                }),
-            );
+            it('does not invoke the children prop if context is not Provided', () => {
+                const children = jest.fn(() => null);
+
+                ReactTestRenderer.create(<Consumer>{children}</Consumer>);
+
+                expect(children).not.toHaveBeenCalled();
+            });
         });
-
-        it('can update expanded state of multiple items at the same time in an accordion that allows multiple expansions', () => {
-            const mock = jest.fn(() => null);
-            const fooItem = {
-                ...DEFAULT_ITEM,
-                uuid: 'foo',
-                expanded: false,
-            };
-            const barItem = {
-                ...DEFAULT_ITEM,
-                uuid: 'bar',
-                expanded: false,
-            };
-
-            const instance = mount(
-                <Provider
-                    allowMultipleExpanded={true}
-                    initialItems={[fooItem, barItem]}
-                >
-                    <Consumer>{mock}</Consumer>
-                </Provider>,
-            ).instance() as Provider;
-
-            instance.setExpanded(fooItem.uuid, true);
-            instance.setExpanded(barItem.uuid, true);
-
-            expect(mock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    items: [
-                        expect.objectContaining({ expanded: true }),
-                        expect.objectContaining({ expanded: true }),
-                    ],
-                }),
-            );
-        });
-    });
-
-    it('raises console error in case of duplicate uuid', () => {
-        const uuid = 'uniqueCustomID';
-        jest.spyOn(global.console, 'error');
-
-        const instance = mount(<Provider />).instance() as Provider;
-
-        instance.addItem({
-            ...DEFAULT_ITEM,
-            uuid,
-            expanded: false,
-        });
-        instance.addItem({
-            ...DEFAULT_ITEM,
-            uuid,
-            expanded: false,
-        });
-
-        // tslint:disable-next-line:no-console
-        expect(console.error).toBeCalled();
-    });
-
-    it("triggers 'onChange' with array of expanded uuids when accordion doesn't allow multiple expansions", () => {
-        const onChange = jest.fn();
-        const item = {
-            ...DEFAULT_ITEM,
-            expanded: false,
-        };
-
-        const instance = mount(
-            <Provider initialItems={[item]} onChange={onChange} />,
-        ).instance() as Provider;
-
-        instance.setExpanded(item.uuid, true);
-
-        expect(onChange).toHaveBeenCalledWith([item.uuid]);
-    });
-
-    it('triggers "onChange" with array of expanded uuids when accordion allows multiple expansions', () => {
-        const onChange = jest.fn();
-        const item = {
-            ...DEFAULT_ITEM,
-            expanded: false,
-        };
-
-        const instance = mount(
-            <Provider
-                allowMultipleExpanded={true}
-                initialItems={[item]}
-                onChange={onChange}
-            />,
-        ).instance() as Provider;
-
-        instance.setExpanded(item.uuid, true);
-
-        expect(onChange).toHaveBeenCalledWith([item.uuid]);
     });
 });

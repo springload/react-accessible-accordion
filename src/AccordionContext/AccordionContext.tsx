@@ -4,7 +4,7 @@ import * as React from 'react';
 import AccordionStore, { Item } from '../AccordionStore/AccordionStore';
 import { UUID } from '../ItemContext/ItemContext';
 
-interface ProviderProps {
+export interface ProviderProps {
     initialItems?: Item[];
     allowMultipleExpanded?: boolean;
     allowZeroExpanded?: boolean;
