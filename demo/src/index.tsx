@@ -102,9 +102,33 @@ const App = (): JSX.Element => (
             ))}
         </Accordion>
 
-        <h2 className="u-margin-top">Pre expanded children</h2>
+        <h2 className="u-margin-top">Pre-expanded items</h2>
 
-        <p>TODO</p>
+        <p>
+            If you set <strong>preExpanded</strong>, then you can choose which
+            items are expanded on mount.
+        </p>
+
+        <p>
+            The strings passed to <strong>preExpanded</strong> are directly
+            related to the <strong>uuid</strong> props of{' '}
+            <strong>AccordionItem</strong>.
+        </p>
+
+        <Accordion preExpanded={[placeholders[0].uuid]}>
+            {placeholders.map((placeholder: Placeholder) => (
+                <AccordionItem
+                    key={placeholder.heading}
+                    uuid={placeholder.uuid}
+                >
+                    <AccordionItemHeading>
+                        <Arrow />
+                        {placeholder.heading}
+                    </AccordionItemHeading>
+                    <AccordionItemPanel>{placeholder.panel}</AccordionItemPanel>
+                </AccordionItem>
+            ))}
+        </Accordion>
 
         <h2 className="u-margin-top">Informative onChange</h2>
 
@@ -129,7 +153,7 @@ const App = (): JSX.Element => (
             {placeholders.map((placeholder: Placeholder) => (
                 <AccordionItem
                     key={placeholder.heading}
-                    uuid={placeholder.heading}
+                    uuid={placeholder.uuid}
                 >
                     <AccordionItemHeading>
                         <Arrow />
