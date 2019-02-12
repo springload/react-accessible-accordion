@@ -76,6 +76,7 @@
         "@types/react": "^16.8.2",
         "@types/react-dom": "^16.8.0",
         "@types/react-test-renderer": "^16.8.0",
+        "@types/uuid": "^3.4.4",
         "babel-core": "^7.0.0-bridge.0",
         "babel-jest": "^23.6.0",
         "babel-loader": "^8.0.4",
@@ -109,6 +110,7 @@
         "tslint-plugin-prettier": "^2.0.1",
         "tslint-react": "^3.6.0",
         "typescript": "^3.3.1",
+        "uuid": "^3.3.2",
         "webpack": "^4.5.0",
         "webpack-cli": "^3.1.0",
         "webpack-dev-server": "^3.1.3"
