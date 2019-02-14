@@ -10,18 +10,13 @@ import {
 
 import AccordionItemState from './AccordionItemState';
 
-type AccordionItemStateWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
-    expanded?: boolean;
+interface AccordionItemStateWrapperProps {
     children(expanded: boolean): JSX.Element;
-};
+}
 
 export default class AccordionItemStateWrapper extends React.Component<
     AccordionItemStateWrapperProps
 > {
-    static defaultProps: AccordionItemStateWrapperProps = {
-        children: (expanded: boolean): JSX.Element => null,
-    };
-
     renderChildren = (
         accordionContext: AccordionContext,
         itemContext: ItemContext,
