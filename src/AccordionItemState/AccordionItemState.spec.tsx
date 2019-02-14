@@ -16,14 +16,24 @@ describe('AccordionItemState', () => {
     }
 
     it('renders correctly with min params', () => {
-        const wrapper = mountItem(<AccordionItemState />);
+        const wrapper = mountItem(
+            <AccordionItemState>
+                {(expanded: boolean): JSX.Element => (
+                    <div>{`Expanded: ${expanded}`}</div>
+                )}
+            </AccordionItemState>,
+        );
         expect(wrapper).toMatchSnapshot();
     });
 
     it('does not render if no accordionContext found in context', () => {
         const wrapper = mount(
             <ItemProvider uuid="foo">
-                <AccordionItemState />
+                <AccordionItemState>
+                    {(expanded: boolean): JSX.Element => (
+                        <div>{`Expanded: ${expanded}`}</div>
+                    )}
+                </AccordionItemState>
             </ItemProvider>,
         );
 
@@ -33,7 +43,11 @@ describe('AccordionItemState', () => {
     it('does not render if no itemContext found in context', () => {
         const wrapper = mount(
             <AccordionProvider>
-                <AccordionItemState />
+                <AccordionItemState>
+                    {(expanded: boolean): JSX.Element => (
+                        <div>{`Expanded: ${expanded}`}</div>
+                    )}
+                </AccordionItemState>
             </AccordionProvider>,
         );
 
@@ -41,17 +55,14 @@ describe('AccordionItemState', () => {
     });
 
     it('renders correctly with different children prop', () => {
-        const renderPropComponent: React.SFC<boolean> = (
-            expanded: boolean,
-        ): JSX.Element =>
-            expanded ? (
-                <div className="expanded" />
-            ) : (
-                <div className="collapsed" />
-            );
-
         const wrapper = mountItem(
-            <AccordionItemState children={renderPropComponent} />,
+            <AccordionItemState>
+                {(expanded: boolean): JSX.Element => {
+                    const className = expanded ? 'expanded' : 'collapsed';
+
+                    return <div className={className} />;
+                }}
+            </AccordionItemState>,
         );
 
         expect(wrapper.find('div').hasClass('expanded')).toEqual(true);
@@ -59,27 +70,22 @@ describe('AccordionItemState', () => {
     });
 
     it('renders correctly with different children prop and expanded set to false', () => {
-        function mountExpandedFalse(children: JSX.Element): ReactWrapper {
-            const uuid = 'foo';
+        const uuid = 'foo';
 
-            return mount(
-                <AccordionProvider>
-                    <ItemProvider uuid={uuid}>{children}</ItemProvider>
-                </AccordionProvider>,
-            );
-        }
+        const wrapper = mount(
+            <AccordionProvider>
+                <ItemProvider uuid={uuid}>
+                    <AccordionItemState>
+                        {(expanded: boolean): JSX.Element => {
+                            const className = expanded
+                                ? 'expanded'
+                                : 'collapsed';
 
-        const renderPropComponent: React.SFC<boolean> = (
-            expanded: boolean,
-        ): JSX.Element =>
-            expanded ? (
-                <div className="expanded" />
-            ) : (
-                <div className="collapsed" />
-            );
-
-        const wrapper = mountExpandedFalse(
-            <AccordionItemState children={renderPropComponent} />,
+                            return <div className={className} />;
+                        }}
+                    </AccordionItemState>
+                </ItemProvider>
+            </AccordionProvider>,
         );
 
         expect(wrapper.find('div').hasClass('expanded')).toEqual(false);
