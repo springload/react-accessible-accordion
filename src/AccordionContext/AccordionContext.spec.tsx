@@ -55,53 +55,6 @@ describe('Accordion', () => {
             });
         });
 
-        // describe('addItem', () => {
-        //     it('proxies state.addItem', () => {
-        //         const provider = createProvider();
-        //         const stateAddItem = jest.spyOn(provider.state, 'addItem');
-
-        //         const item = { uuid: 'foo', expanded: false };
-
-        //         provider.addItem(item);
-
-        //         expect(stateAddItem).toHaveBeenCalledWith(item);
-        //     });
-
-        //     it('immutably updates state', () => {
-        //         const provider = createProvider();
-        //         const { state } = provider;
-
-        //         const item = { uuid: 'foo', expanded: false };
-
-        //         provider.addItem(item);
-
-        //         expect(provider.state).not.toBe(state);
-        //     });
-        // });
-
-        // describe('removeItem', () => {
-        //     it('proxies state.removeItem', () => {
-        //         const provider = createProvider();
-        //         const stateRemoveItem = jest.spyOn(
-        //             provider.state,
-        //             'removeItem',
-        //         );
-
-        //         provider.removeItem('foo');
-
-        //         expect(stateRemoveItem).toHaveBeenCalledWith('foo');
-        //     });
-
-        //     it('immutably updates state', () => {
-        //         const provider = createProvider();
-        //         const { state } = provider;
-
-        //         provider.removeItem('foo');
-
-        //         expect(provider.state).not.toBe(state);
-        //     });
-        // });
-
         describe('setExpanded', () => {
             it('proxies state.setExpanded', () => {
                 const uuid = 'foo';
