@@ -41,7 +41,8 @@ export class Provider extends React.PureComponent<
 
     setExpanded = (key: UUID, expanded: boolean): void => {
         this.setState(
-            (state: ProviderState) => state.setExpanded(key, expanded),
+            (state: Readonly<ProviderState>) =>
+                state.setExpanded(key, expanded),
             () => {
                 if (this.props.onChange) {
                     this.props.onChange(this.state.expanded);
