@@ -12,7 +12,6 @@ describe('Accordion', () => {
             expect(container).toBeDefined();
             expect(container.allowMultipleExpanded).toBeDefined();
             expect(container.allowZeroExpanded).toBeDefined();
-            expect(container.expanded).toBeDefined();
             expect(container.setExpanded).toBeDefined();
             expect(container.isItemExpanded).toBeDefined();
             expect(container.isItemDisabled).toBeDefined();
