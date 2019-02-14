@@ -17,8 +17,8 @@ const AccordionItemPanel: React.SFC<AccordionItemPanelProps> = ({
     allowMultipleExpanded,
     ...rest
 }: AccordionItemPanelProps): JSX.Element => {
-    const role = allowMultipleExpanded ? null : 'region';
-    const hideAriaAttribute = allowMultipleExpanded ? !expanded : null;
+    const role = allowMultipleExpanded ? undefined : 'region';
+    const hideAriaAttribute = allowMultipleExpanded ? !expanded : undefined;
 
     return (
         <div
