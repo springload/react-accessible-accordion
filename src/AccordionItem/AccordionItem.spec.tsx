@@ -4,7 +4,11 @@ import { Provider as AccordionProvider } from '../AccordionContext/AccordionCont
 import { default as AccordionItemHeading } from '../AccordionItemHeading/AccordionItemHeading.wrapper';
 import { default as AccordionItemPanel } from '../AccordionItemPanel/AccordionItemPanel.wrapper';
 import { resetNextUuid } from '../helpers/uuid';
-import { Provider as ItemProvider, UUID } from '../ItemContext/ItemContext';
+import {
+    Provider as ItemProvider,
+    ProviderProps,
+    UUID,
+} from '../ItemContext/ItemContext';
 import { default as AccordionItem } from './AccordionItem.wrapper';
 
 describe('AccordionItem', () => {
@@ -232,7 +236,9 @@ describe('AccordionItem', () => {
 
         const uuids = wrapper
             .find(ItemProvider)
-            .map((provider: ReactWrapper) => provider.prop('uuid'));
+            .map((provider: ReactWrapper<ProviderProps>) =>
+                provider.prop('uuid'),
+            );
 
         expect(uuids.length).toEqual(2);
         expect(uuids[0]).not.toEqual(uuids[1]);
