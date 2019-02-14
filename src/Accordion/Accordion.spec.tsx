@@ -1,6 +1,5 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
-import * as ReactTestRenderer from 'react-test-renderer';
 import { Provider, ProviderProps } from '../AccordionContext/AccordionContext';
 import { UUID } from '../ItemContext/ItemContext';
 import { default as Accordion } from './Accordion.wrapper';

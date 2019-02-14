@@ -9,7 +9,6 @@ import {
     AccordionItem,
     AccordionItemHeading,
     AccordionItemPanel,
-    AccordionItemState,
 } from '../../src';
 
 // tslint:disable-next-line no-import-side-effect
@@ -17,10 +16,6 @@ import './main.css';
 
 // tslint:disable-next-line no-import-side-effect ordered-imports
 import '../../src/css/fancy-example.css';
-
-const renderFn = (expanded: boolean): JSX.Element => {
-    return expanded ? <>This item is expanded</> : <>This item is collapsed</>;
-};
 
 const Arrow = (): JSX.Element => (
     <span className="accordion__arrow" role="presentation" />

@@ -1,6 +1,3 @@
-// tslint:disable:max-classes-per-file
-
-import * as React from 'react';
 import { UUID } from '../ItemContext/ItemContext';
 
 export default class AccordionStore {

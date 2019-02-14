@@ -1,7 +1,5 @@
 import { default as classnames } from 'classnames';
 import * as React from 'react';
-import { AccordionContext } from '../AccordionContext/AccordionContext';
-import { UUID } from '../ItemContext/ItemContext';
 
 type AccordionItemProps = React.HTMLAttributes<HTMLDivElement> & {
     expandedClassName?: string;

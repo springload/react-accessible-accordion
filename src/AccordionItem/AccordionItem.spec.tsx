@@ -7,7 +7,6 @@ import { resetNextUuid } from '../helpers/uuid';
 import {
     Provider as ItemProvider,
     ProviderProps,
-    UUID,
 } from '../ItemContext/ItemContext';
 import { default as AccordionItem } from './AccordionItem.wrapper';
 

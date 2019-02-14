@@ -9,6 +9,7 @@
     ],
     "compilerOptions": {
         "noEmit": true,
+        "noUnusedLocals": true,
         "jsx": "react",
         "baseUrl": "./",
         "lib": ["dom", "es2015"],
