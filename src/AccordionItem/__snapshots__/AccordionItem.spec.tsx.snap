@@ -21,7 +21,6 @@ exports[`AccordionItem renders correctly with allowMultipleExpanded false 1`] = 
     </div>
   </div>
   <div
-    aria-hidden={null}
     aria-labelledby="accordion__heading-0"
     className="accordion__panel"
     id="accordion__panel-0"
@@ -59,7 +58,6 @@ exports[`AccordionItem renders correctly with allowMultipleExpanded true 1`] = `
     aria-labelledby="accordion__heading-0"
     className="accordion__panel"
     id="accordion__panel-0"
-    role={null}
   >
     <div>
       Fake body
@@ -89,7 +87,6 @@ exports[`AccordionItem renders correctly with allowZeroExpanded false 1`] = `
     </div>
   </div>
   <div
-    aria-hidden={null}
     aria-labelledby="accordion__heading-0"
     className="accordion__panel"
     id="accordion__panel-0"
@@ -123,7 +120,6 @@ exports[`AccordionItem renders correctly with allowZeroExpanded true 1`] = `
     </div>
   </div>
   <div
-    aria-hidden={null}
     aria-labelledby="accordion__heading-0"
     className="accordion__panel"
     id="accordion__panel-0"
@@ -160,7 +156,6 @@ exports[`AccordionItem renders correctly with other blocks inside 1`] = `
     Just another block
   </div>
   <div
-    aria-hidden={null}
     aria-labelledby="accordion__heading-0"
     className="accordion__panel"
     id="accordion__panel-0"
@@ -194,7 +189,6 @@ exports[`AccordionItem renders correctly with other blocks inside 2 1`] = `
     </div>
   </div>
   <div
-    aria-hidden={null}
     aria-labelledby="accordion__heading-0"
     className="accordion__panel"
     id="accordion__panel-0"
