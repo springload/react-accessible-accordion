@@ -1,20 +1,16 @@
 import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
 import { Provider as AccordionProvider } from '../AccordionContext/AccordionContext';
-import { Item } from '../AccordionStore/AccordionStore';
 import { Provider as ItemProvider } from '../ItemContext/ItemContext';
 import { default as AccordionItemState } from './AccordionItemState.wrapper';
 
 describe('AccordionItemState', () => {
     function mountItem(children: JSX.Element): ReactWrapper {
-        const item: Item = {
-            uuid: 0,
-            expanded: true,
-        };
+        const uuid = 'foo';
 
         return mount(
-            <AccordionProvider initialItems={[item]}>
-                <ItemProvider uuid={item.uuid}>{children}</ItemProvider>
+            <AccordionProvider preExpanded={[uuid]}>
+                <ItemProvider uuid={uuid}>{children}</ItemProvider>
             </AccordionProvider>,
         );
     }
@@ -36,7 +32,7 @@ describe('AccordionItemState', () => {
 
     it('does not render if no itemContext found in context', () => {
         const wrapper = mount(
-            <AccordionProvider initialItems={[]}>
+            <AccordionProvider>
                 <AccordionItemState />
             </AccordionProvider>,
         );
@@ -64,14 +60,11 @@ describe('AccordionItemState', () => {
 
     it('renders correctly with different children prop and expanded set to false', () => {
         function mountExpandedFalse(children: JSX.Element): ReactWrapper {
-            const item: Item = {
-                uuid: 0,
-                expanded: false,
-            };
+            const uuid = 'foo';
 
             return mount(
-                <AccordionProvider initialItems={[item]}>
-                    <ItemProvider uuid={item.uuid}>{children}</ItemProvider>
+                <AccordionProvider>
+                    <ItemProvider uuid={uuid}>{children}</ItemProvider>
                 </AccordionProvider>,
             );
         }
