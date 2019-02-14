@@ -17,7 +17,7 @@ type AccordionWrapperProps = Omit<
     preExpanded?: UUID[];
     allowMultipleExpanded?: boolean;
     allowZeroExpanded?: boolean;
-    onChange(args: UUID[]): void;
+    onChange?(args: UUID[]): void;
 };
 
 export default class AccordionWrapper extends React.Component<
