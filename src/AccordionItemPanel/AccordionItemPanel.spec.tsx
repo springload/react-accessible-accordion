@@ -1,20 +1,16 @@
 import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
 import { Provider as AccordionProvider } from '../AccordionContext/AccordionContext';
-import { Item } from '../AccordionStore/AccordionStore';
 import { Provider as ItemProvider } from '../ItemContext/ItemContext';
 import { default as AccordionItemPanel } from './AccordionItemPanel.wrapper';
 
 describe('AccordionItemPanel', () => {
     function mountItem(children: JSX.Element): ReactWrapper {
-        const item: Item = {
-            uuid: 0,
-            expanded: true,
-        };
+        const uuid = 0;
 
         return mount(
-            <AccordionProvider initialItems={[item]}>
-                <ItemProvider uuid={item.uuid}>{children}</ItemProvider>
+            <AccordionProvider preExpanded={[uuid]}>
+                <ItemProvider uuid={uuid}>{children}</ItemProvider>
             </AccordionProvider>,
         );
     }
@@ -63,7 +59,7 @@ describe('AccordionItemPanel', () => {
 
     it('does not render if no itemContext found in context', () => {
         const wrapper = mount(
-            <AccordionProvider allowMultipleExpanded={false} initialItems={[]}>
+            <AccordionProvider allowMultipleExpanded={false}>
                 <AccordionItemPanel>
                     <div data-enzyme={true}>Hello World</div>
                 </AccordionItemPanel>
