@@ -138,10 +138,11 @@ describe('AccordionItem', () => {
     });
 
     it('renders with different expandedClassName', () => {
+        const uuid = 'foo';
         const wrapper = mount(
-            <AccordionProvider>
+            <AccordionProvider preExpanded={[uuid]}>
                 <AccordionItem
-                    expanded={true}
+                    uuid={uuid}
                     className="AccordionItem"
                     expandedClassName="AccordionItem--expanded"
                 />
@@ -235,30 +236,5 @@ describe('AccordionItem', () => {
 
         expect(uuids.length).toEqual(2);
         expect(uuids[0]).not.toEqual(uuids[1]);
-    });
-
-    it('supports custom uuid', () => {
-        const uuid = 'uniqueCustomID';
-        const wrapper = mount(
-            <AccordionProvider>
-                <AccordionItem uuid={uuid}>
-                    <AccordionItemHeading>
-                        <div data-enzyme={true}>Fake title</div>
-                    </AccordionItemHeading>
-                </AccordionItem>
-            </AccordionProvider>,
-        );
-
-        const instance = wrapper
-            .find(AccordionProvider)
-            .instance() as AccordionProvider;
-
-        expect(
-            instance.state.expanded.filter(
-                (expandedUuid: UUID) => expandedUuid === uuid,
-            ).length,
-        ).toEqual(1);
-
-        expect(wrapper.find('div[data-enzyme]').length).toEqual(1);
     });
 });
