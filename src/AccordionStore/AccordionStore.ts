@@ -24,15 +24,17 @@ export default class AccordionStore {
 
     public readonly setExpanded = (
         uuid: UUID,
-        expanded: boolean,
+        isExpanded: boolean,
     ): AccordionStore => {
         if (this.isItemDisabled(uuid)) {
             return this;
         }
 
-        if (expanded) {
+        if (isExpanded) {
             return this.augment({
-                expanded: [...this.expanded, uuid],
+                expanded: this.allowMultipleExpanded
+                    ? [...this.expanded, uuid]
+                    : [uuid],
             });
         } else {
             return this.augment({
