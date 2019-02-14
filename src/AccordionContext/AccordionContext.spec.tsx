@@ -110,6 +110,22 @@ describe('Accordion', () => {
             });
         });
 
+        describe('isItemExpanded', () => {
+            it('proxies state.isItemExpanded', () => {
+                const uuid = 'foo';
+                const provider = createProvider();
+
+                const stateIsItemDisabled = jest.spyOn(
+                    provider.state,
+                    'isItemExpanded',
+                );
+
+                provider.isItemExpanded(uuid);
+
+                expect(stateIsItemDisabled).toHaveBeenCalledWith('foo');
+            });
+        });
+
         describe('consumer', () => {
             it('invokes the children prop if when context is Provided', () => {
                 const children = jest.fn(() => null);
