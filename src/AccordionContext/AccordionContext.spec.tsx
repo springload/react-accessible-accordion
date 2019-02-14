@@ -138,7 +138,6 @@ describe('Accordion', () => {
 
                 expect(children).toHaveBeenCalledWith(
                     expect.objectContaining({
-                        expanded: expect.any(Array),
                         allowMultipleExpanded: expect.any(Boolean),
                         allowZeroExpanded: expect.any(Boolean),
                         setExpanded: expect.any(Function),
