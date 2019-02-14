@@ -10,9 +10,11 @@ describe('Accordion', () => {
         it('correctly instantiates with all expected methods', () => {
             const container = new AccordionStore({});
             expect(container).toBeDefined();
-            expect(container.addItem).toBeDefined();
-            expect(container.removeItem).toBeDefined();
+            expect(container.allowMultipleExpanded).toBeDefined();
+            expect(container.allowZeroExpanded).toBeDefined();
+            expect(container.expanded).toBeDefined();
             expect(container.setExpanded).toBeDefined();
+            expect(container.isItemExpanded).toBeDefined();
             expect(container.isItemDisabled).toBeDefined();
         });
 
@@ -32,128 +34,52 @@ describe('Accordion', () => {
             expect(container.allowZeroExpanded).toEqual(true);
         });
 
-        it('respects the `items` property', () => {
-            const items = [{ uuid: UUIDS.FOO, expanded: false }];
-
+        it('respects the `expanded` property', () => {
             const container = new AccordionStore({
                 allowZeroExpanded: true,
-                items,
+                expanded: ['foo'],
             });
 
-            expect(container.items).toEqual(items);
-        });
-    });
-
-    describe('addItem', () => {
-        it('adds an item', () => {
-            const item = { uuid: UUIDS.FOO, expanded: false };
-
-            const container = new AccordionStore({}).addItem(item);
-
-            expect(container.items).toEqual([item]);
-        });
-
-        it('closes expanded items', () => {
-            const container = new AccordionStore({})
-                .addItem({ uuid: UUIDS.FOO, expanded: true })
-                .addItem({ uuid: UUIDS.BAR, expanded: true });
-
-            expect(container.items).toEqual([
-                expect.objectContaining({ expanded: false }),
-                expect.objectContaining({ expanded: true }),
-            ]);
-        });
-
-        it('doesnt close expanded items when allowMultipleExpanded', () => {
-            const container = new AccordionStore({
-                allowMultipleExpanded: true,
-            })
-                .addItem({ uuid: UUIDS.FOO, expanded: true })
-                .addItem({ uuid: UUIDS.BAR, expanded: true });
-
-            expect(container.items).toEqual([
-                expect.objectContaining({ expanded: true }),
-                expect.objectContaining({ expanded: true }),
-            ]);
-        });
-
-        it('raises console error in case of duplicate uuid', () => {
-            const uuid = 'uniqueCustomID';
-            jest.spyOn(global.console, 'error');
-
-            new AccordionStore({})
-                .addItem({
-                    uuid,
-                    expanded: false,
-                })
-                .addItem({
-                    uuid,
-                    expanded: false,
-                });
-
-            // tslint:disable-next-line:no-console
-            expect(console.error).toBeCalled();
-        });
-    });
-
-    describe('removeItem', () => {
-        it('can remove an item', () => {
-            const item = { uuid: UUIDS.FOO, expanded: false };
-
-            const container = new AccordionStore({
-                items: [item],
-            }).removeItem(item.uuid);
-
-            expect(container.items).toEqual([]);
+            expect(container.expanded).toEqual(['foo']);
         });
     });
 
     describe('setExpanded', () => {
         describe('expanding', () => {
             it('expands an item', () => {
-                const container = new AccordionStore({})
-                    .addItem({ uuid: UUIDS.FOO, expanded: false })
-                    .setExpanded(UUIDS.FOO, true);
+                const container = new AccordionStore({}).setExpanded(
+                    UUIDS.FOO,
+                    true,
+                );
 
-                expect(container.items).toEqual([
-                    expect.objectContaining({ expanded: true }),
-                ]);
+                expect(container.expanded).toEqual([UUIDS.FOO]);
             });
 
             it('collapses the currently expanded items', () => {
-                const container = new AccordionStore({})
-                    .addItem({ uuid: UUIDS.FOO, expanded: false })
-                    .addItem({ uuid: UUIDS.BAR, expanded: true })
-                    .setExpanded(UUIDS.FOO, true);
+                const container = new AccordionStore({
+                    expanded: [UUIDS.BAR],
+                }).setExpanded(UUIDS.FOO, true);
 
-                expect(container.items).toEqual([
-                    expect.objectContaining({ expanded: true }),
-                    expect.objectContaining({ expanded: false }),
-                ]);
+                expect(container.expanded).toEqual([UUIDS.FOO]);
             });
         });
 
         describe('collapsing', () => {
             it('doesnt collapse the only expanded item', () => {
-                const container = new AccordionStore({})
-                    .addItem({ uuid: UUIDS.FOO, expanded: true })
-                    .setExpanded(UUIDS.FOO, false);
+                const container = new AccordionStore({
+                    expanded: [UUIDS.FOO],
+                }).setExpanded(UUIDS.FOO, false);
 
-                expect(container.items).toEqual([
-                    expect.objectContaining({ expanded: true }),
-                ]);
+                expect(container.expanded).toEqual([UUIDS.FOO]);
             });
 
             it('collapses the only expanded item when allowZeroExpanded', () => {
                 const container = new AccordionStore({
                     allowZeroExpanded: true,
-                })
-                    .addItem({ uuid: UUIDS.FOO, expanded: true })
-                    .setExpanded(UUIDS.FOO, false);
+                    expanded: [UUIDS.FOO],
+                }).setExpanded(UUIDS.FOO, false);
 
-                expect(container.items).toEqual([
-                    expect.objectContaining({ expanded: false }),
-                ]);
+                expect(container.expanded).toEqual([]);
             });
         });
     });
@@ -161,9 +87,8 @@ describe('Accordion', () => {
     describe('isDisabled', () => {
         describe('expanded item', () => {
             it('is disabled if alone', () => {
-                const container = new AccordionStore({}).addItem({
-                    uuid: UUIDS.FOO,
-                    expanded: true,
+                const container = new AccordionStore({
+                    expanded: [UUIDS.FOO],
                 });
 
                 expect(container.isItemDisabled(UUIDS.FOO)).toEqual(true);
@@ -172,15 +97,8 @@ describe('Accordion', () => {
             it('is not disabled if multiple expanded', () => {
                 const container = new AccordionStore({
                     allowMultipleExpanded: true,
-                })
-                    .addItem({
-                        uuid: UUIDS.FOO,
-                        expanded: true,
-                    })
-                    .addItem({
-                        uuid: UUIDS.BAR,
-                        expanded: true,
-                    });
+                    expanded: [UUIDS.FOO, UUIDS.BAR],
+                });
 
                 expect(container.isItemDisabled(UUIDS.FOO)).toEqual(false);
             });
@@ -188,9 +106,7 @@ describe('Accordion', () => {
             it('is not disabled if allowZeroExpanded', () => {
                 const container = new AccordionStore({
                     allowZeroExpanded: true,
-                }).addItem({
-                    uuid: UUIDS.FOO,
-                    expanded: true,
+                    expanded: [UUIDS.FOO],
                 });
 
                 expect(container.isItemDisabled(UUIDS.FOO)).toEqual(false);
@@ -199,10 +115,7 @@ describe('Accordion', () => {
 
         describe('collapsed item', () => {
             it('is not disabled', () => {
-                const container = new AccordionStore({}).addItem({
-                    uuid: UUIDS.FOO,
-                    expanded: false,
-                });
+                const container = new AccordionStore({});
 
                 expect(container.isItemDisabled(UUIDS.FOO)).toEqual(false);
             });
