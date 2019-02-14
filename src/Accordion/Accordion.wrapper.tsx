@@ -26,15 +26,14 @@ export default class AccordionWrapper extends React.Component<
     static defaultProps: AccordionWrapperProps = {
         allowMultipleExpanded: undefined,
         allowZeroExpanded: undefined,
-        onChange: (): void => {
-            //
-        },
+        onChange: undefined,
         className: 'accordion',
         children: undefined,
     };
 
     renderAccordion = (accordionContext: AccordionContext): JSX.Element => {
         const {
+            preExpanded,
             allowMultipleExpanded,
             allowZeroExpanded,
             onChange,
