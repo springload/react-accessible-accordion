@@ -1,8 +1,9 @@
 import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
-import { Item, Provider } from '../AccordionContainer/AccordionContainer';
+import { Provider } from '../AccordionContext/AccordionContext';
 import { default as AccordionItem } from '../AccordionItem/AccordionItem.wrapper';
 import { default as AccordionItemHeading } from '../AccordionItemHeading/AccordionItemHeading.wrapper';
+import { Item } from '../AccordionStore/AccordionStore';
 import { default as Accordion } from './Accordion.wrapper';
 
 describe('Accordion', () => {

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {
-    AccordionContainer,
+    AccordionContext,
     Consumer as AccordionConsumer,
-    Item,
-} from '../AccordionContainer/AccordionContainer';
+} from '../AccordionContext/AccordionContext';
+import { Item } from '../AccordionStore/AccordionStore';
 import {
     Consumer as ItemConsumer,
-    ItemContainer,
-} from '../ItemContainer/ItemContainer';
+    ItemContext,
+} from '../ItemContext/ItemContext';
 import AccordionItemPanel from './AccordionItemPanel';
 
 type AccordionItemPanelWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -23,11 +23,11 @@ export default class AccordionItemPanelWrapper extends React.Component<
     };
 
     renderChildren = (
-        accordionStore: AccordionContainer,
-        itemStore: ItemContainer,
+        accordionContext: AccordionContext,
+        itemContext: ItemContext,
     ): JSX.Element => {
-        const { uuid } = itemStore;
-        const { items, allowMultipleExpanded } = accordionStore;
+        const { uuid } = itemContext;
+        const { items, allowMultipleExpanded } = accordionContext;
         const item = items.filter(
             (stateItem: Item) => stateItem.uuid === uuid,
         )[0];
@@ -44,10 +44,10 @@ export default class AccordionItemPanelWrapper extends React.Component<
     render(): JSX.Element {
         return (
             <AccordionConsumer>
-                {(accordionStore: AccordionContainer): JSX.Element => (
+                {(accordionContext: AccordionContext): JSX.Element => (
                     <ItemConsumer>
-                        {(itemStore: ItemContainer): JSX.Element =>
-                            this.renderChildren(accordionStore, itemStore)
+                        {(itemContext: ItemContext): JSX.Element =>
+                            this.renderChildren(accordionContext, itemContext)
                         }
                     </ItemConsumer>
                 )}

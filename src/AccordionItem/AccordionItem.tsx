@@ -1,37 +1,35 @@
 import { default as classnames } from 'classnames';
 import * as React from 'react';
-import {
-    AccordionContainer,
-    Item,
-} from '../AccordionContainer/AccordionContainer';
-import { UUID } from '../ItemContainer/ItemContainer';
+import { AccordionContext } from '../AccordionContext/AccordionContext';
+import { Item } from '../AccordionStore/AccordionStore';
+import { UUID } from '../ItemContext/ItemContext';
 
 type AccordionItemProps = React.HTMLAttributes<HTMLDivElement> & {
     uuid: UUID;
     expandedClassName?: string;
     expanded?: boolean;
-    accordionStore: AccordionContainer;
+    accordionContext: AccordionContext;
 };
 
 class AccordionItem extends React.Component<AccordionItemProps> {
     componentDidMount(): void {
-        const { uuid, accordionStore } = this.props;
+        const { uuid, accordionContext } = this.props;
 
-        accordionStore.addItem({
+        accordionContext.addItem({
             uuid,
             expanded: this.props.expanded || false,
         });
     }
 
     componentWillUnmount(): void {
-        this.props.accordionStore.removeItem(this.props.uuid);
+        this.props.accordionContext.removeItem(this.props.uuid);
     }
 
     // This is here so that the user can dynamically set the 'expanded' state using the 'expanded' prop.
     componentDidUpdate(prevProps: AccordionItemProps): void {
-        const { uuid, expanded, accordionStore } = this.props;
+        const { uuid, expanded, accordionContext } = this.props;
         if (expanded !== prevProps.expanded) {
-            accordionStore.setExpanded(uuid, expanded);
+            accordionContext.setExpanded(uuid, expanded);
         }
     }
 
@@ -40,13 +38,13 @@ class AccordionItem extends React.Component<AccordionItemProps> {
             uuid,
             className,
             expandedClassName,
-            accordionStore,
+            accordionContext,
             expanded,
             ...rest
         } = this.props;
 
         // Deliberately not using 'find' because IE compat.
-        const currentItem = accordionStore.items.filter(
+        const currentItem = accordionContext.items.filter(
             (item: Item) => item.uuid === uuid,
         )[0];
 

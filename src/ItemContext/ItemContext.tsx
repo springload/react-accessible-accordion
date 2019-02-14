@@ -9,22 +9,22 @@ export type ProviderProps = {
     uuid: UUID;
 };
 
-export type ItemContainer = {
+export type ItemContext = {
     uuid: UUID;
 };
 
-const Context = React.createContext(null as ItemContainer | null);
+const Context = React.createContext(null as ItemContext | null);
 
 export const Provider = ({ uuid, children }: ProviderProps): JSX.Element => (
     <Context.Provider value={{ uuid }}>{children || null}</Context.Provider>
 );
 
 type ConsumerProps = {
-    children(container: ItemContainer): React.ReactNode;
+    children(container: ItemContext): React.ReactNode;
 };
 
 export class Consumer extends React.PureComponent<ConsumerProps> {
-    renderChildren = (container: ItemContainer): React.ReactNode => {
+    renderChildren = (container: ItemContext): React.ReactNode => {
         return container ? this.props.children(container) : null;
     };
 

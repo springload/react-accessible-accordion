@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { UUID } from '../ItemContainer/ItemContainer';
+import { UUID } from '../ItemContext/ItemContext';
 
 import {
-    AccordionContainer,
+    AccordionContext,
     Consumer,
     Provider,
-} from '../AccordionContainer/AccordionContainer';
+} from '../AccordionContext/AccordionContext';
 import Accordion from './Accordion';
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
@@ -32,7 +32,7 @@ export default class AccordionWrapper extends React.Component<
         children: undefined,
     };
 
-    renderAccordion = (accordionStore: AccordionContainer): JSX.Element => {
+    renderAccordion = (accordionContext: AccordionContext): JSX.Element => {
         const {
             allowMultipleExpanded,
             allowZeroExpanded,

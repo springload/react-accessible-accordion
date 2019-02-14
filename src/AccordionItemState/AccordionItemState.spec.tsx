@@ -1,10 +1,8 @@
 import { mount, ReactWrapper } from 'enzyme';
 import * as React from 'react';
-import {
-    Item,
-    Provider as AccordionProvider,
-} from '../AccordionContainer/AccordionContainer';
-import { Provider as ItemProvider } from '../ItemContainer/ItemContainer';
+import { Provider as AccordionProvider } from '../AccordionContext/AccordionContext';
+import { Item } from '../AccordionStore/AccordionStore';
+import { Provider as ItemProvider } from '../ItemContext/ItemContext';
 import { default as AccordionItemState } from './AccordionItemState.wrapper';
 
 describe('AccordionItemState', () => {
@@ -26,7 +24,7 @@ describe('AccordionItemState', () => {
         expect(wrapper).toMatchSnapshot();
     });
 
-    it('does not render if no accordionStore found in context', () => {
+    it('does not render if no accordionContext found in context', () => {
         const wrapper = mount(
             <ItemProvider uuid="foo">
                 <AccordionItemState />
@@ -36,7 +34,7 @@ describe('AccordionItemState', () => {
         expect(wrapper.find('div[data-enzyme]').length).toEqual(0);
     });
 
-    it('does not render if no itemStore found in context', () => {
+    it('does not render if no itemContext found in context', () => {
         const wrapper = mount(
             <AccordionProvider initialItems={[]}>
                 <AccordionItemState />

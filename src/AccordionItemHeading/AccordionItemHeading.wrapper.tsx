@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {
-    AccordionContainer,
+    AccordionContext,
     Consumer as AccordionConsumer,
-    Item,
-} from '../AccordionContainer/AccordionContainer';
+} from '../AccordionContext/AccordionContext';
+import { Item } from '../AccordionStore/AccordionStore';
 import {
     Consumer as ItemConsumer,
-    ItemContainer,
-} from '../ItemContainer/ItemContainer';
+    ItemContext,
+} from '../ItemContext/ItemContext';
 import { default as AccordionItemHeading } from './AccordionItemHeading';
 
 type AccordionItemHeadingWrapperProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -26,11 +26,11 @@ export default class AccordionItemHeadingWrapper extends React.Component<
     };
 
     renderChildren = (
-        accordionStore: AccordionContainer,
-        itemStore: ItemContainer,
+        accordionContext: AccordionContext,
+        itemContext: ItemContext,
     ): JSX.Element => {
-        const { uuid } = itemStore;
-        const { items, allowZeroExpanded, isItemDisabled } = accordionStore;
+        const { uuid } = itemContext;
+        const { items, allowZeroExpanded, isItemDisabled } = accordionContext;
         const item = items.filter(
             (stateItem: Item) => stateItem.uuid === uuid,
         )[0];
@@ -41,7 +41,7 @@ export default class AccordionItemHeadingWrapper extends React.Component<
                 {...this.props}
                 {...item}
                 disabled={disabled}
-                setExpanded={accordionStore.setExpanded}
+                setExpanded={accordionContext.setExpanded}
             />
         );
     };
@@ -49,10 +49,10 @@ export default class AccordionItemHeadingWrapper extends React.Component<
     render(): JSX.Element {
         return (
             <AccordionConsumer>
-                {(accordionStore: AccordionContainer): JSX.Element => (
+                {(accordionContext: AccordionContext): JSX.Element => (
                     <ItemConsumer>
-                        {(itemStore: ItemContainer): JSX.Element =>
-                            this.renderChildren(accordionStore, itemStore)
+                        {(itemContext: ItemContext): JSX.Element =>
+                            this.renderChildren(accordionContext, itemContext)
                         }
                     </ItemConsumer>
                 )}
