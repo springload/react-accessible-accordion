@@ -21,7 +21,7 @@ export default class AccordionItemWrapper extends React.Component<
 > {
     static defaultProps: AccordionItemWrapperProps = {
         className: 'accordion__item',
-        expandedClassName: '',
+        expandedClassName: 'accordion__item--expanded',
         uuid: undefined,
     };
 
