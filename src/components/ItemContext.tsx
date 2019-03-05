@@ -42,7 +42,7 @@ class Provider extends React.Component<ProviderProps> {
     renderChildren = (accordionContext: AccordionContext): JSX.Element => {
         const { uuid } = this.props;
 
-        const expanded = accordionContext.isItemDisabled(uuid);
+        const expanded = accordionContext.isItemExpanded(uuid);
         const disabled = accordionContext.isItemDisabled(uuid);
         const panelAttributes = accordionContext.getPanelAttributes(uuid);
         const headingAttributes = accordionContext.getHeadingAttributes(uuid);
