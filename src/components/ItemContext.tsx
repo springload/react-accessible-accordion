@@ -2,13 +2,13 @@
 
 import * as React from 'react';
 import {
-    AccordionContext,
-    Consumer as AccordionContextConsumer,
-} from '../AccordionContext/AccordionContext';
-import {
     InjectedHeadingAttributes,
     InjectedPanelAttributes,
-} from '../AccordionStore/AccordionStore';
+} from '../helpers/AccordionStore';
+import {
+    AccordionContext,
+    Consumer as AccordionContextConsumer,
+} from './AccordionContext';
 
 export type UUID = string | number;
 

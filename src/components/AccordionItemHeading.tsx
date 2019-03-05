@@ -9,10 +9,7 @@ import {
 import keycodes from '../helpers/keycodes';
 
 import { DivAttributes } from '../helpers/types';
-import {
-    Consumer as ItemConsumer,
-    ItemContext,
-} from '../ItemContext/ItemContext';
+import { Consumer as ItemConsumer, ItemContext } from './ItemContext';
 
 type Props = Pick<DivAttributes, Exclude<keyof DivAttributes, 'role'>> & {
     expandedClassName: string;

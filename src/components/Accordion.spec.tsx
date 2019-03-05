@@ -1,8 +1,8 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
-import { Provider, ProviderProps } from '../AccordionContext/AccordionContext';
-import { UUID } from '../ItemContext/ItemContext';
 import { default as Accordion } from './Accordion';
+import { Provider, ProviderProps } from './AccordionContext';
+import { UUID } from './ItemContext';
 
 describe('Accordion', () => {
     it('renders without erroring', () => {

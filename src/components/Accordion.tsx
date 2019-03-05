@@ -1,12 +1,7 @@
 import * as React from 'react';
-import { UUID } from '../ItemContext/ItemContext';
-
-import {
-    AccordionContext,
-    Consumer,
-    Provider,
-} from '../AccordionContext/AccordionContext';
 import { DivAttributes } from '../helpers/types';
+import { AccordionContext, Consumer, Provider } from './AccordionContext';
+import { UUID } from './ItemContext';
 
 type AccordionWrapperProps = Pick<
     DivAttributes,

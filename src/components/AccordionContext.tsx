@@ -4,8 +4,8 @@ import * as React from 'react';
 import AccordionStore, {
     InjectedHeadingAttributes,
     InjectedPanelAttributes,
-} from '../AccordionStore/AccordionStore';
-import { UUID } from '../ItemContext/ItemContext';
+} from '../helpers/AccordionStore';
+import { UUID } from './ItemContext';
 
 export interface ProviderProps {
     preExpanded?: UUID[];

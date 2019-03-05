@@ -7,7 +7,7 @@ import {
     ItemContext,
     Provider as ItemProvider,
     UUID,
-} from '../ItemContext/ItemContext';
+} from './ItemContext';
 
 type Props = Pick<DivAttributes, Exclude<keyof DivAttributes, 'role'>> & {
     expanded: boolean;

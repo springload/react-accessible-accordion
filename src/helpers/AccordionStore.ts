@@ -1,4 +1,4 @@
-import { UUID } from '../ItemContext/ItemContext';
+import { UUID } from '../components/ItemContext';
 
 export interface InjectedPanelAttributes {
     role: string | undefined;
