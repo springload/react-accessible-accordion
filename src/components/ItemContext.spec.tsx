@@ -1,26 +1,18 @@
-import { mount } from 'enzyme';
 import * as React from 'react';
+import { render } from 'react-testing-library';
+import Accordion from './Accordion';
 import { Consumer, Provider } from './ItemContext';
 
 describe('ItemContext', () => {
-    it('Propagates uuid by context', () => {
-        const mock = jest.fn(() => null);
-        const uuid = 'foo';
-
-        mount(
-            <Provider uuid={uuid}>
-                <Consumer>{mock}</Consumer>
-            </Provider>,
-        ).instance();
-
-        expect(mock).toHaveBeenCalledWith(
-            expect.objectContaining({
-                uuid,
-            }),
+    it('renders children props', () => {
+        const { getByText } = render(
+            <Accordion>
+                <Provider uuid="FOO">
+                    <Consumer>{(): string => 'Hello World'}</Consumer>
+                </Provider>
+            </Accordion>,
         );
-    });
 
-    it('renders Provider without children', () => {
-        expect(() => mount(<Provider uuid="foo" />)).not.toThrow();
+        expect(getByText('Hello World')).toBeTruthy();
     });
 });
