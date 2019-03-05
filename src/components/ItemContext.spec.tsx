@@ -1,6 +1,6 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
-import { Consumer, ItemContext, Provider } from './ItemContext';
+import { Consumer, Provider } from './ItemContext';
 
 describe('ItemContext', () => {
     it('Propagates uuid by context', () => {

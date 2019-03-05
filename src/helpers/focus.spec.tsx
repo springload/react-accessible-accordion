@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {
     focusFirstSiblingOf,
     focusLastSiblingOf,
@@ -26,12 +24,15 @@ describe('focus', () => {
                 </div>
             `);
 
-            const child: HTMLElement = tree.querySelector('#child');
-            const parent: HTMLElement = tree.querySelector('#parent');
+            const child = tree.querySelector('#child');
+            const parent = tree.querySelector('#parent');
 
             // Predicate
-            expect(child).toBeInstanceOf(HTMLElement);
-            expect(parent).toBeInstanceOf(HTMLElement);
+            if (
+                !(child instanceof HTMLElement && parent instanceof HTMLElement)
+            ) {
+                throw new Error('child or parent not found');
+            }
 
             // Matter
             expect(getClosestAccordion(child)).toEqual(parent);
@@ -46,12 +47,15 @@ describe('focus', () => {
                 </div>
             `);
 
-            const child: HTMLElement = tree.querySelector('#child');
-            const parent: HTMLElement = tree.querySelector('#parent');
+            const child = tree.querySelector('#child');
+            const parent = tree.querySelector('#parent');
 
             // Predicate
-            expect(child).toBeInstanceOf(HTMLElement);
-            expect(parent).toBeInstanceOf(HTMLElement);
+            if (
+                !(child instanceof HTMLElement && parent instanceof HTMLElement)
+            ) {
+                throw new Error('child or parent not found');
+            }
 
             // Matter
             expect(getClosestAccordion(child)).toEqual(parent);
@@ -68,11 +72,16 @@ describe('focus', () => {
                 </div>
             `);
 
-            const child: HTMLElement = tree.querySelector('#child');
-            const parent: HTMLElement = tree.querySelector('#parent');
+            const child = tree.querySelector('#child');
+            const parent = tree.querySelector('#parent');
 
-            expect(child).toBeInstanceOf(HTMLElement);
-            expect(parent).toBeInstanceOf(HTMLElement);
+            // Predicate
+            if (
+                !(child instanceof HTMLElement && parent instanceof HTMLElement)
+            ) {
+                throw new Error('child or parent not found');
+            }
+
             expect(getClosestAccordion(child)).toEqual(parent);
         });
     });
@@ -87,12 +96,14 @@ describe('focus', () => {
                 </div>
             `);
 
-            const heading: HTMLElement = tree.querySelector(
+            const heading = tree.querySelector(
                 '[data-accordion-component="AccordionItemHeading"]',
             );
 
             // Predicate
-            expect(heading).toBeInstanceOf(HTMLElement);
+            if (!(heading instanceof HTMLElement)) {
+                throw new Error('heading not found');
+            }
 
             // Matter
             expect(getSiblingHeadings(heading)).toHaveLength(3);
@@ -109,12 +120,14 @@ describe('focus', () => {
                 </div>
             `);
 
-            const heading: HTMLElement = tree.querySelector(
+            const heading = tree.querySelector(
                 '[data-accordion-component="AccordionItemHeading"]',
             );
 
             // Predicate
-            expect(heading).toBeInstanceOf(HTMLElement);
+            if (!(heading instanceof HTMLElement)) {
+                throw new Error('heading not found');
+            }
 
             // Matter
             expect(getSiblingHeadings(heading)).toHaveLength(3);
@@ -130,10 +143,12 @@ describe('focus', () => {
                 </div>
             `);
 
-            const heading: HTMLElement = tree.querySelector('#first');
+            const heading = tree.querySelector('#first');
 
             // Predicate
-            expect(heading).toBeInstanceOf(HTMLElement);
+            if (!(heading instanceof HTMLElement)) {
+                throw new Error('heading not found');
+            }
 
             // Matter
             expect(getSiblingHeadings(heading)).toHaveLength(2);
@@ -150,20 +165,22 @@ describe('focus', () => {
                 </div>
             `);
 
-            const [
-                firstHeading,
-                secondHeading,
-                thirdHeading,
-            ]: HTMLElement[] = Array.from(
+            const [firstHeading, secondHeading, thirdHeading] = Array.from(
                 tree.querySelectorAll(
                     '[data-accordion-component="AccordionItemHeading"]',
                 ),
             );
 
             // Predicate
-            expect(firstHeading).toBeInstanceOf(HTMLElement);
-            expect(secondHeading).toBeInstanceOf(HTMLElement);
-            expect(thirdHeading).toBeInstanceOf(HTMLElement);
+            if (
+                !(
+                    firstHeading instanceof HTMLElement &&
+                    secondHeading instanceof HTMLElement &&
+                    thirdHeading instanceof HTMLElement
+                )
+            ) {
+                throw new Error('headings not found');
+            }
             thirdHeading.focus();
             expect(document.activeElement).toBe(thirdHeading);
 
@@ -194,8 +211,15 @@ describe('focus', () => {
             );
 
             // Predicate
-            expect(firstHeading).toBeInstanceOf(HTMLElement);
-            expect(secondHeading).toBeInstanceOf(HTMLElement);
+            if (
+                !(
+                    firstHeading instanceof HTMLElement &&
+                    secondHeading instanceof HTMLElement &&
+                    thirdHeading instanceof HTMLElement
+                )
+            ) {
+                throw new Error('headings not found');
+            }
             firstHeading.focus();
             expect(document.activeElement).toBe(firstHeading);
 
@@ -226,9 +250,15 @@ describe('focus', () => {
             );
 
             // Predicate
-            expect(firstHeading).toBeInstanceOf(HTMLElement);
-            expect(secondHeading).toBeInstanceOf(HTMLElement);
-            expect(thirdHeading).toBeInstanceOf(HTMLElement);
+            if (
+                !(
+                    firstHeading instanceof HTMLElement &&
+                    secondHeading instanceof HTMLElement &&
+                    thirdHeading instanceof HTMLElement
+                )
+            ) {
+                throw new Error('headings not found');
+            }
             firstHeading.focus();
             expect(document.activeElement).toBe(firstHeading);
 
@@ -259,9 +289,15 @@ describe('focus', () => {
             );
 
             // Predicate
-            expect(firstHeading).toBeInstanceOf(HTMLElement);
-            expect(secondHeading).toBeInstanceOf(HTMLElement);
-            expect(thirdHeading).toBeInstanceOf(HTMLElement);
+            if (
+                !(
+                    firstHeading instanceof HTMLElement &&
+                    secondHeading instanceof HTMLElement &&
+                    thirdHeading instanceof HTMLElement
+                )
+            ) {
+                throw new Error('headings not found');
+            }
             thirdHeading.focus();
             expect(document.activeElement).toBe(thirdHeading);
 

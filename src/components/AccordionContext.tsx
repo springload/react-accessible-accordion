@@ -1,11 +1,14 @@
 // tslint:disable:max-classes-per-file
 
 import * as React from 'react';
-import AccordionStore, { Item } from '../AccordionStore/AccordionStore';
-import { UUID } from '../ItemContext/ItemContext';
+import AccordionStore, {
+    InjectedHeadingAttributes,
+    InjectedPanelAttributes,
+} from '../helpers/AccordionStore';
+import { UUID } from './ItemContext';
 
 export interface ProviderProps {
-    initialItems?: Item[];
+    preExpanded?: UUID[];
     allowMultipleExpanded?: boolean;
     allowZeroExpanded?: boolean;
     children?: React.ReactNode;
@@ -15,13 +18,13 @@ export interface ProviderProps {
 type ProviderState = AccordionStore;
 
 export interface AccordionContext {
-    items: Item[];
     allowMultipleExpanded: boolean;
     allowZeroExpanded: boolean;
-    addItem(item: Item): void;
-    removeItem(uuid: UUID): void;
-    setExpanded(uuid: UUID, expanded: boolean): void;
+    toggleExpanded(uuid: UUID): void;
     isItemDisabled(uuid: UUID): boolean;
+    isItemExpanded(uuid: UUID): boolean;
+    getPanelAttributes(uuid: UUID): InjectedPanelAttributes;
+    getHeadingAttributes(uuid: UUID): InjectedHeadingAttributes;
 }
 
 const Context = React.createContext(null as AccordionContext | null);
@@ -36,31 +39,17 @@ export class Provider extends React.PureComponent<
     };
 
     state: ProviderState = new AccordionStore({
-        items: this.props.initialItems,
+        expanded: this.props.preExpanded,
         allowMultipleExpanded: this.props.allowMultipleExpanded,
         allowZeroExpanded: this.props.allowZeroExpanded,
     });
 
-    addItem = (item: Item): void => {
+    toggleExpanded = (key: UUID): void => {
         this.setState(
-            (state: ProviderState): ProviderState => state.addItem(item),
-        );
-    };
-
-    removeItem = (key: UUID): void => {
-        this.setState((state: ProviderState) => state.removeItem(key));
-    };
-
-    setExpanded = (key: UUID, expanded: boolean): void => {
-        this.setState(
-            (state: ProviderState) => state.setExpanded(key, expanded),
+            (state: Readonly<ProviderState>) => state.toggleExpanded(key),
             () => {
                 if (this.props.onChange) {
-                    this.props.onChange(
-                        this.state.items
-                            .filter((item: Item) => item.expanded)
-                            .map((item: Item) => item.uuid),
-                    );
+                    this.props.onChange(this.state.expanded);
                 }
             },
         );
@@ -70,19 +59,31 @@ export class Provider extends React.PureComponent<
         return this.state.isItemDisabled(key);
     };
 
+    isItemExpanded = (key: UUID): boolean => {
+        return this.state.isItemExpanded(key);
+    };
+
+    getPanelAttributes = (key: UUID): InjectedPanelAttributes => {
+        return this.state.getPanelAttributes(key);
+    };
+
+    getHeadingAttributes = (key: UUID): InjectedHeadingAttributes => {
+        return this.state.getHeadingAttributes(key);
+    };
+
     render(): JSX.Element {
-        const { items, allowZeroExpanded, allowMultipleExpanded } = this.state;
+        const { allowZeroExpanded, allowMultipleExpanded } = this.state;
 
         return (
             <Context.Provider
                 value={{
-                    items,
                     allowMultipleExpanded,
                     allowZeroExpanded,
-                    addItem: this.addItem,
-                    removeItem: this.removeItem,
-                    setExpanded: this.setExpanded,
+                    toggleExpanded: this.toggleExpanded,
                     isItemDisabled: this.isItemDisabled,
+                    isItemExpanded: this.isItemExpanded,
+                    getPanelAttributes: this.getPanelAttributes,
+                    getHeadingAttributes: this.getHeadingAttributes,
                 }}
             >
                 {this.props.children || null}

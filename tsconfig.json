@@ -7,10 +7,13 @@
         "integration/**/*.ts",
         "integration/**/*.tsx"
     ],
+    "exclude": ["demo/src/**/*"],
     "compilerOptions": {
         "noEmit": true,
+        "noUnusedLocals": true,
         "jsx": "react",
         "baseUrl": "./",
-        "lib": ["dom", "es2015"]
+        "lib": ["dom", "es2015"],
+        "strict": true
     }
 }
