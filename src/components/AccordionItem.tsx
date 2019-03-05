@@ -15,16 +15,13 @@ type Props = Pick<DivAttributes, Exclude<keyof DivAttributes, 'role'>> & {
     expandedClassName?: string;
 };
 
-interface DefaultProps {
-    className: string;
-    expandedClassName: string;
-}
+const defaultProps = {
+    className: 'accordion__item',
+    expandedClassName: 'accordion__item--expanded',
+};
 
 class AccordionItem extends React.Component<Props> {
-    static defaultProps: DefaultProps = {
-        className: 'accordion__item',
-        expandedClassName: 'accordion__item--expanded',
-    };
+    static defaultProps: typeof defaultProps = defaultProps;
 
     render(): JSX.Element {
         const { className, expanded, expandedClassName, ...rest } = this.props;
