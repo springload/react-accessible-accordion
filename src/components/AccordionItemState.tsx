@@ -3,11 +3,10 @@ import { DivAttributes } from '../helpers/types';
 import { Consumer as ItemConsumer, ItemContext } from './ItemContext';
 
 type Props = Pick<DivAttributes, Exclude<keyof DivAttributes, 'children'>> & {
-    expanded: boolean;
-    children(expanded: boolean): JSX.Element;
+    children(expanded?: boolean): React.ReactNode;
 };
 
-export default class AccordionItemStateWrapper extends React.Component<Props> {
+export default class AccordionItemState extends React.Component<Props> {
     renderChildren = (itemContext: ItemContext): JSX.Element => {
         const { expanded } = itemContext;
 
