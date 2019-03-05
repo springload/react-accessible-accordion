@@ -1,11 +1,11 @@
 {
     "include": [
         "src/**/*.ts",
-        "src/**/*.tsx"
-        // "demo/**/*.ts",
-        // "demo/**/*.tsx",
-        // "integration/**/*.ts",
-        // "integration/**/*.tsx"
+        "src/**/*.tsx",
+        "demo/**/*.ts",
+        "demo/**/*.tsx",
+        "integration/**/*.ts",
+        "integration/**/*.tsx"
     ],
     "exclude": ["demo/src/**/*"],
     "compilerOptions": {

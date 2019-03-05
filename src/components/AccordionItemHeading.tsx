@@ -12,12 +12,19 @@ import { DivAttributes } from '../helpers/types';
 import { Consumer as ItemConsumer, ItemContext } from './ItemContext';
 
 type Props = Pick<DivAttributes, Exclude<keyof DivAttributes, 'role'>> & {
-    expandedClassName: string;
+    expandedClassName?: string;
     expanded: boolean;
     toggleExpanded(): void;
 };
 
+const defaultProps = {
+    className: 'accordion__heading',
+    expandedClassName: 'accordion__heading--expanded',
+};
+
 export class AccordionItemHeading extends React.PureComponent<Props> {
+    static defaultProps: typeof defaultProps = defaultProps;
+
     handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
         const keyCode = evt.which.toString();
 
@@ -67,7 +74,7 @@ export class AccordionItemHeading extends React.PureComponent<Props> {
         } = this.props;
 
         const headingClassName = classnames(className, {
-            [expandedClassName]: expandedClassName && expanded,
+            [String(expandedClassName)]: expandedClassName && expanded,
         });
 
         return (
