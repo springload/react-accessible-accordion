@@ -120,5 +120,71 @@ describe('Accordion', () => {
                 ).toEqual('true');
             });
         });
+
+        describe('preExpanded prop', () => {
+            it('expands items whose uuid props match those passed', () => {
+                const { getByTestId } = render(
+                    <Accordion preExpanded={[UUIDS.FOO]}>
+                        <AccordionItem uuid={UUIDS.FOO}>
+                            <AccordionItemHeading data-testid={UUIDS.FOO} />
+                        </AccordionItem>
+                    </Accordion>,
+                );
+
+                expect(
+                    getByTestId(UUIDS.FOO).getAttribute('aria-expanded'),
+                ).toEqual('true');
+            });
+
+            it('collapses items by default', () => {
+                const { getByTestId } = render(
+                    <Accordion>
+                        <AccordionItem>
+                            <AccordionItemHeading data-testid={UUIDS.FOO} />
+                        </AccordionItem>
+                    </Accordion>,
+                );
+
+                expect(
+                    getByTestId(UUIDS.FOO).getAttribute('aria-expanded'),
+                ).toEqual('false');
+            });
+        });
+
+        describe('onChange prop', () => {
+            it('is invoked with an array of expanded items’ uuids, if there are any', () => {
+                const onChange = jest.fn();
+                const { getByTestId } = render(
+                    <Accordion onChange={onChange}>
+                        <AccordionItem uuid={UUIDS.FOO}>
+                            <AccordionItemHeading data-testid={UUIDS.FOO} />
+                        </AccordionItem>
+                    </Accordion>,
+                );
+
+                fireEvent.click(getByTestId(UUIDS.FOO));
+
+                expect(onChange).toHaveBeenCalledWith([UUIDS.FOO]);
+            });
+
+            it('is invoked with an empty array, if no items are expanded', () => {
+                const onChange = jest.fn();
+                const { getByTestId } = render(
+                    <Accordion
+                        onChange={onChange}
+                        preExpanded={[UUIDS.FOO]}
+                        allowZeroExpanded={true}
+                    >
+                        <AccordionItem uuid={UUIDS.FOO}>
+                            <AccordionItemHeading data-testid={UUIDS.FOO} />
+                        </AccordionItem>
+                    </Accordion>,
+                );
+
+                fireEvent.click(getByTestId(UUIDS.FOO));
+
+                expect(onChange).toHaveBeenCalledWith([]);
+            });
+        });
     });
 });
