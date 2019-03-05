@@ -1,74 +1,43 @@
-import { mount } from 'enzyme';
 import * as React from 'react';
+import { cleanup, render } from 'react-testing-library';
 import { default as Accordion } from './Accordion';
-import { Provider, ProviderProps } from './AccordionContext';
-import { UUID } from './ItemContext';
+
+const TEST_ID = 'TEST_ID';
 
 describe('Accordion', () => {
+    afterEach(() => {
+        cleanup();
+    });
+
     it('renders without erroring', () => {
         expect(() => {
-            mount(<Accordion />);
+            render(<Accordion />);
         }).not.toThrow();
     });
 
     describe('className', () => {
         it('is “accordion” by default', () => {
-            expect(
-                mount(<Accordion />)
-                    .getDOMNode()
-                    .getAttribute('class'),
-            ).toBe('accordion');
+            const { getByTestId } = render(<Accordion data-testid={TEST_ID} />);
+            expect(getByTestId(TEST_ID).className).toBe('accordion');
         });
 
         it('can be overridden', () => {
-            const OVERRIDE = 'OVERRIDE';
-            expect(
-                mount(<Accordion className={OVERRIDE} />)
-                    .getDOMNode()
-                    .getAttribute('class'),
-            ).toBe(OVERRIDE);
+            const { getByTestId } = render(
+                <Accordion className="foo" data-testid={TEST_ID} />,
+            );
+            expect(getByTestId(TEST_ID).className).toBe('foo');
         });
     });
 
-    describe('context provision', () => {
-        it('is given to descendants', () => {
-            expect(mount(<Accordion />).find(Provider).length).toEqual(1);
-        });
-
-        it('respects all directly-proxied ProviderProps', () => {
-            // This test asserts that all ProviderProps are respected, AND
-            // the ProxiedProviderProps type helps to ensure that we haven't
-            // forgotten any.
-
-            type ProxiedProviderProps = Pick<
-                Required<ProviderProps>,
-                Exclude<keyof ProviderProps, 'children'> // 'children' is not proxied directly, and is tested separately below.
-            >;
-
-            const props: ProxiedProviderProps = {
-                preExpanded: ['foo', 'bar'],
-                allowMultipleExpanded: true,
-                allowZeroExpanded: true,
-                onChange: (args: UUID[]): void => {
-                    // noop
-                },
-            };
-
-            expect(
-                mount(<Accordion {...props} />)
-                    .find(Provider)
-                    .props(),
-            ).toMatchObject(props);
-        });
-
-        it('respects the ‘children’ prop', () => {
-            expect(
-                mount(
-                    <Accordion>
-                        <div data-foo={true} />
-                    </Accordion>,
-                ).find('[data-foo]'),
-            ).toHaveLength(1);
+    describe('children', () => {
+        it('respects the children prop', () => {
+            const { queryAllByTestId } = render(
+                <Accordion>
+                    <div data-testid={TEST_ID} />
+                    <div data-testid={TEST_ID} />
+                </Accordion>,
+            );
+            expect(queryAllByTestId(TEST_ID).length).toBe(2);
         });
     });
 });

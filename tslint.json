@@ -27,7 +27,7 @@
         "no-default-export": false,
         "no-implicit-dependencies": [
             true,
-            ["enzyme", "react-test-renderer", "uuid"]
+            ["enzyme", "react-testing-library", "uuid"]
         ],
         "no-null-keyword": false,
         "export-name": false,
