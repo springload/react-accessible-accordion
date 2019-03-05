@@ -71,4 +71,17 @@ describe('AccordionItem', () => {
             ]);
         });
     });
+
+    describe('children prop', () => {
+        it('is respected', () => {
+            const { getByText } = render(
+                <Accordion>
+                    <AccordionItem>
+                        <AccordionItemPanel>Hello World</AccordionItemPanel>
+                    </AccordionItem>
+                </Accordion>,
+            );
+            expect(getByText('Hello World')).toBeTruthy();
+        });
+    });
 });
