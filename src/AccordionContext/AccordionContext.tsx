@@ -1,7 +1,10 @@
 // tslint:disable:max-classes-per-file
 
 import * as React from 'react';
-import AccordionStore from '../AccordionStore/AccordionStore';
+import AccordionStore, {
+    InjectedHeadingAttributes,
+    InjectedPanelAttributes,
+} from '../AccordionStore/AccordionStore';
 import { UUID } from '../ItemContext/ItemContext';
 
 export interface ProviderProps {
@@ -17,9 +20,11 @@ type ProviderState = AccordionStore;
 export interface AccordionContext {
     allowMultipleExpanded: boolean;
     allowZeroExpanded: boolean;
-    setExpanded(uuid: UUID, expanded: boolean): void;
+    toggleExpanded(uuid: UUID): void;
     isItemDisabled(uuid: UUID): boolean;
     isItemExpanded(uuid: UUID): boolean;
+    getPanelAttributes(uuid: UUID): InjectedPanelAttributes;
+    getHeadingAttributes(uuid: UUID): InjectedHeadingAttributes;
 }
 
 const Context = React.createContext(null as AccordionContext | null);
@@ -39,10 +44,9 @@ export class Provider extends React.PureComponent<
         allowZeroExpanded: this.props.allowZeroExpanded,
     });
 
-    setExpanded = (key: UUID, expanded: boolean): void => {
+    toggleExpanded = (key: UUID): void => {
         this.setState(
-            (state: Readonly<ProviderState>) =>
-                state.setExpanded(key, expanded),
+            (state: Readonly<ProviderState>) => state.toggleExpanded(key),
             () => {
                 if (this.props.onChange) {
                     this.props.onChange(this.state.expanded);
@@ -59,6 +63,14 @@ export class Provider extends React.PureComponent<
         return this.state.isItemExpanded(key);
     };
 
+    getPanelAttributes = (key: UUID): InjectedPanelAttributes => {
+        return this.state.getPanelAttributes(key);
+    };
+
+    getHeadingAttributes = (key: UUID): InjectedHeadingAttributes => {
+        return this.state.getHeadingAttributes(key);
+    };
+
     render(): JSX.Element {
         const { allowZeroExpanded, allowMultipleExpanded } = this.state;
 
@@ -67,9 +79,11 @@ export class Provider extends React.PureComponent<
                 value={{
                     allowMultipleExpanded,
                     allowZeroExpanded,
-                    setExpanded: this.setExpanded,
+                    toggleExpanded: this.toggleExpanded,
                     isItemDisabled: this.isItemDisabled,
                     isItemExpanded: this.isItemExpanded,
+                    getPanelAttributes: this.getPanelAttributes,
+                    getHeadingAttributes: this.getHeadingAttributes,
                 }}
             >
                 {this.props.children || null}

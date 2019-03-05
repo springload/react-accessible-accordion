@@ -1,5 +1,21 @@
 import { UUID } from '../ItemContext/ItemContext';
 
+export interface InjectedPanelAttributes {
+    role: string | undefined;
+    'aria-hidden': boolean | undefined;
+    'aria-labelledby': string;
+    id: string;
+}
+
+export interface InjectedHeadingAttributes {
+    id: string;
+    'aria-controls': string;
+    'aria-expanded': boolean;
+    'aria-disabled': boolean;
+    role: string;
+    tabIndex: number;
+}
+
 export default class AccordionStore {
     public readonly expanded: UUID[];
     public readonly allowMultipleExpanded: boolean;
@@ -19,15 +35,13 @@ export default class AccordionStore {
         this.allowZeroExpanded = allowZeroExpanded;
     }
 
-    public readonly setExpanded = (
-        uuid: UUID,
-        isExpanded: boolean,
-    ): AccordionStore => {
+    public readonly toggleExpanded = (uuid: UUID): AccordionStore => {
         if (this.isItemDisabled(uuid)) {
             return this;
         }
+        const isExpanded = this.isItemExpanded(uuid);
 
-        if (isExpanded) {
+        if (!isExpanded) {
             return this.augment({
                 expanded: this.allowMultipleExpanded
                     ? [...this.expanded, uuid]
@@ -65,6 +79,41 @@ export default class AccordionStore {
             ) !== -1
         );
     };
+
+    public readonly getPanelAttributes = (
+        uuid: UUID,
+    ): InjectedPanelAttributes => {
+        const expanded = this.isItemExpanded(uuid);
+
+        return {
+            role: this.allowMultipleExpanded ? undefined : 'region',
+            'aria-hidden': this.allowMultipleExpanded ? !expanded : undefined,
+            'aria-labelledby': this.getHeadingId(uuid),
+            id: this.getPanelId(uuid),
+        };
+    };
+
+    public readonly getHeadingAttributes = (
+        uuid: UUID,
+    ): InjectedHeadingAttributes => {
+        const expanded = this.isItemExpanded(uuid);
+        const disabled = this.isItemDisabled(uuid);
+
+        return {
+            id: this.getHeadingId(uuid),
+            'aria-controls': this.getPanelId(uuid),
+            'aria-expanded': expanded,
+            'aria-disabled': disabled,
+            role: 'button',
+            tabIndex: 0,
+        };
+    };
+
+    private readonly getPanelId = (uuid: UUID): string =>
+        `accordion__panel-${uuid}`;
+
+    private readonly getHeadingId = (uuid: UUID): string =>
+        `accordion__heading-${uuid}`;
 
     private readonly augment = (args: {
         expanded?: UUID[];

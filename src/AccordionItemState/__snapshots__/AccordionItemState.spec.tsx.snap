@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`AccordionItemState renders correctly with min params 1`] = `
-<div>
-  Expanded: true
-</div>
-`;

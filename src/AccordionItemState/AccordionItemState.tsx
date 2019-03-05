@@ -1,13 +1,23 @@
 import * as React from 'react';
+import { DivAttributes } from '../helpers/types';
+import {
+    Consumer as ItemConsumer,
+    ItemContext,
+} from '../ItemContext/ItemContext';
 
-type AccordionItemStateProps = React.HTMLAttributes<HTMLDivElement> & {
+type Props = Pick<DivAttributes, Exclude<keyof DivAttributes, 'children'>> & {
     expanded: boolean;
     children(expanded: boolean): JSX.Element;
 };
 
-const AccordionItemState: React.SFC<AccordionItemStateProps> = (
-    props: AccordionItemStateProps,
-): JSX.Element => {
-    return <React.Fragment>{props.children(props.expanded)}</React.Fragment>;
-};
-export default AccordionItemState;
+export default class AccordionItemStateWrapper extends React.Component<Props> {
+    renderChildren = (itemContext: ItemContext): JSX.Element => {
+        const { expanded } = itemContext;
+
+        return <React.Fragment>{this.props.children(expanded)}</React.Fragment>;
+    };
+
+    render(): JSX.Element {
+        return <ItemConsumer>{this.renderChildren}</ItemConsumer>;
+    }
+}

@@ -12,7 +12,7 @@ describe('Accordion', () => {
             expect(container).toBeDefined();
             expect(container.allowMultipleExpanded).toBeDefined();
             expect(container.allowZeroExpanded).toBeDefined();
-            expect(container.setExpanded).toBeDefined();
+            expect(container.toggleExpanded).toBeDefined();
             expect(container.isItemExpanded).toBeDefined();
             expect(container.isItemDisabled).toBeDefined();
         });
@@ -43,12 +43,11 @@ describe('Accordion', () => {
         });
     });
 
-    describe('setExpanded', () => {
+    describe('toggleExpanded', () => {
         describe('expanding', () => {
             it('expands an item', () => {
-                const container = new AccordionStore({}).setExpanded(
+                const container = new AccordionStore({}).toggleExpanded(
                     UUIDS.FOO,
-                    true,
                 );
 
                 expect(container.expanded).toEqual([UUIDS.FOO]);
@@ -57,7 +56,7 @@ describe('Accordion', () => {
             it('collapses the currently expanded items', () => {
                 const container = new AccordionStore({
                     expanded: [UUIDS.BAR],
-                }).setExpanded(UUIDS.FOO, true);
+                }).toggleExpanded(UUIDS.FOO);
 
                 expect(container.expanded).toEqual([UUIDS.FOO]);
             });
@@ -67,7 +66,7 @@ describe('Accordion', () => {
             it('doesnt collapse the only expanded item', () => {
                 const container = new AccordionStore({
                     expanded: [UUIDS.FOO],
-                }).setExpanded(UUIDS.FOO, false);
+                }).toggleExpanded(UUIDS.FOO);
 
                 expect(container.expanded).toEqual([UUIDS.FOO]);
             });
@@ -76,7 +75,7 @@ describe('Accordion', () => {
                 const container = new AccordionStore({
                     allowZeroExpanded: true,
                     expanded: [UUIDS.FOO],
-                }).setExpanded(UUIDS.FOO, false);
+                }).toggleExpanded(UUIDS.FOO);
 
                 expect(container.expanded).toEqual([]);
             });

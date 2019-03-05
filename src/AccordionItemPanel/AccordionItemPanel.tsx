@@ -1,36 +1,53 @@
 import { default as classnames } from 'classnames';
 import * as React from 'react';
-import { UUID } from '../ItemContext/ItemContext';
+import { DivAttributes } from '../helpers/types';
+import {
+    Consumer as ItemConsumer,
+    ItemContext,
+} from '../ItemContext/ItemContext';
 
-type AccordionItemPanelProps = React.HTMLAttributes<HTMLDivElement> & {
+type Props = DivAttributes & {
     expandedClassName: string;
-    uuid: UUID;
     expanded: boolean;
-    allowMultipleExpanded: boolean;
 };
 
-const AccordionItemPanel: React.SFC<AccordionItemPanelProps> = ({
+const AccordionItemPanel: React.SFC<Props> = ({
     className,
     expandedClassName,
-    uuid,
     expanded,
-    allowMultipleExpanded,
     ...rest
-}: AccordionItemPanelProps): JSX.Element => {
-    const role = allowMultipleExpanded ? undefined : 'region';
-    const hideAriaAttribute = allowMultipleExpanded ? !expanded : undefined;
-
+}: Props): JSX.Element => {
     return (
         <div
-            id={`accordion__panel-${uuid}`}
             className={classnames(className, {
                 [expandedClassName]: expanded,
             })}
-            aria-hidden={hideAriaAttribute}
-            aria-labelledby={`accordion__heading-${uuid}`}
-            role={role}
             {...rest}
         />
     );
 };
-export default AccordionItemPanel;
+
+type WrapperProps = Pick<Props, Exclude<keyof Props, 'expanded'>>;
+
+export default class Wrapper extends React.Component<WrapperProps> {
+    static defaultProps: { className: string; expandedClassName: string } = {
+        className: 'accordion__panel',
+        expandedClassName: 'accordion__panel--expanded',
+    };
+
+    renderChildren = (itemContext: ItemContext): JSX.Element => {
+        const { panelAttributes, expanded } = itemContext;
+
+        return (
+            <AccordionItemPanel
+                {...this.props}
+                {...panelAttributes}
+                expanded={expanded}
+            />
+        );
+    };
+
+    render(): JSX.Element {
+        return <ItemConsumer>{this.renderChildren}</ItemConsumer>;
+    }
+}

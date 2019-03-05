@@ -1,15 +1,15 @@
-import AccordionWrapper from './Accordion/Accordion.wrapper';
-import AccordionItemWrapper from './AccordionItem/AccordionItem.wrapper';
-import AccordionItemHeadingWrapper from './AccordionItemHeading/AccordionItemHeading.wrapper';
-import AccordionItemPanelWrapper from './AccordionItemPanel/AccordionItemPanel.wrapper';
-import AccordionItemStateWrapper from './AccordionItemState/AccordionItemState.wrapper';
+import Accordion from './Accordion/Accordion';
+import AccordionItem from './AccordionItem/AccordionItem';
+import AccordionItemHeading from './AccordionItemHeading/AccordionItemHeading';
+import AccordionItemPanel from './AccordionItemPanel/AccordionItemPanel';
+import AccordionItemState from './AccordionItemState/AccordionItemState';
 import { resetNextUuid } from './helpers/uuid';
 
 export {
-    AccordionWrapper as Accordion,
-    AccordionItemWrapper as AccordionItem,
-    AccordionItemHeadingWrapper as AccordionItemHeading,
-    AccordionItemPanelWrapper as AccordionItemPanel,
-    AccordionItemStateWrapper as AccordionItemState,
+    Accordion,
+    AccordionItem,
+    AccordionItemHeading,
+    AccordionItemPanel,
+    AccordionItemState,
     resetNextUuid,
 };

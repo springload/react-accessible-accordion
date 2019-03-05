@@ -7,34 +7,26 @@ import {
     focusPreviousSiblingOf,
 } from '../helpers/focus';
 import keycodes from '../helpers/keycodes';
-import { UUID } from '../ItemContext/ItemContext';
 
-type AccordionItemHeadingProps = React.HTMLAttributes<HTMLDivElement> & {
+import { DivAttributes } from '../helpers/types';
+import {
+    Consumer as ItemConsumer,
+    ItemContext,
+} from '../ItemContext/ItemContext';
+
+type Props = Pick<DivAttributes, Exclude<keyof DivAttributes, 'role'>> & {
     expandedClassName: string;
     expanded: boolean;
-    uuid: UUID;
-    disabled: boolean;
-    setExpanded(uuid: UUID, expanded: boolean): void;
+    toggleExpanded(): void;
 };
 
-type AccordionItemHeadingState = {};
-
-export default class AccordionItemHeading extends React.Component<
-    AccordionItemHeadingProps,
-    AccordionItemHeadingState
-> {
-    handleClick = (): void => {
-        const { uuid, expanded, setExpanded } = this.props;
-
-        setExpanded(uuid, !expanded);
-    };
-
+export class AccordionItemHeading extends React.PureComponent<Props> {
     handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
         const keyCode = evt.which.toString();
 
         if (keyCode === keycodes.ENTER || keyCode === keycodes.SPACE) {
             evt.preventDefault();
-            this.handleClick();
+            this.props.toggleExpanded();
         }
 
         if (evt.target instanceof HTMLElement) {
@@ -72,15 +64,10 @@ export default class AccordionItemHeading extends React.Component<
         const {
             className,
             expandedClassName,
-            setExpanded,
             expanded,
-            uuid,
-            disabled,
+            toggleExpanded,
             ...rest
         } = this.props;
-
-        const id = `accordion__heading-${uuid}`;
-        const ariaControls = `accordion__panel-${uuid}`;
 
         const headingClassName = classnames(className, {
             [expandedClassName]: expandedClassName && expanded,
@@ -88,14 +75,9 @@ export default class AccordionItemHeading extends React.Component<
 
         return (
             <div
-                id={id}
-                aria-expanded={expanded}
-                aria-controls={ariaControls}
+                // tslint:disable-next-line react-a11y-event-has-role
                 className={headingClassName}
-                aria-disabled={disabled}
-                onClick={this.handleClick}
-                role="button"
-                tabIndex={0}
+                onClick={toggleExpanded}
                 data-accordion-component="AccordionItemHeading"
                 onKeyDown={this.handleKeyPress}
                 {...rest}
@@ -103,3 +85,27 @@ export default class AccordionItemHeading extends React.Component<
         );
     }
 }
+
+type WrapperProps = Pick<
+    Props,
+    Exclude<keyof Props, 'toggleExpanded' | 'expanded'>
+>;
+
+const Wrapper: React.SFC<WrapperProps> = (props: WrapperProps): JSX.Element => (
+    <ItemConsumer>
+        {(itemContext: ItemContext): JSX.Element => {
+            const { expanded, toggleExpanded, headingAttributes } = itemContext;
+
+            return (
+                <AccordionItemHeading
+                    {...props}
+                    expanded={expanded}
+                    toggleExpanded={toggleExpanded}
+                    {...headingAttributes}
+                />
+            );
+        }}
+    </ItemConsumer>
+);
+
+export default Wrapper;
