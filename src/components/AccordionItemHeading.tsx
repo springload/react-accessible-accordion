@@ -33,6 +33,11 @@ export class AccordionItemHeading extends React.PureComponent<Props> {
             this.props.toggleExpanded();
         }
 
+        /* The following block is ignored from test coverage because at time
+         * time of writing Jest/react-testing-library can not assert 'focus'
+         * functionality.
+         */
+        // istanbul ignore next
         if (evt.target instanceof HTMLElement) {
             switch (keyCode) {
                 case keycodes.HOME: {
