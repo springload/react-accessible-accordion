@@ -1,5 +1,9 @@
 import * as React from 'react';
 import {
+    InjectedButtonAttributes,
+    InjectedHeadingAttributes,
+} from '../helpers/AccordionStore';
+import {
     focusFirstSiblingOf,
     focusLastSiblingOf,
     focusNextSiblingOf,
@@ -7,15 +11,20 @@ import {
 } from '../helpers/focus';
 import keycodes from '../helpers/keycodes';
 
-import { DivAttributes } from '../helpers/types';
 import { Consumer as ItemConsumer, ItemContext } from './ItemContext';
 
-type Props = Pick<DivAttributes, Exclude<keyof DivAttributes, 'role'>> & {
+type Props = {
+    children?: React.ReactNode;
+    headingAttributes: InjectedHeadingAttributes;
+    buttonAttributes: InjectedButtonAttributes;
+    headingClassName?: string;
+    buttonClassName?: string;
     toggleExpanded(): void;
 };
 
 const defaultProps = {
-    className: 'accordion__heading',
+    headingClassName: 'accordion__heading',
+    buttonClassName: 'accordion__button',
 };
 
 export class AccordionItemHeading extends React.PureComponent<Props> {
@@ -66,33 +75,65 @@ export class AccordionItemHeading extends React.PureComponent<Props> {
     };
 
     render(): JSX.Element {
-        const { toggleExpanded, ...rest } = this.props;
+        const {
+            toggleExpanded,
+            headingAttributes,
+            buttonAttributes,
+            headingClassName,
+            buttonClassName,
+            children,
+        } = this.props;
 
         return (
             <div
-                // tslint:disable-next-line react-a11y-event-has-role
-                onClick={toggleExpanded}
+                className={headingClassName}
                 data-accordion-component="AccordionItemHeading"
-                onKeyDown={this.handleKeyPress}
-                {...rest}
-            />
+                {...headingAttributes}
+            >
+                <div
+                    // tslint:disable-next-line react-a11y-event-has-role
+                    onClick={toggleExpanded}
+                    onKeyDown={this.handleKeyPress}
+                    className={buttonClassName}
+                    data-accordion-component="AccordionItemButton"
+                    {...buttonAttributes}
+                >
+                    {children}
+                </div>
+            </div>
         );
     }
 }
 
-type WrapperProps = Pick<Props, Exclude<keyof Props, 'toggleExpanded'>>;
+type WrapperProps = {
+    buttonClassName?: string;
+    headingClassName?: string;
+    children?: React.ReactNode;
+};
 
-const Wrapper: React.SFC<WrapperProps> = (props: WrapperProps): JSX.Element => (
+const Wrapper: React.SFC<WrapperProps> = ({
+    headingClassName,
+    buttonClassName,
+    children,
+}: WrapperProps): JSX.Element => (
     <ItemConsumer>
         {(itemContext: ItemContext): JSX.Element => {
-            const { toggleExpanded, headingAttributes } = itemContext;
+            const {
+                toggleExpanded,
+                headingAttributes,
+                buttonAttributes,
+            } = itemContext;
 
             return (
                 <AccordionItemHeading
-                    {...props}
                     toggleExpanded={toggleExpanded}
-                    {...headingAttributes}
-                />
+                    headingClassName={headingClassName}
+                    buttonClassName={buttonClassName}
+                    headingAttributes={headingAttributes}
+                    buttonAttributes={buttonAttributes}
+                >
+                    {children}
+                </AccordionItemHeading>
             );
         }}
     </ItemConsumer>

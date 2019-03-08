@@ -20,7 +20,7 @@ describe('AccordionItem', () => {
         }).not.toThrow();
     });
 
-    describe('className prop', () => {
+    describe('headingClassName prop', () => {
         it('are “BEM” by default', () => {
             const { getByTestId } = render(
                 <Accordion>
@@ -41,7 +41,7 @@ describe('AccordionItem', () => {
                     <AccordionItem uuid={UUIDS.FOO}>
                         <AccordionItemHeading
                             data-testid={UUIDS.FOO}
-                            className="foo"
+                            headingClassName="foo"
                         />
                     </AccordionItem>
                 </Accordion>,

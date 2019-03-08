@@ -12,7 +12,7 @@
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.accordion__heading {
+.accordion__button {
     background-color: #f4f4f4;
     color: #444;
     cursor: pointer;
@@ -22,7 +22,7 @@
     border: none;
 }
 
-.accordion__heading:hover {
+.accordion__button:hover {
     background-color: #ddd;
 }
 
