@@ -7,9 +7,6 @@ import {
     AccordionItemPanel,
 } from '../../src';
 
-// tslint:disable-next-line no-import-side-effect
-import '../../src/css/minimal-example.css';
-
 ReactDOM.render(
     <div id="classic-accordion">
         <Accordion>

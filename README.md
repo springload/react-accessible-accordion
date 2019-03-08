@@ -72,13 +72,9 @@ export default function Example() {
 ### Styles
 
 We strongly encourage you to write your own styles for your accordions, but
-we've published these two starter stylesheets to help you get up and running:
+we've published the styles used on our demo page to help you get up and running:
 
 ```js
-// 'Minimal' theme - hide/show the AccordionBody component:
-import 'react-accessible-accordion/dist/minimal-example.css';
-
-// 'Fancy' theme - boilerplate styles for all components, as seen on our demo:
 import 'react-accessible-accordion/dist/fancy-example.css';
 ```
 
