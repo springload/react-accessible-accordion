@@ -1,4 +1,3 @@
-import { default as classnames } from 'classnames';
 import * as React from 'react';
 import {
     focusFirstSiblingOf,
@@ -12,14 +11,11 @@ import { DivAttributes } from '../helpers/types';
 import { Consumer as ItemConsumer, ItemContext } from './ItemContext';
 
 type Props = Pick<DivAttributes, Exclude<keyof DivAttributes, 'role'>> & {
-    expandedClassName?: string;
-    expanded: boolean;
     toggleExpanded(): void;
 };
 
 const defaultProps = {
     className: 'accordion__heading',
-    expandedClassName: 'accordion__heading--expanded',
 };
 
 export class AccordionItemHeading extends React.PureComponent<Props> {
@@ -70,22 +66,11 @@ export class AccordionItemHeading extends React.PureComponent<Props> {
     };
 
     render(): JSX.Element {
-        const {
-            className,
-            expandedClassName,
-            expanded,
-            toggleExpanded,
-            ...rest
-        } = this.props;
-
-        const headingClassName = classnames(className, {
-            [String(expandedClassName)]: expandedClassName && expanded,
-        });
+        const { toggleExpanded, ...rest } = this.props;
 
         return (
             <div
                 // tslint:disable-next-line react-a11y-event-has-role
-                className={headingClassName}
                 onClick={toggleExpanded}
                 data-accordion-component="AccordionItemHeading"
                 onKeyDown={this.handleKeyPress}
@@ -95,20 +80,16 @@ export class AccordionItemHeading extends React.PureComponent<Props> {
     }
 }
 
-type WrapperProps = Pick<
-    Props,
-    Exclude<keyof Props, 'toggleExpanded' | 'expanded'>
->;
+type WrapperProps = Pick<Props, Exclude<keyof Props, 'toggleExpanded'>>;
 
 const Wrapper: React.SFC<WrapperProps> = (props: WrapperProps): JSX.Element => (
     <ItemConsumer>
         {(itemContext: ItemContext): JSX.Element => {
-            const { expanded, toggleExpanded, headingAttributes } = itemContext;
+            const { toggleExpanded, headingAttributes } = itemContext;
 
             return (
                 <AccordionItemHeading
                     {...props}
-                    expanded={expanded}
                     toggleExpanded={toggleExpanded}
                     {...headingAttributes}
                 />

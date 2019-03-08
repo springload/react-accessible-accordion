@@ -20,53 +20,34 @@ describe('AccordionItem', () => {
         }).not.toThrow();
     });
 
-    describe('className + expandedClassName', () => {
+    describe('className prop', () => {
         it('are “BEM” by default', () => {
             const { getByTestId } = render(
-                <Accordion preExpanded={[UUIDS.FOO]}>
+                <Accordion>
                     <AccordionItem uuid={UUIDS.FOO}>
                         <AccordionItemHeading data-testid={UUIDS.FOO} />
-                    </AccordionItem>
-                    <AccordionItem uuid={UUIDS.BAR}>
-                        <AccordionItemHeading data-testid={UUIDS.BAR} />
                     </AccordionItem>
                 </Accordion>,
             );
 
             expect(Array.from(getByTestId(UUIDS.FOO).classList)).toEqual([
-                'accordion__heading',
-                'accordion__heading--expanded',
-            ]);
-            expect(Array.from(getByTestId(UUIDS.BAR).classList)).toEqual([
                 'accordion__heading',
             ]);
         });
 
         it('can be overridden', () => {
             const { getByTestId } = render(
-                <Accordion preExpanded={[UUIDS.FOO]}>
+                <Accordion>
                     <AccordionItem uuid={UUIDS.FOO}>
                         <AccordionItemHeading
                             data-testid={UUIDS.FOO}
                             className="foo"
-                            expandedClassName="foo--expanded"
-                        />
-                    </AccordionItem>
-                    <AccordionItem uuid={UUIDS.BAR}>
-                        <AccordionItemHeading
-                            data-testid={UUIDS.BAR}
-                            className="foo"
-                            expandedClassName="foo--expanded"
                         />
                     </AccordionItem>
                 </Accordion>,
             );
 
             expect(Array.from(getByTestId(UUIDS.FOO).classList)).toEqual([
-                'foo',
-                'foo--expanded',
-            ]);
-            expect(Array.from(getByTestId(UUIDS.BAR).classList)).toEqual([
                 'foo',
             ]);
         });
