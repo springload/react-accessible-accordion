@@ -3,14 +3,6 @@
 * Demo styles
 * ----------------------------------------------
 **/
-.u-position-absolute {
-    position: absolute;
-}
-
-.u-position-relative {
-    position: relative;
-}
-
 .accordion {
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 2px;
