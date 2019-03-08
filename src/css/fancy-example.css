@@ -40,12 +40,7 @@
 
 .accordion__panel {
     padding: 20px;
-    display: none;
     animation: fadein 0.35s ease-in;
-}
-
-.accordion__panel--expanded {
-    display: block;
 }
 
 .accordion__heading > *:last-child,
