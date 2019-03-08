@@ -5,7 +5,7 @@ import AccordionItem from './AccordionItem';
 
 enum UUIDS {
     FOO = 'FOO',
-    BAR = 'Bar',
+    BAR = 'BAR',
 }
 
 describe('AccordionItem', () => {
@@ -19,19 +19,14 @@ describe('AccordionItem', () => {
         }).not.toThrow();
     });
 
-    describe('className + expandedClassName', () => {
-        it('are “BEM” by default', () => {
+    describe('className prop', () => {
+        it('is “BEM” by default', () => {
             const { getByTestId } = render(
-                <Accordion preExpanded={[UUIDS.FOO]}>
+                <Accordion>
                     <AccordionItem uuid={UUIDS.FOO} data-testid={UUIDS.FOO} />
-                    <AccordionItem uuid={UUIDS.BAR} data-testid={UUIDS.BAR} />
                 </Accordion>,
             );
             expect(Array.from(getByTestId(UUIDS.FOO).classList)).toEqual([
-                'accordion__item',
-                'accordion__item--expanded',
-            ]);
-            expect(Array.from(getByTestId(UUIDS.BAR).classList)).toEqual([
                 'accordion__item',
             ]);
         });
@@ -43,22 +38,11 @@ describe('AccordionItem', () => {
                         uuid={UUIDS.FOO}
                         data-testid={UUIDS.FOO}
                         className="foo"
-                        expandedClassName="foo--expanded"
-                    />
-                    <AccordionItem
-                        uuid={UUIDS.BAR}
-                        data-testid={UUIDS.BAR}
-                        className="foo"
-                        expandedClassName="foo--expanded"
                     />
                 </Accordion>,
             );
 
             expect(Array.from(getByTestId(UUIDS.FOO).classList)).toEqual([
-                'foo',
-                'foo--expanded',
-            ]);
-            expect(Array.from(getByTestId(UUIDS.BAR).classList)).toEqual([
                 'foo',
             ]);
         });
