@@ -110,10 +110,6 @@ Callback which is invoked when items are expanded or collapsed. Gets passed
 
 Class(es) to apply to element.
 
-#### expandedClassName : `string` [*optional*, default: `accordion__item--expanded`]
-
-Class(es) to append when item is expanded.
-
 #### uuid : `string|number` [*optional*]
 
 Recommended for use with `onChange`. Will be auto-generated if not provided.
@@ -122,13 +118,13 @@ Recommended for use with `onChange`. Will be auto-generated if not provided.
 
 ### AccordionItemHeading
 
-#### className : `string` [*optional*, default: `'accordion__heading'`]
+#### headingClassName : `string` [*optional*, default: `'accordion__heading'`]
 
-Class(es) to apply to element.
+Class(es) to apply to the 'heading' element.
 
-#### expandedClassName : `string` [*optional*, default: `'accordion__heading--expanded'`]
+#### buttonClassName : `string` [*optional*, default: `'accordion__button'`]
 
-Class(es) to append when item is expanded.
+Class(es) to apply to the 'heading' element.
 
 ---
 
@@ -137,10 +133,6 @@ Class(es) to append when item is expanded.
 #### className : `string` [*optional*, default: `'accordion__panel'`]
 
 Class(es) to apply to element.
-
-#### expandedClassName : `string` [*optional*, default: `'accordion__panel'`]
-
-Class(es) to append when item is expanded.
 
 ---
 
