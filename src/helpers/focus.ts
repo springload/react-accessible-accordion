@@ -9,21 +9,21 @@ export function getClosestAccordion(
     );
 }
 
-export function getSiblingHeadings(item: HTMLElement): HTMLElement[] | null {
+export function getSiblingButtons(item: HTMLElement): HTMLElement[] | null {
     const parentAccordion = getClosestAccordion(item);
 
     return (
         parentAccordion &&
         Array.from(
             parentAccordion.querySelectorAll(
-                '[data-accordion-component="AccordionItemHeading"]',
+                '[data-accordion-component="AccordionItemButton"]',
             ),
         )
     );
 }
 
 export function focusFirstSiblingOf(item: HTMLElement): void {
-    const siblings = getSiblingHeadings(item) || [];
+    const siblings = getSiblingButtons(item) || [];
     const first = siblings[0];
     if (first) {
         first.focus();
@@ -31,7 +31,7 @@ export function focusFirstSiblingOf(item: HTMLElement): void {
 }
 
 export function focusLastSiblingOf(item: HTMLElement): void {
-    const siblings = getSiblingHeadings(item) || [];
+    const siblings = getSiblingButtons(item) || [];
     const last = siblings[siblings.length - 1];
     if (last) {
         last.focus();
@@ -39,7 +39,7 @@ export function focusLastSiblingOf(item: HTMLElement): void {
 }
 
 export function focusNextSiblingOf(item: HTMLElement): void {
-    const siblings = getSiblingHeadings(item) || [];
+    const siblings = getSiblingButtons(item) || [];
     const currentIndex = siblings.indexOf(item);
     if (currentIndex !== -1) {
         const next = siblings[currentIndex + 1];
@@ -50,7 +50,7 @@ export function focusNextSiblingOf(item: HTMLElement): void {
 }
 
 export function focusPreviousSiblingOf(item: HTMLElement): void {
-    const siblings = getSiblingHeadings(item) || [];
+    const siblings = getSiblingButtons(item) || [];
     const currentIndex = siblings.indexOf(item);
     if (currentIndex !== -1) {
         const previous = siblings[currentIndex - 1];

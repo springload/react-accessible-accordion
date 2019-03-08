@@ -4,7 +4,7 @@ import {
     focusNextSiblingOf,
     focusPreviousSiblingOf,
     getClosestAccordion,
-    getSiblingHeadings,
+    getSiblingButtons,
 } from './focus';
 
 describe('focus', () => {
@@ -86,224 +86,224 @@ describe('focus', () => {
         });
     });
 
-    describe('getSiblingHeadings', () => {
+    describe('getSiblingButtons', () => {
         it('returns adjacent siblings', () => {
             const tree = createTree(`
                 <div data-accordion-component="Accordion" id="parent">
-                    <div data-accordion-component="AccordionItemHeading">Heading</div>
-                    <div data-accordion-component="AccordionItemHeading">Heading</div>
-                    <div data-accordion-component="AccordionItemHeading">Heading</div>
+                    <div data-accordion-component="AccordionItemButton">Button</div>
+                    <div data-accordion-component="AccordionItemButton">Button</div>
+                    <div data-accordion-component="AccordionItemButton">Button</div>
                 </div>
             `);
 
-            const heading = tree.querySelector(
-                '[data-accordion-component="AccordionItemHeading"]',
+            const button = tree.querySelector(
+                '[data-accordion-component="AccordionItemButton"]',
             );
 
             // Predicate
-            if (!(heading instanceof HTMLElement)) {
-                throw new Error('heading not found');
+            if (!(button instanceof HTMLElement)) {
+                throw new Error('button not found');
             }
 
             // Matter
-            expect(getSiblingHeadings(heading)).toHaveLength(3);
+            expect(getSiblingButtons(button)).toHaveLength(3);
         });
 
         it('returns nested siblings', () => {
             const tree = createTree(`
                 <div data-accordion-component="Accordion" id="parent">
                     <div>
-                        <div data-accordion-component="AccordionItemHeading">Heading</div>
+                        <div data-accordion-component="AccordionItemButton">Button</div>
                     </div>
-                    <div data-accordion-component="AccordionItemHeading">Heading</div>
-                    <div data-accordion-component="AccordionItemHeading">Heading</div>
+                    <div data-accordion-component="AccordionItemButton">Button</div>
+                    <div data-accordion-component="AccordionItemButton">Button</div>
                 </div>
             `);
 
-            const heading = tree.querySelector(
-                '[data-accordion-component="AccordionItemHeading"]',
+            const button = tree.querySelector(
+                '[data-accordion-component="AccordionItemButton"]',
             );
 
             // Predicate
-            if (!(heading instanceof HTMLElement)) {
-                throw new Error('heading not found');
+            if (!(button instanceof HTMLElement)) {
+                throw new Error('button not found');
             }
 
             // Matter
-            expect(getSiblingHeadings(heading)).toHaveLength(3);
+            expect(getSiblingButtons(button)).toHaveLength(3);
         });
 
-        it('doesn‘t return headings "above" the accordion', () => {
+        it('doesn‘t return buttons "above" the accordion', () => {
             const tree = createTree(`
-                <div data-accordion-component="AccordionItemHeading">
+                <div data-accordion-component="AccordionItemButton">
                     <div data-accordion-component="Accordion" id="parent">
-                        <div data-accordion-component="AccordionItemHeading" id="first">Heading</div>
-                        <div data-accordion-component="AccordionItemHeading">Heading</div>
+                        <div data-accordion-component="AccordionItemButton" id="first">Button</div>
+                        <div data-accordion-component="AccordionItemButton">Button</div>
                     </div>
                 </div>
             `);
 
-            const heading = tree.querySelector('#first');
+            const button = tree.querySelector('#first');
 
             // Predicate
-            if (!(heading instanceof HTMLElement)) {
-                throw new Error('heading not found');
+            if (!(button instanceof HTMLElement)) {
+                throw new Error('button not found');
             }
 
             // Matter
-            expect(getSiblingHeadings(heading)).toHaveLength(2);
+            expect(getSiblingButtons(button)).toHaveLength(2);
         });
     });
 
     describe('focusFirstSiblingOf', () => {
-        it('focuses the first heading in document flow', () => {
+        it('focuses the first button in document flow', () => {
             const tree = createTree(`
                 <div data-accordion-component="Accordion">
-                    <div data-accordion-component="AccordionItemHeading" tabindex="0" id="1"></div>
-                    <div data-accordion-component="AccordionItemHeading" tabindex="0" id="2"></div>
-                    <div data-accordion-component="AccordionItemHeading" tabindex="0" id="3"></div>
+                    <div data-accordion-component="AccordionItemButton" tabindex="0" id="1"></div>
+                    <div data-accordion-component="AccordionItemButton" tabindex="0" id="2"></div>
+                    <div data-accordion-component="AccordionItemButton" tabindex="0" id="3"></div>
                 </div>
             `);
 
-            const [firstHeading, secondHeading, thirdHeading] = Array.from(
+            const [firstButton, secondButton, thirdButton] = Array.from(
                 tree.querySelectorAll(
-                    '[data-accordion-component="AccordionItemHeading"]',
+                    '[data-accordion-component="AccordionItemButton"]',
                 ),
             );
 
             // Predicate
             if (
                 !(
-                    firstHeading instanceof HTMLElement &&
-                    secondHeading instanceof HTMLElement &&
-                    thirdHeading instanceof HTMLElement
+                    firstButton instanceof HTMLElement &&
+                    secondButton instanceof HTMLElement &&
+                    thirdButton instanceof HTMLElement
                 )
             ) {
-                throw new Error('headings not found');
+                throw new Error('buttons not found');
             }
-            thirdHeading.focus();
-            expect(document.activeElement).toBe(thirdHeading);
+            thirdButton.focus();
+            expect(document.activeElement).toBe(thirdButton);
 
             // Matter
-            focusFirstSiblingOf(thirdHeading);
-            expect(document.activeElement).toBe(firstHeading);
+            focusFirstSiblingOf(thirdButton);
+            expect(document.activeElement).toBe(firstButton);
         });
     });
 
     describe('focusLastSiblingOf', () => {
-        it('focuses the last heading in document flow', () => {
+        it('focuses the last button in document flow', () => {
             const tree = createTree(`
                 <div data-accordion-component="Accordion">
-                    <div data-accordion-component="AccordionItemHeading" tabindex="0" id="1"></div>
-                    <div data-accordion-component="AccordionItemHeading" tabindex="0" id="2"></div>
-                    <div data-accordion-component="AccordionItemHeading" tabindex="0" id="3"></div>
+                    <div data-accordion-component="AccordionItemButton" tabindex="0" id="1"></div>
+                    <div data-accordion-component="AccordionItemButton" tabindex="0" id="2"></div>
+                    <div data-accordion-component="AccordionItemButton" tabindex="0" id="3"></div>
                 </div>
             `);
 
             const [
-                firstHeading,
-                secondHeading,
-                thirdHeading,
+                firstButton,
+                secondButton,
+                thirdButton,
             ]: HTMLElement[] = Array.from(
                 tree.querySelectorAll(
-                    '[data-accordion-component="AccordionItemHeading"]',
+                    '[data-accordion-component="AccordionItemButton"]',
                 ),
             );
 
             // Predicate
             if (
                 !(
-                    firstHeading instanceof HTMLElement &&
-                    secondHeading instanceof HTMLElement &&
-                    thirdHeading instanceof HTMLElement
+                    firstButton instanceof HTMLElement &&
+                    secondButton instanceof HTMLElement &&
+                    thirdButton instanceof HTMLElement
                 )
             ) {
-                throw new Error('headings not found');
+                throw new Error('buttons not found');
             }
-            firstHeading.focus();
-            expect(document.activeElement).toBe(firstHeading);
+            firstButton.focus();
+            expect(document.activeElement).toBe(firstButton);
 
             // Matter
-            focusLastSiblingOf(firstHeading);
-            expect(document.activeElement).toBe(thirdHeading);
+            focusLastSiblingOf(firstButton);
+            expect(document.activeElement).toBe(thirdButton);
         });
     });
 
     describe('focusNextSiblingOf', () => {
-        it('focuses the next heading in document flow', () => {
+        it('focuses the next button in document flow', () => {
             const tree = createTree(`
                 <div data-accordion-component="Accordion">
-                    <div data-accordion-component="AccordionItemHeading" tabindex="0" id="1"></div>
-                    <div data-accordion-component="AccordionItemHeading" tabindex="0" id="2"></div>
-                    <div data-accordion-component="AccordionItemHeading" tabindex="0" id="3"></div>
+                    <div data-accordion-component="AccordionItemButton" tabindex="0" id="1"></div>
+                    <div data-accordion-component="AccordionItemButton" tabindex="0" id="2"></div>
+                    <div data-accordion-component="AccordionItemButton" tabindex="0" id="3"></div>
                 </div>
             `);
 
             const [
-                firstHeading,
-                secondHeading,
-                thirdHeading,
+                firstButton,
+                secondButton,
+                thirdButton,
             ]: HTMLElement[] = Array.from(
                 tree.querySelectorAll(
-                    '[data-accordion-component="AccordionItemHeading"]',
+                    '[data-accordion-component="AccordionItemButton"]',
                 ),
             );
 
             // Predicate
             if (
                 !(
-                    firstHeading instanceof HTMLElement &&
-                    secondHeading instanceof HTMLElement &&
-                    thirdHeading instanceof HTMLElement
+                    firstButton instanceof HTMLElement &&
+                    secondButton instanceof HTMLElement &&
+                    thirdButton instanceof HTMLElement
                 )
             ) {
-                throw new Error('headings not found');
+                throw new Error('buttons not found');
             }
-            firstHeading.focus();
-            expect(document.activeElement).toBe(firstHeading);
+            firstButton.focus();
+            expect(document.activeElement).toBe(firstButton);
 
             // Matter
-            focusNextSiblingOf(firstHeading);
-            expect(document.activeElement).toBe(secondHeading);
+            focusNextSiblingOf(firstButton);
+            expect(document.activeElement).toBe(secondButton);
         });
     });
 
     describe('focusPreviousSiblingOf', () => {
-        it('focuses the previous heading in document flow', () => {
+        it('focuses the previous button in document flow', () => {
             const tree = createTree(`
                 <div data-accordion-component="Accordion">
-                    <div data-accordion-component="AccordionItemHeading" tabindex="0" id="1"></div>
-                    <div data-accordion-component="AccordionItemHeading" tabindex="0" id="2"></div>
-                    <div data-accordion-component="AccordionItemHeading" tabindex="0" id="3"></div>
+                    <div data-accordion-component="AccordionItemButton" tabindex="0" id="1"></div>
+                    <div data-accordion-component="AccordionItemButton" tabindex="0" id="2"></div>
+                    <div data-accordion-component="AccordionItemButton" tabindex="0" id="3"></div>
                 </div>
             `);
 
             const [
-                firstHeading,
-                secondHeading,
-                thirdHeading,
+                firstButton,
+                secondButton,
+                thirdButton,
             ]: HTMLElement[] = Array.from(
                 tree.querySelectorAll(
-                    '[data-accordion-component="AccordionItemHeading"]',
+                    '[data-accordion-component="AccordionItemButton"]',
                 ),
             );
 
             // Predicate
             if (
                 !(
-                    firstHeading instanceof HTMLElement &&
-                    secondHeading instanceof HTMLElement &&
-                    thirdHeading instanceof HTMLElement
+                    firstButton instanceof HTMLElement &&
+                    secondButton instanceof HTMLElement &&
+                    thirdButton instanceof HTMLElement
                 )
             ) {
-                throw new Error('headings not found');
+                throw new Error('buttons not found');
             }
-            thirdHeading.focus();
-            expect(document.activeElement).toBe(thirdHeading);
+            thirdButton.focus();
+            expect(document.activeElement).toBe(thirdButton);
 
             // Matter
-            focusPreviousSiblingOf(thirdHeading);
-            expect(document.activeElement).toBe(secondHeading);
+            focusPreviousSiblingOf(thirdButton);
+            expect(document.activeElement).toBe(secondButton);
         });
     });
 });
