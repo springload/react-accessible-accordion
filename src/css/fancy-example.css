@@ -12,10 +12,6 @@
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.accordion__item--has-icon {
-    position: relative;
-}
-
 .accordion__heading {
     background-color: #f4f4f4;
     color: #444;
@@ -132,14 +128,4 @@
     100% {
         transform: translateY(0);
     }
-}
-
-.accordion__heading--animated:hover .accordion__arrow {
-    animation-name: move-down;
-    animation-duration: 1.5s;
-}
-
-.accordion__heading--animated[aria-expanded='true']:hover .accordion__arrow {
-    animation-name: move-up;
-    animation-duration: 1.5s;
 }
