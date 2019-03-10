@@ -124,7 +124,13 @@ Class(es) to apply to the 'heading' element.
 
 #### buttonClassName : `string` [*optional*, default: `'accordion__button'`]
 
-Class(es) to apply to the 'heading' element.
+Class(es) to apply to the 'button' element.
+
+#### aria-level : `number` [*optional*, default: `3`]
+
+Semantics to apply to the 'heading' element. A value of `1` would make your
+heading element hierarchically equivalent to an `<h1>` tag, and likewise a value
+of `6` would make it equivalent to an `<h6>` tag.
 
 ---
 

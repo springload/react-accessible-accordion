@@ -253,10 +253,27 @@ describe('WAI ARIA Spec', () => {
             }
         });
 
-        xit(`Each accordion header button is wrapped in an element with role
+        it(`Each accordion header button is wrapped in an element with role
             heading that has a value set for aria-level that is appropriate for
-            the information architecture of the page.`, () => {
-            // Not yet supported.
+            the information architecture of the page.`, async () => {
+            const { browser, page, buttonsHandles } = await setup();
+            expect(buttonsHandles).toHaveLength(3);
+            for (const buttonHandle of buttonsHandles) {
+                expect(
+                    await page.evaluate(
+                        button => button.parentElement.getAttribute('role'),
+                        buttonHandle,
+                    ),
+                ).toBe('heading');
+
+                expect(
+                    await page.evaluate(
+                        button =>
+                            button.parentElement.getAttribute('aria-level'),
+                        buttonHandle,
+                    ),
+                ).toBeTruthy();
+            }
         });
 
         xit(`If the native host language has an element with an implicit

@@ -15,6 +15,7 @@ import { Consumer as ItemConsumer, ItemContext } from './ItemContext';
 
 type Props = {
     children?: React.ReactNode;
+    'aria-level'?: number;
     headingAttributes: InjectedHeadingAttributes;
     buttonAttributes: InjectedButtonAttributes;
     headingClassName?: string;
@@ -25,6 +26,7 @@ type Props = {
 const defaultProps = {
     headingClassName: 'accordion__heading',
     buttonClassName: 'accordion__button',
+    'aria-level': 3,
 };
 
 export class AccordionItemHeading extends React.PureComponent<Props> {
@@ -81,13 +83,16 @@ export class AccordionItemHeading extends React.PureComponent<Props> {
             buttonAttributes,
             headingClassName,
             buttonClassName,
+            'aria-level': ariaLevel,
             children,
         } = this.props;
 
         return (
             <div
+                // tslint:disable-next-line react-a11y-role-supports-aria-props
                 className={headingClassName}
                 data-accordion-component="AccordionItemHeading"
+                aria-level={ariaLevel}
                 {...headingAttributes}
             >
                 <div
