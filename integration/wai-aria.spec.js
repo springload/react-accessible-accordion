@@ -282,10 +282,31 @@ describe('WAI ARIA Spec', () => {
             // Not applicable.
         });
 
-        xit(`The button element is the only element inside the heading element.
+        it(`The button element is the only element inside the heading element.
             That is, if there are other visually persistent elements, they are
-            not included inside the heading element.`, () => {
-            // todo
+            not included inside the heading element.`, async () => {
+            const { headingsHandles, page } = await setup();
+
+            expect(headingsHandles).toHaveLength(3);
+
+            for (const handle of headingsHandles) {
+                expect(
+                    await page.evaluate(
+                        heading => heading.childNodes.length === 1,
+                        handle,
+                    ),
+                ).toEqual(true);
+
+                expect(
+                    await page.evaluate(
+                        heading =>
+                            heading.firstChild.getAttribute(
+                                'data-accordion-component',
+                            ) === 'AccordionItemButton',
+                        handle,
+                    ),
+                ).toEqual(true);
+            }
         });
 
         it(`If the accordion panel associated with an accordion header is
