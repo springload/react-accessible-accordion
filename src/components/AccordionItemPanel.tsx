@@ -12,7 +12,13 @@ export default class AccordionItemPanel extends React.Component<Props> {
     static defaultProps: typeof defaultProps = defaultProps;
 
     renderChildren = ({ panelAttributes }: ItemContext): JSX.Element => {
-        return <div {...this.props} {...panelAttributes} />;
+        return (
+            <div
+                data-accordion-component="AccordionItemPanel"
+                {...this.props}
+                {...panelAttributes}
+            />
+        );
     };
 
     render(): JSX.Element {

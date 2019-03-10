@@ -20,7 +20,7 @@ export default class AccordionItem extends React.Component<Props> {
 
         return (
             <ItemProvider uuid={uuid}>
-                <div {...rest} />
+                <div data-accordion-component="AccordionItem" {...rest} />
             </ItemProvider>
         );
     }
