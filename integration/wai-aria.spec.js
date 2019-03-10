@@ -279,7 +279,7 @@ describe('WAI ARIA Spec', () => {
         xit(`If the native host language has an element with an implicit
             heading and aria-level, such as an HTML heading tag, a native host
             language element may be used.`, () => {
-            // todo
+            // Not applicable.
         });
 
         xit(`The button element is the only element inside the heading element.
