@@ -3,14 +3,6 @@
 * Demo styles
 * ----------------------------------------------
 **/
-.u-position-absolute {
-    position: absolute;
-}
-
-.u-position-relative {
-    position: relative;
-}
-
 .accordion {
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 2px;
@@ -18,10 +10,6 @@
 
 .accordion__item + .accordion__item {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.accordion__item--has-icon {
-    position: relative;
 }
 
 .accordion__heading {
@@ -40,12 +28,7 @@
 
 .accordion__panel {
     padding: 20px;
-    display: none;
     animation: fadein 0.35s ease-in;
-}
-
-.accordion__panel--expanded {
-    display: block;
 }
 
 .accordion__heading > *:last-child,
@@ -109,50 +92,4 @@
     100% {
         opacity: 1;
     }
-}
-
-@keyframes move-down {
-    0% {
-        transform: translateY(0);
-    }
-    10% {
-        transform: translateY(0);
-    }
-    20% {
-        transform: translateY(5px);
-    }
-    30% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
-
-@keyframes move-up {
-    0% {
-        transform: translateY(0);
-    }
-    10% {
-        transform: translateY(0);
-    }
-    20% {
-        transform: translateY(-5px);
-    }
-    30% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
-
-.accordion__heading--animated:hover .accordion__arrow {
-    animation-name: move-down;
-    animation-duration: 1.5s;
-}
-
-.accordion__heading--animated[aria-expanded='true']:hover .accordion__arrow {
-    animation-name: move-up;
-    animation-duration: 1.5s;
 }
