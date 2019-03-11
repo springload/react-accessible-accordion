@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { InjectedButtonAttributes } from '../helpers/AccordionStore';
+import DisplayName from '../helpers/DisplayName';
 import {
     focusFirstSiblingOf,
     focusLastSiblingOf,
@@ -86,7 +87,9 @@ type WrapperProps = Pick<
     Exclude<keyof DivAttributes, keyof InjectedButtonAttributes>
 >;
 
-const Wrapper: React.SFC<WrapperProps> = (props: WrapperProps): JSX.Element => (
+const AccordionItemButtonWrapper: React.SFC<WrapperProps> = (
+    props: WrapperProps,
+): JSX.Element => (
     <ItemConsumer>
         {(itemContext: ItemContext): JSX.Element => {
             const { toggleExpanded, buttonAttributes } = itemContext;
@@ -102,4 +105,6 @@ const Wrapper: React.SFC<WrapperProps> = (props: WrapperProps): JSX.Element => (
     </ItemConsumer>
 );
 
-export default Wrapper;
+AccordionItemButtonWrapper.displayName = DisplayName.AccordionItemButton;
+
+export default AccordionItemButtonWrapper;

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import DisplayName from '../helpers/DisplayName';
 import { DivAttributes } from '../helpers/types';
 import { Consumer as ItemConsumer, ItemContext } from './ItemContext';
 
@@ -10,6 +11,9 @@ const defaultProps = {
 
 export default class AccordionItemPanel extends React.Component<Props> {
     static defaultProps: typeof defaultProps = defaultProps;
+
+    static displayName: DisplayName.AccordionItemPanel =
+        DisplayName.AccordionItemPanel;
 
     renderChildren = ({ panelAttributes }: ItemContext): JSX.Element => {
         return (
