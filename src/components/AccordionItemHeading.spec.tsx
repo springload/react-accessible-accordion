@@ -6,7 +6,7 @@ import AccordionItemHeading from './AccordionItemHeading';
 
 enum UUIDS {
     FOO = 'FOO',
-    BAR = 'Bar',
+    BAR = 'BAR',
 }
 
 describe('AccordionItem', () => {
@@ -20,8 +20,8 @@ describe('AccordionItem', () => {
         }).not.toThrow();
     });
 
-    describe('headingClassName prop', () => {
-        it('are “BEM” by default', () => {
+    describe('className prop', () => {
+        it('is “BEM” by default', () => {
             const { getByTestId } = render(
                 <Accordion>
                     <AccordionItem uuid={UUIDS.FOO}>
@@ -41,7 +41,7 @@ describe('AccordionItem', () => {
                     <AccordionItem uuid={UUIDS.FOO}>
                         <AccordionItemHeading
                             data-testid={UUIDS.FOO}
-                            headingClassName="foo"
+                            className="foo"
                         />
                     </AccordionItem>
                 </Accordion>,

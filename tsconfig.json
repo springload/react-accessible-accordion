@@ -7,7 +7,6 @@
         "integration/**/*.ts",
         "integration/**/*.tsx"
     ],
-    "exclude": ["demo/src/**/*"],
     "compilerOptions": {
         "noEmit": true,
         "noUnusedLocals": true,

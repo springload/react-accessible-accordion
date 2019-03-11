@@ -7,6 +7,7 @@ import placeholders, { Placeholder } from './placeholders';
 import {
     Accordion,
     AccordionItem,
+    AccordionItemButton,
     AccordionItemHeading,
     AccordionItemPanel,
 } from '../../src';
@@ -49,8 +50,10 @@ const App = (): JSX.Element => (
             {placeholders.map((placeholder: Placeholder) => (
                 <AccordionItem key={placeholder.heading}>
                     <AccordionItemHeading>
-                        <Arrow />
-                        {placeholder.heading}
+                        <AccordionItemButton>
+                            <Arrow />
+                            {placeholder.heading}
+                        </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>{placeholder.panel}</AccordionItemPanel>
                 </AccordionItem>
@@ -69,8 +72,10 @@ const App = (): JSX.Element => (
             {placeholders.map((placeholder: Placeholder) => (
                 <AccordionItem key={placeholder.heading}>
                     <AccordionItemHeading>
-                        <Arrow />
-                        {placeholder.heading}
+                        <AccordionItemButton>
+                            <Arrow />
+                            {placeholder.heading}
+                        </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>{placeholder.panel}</AccordionItemPanel>
                 </AccordionItem>
@@ -89,8 +94,10 @@ const App = (): JSX.Element => (
             {placeholders.map((placeholder: Placeholder) => (
                 <AccordionItem key={placeholder.heading}>
                     <AccordionItemHeading>
-                        <Arrow />
-                        {placeholder.heading}
+                        <AccordionItemButton>
+                            <Arrow />
+                            {placeholder.heading}
+                        </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>{placeholder.panel}</AccordionItemPanel>
                 </AccordionItem>
@@ -117,8 +124,10 @@ const App = (): JSX.Element => (
                     uuid={placeholder.uuid}
                 >
                     <AccordionItemHeading>
-                        <Arrow />
-                        {placeholder.heading}
+                        <AccordionItemButton>
+                            <Arrow />
+                            {placeholder.heading}
+                        </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>{placeholder.panel}</AccordionItemPanel>
                 </AccordionItem>
@@ -151,8 +160,10 @@ const App = (): JSX.Element => (
                     uuid={placeholder.uuid}
                 >
                     <AccordionItemHeading>
-                        <Arrow />
-                        {placeholder.heading}
+                        <AccordionItemButton>
+                            <Arrow />
+                            {placeholder.heading}
+                        </AccordionItemButton>
                     </AccordionItemHeading>
                     <AccordionItemPanel>{placeholder.panel}</AccordionItemPanel>
                 </AccordionItem>
@@ -164,8 +175,10 @@ const App = (): JSX.Element => (
         <Accordion>
             <AccordionItem>
                 <AccordionItemHeading>
-                    <Arrow />
-                    Render something different when expanded
+                    <AccordionItemButton>
+                        <Arrow />
+                        Render something different when expanded
+                    </AccordionItemButton>
                 </AccordionItemHeading>
                 <AccordionItemPanel>
                     <p>
@@ -176,8 +189,10 @@ const App = (): JSX.Element => (
             </AccordionItem>
             <AccordionItem>
                 <AccordionItemHeading>
-                    <Arrow />
-                    How to?
+                    <AccordionItemButton>
+                        <Arrow />
+                        How to?
+                    </AccordionItemButton>
                 </AccordionItemHeading>
                 <AccordionItemPanel>
                     <p>
