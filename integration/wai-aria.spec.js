@@ -132,7 +132,7 @@ describe('WAI ARIA Spec', () => {
                 await firstButtonHandle.focus();
                 await page.keyboard.press('Tab');
                 const secondIsFocussed = await page.evaluate(
-                    heading => document.activeElement === heading,
+                    button => document.activeElement === button,
                     secondButtonHandle,
                 );
                 expect(secondIsFocussed).toEqual(true);
@@ -150,7 +150,7 @@ describe('WAI ARIA Spec', () => {
                 await page.keyboard.press('Tab');
                 await page.keyboard.up('Shift');
                 const firstIsFocussed = await page.evaluate(
-                    heading => document.activeElement === heading,
+                    button => document.activeElement === button,
                     firstButtonHandle,
                 );
                 expect(firstIsFocussed).toEqual(true);
@@ -165,7 +165,7 @@ describe('WAI ARIA Spec', () => {
                 await firstButtonHandle.focus();
                 await page.keyboard.press('ArrowDown');
                 const secondIsFocussed = await page.evaluate(
-                    heading => document.activeElement === heading,
+                    button => document.activeElement === button,
                     secondButtonHandle,
                 );
                 expect(secondIsFocussed).toEqual(true);
@@ -185,7 +185,7 @@ describe('WAI ARIA Spec', () => {
                 await secondButtonHandle.focus();
                 await page.keyboard.press('ArrowUp');
                 const firstIsFocussed = await page.evaluate(
-                    heading => document.activeElement === heading,
+                    button => document.activeElement === button,
                     firstButtonHandle,
                 );
                 expect(firstIsFocussed).toEqual(true);
@@ -209,7 +209,7 @@ describe('WAI ARIA Spec', () => {
                 await thirdButtonHandle.focus();
                 await page.keyboard.press('Home');
                 const firstIsFocussed = await page.evaluate(
-                    heading => document.activeElement === heading,
+                    button => document.activeElement === button,
                     firstButtonHandle,
                 );
                 expect(firstIsFocussed).toEqual(true);
@@ -228,7 +228,7 @@ describe('WAI ARIA Spec', () => {
                 await firstButtonHandle.focus();
                 await page.keyboard.press('End');
                 const thirdIsFocussed = await page.evaluate(
-                    heading => document.activeElement === heading,
+                    button => document.activeElement === button,
                     thirdButtonHandle,
                 );
                 expect(thirdIsFocussed).toEqual(true);
