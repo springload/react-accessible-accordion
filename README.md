@@ -39,8 +39,9 @@ export default function Example() {
         <Accordion>
             <AccordionItem>
                 <AccordionItemHeading>
-                    <span className="accordion__arrow" role="presentation" />
-                    What harsh truths do you prefer to ignore?
+                    <AccordionItemButton>
+                        What harsh truths do you prefer to ignore?
+                    </AccordionItemButton>
                 </AccordionItemHeading>
                 <AccordionItemPanel>
                     <p>
@@ -53,8 +54,9 @@ export default function Example() {
             </AccordionItem>
             <AccordionItem>
                 <AccordionItemHeading>
-                    <span className="accordion__arrow" role="presentation" />
-                    Is free will real or just an illusion?
+                    <AccordionItemButton>
+                        Is free will real or just an illusion?
+                    </AccordionItemButton>
                 </AccordionItemHeading>
                 <AccordionItemPanel>
                     <p>
@@ -118,19 +120,21 @@ Recommended for use with `onChange`. Will be auto-generated if not provided.
 
 ### AccordionItemHeading
 
-#### headingClassName : `string` [*optional*, default: `'accordion__heading'`]
+#### className : `string` [*optional*, default: `'accordion__heading'`]
 
 Class(es) to apply to the 'heading' element.
-
-#### buttonClassName : `string` [*optional*, default: `'accordion__button'`]
-
-Class(es) to apply to the 'button' element.
 
 #### aria-level : `number` [*optional*, default: `3`]
 
 Semantics to apply to the 'heading' element. A value of `1` would make your
 heading element hierarchically equivalent to an `<h1>` tag, and likewise a value
 of `6` would make it equivalent to an `<h6>` tag.
+
+### AccordionItemButton
+
+#### className : `string` [*optional*, default: `'accordion__heading'`]
+
+Class(es) to apply to the 'heading' element.
 
 ---
 
