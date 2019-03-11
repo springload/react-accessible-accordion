@@ -18,10 +18,6 @@ import './main.css';
 // tslint:disable-next-line no-import-side-effect ordered-imports
 import '../../src/css/fancy-example.css';
 
-const Arrow = (): JSX.Element => (
-    <span className="accordion__arrow" role="presentation" />
-);
-
 // tslint:disable-next-line max-func-body-length
 const App = (): JSX.Element => (
     <div className="demo-container">
@@ -51,7 +47,6 @@ const App = (): JSX.Element => (
                 <AccordionItem key={placeholder.heading}>
                     <AccordionItemHeading>
                         <AccordionItemButton>
-                            <Arrow />
                             {placeholder.heading}
                         </AccordionItemButton>
                     </AccordionItemHeading>
@@ -73,7 +68,6 @@ const App = (): JSX.Element => (
                 <AccordionItem key={placeholder.heading}>
                     <AccordionItemHeading>
                         <AccordionItemButton>
-                            <Arrow />
                             {placeholder.heading}
                         </AccordionItemButton>
                     </AccordionItemHeading>
@@ -95,7 +89,6 @@ const App = (): JSX.Element => (
                 <AccordionItem key={placeholder.heading}>
                     <AccordionItemHeading>
                         <AccordionItemButton>
-                            <Arrow />
                             {placeholder.heading}
                         </AccordionItemButton>
                     </AccordionItemHeading>
@@ -125,7 +118,6 @@ const App = (): JSX.Element => (
                 >
                     <AccordionItemHeading>
                         <AccordionItemButton>
-                            <Arrow />
                             {placeholder.heading}
                         </AccordionItemButton>
                     </AccordionItemHeading>
@@ -161,7 +153,6 @@ const App = (): JSX.Element => (
                 >
                     <AccordionItemHeading>
                         <AccordionItemButton>
-                            <Arrow />
                             {placeholder.heading}
                         </AccordionItemButton>
                     </AccordionItemHeading>
@@ -176,7 +167,6 @@ const App = (): JSX.Element => (
             <AccordionItem>
                 <AccordionItemHeading>
                     <AccordionItemButton>
-                        <Arrow />
                         Render something different when expanded
                     </AccordionItemButton>
                 </AccordionItemHeading>
@@ -189,10 +179,7 @@ const App = (): JSX.Element => (
             </AccordionItem>
             <AccordionItem>
                 <AccordionItemHeading>
-                    <AccordionItemButton>
-                        <Arrow />
-                        How to?
-                    </AccordionItemButton>
+                    <AccordionItemButton>How to?</AccordionItemButton>
                 </AccordionItemHeading>
                 <AccordionItemPanel>
                     <p>
