@@ -47,11 +47,6 @@
     animation: fadein 0.35s ease-in;
 }
 
-.accordion__heading > *:last-child,
-.accordion__panel > *:last-child {
-    margin-bottom: 0;
-}
-
 /* -------------------------------------------------- */
 /* ---------------- Animation part ------------------ */
 /* -------------------------------------------------- */
