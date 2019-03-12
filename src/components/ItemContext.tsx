@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import {
+    InjectedButtonAttributes,
     InjectedHeadingAttributes,
     InjectedPanelAttributes,
 } from '../helpers/AccordionStore';
@@ -29,6 +30,7 @@ export type ItemContext = {
     disabled: boolean;
     panelAttributes: InjectedPanelAttributes;
     headingAttributes: InjectedHeadingAttributes;
+    buttonAttributes: InjectedButtonAttributes;
     toggleExpanded(): void;
 };
 
@@ -46,6 +48,7 @@ class Provider extends React.Component<ProviderProps> {
         const disabled = accordionContext.isItemDisabled(uuid);
         const panelAttributes = accordionContext.getPanelAttributes(uuid);
         const headingAttributes = accordionContext.getHeadingAttributes(uuid);
+        const buttonAttributes = accordionContext.getButtonAttributes(uuid);
 
         return (
             <Context.Provider
@@ -56,6 +59,7 @@ class Provider extends React.Component<ProviderProps> {
                     toggleExpanded: this.toggleExpanded,
                     panelAttributes,
                     headingAttributes,
+                    buttonAttributes,
                 }}
                 children={this.props.children}
             />

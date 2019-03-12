@@ -2,6 +2,7 @@ import * as React from 'react';
 import { cleanup, fireEvent, render } from 'react-testing-library';
 import { default as Accordion } from './Accordion';
 import AccordionItem from './AccordionItem';
+import AccordionItemButton from './AccordionItemButton';
 import AccordionItemHeading from './AccordionItemHeading';
 
 enum UUIDS {
@@ -42,10 +43,14 @@ describe('Accordion', () => {
                 const { getByTestId } = render(
                     <Accordion allowMultipleExpanded={true}>
                         <AccordionItem>
-                            <AccordionItemHeading data-testid={UUIDS.FOO} />
+                            <AccordionItemHeading>
+                                <AccordionItemButton data-testid={UUIDS.FOO} />
+                            </AccordionItemHeading>
                         </AccordionItem>
                         <AccordionItem>
-                            <AccordionItemHeading data-testid={UUIDS.BAR} />
+                            <AccordionItemHeading>
+                                <AccordionItemButton data-testid={UUIDS.BAR} />
+                            </AccordionItemHeading>
                         </AccordionItem>
                     </Accordion>,
                 );
@@ -65,10 +70,14 @@ describe('Accordion', () => {
                 const { getByTestId } = render(
                     <Accordion>
                         <AccordionItem>
-                            <AccordionItemHeading data-testid={UUIDS.FOO} />
+                            <AccordionItemHeading>
+                                <AccordionItemButton data-testid={UUIDS.FOO} />
+                            </AccordionItemHeading>
                         </AccordionItem>
                         <AccordionItem>
-                            <AccordionItemHeading data-testid={UUIDS.BAR} />
+                            <AccordionItemHeading>
+                                <AccordionItemButton data-testid={UUIDS.BAR} />
+                            </AccordionItemHeading>
                         </AccordionItem>
                     </Accordion>,
                 );
@@ -90,7 +99,9 @@ describe('Accordion', () => {
                 const { getByTestId } = render(
                     <Accordion allowZeroExpanded={true}>
                         <AccordionItem>
-                            <AccordionItemHeading data-testid={UUIDS.FOO} />
+                            <AccordionItemHeading>
+                                <AccordionItemButton data-testid={UUIDS.FOO} />
+                            </AccordionItemHeading>
                         </AccordionItem>
                     </Accordion>,
                 );
@@ -107,7 +118,9 @@ describe('Accordion', () => {
                 const { getByTestId } = render(
                     <Accordion>
                         <AccordionItem>
-                            <AccordionItemHeading data-testid={UUIDS.FOO} />
+                            <AccordionItemHeading>
+                                <AccordionItemButton data-testid={UUIDS.FOO} />
+                            </AccordionItemHeading>
                         </AccordionItem>
                     </Accordion>,
                 );
@@ -126,7 +139,9 @@ describe('Accordion', () => {
                 const { getByTestId } = render(
                     <Accordion preExpanded={[UUIDS.FOO]}>
                         <AccordionItem uuid={UUIDS.FOO}>
-                            <AccordionItemHeading data-testid={UUIDS.FOO} />
+                            <AccordionItemHeading>
+                                <AccordionItemButton data-testid={UUIDS.FOO} />
+                            </AccordionItemHeading>
                         </AccordionItem>
                     </Accordion>,
                 );
@@ -140,7 +155,9 @@ describe('Accordion', () => {
                 const { getByTestId } = render(
                     <Accordion>
                         <AccordionItem>
-                            <AccordionItemHeading data-testid={UUIDS.FOO} />
+                            <AccordionItemHeading>
+                                <AccordionItemButton data-testid={UUIDS.FOO} />
+                            </AccordionItemHeading>
                         </AccordionItem>
                     </Accordion>,
                 );
@@ -157,7 +174,9 @@ describe('Accordion', () => {
                 const { getByTestId } = render(
                     <Accordion onChange={onChange}>
                         <AccordionItem uuid={UUIDS.FOO}>
-                            <AccordionItemHeading data-testid={UUIDS.FOO} />
+                            <AccordionItemHeading>
+                                <AccordionItemButton data-testid={UUIDS.FOO} />
+                            </AccordionItemHeading>
                         </AccordionItem>
                     </Accordion>,
                 );
@@ -176,7 +195,9 @@ describe('Accordion', () => {
                         allowZeroExpanded={true}
                     >
                         <AccordionItem uuid={UUIDS.FOO}>
-                            <AccordionItemHeading data-testid={UUIDS.FOO} />
+                            <AccordionItemHeading>
+                                <AccordionItemButton data-testid={UUIDS.FOO} />
+                            </AccordionItemHeading>
                         </AccordionItem>
                     </Accordion>,
                 );

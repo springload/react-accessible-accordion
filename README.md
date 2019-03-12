@@ -39,8 +39,9 @@ export default function Example() {
         <Accordion>
             <AccordionItem>
                 <AccordionItemHeading>
-                    <span className="accordion__arrow" role="presentation" />
-                    What harsh truths do you prefer to ignore?
+                    <AccordionItemButton>
+                        What harsh truths do you prefer to ignore?
+                    </AccordionItemButton>
                 </AccordionItemHeading>
                 <AccordionItemPanel>
                     <p>
@@ -53,8 +54,9 @@ export default function Example() {
             </AccordionItem>
             <AccordionItem>
                 <AccordionItemHeading>
-                    <span className="accordion__arrow" role="presentation" />
-                    Is free will real or just an illusion?
+                    <AccordionItemButton>
+                        Is free will real or just an illusion?
+                    </AccordionItemButton>
                 </AccordionItemHeading>
                 <AccordionItemPanel>
                     <p>
@@ -110,10 +112,6 @@ Callback which is invoked when items are expanded or collapsed. Gets passed
 
 Class(es) to apply to element.
 
-#### expandedClassName : `string` [*optional*, default: `accordion__item--expanded`]
-
-Class(es) to append when item is expanded.
-
 #### uuid : `string|number` [*optional*]
 
 Recommended for use with `onChange`. Will be auto-generated if not provided.
@@ -124,11 +122,19 @@ Recommended for use with `onChange`. Will be auto-generated if not provided.
 
 #### className : `string` [*optional*, default: `'accordion__heading'`]
 
-Class(es) to apply to element.
+Class(es) to apply to the 'heading' element.
 
-#### expandedClassName : `string` [*optional*, default: `'accordion__heading--expanded'`]
+#### aria-level : `number` [*optional*, default: `3`]
 
-Class(es) to append when item is expanded.
+Semantics to apply to the 'heading' element. A value of `1` would make your
+heading element hierarchically equivalent to an `<h1>` tag, and likewise a value
+of `6` would make it equivalent to an `<h6>` tag.
+
+### AccordionItemButton
+
+#### className : `string` [*optional*, default: `'accordion__button'`]
+
+Class(es) to apply to the 'button' element.
 
 ---
 
@@ -137,10 +143,6 @@ Class(es) to append when item is expanded.
 #### className : `string` [*optional*, default: `'accordion__panel'`]
 
 Class(es) to apply to element.
-
-#### expandedClassName : `string` [*optional*, default: `'accordion__panel'`]
-
-Class(es) to append when item is expanded.
 
 ---
 

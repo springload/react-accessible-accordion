@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom';
 import {
     Accordion,
     AccordionItem,
+    AccordionItemButton,
     AccordionItemHeading,
     AccordionItemPanel,
 } from '../../src';
@@ -11,7 +12,9 @@ ReactDOM.render(
     <div id="classic-accordion">
         <Accordion>
             <AccordionItem>
-                <AccordionItemHeading>Heading One</AccordionItemHeading>
+                <AccordionItemHeading>
+                    <AccordionItemButton>Heading One</AccordionItemButton>
+                </AccordionItemHeading>
                 <AccordionItemPanel>
                     Sunt in reprehenderit cillum ex proident qui culpa fugiat
                     pariatur aliqua nostrud consequat consequat enim quis sit
@@ -20,7 +23,9 @@ ReactDOM.render(
                 </AccordionItemPanel>
             </AccordionItem>
             <AccordionItem>
-                <AccordionItemHeading>Heading Two</AccordionItemHeading>
+                <AccordionItemHeading>
+                    <AccordionItemButton>Heading Two</AccordionItemButton>
+                </AccordionItemHeading>
                 <AccordionItemPanel>
                     Velit tempor dolore commodo voluptate id do nulla do ut
                     proident cillum ad cillum voluptate deserunt fugiat ut sed
@@ -29,7 +34,9 @@ ReactDOM.render(
                 </AccordionItemPanel>
             </AccordionItem>
             <AccordionItem>
-                <AccordionItemHeading>Heading Three</AccordionItemHeading>
+                <AccordionItemHeading>
+                    <AccordionItemButton>Heading Three</AccordionItemButton>
+                </AccordionItemHeading>
                 <AccordionItemPanel>
                     Lorem ipsum esse occaecat voluptate duis incididunt amet
                     eiusmod sunt commodo sunt enim anim ea culpa ut tempor

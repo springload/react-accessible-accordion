@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import AccordionStore, {
+    InjectedButtonAttributes,
     InjectedHeadingAttributes,
     InjectedPanelAttributes,
 } from '../helpers/AccordionStore';
@@ -25,6 +26,7 @@ export interface AccordionContext {
     isItemExpanded(uuid: UUID): boolean;
     getPanelAttributes(uuid: UUID): InjectedPanelAttributes;
     getHeadingAttributes(uuid: UUID): InjectedHeadingAttributes;
+    getButtonAttributes(uuid: UUID): InjectedButtonAttributes;
 }
 
 const Context = React.createContext(null as AccordionContext | null);
@@ -71,6 +73,10 @@ export class Provider extends React.PureComponent<
         return this.state.getHeadingAttributes(key);
     };
 
+    getButtonAttributes = (key: UUID): InjectedButtonAttributes => {
+        return this.state.getButtonAttributes(key);
+    };
+
     render(): JSX.Element {
         const { allowZeroExpanded, allowMultipleExpanded } = this.state;
 
@@ -84,6 +90,7 @@ export class Provider extends React.PureComponent<
                     isItemExpanded: this.isItemExpanded,
                     getPanelAttributes: this.getPanelAttributes,
                     getHeadingAttributes: this.getHeadingAttributes,
+                    getButtonAttributes: this.getButtonAttributes,
                 }}
             >
                 {this.props.children || null}

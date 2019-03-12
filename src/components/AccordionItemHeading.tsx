@@ -1,120 +1,87 @@
-import { default as classnames } from 'classnames';
 import * as React from 'react';
-import {
-    focusFirstSiblingOf,
-    focusLastSiblingOf,
-    focusNextSiblingOf,
-    focusPreviousSiblingOf,
-} from '../helpers/focus';
-import keycodes from '../helpers/keycodes';
-
+import { InjectedHeadingAttributes } from '../helpers/AccordionStore';
+import DisplayName from '../helpers/DisplayName';
 import { DivAttributes } from '../helpers/types';
+
 import { Consumer as ItemConsumer, ItemContext } from './ItemContext';
 
-type Props = Pick<DivAttributes, Exclude<keyof DivAttributes, 'role'>> & {
-    expandedClassName?: string;
-    expanded: boolean;
-    toggleExpanded(): void;
-};
+type Props = DivAttributes;
 
 const defaultProps = {
     className: 'accordion__heading',
-    expandedClassName: 'accordion__heading--expanded',
+    'aria-level': 3,
 };
+
+export const SPEC_ERROR = `AccordionItemButton may contain only one child element, which must be an instance of AccordionItemButton.
+
+From the WAI-ARIA spec (https://www.w3.org/TR/wai-aria-practices-1.1/#accordion):
+
+“The button element is the only element inside the heading element. That is, if there are other visually persistent elements, they are not included inside the heading element.”
+
+`;
 
 export class AccordionItemHeading extends React.PureComponent<Props> {
     static defaultProps: typeof defaultProps = defaultProps;
 
-    handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
-        const keyCode = evt.which.toString();
+    ref: HTMLDivElement | undefined;
 
-        if (keyCode === keycodes.ENTER || keyCode === keycodes.SPACE) {
-            evt.preventDefault();
-            this.props.toggleExpanded();
+    static VALIDATE(ref: HTMLDivElement | undefined): void | never {
+        if (ref === undefined) {
+            throw new Error('ref is undefined');
         }
+        if (
+            !(
+                ref.childElementCount === 1 &&
+                ref.firstElementChild &&
+                ref.firstElementChild.getAttribute(
+                    'data-accordion-component',
+                ) === 'AccordionItemButton'
+            )
+        ) {
+            throw new Error(SPEC_ERROR);
+        }
+    }
 
-        /* The following block is ignored from test coverage because at time
-         * time of writing Jest/react-testing-library can not assert 'focus'
-         * functionality.
-         */
-        // istanbul ignore next
-        if (evt.target instanceof HTMLElement) {
-            switch (keyCode) {
-                case keycodes.HOME: {
-                    evt.preventDefault();
-                    focusFirstSiblingOf(evt.target);
-                    break;
-                }
-                case keycodes.END: {
-                    evt.preventDefault();
-                    focusLastSiblingOf(evt.target);
-                    break;
-                }
-                case keycodes.LEFT:
-                case keycodes.UP: {
-                    evt.preventDefault();
-                    focusPreviousSiblingOf(evt.target);
-                    break;
-                }
-                case keycodes.RIGHT:
-                case keycodes.DOWN: {
-                    evt.preventDefault();
-                    focusNextSiblingOf(evt.target);
-                    break;
-                }
-                default: {
-                    //
-                }
-            }
-        }
+    setRef = (ref: HTMLDivElement): void => {
+        this.ref = ref;
     };
 
+    componentDidUpdate(): void {
+        AccordionItemHeading.VALIDATE(this.ref);
+    }
+
+    componentDidMount(): void {
+        AccordionItemHeading.VALIDATE(this.ref);
+    }
+
     render(): JSX.Element {
-        const {
-            className,
-            expandedClassName,
-            expanded,
-            toggleExpanded,
-            ...rest
-        } = this.props;
-
-        const headingClassName = classnames(className, {
-            [String(expandedClassName)]: expandedClassName && expanded,
-        });
-
         return (
             <div
-                // tslint:disable-next-line react-a11y-event-has-role
-                className={headingClassName}
-                onClick={toggleExpanded}
                 data-accordion-component="AccordionItemHeading"
-                onKeyDown={this.handleKeyPress}
-                {...rest}
+                {...this.props}
+                ref={this.setRef}
             />
         );
     }
 }
 
 type WrapperProps = Pick<
-    Props,
-    Exclude<keyof Props, 'toggleExpanded' | 'expanded'>
+    DivAttributes,
+    Exclude<keyof DivAttributes, keyof InjectedHeadingAttributes>
 >;
 
-const Wrapper: React.SFC<WrapperProps> = (props: WrapperProps): JSX.Element => (
+const AccordionItemHeadingWrapper: React.SFC<DivAttributes> = (
+    props: WrapperProps,
+): JSX.Element => (
     <ItemConsumer>
         {(itemContext: ItemContext): JSX.Element => {
-            const { expanded, toggleExpanded, headingAttributes } = itemContext;
+            const { headingAttributes } = itemContext;
 
-            return (
-                <AccordionItemHeading
-                    {...props}
-                    expanded={expanded}
-                    toggleExpanded={toggleExpanded}
-                    {...headingAttributes}
-                />
-            );
+            return <AccordionItemHeading {...props} {...headingAttributes} />;
         }}
     </ItemConsumer>
 );
 
-export default Wrapper;
+AccordionItemHeadingWrapper.displayName = DisplayName.AccordionItemHeading;
+
+export default AccordionItemHeadingWrapper;

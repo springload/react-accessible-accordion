@@ -1,49 +1,22 @@
-import { default as classnames } from 'classnames';
 import * as React from 'react';
+import DisplayName from '../helpers/DisplayName';
 import { DivAttributes } from '../helpers/types';
 import { nextUuid } from '../helpers/uuid';
-import {
-    Consumer as ItemConsumer,
-    ItemContext,
-    Provider as ItemProvider,
-    UUID,
-} from './ItemContext';
+import { Provider as ItemProvider, UUID } from './ItemContext';
 
-type Props = Pick<DivAttributes, Exclude<keyof DivAttributes, 'role'>> & {
-    expanded: boolean;
-    className?: string;
-    expandedClassName?: string;
+type Props = DivAttributes & {
+    uuid?: UUID;
 };
 
 const defaultProps = {
     className: 'accordion__item',
-    expandedClassName: 'accordion__item--expanded',
 };
 
-class AccordionItem extends React.Component<Props> {
+export default class AccordionItem extends React.Component<Props> {
     static defaultProps: typeof defaultProps = defaultProps;
 
-    render(): JSX.Element {
-        const { className, expanded, expandedClassName, ...rest } = this.props;
+    static displayName: DisplayName.AccordionItem = DisplayName.AccordionItem;
 
-        return (
-            <div
-                className={classnames(className, {
-                    [String(expandedClassName)]: expanded && expandedClassName,
-                })}
-                {...rest}
-            />
-        );
-    }
-}
-
-type WrapperProps = Pick<Props, Exclude<keyof Props, 'expanded'>> & {
-    uuid?: UUID;
-};
-
-export default class AccordionItemWrapper extends React.Component<
-    WrapperProps
-> {
     instanceUuid: UUID = nextUuid();
 
     render(): JSX.Element {
@@ -51,13 +24,7 @@ export default class AccordionItemWrapper extends React.Component<
 
         return (
             <ItemProvider uuid={uuid}>
-                <ItemConsumer>
-                    {(itemContext: ItemContext): JSX.Element => {
-                        const { expanded } = itemContext;
-
-                        return <AccordionItem {...rest} expanded={expanded} />;
-                    }}
-                </ItemConsumer>
+                <div data-accordion-component="AccordionItem" {...rest} />
             </ItemProvider>
         );
     }

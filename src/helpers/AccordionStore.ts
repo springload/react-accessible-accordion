@@ -5,10 +5,14 @@ export interface InjectedPanelAttributes {
     'aria-hidden': boolean | undefined;
     'aria-labelledby': string;
     id: string;
-    hidden: boolean | undefined; // Any string value is interpreted as 'true'.
+    hidden: boolean | undefined;
 }
 
 export interface InjectedHeadingAttributes {
+    role: string;
+}
+
+export interface InjectedButtonAttributes {
     id: string;
     'aria-controls': string;
     'aria-expanded': boolean;
@@ -89,7 +93,7 @@ export default class AccordionStore {
         return {
             role: this.allowMultipleExpanded ? undefined : 'region',
             'aria-hidden': this.allowMultipleExpanded ? !expanded : undefined,
-            'aria-labelledby': this.getHeadingId(uuid),
+            'aria-labelledby': this.getButtonId(uuid),
             id: this.getPanelId(uuid),
             hidden: expanded ? undefined : true,
         };
@@ -98,14 +102,22 @@ export default class AccordionStore {
     public readonly getHeadingAttributes = (
         uuid: UUID,
     ): InjectedHeadingAttributes => {
+        return {
+            role: 'heading',
+        };
+    };
+
+    public readonly getButtonAttributes = (
+        uuid: UUID,
+    ): InjectedButtonAttributes => {
         const expanded = this.isItemExpanded(uuid);
         const disabled = this.isItemDisabled(uuid);
 
         return {
-            id: this.getHeadingId(uuid),
-            'aria-controls': this.getPanelId(uuid),
-            'aria-expanded': expanded,
+            id: this.getButtonId(uuid),
             'aria-disabled': disabled,
+            'aria-expanded': expanded,
+            'aria-controls': this.getPanelId(uuid),
             role: 'button',
             tabIndex: 0,
         };
@@ -114,7 +126,7 @@ export default class AccordionStore {
     private readonly getPanelId = (uuid: UUID): string =>
         `accordion__panel-${uuid}`;
 
-    private readonly getHeadingId = (uuid: UUID): string =>
+    private readonly getButtonId = (uuid: UUID): string =>
         `accordion__heading-${uuid}`;
 
     private readonly augment = (args: {
