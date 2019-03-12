@@ -132,9 +132,9 @@ of `6` would make it equivalent to an `<h6>` tag.
 
 ### AccordionItemButton
 
-#### className : `string` [*optional*, default: `'accordion__heading'`]
+#### className : `string` [*optional*, default: `'accordion__button'`]
 
-Class(es) to apply to the 'heading' element.
+Class(es) to apply to the 'button' element.
 
 ---
 
