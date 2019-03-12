@@ -76,6 +76,19 @@ describe('AccordionItem', () => {
     });
 
     describe('validation', () => {
+        // tslint:disable-next-line no-console
+        const originalError = console.error;
+
+        beforeEach(() => {
+            // tslint:disable-next-line no-console
+            console.error = jest.fn();
+        });
+
+        afterAll(() => {
+            // tslint:disable-next-line no-console
+            console.error = originalError;
+        });
+
         it('permits a single AccordionItemButton as a child - variation #1', () => {
             expect(() =>
                 render(
