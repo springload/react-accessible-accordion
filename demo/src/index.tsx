@@ -10,6 +10,7 @@ import {
     AccordionItemButton,
     AccordionItemHeading,
     AccordionItemPanel,
+    AccordionItemState,
 } from '../../src';
 
 // tslint:disable-next-line no-import-side-effect
@@ -161,37 +162,36 @@ const App = (): JSX.Element => (
             ))}
         </Accordion>
 
-        <h2 className="u-margin-top" />
+        <h2 className="u-margin-top">Accessing Item State</h2>
+
+        <p>
+            If you'd like to apply different content or styling based on the{' '}
+            <strong>expanded</strong> or <strong>disabled</strong> state of an
+            item, you might like to use the <strong>AccordionItemState</strong>{' '}
+            render-prop component.
+        </p>
 
         <Accordion>
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <AccordionItemButton>
-                        Render something different when expanded
-                    </AccordionItemButton>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <p>
-                        When you open/close this item, you should see the text
-                        under the heading change.
-                    </p>
-                </AccordionItemPanel>
-            </AccordionItem>
-            <AccordionItem>
-                <AccordionItemHeading>
-                    <AccordionItemButton>How to?</AccordionItemButton>
-                </AccordionItemHeading>
-                <AccordionItemPanel>
-                    <p>
-                        Pass the AccordionItemState component a render prop
-                        function.
-                    </p>
-                    <p>
-                        This should take the item's expanded state as an
-                        argument.
-                    </p>
-                </AccordionItemPanel>
-            </AccordionItem>
+            {placeholders.map((placeholder: Placeholder) => (
+                <AccordionItem
+                    key={placeholder.heading}
+                    uuid={placeholder.uuid}
+                >
+                    <AccordionItemHeading>
+                        <AccordionItemButton>
+                            {placeholder.heading}
+                            <br />
+                            <br />
+                            <AccordionItemState>
+                                {(state: object): React.ReactNode =>
+                                    `State: ${JSON.stringify(state)}`
+                                }
+                            </AccordionItemState>
+                        </AccordionItemButton>
+                    </AccordionItemHeading>
+                    <AccordionItemPanel>{placeholder.panel}</AccordionItemPanel>
+                </AccordionItem>
+            ))}
         </Accordion>
     </div>
 );
