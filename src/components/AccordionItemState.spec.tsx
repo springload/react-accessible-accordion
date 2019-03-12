@@ -30,7 +30,11 @@ describe('ItemContext', () => {
                 <Accordion preExpanded={[UUIDS.FOO]}>
                     <AccordionItem uuid={UUIDS.FOO}>
                         <AccordionItemState>
-                            {(expanded: boolean): JSX.Element => (
+                            {({
+                                expanded,
+                            }: {
+                                expanded: boolean;
+                            }): JSX.Element => (
                                 <div data-testid={UUIDS.FOO}>
                                     {expanded && 'expanded'}
                                 </div>
@@ -39,7 +43,11 @@ describe('ItemContext', () => {
                     </AccordionItem>
                     <AccordionItem uuid={UUIDS.BAR}>
                         <AccordionItemState>
-                            {(expanded: boolean): JSX.Element => (
+                            {({
+                                expanded,
+                            }: {
+                                expanded: boolean;
+                            }): JSX.Element => (
                                 <div data-testid={UUIDS.BAR}>
                                     {expanded && 'expanded'}
                                 </div>
