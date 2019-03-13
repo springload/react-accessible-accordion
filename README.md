@@ -148,7 +148,7 @@ Class(es) to apply to element.
 
 ### AccordionItemState
 
-#### children : `(expanded: boolean): JSX.Element` [**required**]
+#### children : `({ expanded: boolean, disabled: boolean }): JSX.Element` [**required**]
 
 ---
 
