@@ -38,19 +38,22 @@
         "accessible",
         "accessibility"
     ],
-    "authors": [
-        "Vincent Audebert <vincent@springload.co.nz>"
-    ],
     "contributors": [
+        {
+            "name": "Vincent Audebert",
+            "url": "https://github.com/vincentaudebert"
+        },
         {
             "name": "Mitch Ryan",
             "url": "https://github.com/ryami333"
         },
         {
-            "name": "Samantha Sanders"
+            "name": "Samantha Sanders",
+            "url": "https://github.com/samanthaksanders"
         },
         {
-            "name": "Thibaud Colas"
+            "name": "Thibaud Colas",
+            "url": "https://github.com/thibaudcolas"
         },
         {
             "name": "Cate Palmer",
