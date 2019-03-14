@@ -29,7 +29,7 @@ to normal again now.
     // Before:
     import { AccordionItemTitle } from 'react-accessible-accordion';
 
-    const headingBefore = <AccordionItemHeading>Foo</AccordionItemHeading>;
+    const headingBefore = <AccordionItemTitle>Foo</AccordionItemTitle>;
     ```
 
     ```tsx
