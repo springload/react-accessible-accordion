@@ -161,6 +161,7 @@ to normal again now.
 ### Added
 
 -   Added `AccordionItemButton` component.
+-   Added `AccordionItemState` component.
 -   Added `allowZeroExpanded` prop to `Accordion`.
 -   Added `allowMultipleExpanded` prop to `Accordion`.
 -   Out-of-the-box Typescript support.
