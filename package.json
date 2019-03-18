@@ -4,7 +4,7 @@
     "description": "Accessible Accordion component for React",
     "main": "dist/umd/index.js",
     "jsnext:main": "dist/es/index.js",
-    "types": "./lib/types/index.d.ts",
+    "types": "dist/types/index.d.ts",
     "scripts": {
         "test": "jest",
         "test:integration": "yarn build:integration && yarn jest --config=integration/jest.config.js integration",
