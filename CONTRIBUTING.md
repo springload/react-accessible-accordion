@@ -48,11 +48,12 @@ between.
 ## Inclusivity
 
 The driving principal behind the existence of React Accessible Accordion is an
-inclusive web. This most obviously relates to the inclusivity of those with
-disabilities or impairments which require the use of assistive technology, such
-as screenreaders. It should extend though to technological inclusivity, such
-that RAA should _try_ to remain as technology-agnostic as possible. Examples of
-technical decisions driven by the principle of inclusivity:
+inclusive web. Primarily, this relates to the inclusivity of those web users
+with disabilities or impairments which require the use of assistive hardware or
+other assistive technology, such as screenreaders. This principle of inclusivity
+should also apply to the technical community as a whole, such that RAA should
+_try_ to remain as technology-agnostic as possible. Examples of technical
+decisions driven by the principle of inclusivity:
 
 -   A deep browser backward compatibility.
 -   A deep React version backward compatibility.
