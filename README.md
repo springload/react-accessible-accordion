@@ -94,6 +94,11 @@ Don't autocollapse items when expanding other items.
 
 Allow the only remaining expanded item to be collapsed.
 
+#### preExpanded: `string[]` [_optional_, default: `[]`]
+
+Accepts an array of strings and any `AccordionItem` whose `uuid` prop matches on
+of these strings will be expanded on mount.
+
 #### className : `string` [*optional*, default: `'accordion'`]
 
 Class(es) to apply to element.
