@@ -94,11 +94,16 @@ Don't autocollapse items when expanding other items.
 
 Allow the only remaining expanded item to be collapsed.
 
+#### preExpanded: `string[]` [_optional_, default: `[]`]
+
+Accepts an array of strings and any `AccordionItem` whose `uuid` prop matches on
+of these strings will be expanded on mount.
+
 #### className : `string` [*optional*, default: `'accordion'`]
 
 Class(es) to apply to element.
 
-#### onChange : `(uuid[]) => void` [*optional*]
+#### onChange : `(string[]) => void` [*optional*]
 
 Callback which is invoked when items are expanded or collapsed. Gets passed
 `uuid`s of the currently expanded `AccordionItem`s.
@@ -182,7 +187,7 @@ spec-compliant:
     inside of your `AccordionItemHeading` component. If in doubt, use text only.
 -   Always provide an `aria-level` prop to your `AccordionItemHeading`
     component, _especially_ if you are nesting accordions. This attribute is a
-    signal assistive technologies (eg. screenreaders) use to determine which
+    signal used by assistive technologies (eg. screenreaders) to determine which
     heading level (ie. `h1`-`h6`) to treat your heading as.
 
 If you have any questions about your implementation, then please don't be afraid
@@ -223,7 +228,9 @@ See "Which design patterns does this component NOT aim to solve?".
 
 ### How do I manually control the expanded state of an item?
 
-See "Which design patterns does this component NOT aim to solve?".
+See "Which design patterns does this component NOT aim to solve?". You may use
+the 'preExpanded' prop to set the initial expanded state, but it may not be
+controlled manually thereafter.
 
 ## Browser Support
 
