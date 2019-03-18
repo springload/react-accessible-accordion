@@ -228,7 +228,9 @@ See "Which design patterns does this component NOT aim to solve?".
 
 ### How do I manually control the expanded state of an item?
 
-See "Which design patterns does this component NOT aim to solve?".
+See "Which design patterns does this component NOT aim to solve?". You may use
+the 'preExpanded' prop to set the initial expanded state, but it may not be
+controlled manually thereafter.
 
 ## Browser Support
 
