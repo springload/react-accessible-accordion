@@ -188,7 +188,9 @@ to normal again now.
 
 ### Removed
 
--   Removed Flow suppport.
+-   Removed Flow support (but we hope to reinstate typing in the future. Track
+    progress
+    [here](https://github.com/springload/react-accessible-accordion/issues/151)).
 -   Removed undocumented `expanded` mechanism for `AccordionItems`.
 -   Removed undocumented `disabled` mechanism for `AccordionItems`.
 -   Remove `hideBodyClassName` prop.
