@@ -187,7 +187,7 @@ spec-compliant:
     inside of your `AccordionItemHeading` component. If in doubt, use text only.
 -   Always provide an `aria-level` prop to your `AccordionItemHeading`
     component, _especially_ if you are nesting accordions. This attribute is a
-    signal assistive technologies (eg. screenreaders) use to determine which
+    signal used by assistive technologies (eg. screenreaders) to determine which
     heading level (ie. `h1`-`h6`) to treat your heading as.
 
 If you have any questions about your implementation, then please don't be afraid
