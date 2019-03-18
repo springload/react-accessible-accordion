@@ -103,7 +103,7 @@ of these strings will be expanded on mount.
 
 Class(es) to apply to element.
 
-#### onChange : `(uuid[]) => void` [*optional*]
+#### onChange : `(string[]) => void` [*optional*]
 
 Callback which is invoked when items are expanded or collapsed. Gets passed
 `uuid`s of the currently expanded `AccordionItem`s.
