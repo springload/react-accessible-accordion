@@ -3,6 +3,7 @@
     "version": "3.0.0",
     "description": "Accessible Accordion component for React",
     "main": "dist/umd/index.js",
+    "module": "dist/es/index.js",
     "jsnext:main": "dist/es/index.js",
     "types": "dist/types/index.d.ts",
     "scripts": {
