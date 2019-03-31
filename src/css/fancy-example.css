@@ -3,14 +3,6 @@
 * Demo styles
 * ----------------------------------------------
 **/
-.u-position-absolute {
-    position: absolute;
-}
-
-.u-position-relative {
-    position: relative;
-}
-
 .accordion {
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 2px;
@@ -20,11 +12,7 @@
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.accordion__item--has-icon {
-    position: relative;
-}
-
-.accordion__title {
+.accordion__button {
     background-color: #f4f4f4;
     color: #444;
     cursor: pointer;
@@ -34,72 +22,29 @@
     border: none;
 }
 
-.accordion__title:hover {
+.accordion__button:hover {
     background-color: #ddd;
 }
 
-.accordion__body {
-    padding: 20px;
-    display: block;
-    animation: fadein 0.35s ease-in;
-}
-
-.accordion__body--hidden {
-    display: none;
-    opacity: 0;
-    animation: fadein 0.35s ease-in;
-}
-
-.accordion__title > *:last-child,
-.accordion__body > *:last-child {
-    margin-bottom: 0;
-}
-
-.accordion__arrow {
+.accordion__button:before {
     display: inline-block;
-    position: relative;
-    width: 24px;
-    height: 12px;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    margin-top: -6px;
-}
-
-.accordion__arrow::after,
-.accordion__arrow::before {
-    display: block;
-    position: absolute;
-    top: 50%;
-    width: 10px;
-    height: 2px;
-    background-color: currentColor;
     content: '';
-}
-
-.accordion__arrow::before {
-    left: 4px;
-    transform: rotate(45deg);
-}
-
-[aria-expanded='true'] .accordion__arrow::before,
-[aria-selected='true'] .accordion__arrow::before {
+    height: 10px;
+    width: 10px;
+    margin-right: 12px;
+    border-bottom: 2px solid currentColor;
+    border-right: 2px solid currentColor;
     transform: rotate(-45deg);
 }
 
-.accordion__arrow::after {
-    right: 4px;
-    transform: rotate(-45deg);
-}
-
-[aria-expanded='true'] .accordion__arrow::after,
-[aria-selected='true'] .accordion__arrow::after {
+.accordion__button[aria-expanded='true']::before,
+.accordion__button[aria-selected='true']::before {
     transform: rotate(45deg);
 }
 
-.accordion__arrow::before,
-.accordion__arrow::after {
-    transition: transform 0.25s ease, -webkit-transform 0.25s ease;
+.accordion__panel {
+    padding: 20px;
+    animation: fadein 0.35s ease-in;
 }
 
 /* -------------------------------------------------- */
@@ -114,50 +59,4 @@
     100% {
         opacity: 1;
     }
-}
-
-@keyframes move-down {
-    0% {
-        transform: translateY(0);
-    }
-    10% {
-        transform: translateY(0);
-    }
-    20% {
-        transform: translateY(5px);
-    }
-    30% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
-
-@keyframes move-up {
-    0% {
-        transform: translateY(0);
-    }
-    10% {
-        transform: translateY(0);
-    }
-    20% {
-        transform: translateY(-5px);
-    }
-    30% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
-
-.accordion__title--animated:hover .accordion__arrow {
-    animation-name: move-down;
-    animation-duration: 1.5s;
-}
-
-.accordion__title--animated[aria-expanded='true']:hover .accordion__arrow {
-    animation-name: move-up;
-    animation-duration: 1.5s;
 }

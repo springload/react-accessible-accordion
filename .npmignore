@@ -7,7 +7,6 @@ src
 .npmignore
 webpack
 .nvmrc
-.travis.yml
 tsconfig.*
 tslint.json
 .editorconfig

@@ -1,6 +1,11 @@
 {
     "extends": "./tsconfig.json",
-    "exclude": ["**/*.spec.ts", "**/*.spec.tsx"],
+    "exclude": [
+        "**/*.spec.ts",
+        "**/*.spec.tsx",
+        "demo/**/*",
+        "integration/**/*"
+    ],
     "compilerOptions": {
         "noEmit": false,
         "emitDeclarationOnly": true,

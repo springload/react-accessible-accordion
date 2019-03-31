@@ -1,9 +1,18 @@
 {
-    "include": ["src/**/*.ts", "src/**/*.tsx", "demo/**/*.ts", "demo/**/*.tsx"],
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "demo/**/*.ts",
+        "demo/**/*.tsx",
+        "integration/**/*.ts",
+        "integration/**/*.tsx"
+    ],
     "compilerOptions": {
         "noEmit": true,
+        "noUnusedLocals": true,
         "jsx": "react",
         "baseUrl": "./",
-        "lib": ["dom", "es2015"]
+        "lib": ["dom", "es2015"],
+        "strict": true
     }
 }

@@ -76,9 +76,8 @@ bower_components
 # Generated files
 # -------------------------------------------------
 dist
-pages
-/demo/js/bundle.js
-/demo/js/bundle.map.js
+demo/dist
+integration/dist
 
 # -------------------------------------------------
 # Visual Studio Code

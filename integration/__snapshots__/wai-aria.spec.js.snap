@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WAI ARIA Spec Chrome Accessibility Tree matches snapshots 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "name": "Heading One",
+      "role": "button",
+    },
+    Object {
+      "name": "Heading Two",
+      "role": "button",
+    },
+    Object {
+      "name": "Heading Three",
+      "role": "button",
+    },
+  ],
+  "name": "React Accessible Accordion - Integration Test Sandbox",
+  "role": "WebArea",
+}
+`;
