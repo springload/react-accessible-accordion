@@ -30,6 +30,9 @@
         "type": "git",
         "url": "git+https://github.com/springload/react-accessible-accordion.git"
     },
+    "files": [
+        "dist"
+    ],
     "keywords": [
         "react",
         "component",
