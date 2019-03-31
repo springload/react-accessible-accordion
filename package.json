@@ -36,7 +36,10 @@
         "accordion",
         "collapse",
         "accessible",
-        "accessibility"
+        "accessibility",
+        "wai-aria",
+        "aria",
+        "a11y"
     ],
     "contributors": [
         {
