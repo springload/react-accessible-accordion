@@ -37,6 +37,7 @@ yarn start-demo
 npm version [TYPE]
 git push origin master --tags
 npm publish
+yarn pages
 ```
 
 # Project Principles
