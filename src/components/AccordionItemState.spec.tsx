@@ -1,5 +1,5 @@
+import { render } from '@testing-library/react';
 import * as React from 'react';
-import { render } from 'react-testing-library';
 import Accordion from './Accordion';
 import AccordionItem from './AccordionItem';
 import AccordionItemState from './AccordionItemState';
