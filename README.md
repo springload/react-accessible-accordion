@@ -97,7 +97,7 @@ Allow the only remaining expanded item to be collapsed.
 
 #### preExpanded: `string[]` [_optional_, default: `[]`]
 
-Accepts an array of strings and any `AccordionItem` whose `uuid` prop matches on
+Accepts an array of strings and any `AccordionItem` whose `uuid` prop matches any one
 of these strings will be expanded on mount.
 
 #### className : `string` [*optional*, default: `'accordion'`]
