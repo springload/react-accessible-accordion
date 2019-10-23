@@ -33,7 +33,7 @@ module.exports = (env, options) => ({
                 ],
             },
             {
-                test: /\.ico$/,
+                test: /\.(ico|svg)$/,
                 loaders: ['file-loader'],
             },
         ],
