@@ -246,5 +246,3 @@ controlled manually thereafter.
 | Chrome        | Desktop   | latest  |
 | Firefox       | Desktop   | latest  |
 | Safari        | OSX       | latest  |
-
->Note: This library does not have polyfill support for `Array.prototype.findIndex`, so if you require support **IE 11** you will need to add polyfill in your build or manually add it.

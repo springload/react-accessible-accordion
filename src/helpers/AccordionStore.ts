@@ -78,11 +78,7 @@ export default class AccordionStore {
     };
 
     public readonly isItemExpanded = (uuid: UUID): boolean => {
-        return (
-            this.expanded.findIndex(
-                (expandedUuid: UUID) => expandedUuid === uuid,
-            ) !== -1
-        );
+        return this.expanded.indexOf(uuid) !== -1;
     };
 
     public readonly getPanelAttributes = (
