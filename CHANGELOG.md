@@ -3,6 +3,12 @@
 > All notable changes to this project are documented in this file. This project
 > adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [[v3.0.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v3.0.1)
+
+### CHANGED
+
+-   Modified usage for `Array.prototype.findIndex` to `Array.prototype.indexOf` across the library to remove the need for polyfill for IE 11.
+
 ## [[v3.0.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v3.0.0)
 
 This release is the culmination of a massive amount of work, resulting in some
