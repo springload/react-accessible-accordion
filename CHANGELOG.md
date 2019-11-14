@@ -5,9 +5,9 @@
 
 ## [[v3.0.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v3.0.1)
 
-### CHANGED
+### FIXED
 
--   Modified usage for `Array.prototype.findIndex` to `Array.prototype.indexOf` across the library to remove the need for polyfill for IE 11.
+-   Refactor away `Array.prototype.findIndex` in favour of `Array.prototype.indexOf` to reinstate IE 11 support without use of a polyfill (https://github.com/springload/react-accessible-accordion/issues/237, https://github.com/springload/react-accessible-accordion/issues/224).
 
 ## [[v3.0.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v3.0.0)
 
