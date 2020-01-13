@@ -68,17 +68,6 @@ a:hover {
     color: #069;
 }
 
-a small {
-    font-size: 11px;
-    color: #777;
-    margin-top: -0.3em;
-    display: block;
-}
-
-a:hover small {
-    color: #777;
-}
-
 .wrapper {
     width: 860px;
     margin: 0 auto;
@@ -173,10 +162,6 @@ section {
     padding-bottom: 25px;
 }
 
-small {
-    font-size: 11px;
-}
-
 footer {
     width: 270px;
     float: left;
@@ -208,10 +193,6 @@ footer {
         border-width: 1px 0;
         padding: 20px 0;
         margin: 0 0 20px;
-    }
-
-    header a small {
-        display: inline;
     }
 
     header ul {
