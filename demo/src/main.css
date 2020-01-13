@@ -1,5 +1,6 @@
 html {
     box-sizing: border-box;
+    background-color: var(--colorPageBackground);
 }
 
 *,
@@ -9,11 +10,12 @@ html {
 }
 
 body {
-    background-color: #fff;
+    background-color: var(--themesDarkColorTheme);
     padding: 50px;
     font: 16px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #727272;
+    color: var(--themesDarkColorText);
     font-weight: 400;
+    margin: 0;
 }
 
 h1,
@@ -22,7 +24,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: #222;
+    color: var(--themesDarkColorText);
     margin: 0 0 15px;
 }
 
@@ -44,29 +46,19 @@ h1 {
     font-size: 22px;
 }
 
-h2 {
-    color: #393939;
-}
-
-h3,
-h4,
-h5,
-h6 {
-    color: #494949;
-}
-
 a {
-    color: #39c;
-    text-decoration: none;
+    color: var(--colorPageLinks);
+    text-decoration: underline solid var(--colorGreenShadow);
 }
 
 a:hover {
-    color: #069;
+    color: var(--colorGreen);
 }
 
 .wrapper {
     width: 860px;
     margin: 0 auto;
+    overflow: auto;
 }
 
 code {
@@ -83,11 +75,9 @@ header {
     width: 270px;
     float: left;
     position: fixed;
-    -webkit-font-smoothing: subpixel-antialiased;
 }
 
 strong {
-    color: #222;
     font-weight: 700;
 }
 
@@ -124,7 +114,7 @@ footer {
     }
 
     section {
-        border: 1px solid #e5e5e5;
+        border: 1px solid var(--themesDarkColorOutline);
         border-width: 1px 0;
         padding: 20px 0;
         margin: 0 0 20px;
