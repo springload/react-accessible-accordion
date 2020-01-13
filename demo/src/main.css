@@ -12,7 +12,7 @@ html {
 body {
     background-color: var(--themesDarkColorTheme);
     padding: 50px;
-    font: 16px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font: 16px/1.5 sans-serif;
     color: var(--themesDarkColorText);
     font-weight: 400;
     margin: 0;
@@ -24,6 +24,8 @@ h3,
 h4,
 h5,
 h6 {
+    font-family: serif;
+    font-weight: normal;
     color: var(--themesDarkColorText);
     margin: 0 0 15px;
 }
