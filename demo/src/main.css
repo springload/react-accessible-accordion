@@ -160,14 +160,6 @@ footer {
     border: 3px solid blue;
 }
 
-.anchor {
-    display: none;
-}
-
-h4:hover .anchor {
-    display: inline;
-}
-
 .u-margin-top {
     margin-top: 1.875rem;
 }
