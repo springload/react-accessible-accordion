@@ -262,31 +262,6 @@ footer {
     padding: 25px 25px;
 }
 
-.btn {
-    display: inline-block;
-    text-align: center;
-    margin: 0;
-    cursor: pointer;
-    background-color: #fff;
-    color: #333;
-    padding: 0.5em;
-    line-height: 1;
-    border: solid #333 2px;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.btn:hover {
-    color: #fff;
-    background-color: #333;
-}
-
-.btn .i {
-    width: 64px;
-    height: 64px;
-    fill: currentColor;
-}
-
 .anchor {
     display: none;
 }
