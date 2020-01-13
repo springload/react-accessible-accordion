@@ -103,7 +103,7 @@
         "lint-staged": "^8.1.5",
         "mini-css-extract-plugin": "^0.7.0",
         "prettier": "^1.16.3",
-        "puppeteer": "1.18.1",
+        "puppeteer": "2.0.0",
         "react": "16.3.2",
         "react-dom": "16.3.3",
         "react-test-renderer": "^16.8.6",
