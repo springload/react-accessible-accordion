@@ -91,12 +91,6 @@ strong {
     font-weight: 700;
 }
 
-header ul a strong {
-    font-size: 14px;
-    display: block;
-    color: #222;
-}
-
 section {
     width: 500px;
     float: right;
@@ -134,12 +128,6 @@ footer {
         border-width: 1px 0;
         padding: 20px 0;
         margin: 0 0 20px;
-    }
-
-    header ul {
-        position: absolute;
-        right: 50px;
-        top: 52px;
     }
 }
 
