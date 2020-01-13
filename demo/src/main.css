@@ -229,35 +229,6 @@ footer {
     border: 3px solid blue;
 }
 
-.i {
-    width: 96px;
-    height: 96px;
-}
-.i--red {
-    fill: #cc0000;
-}
-
-.i {
-    width: 96px;
-    height: 96px;
-}
-.i--blue {
-    fill: #0000cc;
-}
-.i--white {
-    fill: #ffffff;
-    stroke: black;
-    stroke-width: 3;
-    opacity: 0.7;
-}
-.i--red {
-    fill: #cc0000;
-}
-.middle-icon {
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
 .footer-menu {
     padding: 25px 25px;
 }
