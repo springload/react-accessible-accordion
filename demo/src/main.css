@@ -177,13 +177,6 @@ small {
     font-size: 11px;
 }
 
-hr {
-    border: 0;
-    background: #e5e5e5;
-    height: 1px;
-    margin: 0 0 20px;
-}
-
 footer {
     width: 270px;
     float: left;
