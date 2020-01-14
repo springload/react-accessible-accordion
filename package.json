@@ -19,7 +19,7 @@
         "build:css": "cp src/css/*.css dist",
         "build:rollup": "rollup -c",
         "build:types": "yarn tsc --project tsconfig.declaration.json",
-        "build:demo": "rimraf \"demo/dist/**/*\" && yarn webpack --context=demo --mode=production --progress --output-path=demo/dist",
+        "build:demo": "rimraf \"demo/dist/**/*\" && yarn webpack --context=demo --mode=production --progress --output-path=demo/dist && cp demo/src/CNAME demo/dist/CNAME",
         "build:integration": "rimraf \"integration/dist/**/*\" && yarn webpack --context=integration --mode=production --progress --output-path=integration/dist",
         "start-demo": "webpack-dev-server --context=demo --mode=development --hot",
         "pages": "yarn build:demo && yarn gh-pages -d demo/dist",
