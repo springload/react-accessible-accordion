@@ -128,26 +128,6 @@ footer {
     }
 }
 
-@media (max-width: 720px) {
-    body {
-        word-wrap: break-word;
-    }
-
-    header {
-        padding: 0;
-    }
-
-    code {
-        word-wrap: normal;
-    }
-}
-
-@media (max-width: 480px) {
-    body {
-        padding: 15px;
-    }
-}
-
 @media print {
     body {
         padding: 0.4in;
