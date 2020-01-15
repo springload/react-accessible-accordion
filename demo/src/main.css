@@ -11,7 +11,6 @@ html {
 
 body {
     background-color: var(--themesDarkColorTheme);
-    padding: 50px;
     font: 16px/1.5 sans-serif;
     color: var(--themesDarkColorText);
     font-weight: 400;
@@ -57,12 +56,6 @@ a:hover {
     color: var(--colorGreen);
 }
 
-.wrapper {
-    width: 860px;
-    margin: 0 auto;
-    overflow: auto;
-}
-
 code {
     font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal,
         Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
@@ -70,76 +63,68 @@ code {
 }
 
 img {
+    display: block;
     max-width: 100%;
-}
-
-header {
-    width: 270px;
-    float: left;
-    position: fixed;
 }
 
 strong {
     font-weight: 700;
 }
 
+header,
+section,
+footer {
+    padding: 50px 0;
+    width: 860px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+}
+
 section {
-    width: 500px;
-    float: right;
-    padding-bottom: 25px;
+    display: flex;
+    justify-content: flex-end;
 }
 
 footer {
-    width: 270px;
-    float: left;
     position: fixed;
-    bottom: 50px;
-    -webkit-font-smoothing: subpixel-antialiased;
+    bottom: 0;
+}
+
+.inner--left {
+    width: 270px;
+}
+
+.inner--right {
+    width: 500px;
 }
 
 @media (max-width: 960px) {
-    div.wrapper {
-        width: auto;
-        margin: 0;
-    }
-
     header,
     section,
     footer {
-        float: none;
-        position: static;
+        width: initial;
+        position: initial;
+        padding: 0 20px;
+    }
+
+    .inner {
+        padding: 20px 0;
+    }
+
+    .inner--left {
         width: auto;
     }
 
-    header {
-        padding-right: 320px;
-    }
-
-    section {
+    .inner--right {
+        width: auto;
         border: 1px solid var(--themesDarkColorOutline);
         border-width: 1px 0;
-        padding: 20px 0;
-        margin: 0 0 20px;
-    }
-}
-
-@media (max-width: 720px) {
-    body {
-        word-wrap: break-word;
-    }
-
-    header {
-        padding: 0;
-    }
-
-    code {
-        word-wrap: normal;
-    }
-}
-
-@media (max-width: 480px) {
-    body {
-        padding: 15px;
     }
 }
 
@@ -150,18 +135,6 @@ footer {
     }
 }
 
-.u-border {
-    border: 3px solid blue;
-}
-
 .u-margin-top {
     margin-top: 1.875rem;
-}
-
-.u-margin-right {
-    margin-right: 1.875rem;
-}
-
-.u-margin-bottom-s {
-    margin-bottom: 0.5rem;
 }

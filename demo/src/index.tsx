@@ -21,7 +21,7 @@ import '../../src/css/fancy-example.css';
 
 // tslint:disable-next-line max-func-body-length
 const App = (): JSX.Element => (
-    <div className="demo-container">
+    <>
         <h1>React Accessible Accordion</h1>
 
         <p>
@@ -193,7 +193,7 @@ const App = (): JSX.Element => (
                 </AccordionItem>
             ))}
         </Accordion>
-    </div>
+    </>
 );
 
 ReactDOM.render(<App />, document.getElementById('app-root'));
