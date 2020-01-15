@@ -11,7 +11,6 @@ html {
 
 body {
     background-color: var(--themesDarkColorTheme);
-    padding: 50px;
     font: 16px/1.5 sans-serif;
     color: var(--themesDarkColorText);
     font-weight: 400;
@@ -57,12 +56,6 @@ a:hover {
     color: var(--colorGreen);
 }
 
-.wrapper {
-    width: 860px;
-    margin: 0 auto;
-    overflow: auto;
-}
-
 code {
     font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal,
         Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
@@ -70,31 +63,45 @@ code {
 }
 
 img {
+    display: block;
     max-width: 100%;
-}
-
-header {
-    width: 270px;
-    float: left;
-    position: fixed;
 }
 
 strong {
     font-weight: 700;
 }
 
+header,
+section,
+footer {
+    padding: 50px 0;
+    width: 860px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+}
+
 section {
-    width: 500px;
-    float: right;
-    padding-bottom: 25px;
+    display: flex;
+    justify-content: flex-end;
 }
 
 footer {
-    width: 270px;
-    float: left;
     position: fixed;
-    bottom: 50px;
-    -webkit-font-smoothing: subpixel-antialiased;
+    bottom: 0;
+}
+
+.inner--left {
+    width: 270px;
+}
+
+.inner--right {
+    width: 500px;
 }
 
 @media (max-width: 960px) {

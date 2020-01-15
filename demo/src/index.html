@@ -19,8 +19,8 @@
         />
     </head>
     <body>
-        <div class="wrapper">
-            <header>
+        <header>
+            <div class="inner inner--left">
                 <code
                     ><h1>
                         <a
@@ -45,17 +45,20 @@
                             src="https://img.shields.io/badge/a11y-tested-brightgreen.svg"
                     /></a>
                 </p>
-            </header>
-            <section><div id="app-root"></div></section>
-            <footer>
-                <a href="https://www.springload.co.nz/" style="display: block;">
-                    <img
-                        alt=""
-                        src="https://unpkg.com/@springload/brand@1.2.0/dist/logos/springload-logo-color-on-dark.svg"
-                        style="width:144px;"
-                    />
-                </a>
-            </footer>
-        </div>
+            </div>
+        </header>
+        <section>
+            <div id="app-root" class="inner inner--right"></div>
+        </section>
+        <footer>
+                <div class="inner inner--left"
+            <a href="https://www.springload.co.nz/" style="display: block;">
+                <img
+                    alt=""
+                    src="https://unpkg.com/@springload/brand@1.2.0/dist/logos/springload-logo-color-on-dark.svg"
+                    style="width:144px;"
+                />
+            </a>
+        </footer>
     </body>
 </html>
