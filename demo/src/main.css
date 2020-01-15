@@ -98,7 +98,7 @@ footer {
 }
 
 @media (max-width: 960px) {
-    div.wrapper {
+    .wrapper {
         width: auto;
         margin: 0;
     }
