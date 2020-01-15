@@ -105,28 +105,26 @@ footer {
 }
 
 @media (max-width: 960px) {
-    .wrapper {
-        width: auto;
-        margin: 0;
-    }
-
     header,
     section,
     footer {
-        float: none;
-        position: static;
+        width: initial;
+        position: initial;
+        padding: 0 20px;
+    }
+
+    .inner {
+        padding: 20px 0;
+    }
+
+    .inner--left {
         width: auto;
     }
 
-    header {
-        padding-right: 320px;
-    }
-
-    section {
+    .inner--right {
+        width: auto;
         border: 1px solid var(--themesDarkColorOutline);
         border-width: 1px 0;
-        padding: 20px 0;
-        margin: 0 0 20px;
     }
 }
 
