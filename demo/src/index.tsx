@@ -229,7 +229,8 @@ class App extends React.Component<{}, { expanded: UUID[] }> {
                 </h2>
 
                 <Accordion
-                    preExpanded={this.state.expanded}
+                    expanded={this.state.expanded}
+                    preExpanded={[placeholders[0].uuid]}
                     onChange={this.handleChange}
                     allowZeroExpanded={true}
                 >
