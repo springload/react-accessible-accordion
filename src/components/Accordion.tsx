@@ -1,7 +1,12 @@
 import * as React from 'react';
 import DisplayName from '../helpers/DisplayName';
 import { DivAttributes } from '../helpers/types';
-import { AccordionContext, Consumer, Provider } from './AccordionContext';
+import {
+    AccordionContext,
+    Consumer,
+    Provider,
+    ProviderProps,
+} from './AccordionContext';
 import { UUID } from './ItemContext';
 
 type AccordionProps = Pick<
@@ -9,6 +14,7 @@ type AccordionProps = Pick<
     Exclude<keyof DivAttributes, 'onChange'>
 > & {
     preExpanded?: UUID[];
+    expanded?: UUID[];
     allowMultipleExpanded?: boolean;
     allowZeroExpanded?: boolean;
     onChange?(args: UUID[]): void;
@@ -28,6 +34,7 @@ export default class Accordion extends React.Component<AccordionProps> {
     renderAccordion = (accordionContext: AccordionContext): JSX.Element => {
         const {
             preExpanded,
+            expanded,
             allowMultipleExpanded,
             allowZeroExpanded,
             onChange,
@@ -38,13 +45,19 @@ export default class Accordion extends React.Component<AccordionProps> {
     };
 
     render(): JSX.Element {
+        let providerProps: ProviderProps = {
+            preExpanded: this.props.preExpanded,
+            allowMultipleExpanded: this.props.allowMultipleExpanded,
+            allowZeroExpanded: this.props.allowZeroExpanded,
+            onChange: this.props.onChange,
+        };
+
+        if ('expanded' in this.props) {
+            providerProps = { ...providerProps, expanded: this.props.expanded };
+        }
+
         return (
-            <Provider
-                preExpanded={this.props.preExpanded}
-                allowMultipleExpanded={this.props.allowMultipleExpanded}
-                allowZeroExpanded={this.props.allowZeroExpanded}
-                onChange={this.props.onChange}
-            >
+            <Provider {...providerProps}>
                 <Consumer>{this.renderAccordion}</Consumer>
             </Provider>
         );

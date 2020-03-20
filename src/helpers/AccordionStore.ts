@@ -61,6 +61,18 @@ export default class AccordionStore {
         }
     };
 
+    public readonly updateExpanded = (
+        expanded: UUID[] | undefined,
+    ): AccordionStore => {
+        return this.augment({
+            expanded: this.allowMultipleExpanded
+                ? expanded
+                : Array.isArray(expanded) && expanded.length > 0
+                ? [expanded[0]]
+                : [],
+        });
+    };
+
     /*
      * From the spec:
      *

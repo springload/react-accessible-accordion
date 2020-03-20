@@ -10,6 +10,7 @@ import { UUID } from './ItemContext';
 
 export interface ProviderProps {
     preExpanded?: UUID[];
+    expanded?: UUID[];
     allowMultipleExpanded?: boolean;
     allowZeroExpanded?: boolean;
     children?: React.ReactNode;
@@ -41,20 +42,38 @@ export class Provider extends React.PureComponent<
     };
 
     state: ProviderState = new AccordionStore({
-        expanded: this.props.preExpanded,
+        expanded:
+            'expanded' in this.props
+                ? this.props.expanded
+                : this.props.preExpanded,
         allowMultipleExpanded: this.props.allowMultipleExpanded,
         allowZeroExpanded: this.props.allowZeroExpanded,
     });
 
+    static getDerivedStateFromProps(
+        nextProps: ProviderProps,
+        state: ProviderState,
+    ): AccordionStore | undefined {
+        if ('expanded' in nextProps) {
+            return state.updateExpanded(nextProps.expanded);
+        }
+    }
+
     toggleExpanded = (key: UUID): void => {
-        this.setState(
-            (state: Readonly<ProviderState>) => state.toggleExpanded(key),
-            () => {
-                if (this.props.onChange) {
-                    this.props.onChange(this.state.expanded);
-                }
-            },
-        );
+        if ('expanded' in this.props) {
+            if (this.props.onChange) {
+                this.props.onChange(this.state.toggleExpanded(key).expanded);
+            }
+        } else {
+            this.setState(
+                (state: Readonly<ProviderState>) => state.toggleExpanded(key),
+                () => {
+                    if (this.props.onChange) {
+                        this.props.onChange(this.state.expanded);
+                    }
+                },
+            );
+        }
     };
 
     isItemDisabled = (key: UUID): boolean => {

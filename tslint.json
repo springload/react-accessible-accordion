@@ -31,6 +31,8 @@
         "completed-docs": false,
         "strict-boolean-expressions": false,
         "interface-name": false,
-        "match-default-export-name": false
+        "match-default-export-name": false,
+        "max-func-body-length": false,
+        "function-name": false
     }
 }

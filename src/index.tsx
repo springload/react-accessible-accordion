@@ -6,6 +6,7 @@ import AccordionItemPanel from './components/AccordionItemPanel';
 import AccordionItemState from './components/AccordionItemState';
 import { resetNextUuid } from './helpers/uuid';
 
+export * from './components/ItemContext';
 export {
     Accordion,
     AccordionItem,
