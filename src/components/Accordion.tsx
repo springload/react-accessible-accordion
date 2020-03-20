@@ -1,7 +1,7 @@
 import * as React from 'react';
 import DisplayName from '../helpers/DisplayName';
 import { DivAttributes } from '../helpers/types';
-import { AccordionContext, Consumer, Provider } from './AccordionContext';
+import { Provider } from './AccordionContext';
 import { UUID } from './ItemContext';
 
 type AccordionProps = Pick<
@@ -25,7 +25,7 @@ export default class Accordion extends React.Component<AccordionProps> {
 
     static displayName: DisplayName.Accordion = DisplayName.Accordion;
 
-    renderAccordion = (accordionContext: AccordionContext): JSX.Element => {
+    renderAccordion = (): JSX.Element => {
         const {
             preExpanded,
             allowMultipleExpanded,
@@ -45,7 +45,7 @@ export default class Accordion extends React.Component<AccordionProps> {
                 allowZeroExpanded={this.props.allowZeroExpanded}
                 onChange={this.props.onChange}
             >
-                <Consumer>{this.renderAccordion}</Consumer>
+                {this.renderAccordion()}
             </Provider>
         );
     }

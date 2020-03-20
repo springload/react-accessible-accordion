@@ -2,10 +2,16 @@ import * as React from 'react';
 import DisplayName from '../helpers/DisplayName';
 import { DivAttributes } from '../helpers/types';
 import { nextUuid } from '../helpers/uuid';
-import { Provider as ItemProvider, UUID } from './ItemContext';
+import {
+    Consumer as ItemConsumer,
+    ItemContext,
+    Provider as ItemProvider,
+    UUID,
+} from './ItemContext';
 
 type Props = DivAttributes & {
     uuid?: UUID;
+    activeClassName?: string;
 };
 
 const defaultProps = {
@@ -19,12 +25,26 @@ export default class AccordionItem extends React.Component<Props> {
 
     instanceUuid: UUID = nextUuid();
 
+    renderChildren = (itemContext: ItemContext): JSX.Element => {
+        const { uuid, className, activeClassName, ...rest } = this.props;
+        const { expanded } = itemContext;
+        const cx = expanded && activeClassName ? activeClassName : className;
+
+        return (
+            <div
+                data-accordion-component="AccordionItem"
+                className={cx}
+                {...rest}
+            />
+        );
+    };
+
     render(): JSX.Element {
-        const { uuid = this.instanceUuid, ...rest } = this.props;
+        const { uuid = this.instanceUuid } = this.props;
 
         return (
             <ItemProvider uuid={uuid}>
-                <div data-accordion-component="AccordionItem" {...rest} />
+                <ItemConsumer>{this.renderChildren}</ItemConsumer>
             </ItemProvider>
         );
     }
