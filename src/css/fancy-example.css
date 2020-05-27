@@ -42,7 +42,7 @@
     transform: rotate(45deg);
 }
 
-*[data-hidden] {
+.accordion *[data-hidden] {
     display: none;
 }
 
