@@ -8,6 +8,7 @@ import AccordionItemHeading from './AccordionItemHeading';
 enum UUIDS {
     FOO = 'FOO',
     BAR = 'BAR',
+    BAD_ID = 'BAD ID',
 }
 
 describe('AccordionItem', () => {
@@ -56,6 +57,22 @@ describe('AccordionItem', () => {
                 'foo',
             ]);
         });
+    });
+
+    it('throws on invalid uuid', () => {
+        expect(() => {
+            render(
+                <Accordion>
+                    <AccordionItem uuid={UUIDS.BAD_ID}>
+                        <AccordionItemHeading>
+                            <AccordionItemButton>
+                                Hello World
+                            </AccordionItemButton>
+                        </AccordionItemHeading>
+                    </AccordionItem>
+                </Accordion>,
+            );
+        }).toThrow();
     });
 
     describe('children prop', () => {

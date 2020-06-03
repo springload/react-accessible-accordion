@@ -11,6 +11,7 @@ import keycodes from '../helpers/keycodes';
 import { DivAttributes } from '../helpers/types';
 
 import { Consumer as ItemConsumer, ItemContext } from './ItemContext';
+import { assertValidHtmlId } from '../helpers/uuid';
 
 type Props = DivAttributes & {
     toggleExpanded(): void;
@@ -69,6 +70,8 @@ export class AccordionItemButton extends React.PureComponent<Props> {
 
     render(): JSX.Element {
         const { toggleExpanded, ...rest } = this.props;
+
+        if (rest.id) assertValidHtmlId(rest.id);
 
         return (
             <div

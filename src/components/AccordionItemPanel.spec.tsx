@@ -7,6 +7,7 @@ import AccordionItemPanel from './AccordionItemPanel';
 enum UUIDS {
     FOO = 'FOO',
     BAR = 'BAR',
+    BAD_ID = 'BAD ID',
 }
 
 describe('AccordionItem', () => {
@@ -51,6 +52,18 @@ describe('AccordionItem', () => {
                 'foo',
             ]);
         });
+    });
+
+    it('throws on invalid id', () => {
+        expect(() => {
+            render(
+                <Accordion>
+                    <AccordionItem uuid={UUIDS.BAD_ID}>
+                        <AccordionItemPanel id={UUIDS.BAD_ID} />
+                    </AccordionItem>
+                </Accordion>,
+            );
+        }).toThrow();
     });
 
     describe('children prop', () => {
