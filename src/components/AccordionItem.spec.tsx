@@ -46,6 +46,22 @@ describe('AccordionItem', () => {
                 'foo',
             ]);
         });
+
+        it(`switch item's className to activeClassName when it is expanded`, () => {
+            const { getByTestId } = render(
+                <Accordion preExpanded={[UUIDS.FOO]}>
+                    <AccordionItem
+                        uuid={UUIDS.FOO}
+                        data-testid={UUIDS.FOO}
+                        activeClassName="accordion__item___active"
+                    />
+                </Accordion>,
+            );
+
+            expect(Array.from(getByTestId(UUIDS.FOO).classList)).toEqual([
+                'accordion__item___active',
+            ]);
+        });
     });
 
     describe('children prop', () => {
