@@ -42,6 +42,10 @@
     transform: rotate(45deg);
 }
 
+.accordion *[data-hidden] {
+    display: none;
+}
+
 .accordion__panel {
     padding: 20px;
     animation: fadein 0.35s ease-in;
