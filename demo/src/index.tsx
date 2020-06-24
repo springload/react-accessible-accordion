@@ -193,6 +193,42 @@ const App = (): JSX.Element => (
                 </AccordionItem>
             ))}
         </Accordion>
+
+        <h2 className="u-margin-top">Manual state</h2>
+
+        <p>
+            When you use the <strong>onChange</strong> prop, you can get
+            feedback about which items are expanded.
+        </p>
+
+        <p>
+            In this example, we are simply logging the uuids of the expanded
+            items to the console. Have a click around then check your console to
+            see this in action.
+        </p>
+
+        <Accordion>
+            {placeholders.map((placeholder: Placeholder, i: number) => {
+                const dangerouslySetExpanded = i < 2 ? true : false;
+
+                return (
+                    <AccordionItem
+                        key={placeholder.heading}
+                        uuid={placeholder.uuid}
+                        dangerouslySetExpanded={dangerouslySetExpanded}
+                    >
+                        <AccordionItemHeading>
+                            <AccordionItemButton>
+                                {placeholder.heading}
+                            </AccordionItemButton>
+                        </AccordionItemHeading>
+                        <AccordionItemPanel>
+                            {placeholder.panel}
+                        </AccordionItemPanel>
+                    </AccordionItem>
+                );
+            })}
+        </Accordion>
     </>
 );
 
