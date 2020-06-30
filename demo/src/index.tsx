@@ -209,13 +209,14 @@ const App = (): JSX.Element => (
 
         <Accordion>
             {placeholders.map((placeholder: Placeholder, i: number) => {
-                const dangerouslySetExpanded = i < 2 ? true : false;
+                const isExpanded = i < 2;
 
                 return (
                     <AccordionItem
                         key={placeholder.heading}
                         uuid={placeholder.uuid}
-                        dangerouslySetExpanded={dangerouslySetExpanded}
+                        // Warning: This can impact accessibility negatively
+                        dangerouslySetExpanded={isExpanded}
                     >
                         <AccordionItemHeading>
                             <AccordionItemButton>

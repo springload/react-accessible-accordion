@@ -97,8 +97,8 @@ Allow the only remaining expanded item to be collapsed.
 
 #### preExpanded: `string[]` [_optional_, default: `[]`]
 
-Accepts an array of strings and any `AccordionItem` whose `uuid` prop matches any one
-of these strings will be expanded on mount.
+Accepts an array of strings and any `AccordionItem` whose `uuid` prop matches
+any one of these strings will be expanded on mount.
 
 #### className : `string` [*optional*, default: `'accordion'`]
 
@@ -120,6 +120,12 @@ Class(es) to apply to element.
 #### uuid : `string|number` [*optional*]
 
 Recommended for use with `onChange`. Will be auto-generated if not provided.
+
+#### dangerouslySetExpanding: `boolean` [*optional*]
+
+Enables external control of the expansion.
+
+> Warning: This may impact accessibility negatively, use at your own risk
 
 ---
 
