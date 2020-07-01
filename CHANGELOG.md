@@ -3,11 +3,28 @@
 > All notable changes to this project are documented in this file. This project
 > adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [[v3.1.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v3.1.0)
+
+### Added
+
+-   New `AccordionItem` property: `dangerouslySetExpanded` enabling external
+    control of the expansion.
+-   New `AccordionItem` property: `activeClassName` to support expansion-related
+    styles
+
+### Fixed
+
+-   `hidden` support on Microsoft Edge
+
 ## [[v3.0.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v3.0.1)
 
 ### FIXED
 
--   Refactor away `Array.prototype.findIndex` in favour of `Array.prototype.indexOf` to reinstate IE 11 support without use of a polyfill (https://github.com/springload/react-accessible-accordion/issues/237, https://github.com/springload/react-accessible-accordion/issues/224).
+-   Refactor away `Array.prototype.findIndex` in favour of
+    `Array.prototype.indexOf` to reinstate IE 11 support without use of a
+    polyfill
+    (https://github.com/springload/react-accessible-accordion/issues/237,
+    https://github.com/springload/react-accessible-accordion/issues/224).
 
 ## [[v3.0.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v3.0.0)
 
