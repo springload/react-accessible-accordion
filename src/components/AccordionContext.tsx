@@ -24,9 +24,15 @@ export interface AccordionContext {
     toggleExpanded(uuid: UUID): void;
     isItemDisabled(uuid: UUID): boolean;
     isItemExpanded(uuid: UUID): boolean;
-    getPanelAttributes(uuid: UUID): InjectedPanelAttributes;
+    getPanelAttributes(
+        uuid: UUID,
+        dangerouslySetExpanded?: boolean,
+    ): InjectedPanelAttributes;
     getHeadingAttributes(uuid: UUID): InjectedHeadingAttributes;
-    getButtonAttributes(uuid: UUID): InjectedButtonAttributes;
+    getButtonAttributes(
+        uuid: UUID,
+        dangerouslySetExpanded?: boolean,
+    ): InjectedButtonAttributes;
 }
 
 const Context = React.createContext(null as AccordionContext | null);
@@ -65,16 +71,22 @@ export class Provider extends React.PureComponent<
         return this.state.isItemExpanded(key);
     };
 
-    getPanelAttributes = (key: UUID): InjectedPanelAttributes => {
-        return this.state.getPanelAttributes(key);
+    getPanelAttributes = (
+        key: UUID,
+        dangerouslySetExpanded?: boolean,
+    ): InjectedPanelAttributes => {
+        return this.state.getPanelAttributes(key, dangerouslySetExpanded);
     };
 
     getHeadingAttributes = (key: UUID): InjectedHeadingAttributes => {
         return this.state.getHeadingAttributes(key);
     };
 
-    getButtonAttributes = (key: UUID): InjectedButtonAttributes => {
-        return this.state.getButtonAttributes(key);
+    getButtonAttributes = (
+        key: UUID,
+        dangerouslySetExpanded?: boolean,
+    ): InjectedButtonAttributes => {
+        return this.state.getButtonAttributes(key, dangerouslySetExpanded);
     };
 
     render(): JSX.Element {

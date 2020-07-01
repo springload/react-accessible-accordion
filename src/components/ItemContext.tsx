@@ -17,6 +17,7 @@ type ProviderProps = {
     children?: React.ReactNode;
     uuid: UUID;
     accordionContext: AccordionContext;
+    dangerouslySetExpanded?: boolean;
 };
 
 export type ProviderWrapperProps = Pick<
@@ -42,13 +43,20 @@ class Provider extends React.Component<ProviderProps> {
     };
 
     renderChildren = (accordionContext: AccordionContext): JSX.Element => {
-        const { uuid } = this.props;
+        const { uuid, dangerouslySetExpanded } = this.props;
 
-        const expanded = accordionContext.isItemExpanded(uuid);
+        const expanded =
+            dangerouslySetExpanded ?? accordionContext.isItemExpanded(uuid);
         const disabled = accordionContext.isItemDisabled(uuid);
-        const panelAttributes = accordionContext.getPanelAttributes(uuid);
+        const panelAttributes = accordionContext.getPanelAttributes(
+            uuid,
+            dangerouslySetExpanded,
+        );
         const headingAttributes = accordionContext.getHeadingAttributes(uuid);
-        const buttonAttributes = accordionContext.getButtonAttributes(uuid);
+        const buttonAttributes = accordionContext.getButtonAttributes(
+            uuid,
+            dangerouslySetExpanded,
+        );
 
         return (
             <Context.Provider

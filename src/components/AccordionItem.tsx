@@ -12,6 +12,7 @@ import {
 type Props = DivAttributes & {
     uuid?: UUID;
     activeClassName?: string;
+    dangerouslySetExpanded?: boolean;
 };
 
 const defaultProps = {
@@ -40,10 +41,13 @@ export default class AccordionItem extends React.Component<Props> {
     };
 
     render(): JSX.Element {
-        const { uuid = this.instanceUuid } = this.props;
+        const { uuid = this.instanceUuid, dangerouslySetExpanded } = this.props;
 
         return (
-            <ItemProvider uuid={uuid}>
+            <ItemProvider
+                uuid={uuid}
+                dangerouslySetExpanded={dangerouslySetExpanded}
+            >
                 <ItemConsumer>{this.renderChildren}</ItemConsumer>
             </ItemProvider>
         );

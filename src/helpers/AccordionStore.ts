@@ -83,8 +83,9 @@ export default class AccordionStore {
 
     public readonly getPanelAttributes = (
         uuid: UUID,
+        dangerouslySetExpanded?: boolean,
     ): InjectedPanelAttributes => {
-        const expanded = this.isItemExpanded(uuid);
+        const expanded = dangerouslySetExpanded ?? this.isItemExpanded(uuid);
 
         return {
             role: this.allowMultipleExpanded ? undefined : 'region',
@@ -105,8 +106,9 @@ export default class AccordionStore {
 
     public readonly getButtonAttributes = (
         uuid: UUID,
+        dangerouslySetExpanded?: boolean,
     ): InjectedButtonAttributes => {
-        const expanded = this.isItemExpanded(uuid);
+        const expanded = dangerouslySetExpanded ?? this.isItemExpanded(uuid);
         const disabled = this.isItemDisabled(uuid);
 
         return {
