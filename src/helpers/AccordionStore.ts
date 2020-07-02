@@ -5,7 +5,7 @@ export interface InjectedPanelAttributes {
     'aria-hidden': boolean | undefined;
     'aria-labelledby': string;
     id: string;
-    'data-hidden': boolean | undefined;
+    hidden: boolean | undefined;
 }
 
 export interface InjectedHeadingAttributes {
@@ -92,7 +92,7 @@ export default class AccordionStore {
             'aria-hidden': this.allowMultipleExpanded ? !expanded : undefined,
             'aria-labelledby': this.getButtonId(uuid),
             id: this.getPanelId(uuid),
-            'data-hidden': expanded ? undefined : true,
+            hidden: expanded ? undefined : true,
         };
     };
 
