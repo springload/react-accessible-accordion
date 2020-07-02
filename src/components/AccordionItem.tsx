@@ -41,7 +41,11 @@ export default class AccordionItem extends React.Component<Props> {
     };
 
     render(): JSX.Element {
-        const { uuid = this.instanceUuid, dangerouslySetExpanded } = this.props;
+        const {
+            uuid = this.instanceUuid,
+            dangerouslySetExpanded,
+            ...rest
+        } = this.props;
 
         if (rest.id) {
             assertValidHtmlId(rest.id);
