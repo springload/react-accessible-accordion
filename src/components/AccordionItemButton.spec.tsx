@@ -59,22 +59,6 @@ describe('AccordionItem', () => {
         });
     });
 
-    it('throws on invalid uuid', () => {
-        expect(() => {
-            render(
-                <Accordion>
-                    <AccordionItem uuid={UUIDS.BAD_ID}>
-                        <AccordionItemHeading>
-                            <AccordionItemButton>
-                                Hello World
-                            </AccordionItemButton>
-                        </AccordionItemHeading>
-                    </AccordionItem>
-                </Accordion>,
-            );
-        }).toThrow();
-    });
-
     describe('children prop', () => {
         it('is respected', () => {
             const { getByText } = render(

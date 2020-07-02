@@ -54,18 +54,6 @@ describe('AccordionItem', () => {
         });
     });
 
-    it('throws on invalid id', () => {
-        expect(() => {
-            render(
-                <Accordion>
-                    <AccordionItem uuid={UUIDS.BAD_ID}>
-                        <AccordionItemPanel id={UUIDS.BAD_ID} />
-                    </AccordionItem>
-                </Accordion>,
-            );
-        }).toThrow();
-    });
-
     describe('children prop', () => {
         it('is respected', () => {
             const { getByText } = render(

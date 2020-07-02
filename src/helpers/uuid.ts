@@ -15,15 +15,19 @@ export function resetNextUuid(): void {
     counter = DEFAULT;
 }
 
-// https://stackoverflow.com/a/14664879
-// but modified to allow additional first characters per HTML5
-// https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id
-const idRegex = /^[_\-.a-zA-Z][\w:.-]*$/;
+// HTML5 ids allow all unicode characters, except for ASCII whitespaces
+// https://infra.spec.whatwg.org/#ascii-whitespace
+const idRegex = /[\u0009\u000a\u000c\u000d\u0020]/g;
 
-export function assertValidHtmlId(htmlId: string): void {
-    if (!htmlId.toString().match(idRegex)) {
-        throw new Error(
-            `uuid must be a valid HTML Id but was given "${htmlId}"`,
+export function assertValidHtmlId(htmlId: string): boolean {
+    if (htmlId === '' || idRegex.test(htmlId)) {
+        // tslint:disable-next-line
+        console.error(
+            `uuid must be a valid HTML5 id but was given "${htmlId}", ASCII whitespaces are forbidden`,
         );
+
+        return false;
     }
+
+    return true;
 }
