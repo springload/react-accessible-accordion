@@ -20,7 +20,6 @@ describe('UUID helper', () => {
     describe('assertValidHtmlId', () => {
         it("returns false in case there's a whitespace or an empty string", () => {
             expect(assertValidHtmlId('a a')).toBe(false);
-            expect(assertValidHtmlId('a	a')).toBe(false);
             expect(assertValidHtmlId('')).toBe(false);
         });
 

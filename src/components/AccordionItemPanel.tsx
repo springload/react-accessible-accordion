@@ -1,8 +1,8 @@
 import * as React from 'react';
 import DisplayName from '../helpers/DisplayName';
 import { DivAttributes } from '../helpers/types';
-import { Consumer as ItemConsumer, ItemContext } from './ItemContext';
 import { assertValidHtmlId } from '../helpers/uuid';
+import { Consumer as ItemConsumer, ItemContext } from './ItemContext';
 
 type Props = DivAttributes;
 
@@ -17,7 +17,9 @@ export default class AccordionItemPanel extends React.Component<Props> {
         DisplayName.AccordionItemPanel;
 
     renderChildren = ({ panelAttributes }: ItemContext): JSX.Element => {
-        if (this.props.id) assertValidHtmlId(this.props.id);
+        if (this.props.id) {
+            assertValidHtmlId(this.props.id);
+        }
 
         return (
             <div
