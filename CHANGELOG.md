@@ -3,6 +3,19 @@
 > All notable changes to this project are documented in this file. This project
 > adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [[v3.2.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v3.2.0)
+
+### Added
+
+-   Use `console.error` when provided with invalid HTML5 ids
+
+## [[v3.1.1]](https://github.com/springload/react-accessible-accordion/releases/tag/v3.1.1)
+
+### Fixed
+
+-   Use `hidden` capabilities rather than something needing custom css
+    everywhere.
+
 ## [[v3.1.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v3.1.0)
 
 ### Added
