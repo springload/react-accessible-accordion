@@ -7,6 +7,7 @@ import AccordionItemPanel from './AccordionItemPanel';
 enum UUIDS {
     FOO = 'FOO',
     BAR = 'BAR',
+    BAD_ID = 'BAD ID',
 }
 
 describe('AccordionItem', () => {

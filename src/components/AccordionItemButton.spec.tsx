@@ -8,6 +8,7 @@ import AccordionItemHeading from './AccordionItemHeading';
 enum UUIDS {
     FOO = 'FOO',
     BAR = 'BAR',
+    BAD_ID = 'BAD ID',
 }
 
 describe('AccordionItem', () => {

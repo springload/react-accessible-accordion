@@ -1,7 +1,7 @@
 import * as React from 'react';
 import DisplayName from '../helpers/DisplayName';
 import { DivAttributes } from '../helpers/types';
-import { nextUuid } from '../helpers/uuid';
+import { assertValidHtmlId, nextUuid } from '../helpers/uuid';
 import {
     Consumer as ItemConsumer,
     ItemContext,
@@ -41,7 +41,15 @@ export default class AccordionItem extends React.Component<Props> {
     };
 
     render(): JSX.Element {
-        const { uuid = this.instanceUuid, dangerouslySetExpanded } = this.props;
+        const {
+            uuid = this.instanceUuid,
+            dangerouslySetExpanded,
+            ...rest
+        } = this.props;
+
+        if (rest.id) {
+            assertValidHtmlId(rest.id);
+        }
 
         return (
             <ItemProvider
