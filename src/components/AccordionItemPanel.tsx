@@ -1,36 +1,31 @@
 import * as React from 'react';
-import DisplayName from '../helpers/DisplayName';
 import { DivAttributes } from '../helpers/types';
 import { assertValidHtmlId } from '../helpers/uuid';
 import { Consumer as ItemConsumer, ItemContext } from './ItemContext';
 
-type Props = DivAttributes;
+type Props = DivAttributes & { className?: string };
 
-const defaultProps = {
-    className: 'accordion__panel',
-};
-
-export default class AccordionItemPanel extends React.Component<Props> {
-    static defaultProps: typeof defaultProps = defaultProps;
-
-    static displayName: DisplayName.AccordionItemPanel =
-        DisplayName.AccordionItemPanel;
-
-    renderChildren = ({ panelAttributes }: ItemContext): JSX.Element => {
-        if (this.props.id) {
-            assertValidHtmlId(this.props.id);
+const AccordionItemPanel = ({
+    className = 'accordion__panel',
+    id,
+    ...rest
+}: Props) => {
+    const renderChildren = ({ panelAttributes }: ItemContext): JSX.Element => {
+        if (id) {
+            assertValidHtmlId(id);
         }
 
         return (
             <div
                 data-accordion-component="AccordionItemPanel"
-                {...this.props}
+                className={className}
+                {...rest}
                 {...panelAttributes}
             />
         );
     };
 
-    render(): JSX.Element {
-        return <ItemConsumer>{this.renderChildren}</ItemConsumer>;
-    }
-}
+    return <ItemConsumer>{renderChildren}</ItemConsumer>;
+};
+
+export default AccordionItemPanel;
