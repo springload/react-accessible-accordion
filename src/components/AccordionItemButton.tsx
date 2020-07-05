@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { InjectedButtonAttributes } from '../helpers/AccordionStore';
-import DisplayName from '../helpers/DisplayName';
 import {
     focusFirstSiblingOf,
     focusLastSiblingOf,
@@ -17,19 +16,17 @@ type Props = DivAttributes & {
     toggleExpanded(): void;
 };
 
-const defaultProps = {
-    className: 'accordion__button',
-};
-
-export class AccordionItemButton extends React.PureComponent<Props> {
-    static defaultProps: typeof defaultProps = defaultProps;
-
-    handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
+const AccordionItemButton = ({
+    toggleExpanded,
+    className = 'accordion__button',
+    ...rest
+}: Props) => {
+    const handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
         const keyCode = evt.which.toString();
 
         if (keyCode === keycodes.ENTER || keyCode === keycodes.SPACE) {
             evt.preventDefault();
-            this.props.toggleExpanded();
+            toggleExpanded();
         }
 
         /* The following block is ignored from test coverage because at time
@@ -68,24 +65,21 @@ export class AccordionItemButton extends React.PureComponent<Props> {
         }
     };
 
-    render(): JSX.Element {
-        const { toggleExpanded, ...rest } = this.props;
-
-        if (rest.id) {
-            assertValidHtmlId(rest.id);
-        }
-
-        return (
-            <div
-                {...rest}
-                // tslint:disable-next-line react-a11y-event-has-role
-                onClick={toggleExpanded}
-                onKeyDown={this.handleKeyPress}
-                data-accordion-component="AccordionItemButton"
-            />
-        );
+    if (rest.id) {
+        assertValidHtmlId(rest.id);
     }
-}
+
+    return (
+        <div
+            className={className}
+            {...rest}
+            // tslint:disable-next-line react-a11y-event-has-role
+            onClick={toggleExpanded}
+            onKeyDown={handleKeyPress}
+            data-accordion-component="AccordionItemButton"
+        />
+    );
+};
 
 type WrapperProps = Pick<
     DivAttributes,
@@ -109,7 +103,5 @@ const AccordionItemButtonWrapper: React.SFC<WrapperProps> = (
         }}
     </ItemConsumer>
 );
-
-AccordionItemButtonWrapper.displayName = DisplayName.AccordionItemButton;
 
 export default AccordionItemButtonWrapper;
