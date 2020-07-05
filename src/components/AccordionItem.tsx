@@ -1,5 +1,4 @@
 import * as React from 'react';
-import DisplayName from '../helpers/DisplayName';
 import { DivAttributes } from '../helpers/types';
 import { assertValidHtmlId, nextUuid } from '../helpers/uuid';
 import {
@@ -10,24 +9,20 @@ import {
 } from './ItemContext';
 
 type Props = DivAttributes & {
+    className?: string;
     uuid?: UUID;
     activeClassName?: string;
     dangerouslySetExpanded?: boolean;
 };
 
-const defaultProps = {
-    className: 'accordion__item',
-};
-
-export default class AccordionItem extends React.Component<Props> {
-    static defaultProps: typeof defaultProps = defaultProps;
-
-    static displayName: DisplayName.AccordionItem = DisplayName.AccordionItem;
-
-    instanceUuid: UUID = nextUuid();
-
-    renderChildren = (itemContext: ItemContext): JSX.Element => {
-        const { uuid, className, activeClassName, ...rest } = this.props;
+const AccordionItem = ({
+    uuid = nextUuid(),
+    className = 'accordion__item',
+    activeClassName,
+    dangerouslySetExpanded,
+    ...rest
+}: Props) => {
+    const renderChildren = (itemContext: ItemContext): JSX.Element => {
         const { expanded } = itemContext;
         const cx = expanded && activeClassName ? activeClassName : className;
 
@@ -40,24 +35,18 @@ export default class AccordionItem extends React.Component<Props> {
         );
     };
 
-    render(): JSX.Element {
-        const {
-            uuid = this.instanceUuid,
-            dangerouslySetExpanded,
-            ...rest
-        } = this.props;
-
-        if (rest.id) {
-            assertValidHtmlId(rest.id);
-        }
-
-        return (
-            <ItemProvider
-                uuid={uuid}
-                dangerouslySetExpanded={dangerouslySetExpanded}
-            >
-                <ItemConsumer>{this.renderChildren}</ItemConsumer>
-            </ItemProvider>
-        );
+    if (rest.id) {
+        assertValidHtmlId(rest.id);
     }
-}
+
+    return (
+        <ItemProvider
+            uuid={uuid}
+            dangerouslySetExpanded={dangerouslySetExpanded}
+        >
+            <ItemConsumer>{renderChildren}</ItemConsumer>
+        </ItemProvider>
+    );
+};
+
+export default AccordionItem;
