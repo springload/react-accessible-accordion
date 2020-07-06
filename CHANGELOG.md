@@ -3,6 +3,12 @@
 > All notable changes to this project are documented in this file. This project
 > adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [[v3.3.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v3.3.0)
+
+### Changed
+
+-   Bundle size reduction
+
 ## [[v3.2.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v3.2.0)
 
 ### Added
