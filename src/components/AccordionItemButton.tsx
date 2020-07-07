@@ -73,7 +73,8 @@ const AccordionItemButton = ({
         <div
             className={className}
             {...rest}
-            // tslint:disable-next-line react-a11y-event-has-role
+            role="button"
+            tabIndex={0}
             onClick={toggleExpanded}
             onKeyDown={handleKeyPress}
             data-accordion-component="AccordionItemButton"

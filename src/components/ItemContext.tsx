@@ -69,8 +69,9 @@ class Provider extends React.Component<ProviderProps> {
                     headingAttributes,
                     buttonAttributes,
                 }}
-                children={this.props.children}
-            />
+            >
+                {this.props.children}
+            </Context.Provider>
         );
     };
 
