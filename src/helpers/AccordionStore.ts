@@ -125,7 +125,7 @@ export default class AccordionStore {
         `accordion__panel-${uuid}`;
 
     private readonly getButtonId = (uuid: UUID): string =>
-        `accordion__heading-${uuid}`;
+        `${uuid}`;
 
     private readonly augment = (args: {
         expanded?: UUID[];
