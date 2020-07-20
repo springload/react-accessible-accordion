@@ -13,6 +13,19 @@ import {
     AccordionItemState,
 } from '../../src';
 
+import Code from './components/Code';
+
+// tslint:disable-next-line no-import-side-effect ordered-imports
+import {
+    ExampleDefault,
+    ExampleAllowMultipleExpanded,
+    ExampleAllowZeroExpanded,
+    ExamplePreExpanded,
+    ExampleOnChange,
+    ExampleAccordionItemState,
+    ExampleDangerouslySetExpanded,
+} from './code-examples';
+
 // tslint:disable-next-line no-import-side-effect
 import './main.css';
 
@@ -28,8 +41,8 @@ const App = (): JSX.Element => (
             React Component for creating an 'Accordion' that adheres to the{' '}
             <a
                 href="https://www.w3.org/TR/wai-aria-practices-1.1/#accordion"
-                target="_BLANK"
-                rel="noreferrer, nofollow"
+                target="_blank"
+                rel="noreferrer nofollow"
             >
                 WAI ARIA spec
             </a>{' '}
@@ -56,6 +69,8 @@ const App = (): JSX.Element => (
             ))}
         </Accordion>
 
+        <Code code={ExampleDefault} />
+
         <h2 className="u-margin-top">Expanding multiple items at once</h2>
 
         <p>
@@ -76,6 +91,8 @@ const App = (): JSX.Element => (
                 </AccordionItem>
             ))}
         </Accordion>
+
+        <Code code={ExampleAllowMultipleExpanded} />
 
         <h2 className="u-margin-top">Collapsing the last expanded item</h2>
 
@@ -98,6 +115,8 @@ const App = (): JSX.Element => (
             ))}
         </Accordion>
 
+        <Code code={ExampleAllowZeroExpanded} />
+
         <h2 className="u-margin-top">Pre-expanded items</h2>
 
         <p>
@@ -114,8 +133,8 @@ const App = (): JSX.Element => (
         <Accordion preExpanded={[placeholders[0].uuid]}>
             {placeholders.map((placeholder: Placeholder) => (
                 <AccordionItem
-                    key={placeholder.heading}
-                    uuid={placeholder.uuid}
+                key={placeholder.heading}
+                uuid={placeholder.uuid}
                 >
                     <AccordionItemHeading>
                         <AccordionItemButton>
@@ -127,6 +146,8 @@ const App = (): JSX.Element => (
             ))}
         </Accordion>
 
+        <Code code={ExamplePreExpanded} />
+        
         <h2 className="u-margin-top">Informative onChange</h2>
 
         <p>
@@ -149,8 +170,8 @@ const App = (): JSX.Element => (
         >
             {placeholders.map((placeholder: Placeholder) => (
                 <AccordionItem
-                    key={placeholder.heading}
-                    uuid={placeholder.uuid}
+                key={placeholder.heading}
+                uuid={placeholder.uuid}
                 >
                     <AccordionItemHeading>
                         <AccordionItemButton>
@@ -161,6 +182,8 @@ const App = (): JSX.Element => (
                 </AccordionItem>
             ))}
         </Accordion>
+    
+        <Code code={ExampleOnChange} />
 
         <h2 className="u-margin-top">Accessing Item State</h2>
 
@@ -194,17 +217,17 @@ const App = (): JSX.Element => (
             ))}
         </Accordion>
 
+        <Code code={ExampleAccordionItemState} />
+
         <h2 className="u-margin-top">Manual state</h2>
 
         <p>
-            When you use the <strong>onChange</strong> prop, you can get
-            feedback about which items are expanded.
+            When you use the <strong>dangerouslySetExpanded</strong> prop, you can 
+            manually override whether an <strong>AccordionItem</strong> is expanded.
         </p>
 
         <p>
-            In this example, we are simply logging the uuids of the expanded
-            items to the console. Have a click around then check your console to
-            see this in action.
+            <strong>Warning: This can impact accessibility negatively.</strong>
         </p>
 
         <Accordion>
@@ -230,6 +253,8 @@ const App = (): JSX.Element => (
                 );
             })}
         </Accordion>
+
+        <Code code={ExampleDangerouslySetExpanded} />
     </>
 );
 
