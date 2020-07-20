@@ -133,8 +133,8 @@ const App = (): JSX.Element => (
         <Accordion preExpanded={[placeholders[0].uuid]}>
             {placeholders.map((placeholder: Placeholder) => (
                 <AccordionItem
-                key={placeholder.heading}
-                uuid={placeholder.uuid}
+                    key={placeholder.heading}
+                    uuid={placeholder.uuid}
                 >
                     <AccordionItemHeading>
                         <AccordionItemButton>
@@ -147,7 +147,7 @@ const App = (): JSX.Element => (
         </Accordion>
 
         <Code code={ExamplePreExpanded} />
-        
+
         <h2 className="u-margin-top">Informative onChange</h2>
 
         <p>
@@ -170,8 +170,8 @@ const App = (): JSX.Element => (
         >
             {placeholders.map((placeholder: Placeholder) => (
                 <AccordionItem
-                key={placeholder.heading}
-                uuid={placeholder.uuid}
+                    key={placeholder.heading}
+                    uuid={placeholder.uuid}
                 >
                     <AccordionItemHeading>
                         <AccordionItemButton>
@@ -182,7 +182,7 @@ const App = (): JSX.Element => (
                 </AccordionItem>
             ))}
         </Accordion>
-    
+
         <Code code={ExampleOnChange} />
 
         <h2 className="u-margin-top">Accessing Item State</h2>
@@ -222,8 +222,9 @@ const App = (): JSX.Element => (
         <h2 className="u-margin-top">Manual state</h2>
 
         <p>
-            When you use the <strong>dangerouslySetExpanded</strong> prop, you can 
-            manually override whether an <strong>AccordionItem</strong> is expanded.
+            When you use the <strong>dangerouslySetExpanded</strong> prop, you
+            can manually override whether an <strong>AccordionItem</strong> is
+            expanded.
         </p>
 
         <p>
@@ -238,7 +239,6 @@ const App = (): JSX.Element => (
                     <AccordionItem
                         key={placeholder.heading}
                         uuid={placeholder.uuid}
-                        // Warning: This can impact accessibility negatively
                         dangerouslySetExpanded={isExpanded}
                     >
                         <AccordionItemHeading>

@@ -86,10 +86,10 @@ describe('WAI ARIA Spec', () => {
                 function evaluateIsExpanded(buttonHandle) {
                     return page
                         .evaluate(
-                            heading => heading.getAttribute('aria-expanded'),
+                            (heading) => heading.getAttribute('aria-expanded'),
                             buttonHandle,
                         )
-                        .then(ariaExpanded => ariaExpanded === 'true');
+                        .then((ariaExpanded) => ariaExpanded === 'true');
                 }
 
                 // ENTER key
@@ -132,7 +132,7 @@ describe('WAI ARIA Spec', () => {
                 await firstButtonHandle.focus();
                 await page.keyboard.press('Tab');
                 const secondIsFocussed = await page.evaluate(
-                    button => document.activeElement === button,
+                    (button) => document.activeElement === button,
                     secondButtonHandle,
                 );
                 expect(secondIsFocussed).toEqual(true);
@@ -150,7 +150,7 @@ describe('WAI ARIA Spec', () => {
                 await page.keyboard.press('Tab');
                 await page.keyboard.up('Shift');
                 const firstIsFocussed = await page.evaluate(
-                    button => document.activeElement === button,
+                    (button) => document.activeElement === button,
                     firstButtonHandle,
                 );
                 expect(firstIsFocussed).toEqual(true);
@@ -165,7 +165,7 @@ describe('WAI ARIA Spec', () => {
                 await firstButtonHandle.focus();
                 await page.keyboard.press('ArrowDown');
                 const secondIsFocussed = await page.evaluate(
-                    button => document.activeElement === button,
+                    (button) => document.activeElement === button,
                     secondButtonHandle,
                 );
                 expect(secondIsFocussed).toEqual(true);
@@ -185,7 +185,7 @@ describe('WAI ARIA Spec', () => {
                 await secondButtonHandle.focus();
                 await page.keyboard.press('ArrowUp');
                 const firstIsFocussed = await page.evaluate(
-                    button => document.activeElement === button,
+                    (button) => document.activeElement === button,
                     firstButtonHandle,
                 );
                 expect(firstIsFocussed).toEqual(true);
@@ -209,7 +209,7 @@ describe('WAI ARIA Spec', () => {
                 await thirdButtonHandle.focus();
                 await page.keyboard.press('Home');
                 const firstIsFocussed = await page.evaluate(
-                    button => document.activeElement === button,
+                    (button) => document.activeElement === button,
                     firstButtonHandle,
                 );
                 expect(firstIsFocussed).toEqual(true);
@@ -228,7 +228,7 @@ describe('WAI ARIA Spec', () => {
                 await firstButtonHandle.focus();
                 await page.keyboard.press('End');
                 const thirdIsFocussed = await page.evaluate(
-                    button => document.activeElement === button,
+                    (button) => document.activeElement === button,
                     thirdButtonHandle,
                 );
                 expect(thirdIsFocussed).toEqual(true);
@@ -246,7 +246,7 @@ describe('WAI ARIA Spec', () => {
             for (const buttonHandle of buttonsHandles) {
                 expect(
                     await page.evaluate(
-                        button => button.getAttribute('role'),
+                        (button) => button.getAttribute('role'),
                         buttonHandle,
                     ),
                 ).toBe('button');
@@ -261,14 +261,14 @@ describe('WAI ARIA Spec', () => {
             for (const buttonHandle of buttonsHandles) {
                 expect(
                     await page.evaluate(
-                        button => button.parentElement.getAttribute('role'),
+                        (button) => button.parentElement.getAttribute('role'),
                         buttonHandle,
                     ),
                 ).toBe('heading');
 
                 expect(
                     await page.evaluate(
-                        button =>
+                        (button) =>
                             button.parentElement.getAttribute('aria-level'),
                         buttonHandle,
                     ),
@@ -292,14 +292,14 @@ describe('WAI ARIA Spec', () => {
             for (const handle of headingsHandles) {
                 expect(
                     await page.evaluate(
-                        heading => heading.childNodes.length === 1,
+                        (heading) => heading.childNodes.length === 1,
                         handle,
                     ),
                 ).toEqual(true);
 
                 expect(
                     await page.evaluate(
-                        heading =>
+                        (heading) =>
                             heading.firstChild.getAttribute(
                                 'data-accordion-component',
                             ) === 'AccordionItemButton',
@@ -319,7 +319,7 @@ describe('WAI ARIA Spec', () => {
                 // Before expanding
                 expect(
                     await page.evaluate(
-                        button => button.getAttribute('aria-expanded'),
+                        (button) => button.getAttribute('aria-expanded'),
                         handle,
                     ),
                 ).toEqual('false');
@@ -330,7 +330,7 @@ describe('WAI ARIA Spec', () => {
                 // After expanding
                 expect(
                     await page.evaluate(
-                        button => button.getAttribute('aria-expanded'),
+                        (button) => button.getAttribute('aria-expanded'),
                         handle,
                     ),
                 ).toEqual('true');
@@ -351,11 +351,11 @@ describe('WAI ARIA Spec', () => {
                 );
 
                 const buttonAriaControls = await page.evaluate(
-                    button => button.getAttribute('aria-controls'),
+                    (button) => button.getAttribute('aria-controls'),
                     buttonHandle,
                 );
                 const panelId = await page.evaluate(
-                    panel => panel.id,
+                    (panel) => panel.id,
                     panelHandle,
                 );
 
@@ -375,7 +375,7 @@ describe('WAI ARIA Spec', () => {
             await firstButtonHandle.click();
 
             const buttonAriaDisabled = await page.evaluate(
-                button => button.getAttribute('aria-disabled'),
+                (button) => button.getAttribute('aria-disabled'),
                 firstButtonHandle,
             );
 
@@ -397,15 +397,15 @@ describe('WAI ARIA Spec', () => {
                 );
 
                 const buttonId = await page.evaluate(
-                    button => button.id,
+                    (button) => button.id,
                     buttonHandle,
                 );
                 const panelAriaLabelledBy = await page.evaluate(
-                    panel => panel.getAttribute('aria-labelledby'),
+                    (panel) => panel.getAttribute('aria-labelledby'),
                     panelHandle,
                 );
                 const panelRole = await page.evaluate(
-                    panel => panel.getAttribute('role'),
+                    (panel) => panel.getAttribute('role'),
                     panelHandle,
                 );
 
