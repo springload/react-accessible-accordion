@@ -13,6 +13,19 @@ import {
     AccordionItemState,
 } from '../../src';
 
+import Code from './components/Code';
+
+// tslint:disable-next-line no-import-side-effect ordered-imports
+import {
+    ExampleDefault,
+    ExampleAllowMultipleExpanded,
+    ExampleAllowZeroExpanded,
+    ExamplePreExpanded,
+    ExampleOnChange,
+    ExampleAccordionItemState,
+    ExampleDangerouslySetExpanded,
+} from './code-examples';
+
 // tslint:disable-next-line no-import-side-effect
 import './main.css';
 
@@ -25,11 +38,12 @@ const App = (): JSX.Element => (
         <h1>React Accessible Accordion</h1>
 
         <p>
-            React Component for creating an 'Accordion' that adheres to the{' '}
+            React Component for creating an &apos;Accordion&apos; that adheres
+            to the{' '}
             <a
                 href="https://www.w3.org/TR/wai-aria-practices-1.1/#accordion"
-                target="_BLANK"
-                rel="noreferrer, nofollow"
+                target="_blank"
+                rel="noreferrer nofollow"
             >
                 WAI ARIA spec
             </a>{' '}
@@ -56,6 +70,8 @@ const App = (): JSX.Element => (
             ))}
         </Accordion>
 
+        <Code code={ExampleDefault} />
+
         <h2 className="u-margin-top">Expanding multiple items at once</h2>
 
         <p>
@@ -77,6 +93,8 @@ const App = (): JSX.Element => (
             ))}
         </Accordion>
 
+        <Code code={ExampleAllowMultipleExpanded} />
+
         <h2 className="u-margin-top">Collapsing the last expanded item</h2>
 
         <p>
@@ -97,6 +115,8 @@ const App = (): JSX.Element => (
                 </AccordionItem>
             ))}
         </Accordion>
+
+        <Code code={ExampleAllowZeroExpanded} />
 
         <h2 className="u-margin-top">Pre-expanded items</h2>
 
@@ -126,6 +146,8 @@ const App = (): JSX.Element => (
                 </AccordionItem>
             ))}
         </Accordion>
+
+        <Code code={ExamplePreExpanded} />
 
         <h2 className="u-margin-top">Informative onChange</h2>
 
@@ -162,13 +184,15 @@ const App = (): JSX.Element => (
             ))}
         </Accordion>
 
+        <Code code={ExampleOnChange} />
+
         <h2 className="u-margin-top">Accessing Item State</h2>
 
         <p>
-            If you'd like to apply different content or styling based on the{' '}
-            <strong>expanded</strong> or <strong>disabled</strong> state of an
-            item, you might like to use the <strong>AccordionItemState</strong>{' '}
-            render-prop component.
+            If you&apos;d like to apply different content or styling based on
+            the <strong>expanded</strong> or <strong>disabled</strong> state of
+            an item, you might like to use the{' '}
+            <strong>AccordionItemState</strong> render-prop component.
         </p>
 
         <Accordion>
@@ -183,7 +207,9 @@ const App = (): JSX.Element => (
                             <br />
                             <br />
                             <AccordionItemState>
-                                {(state: object): React.ReactNode =>
+                                {(
+                                    state: Record<string, unknown>,
+                                ): React.ReactNode =>
                                     `State: ${JSON.stringify(state)}`
                                 }
                             </AccordionItemState>
@@ -194,17 +220,18 @@ const App = (): JSX.Element => (
             ))}
         </Accordion>
 
+        <Code code={ExampleAccordionItemState} />
+
         <h2 className="u-margin-top">Manual state</h2>
 
         <p>
-            When you use the <strong>onChange</strong> prop, you can get
-            feedback about which items are expanded.
+            When you use the <strong>dangerouslySetExpanded</strong> prop, you
+            can manually override whether an <strong>AccordionItem</strong> is
+            expanded.
         </p>
 
         <p>
-            In this example, we are simply logging the uuids of the expanded
-            items to the console. Have a click around then check your console to
-            see this in action.
+            <strong>Warning: This can impact accessibility negatively.</strong>
         </p>
 
         <Accordion>
@@ -215,7 +242,6 @@ const App = (): JSX.Element => (
                     <AccordionItem
                         key={placeholder.heading}
                         uuid={placeholder.uuid}
-                        // Warning: This can impact accessibility negatively
                         dangerouslySetExpanded={isExpanded}
                     >
                         <AccordionItemHeading>
@@ -230,6 +256,8 @@ const App = (): JSX.Element => (
                 );
             })}
         </Accordion>
+
+        <Code code={ExampleDangerouslySetExpanded} />
     </>
 );
 

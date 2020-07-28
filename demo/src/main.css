@@ -130,6 +130,21 @@ footer {
     }
 }
 
+.code {
+    margin-top: 10px;
+}
+.code__button {
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 0;
+    color: var(--colorPageLinks);
+    text-decoration: underline solid var(--colorGreenShadow);
+}
+.code__button:hover {
+    color: var(--colorGreen);
+}
+
 @media print {
     body {
         padding: 0.4in;

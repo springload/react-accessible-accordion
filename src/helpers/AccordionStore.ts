@@ -96,9 +96,8 @@ export default class AccordionStore {
         };
     };
 
-    public readonly getHeadingAttributes = (
-        uuid: UUID,
-    ): InjectedHeadingAttributes => {
+    public readonly getHeadingAttributes = (): // uuid: UUID,
+    InjectedHeadingAttributes => {
         return {
             role: 'heading',
         };
