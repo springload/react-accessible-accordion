@@ -78,8 +78,9 @@ export class Provider extends React.PureComponent<
         return this.state.getPanelAttributes(key, dangerouslySetExpanded);
     };
 
-    getHeadingAttributes = (key: UUID): InjectedHeadingAttributes => {
-        return this.state.getHeadingAttributes(key);
+    getHeadingAttributes = (): InjectedHeadingAttributes => {
+        // uuid: UUID
+        return this.state.getHeadingAttributes();
     };
 
     getButtonAttributes = (

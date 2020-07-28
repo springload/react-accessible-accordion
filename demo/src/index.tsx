@@ -38,7 +38,8 @@ const App = (): JSX.Element => (
         <h1>React Accessible Accordion</h1>
 
         <p>
-            React Component for creating an 'Accordion' that adheres to the{' '}
+            React Component for creating an &apos;Accordion&apos; that adheres
+            to the{' '}
             <a
                 href="https://www.w3.org/TR/wai-aria-practices-1.1/#accordion"
                 target="_blank"
@@ -188,10 +189,10 @@ const App = (): JSX.Element => (
         <h2 className="u-margin-top">Accessing Item State</h2>
 
         <p>
-            If you'd like to apply different content or styling based on the{' '}
-            <strong>expanded</strong> or <strong>disabled</strong> state of an
-            item, you might like to use the <strong>AccordionItemState</strong>{' '}
-            render-prop component.
+            If you&apos;d like to apply different content or styling based on
+            the <strong>expanded</strong> or <strong>disabled</strong> state of
+            an item, you might like to use the{' '}
+            <strong>AccordionItemState</strong> render-prop component.
         </p>
 
         <Accordion>
@@ -206,7 +207,9 @@ const App = (): JSX.Element => (
                             <br />
                             <br />
                             <AccordionItemState>
-                                {(state: object): React.ReactNode =>
+                                {(
+                                    state: Record<string, unknown>,
+                                ): React.ReactNode =>
                                     `State: ${JSON.stringify(state)}`
                                 }
                             </AccordionItemState>

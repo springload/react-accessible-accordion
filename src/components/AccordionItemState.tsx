@@ -8,7 +8,7 @@ type Props = Pick<DivAttributes, Exclude<keyof DivAttributes, 'children'>> & {
     ): React.ReactNode;
 };
 
-const AccordionItemState = ({ children }: Props) => {
+const AccordionItemState = ({ children }: Props): JSX.Element => {
     const renderChildren = (itemContext: ItemContext): JSX.Element => {
         const { expanded, disabled } = itemContext;
 

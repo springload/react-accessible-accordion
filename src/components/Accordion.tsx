@@ -21,7 +21,7 @@ const Accordion = ({
     onChange,
     preExpanded,
     ...rest
-}: AccordionProps) => {
+}: AccordionProps): JSX.Element => {
     return (
         <Provider
             preExpanded={preExpanded}

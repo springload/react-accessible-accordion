@@ -21,7 +21,7 @@ const AccordionItem = ({
     activeClassName,
     dangerouslySetExpanded,
     ...rest
-}: Props) => {
+}: Props): JSX.Element => {
     const renderChildren = (itemContext: ItemContext): JSX.Element => {
         const { expanded } = itemContext;
         const cx = expanded && activeClassName ? activeClassName : className;
