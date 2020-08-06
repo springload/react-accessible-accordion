@@ -58,7 +58,7 @@ export default class AccordionItem extends React.Component<Props> {
         if (rest.id) {
             assertValidHtmlId(rest.id);
         }
-        ``;
+
         return (
             <ItemProvider
                 uuid={uuid}
