@@ -37,8 +37,6 @@ export default class AccordionItem extends React.Component<Props> {
         const { expanded } = itemContext;
         const cx = expanded && activeClassName ? activeClassName : className;
 
-        console.log({ rest });
-
         return (
             <div
                 data-accordion-component="AccordionItem"
