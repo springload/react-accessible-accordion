@@ -19,6 +19,7 @@ import Code from './components/Code';
 import {
     ExampleDefault,
     ExampleAllowMultipleExpanded,
+    ExampleAllowMultipleExpandedFalse,
     ExampleAllowZeroExpanded,
     ExamplePreExpanded,
     ExampleOnChange,
@@ -94,6 +95,25 @@ const App = (): JSX.Element => (
         </Accordion>
 
         <Code code={ExampleAllowMultipleExpanded} />
+
+        <h2 className="u-margin-top">
+            Same as above except with allowMultipleExpanded=false
+        </h2>
+
+        <Accordion allowMultipleExpanded={false}>
+            {placeholders.map((placeholder: Placeholder) => (
+                <AccordionItem key={placeholder.heading}>
+                    <AccordionItemHeading>
+                        <AccordionItemButton>
+                            {placeholder.heading}
+                        </AccordionItemButton>
+                    </AccordionItemHeading>
+                    <AccordionItemPanel>{placeholder.panel}</AccordionItemPanel>
+                </AccordionItem>
+            ))}
+        </Accordion>
+
+        <Code code={ExampleAllowMultipleExpandedFalse} />
 
         <h2 className="u-margin-top">Collapsing the last expanded item</h2>
 
