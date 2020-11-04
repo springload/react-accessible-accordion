@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import DisplayName from '../helpers/DisplayName';
 import { DivAttributes } from '../helpers/types';
 import { assertValidHtmlId, nextUuid } from '../helpers/uuid';
@@ -16,12 +17,15 @@ type Props = DivAttributes & {
 };
 
 const AccordionItem = ({
-    uuid = nextUuid(),
+    uuid: customUuid,
     dangerouslySetExpanded,
     className = 'accordion__item',
     activeClassName,
     ...rest
 }: Props): JSX.Element => {
+    const [instanceUuid] = useState(nextUuid());
+    const uuid = customUuid || instanceUuid;
+
     const renderChildren = (itemContext: ItemContext): JSX.Element => {
         const { expanded } = itemContext;
         const cx = expanded && activeClassName ? activeClassName : className;
