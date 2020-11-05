@@ -23,7 +23,7 @@ const AccordionItem = ({
     activeClassName,
     ...rest
 }: Props): JSX.Element => {
-    const [instanceUuid] = useState(nextUuid());
+    const [instanceUuid] = useState<UUID>(nextUuid());
     const uuid = customUuid || instanceUuid;
 
     const renderChildren = (itemContext: ItemContext): JSX.Element => {
