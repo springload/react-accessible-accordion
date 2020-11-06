@@ -181,6 +181,7 @@ describe('focus', () => {
             ) {
                 throw new Error('buttons not found');
             }
+            console.log({thirdButton})
             thirdButton.focus();
             expect(document.activeElement).toBe(thirdButton);
 

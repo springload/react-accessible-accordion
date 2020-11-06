@@ -73,6 +73,10 @@
         {
             "name": "Emilia Zapata",
             "url": "https://github.com/synecdokey"
+        },
+        {
+            "name": "Usha Macdonald",
+            "url": "https://github.com/ushamacdonald"
         }
     ],
     "license": "MIT",
@@ -89,63 +93,53 @@
         "@babel/preset-env": "^7.4.5",
         "@babel/preset-react": "^7.0.0",
         "@babel/preset-typescript": "^7.1.0",
-        "@testing-library/react": "^8.0.4",
-        "@types/jest": "^24.0.15",
+        "@testing-library/react": "^11.1.1",
+        "@types/jest": "^26.0.15",
         "@types/react": "^16.8.22",
         "@types/react-dom": "^16.8.4",
-        "@types/react-syntax-highlighter": "^11.0.4",
+        "@types/react-syntax-highlighter": "^13.5.0",
         "@types/react-test-renderer": "^16.8.2",
-        "@types/uuid": "^3.4.4",
-        "@typescript-eslint/eslint-plugin": "^3.6.0",
-        "@typescript-eslint/parser": "^3.6.0",
+        "@types/uuid": "^8.3.0",
+        "@types/webpack": "^4.41.24",
+        "@typescript-eslint/eslint-plugin": "^4.6.1",
+        "@typescript-eslint/parser": "^4.6.1",
         "babel-core": "^7.0.0-bridge.0",
-        "babel-jest": "^24.8.0",
+        "babel-jest": "^26.6.3",
         "babel-loader": "^8.0.6",
+        "core-js": "2",
         "coveralls": "^3.0.3",
-        "css-loader": "^3.0.0",
+        "css-loader": "^5.0.1",
         "eslint": "^7.4.0",
         "eslint-plugin-jsx-a11y": "^6.3.1",
         "eslint-plugin-react": "^7.20.3",
-        "file-loader": "^4.0.0",
-        "gh-pages": "^2.0.1",
-        "html-webpack-plugin": "^3.2.0",
-        "husky": "^2.4.1",
-        "jest": "^24.5.0",
-        "lint-staged": "^8.1.5",
-        "mini-css-extract-plugin": "^0.7.0",
+        "file-loader": "^6.2.0",
+        "gh-pages": "^3.1.0",
+        "html-webpack-plugin": "^4.5.0",
+        "husky": "^4.3.0",
+        "jest": "^26.6.3",
+        "lint-staged": "^10.5.1",
+        "mini-css-extract-plugin": "^1.2.1",
         "prettier": "^2.0.5",
-        "puppeteer": "2.0.0",
-        "react": "16.8.0",
-        "react-dom": "16.8.0",
-        "react-syntax-highlighter": "^12.2.1",
-        "react-test-renderer": "^16.8.6",
-        "rimraf": "^2.6.3",
-        "rollup": "^1.7.4",
+        "puppeteer": "5.4.1",
+        "react": "17.0.1",
+        "react-dom": "17.0.1",
+        "react-syntax-highlighter": "^15.3.0",
+        "react-test-renderer": "^17.0.1",
+        "rimraf": "^3.0.2",
+        "rollup": "^2.33.1",
         "rollup-plugin-babel": "^4.2.0",
         "rollup-plugin-commonjs": "^10.0.0",
         "rollup-plugin-node-resolve": "^5.1.0",
         "rollup-plugin-replace": "^2.1.1",
-        "style-loader": "^0.23.1",
-        "typescript": "^3.9.5",
-        "uuid": "^3.3.2",
-        "webpack": "^4.29.6",
-        "webpack-cli": "^3.3.0",
+        "style-loader": "^2.0.0",
+        "typescript": "^4.0.5",
+        "uuid": "^8.3.1",
+        "webpack": "^4.41.24",
+        "webpack-cli": "^4.2.0",
         "webpack-dev-server": "^3.2.1"
     },
     "peerDependencies": {
         "react": "^16.3.2",
         "react-dom": "^16.3.3"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged && yarn typecheck"
-        }
-    },
-    "lint-staged": {
-        "linters": {
-            "*.{ts,tsx}": [
-                "yarn lint"
-            ]
-        }
     }
 }
