@@ -37,14 +37,19 @@ export type ItemContext = {
 
 const Context = React.createContext(null as ItemContext | null);
 
-class Provider extends React.Component<ProviderProps> {
-    toggleExpanded = (): void => {
-        this.props.accordionContext.toggleExpanded(this.props.uuid);
+const Provider = ({
+    children,
+    uuid,
+    accordionContext,
+    dangerouslySetExpanded,
+}: ProviderProps): JSX.Element => {
+    const toggleExpanded = (): void => {
+        accordionContext.toggleExpanded(uuid);
     };
 
-    renderChildren = (accordionContext: AccordionContext): JSX.Element => {
-        const { uuid, dangerouslySetExpanded } = this.props;
-
+    const renderChildren = (
+        accordionContext: AccordionContext,
+    ): JSX.Element => {
         const expanded =
             dangerouslySetExpanded ?? accordionContext.isItemExpanded(uuid);
         const disabled = accordionContext.isItemDisabled(uuid);
@@ -64,25 +69,21 @@ class Provider extends React.Component<ProviderProps> {
                     uuid,
                     expanded,
                     disabled,
-                    toggleExpanded: this.toggleExpanded,
+                    toggleExpanded: toggleExpanded,
                     panelAttributes,
                     headingAttributes,
                     buttonAttributes,
                 }}
             >
-                {this.props.children}
+                {children}
             </Context.Provider>
         );
     };
 
-    render(): JSX.Element {
-        return (
-            <AccordionContextConsumer>
-                {this.renderChildren}
-            </AccordionContextConsumer>
-        );
-    }
-}
+    return (
+        <AccordionContextConsumer>{renderChildren}</AccordionContextConsumer>
+    );
+};
 
 const ProviderWrapper: React.SFC<ProviderWrapperProps> = (
     props: ProviderWrapperProps,
@@ -100,12 +101,10 @@ type ConsumerProps = {
     children(container: ItemContext): React.ReactNode;
 };
 
-export class Consumer extends React.PureComponent<ConsumerProps> {
-    renderChildren = (container: ItemContext | null): React.ReactNode => {
-        return container ? this.props.children(container) : null;
+export const Consumer = ({ children }: ConsumerProps): JSX.Element => {
+    const renderChildren = (container: ItemContext | null): React.ReactNode => {
+        return container ? children(container) : null;
     };
 
-    render(): JSX.Element {
-        return <Context.Consumer>{this.renderChildren}</Context.Consumer>;
-    }
-}
+    return <Context.Consumer>{renderChildren}</Context.Consumer>;
+};

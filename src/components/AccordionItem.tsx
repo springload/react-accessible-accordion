@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import DisplayName from '../helpers/DisplayName';
 import { DivAttributes } from '../helpers/types';
 import { assertValidHtmlId, nextUuid } from '../helpers/uuid';
@@ -15,25 +16,17 @@ type Props = DivAttributes & {
     dangerouslySetExpanded?: boolean;
 };
 
-const defaultProps = {
-    className: 'accordion__item',
-};
+const AccordionItem = ({
+    uuid: customUuid,
+    dangerouslySetExpanded,
+    className = 'accordion__item',
+    activeClassName,
+    ...rest
+}: Props): JSX.Element => {
+    const [instanceUuid] = useState<UUID>(nextUuid());
+    const uuid = customUuid || instanceUuid;
 
-export default class AccordionItem extends React.Component<Props> {
-    static defaultProps: typeof defaultProps = defaultProps;
-
-    static displayName: DisplayName.AccordionItem = DisplayName.AccordionItem;
-
-    instanceUuid: UUID = nextUuid();
-
-    renderChildren = (itemContext: ItemContext): JSX.Element => {
-        const {
-            uuid,
-            className,
-            activeClassName,
-            dangerouslySetExpanded,
-            ...rest
-        } = this.props;
+    const renderChildren = (itemContext: ItemContext): JSX.Element => {
         const { expanded } = itemContext;
         const cx = expanded && activeClassName ? activeClassName : className;
 
@@ -46,26 +39,20 @@ export default class AccordionItem extends React.Component<Props> {
         );
     };
 
-    render(): JSX.Element {
-        const {
-            uuid = this.instanceUuid,
-            dangerouslySetExpanded,
-            ...rest
-        } = this.props;
-
-        assertValidHtmlId(uuid);
-
-        if (rest.id) {
-            assertValidHtmlId(rest.id);
-        }
-
-        return (
-            <ItemProvider
-                uuid={uuid}
-                dangerouslySetExpanded={dangerouslySetExpanded}
-            >
-                <ItemConsumer>{this.renderChildren}</ItemConsumer>
-            </ItemProvider>
-        );
+    assertValidHtmlId(uuid);
+    if (rest.id) {
+        assertValidHtmlId(rest.id);
     }
-}
+    return (
+        <ItemProvider
+            uuid={uuid}
+            dangerouslySetExpanded={dangerouslySetExpanded}
+        >
+            <ItemConsumer>{renderChildren}</ItemConsumer>
+        </ItemProvider>
+    );
+};
+
+AccordionItem.displayName = DisplayName.AccordionItem;
+
+export default AccordionItem;
