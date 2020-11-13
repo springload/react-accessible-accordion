@@ -7,6 +7,7 @@ const keycodes = {
     RIGHT: 'ArrowRight',
     SPACE: 'Space',
     UP: 'ArrowUp',
+    ESCAPE:'Escape'||'Esc' // ie11 uses Esc instead of Escape.
 };
 
 export default keycodes;
