@@ -22,7 +22,7 @@ const AccordionItemButton = ({
     ...rest
 }: Props) => {
     const handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
-        const keyCode = evt.which.toString();
+        const keyCode = evt.key;
 
         if (keyCode === keycodes.ENTER || keyCode === keycodes.SPACE) {
             evt.preventDefault();
