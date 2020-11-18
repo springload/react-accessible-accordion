@@ -7,6 +7,6 @@ const keycodes = {
     RIGHT: 'ArrowRight',
     SPACE: 'Space',
     UP: 'ArrowUp'
-}
+};
 
 export default keycodes;
