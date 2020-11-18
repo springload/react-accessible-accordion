@@ -24,7 +24,11 @@ const AccordionItemButton = ({
     const handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
         const keyCode = evt.key;
 
-        if (keyCode === keycodes.ENTER || keyCode === keycodes.SPACE) {
+        if (
+            keyCode === keycodes.ENTER ||
+            keyCode === keycodes.SPACE ||
+            keyCode === keycodes.SPACE_DEPCRICATED
+        ) {
             evt.preventDefault();
             toggleExpanded();
         }
