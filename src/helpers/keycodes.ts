@@ -1,12 +1,13 @@
 const keycodes = {
-    DOWN: 'Down',
     END: 'End',
     ENTER: 'Enter',
     HOME: 'Home',
+    SPACE: ' ',
+    SPACE_DEPRECATED: 'Spacebar',
+    UP: 'ArrowUp',
+    DOWN: 'ArrowDown',
     LEFT: 'ArrowLeft',
     RIGHT: 'ArrowRight',
-    SPACE: 'Space',
-    UP: 'ArrowUp'
 };
 
 export default keycodes;
