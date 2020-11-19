@@ -27,7 +27,7 @@ const AccordionItemButton = ({
         if (
             keyCode === keycodes.ENTER ||
             keyCode === keycodes.SPACE ||
-            keyCode === keycodes.SPACE_DEPCRICATED
+            keyCode === keycodes.SPACE_DEPRECATED
         ) {
             evt.preventDefault();
             toggleExpanded();
