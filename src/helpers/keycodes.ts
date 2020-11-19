@@ -3,7 +3,7 @@ const keycodes = {
     ENTER: 'Enter',
     HOME: 'Home',
     SPACE: ' ',
-    SPACE_DEPCRICATED: 'Spacebar',
+    SPACE_DEPRECATED: 'Spacebar',
     UP: 'ArrowUp',
     DOWN: 'ArrowDown',
     LEFT: 'ArrowLeft',
