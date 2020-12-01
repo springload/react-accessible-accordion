@@ -121,7 +121,7 @@ Class(es) to apply to element.
 
 Recommended for use with `onChange`. Will be auto-generated if not provided.
 
-#### dangerouslySetExpanding: `boolean` [*optional*]
+#### dangerouslySetExpanded: `boolean` [*optional*]
 
 Enables external control of the expansion.
 
