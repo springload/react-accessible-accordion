@@ -222,22 +222,11 @@ have collapsible items but require bespoke interactive mechanisms in order to
 expand, collapse and 'disable' them. This includes (but is not limited to)
 multi-step forms, like those seen in many cart/checkout flows, which we believe
 require (other) complex markup in order to be considered 'accessible'.
-
-If you believe that you have a valid use-case for 'disabled' items, or items
-which require manual 'expanded' state-management, then please
-[let us know](https://github.com/springload/react-accessible-accordion/issues/new) -
-we're always open for critical (but polite) feedback. Otherwise, we don't plan
-on implementing this functionality in the near future.
+This also includes disclosure widgets.
 
 ### How do I disable an item?
 
 See "Which design patterns does this component NOT aim to solve?".
-
-### How do I manually control the expanded state of an item?
-
-See "Which design patterns does this component NOT aim to solve?". You may use
-the 'preExpanded' prop to set the initial expanded state, but it may not be
-controlled manually thereafter.
 
 ## Browser Support
 
