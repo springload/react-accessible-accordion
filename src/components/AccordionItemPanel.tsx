@@ -9,7 +9,7 @@ const AccordionItemPanel = ({
     className = 'accordion__panel',
     id,
     ...rest
-}: Props) => {
+}: Props): JSX.Element => {
     const renderChildren = ({ panelAttributes }: ItemContext): JSX.Element => {
         if (id) {
             assertValidHtmlId(id);
