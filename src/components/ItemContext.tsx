@@ -11,7 +11,7 @@ import {
     Consumer as AccordionContextConsumer,
 } from './AccordionContext';
 
-export type UUID = string;
+export type UUID = string | number;
 
 type ProviderProps = {
     children?: React.ReactNode;

@@ -39,7 +39,7 @@ const AccordionItem = ({
         );
     };
 
-    assertValidHtmlId(uuid);
+    assertValidHtmlId(uuid.toString());
     if (rest.id) {
         assertValidHtmlId(rest.id);
     }
