@@ -1,7 +1,8 @@
-import { cleanup, render } from '@testing-library/react';
+import { cleanup, render, fireEvent } from '@testing-library/react';
 import * as React from 'react';
 import { default as Accordion } from './Accordion';
 import AccordionItem from './AccordionItem';
+import AccordionItemButton from './AccordionItemButton';
 
 enum UUIDS {
     FOO = 'FOO',
@@ -72,6 +73,31 @@ describe('AccordionItem', () => {
                 </Accordion>,
             );
             expect(getByText('Hello World')).toBeTruthy();
+        });
+    });
+
+    describe('uuid prop', () => {
+        it('keeps the uuid as 0 even though its falsy', () => {
+            const testId = 'el-with-zero-uuid';
+            const zero = 0;
+            let selected: (string | number)[] = [];
+            const { getByTestId } = render(
+                <Accordion
+                    onChange={(latestSelected) => {
+                        selected = latestSelected;
+                    }}
+                >
+                    <AccordionItem uuid={zero}>
+                        <AccordionItemButton data-testid={testId}>
+                            Click me
+                        </AccordionItemButton>
+                    </AccordionItem>
+                </Accordion>,
+            );
+
+            fireEvent.click(getByTestId(testId));
+
+            expect(selected).toEqual([zero]);
         });
     });
 });

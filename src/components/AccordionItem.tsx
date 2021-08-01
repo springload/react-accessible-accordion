@@ -24,7 +24,7 @@ const AccordionItem = ({
     ...rest
 }: Props): JSX.Element => {
     const [instanceUuid] = useState<UUID>(nextUuid());
-    const uuid = customUuid || instanceUuid;
+    const uuid = customUuid ?? instanceUuid;
 
     const renderChildren = (itemContext: ItemContext): JSX.Element => {
         const { expanded } = itemContext;
@@ -39,7 +39,7 @@ const AccordionItem = ({
         );
     };
 
-    assertValidHtmlId(uuid);
+    assertValidHtmlId(uuid.toString());
     if (rest.id) {
         assertValidHtmlId(rest.id);
     }
