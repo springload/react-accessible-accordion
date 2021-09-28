@@ -155,6 +155,10 @@ Class(es) to apply to the 'button' element.
 
 Class(es) to apply to element.
 
+#### region: `boolean`
+
+Make the element have a region role.
+
 ---
 
 ### AccordionItemState

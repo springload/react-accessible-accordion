@@ -66,4 +66,49 @@ describe('AccordionItem', () => {
             expect(getByText('Hello World')).toBeTruthy();
         });
     });
+
+    describe('role region', () => {
+        it('enables aria-labelledby', () => {
+            const { getByRole } = render(
+                <Accordion>
+                    <AccordionItem>
+                        <AccordionItemPanel region>
+                            Hello World
+                        </AccordionItemPanel>
+                    </AccordionItem>
+                </Accordion>,
+            );
+            expect(
+                getByRole('region').getAttribute('aria-labelledby'),
+            ).toBeTruthy();
+        });
+
+        it('disables aria-labelledby when absent', () => {
+            const { getByText, queryByRole } = render(
+                <Accordion>
+                    <AccordionItem>
+                        <AccordionItemPanel>Hello World</AccordionItemPanel>
+                    </AccordionItem>
+                </Accordion>,
+            );
+            expect(queryByRole('region')).toBeNull();
+            expect(
+                getByText('Hello World').getAttribute('aria-labelledby'),
+            ).toBeFalsy();
+        });
+
+        it('disables aria-labelledby when false', () => {
+            const { getByText, queryByRole } = render(
+                <Accordion>
+                    <AccordionItem>
+                        <AccordionItemPanel region={false}>Hello World</AccordionItemPanel>
+                    </AccordionItem>
+                </Accordion>,
+            );
+            expect(queryByRole('region')).toBeNull();
+            expect(
+                getByText('Hello World').getAttribute('aria-labelledby'),
+            ).toBeFalsy();
+        });
+    });
 });

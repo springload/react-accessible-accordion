@@ -3,10 +3,11 @@ import { DivAttributes } from '../helpers/types';
 import { assertValidHtmlId } from '../helpers/uuid';
 import { Consumer as ItemConsumer, ItemContext } from './ItemContext';
 
-type Props = DivAttributes & { className?: string };
+type Props = DivAttributes & { region?: boolean; className?: string };
 
 const AccordionItemPanel = ({
     className = 'accordion__panel',
+    region,
     id,
     ...rest
 }: Props): JSX.Element => {
@@ -15,12 +16,19 @@ const AccordionItemPanel = ({
             assertValidHtmlId(id);
         }
 
+        const attrs = {
+            ...panelAttributes,
+            'aria-labelledby': region ? panelAttributes['aria-labelledby'] : undefined,
+        };
+        console.log(region)
+
         return (
             <div
                 data-accordion-component="AccordionItemPanel"
                 className={className}
                 {...rest}
-                {...panelAttributes}
+                {...attrs}
+                role={region ? 'region': undefined}
             />
         );
     };
