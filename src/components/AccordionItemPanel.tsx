@@ -20,7 +20,6 @@ const AccordionItemPanel = ({
             ...panelAttributes,
             'aria-labelledby': region ? panelAttributes['aria-labelledby'] : undefined,
         };
-        console.log(region)
 
         return (
             <div
