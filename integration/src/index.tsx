@@ -15,7 +15,7 @@ ReactDOM.render(
                 <AccordionItemHeading>
                     <AccordionItemButton>Heading One</AccordionItemButton>
                 </AccordionItemHeading>
-                <AccordionItemPanel>
+                <AccordionItemPanel region>
                     Sunt in reprehenderit cillum ex proident qui culpa fugiat
                     pariatur aliqua nostrud consequat consequat enim quis sit
                     consectetur ad aute ea ex eiusmod id esse culpa et pariatur
@@ -26,7 +26,7 @@ ReactDOM.render(
                 <AccordionItemHeading>
                     <AccordionItemButton>Heading Two</AccordionItemButton>
                 </AccordionItemHeading>
-                <AccordionItemPanel>
+                <AccordionItemPanel region>
                     Velit tempor dolore commodo voluptate id do nulla do ut
                     proident cillum ad cillum voluptate deserunt fugiat ut sed
                     cupidatat ut consectetur consequat incididunt sed in culpa
@@ -37,7 +37,7 @@ ReactDOM.render(
                 <AccordionItemHeading>
                     <AccordionItemButton>Heading Three</AccordionItemButton>
                 </AccordionItemHeading>
-                <AccordionItemPanel>
+                <AccordionItemPanel region>
                     Lorem ipsum esse occaecat voluptate duis incididunt amet
                     eiusmod sunt commodo sunt enim anim ea culpa ut tempor
                     dolore fugiat exercitation aliquip commodo dolore elit esse
