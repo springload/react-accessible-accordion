@@ -2,16 +2,16 @@ import * as React from 'react';
 import { useState } from 'react';
 import DisplayName from '../helpers/DisplayName';
 import { DivAttributes } from '../helpers/types';
-import { assertValidHtmlId, nextUuid } from '../helpers/uuid';
+import { assertValidHtmlId, useNextId } from '../helpers/id';
 import {
     Consumer as ItemConsumer,
     ItemContext,
     Provider as ItemProvider,
-    UUID,
+    ID,
 } from './ItemContext';
 
 type Props = DivAttributes & {
-    uuid?: UUID;
+    uuid?: ID;
     activeClassName?: string;
     dangerouslySetExpanded?: boolean;
 };
@@ -23,7 +23,7 @@ const AccordionItem = ({
     activeClassName,
     ...rest
 }: Props): JSX.Element => {
-    const [instanceUuid] = useState<UUID>(nextUuid());
+    const [instanceUuid] = useState<ID>(useNextId());
     const uuid = customUuid ?? instanceUuid;
 
     const renderChildren = (itemContext: ItemContext): JSX.Element => {

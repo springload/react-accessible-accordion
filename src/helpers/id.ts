@@ -1,19 +1,24 @@
-import { UUID } from '../components/ItemContext';
+// @ts-ignore
+import { useId } from 'react';
+import { ID } from '../components/ItemContext';
 
 const DEFAULT = 0;
 
-let counter = DEFAULT;
+let counter = 0;
 
-export function nextUuid(): UUID {
+export function useGlobalCounterId(): ID {
     const current = counter;
     counter = counter + 1;
-
     return `raa-${current}`;
 }
 
-export function resetNextUuid(): void {
+export function resetGlobalCounterId(): void {
     counter = DEFAULT;
 }
+
+type IDGenerator = () => ID;
+
+export const useNextId: IDGenerator = useId || useGlobalCounterId;
 
 // HTML5 ids allow all unicode characters, except for ASCII whitespaces
 // https://infra.spec.whatwg.org/#ascii-whitespace
