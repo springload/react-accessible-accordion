@@ -17,7 +17,6 @@ export interface InjectedButtonAttributes {
     'aria-controls': string;
     'aria-expanded': boolean;
     'aria-disabled': boolean;
-    role: string;
     tabIndex: number;
 }
 
@@ -115,7 +114,6 @@ export default class AccordionStore {
             'aria-disabled': disabled,
             'aria-expanded': expanded,
             'aria-controls': this.getPanelId(uuid),
-            role: 'button',
             tabIndex: 0,
         };
     };

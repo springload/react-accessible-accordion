@@ -83,6 +83,9 @@ import 'react-accessible-accordion/dist/fancy-example.css';
 We recommend that you copy them into your own app and modify them to suit your
 needs, particularly if you're using your own `className`s.
 
+The accordian trigger is built using native button elements which have default
+browser styling, this can be overridden in your stylesheet.
+
 ## Component API
 
 ### Accordion
@@ -225,8 +228,8 @@ description, as written above. By "accordion-like", we mean components which
 have collapsible items but require bespoke interactive mechanisms in order to
 expand, collapse and 'disable' them. This includes (but is not limited to)
 multi-step forms, like those seen in many cart/checkout flows, which we believe
-require (other) complex markup in order to be considered 'accessible'.
-This also includes disclosure widgets.
+require (other) complex markup in order to be considered 'accessible'. This also
+includes disclosure widgets.
 
 ### How do I disable an item?
 

@@ -20,6 +20,7 @@
     width: 100%;
     text-align: left;
     border: none;
+    font: inherit;
 }
 
 .accordion__button:hover {
