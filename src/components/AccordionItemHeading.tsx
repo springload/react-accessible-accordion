@@ -34,7 +34,6 @@ const Heading = React.forwardRef<HTMLHeadingElement, AccordianItemHeadingProps>(
         });
     },
 );
-
 Heading.displayName = 'Heading';
 
 export class AccordionItemHeading extends React.PureComponent<AccordianItemHeadingProps> {

@@ -11,7 +11,10 @@
 .accordion__item + .accordion__item {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
-
+.accordion__heading {
+    margin: 0;
+    font: 16px/1.5 sans-serif;
+}
 .accordion__button {
     background-color: #f4f4f4;
     color: #444;
@@ -21,6 +24,7 @@
     text-align: left;
     border: none;
     font: inherit;
+    margin: 0;
 }
 
 .accordion__button:hover {
