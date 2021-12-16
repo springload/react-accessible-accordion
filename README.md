@@ -138,7 +138,7 @@ Enables external control of the expansion.
 
 Class(es) to apply to the 'heading' element.
 
-#### ariaLevel : `number` [*optional*, default: `3`]
+#### aria-level : `number` [*optional*, default: `3`]
 
 Will determine which 'heading' element is used in the markup. A value of `1`
 would make your element an `<h1>` tag, and likewise a value of `6` would make it
@@ -200,7 +200,7 @@ spec-compliant:
 -   Only ever use
     [phrasing content](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#Phrasing_content)
     inside of your `AccordionItemHeading` component. If in doubt, use text only.
--   Remember to provide an `ariaLevel` prop to your `AccordionItemHeading`
+-   Remember to provide an `aria-level` prop to your `AccordionItemHeading`
     component, when you are nesting accordions. The levels are used by assistive
     technologies (eg. screenreaders) to infer structure, by default each heading
     uses `h3` .

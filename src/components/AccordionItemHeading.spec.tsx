@@ -59,7 +59,7 @@ describe('AccordionItem', () => {
         });
     });
 
-    describe('ariaLevel prop', () => {
+    describe('aria-level prop', () => {
         it('is h3 by default', () => {
             const { getByTestId } = render(
                 <Accordion>
@@ -80,7 +80,7 @@ describe('AccordionItem', () => {
                     <AccordionItem>
                         <AccordionItemHeading
                             data-testid={UUIDS.FOO}
-                            ariaLevel={4}
+                            aria-level={4}
                         >
                             <AccordionItemButton />
                         </AccordionItemHeading>

@@ -5,7 +5,7 @@ import { HeadingAttributes } from '../helpers/types';
 
 interface AccordianItemHeadingProps extends HeadingAttributes {
     className?: string;
-    ariaLevel?: number;
+    'aria-level'?: number;
 }
 
 export const SPEC_ERROR = `AccordionItemButton may contain only one child element, which must be an instance of AccordionItemButton.
@@ -19,7 +19,7 @@ From the WAI-ARIA spec (https://www.w3.org/TR/wai-aria-practices-1.1/#accordion)
 const Heading = React.forwardRef<HTMLHeadingElement, AccordianItemHeadingProps>(
     (
         {
-            ariaLevel = 3,
+            'aria-level': ariaLevel = 3,
             className = 'accordion__heading',
             ...props
         }: AccordianItemHeadingProps,
