@@ -3,7 +3,6 @@
 import * as React from 'react';
 import {
     InjectedButtonAttributes,
-    InjectedHeadingAttributes,
     InjectedPanelAttributes,
 } from '../helpers/AccordionStore';
 import {
@@ -30,7 +29,6 @@ export type ItemContext = {
     expanded: boolean;
     disabled: boolean;
     panelAttributes: InjectedPanelAttributes;
-    headingAttributes: InjectedHeadingAttributes;
     buttonAttributes: InjectedButtonAttributes;
     toggleExpanded(): void;
 };
@@ -57,7 +55,6 @@ const Provider = ({
             uuid,
             dangerouslySetExpanded,
         );
-        const headingAttributes = accordionContext.getHeadingAttributes(uuid);
         const buttonAttributes = accordionContext.getButtonAttributes(
             uuid,
             dangerouslySetExpanded,
@@ -71,7 +68,6 @@ const Provider = ({
                     disabled,
                     toggleExpanded: toggleExpanded,
                     panelAttributes,
-                    headingAttributes,
                     buttonAttributes,
                 }}
             >

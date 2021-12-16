@@ -8,10 +8,6 @@ export interface InjectedPanelAttributes {
     hidden: boolean | undefined;
 }
 
-export interface InjectedHeadingAttributes {
-    role: string;
-}
-
 export interface InjectedButtonAttributes {
     id: string;
     'aria-controls': string;
@@ -92,13 +88,6 @@ export default class AccordionStore {
             'aria-labelledby': this.getButtonId(uuid),
             id: this.getPanelId(uuid),
             hidden: expanded ? undefined : true,
-        };
-    };
-
-    public readonly getHeadingAttributes = (): // uuid: UUID,
-    InjectedHeadingAttributes => {
-        return {
-            role: 'heading',
         };
     };
 
