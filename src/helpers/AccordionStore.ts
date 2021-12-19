@@ -8,17 +8,11 @@ export interface InjectedPanelAttributes {
     hidden: boolean | undefined;
 }
 
-export interface InjectedHeadingAttributes {
-    role: string;
-}
-
 export interface InjectedButtonAttributes {
     id: string;
     'aria-controls': string;
     'aria-expanded': boolean;
     'aria-disabled': boolean;
-    role: string;
-    tabIndex: number;
 }
 
 export default class AccordionStore {
@@ -96,13 +90,6 @@ export default class AccordionStore {
         };
     };
 
-    public readonly getHeadingAttributes = (): // uuid: UUID,
-    InjectedHeadingAttributes => {
-        return {
-            role: 'heading',
-        };
-    };
-
     public readonly getButtonAttributes = (
         uuid: ID,
         dangerouslySetExpanded?: boolean,
@@ -115,8 +102,6 @@ export default class AccordionStore {
             'aria-disabled': disabled,
             'aria-expanded': expanded,
             'aria-controls': this.getPanelId(uuid),
-            role: 'button',
-            tabIndex: 0,
         };
     };
 

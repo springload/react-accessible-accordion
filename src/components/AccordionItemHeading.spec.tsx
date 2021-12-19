@@ -59,6 +59,39 @@ describe('AccordionItem', () => {
         });
     });
 
+    describe('aria-level prop', () => {
+        it('is h3 by default', () => {
+            const { getByTestId } = render(
+                <Accordion>
+                    <AccordionItem>
+                        <AccordionItemHeading data-testid={UUIDS.FOO}>
+                            <AccordionItemButton />
+                        </AccordionItemHeading>
+                    </AccordionItem>
+                </Accordion>,
+            );
+
+            expect(getByTestId(UUIDS.FOO).tagName).toEqual('H3');
+        });
+
+        it('can be overridden', () => {
+            const { getByTestId } = render(
+                <Accordion>
+                    <AccordionItem>
+                        <AccordionItemHeading
+                            data-testid={UUIDS.FOO}
+                            aria-level={4}
+                        >
+                            <AccordionItemButton />
+                        </AccordionItemHeading>
+                    </AccordionItem>
+                </Accordion>,
+            );
+
+            expect(getByTestId(UUIDS.FOO).tagName).toEqual('H4');
+        });
+    });
+
     describe('children prop', () => {
         it('is respected', () => {
             const { getByText } = render(

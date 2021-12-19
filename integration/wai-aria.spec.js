@@ -237,42 +237,16 @@ describe('WAI ARIA Spec', () => {
     });
 
     describe('WAI-ARIA Roles, States, and Properties', () => {
-        it(`The title of each accordion header is contained in an element with
-            role button.`, async () => {
-            // TODO: Use 'title' elements inside the headings.
-
-            const { browser, page, buttonsHandles } = await setup();
-            expect(buttonsHandles).toHaveLength(3);
-            for (const buttonHandle of buttonsHandles) {
+        it(`The title of each accordion header is contained in a heading tag`, async () => {
+            const { browser, page, headingsHandles } = await setup();
+            expect(headingsHandles).toHaveLength(3);
+            for (const headingsHandle of headingsHandles) {
                 expect(
                     await page.evaluate(
-                        (button) => button.getAttribute('role'),
-                        buttonHandle,
+                        (heading) => heading.tagName,
+                        headingsHandle,
                     ),
-                ).toBe('button');
-            }
-        });
-
-        it(`Each accordion header button is wrapped in an element with role
-            heading that has a value set for aria-level that is appropriate for
-            the information architecture of the page.`, async () => {
-            const { browser, page, buttonsHandles } = await setup();
-            expect(buttonsHandles).toHaveLength(3);
-            for (const buttonHandle of buttonsHandles) {
-                expect(
-                    await page.evaluate(
-                        (button) => button.parentElement.getAttribute('role'),
-                        buttonHandle,
-                    ),
-                ).toBe('heading');
-
-                expect(
-                    await page.evaluate(
-                        (button) =>
-                            button.parentElement.getAttribute('aria-level'),
-                        buttonHandle,
-                    ),
-                ).toBeTruthy();
+                ).toContain('H3');
             }
         });
 

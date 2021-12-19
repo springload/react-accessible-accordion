@@ -7,12 +7,12 @@ import {
     focusPreviousSiblingOf,
 } from '../helpers/focus';
 import keycodes from '../helpers/keycodes';
-import { DivAttributes } from '../helpers/types';
 import { assertValidHtmlId } from '../helpers/id';
+import { ButtonAttributes } from '../helpers/types';
 
 import { Consumer as ItemConsumer, ItemContext } from './ItemContext';
 
-type Props = DivAttributes & {
+type Props = ButtonAttributes & {
     toggleExpanded(): void;
 };
 
@@ -21,7 +21,9 @@ const AccordionItemButton = ({
     className = 'accordion__button',
     ...rest
 }: Props) => {
-    const handleKeyPress = (evt: React.KeyboardEvent<HTMLDivElement>): void => {
+    const handleKeyPress = (
+        evt: React.KeyboardEvent<HTMLButtonElement>,
+    ): void => {
         const keyCode = evt.key;
 
         if (
@@ -74,11 +76,9 @@ const AccordionItemButton = ({
     }
 
     return (
-        <div
+        <button
             className={className}
             {...rest}
-            role="button"
-            tabIndex={0}
             onClick={toggleExpanded}
             onKeyDown={handleKeyPress}
             data-accordion-component="AccordionItemButton"
@@ -87,8 +87,8 @@ const AccordionItemButton = ({
 };
 
 type WrapperProps = Pick<
-    DivAttributes,
-    Exclude<keyof DivAttributes, keyof InjectedButtonAttributes>
+    ButtonAttributes,
+    Exclude<keyof ButtonAttributes, keyof InjectedButtonAttributes>
 >;
 
 const AccordionItemButtonWrapper: React.SFC<WrapperProps> = (

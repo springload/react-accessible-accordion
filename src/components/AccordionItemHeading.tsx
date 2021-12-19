@@ -1,17 +1,12 @@
 import * as React from 'react';
-import { InjectedHeadingAttributes } from '../helpers/AccordionStore';
 import DisplayName from '../helpers/DisplayName';
-import { DivAttributes } from '../helpers/types';
 import { assertValidHtmlId } from '../helpers/id';
+import { HeadingAttributes } from '../helpers/types';
 
-import { Consumer as ItemConsumer, ItemContext } from './ItemContext';
-
-type Props = DivAttributes;
-
-const defaultProps = {
-    className: 'accordion__heading',
-    'aria-level': 3,
-};
+interface AccordionItemHeadingProps extends HeadingAttributes {
+    className?: string;
+    'aria-level'?: number;
+}
 
 export const SPEC_ERROR = `AccordionItemButton may contain only one child element, which must be an instance of AccordionItemButton.
 
@@ -21,12 +16,30 @@ From the WAI-ARIA spec (https://www.w3.org/TR/wai-aria-practices-1.1/#accordion)
 
 `;
 
-export class AccordionItemHeading extends React.PureComponent<Props> {
-    static defaultProps: typeof defaultProps = defaultProps;
+const Heading = React.forwardRef<HTMLHeadingElement, AccordionItemHeadingProps>(
+    (
+        {
+            'aria-level': ariaLevel = 3,
+            className = 'accordion__heading',
+            ...props
+        }: AccordionItemHeadingProps,
+        ref,
+    ) => {
+        const headingTag = `h${ariaLevel}`;
+        return React.createElement(headingTag, {
+            className,
+            ...props,
+            ref,
+            'data-accordion-component': 'AccordionItemHeading',
+        });
+    },
+);
+Heading.displayName = 'Heading';
 
-    ref: HTMLDivElement | undefined;
+export class AccordionItemHeading extends React.PureComponent<AccordionItemHeadingProps> {
+    ref: HTMLHeadingElement | undefined;
 
-    static VALIDATE(ref: HTMLDivElement | undefined): void | never {
+    static VALIDATE(ref: HTMLHeadingElement | undefined): void | never {
         if (ref === undefined) {
             throw new Error('ref is undefined');
         }
@@ -43,7 +56,7 @@ export class AccordionItemHeading extends React.PureComponent<Props> {
         }
     }
 
-    setRef = (ref: HTMLDivElement): void => {
+    setRef = (ref: HTMLHeadingElement): void => {
         this.ref = ref;
     };
 
@@ -56,36 +69,19 @@ export class AccordionItemHeading extends React.PureComponent<Props> {
     }
 
     render(): JSX.Element {
-        return (
-            <div
-                data-accordion-component="AccordionItemHeading"
-                {...this.props}
-                ref={this.setRef}
-            />
-        );
+        return <Heading ref={this.setRef} {...this.props} />;
     }
 }
 
-type WrapperProps = Pick<
-    DivAttributes,
-    Exclude<keyof DivAttributes, keyof InjectedHeadingAttributes>
->;
+const AccordionItemHeadingWrapper: React.FC<AccordionItemHeadingProps> = (
+    props: AccordionItemHeadingProps,
+): JSX.Element => {
+    if (props.id) {
+        assertValidHtmlId(props.id);
+    }
 
-const AccordionItemHeadingWrapper: React.SFC<DivAttributes> = (
-    props: WrapperProps,
-): JSX.Element => (
-    <ItemConsumer>
-        {(itemContext: ItemContext): JSX.Element => {
-            const { headingAttributes } = itemContext;
-
-            if (props.id) {
-                assertValidHtmlId(props.id);
-            }
-
-            return <AccordionItemHeading {...props} {...headingAttributes} />;
-        }}
-    </ItemConsumer>
-);
+    return <AccordionItemHeading {...props} />;
+};
 
 AccordionItemHeadingWrapper.displayName = DisplayName.AccordionItemHeading;
 

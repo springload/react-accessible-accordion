@@ -83,6 +83,9 @@ import 'react-accessible-accordion/dist/fancy-example.css';
 We recommend that you copy them into your own app and modify them to suit your
 needs, particularly if you're using your own `className`s.
 
+The accordion trigger is built using native button and heading elements which
+have default browser styling, these can be overridden in your stylesheet.
+
 ## Component API
 
 ### Accordion
@@ -137,9 +140,9 @@ Class(es) to apply to the 'heading' element.
 
 #### aria-level : `number` [*optional*, default: `3`]
 
-Semantics to apply to the 'heading' element. A value of `1` would make your
-heading element hierarchically equivalent to an `<h1>` tag, and likewise a value
-of `6` would make it equivalent to an `<h6>` tag.
+Will determine which 'heading' element is used in the markup. A value of `1`
+would make your element an `<h1>` tag, and likewise a value of `6` would make it
+an `<h6>` tag.
 
 ### AccordionItemButton
 
@@ -185,7 +188,8 @@ you, including:
 
 -   Applying appropriate aria attributes (`aria-expanded`, `aria-controls`,
     `aria-disabled`, `aria-hidden` and `aria-labelledby`).
--   Applying appropriate `role` attributes (`button`, `heading`, `region`).
+-   Applying appropriate `role` attributes (`region`).
+-   Using semantic HTML elements (`h1` - `h6`, `button`).
 -   Applying appropriate `tabindex` attributes.
 -   Applying keyboard interactivity ('space', 'end', 'tab', 'up', 'down', 'home'
     and 'end' keys).
@@ -196,10 +200,10 @@ spec-compliant:
 -   Only ever use
     [phrasing content](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#Phrasing_content)
     inside of your `AccordionItemHeading` component. If in doubt, use text only.
--   Always provide an `aria-level` prop to your `AccordionItemHeading`
-    component, _especially_ if you are nesting accordions. This attribute is a
-    signal used by assistive technologies (eg. screenreaders) to determine which
-    heading level (ie. `h1`-`h6`) to treat your heading as.
+-   Remember to provide an `aria-level` prop to your `AccordionItemHeading`
+    component, when you are nesting accordions. The levels are used by assistive
+    technologies (eg. screenreaders) to infer structure, by default each heading
+    uses `h3` .
 
 If you have any questions about your implementation, then please don't be afraid
 to get in touch via our
@@ -225,8 +229,8 @@ description, as written above. By "accordion-like", we mean components which
 have collapsible items but require bespoke interactive mechanisms in order to
 expand, collapse and 'disable' them. This includes (but is not limited to)
 multi-step forms, like those seen in many cart/checkout flows, which we believe
-require (other) complex markup in order to be considered 'accessible'.
-This also includes disclosure widgets.
+require (other) complex markup in order to be considered 'accessible'. This also
+includes disclosure widgets.
 
 ### How do I disable an item?
 
