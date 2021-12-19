@@ -13,7 +13,7 @@
 }
 .accordion__heading {
     margin: 0;
-    font: 16px/1.5 sans-serif;
+    font: inherit;
 }
 .accordion__button {
     background-color: #f4f4f4;

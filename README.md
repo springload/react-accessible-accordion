@@ -83,8 +83,8 @@ import 'react-accessible-accordion/dist/fancy-example.css';
 We recommend that you copy them into your own app and modify them to suit your
 needs, particularly if you're using your own `className`s.
 
-The accordian trigger is built using native button elements which have default
-browser styling, this can be overridden in your stylesheet.
+The accordion trigger is built using native button and heading elements which
+have default browser styling, these can be overridden in your stylesheet.
 
 ## Component API
 

@@ -139,7 +139,7 @@ footer {
     padding: 10px 0;
     color: var(--colorPageLinks);
     background-color: transparent;
-    font: 16px/1.5 sans-serif;
+    font: inherit;
     font-weight: bold;
     border: none;
     text-decoration: underline solid var(--colorGreenShadow);

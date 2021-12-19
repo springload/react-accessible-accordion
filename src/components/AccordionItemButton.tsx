@@ -79,7 +79,6 @@ const AccordionItemButton = ({
         <button
             className={className}
             {...rest}
-            tabIndex={0}
             onClick={toggleExpanded}
             onKeyDown={handleKeyPress}
             data-accordion-component="AccordionItemButton"

@@ -13,7 +13,6 @@ export interface InjectedButtonAttributes {
     'aria-controls': string;
     'aria-expanded': boolean;
     'aria-disabled': boolean;
-    tabIndex: number;
 }
 
 export default class AccordionStore {
@@ -103,7 +102,6 @@ export default class AccordionStore {
             'aria-disabled': disabled,
             'aria-expanded': expanded,
             'aria-controls': this.getPanelId(uuid),
-            tabIndex: 0,
         };
     };
 

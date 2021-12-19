@@ -3,7 +3,7 @@ import DisplayName from '../helpers/DisplayName';
 import { assertValidHtmlId } from '../helpers/id';
 import { HeadingAttributes } from '../helpers/types';
 
-interface AccordianItemHeadingProps extends HeadingAttributes {
+interface AccordionItemHeadingProps extends HeadingAttributes {
     className?: string;
     'aria-level'?: number;
 }
@@ -16,17 +16,17 @@ From the WAI-ARIA spec (https://www.w3.org/TR/wai-aria-practices-1.1/#accordion)
 
 `;
 
-const Heading = React.forwardRef<HTMLHeadingElement, AccordianItemHeadingProps>(
+const Heading = React.forwardRef<HTMLHeadingElement, AccordionItemHeadingProps>(
     (
         {
             'aria-level': ariaLevel = 3,
             className = 'accordion__heading',
             ...props
-        }: AccordianItemHeadingProps,
+        }: AccordionItemHeadingProps,
         ref,
     ) => {
-        const HeadingTag = `h${ariaLevel}`;
-        return React.createElement(HeadingTag, {
+        const headingTag = `h${ariaLevel}`;
+        return React.createElement(headingTag, {
             className,
             ...props,
             ref,
@@ -36,7 +36,7 @@ const Heading = React.forwardRef<HTMLHeadingElement, AccordianItemHeadingProps>(
 );
 Heading.displayName = 'Heading';
 
-export class AccordionItemHeading extends React.PureComponent<AccordianItemHeadingProps> {
+export class AccordionItemHeading extends React.PureComponent<AccordionItemHeadingProps> {
     ref: HTMLHeadingElement | undefined;
 
     static VALIDATE(ref: HTMLHeadingElement | undefined): void | never {
@@ -73,8 +73,8 @@ export class AccordionItemHeading extends React.PureComponent<AccordianItemHeadi
     }
 }
 
-const AccordionItemHeadingWrapper: React.FC<AccordianItemHeadingProps> = (
-    props: AccordianItemHeadingProps,
+const AccordionItemHeadingWrapper: React.FC<AccordionItemHeadingProps> = (
+    props: AccordionItemHeadingProps,
 ): JSX.Element => {
     if (props.id) {
         assertValidHtmlId(props.id);
