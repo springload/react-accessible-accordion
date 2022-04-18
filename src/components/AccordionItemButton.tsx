@@ -91,7 +91,7 @@ type WrapperProps = Pick<
     Exclude<keyof DivAttributes, keyof InjectedButtonAttributes>
 >;
 
-const AccordionItemButtonWrapper: React.SFC<WrapperProps> = (
+const AccordionItemButtonWrapper: React.FC<WrapperProps> = (
     props: WrapperProps,
 ): JSX.Element => (
     <ItemConsumer>

@@ -79,7 +79,9 @@ describe('AccordionItem', () => {
                 </Accordion>,
             );
             expect(
-                getByRole('region').getAttribute('aria-labelledby'),
+                getByRole('region', { hidden: true }).getAttribute(
+                    'aria-labelledby',
+                ),
             ).toBeTruthy();
         });
 
@@ -101,7 +103,9 @@ describe('AccordionItem', () => {
             const { getByText, queryByRole } = render(
                 <Accordion>
                     <AccordionItem>
-                        <AccordionItemPanel region={false}>Hello World</AccordionItemPanel>
+                        <AccordionItemPanel region={false}>
+                            Hello World
+                        </AccordionItemPanel>
                     </AccordionItem>
                 </Accordion>,
             );
