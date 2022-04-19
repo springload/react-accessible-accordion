@@ -1,4 +1,4 @@
-import { UUID } from '../components/ItemContext';
+import { ID } from '../components/ItemContext';
 
 export interface InjectedPanelAttributes {
     role: string | undefined;
@@ -22,7 +22,7 @@ export interface InjectedButtonAttributes {
 }
 
 export default class AccordionStore {
-    public readonly expanded: UUID[];
+    public readonly expanded: ID[];
     public readonly allowMultipleExpanded: boolean;
     public readonly allowZeroExpanded: boolean;
 
@@ -31,7 +31,7 @@ export default class AccordionStore {
         allowMultipleExpanded = false,
         allowZeroExpanded = false,
     }: {
-        expanded?: UUID[];
+        expanded?: ID[];
         allowMultipleExpanded?: boolean;
         allowZeroExpanded?: boolean;
     }) {
@@ -40,7 +40,7 @@ export default class AccordionStore {
         this.allowZeroExpanded = allowZeroExpanded;
     }
 
-    public readonly toggleExpanded = (uuid: UUID): AccordionStore => {
+    public readonly toggleExpanded = (uuid: ID): AccordionStore => {
         if (this.isItemDisabled(uuid)) {
             return this;
         }
@@ -55,7 +55,7 @@ export default class AccordionStore {
         } else {
             return this.augment({
                 expanded: this.expanded.filter(
-                    (expandedUuid: UUID): boolean => expandedUuid !== uuid,
+                    (expandedUuid: ID): boolean => expandedUuid !== uuid,
                 ),
             });
         }
@@ -68,7 +68,7 @@ export default class AccordionStore {
      * and if the accordion does not permit the panel to be collapsed, the
      * header button element has aria-disabled set to true.”
      */
-    public readonly isItemDisabled = (uuid: UUID): boolean => {
+    public readonly isItemDisabled = (uuid: ID): boolean => {
         const isExpanded = this.isItemExpanded(uuid);
         const isOnlyOneExpanded = this.expanded.length === 1;
 
@@ -77,12 +77,12 @@ export default class AccordionStore {
         );
     };
 
-    public readonly isItemExpanded = (uuid: UUID): boolean => {
+    public readonly isItemExpanded = (uuid: ID): boolean => {
         return this.expanded.indexOf(uuid) !== -1;
     };
 
     public readonly getPanelAttributes = (
-        uuid: UUID,
+        uuid: ID,
         dangerouslySetExpanded?: boolean,
     ): InjectedPanelAttributes => {
         const expanded = dangerouslySetExpanded ?? this.isItemExpanded(uuid);
@@ -104,7 +104,7 @@ export default class AccordionStore {
     };
 
     public readonly getButtonAttributes = (
-        uuid: UUID,
+        uuid: ID,
         dangerouslySetExpanded?: boolean,
     ): InjectedButtonAttributes => {
         const expanded = dangerouslySetExpanded ?? this.isItemExpanded(uuid);
@@ -120,14 +120,13 @@ export default class AccordionStore {
         };
     };
 
-    private readonly getPanelId = (uuid: UUID): string =>
-        `accordion__panel-${uuid}`;
+    private readonly getPanelId = (id: ID): string => `accordion__panel-${id}`;
 
-    private readonly getButtonId = (uuid: UUID): string =>
-        `accordion__heading-${uuid}`;
+    private readonly getButtonId = (id: ID): string =>
+        `accordion__heading-${id}`;
 
     private readonly augment = (args: {
-        expanded?: UUID[];
+        expanded?: ID[];
         allowMultipleExpanded?: boolean;
         allowZeroExpanded?: boolean;
     }): AccordionStore => {

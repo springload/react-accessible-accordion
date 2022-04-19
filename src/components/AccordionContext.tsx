@@ -6,14 +6,14 @@ import AccordionStore, {
     InjectedHeadingAttributes,
     InjectedPanelAttributes,
 } from '../helpers/AccordionStore';
-import { UUID } from './ItemContext';
+import { ID } from './ItemContext';
 
 export interface ProviderProps {
-    preExpanded?: UUID[];
+    preExpanded?: ID[];
     allowMultipleExpanded?: boolean;
     allowZeroExpanded?: boolean;
     children?: React.ReactNode;
-    onChange?(args: UUID[]): void;
+    onChange?(args: ID[]): void;
 }
 
 type ProviderState = AccordionStore;
@@ -21,16 +21,16 @@ type ProviderState = AccordionStore;
 export interface AccordionContext {
     allowMultipleExpanded: boolean;
     allowZeroExpanded: boolean;
-    toggleExpanded(uuid: UUID): void;
-    isItemDisabled(uuid: UUID): boolean;
-    isItemExpanded(uuid: UUID): boolean;
+    toggleExpanded(uuid: ID): void;
+    isItemDisabled(uuid: ID): boolean;
+    isItemExpanded(uuid: ID): boolean;
     getPanelAttributes(
-        uuid: UUID,
+        uuid: ID,
         dangerouslySetExpanded?: boolean,
     ): InjectedPanelAttributes;
-    getHeadingAttributes(uuid: UUID): InjectedHeadingAttributes;
+    getHeadingAttributes(uuid: ID): InjectedHeadingAttributes;
     getButtonAttributes(
-        uuid: UUID,
+        uuid: ID,
         dangerouslySetExpanded?: boolean,
     ): InjectedButtonAttributes;
 }
@@ -52,7 +52,7 @@ export class Provider extends React.PureComponent<
         allowZeroExpanded: this.props.allowZeroExpanded,
     });
 
-    toggleExpanded = (key: UUID): void => {
+    toggleExpanded = (key: ID): void => {
         this.setState(
             (state: Readonly<ProviderState>) => state.toggleExpanded(key),
             () => {
@@ -63,16 +63,16 @@ export class Provider extends React.PureComponent<
         );
     };
 
-    isItemDisabled = (key: UUID): boolean => {
+    isItemDisabled = (key: ID): boolean => {
         return this.state.isItemDisabled(key);
     };
 
-    isItemExpanded = (key: UUID): boolean => {
+    isItemExpanded = (key: ID): boolean => {
         return this.state.isItemExpanded(key);
     };
 
     getPanelAttributes = (
-        key: UUID,
+        key: ID,
         dangerouslySetExpanded?: boolean,
     ): InjectedPanelAttributes => {
         return this.state.getPanelAttributes(key, dangerouslySetExpanded);
@@ -84,7 +84,7 @@ export class Provider extends React.PureComponent<
     };
 
     getButtonAttributes = (
-        key: UUID,
+        key: ID,
         dangerouslySetExpanded?: boolean,
     ): InjectedButtonAttributes => {
         return this.state.getButtonAttributes(key, dangerouslySetExpanded);

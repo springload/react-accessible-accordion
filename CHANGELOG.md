@@ -3,6 +3,35 @@
 > All notable changes to this project are documented in this file. This project
 > adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [[v5.0.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v5.0.0)
+
+React Accessible Accordion now supports React 18 with its out-of-order streaming
+feature.
+
+The new out-of-order streaming feature required using React 18's
+[`useId`](https://reactjs.org/blog/2022/03/29/react-v18.html#useid) hook. This
+affects the DOM ids that RAA generates, changing from `accordion__heading-raa-0`
+(React 16 and 17) to `accordion__heading-:r0:` (React 18). Although this change
+shouldn't affect most users, if you have any code that selects ids with DOM APIs
+such as `document.querySelector()` then the `:` characters will need escaping
+with `\\` eg. `document.querySelector('#accordion__heading-\\:r0\\:')`.
+
+When using older versions of React 16 or 17 the same DOM ids will be generated.
+
+Because of this change in behaviour this is a major version upgrade.
+
+## [[v4.0.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v4.0.0)
+
+Making `role="region"` optional on panels.
+
+The new behaviour has no `role="region"` by default, and developers can opt-in
+using the `region` prop as `<AccordionItemPanel region>`.
+
+The previous behaviour had every panel as a `role="region"` which created an
+excessive amount of regions for the screen reader.
+
+Because of this change in behaviour this is a major version upgrade.
+
 ## [[v3.3.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v3.3.0)
 
 ### Changed

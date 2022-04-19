@@ -11,11 +11,11 @@ import {
     Consumer as AccordionContextConsumer,
 } from './AccordionContext';
 
-export type UUID = string | number;
+export type ID = string | number;
 
 type ProviderProps = {
     children?: React.ReactNode;
-    uuid: UUID;
+    uuid: ID;
     accordionContext: AccordionContext;
     dangerouslySetExpanded?: boolean;
 };
@@ -26,7 +26,7 @@ export type ProviderWrapperProps = Pick<
 >;
 
 export type ItemContext = {
-    uuid: UUID;
+    uuid: ID;
     expanded: boolean;
     disabled: boolean;
     panelAttributes: InjectedPanelAttributes;
@@ -85,7 +85,7 @@ const Provider = ({
     );
 };
 
-const ProviderWrapper: React.SFC<ProviderWrapperProps> = (
+const ProviderWrapper: React.FunctionComponent<ProviderWrapperProps> = (
     props: ProviderWrapperProps,
 ): JSX.Element => (
     <AccordionContextConsumer>

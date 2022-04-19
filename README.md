@@ -207,6 +207,11 @@ to get in touch via our
 
 ## FAQs
 
+### React 18?
+
+RAA supports React 18, and the new out-of-order streaming feature. See the
+CHANGELOG for details.
+
 ### Which design patterns does this component aim to solve?
 
 Those described by the WAI ARIA spec's description of an 'accordion':
@@ -225,8 +230,8 @@ description, as written above. By "accordion-like", we mean components which
 have collapsible items but require bespoke interactive mechanisms in order to
 expand, collapse and 'disable' them. This includes (but is not limited to)
 multi-step forms, like those seen in many cart/checkout flows, which we believe
-require (other) complex markup in order to be considered 'accessible'.
-This also includes disclosure widgets.
+require (other) complex markup in order to be considered 'accessible'. This also
+includes disclosure widgets.
 
 ### How do I disable an item?
 

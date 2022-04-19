@@ -2,7 +2,7 @@ import * as React from 'react';
 import { InjectedHeadingAttributes } from '../helpers/AccordionStore';
 import DisplayName from '../helpers/DisplayName';
 import { DivAttributes } from '../helpers/types';
-import { assertValidHtmlId } from '../helpers/uuid';
+import { assertValidHtmlId } from '../helpers/id';
 
 import { Consumer as ItemConsumer, ItemContext } from './ItemContext';
 
@@ -71,7 +71,7 @@ type WrapperProps = Pick<
     Exclude<keyof DivAttributes, keyof InjectedHeadingAttributes>
 >;
 
-const AccordionItemHeadingWrapper: React.SFC<DivAttributes> = (
+const AccordionItemHeadingWrapper: React.FC<DivAttributes> = (
     props: WrapperProps,
 ): JSX.Element => (
     <ItemConsumer>

@@ -2,7 +2,7 @@ version: 2
 jobs:
     install-job:
         docker:
-            - image: circleci/node:dubnium
+            - image: circleci/node:erbium
         working_directory: ~/repo
         steps:
             - checkout
@@ -24,7 +24,7 @@ jobs:
 
     test-job:
         docker:
-            - image: circleci/node:dubnium
+            - image: circleci/node:erbium
 
         working_directory: ~/repo
 
@@ -36,7 +36,7 @@ jobs:
 
     lint-job:
         docker:
-            - image: circleci/node:dubnium
+            - image: circleci/node:erbium
 
         working_directory: ~/repo
 
@@ -48,7 +48,7 @@ jobs:
 
     build-job:
         docker:
-            - image: circleci/node:dubnium
+            - image: circleci/node:erbium
 
         working_directory: ~/repo
 
@@ -60,7 +60,7 @@ jobs:
 
     coverage-job:
         docker:
-            - image: circleci/node:dubnium
+            - image: circleci/node:erbium
 
         working_directory: ~/repo
 
@@ -73,7 +73,7 @@ jobs:
 
     integration-job:
         docker:
-            - image: circleci/node:dubnium-browsers
+            - image: circleci/node:erbium-browsers
 
         working_directory: ~/repo
 

@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { DivAttributes } from '../helpers/types';
 import { Provider } from './AccordionContext';
-import { UUID } from './ItemContext';
+import { ID } from './ItemContext';
 
 type AccordionProps = Pick<
     DivAttributes,
     Exclude<keyof DivAttributes, 'onChange'>
 > & {
     className?: string;
-    preExpanded?: UUID[];
+    preExpanded?: ID[];
     allowMultipleExpanded?: boolean;
     allowZeroExpanded?: boolean;
-    onChange?(args: UUID[]): void;
+    onChange?(args: ID[]): void;
 };
 
 const Accordion = ({

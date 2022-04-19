@@ -8,7 +8,7 @@ import {
 } from '../helpers/focus';
 import keycodes from '../helpers/keycodes';
 import { DivAttributes } from '../helpers/types';
-import { assertValidHtmlId } from '../helpers/uuid';
+import { assertValidHtmlId } from '../helpers/id';
 
 import { Consumer as ItemConsumer, ItemContext } from './ItemContext';
 
@@ -91,7 +91,7 @@ type WrapperProps = Pick<
     Exclude<keyof DivAttributes, keyof InjectedButtonAttributes>
 >;
 
-const AccordionItemButtonWrapper: React.SFC<WrapperProps> = (
+const AccordionItemButtonWrapper: React.FC<WrapperProps> = (
     props: WrapperProps,
 ): JSX.Element => (
     <ItemConsumer>
