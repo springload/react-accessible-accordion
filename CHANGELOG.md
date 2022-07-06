@@ -106,7 +106,7 @@ to normal again now.
     ```tsx
     //  After:
     import {
-        AcccordionItemHeading,
+        AccordionItemHeading,
         AccordionItemButton,
     } from 'react-accessible-accordion';
 
