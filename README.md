@@ -85,11 +85,11 @@ needs, particularly if you're using your own `className`s.
 
 ### Accordion
 
-#### allowMultipleExpanded : `boolean` [*optional*, default: `false`]
+#### allowMultipleExpanded : `boolean` [*optional*, default: `true`]
 
-Don't autocollapse items when expanding other items.
+Don't auto-collapse items when expanding other items.
 
-#### allowZeroExpanded : `boolean` [*optional*, default: `false`]
+#### allowZeroExpanded : `boolean` [*optional*, default: `true`]
 
 Allow the only remaining expanded item to be collapsed.
 

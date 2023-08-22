@@ -3,6 +3,23 @@
 > All notable changes to this project are documented in this file. This project
 > adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [[v6.0.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v6.0.0)
+
+**A sort-of breaking change** which updates the default behavior regarding
+`allowMultipleExpanded` and `allowZeroExpanded`. They both now default to
+`true`.
+
+This is based on
+[advice from NNG](https://www.nngroup.com/articles/accordions-on-desktop/), as
+well as Springload's views on accordion usability.
+
+From this version onwards:
+
+-   to disable allowing more than one accordion panel to be open at once, you
+    must explicitly set `allowMultipleExpanded={false}`
+-   to disable collapsing all accordion panels, you must explicitly set
+    `allowZeroExpanded={false}`
+
 ## [[v5.0.0]](https://github.com/springload/react-accessible-accordion/releases/tag/v5.0.0)
 
 React Accessible Accordion now supports React 18 with its out-of-order streaming

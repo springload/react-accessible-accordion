@@ -42,8 +42,8 @@ export class Provider extends React.PureComponent<
     ProviderState
 > {
     static defaultProps: ProviderProps = {
-        allowMultipleExpanded: false,
-        allowZeroExpanded: false,
+        allowMultipleExpanded: true,
+        allowZeroExpanded: true,
     };
 
     state: ProviderState = new AccordionStore({

@@ -10,7 +10,7 @@ import {
 
 ReactDOM.render(
     <div id="classic-accordion">
-        <Accordion>
+        <Accordion allowMultipleExpanded={false} allowZeroExpanded={false}>
             <AccordionItem>
                 <AccordionItemHeading>
                     <AccordionItemButton>Heading One</AccordionItemButton>

@@ -53,9 +53,10 @@ describe('Accordion', () => {
                 expect(container.expanded).toEqual([UUIDS.FOO]);
             });
 
-            it('collapses the currently expanded items', () => {
+            it('collapses the currently expanded items, if allowMultipleExpanded is set to false', () => {
                 const container = new AccordionStore({
                     expanded: [UUIDS.BAR],
+                    allowMultipleExpanded: false,
                 }).toggleExpanded(UUIDS.FOO);
 
                 expect(container.expanded).toEqual([UUIDS.FOO]);
@@ -63,51 +64,34 @@ describe('Accordion', () => {
         });
 
         describe('collapsing', () => {
-            it('doesnt collapse the only expanded item', () => {
+            it('collapses the only expanded item', () => {
                 const container = new AccordionStore({
-                    expanded: [UUIDS.FOO],
-                }).toggleExpanded(UUIDS.FOO);
-
-                expect(container.expanded).toEqual([UUIDS.FOO]);
-            });
-
-            it('collapses the only expanded item when allowZeroExpanded', () => {
-                const container = new AccordionStore({
-                    allowZeroExpanded: true,
                     expanded: [UUIDS.FOO],
                 }).toggleExpanded(UUIDS.FOO);
 
                 expect(container.expanded).toEqual([]);
+            });
+
+            it('does not collapse the only expanded item when allowZeroExpanded is false', () => {
+                const container = new AccordionStore({
+                    allowZeroExpanded: false,
+                    expanded: [UUIDS.FOO],
+                }).toggleExpanded(UUIDS.FOO);
+
+                expect(container.expanded).toEqual([UUIDS.FOO]);
             });
         });
     });
 
     describe('isDisabled', () => {
         describe('expanded item', () => {
-            it('is disabled if alone', () => {
+            it('is disabled if alone, if allowZeroExpanded is set to false', () => {
                 const container = new AccordionStore({
+                    allowZeroExpanded: false,
                     expanded: [UUIDS.FOO],
                 });
 
                 expect(container.isItemDisabled(UUIDS.FOO)).toEqual(true);
-            });
-
-            it('is not disabled if multiple expanded', () => {
-                const container = new AccordionStore({
-                    allowMultipleExpanded: true,
-                    expanded: [UUIDS.FOO, UUIDS.BAR],
-                });
-
-                expect(container.isItemDisabled(UUIDS.FOO)).toEqual(false);
-            });
-
-            it('is not disabled if allowZeroExpanded', () => {
-                const container = new AccordionStore({
-                    allowZeroExpanded: true,
-                    expanded: [UUIDS.FOO],
-                });
-
-                expect(container.isItemDisabled(UUIDS.FOO)).toEqual(false);
             });
         });
 

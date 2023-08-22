@@ -371,7 +371,7 @@ describe('WAI ARIA Spec', () => {
             const { browser, page, buttonsHandles } = await setup();
             expect(buttonsHandles.length).toEqual(3);
 
-            const [firstButtonHandle] = buttonsHandles;
+            const firstButtonHandle = buttonsHandles[0];
             await firstButtonHandle.click();
 
             const buttonAriaDisabled = await page.evaluate(

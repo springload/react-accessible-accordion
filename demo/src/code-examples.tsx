@@ -21,21 +21,6 @@ export const ExampleDefault = `import {
     ))}
 </Accordion>`;
 
-export const ExampleAllowMultipleExpanded = `<Accordion allowMultipleExpanded>
-    {items.map((item) => (
-        <AccordionItem key={item.uuid}>
-            <AccordionItemHeading>
-                <AccordionItemButton>
-                    {item.heading}
-                </AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>
-              {item.content}
-            </AccordionItemPanel>
-        </AccordionItem>
-    ))}
-</Accordion>`;
-
 export const ExampleAllowMultipleExpandedFalse = `<Accordion allowMultipleExpanded={false}>
     {items.map((item) => (
         <AccordionItem key={item.uuid}>
@@ -51,7 +36,7 @@ export const ExampleAllowMultipleExpandedFalse = `<Accordion allowMultipleExpand
     ))}
 </Accordion>`;
 
-export const ExampleAllowZeroExpanded = `<Accordion allowZeroExpanded>
+export const ExampleAllowZeroExpandedFalse = `<Accordion allowZeroExpanded={false} preExpanded={['a']}>
     {items.map((item) => (
         <AccordionItem key={item.uuid}>
             <AccordionItemHeading>

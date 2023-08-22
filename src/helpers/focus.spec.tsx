@@ -200,15 +200,12 @@ describe('focus', () => {
                 </div>
             `);
 
-            const [
-                firstButton,
-                secondButton,
-                thirdButton,
-            ]: HTMLElement[] = Array.from(
-                tree.querySelectorAll(
-                    '[data-accordion-component="AccordionItemButton"]',
-                ),
-            );
+            const [firstButton, secondButton, thirdButton]: HTMLElement[] =
+                Array.from(
+                    tree.querySelectorAll(
+                        '[data-accordion-component="AccordionItemButton"]',
+                    ),
+                );
 
             // Predicate
             if (
@@ -239,15 +236,12 @@ describe('focus', () => {
                 </div>
             `);
 
-            const [
-                firstButton,
-                secondButton,
-                thirdButton,
-            ]: HTMLElement[] = Array.from(
-                tree.querySelectorAll(
-                    '[data-accordion-component="AccordionItemButton"]',
-                ),
-            );
+            const [firstButton, secondButton, thirdButton]: HTMLElement[] =
+                Array.from(
+                    tree.querySelectorAll(
+                        '[data-accordion-component="AccordionItemButton"]',
+                    ),
+                );
 
             // Predicate
             if (
@@ -278,15 +272,12 @@ describe('focus', () => {
                 </div>
             `);
 
-            const [
-                firstButton,
-                secondButton,
-                thirdButton,
-            ]: HTMLElement[] = Array.from(
-                tree.querySelectorAll(
-                    '[data-accordion-component="AccordionItemButton"]',
-                ),
-            );
+            const [firstButton, secondButton, thirdButton]: HTMLElement[] =
+                Array.from(
+                    tree.querySelectorAll(
+                        '[data-accordion-component="AccordionItemButton"]',
+                    ),
+                );
 
             // Predicate
             if (

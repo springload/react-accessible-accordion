@@ -18,9 +18,8 @@ import Code from './components/Code';
 // tslint:disable-next-line no-import-side-effect ordered-imports
 import {
     ExampleDefault,
-    ExampleAllowMultipleExpanded,
     ExampleAllowMultipleExpandedFalse,
-    ExampleAllowZeroExpanded,
+    ExampleAllowZeroExpandedFalse,
     ExamplePreExpanded,
     ExampleOnChange,
     ExampleAccordionItemState,
@@ -54,8 +53,7 @@ const App = (): JSX.Element => (
         <h2 className="u-margin-top">Default behaviour</h2>
 
         <p>
-            By default, only one item may be expanded and it can only be
-            collapsed again by expanding another.
+            By default, any number of items may be expanded at any given time.
         </p>
 
         <Accordion>
@@ -73,32 +71,15 @@ const App = (): JSX.Element => (
 
         <Code code={ExampleDefault} />
 
-        <h2 className="u-margin-top">Expanding multiple items at once</h2>
-
-        <p>
-            If you set <strong>allowMultipleExpanded</strong> to{' '}
-            <strong>true</strong> then the accordion will permit multiple items
-            to be expanded at once.
-        </p>
-
-        <Accordion allowMultipleExpanded={true}>
-            {placeholders.map((placeholder: Placeholder) => (
-                <AccordionItem key={placeholder.heading}>
-                    <AccordionItemHeading>
-                        <AccordionItemButton>
-                            {placeholder.heading}
-                        </AccordionItemButton>
-                    </AccordionItemHeading>
-                    <AccordionItemPanel>{placeholder.panel}</AccordionItemPanel>
-                </AccordionItem>
-            ))}
-        </Accordion>
-
-        <Code code={ExampleAllowMultipleExpanded} />
-
         <h2 className="u-margin-top">
-            Same as above except with allowMultipleExpanded=false
+            Prevent multiple items being expanded at a time
         </h2>
+        <p>
+            <strong>Note:</strong> we do not recommend this behavior. Users may
+            wish to view the content of more than one panel at once. Also,
+            collapsing a panel when opening another can cause unexpected scroll
+            position changes.
+        </p>
 
         <Accordion allowMultipleExpanded={false}>
             {placeholders.map((placeholder: Placeholder) => (
@@ -114,29 +95,6 @@ const App = (): JSX.Element => (
         </Accordion>
 
         <Code code={ExampleAllowMultipleExpandedFalse} />
-
-        <h2 className="u-margin-top">Collapsing the last expanded item</h2>
-
-        <p>
-            If you set <strong>allowZeroExpanded</strong> to{' '}
-            <strong>true</strong> then a solitary expanded item may be collapsed
-            again.
-        </p>
-
-        <Accordion allowZeroExpanded={true}>
-            {placeholders.map((placeholder: Placeholder) => (
-                <AccordionItem key={placeholder.heading}>
-                    <AccordionItemHeading>
-                        <AccordionItemButton>
-                            {placeholder.heading}
-                        </AccordionItemButton>
-                    </AccordionItemHeading>
-                    <AccordionItemPanel>{placeholder.panel}</AccordionItemPanel>
-                </AccordionItem>
-            ))}
-        </Accordion>
-
-        <Code code={ExampleAllowZeroExpanded} />
 
         <h2 className="u-margin-top">Pre-expanded items</h2>
 
@@ -168,6 +126,42 @@ const App = (): JSX.Element => (
         </Accordion>
 
         <Code code={ExamplePreExpanded} />
+
+        <h2 className="u-margin-top">Preventing the collapsing of all items</h2>
+
+        <p>
+            If you set <strong>allowZeroExpanded</strong> to{' '}
+            <strong>false</strong> then the user must have at least one panel
+            open at a time.
+        </p>
+        <p>
+            <strong>Note:</strong> we do not recommend this behavior. Users
+            would be able to expand items but not necessarily collapse them,
+            which might not match their expectations. If you do choose to use
+            this setting, we recommend you pair it with having{' '}
+            <strong>preExpanded</strong> item(s).
+        </p>
+
+        <Accordion
+            allowZeroExpanded={false}
+            preExpanded={[placeholders[0].uuid]}
+        >
+            {placeholders.map((placeholder: Placeholder) => (
+                <AccordionItem
+                    key={placeholder.heading}
+                    uuid={placeholder.uuid}
+                >
+                    <AccordionItemHeading>
+                        <AccordionItemButton>
+                            {placeholder.heading}
+                        </AccordionItemButton>
+                    </AccordionItemHeading>
+                    <AccordionItemPanel>{placeholder.panel}</AccordionItemPanel>
+                </AccordionItem>
+            ))}
+        </Accordion>
+
+        <Code code={ExampleAllowZeroExpandedFalse} />
 
         <h2 className="u-margin-top">Informative onChange</h2>
 
