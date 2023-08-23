@@ -116,7 +116,7 @@ describe('Accordion', () => {
                 ).toEqual('true');
             });
 
-            it('allows the last-expanded to collapsed by default', () => {
+            it('allows the last-expanded to be collapsed by default', () => {
                 const { getByTestId } = render(
                     <Accordion>
                         <AccordionItem>
