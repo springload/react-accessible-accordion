@@ -39,9 +39,9 @@ describe('Accordion', () => {
 
     describe('expanding and collapsing: ', () => {
         describe('allowMultipleExpanded prop', () => {
-            it('permits multiple items to be expanded when explicitly true', () => {
+            it('prevents multiple items to be expanded when set to false', () => {
                 const { getByTestId } = render(
-                    <Accordion allowMultipleExpanded={true}>
+                    <Accordion allowMultipleExpanded={false}>
                         <AccordionItem>
                             <AccordionItemHeading>
                                 <AccordionItemButton data-testid={UUIDS.FOO} />
@@ -60,13 +60,13 @@ describe('Accordion', () => {
 
                 expect(
                     getByTestId(UUIDS.FOO).getAttribute('aria-expanded'),
-                ).toEqual('true');
+                ).toEqual('false');
                 expect(
                     getByTestId(UUIDS.BAR).getAttribute('aria-expanded'),
                 ).toEqual('true');
             });
 
-            it('prevents multiple items being expanded by default', () => {
+            it('allows multiple items being expanded by default', () => {
                 const { getByTestId } = render(
                     <Accordion>
                         <AccordionItem>
@@ -87,7 +87,7 @@ describe('Accordion', () => {
 
                 expect(
                     getByTestId(UUIDS.FOO).getAttribute('aria-expanded'),
-                ).toEqual('false');
+                ).toEqual('true');
                 expect(
                     getByTestId(UUIDS.BAR).getAttribute('aria-expanded'),
                 ).toEqual('true');
@@ -95,9 +95,9 @@ describe('Accordion', () => {
         });
 
         describe('allowZeroExpanded prop', () => {
-            it('permits the last-expanded item to be collapsed when explicitly true', () => {
+            it('prevents the last-expanded item to be collapsed when explicitly false', () => {
                 const { getByTestId } = render(
-                    <Accordion allowZeroExpanded={true}>
+                    <Accordion allowZeroExpanded={false}>
                         <AccordionItem>
                             <AccordionItemHeading>
                                 <AccordionItemButton data-testid={UUIDS.FOO} />
@@ -106,15 +106,17 @@ describe('Accordion', () => {
                     </Accordion>,
                 );
 
+                // open it
                 fireEvent.click(getByTestId(UUIDS.FOO));
+                // attempt to close it
                 fireEvent.click(getByTestId(UUIDS.FOO));
 
                 expect(
                     getByTestId(UUIDS.FOO).getAttribute('aria-expanded'),
-                ).toEqual('false');
+                ).toEqual('true');
             });
 
-            it('prevents the last-expanded item being collapsed by default', () => {
+            it('allows the last-expanded to be collapsed by default', () => {
                 const { getByTestId } = render(
                     <Accordion>
                         <AccordionItem>
@@ -130,7 +132,7 @@ describe('Accordion', () => {
 
                 expect(
                     getByTestId(UUIDS.FOO).getAttribute('aria-expanded'),
-                ).toEqual('true');
+                ).toEqual('false');
             });
         });
 

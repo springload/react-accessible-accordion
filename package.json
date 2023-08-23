@@ -1,6 +1,6 @@
 {
     "name": "react-accessible-accordion",
-    "version": "5.0.0",
+    "version": "6.0.0",
     "description": "Accessible Accordion component for React",
     "main": "dist/umd/index.js",
     "module": "dist/es/index.js",
@@ -73,6 +73,10 @@
         {
             "name": "Emilia Zapata",
             "url": "https://github.com/synecdokey"
+        },
+        {
+            "name": "Liam Johnston",
+            "url": "https://github.com/liamjohnston"
         }
     ],
     "license": "MIT",

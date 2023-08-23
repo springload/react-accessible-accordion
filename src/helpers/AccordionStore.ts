@@ -28,8 +28,8 @@ export default class AccordionStore {
 
     constructor({
         expanded = [],
-        allowMultipleExpanded = false,
-        allowZeroExpanded = false,
+        allowMultipleExpanded = true,
+        allowZeroExpanded = true,
     }: {
         expanded?: ID[];
         allowMultipleExpanded?: boolean;
