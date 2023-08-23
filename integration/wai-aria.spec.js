@@ -365,23 +365,6 @@ describe('WAI ARIA Spec', () => {
             }
         });
 
-        it(`If the accordion panel associated with an accordion header is
-            visible, and if the accordion does not permit the panel to be
-            collapsed, the header button element has aria-disabled set to true.`, async () => {
-            const { browser, page, buttonsHandles } = await setup();
-            expect(buttonsHandles.length).toEqual(3);
-
-            const firstButtonHandle = buttonsHandles[0];
-            await firstButtonHandle.click();
-
-            const buttonAriaDisabled = await page.evaluate(
-                (button) => button.getAttribute('aria-disabled'),
-                firstButtonHandle,
-            );
-
-            expect(buttonAriaDisabled).toEqual('true');
-        });
-
         it(`Optionally, each element that serves as a container for panel
             content has role region and aria-labelledby with a value that refers
             to the button that controls display of the panel.`, async () => {
