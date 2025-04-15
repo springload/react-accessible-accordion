@@ -3,6 +3,17 @@
 [![Accessibility status](https://img.shields.io/badge/a11y-tested-brightgreen.svg)](http://wave.webaim.org/report#/https://springload.github.io/react-accessible-accordion/)
 =========
 
+## ⚠️ Project status
+
+In most cases, you no longer need a JS library like this to render fully functional, accessible accordions. For that reason, **this project is no longer maintained**. 
+
+This is because native [HTML Disclosure](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/summary) (aka `<details>`/`<summary`>) elements are now [widely supported](https://caniuse.com/details). 
+
+Native disclosures offer several advantages over any JS-based solutions. For instance: 
+- Because there is no JS to download/parse, they are far more performant.
+- They are framework-agnostic, and will work the same way whether you're using React, [other framework], or plain old HTML.
+- Collapsed content can still be found via find-on-page (<key>ctrl</key>/<key>command</key>+<key>f</key>) in supporting browsers, including Chrome.
+
 ## Demo
 
 [Try a demo now](https://springload.github.io/react-accessible-accordion/).
