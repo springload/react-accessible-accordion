@@ -13,6 +13,7 @@
         "jsx": "react",
         "baseUrl": "./",
         "lib": ["dom", "es2015"],
-        "strict": true
+        "strict": true,
+        "skipLibCheck": true
     }
 }
